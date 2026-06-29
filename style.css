@@ -2867,3 +2867,18 @@ p {
   border-color: var(--color-gold) !important;
   box-shadow: 0 0 15px rgba(223, 207, 173, 0.15) !important;
 }
+
+/* Hero Editorial Label */
+.hero-editorial-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 1.2vw, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: var(--color-gold);
+  font-weight: 500;
+  opacity: 0.85;
+  margin-top: 12px;
+  margin-bottom: 24px;
+  text-align: left;
+}
