@@ -2792,3 +2792,78 @@ p {
   transform: rotate(45deg);
   color: var(--color-gold);
 }
+
+/* ==========================================================================
+   Final Production Refinements (ScrollSpy, Chips, Credibility & Focus)
+   ========================================================================== */
+
+/* Active Navigation scroll spy highlights */
+.nav-link.active {
+  color: var(--color-gold) !important;
+  text-shadow: 0 0 10px rgba(223, 207, 173, 0.4);
+}
+.nav-cta-btn.active {
+  border-color: var(--color-gold) !important;
+  color: var(--color-gold) !important;
+  box-shadow: 0 0 15px rgba(223, 207, 173, 0.25);
+}
+
+/* Who Should Attend Webinar Chips */
+.webinar-audience-group {
+  margin: 28px 0;
+  text-align: left;
+}
+
+.webinar-audience-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.webinar-audience-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.audience-chip {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background-color: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: all var(--duration-normal) var(--transition-smooth);
+  cursor: none !important;
+}
+
+.audience-chip:hover {
+  border-color: var(--color-blue);
+  color: #ffffff;
+  box-shadow: 0 0 12px var(--color-blue-glow);
+  background-color: rgba(0, 82, 255, 0.02);
+}
+
+/* Founder Credibility Line */
+.builder-bio-cred {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* Form Field Focus Upgrade */
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--color-gold) !important;
+  box-shadow: 0 0 15px rgba(223, 207, 173, 0.15) !important;
+}

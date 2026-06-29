@@ -3,8 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI Passport™ by Ekaakshar Education. Become part of the first AI generation. Explore, create, and build your lifelong AI identity.">
-  <title>AI Passport™ — Ekaakshar Education</title>
+  <meta name="description" content="AI Passport™ by Ekaakshar Education. Become part of the First AI Generation. Explore, create, and build your lifelong AI identity.">
+  <title>AI Passport™ | The Official Launch Experience</title>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hr0417-del.github.io/ai-passportV2/">
+  <meta property="og:title" content="AI Passport™ | The Official Launch Experience">
+  <meta property="og:description" content="Become part of the First AI Generation. Secure your exclusive Founding Cohort registration.">
+  <meta property="og:image" content="FRAME 1.webp">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://hr0417-del.github.io/ai-passportV2/">
+  <meta property="twitter:title" content="AI Passport™ | The Official Launch Experience">
+  <meta property="twitter:description" content="Become part of the First AI Generation. Secure your exclusive Founding Cohort registration.">
+  <meta property="twitter:image" content="FRAME 1.webp">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="FRAME 1.webp">
+
+  <!-- Structured Schema Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "AI Passport™ Launch Webinar",
+    "startDate": "2026-07-05T14:00:00+05:30",
+    "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "location": {
+      "@type": "VirtualLocation",
+      "url": "https://hr0417-del.github.io/ai-passportV2/"
+    },
+    "description": "Unveiling the AI Passport, the world's first AI identity that grows with everything you learn, build, and create.",
+    "organizer": {
+      "@type": "Organization",
+      "name": "Ekaakshar Education",
+      "url": "https://hr0417-del.github.io/ai-passportV2/"
+    }
+  }
+  </script>
   
   <!-- Premium Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -299,7 +338,17 @@
           <h2>Join the Official Launch Webinar</h2>
           <p class="section-lead">Experience the public unveiling of AI Passport™ and discover the tools, mindset, and opportunities shaping the future of AI education.</p>
           
-          <!-- Speakers/Hosted By Segment -->
+          <!-- Who Should Attend Section -->
+          <div class="webinar-audience-group">
+            <span class="webinar-audience-label">WHO SHOULD ATTEND</span>
+            <div class="webinar-audience-chips">
+              <span class="audience-chip">Students</span>
+              <span class="audience-chip">Teachers</span>
+              <span class="audience-chip">Parents</span>
+              <span class="audience-chip">Professionals</span>
+              <span class="audience-chip">Schools</span>
+            </div>
+          </div>
           <div class="webinar-speakers">
             <span class="speakers-label">HOSTED BY</span>
             <div class="speakers-grid">
@@ -370,6 +419,7 @@
             <div class="builder-info">
               <h3>Hitesh Rathee</h3>
               <p class="builder-role">Founder & CEO</p>
+              <p class="builder-bio-cred">Entrepreneur • AI Education</p>
               <p class="builder-bio">Building AI Passport™ to help every learner develop a lifelong AI identity and prepare for an AI-first future.</p>
             </div>
           </div>
@@ -390,6 +440,7 @@
             <div class="builder-info">
               <h3>Nishant Lakra</h3>
               <p class="builder-role">AI Educator</p>
+              <p class="builder-bio-cred">Technology & Learning</p>
               <p class="builder-bio">Helping students learn, apply and build with Artificial Intelligence through practical, hands-on experiences.</p>
             </div>
           </div>
@@ -688,9 +739,9 @@
               </div>
               <div class="ticket-body">
                 <h3 class="success-headline">🎉 Welcome to the First AI Generation.</h3>
-                <p class="success-body">Your seat has been reserved successfully.</p>
-                <p class="success-subbody">Please check your email for your confirmation and Google Calendar invitation.</p>
-                <p class="success-subbody">We look forward to welcoming you to the AI Passport Launch Webinar.</p>
+                <p class="success-body">Your registration has been confirmed.</p>
+                <p class="success-subbody">Check your email for your confirmation.</p>
+                <p class="success-subbody">Your AI Passport journey has officially begun.</p>
                 
                 <div class="ticket-meta-details">
                   <div class="ticket-row">
@@ -806,6 +857,7 @@
       initScrollToTop(); // Initialize premium scroll-to-top reset
       initCustomCursor(); // Custom Glow Cursor logic
       initSoundEngine();   // Mechanical Audio feedback triggers
+      initScrollSpy();     // ScrollSpy Navigation Highlights
     });
 
     /* --- 1. Preloader & Intro Sequence --- */
@@ -1957,6 +2009,30 @@
       } catch (err) {
         console.warn("Web Audio API not supported or blocked:", err);
       }
+    }
+
+    /* --- 15. Navigation ScrollSpy --- */
+    function initScrollSpy() {
+      const links = document.querySelectorAll('.nav-links .nav-link, .nav-cta-btn');
+      links.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId.startsWith('#') && targetId.length > 1) {
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            ScrollTrigger.create({
+              trigger: targetSection,
+              start: 'top 40%',
+              end: 'bottom 40%',
+              onToggle: self => {
+                if (self.isActive) {
+                  links.forEach(l => l.classList.remove('active'));
+                  link.classList.add('active');
+                }
+              }
+            });
+          }
+        }
+      });
     }
   </script>
 
