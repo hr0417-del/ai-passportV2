@@ -2882,3 +2882,96 @@ p {
   margin-bottom: 24px;
   text-align: left;
 }
+
+/* ==========================================================================
+   Hero Keynote Event & Webinar Outcomes Styles
+   ========================================================================== */
+
+/* Hero Event Details Keynote */
+.hero-event-details {
+  margin: 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  border-left: 2px solid var(--color-gold);
+  padding-left: 18px;
+}
+
+.hero-event-lead {
+  font-family: var(--font-sans);
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.hero-event-sub {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 500;
+  color: var(--color-gold);
+}
+
+.hero-event-meta {
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+/* Webinar Outcomes Grid */
+.webinar-outcomes-container {
+  margin: 40px 0 24px 0;
+  text-align: left;
+}
+
+.webinar-outcomes-container h3 {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.webinar-outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.outcome-card {
+  background-color: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 20px;
+  border-radius: 4px;
+  transition: all var(--duration-normal) var(--transition-smooth);
+}
+
+.outcome-card:hover {
+  border-color: rgba(223, 207, 173, 0.20);
+  background-color: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.outcome-title {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.outcome-desc {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  font-weight: 300;
+}
