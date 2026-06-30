@@ -248,7 +248,7 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   background-color: rgba(0, 0, 0, 0.4);
-  transition: background-color var(--duration-normal) var(--transition-smooth), transform var(--duration-normal) var(--transition-smooth);
+  transition: background-color var(--duration-normal) var(--transition-smooth), border-color var(--duration-normal) var(--transition-smooth);
 }
 
 .global-nav.scrolled {
