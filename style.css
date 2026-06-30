@@ -271,7 +271,7 @@ body {
   color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
-  line-height: 1;
+  line-height: 1.2; /* Prevent vertical clipping of uppercase text */
 }
 
 .logo-main {
@@ -279,6 +279,7 @@ body {
   font-weight: 600;
   font-size: 1.1rem;
   letter-spacing: 0.15em;
+  line-height: 1.2;
 }
 
 .logo-sub {
@@ -287,7 +288,8 @@ body {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--color-gold);
-  margin-top: 2px;
+  margin-top: 4px;
+  line-height: 1.2;
 }
 
 .nav-links {
