@@ -2975,3 +2975,166 @@ p {
   line-height: 1.4;
   font-weight: 300;
 }
+
+/* ==========================================================================
+   AI PASSPORT™ DESIGN SYSTEM ENFORCEMENT
+   Strict 8-Point Spacing Grid & Layout Harmony (Design Lock Phase)
+   ========================================================================== */
+
+/* 1. Standardized Heading bottom spacing */
+h1 {
+  margin-bottom: 24px !important;
+}
+h2 {
+  margin-bottom: 24px !important;
+}
+h3 {
+  margin-bottom: 24px !important;
+}
+h4 {
+  margin-bottom: 16px !important;
+}
+
+/* 2. Ideal Reading Line-Width for paragraphs */
+.text-block p,
+.pathway-text-block p,
+.outro-text-block p,
+.hero-text-block p,
+.section-lead,
+.section-subtext {
+  max-width: 640px !important; /* 600px - 720px optimal reading width, multiple of 8 */
+}
+
+/* 3. Standardized Paragraph Spacing */
+p, .section-lead, .section-subtext {
+  margin-bottom: 24px !important;
+}
+.highlight-text, .highlight-text-gold {
+  margin: 32px 0 !important;
+  padding-left: 24px !important;
+}
+.quote-text {
+  margin-top: 32px !important;
+}
+.quote-text-gold {
+  margin-top: 24px !important;
+  padding-top: 16px !important;
+}
+
+/* 4. Spacing Between Sections (Standardized Paddings) */
+.hero-section {
+  padding-top: 176px !important; /* 80px nav height + 96px top padding */
+  padding-bottom: 96px !important;
+}
+#identity, #pathway, #capability, #founding, #faq, #register, #outro {
+  padding-top: 96px !important; /* Large Section Top */
+  padding-bottom: 96px !important; /* Large Section Bottom */
+}
+#ecosystem, #webinar-details, #builders, #community {
+  padding-top: 80px !important; /* Medium Section Top */
+  padding-bottom: 80px !important; /* Medium Section Bottom */
+}
+
+/* 5. Spacing System: Paragraph -> Cards/Grid */
+.ecosystem-grid,
+.pathway-steps,
+.webinar-speakers,
+.webinar-outcomes-container,
+.builders-grid,
+.community-bubbles,
+.benefits-container,
+.faq-accordion,
+.register-form {
+  margin-top: 32px !important;
+}
+
+/* 6. Spacing System: Cards -> CTA */
+.btn-submit,
+.hero-text-block .btn,
+.webinar-details .btn {
+  margin-top: 40px !important;
+}
+
+/* 7. Spacing System: Button -> Next Element */
+.btn + *,
+.btn-submit + * {
+  margin-top: 24px !important;
+}
+
+/* 8. Spacing System: Header Navigation */
+.nav-links {
+  gap: 40px !important; /* 40px, multiple of 8 */
+}
+.nav-link {
+  padding: 8px 0 !important; /* 8px, multiple of 8 */
+}
+.nav-container {
+  padding: 0 40px !important; /* 40px padding, multiple of 8 */
+}
+
+/* 9. Card System Unification */
+.grid-item,
+.step-card,
+.speaker-card,
+.outcome-card,
+.benefit-item,
+.accordion-item,
+.builder-column {
+  border-radius: 8px !important; /* 8px corner radius */
+  padding: 24px !important; /* 24px internal padding */
+  transition: all var(--duration-normal) var(--transition-smooth) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Hover offsets aligned to 8px */
+.grid-item:hover,
+.step-card:hover,
+.speaker-card:hover,
+.outcome-card:hover,
+.benefit-item:hover,
+.accordion-item:hover,
+.builder-column:hover {
+  transform: translateY(-8px) !important;
+}
+
+/* 10. Button System Unification */
+.btn,
+.btn-submit,
+.nav-cta-btn,
+#scroll-to-top-btn,
+#success-return-btn,
+#success-share-btn {
+  padding: 16px 32px !important; /* 16px vertical, 32px horizontal padding */
+  border-radius: 8px !important; /* 8px border radius */
+  font-family: var(--font-sans) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.15em !important;
+  transition: all var(--duration-normal) var(--transition-smooth) !important;
+}
+
+/* 11. Form Spacing & Heights */
+.form-input {
+  padding: 16px 0 !important; /* 16px vertical padding */
+}
+.form-label {
+  top: 16px !important;
+}
+.form-input:focus ~ .form-label,
+.form-input:not(:placeholder-shown) ~ .form-label {
+  top: -8px !important; /* -8px position offset */
+}
+.form-select {
+  padding: 16px !important;
+  border-radius: 8px !important; /* Unify input & select corners to 8px */
+}
+.form-status {
+  margin-top: 24px !important;
+  min-height: 24px !important;
+}
+
+/* 12. Grid container layouts */
+.section-container {
+  gap: 64px !important; /* Unified container gap to 64px */
+}
