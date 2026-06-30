@@ -412,7 +412,7 @@ body {
 }
 
 /* Overlapping Z-Index layers on desktop viewports */
-@media (min-width: 992px) {
+@media (min-width: 1151px) {
   .section-container:not(.reverse) .text-block,
   .section-container:not(.reverse) .pathway-text-block,
   .section-container:not(.reverse) .faq-container,
@@ -1520,7 +1520,7 @@ p {
   }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1150px) {
   :root {
     --header-height: 70px;
   }
