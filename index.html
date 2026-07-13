@@ -284,9 +284,9 @@
         </div>
 
         <!-- Movement content grid -->
-        <div class="movement-cards-grid">
-          <!-- Card 1: Webinar Gallery -->
-          <div class="movement-card gallery-card">
+        <div class="movement-cards-grid bento-grid">
+          <!-- Card 1: Webinar Gallery (Bento Col-5) -->
+          <div class="movement-card gallery-card bento-col-5">
             <div class="card-glow"></div>
             <div class="card-header">
               <span class="card-icon">
@@ -301,16 +301,22 @@
               <div class="gallery-overlay">
                 <span>View Launch Moments</span>
               </div>
-              <div class="gallery-item-placeholder"></div>
-              <div class="gallery-item-placeholder"></div>
-              <div class="gallery-item-placeholder"></div>
-              <div class="gallery-item-placeholder"></div>
+              <div class="avatar-stack-container">
+                <div class="avatar-stack">
+                  <div class="avatar-item avatar-1"></div>
+                  <div class="avatar-item avatar-2"></div>
+                  <div class="avatar-item avatar-3"></div>
+                  <div class="avatar-item avatar-4"></div>
+                  <div class="avatar-item avatar-more">+5K</div>
+                </div>
+                <span class="avatar-stack-label">Active Learners Engaged</span>
+              </div>
             </div>
             <p class="card-desc">Visual moments from the National Launch Webinar capturing students, parents, and educators in action.</p>
           </div>
 
-          <!-- Card 2: Webinar Highlights -->
-          <div class="movement-card video-card">
+          <!-- Card 2: Webinar Highlights (Bento Col-7) -->
+          <div class="movement-card video-card bento-col-7">
             <div class="card-glow"></div>
             <div class="card-header">
               <span class="card-icon">
@@ -334,9 +340,12 @@
             <p class="card-desc">Watch the 3-minute cinematic highlights reel covering the core product reveal and live student reactions.</p>
           </div>
 
-          <!-- Card 3: Testimonials Link -->
-          <div class="movement-card testimonial-preview-card">
+          <!-- Card 3: Testimonials Link (Bento Col-7) -->
+          <div class="movement-card testimonial-preview-card bento-col-7">
             <div class="card-glow"></div>
+            <svg class="testimonial-quotes-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M3 21h3a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3H3v6zm12 0h3a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-3v6z"/>
+            </svg>
             <div class="card-header">
               <span class="card-icon">
                 <svg class="premium-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -352,8 +361,8 @@
             <p class="card-desc">Browse through verified attendee feedback and testimonials from leading educators, parents, and students.</p>
           </div>
 
-          <!-- Card 4: Community Growth -->
-          <div class="movement-card growth-card">
+          <!-- Card 4: Community Growth (Bento Col-5) -->
+          <div class="movement-card growth-card bento-col-5">
             <div class="card-glow"></div>
             <div class="card-header">
               <span class="card-icon">
@@ -366,7 +375,7 @@
             </div>
             <div class="growth-chart-placeholder">
               <svg class="growth-chart-svg" viewBox="0 0 100 40">
-                <path d="M 0 35 Q 25 32, 50 20 T 100 5" fill="none" stroke="var(--color-gold)" stroke-width="1.5"></path>
+                <path class="growth-path-stroke" d="M 0 35 Q 25 32, 50 20 T 100 5" fill="none" stroke="var(--color-gold)" stroke-width="1.5"></path>
                 <path d="M 0 35 Q 25 32, 50 20 T 100 5 L 100 40 L 0 40 Z" fill="url(#chart-glow)"></path>
                 <defs>
                   <linearGradient id="chart-glow" x1="0" y1="0" x2="0" y2="1">
@@ -375,6 +384,7 @@
                   </linearGradient>
                 </defs>
               </svg>
+              <div class="chart-pulse-dot"></div>
               <div class="growth-labels">
                 <span>12 July Launch</span>
                 <span>19 July Next Step</span>
@@ -1446,6 +1456,105 @@
       sections.forEach((section) => {
         // Skip Hero section animation since it's handled by introTimeline
         if (section.classList.contains('hero-section')) return;
+
+        // Custom reveals for V2.0 sections
+        if (section.id === 'movement') {
+          const header = section.querySelector('.movement-header');
+          const stats = section.querySelectorAll('.stat-card');
+          const cards = section.querySelectorAll('.movement-card');
+          const chartPath = section.querySelector('.growth-path-stroke');
+          
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 78%',
+              toggleActions: 'play none none reverse'
+            }
+          });
+          
+          if (header) {
+            tl.fromTo(header, 
+              { opacity: 0, y: 30 }, 
+              { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+            );
+          }
+          
+          if (stats.length) {
+            tl.fromTo(stats,
+              { opacity: 0, y: 20 },
+              { opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' },
+              '-=0.4'
+            );
+          }
+          
+          if (cards.length) {
+            tl.fromTo(cards,
+              { opacity: 0, y: 30, scale: 0.98 },
+              { opacity: 1, y: 0, scale: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' },
+              '-=0.4'
+            );
+          }
+          
+          if (chartPath) {
+            try {
+              const pathLength = chartPath.getTotalLength();
+              gsap.set(chartPath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+              tl.to(chartPath, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.out' }, '-=0.6');
+            } catch (e) {
+              console.warn("SVG path measurement skipped in non-browser context", e);
+            }
+          }
+          return;
+        }
+
+        if (section.id === 'testimonials') {
+          const header = section.querySelector('.testimonials-header');
+          const carousel = section.querySelector('.carousel-container');
+          
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 78%',
+              toggleActions: 'play none none reverse'
+            }
+          });
+          
+          if (header) {
+            tl.fromTo(header, 
+              { opacity: 0, y: 30 }, 
+              { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+            );
+          }
+          
+          if (carousel) {
+            tl.fromTo(carousel,
+              { opacity: 0, y: 40 },
+              { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' },
+              '-=0.4'
+            );
+          }
+          return;
+        }
+
+        if (section.id === 'final-cta') {
+          const content = section.querySelector('.final-cta-content');
+          if (content) {
+            gsap.fromTo(content,
+              { opacity: 0, scale: 0.95, y: 40 },
+              {
+                opacity: 1, scale: 1, y: 0,
+                duration: 1.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                  trigger: section,
+                  start: 'top 78%',
+                  toggleActions: 'play none none reverse'
+                }
+              }
+            );
+          }
+          return;
+        }
 
         const container = section.querySelector('.section-container');
         if (!container) return;
