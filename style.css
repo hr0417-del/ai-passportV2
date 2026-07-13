@@ -3344,3 +3344,775 @@ p, .section-lead, .section-subtext {
     display: none !important; /* Hide punch card holes on very narrow mobile screens */
   }
 }
+
+/* ==========================================================================
+   Passport Activation, UPI Payments & Gold Animated Cards Styles
+   ========================================================================== */
+
+/* Premium Gold CTA & Webinar Seat buttons in Header */
+.nav-cta-btn.nav-cta-gold {
+  background-color: var(--color-gold);
+  color: #000000 !important;
+  border: 1px solid var(--color-gold);
+  margin-left: 10px;
+}
+
+.nav-cta-btn.nav-cta-gold:hover {
+  background-color: transparent;
+  color: var(--color-gold) !important;
+  box-shadow: 0 0 20px var(--color-gold-glow);
+}
+
+.mobile-only-nav-link {
+  display: none;
+}
+
+@media (max-width: 1150px) {
+  .mobile-only-nav-link {
+    display: block !important;
+  }
+  .nav-cta-btn.nav-cta-gold {
+    display: none; /* Hidden on mobile header, uses hamburger link */
+  }
+}
+
+/* Custom premium buttons in Hero */
+.btn-webinar-seat {
+  border-color: var(--color-gold) !important;
+  color: var(--color-gold) !important;
+}
+
+.btn-webinar-seat:hover {
+  background-color: rgba(223, 207, 173, 0.05) !important;
+  color: #ffffff !important;
+}
+
+/* Passport Activation Section */
+.activate-section {
+  background-color: #030303;
+  position: relative;
+  padding: 100px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.activate-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+}
+
+.activation-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.receive-container h3 {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
+.glass-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.receive-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.receive-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(223, 207, 173, 0.25);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.receive-card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 0% 0%, rgba(223, 207, 173, 0.06) 0%, rgba(223, 207, 173, 0) 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.receive-card:hover .receive-card-glow {
+  opacity: 1;
+}
+
+.receive-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.receive-card h4 {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.03em;
+}
+
+.receive-card p {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin: 0;
+  font-weight: 300;
+}
+
+/* Pricing Card Component */
+.pricing-container {
+  position: sticky;
+  top: 120px;
+}
+
+.pricing-card {
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, rgba(223, 207, 173, 0.06) 0%, rgba(0, 0, 0, 0) 70%), rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 48px 36px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.pricing-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(223, 207, 173, 0.04) 0%, rgba(223, 207, 173, 0) 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.pricing-badge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--color-gold);
+  border: 1px solid rgba(223, 207, 173, 0.35);
+  padding: 5px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.pricing-title {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+}
+
+.pricing-desc {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0 0 36px 0;
+  font-weight: 300;
+}
+
+.pricing-price-box {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 36px;
+}
+
+.price-currency {
+  font-family: var(--font-sans);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--color-gold);
+}
+
+.price-value {
+  font-family: var(--font-sans);
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1.0;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.price-period {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.pricing-features {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 44px;
+  text-align: left;
+}
+
+.pricing-features span {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 400;
+}
+
+.pricing-features span::before {
+  content: "✓";
+  color: var(--color-gold);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.btn-pricing-activate {
+  width: 100%;
+  padding: 18px 24px;
+  letter-spacing: 0.1em;
+}
+
+/* Payment Section Dropdown Box */
+.payment-overlay-section {
+  grid-column: span 2;
+  margin-top: 48px;
+  background: rgba(255, 255, 255, 0.012);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 56px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.payment-overlay-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.payment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 24px;
+  margin-bottom: 48px;
+}
+
+.payment-header h3 {
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.payment-pricing-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.summary-label {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.summary-price {
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.02em;
+}
+
+.payment-grid-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.payment-qr-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.qr-wrapper-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.upi-qr-image {
+  width: 220px;
+  height: 220px;
+  display: block;
+  border-radius: 4px;
+  filter: contrast(1.05);
+}
+
+.qr-glow-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(223, 207, 173, 0.04) 0%, rgba(223, 207, 173, 0) 70%);
+  pointer-events: none;
+}
+
+.qr-text-info h4 {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+.upi-icons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 280px;
+}
+
+.upi-icons-grid span {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  background: rgba(255, 255, 255, 0.025);
+  padding: 6px 12px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 500;
+}
+
+/* File Upload input custom styling */
+.file-upload-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  margin-bottom: 32px !important;
+}
+
+.file-label {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.form-file-input {
+  display: none;
+}
+
+.custom-file-upload {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  padding: 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.custom-file-upload:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--color-gold);
+}
+
+.upload-icon {
+  font-size: 1.1rem;
+}
+
+.upload-text {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+
+/* Success Card Block */
+.payment-success-section {
+  grid-column: span 2;
+  margin-top: 48px;
+  text-align: center;
+}
+
+.success-box-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  padding: 64px 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 720px;
+  margin: 0 auto;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+}
+
+.success-card-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(223, 207, 173, 0.05) 0%, rgba(223, 207, 173, 0) 75%);
+  pointer-events: none;
+}
+
+.success-box-card h2 {
+  font-family: var(--font-sans);
+  font-size: 2.5rem;
+  color: var(--color-gold);
+  margin: 0 0 12px 0;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.success-box-card h3 {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.success-sub {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin: 0 0 36px 0;
+  font-weight: 300;
+}
+
+.status-bullets {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.status-bullet {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  letter-spacing: 0.05em;
+}
+
+.success-passport-preview {
+  margin: 48px 0;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.passport-gold-card {
+  position: relative;
+  width: 340px;
+  height: 200px;
+  background: linear-gradient(135deg, #1c1810 0%, #0d0b07 100%);
+  border: 1px solid rgba(223, 207, 173, 0.35);
+  border-radius: 12px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  animation: passportCardPulse 4s infinite ease-in-out;
+  transform-style: preserve-3d;
+}
+
+@keyframes passportCardPulse {
+  0%, 100% {
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 15px rgba(223, 207, 173, 0.05);
+    border-color: rgba(223, 207, 173, 0.35);
+    transform: rotateY(0deg) translateY(0);
+  }
+  50% {
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.7), 0 0 30px rgba(223, 207, 173, 0.25);
+    border-color: rgba(223, 207, 173, 0.6);
+    transform: rotateY(5deg) translateY(-5px);
+  }
+}
+
+.gold-card-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-25deg);
+  animation: shineReflection 6s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.gold-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gold-logo {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+}
+
+.gold-badge {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+  border: 1px solid rgba(223, 207, 173, 0.35);
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-weight: 600;
+}
+
+.gold-card-body {
+  margin: 18px 0;
+}
+
+.gold-chip {
+  width: 36px;
+  height: 26px;
+  background: linear-gradient(135deg, #a68b55 0%, #8c7340 100%);
+  border-radius: 4px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.gold-chip::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  width: 20px;
+  height: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+}
+
+.gold-user-name {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gold-passport-id {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+.gold-card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-secondary);
+}
+
+.success-instructions {
+  background: rgba(255, 255, 255, 0.012);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  padding: 28px;
+  max-width: 500px;
+  margin: 0 auto 44px auto;
+  text-align: left;
+  box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.success-instructions h4 {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.success-instructions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.success-instructions li {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.success-instructions li::before {
+  content: "✦";
+  color: var(--color-gold);
+  font-size: 0.8rem;
+}
+
+/* Footer Positioning layout */
+.footer-positioning {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+  margin-top: 16px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.footer-tagline {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  margin: 0 0 16px 0;
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+.footer-org {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Responsive adjustment for activation section */
+@media (max-width: 1150px) {
+  .activation-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .pricing-container {
+    position: static;
+  }
+  
+  .payment-overlay-section {
+    grid-column: span 1;
+  }
+  
+  .payment-success-section {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .payment-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .payment-overlay-section {
+    padding: 36px 20px;
+    margin-top: 36px;
+  }
+  
+  .payment-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  
+  .status-bullets {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .success-box-card {
+    padding: 44px 20px;
+  }
+  
+  .passport-gold-card {
+    width: 300px;
+    height: 176px;
+    padding: 20px;
+  }
+  
+  .gold-user-name {
+    font-size: 1.1rem;
+  }
+}
+
