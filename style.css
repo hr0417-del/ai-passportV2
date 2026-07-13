@@ -3391,7 +3391,7 @@ p, .section-lead, .section-subtext {
 .activate-section {
   background-color: #030303;
   position: relative;
-  padding: 100px 0;
+  padding: 80px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid rgba(255, 255, 255, 0.02);
 }
@@ -3399,48 +3399,62 @@ p, .section-lead, .section-subtext {
 .activate-header {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 60px auto;
+  margin: 0 auto 64px auto;
+}
+
+.activate-editorial-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(11px, 1.1vw, 13px);
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: var(--color-gold);
+  font-weight: 500;
+  opacity: 0.85;
+  margin-bottom: 16px;
+  text-align: center;
 }
 
 .activation-grid {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 48px;
   align-items: start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .receive-container h3 {
   font-family: var(--font-sans);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   color: #ffffff;
   margin-top: 0;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .glass-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
 
 .receive-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 28px;
-  border-radius: 6px;
+  background: var(--color-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px !important;
+  padding: 24px !important;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+  transition: all var(--duration-normal) var(--transition-smooth) !important;
 }
 
 .receive-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(223, 207, 173, 0.25);
-  background: rgba(255, 255, 255, 0.03);
+  transform: translateY(-8px) !important;
+  border-color: rgba(223, 207, 173, 0.3) !important;
 }
 
 .receive-card-glow {
@@ -3449,7 +3463,7 @@ p, .section-lead, .section-subtext {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 0% 0%, rgba(223, 207, 173, 0.06) 0%, rgba(223, 207, 173, 0) 60%);
+  background: radial-gradient(circle at 0% 0%, rgba(223, 207, 173, 0.04) 0%, rgba(223, 207, 173, 0) 60%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -3459,10 +3473,12 @@ p, .section-lead, .section-subtext {
   opacity: 1;
 }
 
-.receive-icon {
-  font-size: 1.8rem;
+.receive-icon-svg {
+  width: 32px;
+  height: 32px;
   display: block;
-  margin-bottom: 20px;
+  stroke: var(--color-gold);
+  margin-bottom: 16px;
 }
 
 .receive-card h4 {
@@ -3470,8 +3486,8 @@ p, .section-lead, .section-subtext {
   font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
-  margin: 0 0 10px 0;
-  letter-spacing: 0.03em;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.02em;
 }
 
 .receive-card p {
@@ -3491,15 +3507,16 @@ p, .section-lead, .section-subtext {
 
 .pricing-card {
   position: relative;
-  background: radial-gradient(circle at 50% 0%, rgba(223, 207, 173, 0.06) 0%, rgba(0, 0, 0, 0) 70%), rgba(255, 255, 255, 0.015);
-  border: 1px solid rgba(223, 207, 173, 0.2);
+  background: radial-gradient(circle at 50% 0%, rgba(223, 207, 173, 0.08) 0%, rgba(0, 0, 0, 0) 70%), var(--color-card-bg);
+  border: 1px solid rgba(223, 207, 173, 0.3);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  padding: 48px 36px;
-  border-radius: 8px;
+  padding: 40px 32px;
+  border-radius: 8px !important;
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
   text-align: center;
+  transition: all var(--duration-normal) var(--transition-smooth);
 }
 
 .pricing-glow {
@@ -3509,7 +3526,7 @@ p, .section-lead, .section-subtext {
   transform: translate(-50%, -50%);
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(223, 207, 173, 0.04) 0%, rgba(223, 207, 173, 0) 70%);
+  background: radial-gradient(circle, rgba(223, 207, 173, 0.03) 0%, rgba(223, 207, 173, 0) 70%);
   filter: blur(50px);
   pointer-events: none;
 }
@@ -3517,32 +3534,32 @@ p, .section-lead, .section-subtext {
 .pricing-badge {
   display: inline-block;
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   color: var(--color-gold);
-  border: 1px solid rgba(223, 207, 173, 0.35);
-  padding: 5px 16px;
+  border: 1px solid rgba(223, 207, 173, 0.3);
+  padding: 4px 14px;
   border-radius: 100px;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   text-transform: uppercase;
 }
 
 .pricing-title {
   font-family: var(--font-sans);
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   color: #ffffff;
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
 }
 
 .pricing-desc {
   font-family: var(--font-sans);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--color-text-secondary);
-  line-height: 1.6;
-  margin: 0 0 36px 0;
+  line-height: 1.5;
+  margin: 0 0 32px 0;
   font-weight: 300;
 }
 
@@ -3550,20 +3567,20 @@ p, .section-lead, .section-subtext {
   display: flex;
   justify-content: center;
   align-items: baseline;
-  gap: 6px;
-  margin-bottom: 36px;
+  gap: 4px;
+  margin-bottom: 32px;
 }
 
 .price-currency {
   font-family: var(--font-sans);
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 300;
   color: var(--color-gold);
 }
 
 .price-value {
   font-family: var(--font-sans);
-  font-size: 4.5rem;
+  font-size: 4rem;
   font-weight: 700;
   line-height: 1.0;
   color: #ffffff;
@@ -3572,52 +3589,46 @@ p, .section-lead, .section-subtext {
 
 .price-period {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--color-text-secondary);
 }
 
 .pricing-features {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin-bottom: 44px;
+  gap: 16px;
+  margin-bottom: 36px;
   text-align: left;
 }
 
 .pricing-features span {
   font-family: var(--font-sans);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--color-text-primary);
   display: flex;
   align-items: center;
-  gap: 12px;
   font-weight: 400;
 }
 
-.pricing-features span::before {
-  content: "✓";
-  color: var(--color-gold);
-  font-weight: 700;
-  font-size: 1rem;
-}
-
-.btn-pricing-activate {
-  width: 100%;
-  padding: 18px 24px;
-  letter-spacing: 0.1em;
+.pricing-check-svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-right: 12px;
+  stroke: var(--color-gold);
 }
 
 /* Payment Section Dropdown Box */
 .payment-overlay-section {
   grid-column: span 2;
-  margin-top: 48px;
-  background: rgba(255, 255, 255, 0.012);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
-  padding: 56px;
+  margin-top: 40px;
+  background: var(--color-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px !important;
+  padding: 48px !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6) !important;
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -3633,13 +3644,13 @@ p, .section-lead, .section-subtext {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding-bottom: 24px;
-  margin-bottom: 48px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .payment-header h3 {
   font-family: var(--font-sans);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: #ffffff;
   margin: 0;
   letter-spacing: 0.05em;
@@ -3654,22 +3665,21 @@ p, .section-lead, .section-subtext {
 
 .summary-label {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--color-text-secondary);
 }
 
 .summary-price {
   font-family: var(--font-sans);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-gold);
-  letter-spacing: 0.02em;
 }
 
 .payment-grid-layout {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  gap: 56px;
+  gap: 48px;
   align-items: start;
 }
 
@@ -3711,7 +3721,7 @@ p, .section-lead, .section-subtext {
 
 .qr-text-info h4 {
   font-family: var(--font-sans);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: #ffffff;
   margin: 0 0 16px 0;
   letter-spacing: 0.04em;
@@ -3788,20 +3798,20 @@ p, .section-lead, .section-subtext {
 /* Success Card Block */
 .payment-success-section {
   grid-column: span 2;
-  margin-top: 48px;
+  margin-top: 40px;
   text-align: center;
 }
 
 .success-box-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.015);
+  background: var(--color-card-bg);
   border: 1px solid rgba(223, 207, 173, 0.2);
-  padding: 64px 48px;
-  border-radius: 8px;
+  padding: 56px 40px;
+  border-radius: 8px !important;
   overflow: hidden;
-  max-width: 720px;
+  max-width: 680px;
   margin: 0 auto;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7) !important;
 }
 
 .success-card-glow {
@@ -3817,7 +3827,7 @@ p, .section-lead, .section-subtext {
 
 .success-box-card h2 {
   font-family: var(--font-sans);
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: var(--color-gold);
   margin: 0 0 12px 0;
   letter-spacing: 0.05em;
@@ -3826,7 +3836,7 @@ p, .section-lead, .section-subtext {
 
 .success-box-card h3 {
   font-family: var(--font-sans);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #ffffff;
   margin: 0 0 20px 0;
   font-weight: 500;
@@ -3835,9 +3845,9 @@ p, .section-lead, .section-subtext {
 
 .success-sub {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--color-text-secondary);
-  margin: 0 0 36px 0;
+  margin: 0 0 32px 0;
   font-weight: 300;
 }
 
@@ -3850,18 +3860,20 @@ p, .section-lead, .section-subtext {
 
 .status-bullet {
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: #ffffff;
   background: rgba(255, 255, 255, 0.03);
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 100px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
 }
 
 .success-passport-preview {
-  margin: 48px 0;
+  margin: 40px 0;
   display: flex;
   justify-content: center;
   perspective: 1000px;
@@ -3869,12 +3881,13 @@ p, .section-lead, .section-subtext {
 
 .passport-gold-card {
   position: relative;
-  width: 340px;
-  height: 200px;
+  width: 320px;
+  max-width: 100%;
+  height: 188px;
   background: linear-gradient(135deg, #1c1810 0%, #0d0b07 100%);
   border: 1px solid rgba(223, 207, 173, 0.35);
   border-radius: 12px;
-  padding: 28px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -3887,14 +3900,10 @@ p, .section-lead, .section-subtext {
 
 @keyframes passportCardPulse {
   0%, 100% {
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 15px rgba(223, 207, 173, 0.05);
-    border-color: rgba(223, 207, 173, 0.35);
     transform: rotateY(0deg) translateY(0);
   }
   50% {
-    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.7), 0 0 30px rgba(223, 207, 173, 0.25);
-    border-color: rgba(223, 207, 173, 0.6);
-    transform: rotateY(5deg) translateY(-5px);
+    transform: rotateY(6deg) translateY(-6px);
   }
 }
 
@@ -3904,7 +3913,7 @@ p, .section-lead, .section-subtext {
   left: 0;
   width: 200%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0) 100%);
   transform: skewX(-25deg);
   animation: shineReflection 6s infinite ease-in-out;
   pointer-events: none;
@@ -3918,30 +3927,30 @@ p, .section-lead, .section-subtext {
 
 .gold-logo {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: var(--color-gold);
 }
 
 .gold-badge {
   font-family: var(--font-sans);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.15em;
   color: var(--color-gold);
   border: 1px solid rgba(223, 207, 173, 0.35);
-  padding: 3px 10px;
+  padding: 2px 8px;
   border-radius: 100px;
   font-weight: 600;
 }
 
 .gold-card-body {
-  margin: 18px 0;
+  margin: 16px 0;
 }
 
 .gold-chip {
-  width: 36px;
-  height: 26px;
+  width: 32px;
+  height: 24px;
   background: linear-gradient(135deg, #a68b55 0%, #8c7340 100%);
   border-radius: 4px;
   margin-bottom: 12px;
@@ -3953,26 +3962,26 @@ p, .section-lead, .section-subtext {
   position: absolute;
   top: 4px;
   left: 8px;
-  width: 20px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 2px;
 }
 
 .gold-user-name {
   font-family: var(--font-sans);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: #ffffff;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .gold-passport-id {
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--color-gold);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   margin-top: 4px;
 }
 
@@ -3980,7 +3989,7 @@ p, .section-lead, .section-subtext {
   display: flex;
   justify-content: space-between;
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   letter-spacing: 0.12em;
   color: var(--color-text-secondary);
 }
@@ -3989,44 +3998,20 @@ p, .section-lead, .section-subtext {
   background: rgba(255, 255, 255, 0.012);
   border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 6px;
-  padding: 28px;
-  max-width: 500px;
-  margin: 0 auto 44px auto;
+  padding: 24px;
+  max-width: 480px;
+  margin: 0 auto 36px auto;
   text-align: left;
   box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .success-instructions h4 {
   font-family: var(--font-sans);
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: #ffffff;
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
   font-weight: 600;
   letter-spacing: 0.02em;
-}
-
-.success-instructions ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.success-instructions li {
-  font-family: var(--font-sans);
-  font-size: 0.88rem;
-  color: var(--color-text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.success-instructions li::before {
-  content: "✦";
-  color: var(--color-gold);
-  font-size: 0.8rem;
 }
 
 /* Footer Positioning layout */
@@ -4070,6 +4055,7 @@ p, .section-lead, .section-subtext {
   
   .payment-overlay-section {
     grid-column: span 1;
+    padding: 32px 24px !important;
   }
   
   .payment-success-section {
@@ -4084,7 +4070,7 @@ p, .section-lead, .section-subtext {
   }
   
   .payment-overlay-section {
-    padding: 36px 20px;
+    padding: 32px 20px !important;
     margin-top: 36px;
   }
   
@@ -4102,7 +4088,7 @@ p, .section-lead, .section-subtext {
   }
   
   .success-box-card {
-    padding: 44px 20px;
+    padding: 44px 20px !important;
   }
   
   .passport-gold-card {
