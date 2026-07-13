@@ -259,138 +259,110 @@
           <p class="section-lead">Our National Launch Webinar on 12 July brought together students, teachers, parents, professionals and school leaders from across India. Now we're taking the next step.</p>
         </div>
 
-        <!-- Stat Bar placeholders -->
-        <div class="movement-stats-bar">
-          <div class="stat-card">
-            <!-- EDITABLE STAT: Participants -->
-            <span class="stat-number">5,000+</span>
-            <span class="stat-label">Participants</span>
-          </div>
-          <div class="stat-card">
-            <!-- EDITABLE STAT: Schools Represented -->
-            <span class="stat-number">150+</span>
-            <span class="stat-label">Schools Represented</span>
-          </div>
-          <div class="stat-card">
-            <!-- EDITABLE STAT: Cities -->
-            <span class="stat-number">80+</span>
-            <span class="stat-label">Cities Engaged</span>
-          </div>
-          <div class="stat-card">
-            <!-- EDITABLE STAT: Community Members -->
-            <span class="stat-number">12,000+</span>
-            <span class="stat-label">Ecosystem Members</span>
-          </div>
-        </div>
-
-        <!-- Movement content grid -->
-        <div class="movement-cards-grid bento-grid">
-          <!-- Card 1: Webinar Gallery (Bento Col-5) -->
-          <div class="movement-card gallery-card bento-col-5">
-            <div class="card-glow"></div>
-            <div class="card-header">
-              <span class="card-icon">
-                <svg class="premium-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                  <circle cx="12" cy="13" r="4"></circle>
-                </svg>
-              </span>
-              <h3>Webinar Gallery</h3>
-            </div>
-            <div class="gallery-preview">
-              <div class="gallery-overlay">
-                <span>View Launch Moments</span>
-              </div>
-              <div class="avatar-stack-container">
-                <div class="avatar-stack">
-                  <div class="avatar-item avatar-1"></div>
-                  <div class="avatar-item avatar-2"></div>
-                  <div class="avatar-item avatar-3"></div>
-                  <div class="avatar-item avatar-4"></div>
-                  <div class="avatar-item avatar-more">+5K</div>
+        <!-- Asymmetric Split Layout Container -->
+        <div class="movement-split-layout">
+          <!-- Left Column (60% width): Dominant Video Player -->
+          <div class="movement-video-column">
+            <div class="premium-player-card">
+              <div class="card-glow"></div>
+              
+              <!-- Video Screen Container -->
+              <div class="player-screen-wrapper">
+                <div class="player-vignette"></div>
+                
+                <!-- Central pulsing play button -->
+                <div class="player-play-trigger">
+                  <svg class="play-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                  </svg>
                 </div>
-                <span class="avatar-stack-label">Active Learners Engaged</span>
+                
+                <!-- Video Poster Background info -->
+                <div class="player-poster-info">
+                  <span class="player-video-tag">LAUNCH HIGHLIGHTS</span>
+                  <h3 class="player-video-title">AI Passport™ National Reveal</h3>
+                </div>
+
+                <!-- Technical Media Player Controls HUD Overlay -->
+                <div class="player-hud-overlay">
+                  <div class="hud-left">
+                    <button class="hud-control-btn play-pause-btn" aria-label="Play/Pause">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </button>
+                    <span class="hud-timecode">01:42 / 03:00</span>
+                  </div>
+                  <!-- Progress seek bar -->
+                  <div class="hud-progress-bar-wrapper">
+                    <div class="hud-progress-track">
+                      <div class="hud-progress-fill" style="width: 56.6%"></div>
+                    </div>
+                  </div>
+                  <div class="hud-right">
+                    <button class="hud-control-btn volume-btn" aria-label="Volume">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    </button>
+                    <button class="hud-control-btn fullscreen-btn" aria-label="Fullscreen">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video Card footer info description -->
+              <div class="player-footer-desc">
+                <p>Experience the official launch reel covering our 12 July session outcomes, product walkthrough, and student reactions from schools nationwide.</p>
               </div>
             </div>
-            <p class="card-desc">Visual moments from the National Launch Webinar capturing students, parents, and educators in action.</p>
           </div>
 
-          <!-- Card 2: Webinar Highlights (Bento Col-7) -->
-          <div class="movement-card video-card bento-col-7">
-            <div class="card-glow"></div>
-            <div class="card-header">
-              <span class="card-icon">
-                <svg class="premium-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                </svg>
-              </span>
-              <h3>Webinar Highlights</h3>
-            </div>
-            <div class="video-preview-container">
-              <div class="video-play-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <polygon points="5 3 19 12 5 21 5 3"/>
-                </svg>
+          <!-- Right Column (40% width): Stats Sidebar -->
+          <div class="movement-stats-sidebar">
+            <div class="sidebar-wrapper">
+              <div class="sidebar-intro">
+                <span class="sidebar-eyebrow">COHORT TRACTION</span>
+                <h3>Genesis Growth Benchmarks</h3>
+                <p>Onboarding metrics tracking the footprint of the AI Passport™ ecosystem across educational hubs.</p>
               </div>
-              <div class="video-poster-placeholder">
-                <span class="video-caption">AI Passport V1.0 Launch Reel</span>
-              </div>
-            </div>
-            <p class="card-desc">Watch the 3-minute cinematic highlights reel covering the core product reveal and live student reactions.</p>
-          </div>
 
-          <!-- Card 3: Testimonials Link (Bento Col-7) -->
-          <div class="movement-card testimonial-preview-card bento-col-7">
-            <div class="card-glow"></div>
-            <svg class="testimonial-quotes-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M3 21h3a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3H3v6zm12 0h3a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-3v6z"/>
-            </svg>
-            <div class="card-header">
-              <span class="card-icon">
-                <svg class="premium-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
-              </span>
-              <h3>Launch Feedback</h3>
-            </div>
-            <div class="testimonial-bubble-preview">
-              <p class="preview-quote">"This is exactly what the education system needs—a way to reward actual builder capability over paper certificates."</p>
-              <span class="preview-author">— Principal, National Heritage School</span>
-            </div>
-            <p class="card-desc">Browse through verified attendee feedback and testimonials from leading educators, parents, and students.</p>
-          </div>
+              <!-- Stats list -->
+              <div class="sidebar-stats-list">
+                <!-- Stat 1 -->
+                <div class="sidebar-stat-item">
+                  <div class="stat-meta">
+                    <span class="stat-big-val">5,000+</span>
+                    <span class="stat-meta-label">Webinar Attendees</span>
+                  </div>
+                  <p class="stat-sub-desc">Students, parents, and educators gathered live on Zoom for the first generation launch.</p>
+                </div>
 
-          <!-- Card 4: Community Growth (Bento Col-5) -->
-          <div class="movement-card growth-card bento-col-5">
-            <div class="card-glow"></div>
-            <div class="card-header">
-              <span class="card-icon">
-                <svg class="premium-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                  <polyline points="17 6 23 6 23 12"></polyline>
-                </svg>
-              </span>
-              <h3>Community Growth</h3>
-            </div>
-            <div class="growth-chart-placeholder">
-              <svg class="growth-chart-svg" viewBox="0 0 100 40">
-                <path class="growth-path-stroke" d="M 0 35 Q 25 32, 50 20 T 100 5" fill="none" stroke="var(--color-gold)" stroke-width="1.5"></path>
-                <path d="M 0 35 Q 25 32, 50 20 T 100 5 L 100 40 L 0 40 Z" fill="url(#chart-glow)"></path>
-                <defs>
-                  <linearGradient id="chart-glow" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="var(--color-blue)" stop-opacity="0.2"/>
-                    <stop offset="100%" stop-color="var(--color-blue)" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-              <div class="chart-pulse-dot"></div>
-              <div class="growth-labels">
-                <span>12 July Launch</span>
-                <span>19 July Next Step</span>
+                <!-- Stat 2 -->
+                <div class="sidebar-stat-item">
+                  <div class="stat-meta">
+                    <span class="stat-big-val">150+</span>
+                    <span class="stat-meta-label">Schools Represented</span>
+                  </div>
+                  <p class="stat-sub-desc">Active institutional registration footprints from schools across CBSE, ICSE, and IB boards.</p>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="sidebar-stat-item">
+                  <div class="stat-meta">
+                    <span class="stat-big-val">80+</span>
+                    <span class="stat-meta-label">Cities Engaged</span>
+                  </div>
+                  <p class="stat-sub-desc">Widespread regional adoption covering tier-1 metro clusters and regional cities.</p>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="sidebar-stat-item">
+                  <div class="stat-meta">
+                    <span class="stat-big-val">12,000+</span>
+                    <span class="stat-meta-label">Ecosystem Members</span>
+                  </div>
+                  <p class="stat-sub-desc">Lifetime community profiles registered on the active learning platform.</p>
+                </div>
               </div>
             </div>
-            <p class="card-desc">Tracking live enrollment growth and community onboarding benchmarks as the national movement scales.</p>
           </div>
         </div>
 
@@ -1460,9 +1432,9 @@
         // Custom reveals for V2.0 sections
         if (section.id === 'movement') {
           const header = section.querySelector('.movement-header');
-          const stats = section.querySelectorAll('.stat-card');
-          const cards = section.querySelectorAll('.movement-card');
-          const chartPath = section.querySelector('.growth-path-stroke');
+          const videoCol = section.querySelector('.movement-video-column');
+          const sidebarIntro = section.querySelector('.sidebar-intro');
+          const sidebarStats = section.querySelectorAll('.sidebar-stat-item');
           
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -1479,30 +1451,28 @@
             );
           }
           
-          if (stats.length) {
-            tl.fromTo(stats,
+          if (videoCol) {
+            tl.fromTo(videoCol,
+              { opacity: 0, x: -30 },
+              { opacity: 1, x: 0, duration: 1.0, ease: 'power3.out' },
+              '-=0.4'
+            );
+          }
+          
+          if (sidebarIntro) {
+            tl.fromTo(sidebarIntro,
               { opacity: 0, y: 20 },
-              { opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' },
-              '-=0.4'
+              { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+              '-=0.8'
             );
           }
-          
-          if (cards.length) {
-            tl.fromTo(cards,
-              { opacity: 0, y: 30, scale: 0.98 },
-              { opacity: 1, y: 0, scale: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' },
-              '-=0.4'
+
+          if (sidebarStats.length) {
+            tl.fromTo(sidebarStats,
+              { opacity: 0, x: 30 },
+              { opacity: 1, x: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' },
+              '-=0.6'
             );
-          }
-          
-          if (chartPath) {
-            try {
-              const pathLength = chartPath.getTotalLength();
-              gsap.set(chartPath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
-              tl.to(chartPath, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.out' }, '-=0.6');
-            } catch (e) {
-              console.warn("SVG path measurement skipped in non-browser context", e);
-            }
           }
           return;
         }
