@@ -287,81 +287,33 @@
 
           <div class="reels-track" id="reels-track">
             <!-- Reel Card 1 (Webinar Launch Reveal) -->
-            <div class="reel-card" data-reel-id="DablBM0KbTD">
-              <div class="reel-poster" style="background-image: url('FRAME 12.webp');">
-                <div class="reel-play-btn">
-                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </div>
-                <div class="reel-info">
-                  <span class="reel-category">LAUNCH SPECIAL</span>
-                  <h4 class="reel-title">AI Passport™ National Reveal Highlights</h4>
-                </div>
-              </div>
+            <div class="reel-card">
+              <iframe src="https://www.instagram.com/reel/DablBM0KbTD/embed/" class="reel-iframe" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
 
-            <!-- Reel Card 2 (Student Highlights Placeholder) -->
-            <div class="reel-card" data-reel-id="Dawv6kFR3i7">
-              <div class="reel-poster" style="background-image: url('FRAME 6.webp');">
-                <div class="reel-play-btn">
-                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </div>
-                <div class="reel-info">
-                  <span class="reel-category">STUDENT VOICES</span>
-                  <h4 class="reel-title">Student Creations & Direct Feedbacks</h4>
-                </div>
-              </div>
+            <!-- Reel Card 2 (Student Highlights) -->
+            <div class="reel-card">
+              <iframe src="https://www.instagram.com/reel/Dawv6kFR3i7/embed/" class="reel-iframe" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
 
-            <!-- Reel Card 3 (Parent Q&A Highlights Placeholder) -->
-            <div class="reel-card" data-reel-id="DaWsXlGK3MM">
-              <div class="reel-poster" style="background-image: url('FRAME 10.webp');">
-                <div class="reel-play-btn">
-                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </div>
-                <div class="reel-info">
-                  <span class="reel-category">COMMUNITY Q&A</span>
-                  <h4 class="reel-title">Parents & School Leaders Insights</h4>
-                </div>
-              </div>
+            <!-- Reel Card 3 (Parent Q&A Highlights) -->
+            <div class="reel-card">
+              <iframe src="https://www.instagram.com/reel/DaWsXlGK3MM/embed/" class="reel-iframe" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
 
             <!-- Reel Card 4 (Interactive Q&A Session) -->
-            <div class="reel-card" data-reel-id="DawSoCkqUJC">
-              <div class="reel-poster" style="background-image: url('FRAME 4.webp');">
-                <div class="reel-play-btn">
-                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </div>
-                <div class="reel-info">
-                  <span class="reel-category">Q&A HIGHLIGHTS</span>
-                  <h4 class="reel-title">Live Q&A Session Interactions</h4>
-                </div>
-              </div>
+            <div class="reel-card">
+              <iframe src="https://www.instagram.com/reel/DawSoCkqUJC/embed/" class="reel-iframe" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
 
             <!-- Reel Card 5 (Student Project Showcase) -->
-            <div class="reel-card" data-reel-id="DaWpcm1KFOF">
-              <div class="reel-poster" style="background-image: url('FRAME 8.webp');">
-                <div class="reel-play-btn">
-                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </div>
-                <div class="reel-info">
-                  <span class="reel-category">CREATOR SPOTLIGHT</span>
-                  <h4 class="reel-title">Student AI Project Demonstrations</h4>
-                </div>
-              </div>
+            <div class="reel-card">
+              <iframe src="https://www.instagram.com/reel/DaWpcm1KFOF/embed/" class="reel-iframe" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
 
             <!-- Reel Card 6 (AI Passport Curriculum Walkthrough) -->
-            <div class="reel-card" data-reel-id="DaRT-YbKAhn">
-              <div class="reel-poster" style="background-image: url('FRAME 9.webp');">
-                <div class="reel-play-btn">
-                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </div>
-                <div class="reel-info">
-                  <span class="reel-category">CURRICULUM DEEP DIVE</span>
-                  <h4 class="reel-title">AI Passport™ Progression Levels</h4>
-                </div>
-              </div>
+            <div class="reel-card">
+              <iframe src="https://www.instagram.com/reel/DaRT-YbKAhn/embed/" class="reel-iframe" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
           </div>
         </div>
@@ -1906,59 +1858,6 @@
 
     /* --- 8b. Cinematic Video Player Instagram Reel Embed --- */
     function initVideoPlayer() {
-      const cards = document.querySelectorAll('.reel-card');
-      cards.forEach(card => {
-        card.addEventListener('click', function handler(e) {
-          // If already playing, bypass to let user interact with iframe
-          if (card.classList.contains('is-playing')) return;
-          
-          card.removeEventListener('click', handler);
-          
-          // Play click sound if configured
-          if (typeof playTickSound === 'function') {
-            playTickSound('click');
-          }
-          
-          card.classList.add('is-playing');
-          
-          const reelId = card.getAttribute('data-reel-id');
-          
-          // Inject custom glass-themed Instagram blockquote for the targeted Reel
-          card.innerHTML = `
-            <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/${reelId}/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#030303; border:0; border-radius:12px; box-shadow:none; margin: 0; padding:0; width:100%; height:100%;">
-              <div style="padding:16px; display:flex; align-items:center; justify-content:center; height:100%; min-height:450px;">
-                <a href="https://www.instagram.com/reel/${reelId}/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#030303; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
-                  <div style="display:flex; flex-direction:row; align-items:center; justify-content:center;">
-                    <div style="color:var(--color-gold); font-family:var(--font-sans); font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; text-shadow:0 0 10px rgba(223,207,173,0.35);">LOADING HIGHLIGHTS...</div>
-                  </div>
-                </a>
-              </div>
-            </blockquote>
-          `;
-          
-          // Load or process Instagram embeds
-          if (window.instgrm) {
-            window.instgrm.Embeds.process();
-          } else {
-            const script = document.createElement('script');
-            script.src = "https://www.instagram.com/embed.js";
-            script.async = true;
-            script.defer = true;
-            script.onload = () => {
-              if (window.instgrm && window.instgrm.Embeds) {
-                window.instgrm.Embeds.process();
-              }
-            };
-            document.body.appendChild(script);
-          }
-          
-          // Recalculate layout constraints in GSAP ScrollTrigger
-          setTimeout(() => {
-            ScrollTrigger.refresh();
-          }, 1500);
-        });
-      });
-      
       // Wire horizontal scrolling controls for the reels slider
       const track = document.getElementById('reels-track');
       const prevBtn = document.getElementById('reels-prev');
