@@ -3608,7 +3608,35 @@ p, .section-lead, .section-subtext {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: visible;
-  padding: 96px 5%;
+  padding: 96px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.movement-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.movement-header {
+  width: 100%;
+  text-align: center;
+}
+
+.movement-bottom-cta {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .movement-badge {
@@ -4291,9 +4319,8 @@ p, .section-lead, .section-subtext {
 .reels-slider-container {
   position: relative;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto 48px auto;
-  padding: 0 4px;
+  margin: 0 auto 16px auto;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -4399,13 +4426,8 @@ p, .section-lead, .section-subtext {
     gap: 16px;
     margin: 32px auto;
   }
-  .movement-section .section-container {
-    padding: 0 20px;
-    box-sizing: border-box;
-  }
-  .reels-slider-container {
-    padding: 0 20px;
-    box-sizing: border-box;
+  .movement-inner {
+    padding: 0 24px;
   }
 }
 
@@ -4413,22 +4435,14 @@ p, .section-lead, .section-subtext {
   .movement-section {
     padding: 64px 0 !important;
   }
-  .movement-section .section-container {
+  .movement-inner {
     padding: 0 16px !important;
-    box-sizing: border-box !important;
-  }
-  .reels-slider-container {
-    padding: 0 16px !important;
-    box-sizing: border-box !important;
+    gap: 28px !important;
   }
   .movement-stats-row {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     width: 100%;
-  }
-  .movement-bottom-cta {
-    padding: 0 16px;
-    box-sizing: border-box;
   }
   .reel-card {
     flex: 0 0 280px;
