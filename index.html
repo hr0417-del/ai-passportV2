@@ -2173,12 +2173,15 @@
           if (isOpen) {
             gsap.to(spans[0], { y: 6, rotation: 45, duration: 0.3 });
             gsap.to(spans[1], { y: -6, rotation: -45, duration: 0.3 });
-            gsap.to(navLinks, { display: 'flex', opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+            gsap.to(navLinks, { display: 'flex', opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', onComplete: () => {
+              ScrollTrigger.refresh();
+            } });
           } else {
             gsap.to(spans[0], { y: 0, rotation: 0, duration: 0.3 });
             gsap.to(spans[1], { y: 0, rotation: 0, duration: 0.3 });
             gsap.to(navLinks, { opacity: 0, y: -20, duration: 0.3, onComplete: () => {
               navLinks.style.display = '';
+              ScrollTrigger.refresh();
             }});
           }
         });

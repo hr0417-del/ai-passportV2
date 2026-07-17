@@ -4410,5 +4410,35 @@ p, .section-lead, .section-subtext {
     width: 280px;
     height: 530px;
   }
+  h1 {
+    font-size: 2.1rem !important;
+    line-height: 1.2 !important;
+  }
+  h2 {
+    font-size: 1.65rem !important;
+    line-height: 1.25 !important;
+  }
+  .section {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+  .hero-section {
+    padding-top: 100px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .ticket-wrapper {
+    padding: 16px 12px !important;
+  }
+  .success-headline {
+    font-size: 1rem !important;
+  }
+  .ticket-logo {
+    font-size: 0.8rem !important;
+  }
+  .ticket-cell span {
+    font-size: 0.7rem !important;
+  }
 }
 
