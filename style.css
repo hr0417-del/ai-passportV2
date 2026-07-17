@@ -3601,37 +3601,127 @@ p, .section-lead, .section-subtext {
   align-items: center;
 }
 
-/* --- Movement Section V2.0 --- */
+/* --- Movement Section — Complete Mobile-First Rewrite --- */
 .movement-section {
   background-color: #000000;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
-  overflow: visible;
   padding: 96px 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  overflow: visible;
 }
 
+/* Safe-zone wrapper — constrains text/stats/CTA to max-width with padding */
 .movement-inner {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
 }
 
+/* Centered header block */
 .movement-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+/* Stats grid: 4-col desktop, 2-col tablet, 2-col mobile */
+.movement-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   width: 100%;
+  margin-bottom: 56px;
+}
+
+.stat-badge {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 24px 16px;
   text-align: center;
 }
 
-.movement-bottom-cta {
+.stat-num {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--color-gold);
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+/* Reels slider — sits at full section width, no padding on the section itself */
+.reels-slider-container {
   width: 100%;
+  margin-bottom: 56px;
+}
+
+.reels-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.reels-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 8px 40px 24px 40px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+.reels-track::-webkit-scrollbar { height: 4px; }
+.reels-track::-webkit-scrollbar-track { background: transparent; }
+.reels-track::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+.reel-card {
+  flex: 0 0 300px;
+  width: 300px;
+  height: 540px;
+  background: #030303;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.reel-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #030303;
+  color-scheme: dark;
+}
+
+/* CTA below reels */
+.movement-bottom-cta {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -3639,9 +3729,51 @@ p, .section-lead, .section-subtext {
   gap: 20px;
 }
 
+.movement-cta-lead {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* --- Responsive Breakpoints --- */
+
+@media (max-width: 1024px) {
+  .movement-inner { padding: 0 32px; }
+  .reels-slider-header { padding-left: 32px; padding-right: 32px; }
+  .reels-track { padding-left: 32px; padding-right: 32px; }
+}
+
+@media (max-width: 768px) {
+  .movement-section { padding: 72px 0; }
+  .movement-inner { padding: 0 20px; }
+  .movement-header { margin-bottom: 32px; }
+  .movement-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .reels-slider-header { padding-left: 20px; padding-right: 20px; }
+  .reels-track { padding-left: 20px; padding-right: 20px; gap: 16px; }
+  .reel-card { flex: 0 0 260px; width: 260px; height: 470px; }
+  .reels-slider-container { margin-bottom: 40px; }
+}
+
+@media (max-width: 480px) {
+  .movement-section { padding: 60px 0; }
+  .movement-inner { padding: 0 16px; }
+  .movement-stats-row { gap: 10px; margin-bottom: 32px; }
+  .stat-badge { padding: 16px 10px; }
+  .reels-slider-header { padding-left: 16px; padding-right: 16px; }
+  .reels-track { padding-left: 16px; padding-right: 8px; gap: 12px; }
+  .reel-card { flex: 0 0 240px; width: 240px; height: 430px; }
+  .movement-bottom-cta .btn { width: 100%; text-align: center; }
+}
+
 .movement-badge {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   font-family: var(--font-sans);
   font-size: 0.7rem;
   font-weight: 600;
