@@ -242,107 +242,85 @@
           <p class="section-lead">Our National Launch Webinar on 12 July brought together students, teachers, parents, professionals and school leaders from across India. Now we're taking the next step.</p>
         </div>
 
-        <!-- Asymmetric Split Layout Container -->
-        <div class="movement-split-layout">
-          <!-- Left Column (60% width): Dominant Video Player -->
-          <div class="movement-video-column">
-            <div class="premium-player-card">
-              <div class="card-glow"></div>
-              
-              <!-- Video Screen Container -->
-              <div class="player-screen-wrapper" style="background-image: url('FRAME 12.webp'); background-size: cover; background-position: center;">
-                <div class="player-vignette"></div>
-                
-                <!-- Central pulsing play button -->
-                <div class="player-play-trigger">
-                  <svg class="play-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <polygon points="5 3 19 12 5 21 5 3"/>
-                  </svg>
-                </div>
-                
-                <!-- Video Poster Background info -->
-                <div class="player-poster-info">
-                  <span class="player-video-tag">LAUNCH HIGHLIGHTS</span>
-                  <h3 class="player-video-title">AI Passport™ National Reveal</h3>
-                </div>
+        <!-- Horizontal Stats Grid Row -->
+        <div class="movement-stats-row">
+          <div class="stat-badge">
+            <span class="stat-num">5,000+</span>
+            <span class="stat-label">Webinar Attendees</span>
+          </div>
+          <div class="stat-badge">
+            <span class="stat-num">150+</span>
+            <span class="stat-label">Schools Represented</span>
+          </div>
+          <div class="stat-badge">
+            <span class="stat-num">80+</span>
+            <span class="stat-label">Cities Engaged</span>
+          </div>
+          <div class="stat-badge">
+            <span class="stat-num">12,000+</span>
+            <span class="stat-label">Ecosystem Members</span>
+          </div>
+        </div>
 
-                <!-- Technical Media Player Controls HUD Overlay -->
-                <div class="player-hud-overlay">
-                  <div class="hud-left">
-                    <button class="hud-control-btn play-pause-btn" aria-label="Play/Pause">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                    </button>
-                    <span class="hud-timecode">01:42 / 03:00</span>
-                  </div>
-                  <!-- Progress seek bar -->
-                  <div class="hud-progress-bar-wrapper">
-                    <div class="hud-progress-track">
-                      <div class="hud-progress-fill" style="width: 56.6%"></div>
-                    </div>
-                  </div>
-                  <div class="hud-right">
-                    <button class="hud-control-btn volume-btn" aria-label="Volume">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-                    </button>
-                    <button class="hud-control-btn fullscreen-btn" aria-label="Fullscreen">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Video Card footer info description -->
-              <div class="player-footer-desc">
-                <p>Experience the official launch reel covering our 12 July session outcomes, product walkthrough, and student reactions from schools nationwide.</p>
-              </div>
+        <!-- Cinematic Reels Slider Container -->
+        <div class="reels-slider-container">
+          <div class="reels-slider-header">
+            <div class="reels-slider-title">
+              <span class="reels-live-dot"></span>
+              REELS HIGHLIGHTS
+            </div>
+            <div class="reels-slider-controls">
+              <button class="carousel-control-btn reels-prev-btn" id="reels-prev" aria-label="Previous Slide">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+              </button>
+              <button class="carousel-control-btn reels-next-btn" id="reels-next" aria-label="Next Slide">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
             </div>
           </div>
 
-          <!-- Right Column (40% width): Stats Sidebar -->
-          <div class="movement-stats-sidebar">
-            <div class="sidebar-wrapper">
-              <div class="sidebar-intro">
-                <span class="sidebar-eyebrow">COHORT TRACTION</span>
-                <h3>Genesis Growth Benchmarks</h3>
-                <p>Onboarding metrics tracking the footprint of the AI Passport™ ecosystem across educational hubs.</p>
+          <div class="reels-track" id="reels-track">
+            <!-- Reel Card 1 (Webinar Launch Reveal) -->
+            <div class="reel-card" data-reel-id="DawSoCkqUJC">
+              <div class="reel-poster" style="background-image: url('FRAME 12.webp');">
+                <div class="reel-play-btn">
+                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="reel-info">
+                  <span class="reel-category">LAUNCH SPECIAL</span>
+                  <h4 class="reel-title">AI Passport™ National Reveal Highlights</h4>
+                </div>
               </div>
+            </div>
 
-              <!-- Stats list -->
-              <div class="sidebar-stats-list">
-                <!-- Stat 1 -->
-                <div class="sidebar-stat-item">
-                  <div class="stat-meta">
-                    <span class="stat-big-val">5,000+</span>
-                    <span class="stat-meta-label">Webinar Attendees</span>
-                  </div>
-                  <p class="stat-sub-desc">Students, parents, and educators gathered live on Zoom for the first generation launch.</p>
+            <!-- Reel Card 2 (Student Highlights Placeholder) -->
+            <div class="reel-card" data-reel-id="DawSoCkqUJC">
+              <div class="reel-poster" style="background-image: url('FRAME 6.webp');">
+                <div class="reel-play-btn">
+                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
-
-                <!-- Stat 2 -->
-                <div class="sidebar-stat-item">
-                  <div class="stat-meta">
-                    <span class="stat-big-val">150+</span>
-                    <span class="stat-meta-label">Schools Represented</span>
-                  </div>
-                  <p class="stat-sub-desc">Active institutional registration footprints from schools across CBSE, ICSE, and IB boards.</p>
+                <div class="reel-info">
+                  <span class="reel-category">STUDENT VOICES</span>
+                  <h4 class="reel-title">Student Creations & Direct Feedbacks</h4>
                 </div>
+              </div>
+            </div>
 
-                <!-- Stat 3 -->
-                <div class="sidebar-stat-item">
-                  <div class="stat-meta">
-                    <span class="stat-big-val">80+</span>
-                    <span class="stat-meta-label">Cities Engaged</span>
-                  </div>
-                  <p class="stat-sub-desc">Widespread regional adoption covering tier-1 metro clusters and regional cities.</p>
+            <!-- Reel Card 3 (Parent Q&A Highlights Placeholder) -->
+            <div class="reel-card" data-reel-id="DawSoCkqUJC">
+              <div class="reel-poster" style="background-image: url('FRAME 10.webp');">
+                <div class="reel-play-btn">
+                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
-
-                <!-- Stat 4 -->
-                <div class="sidebar-stat-item">
-                  <div class="stat-meta">
-                    <span class="stat-big-val">12,000+</span>
-                    <span class="stat-meta-label">Ecosystem Members</span>
-                  </div>
-                  <p class="stat-sub-desc">Lifetime community profiles registered on the active learning platform.</p>
+                <div class="reel-info">
+                  <span class="reel-category">COMMUNITY Q&A</span>
+                  <h4 class="reel-title">Parents & School Leaders Insights</h4>
                 </div>
               </div>
             </div>
@@ -1889,55 +1867,77 @@
 
     /* --- 8b. Cinematic Video Player Instagram Reel Embed --- */
     function initVideoPlayer() {
-      const wrapper = document.querySelector('.player-screen-wrapper');
-      if (!wrapper) return;
-      
-      wrapper.addEventListener('click', function handler(e) {
-        // Remove click listener to prevent double triggers
-        wrapper.removeEventListener('click', handler);
-        
-        // Play soft tactical click sound if the audio system is active
-        if (typeof playTickSound === 'function') {
-          playTickSound('click');
-        }
-        
-        // Set playing class to adjust height and layout properties in CSS
-        wrapper.classList.add('is-playing');
-        
-        // Inject the Instagram blockquote code provided by the user, themed to match matte black luxury
-        wrapper.innerHTML = `
-          <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DawSoCkqUJC/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#030303; border:1px solid rgba(255,255,255,0.06); border-radius:8px; box-shadow:none; margin: 0 auto; max-width:540px; min-width:326px; padding:0; width:100%;">
-            <div style="padding:16px;">
-              <a href="https://www.instagram.com/reel/DawSoCkqUJC/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#030303; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank">
-                <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; height: 350px;">
-                  <div style="color:var(--color-gold); font-family:var(--font-sans); font-size:0.85rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:400; text-shadow:0 0 10px rgba(223,207,173,0.3);">LOADING VIDEO HIGHLIGHTS...</div>
-                </div>
-              </a>
-            </div>
-          </blockquote>
-        `;
-        
-        // Load the Instagram embed.js script dynamically
-        if (window.instgrm) {
-          window.instgrm.Embeds.process();
-        } else {
-          const script = document.createElement('script');
-          script.src = "https://www.instagram.com/embed.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => {
-            if (window.instgrm && window.instgrm.Embeds) {
-              window.instgrm.Embeds.process();
-            }
-          };
-          document.body.appendChild(script);
-        }
-        
-        // Refresh GSAP ScrollTrigger to capture any height changes in the layout
-        setTimeout(() => {
-          ScrollTrigger.refresh();
-        }, 1500);
+      const cards = document.querySelectorAll('.reel-card');
+      cards.forEach(card => {
+        card.addEventListener('click', function handler(e) {
+          // If already playing, bypass to let user interact with iframe
+          if (card.classList.contains('is-playing')) return;
+          
+          card.removeEventListener('click', handler);
+          
+          // Play click sound if configured
+          if (typeof playTickSound === 'function') {
+            playTickSound('click');
+          }
+          
+          card.classList.add('is-playing');
+          
+          const reelId = card.getAttribute('data-reel-id');
+          
+          // Inject custom glass-themed Instagram blockquote for the targeted Reel
+          card.innerHTML = `
+            <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/${reelId}/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#030303; border:0; border-radius:12px; box-shadow:none; margin: 0; padding:0; width:100%; height:100%;">
+              <div style="padding:16px; display:flex; align-items:center; justify-content:center; height:100%; min-height:450px;">
+                <a href="https://www.instagram.com/reel/${reelId}/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#030303; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+                  <div style="display:flex; flex-direction:row; align-items:center; justify-content:center;">
+                    <div style="color:var(--color-gold); font-family:var(--font-sans); font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; text-shadow:0 0 10px rgba(223,207,173,0.35);">LOADING HIGHLIGHTS...</div>
+                  </div>
+                </a>
+              </div>
+            </blockquote>
+          `;
+          
+          // Load or process Instagram embeds
+          if (window.instgrm) {
+            window.instgrm.Embeds.process();
+          } else {
+            const script = document.createElement('script');
+            script.src = "https://www.instagram.com/embed.js";
+            script.async = true;
+            script.defer = true;
+            script.onload = () => {
+              if (window.instgrm && window.instgrm.Embeds) {
+                window.instgrm.Embeds.process();
+              }
+            };
+            document.body.appendChild(script);
+          }
+          
+          // Recalculate layout constraints in GSAP ScrollTrigger
+          setTimeout(() => {
+            ScrollTrigger.refresh();
+          }, 1500);
+        });
       });
+      
+      // Wire horizontal scrolling controls for the reels slider
+      const track = document.getElementById('reels-track');
+      const prevBtn = document.getElementById('reels-prev');
+      const nextBtn = document.getElementById('reels-next');
+      if (track && prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+          track.scrollBy({ left: -344, behavior: 'smooth' });
+          if (typeof playTickSound === 'function') {
+            playTickSound('click');
+          }
+        });
+        nextBtn.addEventListener('click', () => {
+          track.scrollBy({ left: 344, behavior: 'smooth' });
+          if (typeof playTickSound === 'function') {
+            playTickSound('click');
+          }
+        });
+      }
     }
 
     /* --- 9. Registration Form & Digital Ticket Generation --- */
