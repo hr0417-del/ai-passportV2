@@ -624,6 +624,15 @@ p {
   max-width: 540px;
 }
 
+.section-sub-lead {
+  margin-top: 14px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
 .highlight-text {
   font-size: 1.15rem;
   line-height: 1.7;
@@ -4068,6 +4077,15 @@ p, .section-lead, .section-subtext {
   color: var(--color-text-secondary);
 }
 
+.author-attribution {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
 /* Carousel controls */
 .carousel-controls {
   display: flex;
@@ -4286,6 +4304,16 @@ p, .section-lead, .section-subtext {
   overflow: hidden;
   cursor: pointer;
 }
+
+.player-screen-wrapper.is-playing {
+  aspect-ratio: auto !important;
+  background: #030303 !important;
+  padding: 16px;
+  cursor: default !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
 
 .player-vignette {
   position: absolute;
