@@ -3607,8 +3607,8 @@ p, .section-lead, .section-subtext {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
-  overflow: hidden;
-  padding: 96px 0;
+  overflow: visible;
+  padding: 96px 5%;
 }
 
 .movement-badge {
@@ -4294,6 +4294,7 @@ p, .section-lead, .section-subtext {
   max-width: 1200px;
   margin: 0 auto 48px auto;
   padding: 0 4px;
+  box-sizing: border-box;
 }
 
 .reels-slider-header {
@@ -4398,12 +4399,36 @@ p, .section-lead, .section-subtext {
     gap: 16px;
     margin: 32px auto;
   }
+  .movement-section .section-container {
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .reels-slider-container {
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
 }
 
 @media (max-width: 568px) {
+  .movement-section {
+    padding: 64px 0 !important;
+  }
+  .movement-section .section-container {
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+  .reels-slider-container {
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
   .movement-stats-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
+    width: 100%;
+  }
+  .movement-bottom-cta {
+    padding: 0 16px;
+    box-sizing: border-box;
   }
   .reel-card {
     flex: 0 0 280px;
