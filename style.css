@@ -2072,7 +2072,7 @@ p {
 /* Custom Luxury Cursor */
 @media (pointer: fine) {
   body, a, button, input, select, textarea, .accordion-trigger, .step-card, .bubble {
-    cursor: none !important;
+    /* Native cursor remains visible for maximum responsiveness; custom dot/glow acts as trailing effect */
   }
 }
 
@@ -2369,7 +2369,6 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.02);
-  cursor: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2685,7 +2684,6 @@ p {
   transition: padding-left 0.4s var(--transition-smooth), 
               color 0.4s var(--transition-smooth),
               text-shadow 0.4s var(--transition-smooth);
-  cursor: none !important;
 }
 
 .webinar-topics-list li::before {
@@ -2714,7 +2712,6 @@ p {
 
 /* Section 7 Portrait lift & gold rim light */
 .builder-column {
-  cursor: none !important;
 }
 
 .portrait-wrapper {
@@ -2930,7 +2927,6 @@ p {
   padding: 6px 14px;
   border-radius: 2px;
   transition: all var(--duration-normal) var(--transition-smooth);
-  cursor: none !important;
 }
 
 .audience-chip:hover {
@@ -3679,11 +3675,7 @@ p, .section-lead, .section-subtext {
   margin-bottom: 20px;
   padding-bottom: 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 40px;
-  padding-right: 40px;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -3692,7 +3684,8 @@ p, .section-lead, .section-subtext {
   gap: 20px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 8px 40px 24px 40px;
+  padding: 8px 0 24px 0;
+  width: 100%;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
 }
@@ -3740,8 +3733,6 @@ p, .section-lead, .section-subtext {
 
 @media (max-width: 1024px) {
   .movement-inner { padding: 0 32px; }
-  .reels-slider-header { padding-left: 32px; padding-right: 32px; }
-  .reels-track { padding-left: 32px; padding-right: 32px; }
 }
 
 @media (max-width: 768px) {
@@ -3753,8 +3744,6 @@ p, .section-lead, .section-subtext {
     gap: 12px;
     margin-bottom: 40px;
   }
-  .reels-slider-header { padding-left: 20px; padding-right: 20px; }
-  .reels-track { padding-left: 20px; padding-right: 20px; gap: 16px; }
   .reel-card { flex: 0 0 260px; width: 260px; height: 470px; }
   .reels-slider-container { margin-bottom: 40px; }
 }
@@ -3764,8 +3753,6 @@ p, .section-lead, .section-subtext {
   .movement-inner { padding: 0 16px; }
   .movement-stats-row { gap: 10px; margin-bottom: 32px; }
   .stat-badge { padding: 16px 10px; }
-  .reels-slider-header { padding-left: 16px; padding-right: 16px; }
-  .reels-track { padding-left: 16px; padding-right: 8px; gap: 12px; }
   .reel-card { flex: 0 0 240px; width: 240px; height: 430px; }
   .movement-bottom-cta .btn { width: 100%; text-align: center; }
 }
