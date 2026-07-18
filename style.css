@@ -3626,40 +3626,43 @@ p, .section-lead, .section-subtext {
   margin-bottom: 48px;
 }
 
-/* Stats grid: 4-col desktop, 2-col tablet, 2-col mobile */
-.movement-stats-row {
+/* Audience grid: 4-col desktop, 2-col tablet, 1-col mobile */
+.audience-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 16px;
   width: 100%;
-  margin-bottom: 56px;
+  margin-bottom: 24px;
 }
 
-.stat-badge {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  padding: 24px 16px;
+.audience-card {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 28px 16px;
+  border-radius: 8px;
   text-align: center;
+  transition: all 0.4s var(--transition-smooth);
 }
 
-.stat-num {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-  font-weight: 700;
-  color: var(--color-gold);
-  margin-bottom: 6px;
+.audience-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(0, 82, 255, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
-.stat-label {
+.audience-emoji {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.audience-title {
   display: block;
   font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
 }
 
 /* Reels slider — sits at full section width, no padding on the section itself */
@@ -3739,10 +3742,9 @@ p, .section-lead, .section-subtext {
   .movement-section { padding: 72px 0; }
   .movement-inner { padding: 0 20px; }
   .movement-header { margin-bottom: 32px; }
-  .movement-stats-row {
+  .audience-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
-    margin-bottom: 40px;
   }
   .reel-card { flex: 0 0 260px; width: 260px; height: 470px; }
   .reels-slider-container { margin-bottom: 40px; }
@@ -3751,8 +3753,10 @@ p, .section-lead, .section-subtext {
 @media (max-width: 480px) {
   .movement-section { padding: 60px 0; }
   .movement-inner { padding: 0 16px; }
-  .movement-stats-row { gap: 10px; margin-bottom: 32px; }
-  .stat-badge { padding: 16px 10px; }
+  .audience-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
   .reel-card { flex: 0 0 240px; width: 240px; height: 430px; }
   .movement-bottom-cta .btn { width: 100%; text-align: center; }
 }
