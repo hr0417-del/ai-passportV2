@@ -3626,6 +3626,11 @@ p, .section-lead, .section-subtext {
   margin-bottom: 48px;
 }
 
+.movement-header .section-lead {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 /* Audience grid: 4-col desktop, 2-col tablet, 1-col mobile */
 .audience-grid {
   display: grid;
