@@ -3640,8 +3640,13 @@ p, .section-lead, .section-subtext {
   border: 1px solid rgba(255, 255, 255, 0.04);
   padding: 28px 16px;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   transition: all 0.4s var(--transition-smooth);
+  box-sizing: border-box;
 }
 
 .audience-card:hover {
@@ -3651,10 +3656,15 @@ p, .section-lead, .section-subtext {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
-.audience-emoji {
-  font-size: 2.2rem;
-  display: block;
-  margin-bottom: 12px;
+.audience-icon {
+  color: var(--color-gold); /* Custom theme gold */
+  margin-bottom: 16px;
+  transition: transform 0.4s var(--transition-smooth), color 0.4s var(--transition-smooth);
+}
+
+.audience-card:hover .audience-icon {
+  color: #ffffff;
+  transform: scale(1.1);
 }
 
 .audience-title {
@@ -3663,6 +3673,7 @@ p, .section-lead, .section-subtext {
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--color-text-primary);
+  line-height: 1.3;
 }
 
 /* Reels slider — sits at full section width, no padding on the section itself */
