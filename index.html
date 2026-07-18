@@ -813,29 +813,43 @@
        Preloader | Smooth Scroll | ScrollTrigger Section Reveal | Particles | Parallax
        ========================================================================== */
 
-    // Register GSAP plugins
-    gsap.registerPlugin(ScrollTrigger);
+    // Register GSAP plugins safely
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      try {
+        gsap.registerPlugin(ScrollTrigger);
+      } catch (e) {
+        console.warn("Failed to register ScrollTrigger:", e);
+      }
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
-      initPreloader();
-      initLenis();
-      initParticles();
-      initMouseParallax();
-      initSectionReveal();
-      initScrollParallax(); // Animate subjects on scroll
-      initTimelineDraw();
-      initBuildersDivider();
-      initAccordion();
-      initRegistrationForm();
-      initCardHoverReactions(); // Initialize card hovers & bubbles reactions
-      initCountdowns(); // Initialize countdown timers
-      initMobileMenu();
-      initScrollToTop(); // Initialize premium scroll-to-top reset
-      initCustomCursor(); // Custom Glow Cursor logic
-      initSoundEngine();   // Mechanical Audio feedback triggers
-      initScrollSpy();     // ScrollSpy Navigation Highlights
-      initTestimonialCarousel(); // Evolve V2.0 Testimonial Slider
-      initVideoPlayer(); // Initialize Instagram reel play handler
+      const initSafe = (fnName, fn) => {
+        try {
+          if (typeof fn === 'function') fn();
+        } catch (e) {
+          console.warn(`Error initializing ${fnName}:`, e);
+        }
+      };
+
+      initSafe('initPreloader', initPreloader);
+      initSafe('initLenis', initLenis);
+      initSafe('initParticles', initParticles);
+      initSafe('initMouseParallax', initMouseParallax);
+      initSafe('initSectionReveal', initSectionReveal);
+      initSafe('initScrollParallax', initScrollParallax);
+      initSafe('initTimelineDraw', initTimelineDraw);
+      initSafe('initBuildersDivider', initBuildersDivider);
+      initSafe('initAccordion', initAccordion);
+      initSafe('initRegistrationForm', initRegistrationForm);
+      initSafe('initCardHoverReactions', initCardHoverReactions);
+      initSafe('initCountdowns', initCountdowns);
+      initSafe('initMobileMenu', initMobileMenu);
+      initSafe('initScrollToTop', initScrollToTop);
+      initSafe('initCustomCursor', initCustomCursor);
+      initSafe('initSoundEngine', initSoundEngine);
+      initSafe('initScrollSpy', initScrollSpy);
+      initSafe('initTestimonialCarousel', initTestimonialCarousel);
+      initSafe('initVideoPlayer', initVideoPlayer);
     });
 
     /* --- 1. Preloader & Intro Sequence --- */
@@ -1897,6 +1911,10 @@
       
       // Compares each digit and triggers a smooth flip, glow, and subtle pulse
       function updateContainerDigits(container, valStr) {
+        if (typeof gsap === 'undefined') {
+          container.textContent = valStr;
+          return;
+        }
         try {
           adjustDigitSpans(container, valStr.length);
           const spans = container.querySelectorAll('.digit');
