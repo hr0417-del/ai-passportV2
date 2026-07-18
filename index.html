@@ -1897,25 +1897,29 @@
       
       // Compares each digit and triggers a smooth flip, glow, and subtle pulse
       function updateContainerDigits(container, valStr) {
-        adjustDigitSpans(container, valStr.length);
-        const spans = container.querySelectorAll('.digit');
-        for (let i = 0; i < valStr.length; i++) {
-          const char = valStr.charAt(i);
-          const span = spans[i];
-          if (span.textContent !== char) {
-            span.textContent = char;
-            gsap.fromTo(span,
-              { scaleY: 0.4, y: -6, opacity: 0.5, filter: 'drop-shadow(0 0 0px rgba(0,0,0,0))' },
-              { 
-                scaleY: 1, 
-                y: 0, 
-                opacity: 1, 
-                filter: 'drop-shadow(0 0 10px rgba(223, 207, 173, 0.45))', 
-                duration: 0.4, 
-                ease: 'back.out(1.5)' 
-              }
-            );
+        try {
+          adjustDigitSpans(container, valStr.length);
+          const spans = container.querySelectorAll('.digit');
+          for (let i = 0; i < valStr.length; i++) {
+            const char = valStr.charAt(i);
+            const span = spans[i];
+            if (span && span.textContent !== char) {
+              span.textContent = char;
+              gsap.fromTo(span,
+                { scaleY: 0.4, y: -6, opacity: 0.5 },
+                { 
+                  scaleY: 1, 
+                  y: 0, 
+                  opacity: 1, 
+                  duration: 0.4, 
+                  ease: 'back.out(1.5)' 
+                }
+              );
+            }
           }
+        } catch (err) {
+          // Robust static fallback in case of query/animation errors
+          container.textContent = valStr;
         }
       }
       
