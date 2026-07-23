@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initScrollSpy', initScrollSpy);
   initSafe('initTestimonialCarousel', initTestimonialCarousel);
   initSafe('initVideoPlayer', initVideoPlayer);
+  initSafe('initAIDemoTabs', initAIDemoTabs);
+  initSafe('initStatsCounters', initStatsCounters);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -1461,3 +1463,136 @@ function initScrollSpy() {
     }
   });
 }
+
+/* --- 16. Interactive AI Demo Typewriter Showcase --- */
+function initAIDemoTabs() {
+  const tabs = document.querySelectorAll('.ai-demo-tab-btn');
+  const container = document.getElementById('ai-demo-window-content');
+  if (!container || !tabs.length) return;
+
+  const demoData = {
+    code: {
+      prompt: "Generate a fully responsive CSS/JS ticket container component.",
+      response: "Deploying boarding ticket layout...\n- Node perspective: 1200px\n- Glassmorphism: blur(25px)\n- Border treatment: 1px solid rgba(255,255,255,0.04)\n\nCompile status: Completed! Preview boarding ticket in live.html registration success block."
+    },
+    presentations: {
+      prompt: "Draft a presentation outline for the Ekaakshar AI Passport campaign.",
+      response: "Compiling presentation slides...\n- Slide 1: Systemic AI Shifts (Memorization vs Capability)\n- Slide 2: The Evolving Learning Profile (Active Ledger)\n- Slide 3: 5 Levels of Progression (Explorer to Citizen)\n\nOutline drafted! Outline active in about.html."
+    },
+    data: {
+      prompt: "Query standard registration JSON payload metrics.",
+      response: "Retrieving registration logs...\n- Total active registrations: 5,000+\n- Webhook success rate: 98%\n- Processing latency: 120ms\n\nDatabase sync: Verified! Reference logs mapped in website_audit_report.md."
+    },
+    business: {
+      prompt: "Optimize automated notification webhook pipelines.",
+      response: "Setting up WhatsApp Twilio API gateway payload...\n- Recipient validation: Verified!\n- Webhook connected: Success!\n- Transaction alert dispatching: Active on form submit."
+    }
+  };
+
+  let typingTimeout = null;
+
+  function runDemo(tabId) {
+    if (typingTimeout) clearTimeout(typingTimeout);
+    
+    const data = demoData[tabId];
+    if (!data) return;
+
+    container.innerHTML = `<div class="code-prompt"></div><div class="code-response" style="display:none;"></div>`;
+    const promptDiv = container.querySelector('.code-prompt');
+    const responseDiv = container.querySelector('.code-response');
+
+    let charIdx = 0;
+    function typePrompt() {
+      if (charIdx < data.prompt.length) {
+        promptDiv.textContent += data.prompt.charAt(charIdx);
+        charIdx++;
+        typingTimeout = setTimeout(typePrompt, 25);
+      } else {
+        // Prompt typing finished, reveal response after small pause
+        typingTimeout = setTimeout(() => {
+          responseDiv.style.display = 'block';
+          let lineIdx = 0;
+          const lines = data.response.split('\n');
+          responseDiv.innerHTML = '';
+          
+          function revealResponseLines() {
+            if (lineIdx < lines.length) {
+              const line = document.createElement('div');
+              line.textContent = lines[lineIdx];
+              responseDiv.appendChild(line);
+              lineIdx++;
+              typingTimeout = setTimeout(revealResponseLines, 100);
+            }
+          }
+          revealResponseLines();
+        }, 300);
+      }
+    }
+    typePrompt();
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const tabId = tab.getAttribute('data-tab');
+      runDemo(tabId);
+      if (typeof playTickSound === 'function') {
+        playTickSound('click');
+      }
+    });
+  });
+
+  // Run first demo as default
+  runDemo('code');
+}
+
+/* --- 17. Viewport Stats Counters Animation --- */
+function initStatsCounters() {
+  const counters = document.querySelectorAll('.stat-counter');
+  if (!counters.length) return;
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+        const suffix = el.getAttribute('data-suffix') || '';
+        const duration = 1500; // 1.5s
+        let start = 0;
+        const startTime = performance.now();
+
+        function animate(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out quad
+          const easeProgress = progress * (2 - progress);
+          const currentVal = Math.floor(easeProgress * target);
+          
+          // Format with commas if large value
+          if (target >= 1000) {
+            el.textContent = currentVal.toLocaleString() + suffix;
+          } else {
+            el.textContent = currentVal + suffix;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            if (target >= 1000) {
+              el.textContent = target.toLocaleString() + suffix;
+            } else {
+              el.textContent = target + suffix;
+            }
+          }
+        }
+
+        requestAnimationFrame(animate);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  counters.forEach(c => observer.observe(c));
+}
+

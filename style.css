@@ -5242,3 +5242,255 @@ p, .section-lead, .section-subtext {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* --- V2.0 Premium Design System Extensions --- */
+
+/* 1. Why AI Sector Cards Grid */
+.why-ai-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.why-ai-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 36px 28px;
+  border-radius: 8px;
+  transition: all 0.4s var(--transition-smooth);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-sizing: border-box;
+}
+
+.why-ai-card:hover {
+  border-color: rgba(223, 207, 173, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.why-ai-card h3 {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+
+.why-ai-card p {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 2. Interactive AI Showcase Window */
+.ai-demo-showcase {
+  width: 100%;
+  max-width: 1000px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.ai-demo-tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.ai-demo-tab-btn {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ai-demo-tab-btn.active, .ai-demo-tab-btn:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+  background-color: rgba(223, 207, 173, 0.05);
+}
+
+.ai-demo-window {
+  width: 100%;
+  background-color: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+}
+
+.ai-demo-header-bar {
+  background-color: #0f0f0f;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ai-demo-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.ai-demo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.ai-demo-dot.red { background-color: #ff5f56; }
+.ai-demo-dot.yellow { background-color: #ffbd2e; }
+.ai-demo-dot.green { background-color: #27c93f; }
+
+.ai-demo-title-bar {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.ai-demo-content-body {
+  padding: 32px 28px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  min-height: 240px;
+  text-align: left;
+}
+
+.code-prompt {
+  color: var(--color-gold);
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+}
+
+.code-prompt::before {
+  content: '>';
+  color: var(--color-blue);
+  font-weight: bold;
+}
+
+.code-response {
+  color: #a0a0a0;
+  border-left: 2px solid rgba(255, 255, 255, 0.04);
+  padding-left: 16px;
+  margin-left: 4px;
+}
+
+/* 3. Partner & Trust Logos */
+.partner-logos-section {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 40px 0;
+  margin: 56px 0;
+}
+
+.logos-grid {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  opacity: 0.45;
+}
+
+.logo-item {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-text-primary);
+  transition: opacity 0.3s ease;
+}
+
+.logo-item:hover {
+  opacity: 1;
+}
+
+/* 4. Large Trust Stats Grid */
+.trust-stats-section {
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
+.trust-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  width: 100%;
+}
+
+.trust-stat-card {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 40px 32px;
+  border-radius: 8px;
+  text-align: center;
+  transition: border-color 0.4s var(--transition-smooth);
+}
+
+.trust-stat-card:hover {
+  border-color: rgba(223, 207, 173, 0.15);
+}
+
+.trust-stat-card h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--color-gold);
+  margin-bottom: 8px;
+}
+
+.trust-stat-card p {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1150px) {
+  .why-ai-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-ai-grid, .trust-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+  .ai-demo-content-body {
+    padding: 24px 18px;
+    font-size: 0.75rem;
+  }
+}
+
