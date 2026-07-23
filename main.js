@@ -1473,20 +1473,20 @@ function initAIDemoTabs() {
 
   const demoData = {
     code: {
-      prompt: "Generate a fully responsive CSS/JS ticket container component.",
-      response: "Deploying boarding ticket layout...\n- Node perspective: 1200px\n- Glassmorphism: blur(25px)\n- Border treatment: 1px solid rgba(255,255,255,0.04)\n\nCompile status: Completed! Preview boarding ticket in live.html registration success block."
+      prompt: "Build a fully responsive web application with custom database endpoints.",
+      response: "Initiating React & Node.js application stack...\n- Database endpoints: /api/v1/citizens verified\n- Encryption protocols: SHA-256 enabled\n- Host deployment: Complete!\n\nSystem is live. You can now build, secure, and deploy custom full-stack solutions."
     },
     presentations: {
-      prompt: "Draft a presentation outline for the Ekaakshar AI Passport campaign.",
-      response: "Compiling presentation slides...\n- Slide 1: Systemic AI Shifts (Memorization vs Capability)\n- Slide 2: The Evolving Learning Profile (Active Ledger)\n- Slide 3: 5 Levels of Progression (Explorer to Citizen)\n\nOutline drafted! Outline active in about.html."
+      prompt: "Draft an educational AI campaign strategy and presentation outline.",
+      response: "Compiling presentation slides...\n- Slide 1: The AI Competence Shift (Memorization vs Action)\n- Slide 2: Dynamic Skill Portfolios (Live Ledgers)\n- Slide 3: Growth Roadmap (From Classroom to Workspace)\n\nOutline completed! You are ready to present to schools and enterprises."
     },
     data: {
-      prompt: "Query standard registration JSON payload metrics.",
-      response: "Retrieving registration logs...\n- Total active registrations: 5,000+\n- Webhook success rate: 98%\n- Processing latency: 120ms\n\nDatabase sync: Verified! Reference logs mapped in website_audit_report.md."
+      prompt: "Analyze active cohort metrics and generate insight logs.",
+      response: "Processing student database analytics...\n- Total cohort registrations: 5,000+ verified\n- Platform uptime: 99.98%\n- Skill verification latency: 120ms\n\nLogs compiled! You are ready to make data-driven operational decisions."
     },
     business: {
-      prompt: "Optimize automated notification webhook pipelines.",
-      response: "Setting up WhatsApp Twilio API gateway payload...\n- Recipient validation: Verified!\n- Webhook connected: Success!\n- Transaction alert dispatching: Active on form submit."
+      prompt: "Automate WhatsApp notification alerts on user form submissions.",
+      response: "Deploying serverless webhook triggers...\n- WhatsApp API handshake: Validated\n- JSON payload parsing: Active\n- Delivery logging: Success!\n\nAutomation online. You are ready to trigger real-time transaction updates."
     }
   };
 
