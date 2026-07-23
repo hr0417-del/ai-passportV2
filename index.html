@@ -154,7 +154,14 @@
             <a href="live.html" class="btn btn-primary">Start Your AI Journey</a>
             <a href="#identity" class="btn btn-secondary">Explore AI Passport</a>
           </div>
-          <p class="hero-cta-subtext">Includes active verification ledger and lifetime passport активиция.</p>
+
+          <!-- Segmented control router switcher -->
+          <div class="ecosystem-segment-control" style="display: inline-flex; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 4px; border-radius: 30px; margin-top: 24px;">
+            <a href="live.html" class="segment-btn active" style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-gold); padding: 8px 18px; border-radius: 20px; text-decoration: none; transition: background 0.3s;">AI Passport Live (₹999)</a>
+            <a href="academy.html" class="segment-btn" style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-secondary); padding: 8px 18px; border-radius: 20px; text-decoration: none; transition: background 0.3s;">Professional Academy</a>
+          </div>
+
+          <p class="hero-cta-subtext" style="margin-top: 16px;">Includes active verification ledger and lifetime passport активиция.</p>
         </div>
         
         <div class="hero-image-block">
@@ -237,6 +244,10 @@
             </div>
             <div class="ai-demo-content-body" id="ai-demo-window-content">
               <!-- Typewritten contents injected via JS -->
+            </div>
+            <div class="ai-demo-cli-input-line" style="background: #050505; border-top: 1px solid rgba(255,255,255,0.03); padding: 12px 28px; display: flex; align-items: center; gap: 8px;">
+              <span style="color: var(--color-blue); font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: bold;">&gt;</span>
+              <input type="text" id="ai-demo-cli-input" placeholder="Type a command (help, code, data, business) and press Enter..." style="background: transparent; border: none; outline: none; color: var(--color-gold); font-family: 'Space Mono', monospace; font-size: 0.8rem; width: 100%;">
             </div>
           </div>
         </div>

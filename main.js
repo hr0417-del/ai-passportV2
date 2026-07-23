@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initVideoPlayer', initVideoPlayer);
   initSafe('initAIDemoTabs', initAIDemoTabs);
   initSafe('initStatsCounters', initStatsCounters);
+  initSafe('initCardSpotlight', initCardSpotlight);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -1508,7 +1509,6 @@ function initAIDemoTabs() {
         charIdx++;
         typingTimeout = setTimeout(typePrompt, 25);
       } else {
-        // Prompt typing finished, reveal response after small pause
         typingTimeout = setTimeout(() => {
           responseDiv.style.display = 'block';
           let lineIdx = 0;
@@ -1521,6 +1521,7 @@ function initAIDemoTabs() {
               line.textContent = lines[lineIdx];
               responseDiv.appendChild(line);
               lineIdx++;
+              container.scrollTop = container.scrollHeight;
               typingTimeout = setTimeout(revealResponseLines, 100);
             }
           }
@@ -1543,6 +1544,69 @@ function initAIDemoTabs() {
     });
   });
 
+  // CLI Sandbox input keys handler
+  const cliInput = document.getElementById('ai-demo-cli-input');
+  if (cliInput) {
+    cliInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const cmd = cliInput.value.trim().toLowerCase();
+        cliInput.value = '';
+        if (!cmd) return;
+
+        if (typeof playTickSound === 'function') {
+          playTickSound('click');
+        }
+
+        // Append user prompt command to screen
+        const userPrompt = document.createElement('div');
+        userPrompt.className = 'code-prompt';
+        userPrompt.textContent = cmd;
+        container.appendChild(userPrompt);
+        container.scrollTop = container.scrollHeight;
+
+        const resLine = document.createElement('div');
+        resLine.className = 'code-response';
+        container.appendChild(resLine);
+
+        if (cmd === 'clear') {
+          container.innerHTML = '';
+          return;
+        }
+
+        let responseText = '';
+        if (cmd === 'help') {
+          responseText = "Available commands:\n- help: display instructions\n- code: build component demo\n- data: inspect database logs\n- business: setup webhook pipeline\n- status: audit active platform states\n- clear: flush logs";
+        } else if (demoData[cmd]) {
+          responseText = demoData[cmd].response;
+          tabs.forEach(t => {
+            if (t.getAttribute('data-tab') === cmd) {
+              tabs.forEach(x => x.classList.remove('active'));
+              t.classList.add('active');
+            }
+          });
+        } else if (cmd === 'status') {
+          responseText = "System operational coordinates:\n- API Gateways: Synchronized\n- Citizen Profile DB: Connected\n- Security Hash Signature: Verified V2.2\n- Active users count: 5,000+";
+        } else {
+          responseText = `Command not recognized: '${cmd}'. Type 'help' for instructions.`;
+        }
+
+        let lineIdx = 0;
+        const lines = responseText.split('\n');
+        function revealLines() {
+          if (lineIdx < lines.length) {
+            const div = document.createElement('div');
+            div.textContent = lines[lineIdx];
+            resLine.appendChild(div);
+            lineIdx++;
+            container.scrollTop = container.scrollHeight;
+            setTimeout(revealLines, 80);
+          }
+        }
+        revealLines();
+      }
+    });
+  }
+
   // Run first demo as default
   runDemo('code');
 }
@@ -1559,17 +1623,14 @@ function initStatsCounters() {
         const target = parseInt(el.getAttribute('data-target'), 10) || 0;
         const suffix = el.getAttribute('data-suffix') || '';
         const duration = 1500; // 1.5s
-        let start = 0;
         const startTime = performance.now();
 
         function animate(currentTime) {
           const elapsed = currentTime - startTime;
           const progress = Math.min(elapsed / duration, 1);
-          // Ease-out quad
           const easeProgress = progress * (2 - progress);
           const currentVal = Math.floor(easeProgress * target);
           
-          // Format with commas if large value
           if (target >= 1000) {
             el.textContent = currentVal.toLocaleString() + suffix;
           } else {
@@ -1594,5 +1655,19 @@ function initStatsCounters() {
   }, { threshold: 0.1 });
 
   counters.forEach(c => observer.observe(c));
+}
+
+/* --- 18. Apple/Stripe Spotlight Glow Effect --- */
+function initCardSpotlight() {
+  const cards = document.querySelectorAll('.why-ai-card, .program-card, .benefit-item-card, .audience-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
 }
 

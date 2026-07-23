@@ -5494,3 +5494,50 @@ p, .section-lead, .section-subtext {
   }
 }
 
+/* --- V2.2 Spotlight & Interactive CLI Sandbox --- */
+
+.why-ai-card, .program-card, .benefit-item-card, .audience-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.why-ai-card::before, .program-card::before, .benefit-item-card::before, .audience-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(223, 207, 173, 0.05), transparent 85%);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.why-ai-card:hover::before, .program-card:hover::before, .benefit-item-card:hover::before, .audience-card:hover::before {
+  opacity: 1;
+}
+
+/* CLI Sandbox Input styles */
+.ai-demo-cli-input-line {
+  position: relative;
+  z-index: 10;
+}
+
+.ai-demo-cli-input-line input {
+  transition: border-color 0.3s ease;
+  border-bottom: 1px solid transparent !important;
+}
+
+.ai-demo-cli-input-line input:focus {
+  border-color: rgba(223, 207, 173, 0.2) !important;
+}
+
+.ai-demo-cli-input-line input::placeholder {
+  color: rgba(223, 207, 173, 0.3);
+  font-size: 0.72rem;
+}
+
+
