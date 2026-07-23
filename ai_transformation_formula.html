@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE AI TRANSFORMATION FORMULA™</title>
+<style>
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* APP CANVAS */
+#app {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  transform-origin: top left;
+  background: #050505;
+  overflow: hidden;
+}
+
+/* BACKGROUND EFFECTS */
+#bg-glow-1 {
+  position: absolute;
+  top: -20%; left: -10%;
+  width: 1200px; height: 1200px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+#bg-glow-2 {
+  position: absolute;
+  bottom: -30%; right: -10%;
+  width: 1500px; height: 1500px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* TITLE SLIDE */
+#title-slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1920px; height: 1080px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #050505;
+  z-index: 100;
+  transition: opacity 1.5s ease;
+}
+#title-slide.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.main-title {
+  font-size: 80px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin-bottom: 50px;
+  background: linear-gradient(135deg, #fff 40%, #888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 10px 0;
+  line-height: 1.2;
+}
+.tm {
+  font-size: 40px;
+  vertical-align: super;
+  -webkit-text-fill-color: rgba(255,255,255,0.4);
+}
+.main-subtitle {
+  font-size: 40px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+  text-align: center;
+  font-style: italic;
+}
+
+/* CAMERA SYSTEM */
+#zoom-layer {
+  width: 1920px; height: 1080px;
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: center center;
+  transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+#pan-layer {
+  width: 1920px; height: 1080px;
+  position: absolute;
+  top: 0; left: 0;
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* STACK CONTAINER */
+#stack-container {
+  width: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 300px 0;
+}
+
+/* FINAL TITLE & FOOTER */
+#final-title {
+  text-align: center;
+  margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 2s ease;
+}
+#final-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ft-main {
+  font-size: 56px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: #fff;
+  margin-bottom: 15px;
+}
+.ft-sub {
+  font-size: 56px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, #fff, #D4AF37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 5px 0;
+}
+#final-footer {
+  margin-top: 100px;
+  font-size: 36px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+#final-footer.visible {
+  opacity: 1;
+}
+
+/* CARDS */
+.card {
+  width: 900px;
+  background: rgba(15, 15, 15, 0.5);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 50px 60px;
+  opacity: 0;
+  transform: translateY(80px) scale(0.95);
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 10;
+}
+.card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.card-icon {
+  width: 56px; height: 56px;
+  margin-right: 28px;
+}
+.card-title {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: #fff;
+  opacity: 0.9;
+}
+.card-caption {
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.35;
+  color: #fff;
+}
+
+/* Specific Card Styling */
+#card-1.visible {
+  box-shadow: 0 0 60px rgba(59, 130, 246, 0.15), inset 0 0 30px rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+#card-2.visible {
+  box-shadow: 0 0 60px rgba(59, 130, 246, 0.15), inset 0 0 30px rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+#card-3.visible {
+  box-shadow: 0 0 80px rgba(212, 175, 55, 0.15), inset 0 0 40px rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.5);
+}
+#card-3 .card-title { color: #D4AF37; opacity: 1; }
+#card-4.visible {
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.05);
+}
+#card-5 {
+  width: 1000px;
+  padding: 60px 70px;
+}
+#card-5.visible {
+  box-shadow: 0 0 100px rgba(59, 130, 246, 0.25), inset 0 0 50px rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.7);
+}
+#card-5 .card-title { color: #D4AF37; opacity: 1; }
+
+/* TAGS */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 36px;
+}
+.tag {
+  padding: 14px 28px;
+  border-radius: 40px;
+  font-size: 22px;
+  font-weight: 300;
+}
+.tag-gold {
+  background: rgba(212, 175, 55, 0.1);
+  color: #D4AF37;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+.tag-blue {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+/* WORKFLOW DIAGRAM */
+.workflow-compare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  margin-top: 36px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 16px;
+  padding: 24px;
+}
+.wf-box {
+  padding: 18px 36px;
+  border-radius: 12px;
+  font-size: 26px;
+  font-weight: 300;
+}
+.wf-old {
+  color: rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.wf-arrow {
+  color: rgba(255,255,255,0.3);
+  font-size: 32px;
+}
+.wf-new {
+  color: #3B82F6;
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+/* ARROWS & CONTINUOUS LINE */
+.arrow-container {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+  position: relative;
+  z-index: 5;
+}
+.arrow-container.visible {
+  opacity: 1;
+}
+.arrow-line {
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.9), transparent);
+  position: relative;
+  animation: pulse-arrow 2s infinite;
+}
+.arrow-head {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid rgba(59, 130, 246, 0.9);
+  animation: pulse-arrow 2s infinite;
+}
+@keyframes pulse-arrow {
+  0% { transform: translateY(-15px) translateX(-50%); opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { transform: translateY(15px) translateX(-50%); opacity: 0.2; }
+}
+/* Overriding X translation for arrow line which has no left:50% */
+.arrow-line { animation: pulse-line 2s infinite; }
+@keyframes pulse-line {
+  0% { transform: translateY(-15px); opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { transform: translateY(15px); opacity: 0.2; }
+}
+
+#continuous-line {
+  position: absolute;
+  top: 400px; 
+  bottom: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.7) 15%, rgba(212, 175, 55, 0.7) 85%, transparent);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 2.5s ease;
+}
+
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div id="bg-glow-1"></div>
+  <div id="bg-glow-2"></div>
+  
+  <div id="title-slide">
+    <div class="main-title">THE AI TRANSFORMATION FORMULA<span class="tm">™</span></div>
+    <div class="main-subtitle">"We are not learning AI tools.<br>We are learning how the world will work."</div>
+  </div>
+
+  <div id="zoom-layer">
+    <div id="pan-layer">
+      <div id="stack-container">
+        
+        <div id="continuous-line"></div>
+        
+        <div id="final-title">
+          <div class="ft-main">AI DOES NOT REPLACE THINKING.</div>
+          <div class="ft-sub">IT AMPLIFIES THINKING.</div>
+        </div>
+
+        <div class="card" id="card-1">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <div class="card-title">PROBLEM</div>
+          </div>
+          <div class="card-caption">"What needs to be solved?"</div>
+        </div>
+
+        <div class="arrow-container" id="arrow-1">
+          <div class="arrow-line"></div>
+          <div class="arrow-head"></div>
+        </div>
+
+        <div class="card" id="card-2">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+              <circle cx="12" cy="5" r="3"></circle>
+              <circle cx="5" cy="19" r="3"></circle>
+              <circle cx="19" cy="19" r="3"></circle>
+              <path d="M10.5 7.5L6.5 16.5M13.5 7.5L17.5 16.5M7.5 19h9"></path>
+            </svg>
+            <div class="card-title">AI LAYER</div>
+          </div>
+          <div class="card-caption">"What can AI do faster, better or differently?"</div>
+        </div>
+
+        <div class="arrow-container" id="arrow-2">
+          <div class="arrow-line"></div>
+          <div class="arrow-head"></div>
+        </div>
+
+        <div class="card" id="card-3">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <div class="card-title">HUMAN LAYER</div>
+          </div>
+          <div class="card-caption">"What requires human intelligence?"</div>
+          <div class="tags">
+            <div class="tag tag-gold">Empathy</div>
+            <div class="tag tag-gold">Creativity</div>
+            <div class="tag tag-gold">Judgement</div>
+            <div class="tag tag-gold">Ethics</div>
+            <div class="tag tag-gold">Leadership</div>
+            <div class="tag tag-gold">Communication</div>
+          </div>
+        </div>
+
+        <div class="arrow-container" id="arrow-3">
+          <div class="arrow-line"></div>
+          <div class="arrow-head"></div>
+        </div>
+
+        <div class="card" id="card-4">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+              <rect x="8" y="3" width="8" height="6" rx="1"></rect>
+              <path d="M12 9v4"></path>
+              <path d="M12 13h-4v2"></path>
+              <path d="M12 13h4v2"></path>
+              <rect x="4" y="15" width="8" height="6" rx="1"></rect>
+              <rect x="12" y="15" width="8" height="6" rx="1"></rect>
+            </svg>
+            <div class="card-title">NEW WORKFLOW</div>
+          </div>
+          <div class="card-caption">"How does work change?"</div>
+          <div class="workflow-compare">
+            <div class="wf-box wf-old">Old Way</div>
+            <div class="wf-arrow">→</div>
+            <div class="wf-box wf-new">New Way</div>
+          </div>
+        </div>
+
+        <div class="arrow-container" id="arrow-4">
+          <div class="arrow-line"></div>
+          <div class="arrow-head"></div>
+        </div>
+
+        <div class="card" id="card-5">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+              <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+            </svg>
+            <div class="card-title">FUTURE SKILL</div>
+          </div>
+          <div class="card-caption">"What ability becomes valuable?"</div>
+          <div class="tags">
+            <div class="tag tag-blue">Learning</div>
+            <div class="tag tag-gold">Critical Thinking</div>
+            <div class="tag tag-blue">Creativity</div>
+            <div class="tag tag-gold">Problem Solving</div>
+            <div class="tag tag-blue">AI Fluency</div>
+            <div class="tag tag-gold">Communication</div>
+            <div class="tag tag-blue">Adaptability</div>
+          </div>
+        </div>
+
+        <div id="final-footer">
+          This is how every profession will evolve.
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Scaler for robust letterboxing
+function resizeApp() {
+  const app = document.getElementById('app');
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  app.style.transform = `scale(${scale})`;
+  app.style.left = `${(window.innerWidth - 1920 * scale) / 2}px`;
+  app.style.top = `${(window.innerHeight - 1080 * scale) / 2}px`;
+}
+window.addEventListener('resize', resizeApp);
+resizeApp();
+
+// State Machine
+let currentState = 0;
+const TOTAL_STATES = 8; 
+/*
+0: Title Slide
+1: Card 1
+2: Card 2
+3: Card 3
+4: Card 4
+5: Card 5
+6: Zoom out & continuous line
+7: Final Title
+8: Final Footer
+*/
+
+function updateState() {
+  const titleSlide = document.getElementById('title-slide');
+  const zoomLayer = document.getElementById('zoom-layer');
+  const panLayer = document.getElementById('pan-layer');
+  
+  if (currentState === 0) {
+    titleSlide.classList.remove('hidden');
+    document.querySelectorAll('.card, .arrow-container').forEach(el => el.classList.remove('visible'));
+    document.getElementById('continuous-line').style.opacity = '0';
+    document.getElementById('final-title').classList.remove('visible');
+    document.getElementById('final-footer').classList.remove('visible');
+    
+    // Reset camera to center of container
+    zoomLayer.style.transform = `scale(1)`;
+    panLayer.style.transform = `translateY(0px)`;
+    return;
+  }
+  
+  titleSlide.classList.add('hidden');
+  
+  if (currentState >= 1 && currentState <= 5) {
+    zoomLayer.style.transform = `scale(1.15)`;
+    
+    // Reveal Cards and Arrows
+    for (let i = 1; i <= 5; i++) {
+      const card = document.getElementById(`card-${i}`);
+      const arrow = document.getElementById(`arrow-${i}`);
+      
+      if (i <= currentState) {
+        card.classList.add('visible');
+      } else {
+        card.classList.remove('visible');
+      }
+      
+      if (arrow) {
+        if (i < currentState) {
+          arrow.classList.add('visible');
+        } else {
+          arrow.classList.remove('visible');
+        }
+      }
+    }
+    
+    // Dynamic Panning: find target card center and align it to screen center (540px)
+    const targetCard = document.getElementById(`card-${currentState}`);
+    const yCenter = targetCard.offsetTop + (targetCard.offsetHeight / 2);
+    panLayer.style.transform = `translateY(${540 - yCenter}px)`;
+    
+    // Reset ending visuals
+    document.getElementById('continuous-line').style.opacity = '0';
+    document.getElementById('final-title').classList.remove('visible');
+    document.getElementById('final-footer').classList.remove('visible');
+    
+    // Keep arrows visible if moving backwards
+    document.querySelectorAll('.arrow-container').forEach((el, index) => {
+      if (index + 1 < currentState) el.style.opacity = '1';
+    });
+  }
+  
+  if (currentState >= 6) {
+    // Zoom out
+    zoomLayer.style.transform = `scale(0.48)`;
+    
+    // Pan to perfect center of the entire stack
+    const stack = document.getElementById('stack-container');
+    const yCenter = stack.offsetHeight / 2;
+    panLayer.style.transform = `translateY(${540 - yCenter}px)`;
+    
+    // Hide pulsing arrows
+    document.querySelectorAll('.arrow-container').forEach(el => el.style.opacity = '0');
+    
+    // Fade in continuous line
+    if (currentState === 6) {
+      setTimeout(() => {
+        if (currentState >= 6) document.getElementById('continuous-line').style.opacity = '1';
+      }, 1000);
+    } else {
+      document.getElementById('continuous-line').style.opacity = '1';
+    }
+  }
+  
+  if (currentState >= 7) {
+    document.getElementById('final-title').classList.add('visible');
+  } else {
+    document.getElementById('final-title').classList.remove('visible');
+  }
+  
+  if (currentState >= 8) {
+    document.getElementById('final-footer').classList.add('visible');
+  } else {
+    document.getElementById('final-footer').classList.remove('visible');
+  }
+}
+
+// Controller
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' || e.code === 'ArrowRight') {
+    if (currentState < TOTAL_STATES) {
+      currentState++;
+      updateState();
+    }
+  } else if (e.code === 'ArrowLeft') {
+    if (currentState > 0) {
+      currentState--;
+      updateState();
+    }
+  } else if (e.code === 'KeyR') {
+    currentState = 0;
+    updateState();
+  } else if (e.code === 'KeyF') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+});
+
+// Boot
+updateState();
+</script>
+</body>
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline of Human Technology Revolutions</title>
+<style>
+/* CSS RESET & BASE */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: #000; /* Outer black for letterboxing */
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+#app {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  transform-origin: top left;
+  background: #050505; /* Inner canvas color */
+  overflow: hidden; /* Ensure nothing escapes the 1920x1080 canvas */
+}
+
+/* BACKGROUNDS */
+#viewport {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  top: 0; left: 0;
+  background: radial-gradient(circle at center, #151515 0%, #050505 100%);
+}
+
+#dark-overlay {
+  position: absolute;
+  top: 0; left: 0; 
+  width: 1920px; height: 1080px;
+  background: #000;
+  opacity: 0;
+  transition: opacity 3s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+#viewport.darken #dark-overlay {
+  opacity: 1;
+}
+
+/* EFFECTS */
+#cinematic-glow {
+  position: absolute;
+  top: 540px; left: 960px; /* Center of 1920x1080 */
+  width: 3840px; height: 2160px; /* 200% size */
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.12) 0%, rgba(212, 175, 55, 0.05) 30%, transparent 60%);
+  opacity: 0;
+  transition: opacity 4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#particles-canvas {
+  position: absolute;
+  top: 0; left: 0; 
+  width: 1920px; height: 1080px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 3s ease;
+  z-index: 3;
+}
+
+/* TITLE SLIDE */
+#title-slide {
+  position: absolute;
+  top: 0; left: 0; 
+  width: 1920px; height: 1080px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 1.5s ease;
+  z-index: 20;
+}
+#title-slide h1 {
+  font-size: 80px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin-bottom: 30px;
+  line-height: 1.4;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #fff 40%, #777);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* standard property */
+}
+#title-slide h2 {
+  font-size: 32px;
+  font-weight: 300;
+  color: #D4AF37;
+  opacity: 0.9;
+  font-style: italic;
+}
+
+/* CAMERA & ZOOM */
+#zoom-layer {
+  width: 1920px; height: 1080px;
+  position: relative;
+  z-index: 10;
+  transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: center center;
+}
+#zoom-layer.zoomed {
+  transform: scale(1.3);
+}
+
+#camera {
+  width: 1920px; height: 1080px;
+  position: absolute;
+  top: 0; left: 0;
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* TIMELINE */
+#timeline-wrapper {
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+#timeline-line {
+  position: absolute;
+  top: 540px; left: -5000px;
+  width: 30000px; height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-50%);
+  transition: opacity 2s ease;
+}
+
+#timeline-progress {
+  position: absolute;
+  top: 540px; left: -5000px;
+  width: 0; height: 2px;
+  background: #D4AF37;
+  transform: translateY(-50%);
+  transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 2s ease;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+}
+
+/* MILESTONES */
+.milestone {
+  position: absolute;
+  top: 540px;
+  width: 800px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.15;
+  transition: opacity 1s ease, filter 1s ease;
+  filter: blur(2px);
+}
+.milestone.active {
+  opacity: 1;
+  filter: blur(0px);
+}
+.milestone.past {
+  opacity: 0.4;
+  filter: blur(0px);
+}
+
+.m-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.milestone.active .m-dot {
+  background: #D4AF37;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4);
+  transform: translate(-50%, -50%) scale(1.6);
+}
+.milestone.past .m-dot {
+  background: #D4AF37;
+  opacity: 0.6;
+}
+
+.m-year {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 64px;
+  font-weight: 200;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 1s ease;
+  white-space: nowrap; /* Prevent wrap */
+}
+.milestone.active .m-year {
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
+
+.m-text {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px; /* Wider to prevent wrapping */
+  text-align: center;
+}
+.m-title {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 1s ease;
+  white-space: nowrap;
+}
+.milestone.active .m-title {
+  color: #fff;
+}
+.m-subtitle {
+  font-size: 22px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 1s ease;
+  white-space: nowrap;
+}
+.milestone.active .m-subtitle {
+  color: rgba(212, 175, 55, 0.9);
+}
+
+/* 2025 AI Revolution Highlight */
+.milestone[data-year="2025"].active .m-dot {
+  background: #3B82F6;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 1), 0 0 80px rgba(59, 130, 246, 0.6);
+  transform: translate(-50%, -50%) scale(2.2);
+}
+.milestone[data-year="2025"].active .m-year {
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+}
+.milestone[data-year="2025"].active .m-title {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+.milestone[data-year="2025"].active .m-subtitle {
+  color: #3B82F6;
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+}
+
+/* 2035 Era Reveal */
+#m-2035 {
+  position: absolute;
+  top: calc(50% + 280px);
+  /* left will be set dynamically via JS to match 2025 position exactly */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  width: 1400px;
+  transition: opacity 3s ease;
+}
+#m-2035 .m35-year {
+  font-size: 80px;
+  font-weight: 200;
+  color: #fff;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+}
+#m-2035 .m35-title {
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 10px 20px; /* Prevent background-clip cropping */
+  background: linear-gradient(135deg, #fff, #3B82F6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  white-space: nowrap;
+}
+#m-2035 .m35-caption {
+  font-size: 28px;
+  font-weight: 300;
+  color: #D4AF37;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ENDING TEXTS */
+.final-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  text-align: center;
+  transition: opacity 2s ease;
+  z-index: 50;
+  width: 100%;
+}
+#final-text-1 {
+  font-size: 72px;
+  font-weight: 200;
+  letter-spacing: 0.15em;
+  color: #D4AF37;
+  text-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+  white-space: nowrap;
+}
+#final-text-2 {
+  font-size: 56px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div id="viewport">
+    
+    <div id="dark-overlay"></div>
+    <div id="cinematic-glow"></div>
+    <canvas id="particles-canvas"></canvas>
+    
+    <div id="title-slide">
+      <h1>Timeline of Human Technology Revolutions</h1>
+      <h2>"Every generation gets one technology that changes everything."</h2>
+    </div>
+    
+    <div id="zoom-layer">
+      <div id="camera">
+         <div id="timeline-wrapper"></div>
+         <div id="m-2035">
+            <div class="m35-year">2035</div>
+            <div class="m35-title">Human + AI Collaboration Era</div>
+            <div class="m35-caption">"The future belongs to those who learn to think with AI."</div>
+         </div>
+      </div>
+    </div>
+    
+    <div id="final-text-1" class="final-text">THIS IS OURS</div>
+    <div id="final-text-2" class="final-text">WELCOME TO THE AGE OF AI</div>
+    
+  </div>
+</div>
+
+<script>
+// Data
+const milestonesData = [
+  { year: 1440, title: "Printing Press Revolution", subtitle: "Knowledge became accessible." },
+  { year: 1876, title: "Telephone Revolution", subtitle: "Distance disappeared." },
+  { year: 1900, title: "Industrial Revolution", subtitle: "Machines transformed work." },
+  { year: 1970, title: "Computer Revolution", subtitle: "Information became digital." },
+  { year: 1995, title: "Internet Revolution", subtitle: "The world became connected." },
+  { year: 2007, title: "Smartphone Revolution", subtitle: "Computing entered every pocket." },
+  { year: 2010, title: "Social Media Revolution", subtitle: "Everyone became a creator." },
+  { year: 2025, title: "Artificial Intelligence Revolution", subtitle: "Thinking becomes collaborative." }
+];
+
+const spacingPx = 1536; // Spacing between milestones (80% of 1920)
+
+// Initialize Timeline UI
+const timelineWrapper = document.getElementById('timeline-wrapper');
+
+const line = document.createElement('div');
+line.id = 'timeline-line';
+timelineWrapper.appendChild(line);
+
+const progress = document.createElement('div');
+progress.id = 'timeline-progress';
+timelineWrapper.appendChild(progress);
+
+milestonesData.forEach((ms, index) => {
+  const el = document.createElement('div');
+  el.className = 'milestone';
+  el.dataset.year = ms.year;
+  el.style.left = `${(index + 1) * spacingPx}px`;
+  
+  el.innerHTML = `
+    <div class="m-year">${ms.year}</div>
+    <div class="m-dot"></div>
+    <div class="m-text">
+      <div class="m-title">${ms.title}</div>
+      <div class="m-subtitle">${ms.subtitle}</div>
+    </div>
+  `;
+  timelineWrapper.appendChild(el);
+});
+
+// Position 2035 exactly below 2025
+document.getElementById('m-2035').style.left = `${8 * spacingPx}px`;
+
+// State Machine
+let currentState = 0;
+let isEnding = false;
+let endTimers = [];
+
+function updateState() {
+  const camera = document.getElementById('camera');
+  const titleSlide = document.getElementById('title-slide');
+  const timelineWrapper = document.getElementById('timeline-wrapper');
+  const progressLine = document.getElementById('timeline-progress');
+  const zoomLayer = document.getElementById('zoom-layer');
+  const m2035 = document.getElementById('m-2035');
+  const viewport = document.getElementById('viewport');
+  const cinematicGlow = document.getElementById('cinematic-glow');
+  const particles = document.getElementById('particles-canvas');
+  const timelineLine = document.getElementById('timeline-line');
+  
+  if (currentState === 0) {
+    titleSlide.style.opacity = '1';
+    timelineWrapper.style.opacity = '0';
+    camera.style.transform = `translateX(0px) translateY(0)`;
+    return;
+  }
+  
+  if (currentState >= 1 && currentState <= 8) {
+    titleSlide.style.opacity = '0';
+    timelineWrapper.style.opacity = '1';
+    
+    const xPos = currentState * spacingPx;
+    camera.style.transform = `translateX(${960 - xPos}px) translateY(0)`;
+    progressLine.style.width = `${5000 + xPos}px`;
+    
+    const msElems = document.querySelectorAll('.milestone');
+    msElems.forEach((el, index) => {
+      if (index + 1 < currentState) {
+        el.className = 'milestone past';
+      } else if (index + 1 === currentState) {
+        el.className = 'milestone active';
+      } else {
+        el.className = 'milestone';
+      }
+      el.style.opacity = ''; 
+    });
+    
+    zoomLayer.classList.remove('zoomed');
+    timelineLine.style.opacity = '';
+    progressLine.style.opacity = '';
+    m2035.style.opacity = '0';
+    viewport.classList.remove('darken');
+    cinematicGlow.style.opacity = '0';
+    particles.style.opacity = '0';
+  }
+  
+  if (currentState === 9) {
+    zoomLayer.classList.add('zoomed');
+    camera.style.transform = `translateX(${960 - 8 * spacingPx}px) translateY(0)`;
+    
+    const msElems = document.querySelectorAll('.milestone');
+    msElems.forEach((el, index) => {
+      if (index + 1 !== 8) {
+        el.style.opacity = '0';
+      }
+    });
+    timelineLine.style.opacity = '0';
+    progressLine.style.opacity = '0';
+    
+    m2035.style.opacity = '0';
+    viewport.classList.remove('darken');
+    cinematicGlow.style.opacity = '0';
+    particles.style.opacity = '0';
+  }
+  
+  if (currentState === 10) {
+    zoomLayer.classList.add('zoomed');
+    camera.style.transform = `translateX(${960 - 8 * spacingPx}px) translateY(-140px)`;
+    m2035.style.opacity = '1';
+    viewport.classList.add('darken');
+    cinematicGlow.style.opacity = '1';
+    particles.style.opacity = '1';
+  }
+  
+  if (currentState === 11) {
+    playEndSequence();
+  }
+}
+
+function playEndSequence() {
+  if (isEnding) return;
+  isEnding = true;
+  
+  const m2025 = document.querySelector('.milestone[data-year="2025"]');
+  const m2035 = document.getElementById('m-2035');
+  const cinematicGlow = document.getElementById('cinematic-glow');
+  const particles = document.getElementById('particles-canvas');
+  const final1 = document.getElementById('final-text-1');
+  const final2 = document.getElementById('final-text-2');
+  const darkOverlay = document.getElementById('dark-overlay');
+  
+  if(m2025) m2025.style.opacity = '0';
+  m2035.style.opacity = '0';
+  cinematicGlow.style.opacity = '0';
+  particles.style.opacity = '0';
+  darkOverlay.style.opacity = '1';
+  
+  endTimers.push(setTimeout(() => {
+    final1.style.opacity = '1';
+  }, 2000));
+  
+  endTimers.push(setTimeout(() => {
+    final1.style.opacity = '0';
+  }, 6000));
+  
+  endTimers.push(setTimeout(() => {
+    final2.style.opacity = '1';
+  }, 7000));
+  
+  endTimers.push(setTimeout(() => {
+    final2.style.opacity = '0';
+  }, 9000));
+}
+
+// Interaction Controller
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' || e.code === 'ArrowRight') {
+    if (currentState < 11) {
+      currentState++;
+      updateState();
+    }
+  } else if (e.code === 'ArrowLeft') {
+    if (currentState > 0) {
+      if (isEnding) return;
+      currentState--;
+      updateState();
+    }
+  } else if (e.code === 'KeyF') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  } else if (e.code === 'KeyR') {
+    currentState = 0;
+    isEnding = false;
+    
+    endTimers.forEach(clearTimeout);
+    endTimers = [];
+    
+    const m2025 = document.querySelector('.milestone[data-year="2025"]');
+    const final1 = document.getElementById('final-text-1');
+    const final2 = document.getElementById('final-text-2');
+    const darkOverlay = document.getElementById('dark-overlay');
+    
+    if (m2025) m2025.style.opacity = '';
+    darkOverlay.style.opacity = '0';
+    
+    if (final1) {
+      final1.style.transition = 'none';
+      final1.style.opacity = '0';
+      setTimeout(() => final1.style.transition = 'opacity 2s ease', 50);
+    }
+    if (final2) {
+      final2.style.transition = 'none';
+      final2.style.opacity = '0';
+      setTimeout(() => final2.style.transition = 'opacity 2s ease', 50);
+    }
+    
+    updateState();
+  }
+});
+
+// Particles System (Fixed 1920x1080)
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = 1920;
+canvas.height = 1080;
+
+const particlesArray = [];
+for (let i = 0; i < 150; i++) {
+  particlesArray.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2.5 + 0.5,
+    speedX: Math.random() * 0.4 - 0.2,
+    speedY: Math.random() * -0.4 - 0.1,
+    opacity: Math.random() * 0.5 + 0.1,
+    color: Math.random() > 0.5 ? '212, 175, 55' : '59, 130, 246'
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  particlesArray.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+    
+    if (p.y < 0) p.y = canvas.height;
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y > canvas.height) p.y = 0;
+    
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${p.color}, ${p.opacity})`;
+    ctx.fill();
+  });
+  
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// Resize Logic for Letterboxing
+function resizeApp() {
+  const app = document.getElementById('app');
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  app.style.transform = `scale(${scale})`;
+  app.style.left = `${(window.innerWidth - 1920 * scale) / 2}px`;
+  app.style.top = `${(window.innerHeight - 1080 * scale) / 2}px`;
+}
+window.addEventListener('resize', resizeApp);
+resizeApp();
+
+// Boot
+updateState();
+</script>
+</body>
+</html>

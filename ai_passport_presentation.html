@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI PASSPORT™</title>
+<style>
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* APP CANVAS */
+#app {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  transform-origin: top left;
+  background: #050505;
+  overflow: hidden;
+}
+
+/* AMBIENT EFFECTS */
+#particles-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1920px; height: 1080px;
+  z-index: 1;
+}
+#ambient-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1500px; height: 1500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* INTRO STATE */
+#intro-container {
+  position: absolute; top: 0; left: 0; width: 1920px; height: 1080px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  z-index: 20;
+  transition: opacity 1.5s ease;
+}
+#intro-line {
+  width: 0; height: 1px; background: rgba(212, 175, 55, 0.6);
+  transition: width 2.5s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+#intro-line.drawn { width: 500px; }
+
+#intro-text {
+  font-size: 24px; letter-spacing: 0.5em; color: rgba(255,255,255,0.6);
+  margin-top: 30px; opacity: 0; transform: translateY(10px);
+  transition: all 1.5s ease;
+}
+#intro-text.visible { opacity: 1; transform: translateY(0); }
+
+#main-logo {
+  font-size: 110px; font-weight: 300; letter-spacing: 0.15em;
+  color: #D4AF37; text-shadow: 0 0 60px rgba(212, 175, 55, 0.3);
+  margin-top: 40px; opacity: 0; transform: scale(0.95);
+  transition: all 2.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#main-logo.visible { opacity: 1; transform: scale(1); }
+.tm { font-size: 40px; vertical-align: super; -webkit-text-fill-color: rgba(212, 175, 55, 0.6); }
+
+#tagline {
+  font-size: 36px; font-weight: 300; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5); margin-top: 40px;
+  opacity: 0; transition: opacity 1.5s ease; font-style: italic;
+}
+#tagline.visible { opacity: 1; }
+
+/* MISSION STATEMENT */
+#mission-statement {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center; opacity: 0; transition: opacity 1.5s ease;
+  z-index: 15;
+}
+.ms-text {
+  font-size: 64px; font-weight: 300; line-height: 1.4; color: #fff;
+  letter-spacing: 0.05em;
+}
+.ms-highlight {
+  background: linear-gradient(135deg, #fff, #3B82F6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* GRID CONTAINER & CARDS */
+#grid-container {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 1430px; height: 540px;
+  transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 10;
+  opacity: 0;
+}
+.m-card {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 450px; height: 250px;
+  background: rgba(15,15,15,0.5); backdrop-filter: blur(30px);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+  padding: 40px;
+  display: flex; flex-direction: column; justify-content: center;
+  opacity: 0;
+  transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+.m-card.stacked { opacity: 1; }
+#mc-1.stacked { transform: translate(-50%, -50%) scale(1) rotate(-3deg); z-index: 1; }
+#mc-2.stacked { transform: translate(-49%, -49%) scale(1) rotate(1deg); z-index: 2; }
+#mc-3.stacked { transform: translate(-51%, -52%) scale(1) rotate(-1.5deg); z-index: 3; }
+#mc-4.stacked { transform: translate(-48%, -50%) scale(1) rotate(2deg); z-index: 4; }
+#mc-5.stacked { transform: translate(-50%, -48%) scale(1) rotate(-0.5deg); z-index: 5; }
+#mc-6.stacked { transform: translate(-50%, -50%) scale(1) rotate(0deg); z-index: 6; 
+  box-shadow: 0 0 50px rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); }
+
+.m-card.grid { opacity: 1; z-index: 1; }
+#mc-1.grid { left: 0; top: 0; transform: translate(0, 0) scale(1) rotate(0); }
+#mc-2.grid { left: 490px; top: 0; transform: translate(0, 0) scale(1) rotate(0); }
+#mc-3.grid { left: 980px; top: 0; transform: translate(0, 0) scale(1) rotate(0); }
+#mc-4.grid { left: 0; top: 290px; transform: translate(0, 0) scale(1) rotate(0); }
+#mc-5.grid { left: 490px; top: 290px; transform: translate(0, 0) scale(1) rotate(0); }
+#mc-6.grid { left: 980px; top: 290px; transform: translate(0, 0) scale(1) rotate(0); }
+
+#grid-container.shifted {
+  transform: translate(-900px, -50%) scale(0.65);
+}
+
+.mc-num { font-size: 16px; color: #D4AF37; letter-spacing: 0.15em; margin-bottom: 15px; }
+.mc-title { font-size: 32px; font-weight: 500; color: #fff; margin-bottom: 15px; }
+.mc-desc { font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.4; }
+
+/* CHECKLIST */
+#checklist {
+  position: absolute; top: 50%; left: 1050px; transform: translateY(-50%);
+  opacity: 0; transition: opacity 1.5s ease; z-index: 10;
+}
+#checklist.visible { opacity: 1; }
+.cl-title { font-size: 24px; color: #D4AF37; letter-spacing: 0.25em; margin-bottom: 40px; }
+.cl-item {
+  font-size: 36px; font-weight: 300; margin-bottom: 24px; color: #fff;
+  opacity: 0; transform: translateX(30px);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#checklist.visible .cl-item { opacity: 1; transform: translateX(0); }
+.check-icon { color: #3B82F6; margin-right: 15px; }
+
+/* FINAL PASSPORT REVEAL */
+#final-passport {
+  position: absolute;
+  top: 45%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 440px; height: 720px;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.1), 0 30px 80px rgba(0,0,0,0.9), 0 0 60px rgba(59, 130, 246, 0.15), inset 0 0 30px rgba(212, 175, 55, 0.05);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 40px;
+  opacity: 0;
+  transition: all 2.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 50;
+}
+#final-passport.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.fp-brand {
+  font-size: 13px; letter-spacing: 0.3em; color: #D4AF37; opacity: 0.8; text-align: center;
+  margin-bottom: 30px; line-height: 1.5;
+}
+.fp-title {
+  font-size: 36px; letter-spacing: 0.15em; color: #D4AF37; font-weight: 300;
+  margin-bottom: 40px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+.fp-qr-container {
+  width: 240px; height: 240px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 0 50px rgba(59, 130, 246, 0.3), inset 0 0 10px rgba(0,0,0,0.2);
+  margin-bottom: 30px;
+}
+.fp-id {
+  font-size: 15px; letter-spacing: 0.25em; color: rgba(212, 175, 55, 0.6);
+  margin-bottom: 30px;
+}
+.fp-icon {
+  width: 50px; height: 50px; margin-bottom: 20px;
+}
+.fp-verified {
+  font-size: 16px; letter-spacing: 0.25em; color: #D4AF37; margin-bottom: 25px;
+}
+.fp-footer {
+  font-size: 12px; letter-spacing: 0.4em; color: rgba(212, 175, 55, 0.4);
+}
+
+/* FINAL TEXTS */
+.final-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 2s ease;
+  white-space: nowrap;
+  z-index: 40;
+}
+#ft-tools {
+  top: 840px;
+  font-size: 32px; font-weight: 300; color: rgba(255,255,255,0.5);
+}
+#ft-ability {
+  top: 890px; 
+  font-size: 32px; font-weight: 400; color: #fff;
+}
+#ft-welcome {
+  top: 940px;
+  font-size: 64px; font-weight: 300; letter-spacing: 0.15em; color: #D4AF37;
+  text-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+}
+#pricing-page {
+  position: absolute; top: 0; left: 0; width: 1920px; height: 1080px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  opacity: 0; pointer-events: none; transition: opacity 2s ease; z-index: 60;
+}
+#pricing-page.visible { opacity: 1; pointer-events: auto; }
+.pp-title { font-size: 48px; font-weight: 300; letter-spacing: 0.25em; color: #D4AF37; margin-bottom: 80px; text-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
+.pp-features { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 80px; margin-bottom: 80px; }
+.pp-feature { font-size: 32px; font-weight: 300; color: #fff; display: flex; align-items: center; }
+.pp-check { color: #3B82F6; margin-right: 20px; font-size: 36px; }
+.pp-price-box {
+  background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 20px; padding: 40px 100px; text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(212, 175, 55, 0.05);
+}
+.pp-price-main { font-size: 96px; font-weight: 400; color: #D4AF37; margin-bottom: 10px; }
+.pp-price-sub { font-size: 24px; font-weight: 300; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <canvas id="particles-canvas"></canvas>
+  <div id="ambient-glow"></div>
+  
+  <div id="intro-container">
+    <div id="intro-line"></div>
+    <div id="intro-text">INTRODUCING</div>
+    <div id="main-logo">AI PASSPORT<span class="tm">™</span></div>
+    <div id="tagline">"The Passport To The Future"</div>
+  </div>
+
+  <div id="mission-statement">
+    <div class="ms-text">Preparing the Next Generation<br><span class="ms-highlight">for the Age of Artificial Intelligence</span></div>
+  </div>
+
+  <div id="grid-container">
+    <div class="m-card" id="mc-1">
+      <div class="mc-num">Mission 1</div>
+      <div class="mc-title">AI Explorer</div>
+      <div class="mc-desc">Discover how AI works.</div>
+    </div>
+    <div class="m-card" id="mc-2">
+      <div class="mc-num">Mission 2</div>
+      <div class="mc-title">Prompt Master</div>
+      <div class="mc-desc">Learn to communicate with AI.</div>
+    </div>
+    <div class="m-card" id="mc-3">
+      <div class="mc-num">Mission 3</div>
+      <div class="mc-title">AI Researcher</div>
+      <div class="mc-desc">Find, verify and organize knowledge.</div>
+    </div>
+    <div class="m-card" id="mc-4">
+      <div class="mc-num">Mission 4</div>
+      <div class="mc-title">AI Creator</div>
+      <div class="mc-desc">Create presentations, videos, designs and content.</div>
+    </div>
+    <div class="m-card" id="mc-5">
+      <div class="mc-num">Mission 5</div>
+      <div class="mc-title">AI Problem Solver</div>
+      <div class="mc-desc">Solve real-world challenges using AI.</div>
+    </div>
+    <div class="m-card" id="mc-6">
+      <div class="mc-num">Mission 6</div>
+      <div class="mc-title">AI Entrepreneur</div>
+      <div class="mc-desc">Build ideas, products and businesses using AI.</div>
+    </div>
+  </div>
+
+  <div id="checklist">
+    <div class="cl-title">WHAT STUDENTS RECEIVE</div>
+    <div class="cl-item" style="transition-delay: 0.1s"><span class="check-icon">✓</span>Premium AI Passport</div>
+    <div class="cl-item" style="transition-delay: 0.2s"><span class="check-icon">✓</span>Live AI Missions</div>
+    <div class="cl-item" style="transition-delay: 0.3s"><span class="check-icon">✓</span>AI Thinking Framework</div>
+    <div class="cl-item" style="transition-delay: 0.4s"><span class="check-icon">✓</span>Practical AI Tools</div>
+    <div class="cl-item" style="transition-delay: 0.5s"><span class="check-icon">✓</span>Challenges & Projects</div>
+    <div class="cl-item" style="transition-delay: 0.6s"><span class="check-icon">✓</span>AI Learning Library</div>
+    <div class="cl-item" style="transition-delay: 0.7s"><span class="check-icon">✓</span>Certificate</div>
+    <div class="cl-item" style="transition-delay: 0.8s"><span class="check-icon">✓</span>Community</div>
+  </div>
+
+  <div id="final-passport">
+    <div class="fp-brand">EKAAKSHAR<br>EDUCATION</div>
+    <div class="fp-title">AI PASSPORT<span style="font-size:0.5em; vertical-align:super;">™</span></div>
+    
+    <div class="fp-qr-container">
+      <svg width="100%" height="100%" viewBox="0 0 100 100">
+        <rect width="100" height="100" fill="#fff"/>
+        <rect x="10" y="10" width="20" height="20" fill="none" stroke="#000" stroke-width="4"/>
+        <rect x="15" y="15" width="10" height="10" fill="#000"/>
+        <rect x="70" y="10" width="20" height="20" fill="none" stroke="#000" stroke-width="4"/>
+        <rect x="75" y="15" width="10" height="10" fill="#000"/>
+        <rect x="10" y="70" width="20" height="20" fill="none" stroke="#000" stroke-width="4"/>
+        <rect x="15" y="75" width="10" height="10" fill="#000"/>
+        <path d="M40 10h20v10H40z M45 25h15v5H45z M35 35h30v10H35z M10 40h20v5H10z M15 50h15v15H15z M40 50h10v10H40z M60 40h30v15H60z M80 60h10v30H80z M40 70h30v10H40z M45 85h25v5H45z M10 90h15v10H10z" fill="#000"/>
+      </svg>
+    </div>
+    
+    <div class="fp-id">AIP-26-000001</div>
+    
+    <svg class="fp-icon" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.5">
+      <polygon points="12 2 21 7 21 17 12 22 3 17 3 7"></polygon>
+      <line x1="12" y1="22" x2="12" y2="12"></line>
+      <line x1="3" y1="7" x2="12" y2="12"></line>
+      <line x1="21" y1="7" x2="12" y2="12"></line>
+      <line x1="3" y1="17" x2="12" y2="12"></line>
+      <line x1="21" y1="17" x2="12" y2="12"></line>
+      <line x1="12" y1="2" x2="12" y2="12"></line>
+      <circle cx="12" cy="12" r="1.5" fill="#D4AF37"></circle>
+    </svg>
+    
+    <div class="fp-verified">VERIFIED AI IDENTITY</div>
+    <div class="fp-footer">DISCOVER • BUILD • LEAD</div>
+  </div>
+
+  <div id="ft-tools" class="final-text">"Tools will change."</div>
+  <div id="ft-ability" class="final-text">"The ability to think with AI will remain."</div>
+  <div id="ft-welcome" class="final-text">WELCOME TO THE MOVEMENT</div>
+
+  <div id="pricing-page">
+    <div class="pp-title">THE AI PASSPORT WEBINAR SERIES</div>
+    <div class="pp-features">
+      <div class="pp-feature"><span class="pp-check">✓</span> 12 Live Masterclasses</div>
+      <div class="pp-feature"><span class="pp-check">✓</span> Practical AI Tools & Workflows</div>
+      <div class="pp-feature"><span class="pp-check">✓</span> Live Q&A and Community Access</div>
+      <div class="pp-feature"><span class="pp-check">✓</span> Real-World AI Projects</div>
+      <div class="pp-feature"><span class="pp-check">✓</span> Step-by-Step Guidance</div>
+      <div class="pp-feature"><span class="pp-check">✓</span> Official AI Passport Certificate</div>
+    </div>
+    <div class="pp-price-box">
+      <div class="pp-price-main" id="animated-price">RS 4999</div>
+      <div class="pp-price-sub">FOR ALL 12 WEBINARS</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let priceAnimationTriggered = false;
+function animatePrice(element, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    
+    // easeOutExpo for dramatic slowdown
+    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    
+    const current = Math.floor(start - (start - end) * easeProgress);
+    element.innerHTML = `RS ${current}`;
+    
+    if (progress < 1 && priceAnimationTriggered) {
+      window.requestAnimationFrame(step);
+    } else if (priceAnimationTriggered) {
+      element.innerHTML = `RS ${end}`;
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+// Canvas Particles
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = 1920; canvas.height = 1080;
+const particles = [];
+for(let i=0; i<80; i++) {
+  particles.push({
+    x: Math.random() * 1920, y: Math.random() * 1080,
+    size: Math.random() * 2 + 0.5,
+    speedX: (Math.random() - 0.5) * 0.4, speedY: (Math.random() - 0.5) * 0.4,
+    opacity: Math.random() * 0.6 + 0.2
+  });
+}
+function draw() {
+  ctx.clearRect(0,0,1920,1080);
+  particles.forEach(p => {
+    p.x += p.speedX; p.y += p.speedY;
+    if(p.x < 0) p.x = 1920; if(p.x > 1920) p.x = 0;
+    if(p.y < 0) p.y = 1080; if(p.y > 1080) p.y = 0;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(212, 175, 55, ${p.opacity})`; ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+// Scaler for robust letterboxing
+function resizeApp() {
+  const app = document.getElementById('app');
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  app.style.transform = `scale(${scale})`;
+  app.style.left = `${(window.innerWidth - 1920 * scale) / 2}px`;
+  app.style.top = `${(window.innerHeight - 1080 * scale) / 2}px`;
+}
+window.addEventListener('resize', resizeApp);
+resizeApp();
+
+// State Machine
+let currentState = 0;
+const TOTAL_STATES = 17; 
+
+function updateState() {
+  // DOM Elements
+  const introContainer = document.getElementById('intro-container');
+  const missionStatement = document.getElementById('mission-statement');
+  const gridContainer = document.getElementById('grid-container');
+  const checklist = document.getElementById('checklist');
+  const finalPassport = document.getElementById('final-passport');
+  
+  // Reset visibility groups
+  introContainer.style.opacity = '0';
+  missionStatement.style.opacity = '0';
+  gridContainer.style.opacity = '0';
+  checklist.classList.remove('visible');
+  finalPassport.classList.remove('visible');
+  
+  // INTRO SEQUENCE
+  if (currentState >= 0 && currentState <= 3) {
+    introContainer.style.opacity = '1';
+    
+    if (currentState >= 1) {
+      document.getElementById('intro-line').classList.add('drawn');
+      document.getElementById('intro-text').classList.add('visible');
+    } else {
+      document.getElementById('intro-line').classList.remove('drawn');
+      document.getElementById('intro-text').classList.remove('visible');
+    }
+    
+    if (currentState >= 2) document.getElementById('main-logo').classList.add('visible');
+    else document.getElementById('main-logo').classList.remove('visible');
+    
+    if (currentState >= 3) document.getElementById('tagline').classList.add('visible');
+    else document.getElementById('tagline').classList.remove('visible');
+  }
+  
+  // MISSION STATEMENT
+  if (currentState === 4) {
+    missionStatement.style.opacity = '1';
+  }
+  
+  // MISSIONS REVEAL (5 to 12)
+  if (currentState >= 5 && currentState <= 12) {
+    gridContainer.style.opacity = '1';
+    
+    // Cards logic
+    for (let i = 1; i <= 6; i++) {
+      const card = document.getElementById(`mc-${i}`);
+      card.className = 'm-card'; // reset
+      const cardState = i + 4; // Card 1 appears at state 5
+      
+      if (currentState >= 11) {
+        card.classList.add('grid');
+      } else if (currentState >= cardState) {
+        card.classList.add('stacked');
+      }
+    }
+    
+    // Shift & Checklist Reveal
+    if (currentState >= 12) {
+      gridContainer.classList.add('shifted');
+      checklist.classList.add('visible');
+    } else {
+      gridContainer.classList.remove('shifted');
+    }
+  }
+  
+  // FINAL REVEAL (13 to 16)
+  if (currentState >= 13 && currentState < 17) {
+    finalPassport.classList.add('visible');
+  } else {
+    finalPassport.classList.remove('visible');
+  }
+  
+  if (currentState >= 14 && currentState < 17) document.getElementById('ft-tools').style.opacity = '1';
+  else document.getElementById('ft-tools').style.opacity = '0';
+  
+  if (currentState >= 15 && currentState < 17) document.getElementById('ft-ability').style.opacity = '1';
+  else document.getElementById('ft-ability').style.opacity = '0';
+  
+  if (currentState >= 16 && currentState < 17) document.getElementById('ft-welcome').style.opacity = '1';
+  else document.getElementById('ft-welcome').style.opacity = '0';
+
+  // PRICING PAGE (17)
+  if (currentState === 17) {
+    document.getElementById('pricing-page').classList.add('visible');
+    if (!priceAnimationTriggered) {
+      priceAnimationTriggered = true;
+      const priceEl = document.getElementById('animated-price');
+      // Delay animation slightly to allow fade in
+      setTimeout(() => {
+        if (priceAnimationTriggered) animatePrice(priceEl, 4999, 999, 4000);
+      }, 500);
+    }
+  } else {
+    document.getElementById('pricing-page').classList.remove('visible');
+    if (priceAnimationTriggered) {
+      priceAnimationTriggered = false;
+      document.getElementById('animated-price').innerHTML = 'RS 4999';
+    }
+  }
+}
+
+// Controller
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' || e.code === 'ArrowRight') {
+    if (currentState < TOTAL_STATES) {
+      currentState++;
+      updateState();
+    }
+  } else if (e.code === 'ArrowLeft') {
+    if (currentState > 0) {
+      currentState--;
+      updateState();
+    }
+  } else if (e.code === 'KeyR') {
+    currentState = 0;
+    updateState();
+  } else if (e.code === 'KeyF') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+});
+
+// Boot
+updateState();
+</script>
+</body>
+</html>

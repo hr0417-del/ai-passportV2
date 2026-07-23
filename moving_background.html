@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crazy Tech Background (Subtle)</title>
+    <style>
+        body, html { 
+            margin: 0; padding: 0; 
+            width: 100%; height: 100%; 
+            background-color: #010101; 
+            overflow: hidden; 
+        }
+        canvas { display: block; opacity: 0.5; /* Dimmed the whole canvas so it doesn't distract */ }
+        
+        #vignette {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.9) 100%);
+            pointer-events: none;
+        }
+
+        #watermark {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Arial', sans-serif;
+            font-size: 150px;
+            font-weight: 900;
+            color: rgba(255, 215, 0, 0.02);
+            white-space: nowrap;
+            letter-spacing: 20px;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="watermark">AI PASSPORT</div>
+    <canvas id="bg"></canvas>
+    <div id="vignette"></div>
+
+    <script>
+        const canvas = document.getElementById('bg');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            columns = width / fontSize;
+            drops = [];
+            for (let x = 0; x < columns; x++) drops[x] = 1;
+        }
+        window.addEventListener('resize', resize);
+
+        const letters = "01".split("");
+        const fontSize = 14;
+        let columns;
+        let drops;
+        resize();
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(1, 1, 1, 0.25)"; 
+            ctx.fillRect(0, 0, width, height);
+            
+            ctx.fillStyle = "rgba(255, 215, 0, 0.05)"; // Very faint gold text
+            ctx.font = fontSize + "px monospace";
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > height && Math.random() > 0.99) {
+                    drops[i] = 0;
+                }
+                drops[i] += 0.3; // Slower falling
+            }
+        }
+
+        const particles = [];
+        const numParticles = 70; // Greatly reduced density
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.z = Math.random() * 2 + 0.5; 
+                
+                // Slower speed so it's less distracting
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                
+                this.color = Math.random() > 0.3 ? '#B8860B' : '#FFFFFF';
+                this.size = Math.random() * 2 + 0.5;
+            }
+
+            update() {
+                this.x += this.vx * this.z;
+                this.y += this.vy * this.z;
+
+                if (this.x <= 0 || this.x >= width) this.vx *= -1;
+                if (this.y <= 0 || this.y >= height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * this.z, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < numParticles; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 215, 0, ${0.15 - (dist/150)*0.15})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            drawMatrix();
+            drawConnections();
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

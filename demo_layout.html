@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Demo Layout</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap');
+        body, html { margin: 0; padding: 0; width: 1920px; height: 1080px; background: transparent; font-family: 'Inter', sans-serif; overflow: hidden; position: relative; }
+        
+        .logo-top-right {
+            position: absolute; top: 40px; right: 40px; z-index: 10;
+        }
+        .logo-top-right h1 {
+            color: #FFFFFF; font-size: 20px; font-weight: 900; letter-spacing: 6px; margin: 0; text-align: right; text-transform: uppercase;
+        }
+        .logo-top-right span { color: #FFD700; }
+
+        .frame {
+            position: absolute; background: transparent; z-index: 10;
+            border: 1px solid rgba(255, 215, 0, 0.4); border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        .frame::after {
+            content: ''; position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px;
+            border: 1px solid #FFD700; border-radius: 12px; opacity: 0.3; pointer-events: none;
+        }
+
+        /* Large Browser Frame (Left/Center) */
+        .browser-frame {
+            top: 40px; left: 40px; width: 1450px; height: 1000px;
+        }
+
+        /* Small Camera Frame (Bottom Right) */
+        .cam-frame {
+            bottom: 40px; right: 40px; width: 350px; height: 196px; /* 16:9 */
+        }
+        
+        .footer {
+            position: absolute; bottom: 260px; right: 40px; text-align: right; width: 350px;
+        }
+        .footer h1 { color: #FFF; font-size: 24px; font-weight: 900; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px;}
+        .footer h2 { color: #FFD700; font-size: 12px; font-weight: 600; margin: 0; text-transform: uppercase; letter-spacing: 3px;}
+    </style>
+</head>
+<body>
+    <div class="logo-top-right">
+        <h1><span>AI</span> PASSPORT&trade;</h1>
+    </div>
+
+    <div class="frame browser-frame"></div>
+    <div class="frame cam-frame"></div>
+
+    <div class="footer">
+        <h1>HITESH RATHEE</h1>
+        <h2>LIVE DEMO</h2>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1463 @@
+/* ==========================================================================
+   AI PASSPORT™ — MASTER INTERACTIVE ENGINE
+   Preloader | Smooth Scroll | ScrollTrigger Section Reveal | Particles | Parallax
+   ========================================================================== */
+
+/* --- CONFIGURATION --- */
+const AIPASSPORT_CONFIG = {
+  // Connect to Google Sheets & Gmail Webhook
+  webhookUrl: "https://script.google.com/macros/s/AKfycbzaIwGqncSPPpBJEZbGWscd6cWwls7rqqUvoGc931d2NylsEbLvuJvyLZYHG1toldpEbw/exec"
+};
+
+// Register GSAP plugins safely
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  try {
+    gsap.registerPlugin(ScrollTrigger);
+  } catch (e) {
+    console.warn("Failed to register ScrollTrigger:", e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const initSafe = (fnName, fn) => {
+    try {
+      if (typeof fn === 'function') fn();
+    } catch (e) {
+      console.warn(`Error initializing ${fnName}:`, e);
+    }
+  };
+
+  initSafe('initPreloader', initPreloader);
+  initSafe('initLenis', initLenis);
+  initSafe('initParticles', initParticles);
+  initSafe('initMouseParallax', initMouseParallax);
+  initSafe('initSectionReveal', initSectionReveal);
+  initSafe('initScrollParallax', initScrollParallax);
+  initSafe('initTimelineDraw', initTimelineDraw);
+  initSafe('initBuildersDivider', initBuildersDivider);
+  initSafe('initAccordion', initAccordion);
+  initSafe('initRegistrationForm', initRegistrationForm);
+  initSafe('initCardHoverReactions', initCardHoverReactions);
+  initSafe('initCountdowns', initCountdowns);
+  initSafe('initMobileMenu', initMobileMenu);
+  initSafe('initScrollToTop', initScrollToTop);
+  initSafe('initCustomCursor', initCustomCursor);
+  initSafe('initSoundEngine', initSoundEngine);
+  initSafe('initScrollSpy', initScrollSpy);
+  initSafe('initTestimonialCarousel', initTestimonialCarousel);
+  initSafe('initVideoPlayer', initVideoPlayer);
+});
+
+/* --- 1. Preloader & Intro Sequence --- */
+function initPreloader() {
+  const loader = document.getElementById('loader');
+  if (!loader) return;
+  
+  // Dynamically split hero title words for premium entrance reveal
+  const heroTitle = document.querySelector('.hero-section h1');
+  if (heroTitle) {
+    const words = heroTitle.textContent.split(' ');
+    heroTitle.innerHTML = words.map(w => `<span class="word-wrapper"><span class="word-inner">${w}</span></span>`).join(' ');
+  }
+  
+  const introTimeline = gsap.timeline({ paused: true });
+  
+  introTimeline
+    .to(loader, { 
+      opacity: 0, 
+      duration: 0.8, 
+      ease: 'power2.inOut', 
+      onComplete: () => {
+        loader.style.display = 'none';
+      }
+    })
+    // Fade in subtitle & badge
+    .from('.hero-section .hero-text-block .hero-subtitle', {
+      y: 15,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    }, '-=0.4')
+    .from('.hero-section .hero-text-block .webinar-badge', {
+      y: 20,
+      opacity: 0,
+      duration: 1.0,
+      ease: 'power3.out'
+    }, '-=0.6')
+    // Apple-style vertical emerge for each word in the headline
+    .to('.hero-section .hero-text-block h1 .word-inner', { 
+      y: 0, 
+      opacity: 1, 
+      duration: 1.3, 
+      stagger: 0.08,
+      ease: 'power4.out' 
+    }, '-=0.6')
+    .from('.hero-section .hero-text-block .section-lead', { 
+      y: 30, 
+      opacity: 0, 
+      duration: 1.2, 
+      ease: 'power3.out' 
+    }, '-=0.8')
+    .from('.hero-section .hero-text-block .section-subtext', { 
+      y: 20, 
+      opacity: 0, 
+      duration: 1.0, 
+      ease: 'power3.out' 
+    }, '-=0.6')
+    .from('.hero-section .hero-text-block .countdown-display', {
+      y: 20,
+      opacity: 0,
+      duration: 1.0,
+      ease: 'power3.out'
+    }, '-=0.6')
+    .from('.hero-section .hero-text-block .btn-group', { 
+      y: 15, 
+      opacity: 0, 
+      duration: 0.8, 
+      ease: 'power3.out' 
+    }, '-=0.4')
+    .from('.hero-section .hero-image-block', { 
+      scale: 0.94,
+      opacity: 0, 
+      duration: 1.8, 
+      ease: 'power3.out' 
+    }, '-=1.2')
+    .from('.global-nav', { 
+      opacity: 0, 
+      duration: 1.0, 
+      ease: 'power2.out' 
+    }, '-=0.8');
+
+  function runPreloaderTimeline() {
+    sessionStorage.setItem('ai_passport_preloader_played', 'true');
+    
+    const preloaderTimeline = gsap.timeline({
+      onComplete: () => {
+        introTimeline.play();
+      }
+    });
+    
+    // Ensure initial states are set
+    gsap.set('.loader-logo-wrap', { opacity: 0, scale: 0.98 });
+    gsap.set('.loader-logo-glow', { opacity: 0, scale: 0.9 });
+    gsap.set('#loader-headline', { opacity: 0, scale: 0.98 });
+    gsap.set('#loader-caption', { opacity: 0, display: 'none' });
+    gsap.set('.loader-progress-bar', { opacity: 0, display: 'none' });
+    gsap.set('.loader-progress', { width: '0%' });
+    gsap.set('#loader-final-msg', { opacity: 0, scale: 0.98 });
+    
+    preloaderTimeline
+      // 1. Logo & Glow fade in rapidly
+      .to('.loader-logo-wrap', { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' }, '0.0')
+      .to('.loader-logo-glow', { opacity: 0.8, scale: 1, duration: 0.5, ease: 'power2.out' }, '0.0')
+      
+      // 2. 0.3s: "THE FIRST AI GENERATION" fades in
+      .to('#loader-headline', { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }, '0.3')
+      
+      // 3. 0.8s: "THE FIRST AI GENERATION" fades out
+      .to('#loader-headline', { opacity: 0, scale: 1.01, duration: 0.3, ease: 'power2.in' }, '0.8')
+      
+      // 4. 0.9s: "Loading AI Passport™..." & progress bar loading
+      .to('#loader-caption', { display: 'block', opacity: 1, duration: 0.3, ease: 'power2.out' }, '0.9')
+      .to('.loader-progress-bar', { display: 'block', opacity: 1, duration: 0.3 }, '0.9')
+      .to('.loader-progress', { width: '100%', duration: 0.7, ease: 'power1.inOut' }, '0.9')
+      
+      // 5. 1.6s: Fade out loader items
+      .to(['#loader-caption', '.loader-progress-bar', '.loader-logo-wrap', '.loader-logo-glow'], { opacity: 0, duration: 0.3, ease: 'power2.in' }, '1.6')
+      
+      // 6. 1.8s: "The AI Revolution Begins" (Final message) fades in
+      .to('#loader-final-msg', { opacity: 1, scale: 1.02, duration: 0.5, ease: 'power3.out' }, '1.8')
+      
+      // 7. 2.4s: Fade out final message
+      .to('#loader-final-msg', { opacity: 0, scale: 1.03, duration: 0.4, ease: 'power3.in' }, '2.4');
+  }
+
+  // Skip the animation entirely if the page loads faster than 1 second (subsequent visits)
+  const loadTime = performance.now();
+  const hasPlayed = sessionStorage.getItem('ai_passport_preloader_played');
+  
+  if (hasPlayed === 'true' && loadTime < 1000) {
+    loader.style.display = 'none';
+    introTimeline.play();
+  } else {
+    runPreloaderTimeline();
+  }
+}
+
+/* --- 2. Smooth Scrolling (Lenis) --- */
+let lenisInstance;
+function initLenis() {
+  if (typeof Lenis === 'undefined') return;
+  lenisInstance = new Lenis({
+    duration: 1.4,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 0.95,
+    smoothTouch: false,
+    infinite: false,
+  });
+
+  function raf(time) {
+    lenisInstance.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  if (typeof ScrollTrigger !== 'undefined') {
+    lenisInstance.on('scroll', ScrollTrigger.update);
+  }
+  
+  lenisInstance.on('scroll', (e) => {
+    const nav = document.querySelector('.global-nav');
+    if (nav) {
+      if (e.scroll > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+  });
+
+  const navLinks = document.querySelectorAll('.nav-link, .footer-links a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (targetId && targetId.startsWith('#') && targetId.length > 1) {
+        e.preventDefault();
+        lenisInstance.scrollTo(targetId, { offset: -20, duration: 1.5 });
+      }
+    });
+  });
+
+  const ctaButtons = document.querySelectorAll('.nav-cta-btn, .btn[href="#register"], .cta-btn');
+  ctaButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const targetId = btn.getAttribute('href');
+      if (targetId && targetId.startsWith('#') && targetId.length > 1) {
+        e.preventDefault();
+        lenisInstance.scrollTo(targetId, { offset: -40, duration: 1.8 });
+      }
+    });
+  });
+
+  const discoverBtn = document.querySelector('.btn[href="#identity"]');
+  if (discoverBtn) {
+    discoverBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      lenisInstance.scrollTo('#identity', { offset: -20, duration: 1.4 });
+    });
+  }
+
+  // Loop scroll action
+  const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+  if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener('click', () => {
+      lenisInstance.scrollTo('#hero', {
+        duration: 2.8,
+        easing: (t) => t * (2 - t)
+      });
+    });
+  }
+}
+
+/* --- 3. Scroll-Linked Section Reveal Animations --- */
+function initSectionReveal() {
+  if (typeof gsap === 'undefined') return;
+  const sections = gsap.utils.toArray('.section');
+  
+  sections.forEach((section) => {
+    // Skip Hero section animation since it's handled by introTimeline
+    if (section.classList.contains('hero-section')) return;
+
+    // Custom reveals for V2.0 sections
+    if (section.id === 'movement') {
+      const header = section.querySelector('.movement-header');
+      const audienceGrid = section.querySelector('.audience-grid');
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+      
+      if (header) {
+        tl.fromTo(header, 
+          { opacity: 0, y: 30 }, 
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+        );
+      }
+      
+      if (audienceGrid) {
+        const cards = audienceGrid.querySelectorAll('.audience-card');
+        tl.fromTo(cards,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' },
+          '-=0.4'
+        );
+      }
+      return;
+    }
+
+    if (section.id === 'testimonials') {
+      const header = section.querySelector('.testimonials-header');
+      const carousel = section.querySelector('.carousel-container');
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+      
+      if (header) {
+        tl.fromTo(header, 
+          { opacity: 0, y: 30 }, 
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+        );
+      }
+      
+      if (carousel) {
+        tl.fromTo(carousel,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' },
+          '-=0.4'
+        );
+      }
+      return;
+    }
+
+    const container = section.querySelector('.section-container');
+    if (!container) return;
+
+    const textCol = section.querySelector('.text-block, .pathway-text-block, .faq-container, .register-container, .outro-text-block, .contact-container, .info-container');
+    const imageCol = section.querySelector('.image-block');
+
+    // Layout direction parameters
+    const isReverse = container.classList.contains('reverse');
+    const textDirection = isReverse ? 50 : -50;
+
+    // Apply 3D perspective to container for holographic card swing on entry
+    gsap.set(container, { perspective: 1200, transformStyle: 'preserve-3d' });
+
+    // Master entrance reveal timeline
+    const revealTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 78%',
+        toggleActions: 'play none none reverse',
+        onEnter: () => {
+          if (section.id === 'identity') {
+            const pass = section.querySelector('.image-wrapper');
+            if (pass) {
+              gsap.fromTo(pass,
+                { scale: 1, filter: 'drop-shadow(0 0 0px rgba(0,82,255,0))' },
+                { scale: 1.04, filter: 'drop-shadow(0 0 25px rgba(0,82,255,0.35))', duration: 0.6, yoyo: true, repeat: 1, ease: 'sine.inOut' }
+              );
+            }
+            const quote = section.querySelector('.quote-text-gold');
+            if (quote) quote.classList.add('active');
+          }
+        },
+        onLeaveBack: () => {
+          if (section.id === 'identity') {
+            const quote = section.querySelector('.quote-text-gold');
+            if (quote) quote.classList.remove('active');
+          }
+        }
+      }
+    });
+
+    // 1. Slide and fade the text column parent block slightly
+    if (textCol) {
+      const h2 = textCol.querySelector('h2');
+
+      revealTimeline.fromTo(textCol, 
+        { 
+          opacity: 0, 
+          x: textDirection 
+        },
+        { 
+          opacity: 1, 
+          x: 0, 
+          duration: 1.2, 
+          ease: 'power3.out' 
+        },
+        0
+      );
+
+      // 2. Continuous clip-path mask reveal on H2
+      if (h2) {
+        revealTimeline.fromTo(h2,
+          { 
+            clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)', 
+            y: 35,
+            opacity: 0
+          },
+          { 
+            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', 
+            y: 0,
+            opacity: 1,
+            duration: 1.2, 
+            ease: 'power3.out' 
+          },
+          0.1
+        );
+      }
+
+      // 3. Stagger secondary text descriptions, tags, accordion, or grids
+      const childElements = textCol.querySelectorAll('.section-tag, p, .ecosystem-grid, .ecosystem-summary, .pathway-steps, .webinar-speakers, .builders-grid, .community-bubbles, .benefits-container, .faq-accordion, .register-form, .academy-grid, .journey-timeline-vertical, .contact-form-wrapper');
+      if (childElements.length > 0) {
+        revealTimeline.fromTo(childElements,
+          { opacity: 0, y: 20, filter: 'blur(4px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out', stagger: 0.05 },
+          0.25
+        );
+      }
+    }
+
+    // 4. 3D holographic camera swing on passport image column
+    if (imageCol) {
+      revealTimeline.fromTo(imageCol,
+        {
+          opacity: 0,
+          rotationX: 18,
+          rotationY: isReverse ? 14 : -14,
+          z: -120,
+          scale: 0.92,
+          filter: 'blur(8px)'
+        },
+        {
+          opacity: 1,
+          rotationX: 0,
+          rotationY: 0,
+          z: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 1.5,
+          ease: 'power3.out'
+        },
+        0
+      );
+    }
+  });
+}
+
+/* --- 3.5. Scroll-Driven Parallax and Scale for Images --- */
+function initScrollParallax() {
+  if (typeof gsap === 'undefined') return;
+  // Hero text parallax
+  const heroText = document.querySelector('.hero-section .hero-text-block');
+  if (heroText) {
+    gsap.to(heroText, {
+      y: -80,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  }
+
+  const sections = gsap.utils.toArray('.section');
+  
+  sections.forEach((section) => {
+    const wrapper = section.querySelector('.image-wrapper');
+    if (!wrapper) return;
+    
+    // Skip Hero section vertical parallax to avoid conflicts with loading timeline
+    const isHero = section.classList.contains('hero-section');
+    const startY = isHero ? 0 : 50;
+    const endY = isHero ? -30 : -50;
+    const startScale = isHero ? 1 : 0.94;
+    const endScale = isHero ? 1.03 : 1.06;
+    const startRot = isHero ? 0 : -2;
+    const endRot = isHero ? 1.5 : 2;
+    
+    gsap.fromTo(wrapper, 
+      { 
+        y: startY, 
+        scale: startScale, 
+        rotation: startRot 
+      },
+      {
+        y: endY,
+        scale: endScale,
+        rotation: endRot,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      }
+    );
+  });
+}
+
+/* --- 4. Drifting Particles --- */
+function initParticles() {
+  if (typeof gsap === 'undefined') return;
+  const container = document.getElementById('particles-container');
+  if (!container) return;
+  
+  const count = 25;
+  
+  for (let i = 0; i < count; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    container.appendChild(particle);
+    
+    gsap.set(particle, {
+      x: gsap.utils.random(0, window.innerWidth),
+      y: gsap.utils.random(0, window.innerHeight),
+      opacity: gsap.utils.random(0.15, 0.45),
+      scale: gsap.utils.random(0.4, 1.4),
+      backgroundColor: gsap.utils.random(0, 1) > 0.6 ? '#dfcfad' : '#0052ff'
+    });
+    
+    floatParticle(particle);
+  }
+}
+
+function floatParticle(el) {
+  if (typeof gsap === 'undefined') return;
+  gsap.to(el, {
+    x: `+=${gsap.utils.random(-150, 150)}`,
+    y: `+=${gsap.utils.random(-150, 150)}`,
+    opacity: gsap.utils.random(0.15, 0.45),
+    duration: gsap.utils.random(15, 30),
+    ease: 'sine.inOut',
+    onComplete: () => floatParticle(el)
+  });
+}
+
+/* --- 5. Interactive Mouse Parallax --- */
+function initMouseParallax() {
+  if (typeof gsap === 'undefined') return;
+  window.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    const xVal = (clientX / window.innerWidth - 0.5) * 2;
+    const yVal = (clientY / window.innerHeight - 0.5) * 2;
+    
+    // Tilt the active image wrappers dynamically
+    const visibleImages = document.querySelectorAll('.section .image-wrapper');
+    visibleImages.forEach(img => {
+      gsap.to(img, {
+        rotationY: xVal * 3,
+        rotationX: -yVal * 3,
+        transformPerspective: 800,
+        duration: 1.2,
+        ease: 'power2.out'
+      });
+    });
+    
+    // Gentle parallax on ambient background glows
+    gsap.to('.electric-blue-glow', {
+      x: xVal * 35,
+      y: yVal * 35,
+      duration: 2.2,
+      ease: 'power2.out'
+    });
+    
+    gsap.to('.champagne-glow', {
+      x: -xVal * 20,
+      y: -yVal * 20,
+      duration: 1.8,
+      ease: 'power2.out'
+    });
+  });
+}
+
+/* --- 6. Pathway Timeline Draw --- */
+function initTimelineDraw() {
+  if (typeof gsap === 'undefined') return;
+  const activeLine = document.getElementById('pathway-draw-line');
+  
+  if (activeLine) {
+    const pathLength = activeLine.getTotalLength();
+    gsap.set(activeLine, { 
+      strokeDasharray: pathLength, 
+      strokeDashoffset: pathLength 
+    });
+    
+    gsap.to(activeLine, {
+      strokeDashoffset: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#pathway .pathway-steps',
+        start: 'top 65%',
+        end: 'bottom 40%',
+        scrub: true
+      }
+    });
+  }
+
+  const cards = document.querySelectorAll('.step-card');
+  const pathwayImg = document.querySelector('#pathway .image-wrapper');
+  cards.forEach((card, index) => {
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top 65%',
+      end: 'bottom 35%',
+      onToggle: self => {
+        if (self.isActive) {
+          cards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          
+          // Illuminate passport on active level transition
+          if (pathwayImg) {
+            gsap.fromTo(pathwayImg,
+              { scale: 1, filter: 'drop-shadow(0 0 0px rgba(0,0,0,0))' },
+              { 
+                scale: 1.04, 
+                filter: 'drop-shadow(0 0 25px rgba(223, 207, 173, 0.35))', 
+                duration: 0.5, 
+                yoyo: true, 
+                repeat: 1, 
+                ease: 'power2.out' 
+              }
+            );
+          }
+        }
+      }
+    });
+  });
+}
+
+/* --- 7. Builders Central Divider Line --- */
+function initBuildersDivider() {
+  if (typeof gsap === 'undefined') return;
+  const line = document.getElementById('divider-draw-line');
+  if (line) {
+    gsap.fromTo(line, 
+      { scaleY: 0, transformOrigin: 'top center' },
+      {
+        scaleY: 1,
+        duration: 1.8,
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: '#builders',
+          start: 'top 50%',
+          toggleActions: 'play none none reverse'
+        }
+      }
+    );
+  }
+}
+
+/* --- 8. Accordion Toggle System --- */
+function initAccordion() {
+  const accordionItems = document.querySelectorAll('.accordion-item');
+  const faqImg = document.querySelector('#faq .image-wrapper');
+  
+  accordionItems.forEach(item => {
+    const trigger = item.querySelector('.accordion-trigger');
+    const content = item.querySelector('.accordion-content');
+    
+    if (trigger && content) {
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        
+        accordionItems.forEach(el => {
+          el.classList.remove('active');
+          const inner = el.querySelector('.accordion-content');
+          if (inner) inner.style.maxHeight = null;
+        });
+        
+        if (!isOpen) {
+          item.classList.add('active');
+          content.style.maxHeight = `${content.scrollHeight}px`;
+          
+          // Subtly react the passport image when FAQ item changes
+          if (faqImg && typeof gsap !== 'undefined') {
+            gsap.fromTo(faqImg,
+              { scale: 1, filter: 'drop-shadow(0 0 0px rgba(0,0,0,0))' },
+              { 
+                scale: 1.03, 
+                filter: 'drop-shadow(0 0 20px rgba(223, 207, 173, 0.25))', 
+                duration: 0.45, 
+                yoyo: true, 
+                repeat: 1, 
+                ease: 'power2.out' 
+              }
+            );
+          }
+        }
+        
+        // Refresh trigger heights for both expand and collapse events
+        setTimeout(() => {
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+          }
+        }, 350);
+      });
+    }
+  });
+}
+
+/* --- 8b. Cinematic Video Player Instagram Reel Embed --- */
+function initVideoPlayer() {
+  // Wire horizontal scrolling controls for the reels slider
+  const track = document.getElementById('reels-track');
+  const prevBtn = document.getElementById('reels-prev');
+  const nextBtn = document.getElementById('reels-next');
+  if (track && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -344, behavior: 'smooth' });
+      if (typeof playTickSound === 'function') {
+        playTickSound('click');
+      }
+    });
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: 344, behavior: 'smooth' });
+      if (typeof playTickSound === 'function') {
+        playTickSound('click');
+      }
+    });
+  }
+}
+
+/* --- 9. Registration Form & Digital Ticket Generation --- */
+function initRegistrationForm() {
+  const form = document.getElementById('registration-form');
+  if (!form) return;
+  
+  const submitBtn = form.querySelector('.btn-submit');
+  const fullname = document.getElementById('fullname');
+  const email = document.getElementById('email');
+  const mobile = document.getElementById('mobile');
+  const role = document.getElementById('user-role');
+  const consent = document.getElementById('consent');
+  
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  // Inline Validation Helper
+  function validateField(inputEl, condition, errorMsg) {
+    if (!inputEl) return false;
+    const group = inputEl.closest('.form-group') || inputEl.closest('.form-checkbox-group');
+    if (!group) return condition;
+    
+    const existingError = group.querySelector('.error-msg');
+    if (existingError) existingError.remove();
+    group.classList.remove('invalid');
+    
+    if (!condition) {
+      group.classList.add('invalid');
+      const span = document.createElement('span');
+      span.className = 'error-msg';
+      span.textContent = errorMsg;
+      group.appendChild(span);
+      return false;
+    }
+    return true;
+  }
+  
+  // Dynamic real-time validation listeners
+  const validateList = [fullname, email, mobile, role, consent].filter(el => el !== null);
+  validateList.forEach(el => {
+    const evName = (el.tagName === 'SELECT' || el.type === 'checkbox') ? 'change' : 'input';
+    el.addEventListener(evName, () => {
+      if (el === fullname) {
+        validateField(fullname, fullname.value.trim().length > 0, "Full Name is required *");
+      } else if (el === email) {
+        validateField(email, emailPattern.test(email.value.trim()), "Please enter a valid email *");
+      } else if (el === mobile) {
+        validateField(mobile, mobile.value.trim().length >= 8, "Enter a valid mobile number *");
+      } else if (el === role) {
+        validateField(role, role.value !== "", "Please select your role *");
+      } else if (el === consent) {
+        validateField(consent, consent.checked, "You must agree to receive updates *");
+      }
+    });
+  });
+  
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Final Validation Check
+    let isValid = true;
+    if (fullname) isValid = validateField(fullname, fullname.value.trim().length > 0, "Full Name is required *") && isValid;
+    if (email) isValid = validateField(email, emailPattern.test(email.value.trim()), "Please enter a valid email *") && isValid;
+    if (mobile) isValid = validateField(mobile, mobile.value.trim().length >= 8, "Enter a valid mobile number *") && isValid;
+    if (role) isValid = validateField(role, role.value !== "", "Please select your role *") && isValid;
+    if (consent) isValid = validateField(consent, consent.checked, "You must agree to receive updates *") && isValid;
+    
+    if (!isValid) {
+      playTickSound('click');
+      return;
+    }
+    
+    // Enter loading state
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add('loading');
+      const btnTxt = submitBtn.querySelector('.btn-text');
+      if (btnTxt) btnTxt.textContent = 'SUBMITTING...';
+    }
+    playTickSound('click');
+    
+    // Collect form data and format as plain JSON object
+    const formData = new FormData(form);
+    const formObject = {};
+    formData.forEach((value, key) => {
+      formObject[key] = value;
+    });
+    
+    const dataName = (fullname && fullname.value) || 'Citizen Builder';
+    
+    // Send form data to Webhook
+    fetch(AIPASSPORT_CONFIG.webhookUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      body: JSON.stringify(formObject)
+    })
+    .then(() => {
+      proceedToSuccess(dataName);
+    })
+    .catch(err => {
+      console.warn("Webhook submission warning, proceeding to success fallback:", err);
+      proceedToSuccess(dataName);
+    });
+  });
+  
+  // Success ticket reveal and celebration burst
+  function proceedToSuccess(name) {
+    const randomId = Math.floor(1000 + Math.random() * 9000);
+    const ticketName = document.getElementById('ticket-holder-name');
+    const ticketId = document.getElementById('ticket-citizen-id');
+    if (ticketName) ticketName.textContent = name.toUpperCase();
+    if (ticketId) ticketId.textContent = `#2026-${randomId}`;
+    
+    // Step 1: Collapse form
+    if (typeof gsap !== 'undefined') {
+      gsap.to(form, {
+        opacity: 0,
+        y: -20,
+        duration: 0.4,
+        onComplete: () => {
+          form.style.display = 'none';
+          
+          // Step 2: Show and animate ID pre-generation loader screen
+          const genLoader = document.getElementById('ticket-generation-loader');
+          if (genLoader) {
+            const prgBar = genLoader.querySelector('.loader-ticket-progress');
+            genLoader.style.display = 'block';
+            
+            gsap.fromTo(genLoader,
+              { opacity: 0, y: 15 },
+              { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+            );
+            
+            // Reset progress bar scale
+            if (prgBar) gsap.set(prgBar, { scaleX: 0, transformOrigin: 'left center' });
+            
+            playTickSound('hover');
+            
+            gsap.to(prgBar || {}, {
+              scaleX: 1,
+              duration: 2.4,
+              ease: 'power1.inOut',
+              onComplete: () => {
+                // Step 3: Fade out preloader and reveal actual boarding ticket
+                gsap.to(genLoader, {
+                  opacity: 0,
+                  y: -15,
+                  duration: 0.4,
+                  onComplete: () => {
+                    genLoader.style.display = 'none';
+                    
+                    const successTicket = document.getElementById('registration-success');
+                    if (successTicket) {
+                      successTicket.style.display = 'block';
+                      playTickSound('success');
+                      
+                      gsap.fromTo(successTicket, 
+                        { opacity: 0, scale: 0.95, y: 20 },
+                        { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.2)' }
+                      );
+                      
+                      triggerConfetti(successTicket);
+                    }
+                    
+                    setTimeout(() => {
+                      if (typeof ScrollTrigger !== 'undefined') {
+                        ScrollTrigger.refresh();
+                      }
+                    }, 150);
+                  }
+                });
+              }
+            });
+          }
+        }
+      });
+    } else {
+      // Non-GSAP fallback
+      form.style.display = 'none';
+      const successTicket = document.getElementById('registration-success');
+      if (successTicket) successTicket.style.display = 'block';
+    }
+  }
+  
+  // Dynamic Confetti Particle explosion using GSAP
+  function triggerConfetti(successContainer) {
+    if (typeof gsap === 'undefined') return;
+    const colors = ['#dfcfad', '#0052ff', '#ffffff'];
+    const count = 50;
+    
+    successContainer.style.position = 'relative';
+    
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'confetti-particle';
+      successContainer.appendChild(p);
+      
+      const size = gsap.utils.random(5, 9);
+      gsap.set(p, {
+        width: size,
+        height: size,
+        backgroundColor: gsap.utils.random(colors),
+        borderRadius: gsap.utils.random(0, 1) > 0.5 ? '50%' : '2px',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        x: 0,
+        y: 0,
+        z: 0,
+        pointerEvents: 'none'
+      });
+      
+      const angle = gsap.utils.random(0, Math.PI * 2);
+      const velocity = gsap.utils.random(80, 220);
+      const targetX = Math.cos(angle) * velocity;
+      const targetY = Math.sin(angle) * velocity - gsap.utils.random(60, 140);
+      
+      gsap.to(p, {
+        x: targetX,
+        y: targetY,
+        rotation: gsap.utils.random(0, 360),
+        opacity: 0,
+        duration: gsap.utils.random(1.4, 2.2),
+        ease: 'power2.out',
+        onComplete: () => p.remove()
+      });
+    }
+  }
+  
+  // Success return action
+  const returnBtn = document.getElementById('success-return-btn');
+  if (returnBtn) {
+    returnBtn.addEventListener('click', () => {
+      playTickSound('click');
+      form.reset();
+      
+      form.querySelectorAll('.form-group, .form-checkbox-group').forEach(grp => {
+        grp.classList.remove('invalid');
+        const err = grp.querySelector('.error-msg');
+        if (err) err.remove();
+      });
+      
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        const btnTxt = submitBtn.querySelector('.btn-text');
+        if (btnTxt) btnTxt.textContent = 'Reserve My Free Seat';
+      }
+      
+      const successTicket = document.getElementById('registration-success');
+      if (successTicket) {
+        if (typeof gsap !== 'undefined') {
+          gsap.to(successTicket, {
+            opacity: 0,
+            scale: 0.95,
+            y: 20,
+            duration: 0.4,
+            onComplete: () => {
+              successTicket.style.display = 'none';
+              form.style.display = 'block';
+              gsap.fromTo(form, 
+                { opacity: 0, y: -20 },
+                { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+              );
+              
+              if (lenisInstance) {
+                lenisInstance.scrollTo('#hero', { duration: 2.2 });
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+              
+              setTimeout(() => {
+                ScrollTrigger.refresh();
+              }, 150);
+            }
+          });
+        } else {
+          successTicket.style.display = 'none';
+          form.style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    });
+  }
+  
+  // Success share action
+  const shareBtn = document.getElementById('success-share-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      playTickSound('click');
+      if (navigator.share) {
+        navigator.share({
+          title: 'AI Passport Launch',
+          text: 'I just reserved my seat for the official AI Passport Launch Webinar! Join the First AI Generation.',
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('AI Passport link copied to clipboard! Share it with your friends.');
+      }
+    });
+  }
+}
+
+/* --- 10. Mobile Menu Logic --- */
+function initMobileMenu() {
+  const toggleBtn = document.querySelector('.mobile-menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (toggleBtn && navLinks) {
+    toggleBtn.addEventListener('click', () => {
+      toggleBtn.classList.toggle('active');
+      navLinks.classList.toggle('mobile-open');
+      
+      const isOpen = toggleBtn.classList.contains('active');
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      
+      const spans = toggleBtn.querySelectorAll('span');
+      if (typeof gsap !== 'undefined') {
+        if (isOpen) {
+          gsap.to(spans[0], { y: 6, rotation: 45, duration: 0.3 });
+          gsap.to(spans[1], { y: -6, rotation: -45, duration: 0.3 });
+          gsap.to(navLinks, { display: 'flex', opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', onComplete: () => {
+            if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+          } });
+        } else {
+          gsap.to(spans[0], { y: 0, rotation: 0, duration: 0.3 });
+          gsap.to(spans[1], { y: 0, rotation: 0, duration: 0.3 });
+          gsap.to(navLinks, { opacity: 0, y: -20, duration: 0.3, onComplete: () => {
+            navLinks.style.display = '';
+            if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+          } });
+        }
+      } else {
+        navLinks.style.display = isOpen ? 'flex' : '';
+      }
+    });
+
+    const links = navLinks.querySelectorAll('a');
+    links.forEach(l => {
+      l.addEventListener('click', () => {
+        if (toggleBtn.classList.contains('active')) {
+          toggleBtn.click();
+        }
+      });
+    });
+  }
+}
+
+/* --- 11. Live Countdown Timer Logic --- */
+function initCountdowns() {
+  // Target Webinar Date: July 19, 2026, 14:00 IST (UTC+5:30) => 08:30 UTC
+  const targetDate = Date.UTC(2026, 6, 19, 8, 30, 0);
+  
+  const hoursContainers = document.querySelectorAll('.countdown-hours');
+  const minsContainers = document.querySelectorAll('.countdown-minutes');
+  const secsContainers = document.querySelectorAll('.countdown-seconds');
+  const wrappers = document.querySelectorAll('.countdown-display');
+  
+  if (!wrappers.length) return;
+  
+  // Inject countdown captions dynamically
+  wrappers.forEach(display => {
+    const parent = display.parentNode;
+    if (!parent) return;
+    const caption = parent.querySelector('.countdown-caption') || document.createElement('p');
+    caption.className = 'countdown-caption';
+    caption.textContent = 'Until the next live experience';
+    if (!parent.querySelector('.countdown-caption')) {
+      parent.insertBefore(caption, display.nextSibling);
+    }
+  });
+  
+  function adjustDigitSpans(container, length) {
+    let spans = container.querySelectorAll('.digit');
+    if (spans.length !== length) {
+      container.innerHTML = '';
+      for (let i = 0; i < length; i++) {
+        const span = document.createElement('span');
+        span.className = 'digit';
+        span.textContent = '0';
+        container.appendChild(span);
+      }
+    }
+  }
+  
+  function updateContainerDigits(container, valStr) {
+    if (typeof gsap === 'undefined') {
+      container.textContent = valStr;
+      return;
+    }
+    try {
+      adjustDigitSpans(container, valStr.length);
+      const spans = container.querySelectorAll('.digit');
+      for (let i = 0; i < valStr.length; i++) {
+        const char = valStr.charAt(i);
+        const span = spans[i];
+        if (span && span.textContent !== char) {
+          span.textContent = char;
+          gsap.fromTo(span,
+            { scaleY: 0.4, y: -6, opacity: 0.5 },
+            { 
+              scaleY: 1, 
+              y: 0, 
+              opacity: 1, 
+              duration: 0.4, 
+              ease: 'back.out(1.5)' 
+            }
+          );
+        }
+      }
+    } catch (err) {
+      container.textContent = valStr;
+    }
+  }
+  
+  const updateTimer = () => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+    
+    if (diff <= 0) {
+      wrappers.forEach(w => {
+        w.innerHTML = "<div class='live-badge-wrapper'><span class='live-badge'>LIVE NOW</span> <span class='live-text'>Next Live National Webinar is in progress!</span></div>";
+      });
+      return;
+    }
+    
+    const totalHours = Math.floor(diff / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    const hrsStr = totalHours.toString().padStart(2, '0');
+    const minsStr = mins.toString().padStart(2, '0');
+    const secsStr = secs.toString().padStart(2, '0');
+    
+    hoursContainers.forEach(container => updateContainerDigits(container, hrsStr));
+    marginStr = minsContainers.forEach(container => updateContainerDigits(container, minsStr));
+    secsContainers.forEach(container => updateContainerDigits(container, secsStr));
+  };
+  
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+
+/* --- 11b. Testimonial Carousel sliding track logic --- */
+function initTestimonialCarousel() {
+  const track = document.getElementById('testimonial-track');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next-btn');
+  const dotsContainer = document.getElementById('carousel-dots');
+  
+  if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+  
+  const slides = Array.from(track.children);
+  let currentIndex = 0;
+  
+  dotsContainer.innerHTML = '';
+  slides.forEach((_, idx) => {
+    const dot = document.createElement('button');
+    dot.className = `carousel-dot ${idx === 0 ? 'active' : ''}`;
+    dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
+    dotsContainer.appendChild(dot);
+    
+    dot.addEventListener('click', () => {
+      if (typeof playTickSound === 'function') playTickSound('click');
+      goToSlide(idx);
+    });
+  });
+  
+  const dots = Array.from(dotsContainer.children);
+  
+  function goToSlide(index) {
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+    
+    currentIndex = index;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentIndex);
+    });
+  }
+  
+  prevBtn.addEventListener('click', () => {
+    if (typeof playTickSound === 'function') playTickSound('click');
+    goToSlide(currentIndex - 1);
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    if (typeof playTickSound === 'function') playTickSound('click');
+    goToSlide(currentIndex + 1);
+  });
+  
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  track.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+  
+  function handleSwipe() {
+    if (touchStartX - touchEndX > 50) {
+      goToSlide(currentIndex + 1);
+    }
+    if (touchEndX - touchStartX > 50) {
+      goToSlide(currentIndex - 1);
+    }
+  }
+}
+
+/* --- 12. Smooth Scroll-To-Top Loop Reset --- */
+function initScrollToTop() {
+  const btn = document.getElementById('scroll-to-top-btn');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      playTickSound('click');
+      if (lenisInstance) {
+        lenisInstance.scrollTo('#hero', { 
+          duration: 2.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+}
+
+/* --- 12.5. Card Hover & Dynamic Swapping Reactions --- */
+function initCardHoverReactions() {
+  const ecoPassport = document.querySelector('#ecosystem .image-wrapper');
+  const ecoCards = document.querySelectorAll('#ecosystem .grid-item');
+  if (ecoPassport && ecoCards.length > 0 && typeof gsap !== 'undefined') {
+    ecoCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(ecoPassport, {
+          scale: 1.05,
+          filter: 'drop-shadow(0 0 25px rgba(0, 82, 255, 0.25))',
+          duration: 0.45,
+          ease: 'power2.out'
+        });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(ecoPassport, {
+          scale: 1,
+          filter: 'drop-shadow(0 0 0px rgba(0,0,0,0))',
+          duration: 0.45,
+          ease: 'power2.out'
+        });
+      });
+    });
+  }
+  
+  const bubbles = document.querySelectorAll('.community-bubbles .bubble');
+  const activeDesc = document.getElementById('community-active-desc');
+  if (bubbles.length > 0 && activeDesc && typeof gsap !== 'undefined') {
+    bubbles.forEach(b => {
+      b.addEventListener('mouseenter', () => {
+        bubbles.forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        
+        const newText = b.getAttribute('data-desc');
+        
+        gsap.to(activeDesc, {
+          opacity: 0,
+          x: -12,
+          duration: 0.2,
+          onComplete: () => {
+            activeDesc.textContent = newText;
+            gsap.to(activeDesc, {
+              opacity: 1,
+              x: 0,
+              duration: 0.35,
+              ease: 'power2.out'
+            });
+          }
+        });
+        playTickSound('hover');
+      });
+    });
+  }
+}
+
+/* --- 13. Custom Luxury Cursor Logic --- */
+function initCustomCursor() {
+  const cursor = document.getElementById('custom-cursor');
+  if (!cursor) return;
+  const dot = cursor.querySelector('.cursor-dot');
+  const glow = cursor.querySelector('.cursor-glow');
+  
+  if (!dot || !glow) return;
+  
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    cursor.style.display = 'none';
+    return;
+  }
+  
+  let mouseX = 0, mouseY = 0;
+  let glowX = 0, glowY = 0;
+  
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    if (typeof gsap !== 'undefined') {
+      gsap.set(dot, { x: mouseX, y: mouseY });
+    }
+  });
+  
+  if (typeof gsap !== 'undefined') {
+    gsap.ticker.add(() => {
+      const dt = 1.0 - Math.pow(0.85, gsap.ticker.deltaRatio());
+      glowX += (mouseX - glowX) * dt * 0.35;
+      glowY += (mouseY - glowY) * dt * 0.35;
+      gsap.set(glow, { x: glowX, y: glowY });
+    });
+  }
+  
+  const interactiveTargets = document.querySelectorAll('a, button, .accordion-trigger, .step-card, .bubble, .portrait-wrapper, .program-card');
+  interactiveTargets.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('hovering');
+      playTickSound('hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('hovering');
+    });
+  });
+}
+
+/* --- 14. Synthesized Audio Engine (Web Audio API) --- */
+let audioCtx = null;
+let audioMuted = true;
+
+function initSoundEngine() {
+  const toggle = document.getElementById('sound-toggle');
+  if (toggle) {
+    const soundOffIcon = toggle.querySelector('.sound-off');
+    const soundOnIcon = toggle.querySelector('.sound-on');
+    
+    toggle.addEventListener('click', () => {
+      audioMuted = !audioMuted;
+      
+      if (audioMuted) {
+        if (soundOffIcon) soundOffIcon.style.display = 'block';
+        if (soundOnIcon) soundOnIcon.style.display = 'none';
+        toggle.classList.remove('active');
+      } else {
+        if (soundOffIcon) soundOffIcon.style.display = 'none';
+        if (soundOnIcon) soundOnIcon.style.display = 'block';
+        toggle.classList.add('active');
+        
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        playTickSound('success');
+      }
+    });
+  }
+}
+
+function playTickSound(type = 'click') {
+  if (audioMuted) return;
+  
+  try {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    if (type === 'click') {
+      osc.frequency.setValueAtTime(1000, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.05);
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.05);
+    } else if (type === 'hover') {
+      osc.frequency.setValueAtTime(1500, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.02);
+      gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.02);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.02);
+    } else if (type === 'success') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+      osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.25);
+    }
+  } catch (err) {
+    console.warn("Web Audio API not supported or blocked:", err);
+  }
+}
+
+/* --- 15. Navigation ScrollSpy --- */
+function initScrollSpy() {
+  if (typeof ScrollTrigger === 'undefined') return;
+  const links = document.querySelectorAll('.nav-links .nav-link, .nav-cta-btn');
+  links.forEach(link => {
+    const targetId = link.getAttribute('href');
+    if (targetId && targetId.startsWith('#') && targetId.length > 1) {
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        ScrollTrigger.create({
+          trigger: targetSection,
+          start: 'top 40%',
+          end: 'bottom 40%',
+          onToggle: self => {
+            if (self.isActive) {
+              links.forEach(l => l.classList.remove('active'));
+              link.classList.add('active');
+            }
+          }
+        });
+      }
+    }
+  });
+}

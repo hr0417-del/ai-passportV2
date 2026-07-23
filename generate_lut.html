@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LUT Generator</title>
+    <style>
+        body { font-family: sans-serif; background: #111; color: white; padding: 50px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h2 id="status">Generating Cinematic Color Grade...</h2>
+    <canvas id="lutCanvas" width="512" height="512" style="display:none;"></canvas>
+    
+    <script>
+        setTimeout(() => {
+            const canvas = document.getElementById('lutCanvas');
+            const ctx = canvas.getContext('2d');
+            const imgData = ctx.createImageData(512, 512);
+            const data = imgData.data;
+
+            const size = 512;
+            const blockSize = 64;
+            const blocksPerRow = size / blockSize;
+
+            for (let y = 0; y < size; y++) {
+                for (let x = 0; x < size; x++) {
+                    
+                    let r = x % blockSize;
+                    let g = y % blockSize;
+                    let b = Math.floor(x / blockSize) + Math.floor(y / blockSize) * blocksPerRow;
+
+                    r /= 63.0;
+                    g /= 63.0;
+                    b /= 63.0;
+
+                    const luma = 0.299 * r + 0.587 * g + 0.114 * b;
+
+                    // Cinematic Orange & Teal Grade
+                    const teal_r = r * 0.6;
+                    const teal_g = g * 1.0 + 0.05;
+                    const teal_b = b * 1.4 + 0.1;
+
+                    const orange_r = r * 1.4 + 0.1;
+                    const orange_g = g * 1.1;
+                    const orange_b = b * 0.7;
+
+                    let mix = (luma - 0.25) / 0.5;
+                    mix = Math.max(0, Math.min(1, mix));
+                    mix = mix * mix * (3 - 2 * mix);
+
+                    let out_r = teal_r * (1 - mix) + orange_r * mix;
+                    let out_g = teal_g * (1 - mix) + orange_g * mix;
+                    let out_b = teal_b * (1 - mix) + orange_b * mix;
+
+                    const contrast = (val, amount = 1.15) => Math.max(0, Math.min(1, ((val - 0.5) * amount) + 0.5));
+
+                    out_r = contrast(out_r);
+                    out_g = contrast(out_g);
+                    out_b = contrast(out_b);
+
+                    const finalR = Math.min(255, Math.max(0, Math.round(out_r * 255)));
+                    const finalG = Math.min(255, Math.max(0, Math.round(out_g * 255)));
+                    const finalB = Math.min(255, Math.max(0, Math.round(out_b * 255)));
+
+                    const index = (y * 512 + x) * 4;
+                    data[index] = finalR;
+                    data[index+1] = finalG;
+                    data[index+2] = finalB;
+                    data[index+3] = 255;
+                }
+            }
+
+            ctx.putImageData(imgData, 0, 0);
+
+            // Trigger download
+            const link = document.createElement('a');
+            link.download = 'cinematic_lut.png';
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+            
+            document.getElementById('status').innerText = "✅ Downloaded cinematic_lut.png to your Downloads folder!";
+        }, 500);
+    </script>
+</body>
+</html>

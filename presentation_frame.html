@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Presentation Frame</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            /* Completely transparent so OBS video sources show underneath! */
+            background-color: transparent; 
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Large Frame for Screen Share (16:9 Aspect Ratio) */
+        .screen-frame {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            width: 1440px;
+            height: 810px;
+            border: 4px solid #FFD700; /* Gold Border */
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(0,0,0,0.8);
+            background-color: transparent; 
+        }
+
+        /* Small Circular Frame for your Webcam cutout */
+        .webcam-frame {
+            position: absolute;
+            top: 60px;
+            right: 60px;
+            width: 300px;
+            height: 300px;
+            border: 4px solid #FFD700;
+            border-radius: 50%; /* Perfect Circle */
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+            background-color: transparent;
+        }
+
+        /* AI Passport Branding in the bottom right corner */
+        .brand-box {
+            position: absolute;
+            bottom: 60px;
+            right: 60px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .brand-title {
+            color: #FFFFFF;
+            font-size: 36px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+        }
+
+        .brand-subtitle {
+            color: #FFD700;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-top: 8px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
+        }
+        
+        /* A subtle decorative gold line spanning the bottom */
+        .decorative-line {
+            position: absolute;
+            bottom: 120px;
+            left: 60px;
+            width: 1440px;
+            height: 2px;
+            background: linear-gradient(90deg, #FFD700, transparent);
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-frame"></div>
+    <div class="webcam-frame"></div>
+    <div class="decorative-line"></div>
+    
+    <div class="brand-box">
+        <h1 class="brand-title">AI Passport</h1>
+        <div class="brand-subtitle">LIVE PRESENTATION</div>
+    </div>
+</body>
+</html>

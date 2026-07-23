@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activation Scene</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
+        body, html { margin: 0; padding: 0; width: 1920px; height: 1080px; background: #000000; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        
+        .text {
+            color: #FFFFFF; font-family: 'Inter', sans-serif; font-size: 54px; font-weight: 900;
+            letter-spacing: 15px; text-transform: uppercase; text-align: center;
+            opacity: 0; animation: fadeInGrow 4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; animation-delay: 1s;
+            z-index: 10;
+        }
+        .text span { color: #FFD700; text-shadow: 0 0 30px rgba(255, 215, 0, 0.5); }
+        
+        .logo {
+            margin-top: 60px; font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 900; letter-spacing: 10px; color: #444;
+            opacity: 0; animation: fadeIn 2s ease forwards; animation-delay: 3s; z-index: 10;
+        }
+
+        /* Gold Particles */
+        canvas { position: absolute; top: 0; left: 0; z-index: 1; }
+
+        @keyframes fadeInGrow {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+    
+    <div class="text">YOUR <span>AI PASSPORT</span><br>HAS BEEN ACTIVATED</div>
+    <div class="logo">AI PASSPORT&trade;</div>
+
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 1920; canvas.height = 1080;
+        
+        const particles = [];
+        for(let i=0; i<100; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 0.5,
+                speedY: Math.random() * -1 - 0.1,
+                opacity: Math.random()
+            });
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.y += p.speedY;
+                if(p.y < 0) p.y = canvas.height;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+                ctx.fillStyle = `rgba(255, 215, 0, ${p.opacity})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

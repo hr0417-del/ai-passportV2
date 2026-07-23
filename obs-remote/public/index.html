@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Ensure mobile optimization, disable zooming to feel like a native app -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Studio Remote</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            background-color: #080808;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* Subtle dark grid background */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #FFD700;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .header p {
+            color: #666666;
+            font-size: 14px;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .button-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .scene-btn {
+            background: linear-gradient(145deg, #141414, #0a0a0a);
+            border: 2px solid #222222;
+            border-radius: 20px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            padding: 35px 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.05);
+            transition: all 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 30px;
+        }
+        
+        .icon {
+            font-size: 28px;
+            margin-right: 20px;
+            opacity: 0.8;
+        }
+
+        /* Gold highlight for active state */
+        .scene-btn:active {
+            transform: scale(0.97);
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.8);
+        }
+
+        .scene-btn.active {
+            border-color: #FFD700;
+            color: #FFD700;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.15), inset 0 0 20px rgba(255, 215, 0, 0.05);
+            background: linear-gradient(145deg, #1a1500, #0a0800);
+        }
+
+        .scene-btn.active .icon {
+            opacity: 1;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .status-toast {
+            position: fixed;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFD700;
+            color: #000000;
+            font-weight: 900;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .status-toast.show {
+            bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AI Passport</h1>
+        <p>Live Studio Remote</p>
+    </div>
+
+    <div class="button-grid">
+        <button class="scene-btn" onclick="switchScene('starting soon', this)">
+            <span class="icon">⏳</span> Starting Soon
+        </button>
+        <button class="scene-btn active" onclick="switchScene('speaker', this)">
+            <span class="icon">🎤</span> Main Speaker
+        </button>
+        <button class="scene-btn" onclick="switchScene('presentation', this)">
+            <span class="icon">💻</span> Presentation
+        </button>
+    </div>
+
+    <div id="toast" class="status-toast">Scene Switched!</div>
+
+    <script>
+        function switchScene(sceneName, buttonElement) {
+            // Provide immediate visual feedback on the button
+            document.querySelectorAll('.scene-btn').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+
+            // Send API request to Node backend
+            fetch(`/api/switch-scene/${encodeURIComponent(sceneName)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        showToast(`Live: ${sceneName}`);
+                    } else {
+                        showToast(`Error: Check Connection`);
+                        buttonElement.classList.remove('active');
+                    }
+                })
+                .catch(error => {
+                    showToast(`Connection Error`);
+                    buttonElement.classList.remove('active');
+                });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.add('show');
+            
+            // Hide after 2.5 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>

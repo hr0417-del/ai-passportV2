@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Presentation Overlay</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap');
+        
+        body, html {
+            margin: 0; padding: 0;
+            width: 1920px; height: 1080px;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Top Right Logo */
+        .logo-top-right {
+            position: absolute;
+            top: 50px; 
+            right: 50px;
+            z-index: 10;
+        }
+
+        .logo-top-right h1 {
+            color: #FFFFFF;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            margin: 0;
+            text-align: right;
+        }
+
+        .logo-top-right span {
+            color: #FFD700;
+        }
+
+        /* Frame Styles */
+        .frame {
+            position: absolute;
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            border-radius: 12px;
+            box-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.15),
+                inset 0 0 30px rgba(255, 215, 0, 0.15);
+            background: transparent;
+            z-index: 10;
+        }
+
+        .frame::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border: 1px solid #FFD700;
+            border-radius: 12px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* 
+           LEFT FRAME (For Screen Share / PowerPoint)
+           Width: 1350px, Height: 759px (16:9)
+        */
+        .screen-frame {
+            top: 50px;
+            left: 50px;
+            width: 1380px;
+            height: 776px;
+        }
+
+        .screen-label {
+            position: absolute;
+            top: -30px;
+            left: 15px;
+            color: #FFD700;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* 
+           RIGHT FRAME (For Webcam)
+           Moved to BOTTOM RIGHT as requested
+           Width: 426px, Height: 240px (16:9)
+        */
+        .cam-frame {
+            bottom: 50px;
+            right: 50px;
+            width: 426px;
+            height: 240px;
+        }
+
+        .cam-label {
+            position: absolute;
+            top: -28px;
+            left: 15px;
+            color: #FFD700;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Bottom Left Footer (Moved from right since camera is there now) */
+        .footer {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            text-align: left;
+            z-index: 10;
+        }
+
+        .footer .name {
+            color: #FFFFFF;
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+
+        .footer .title {
+            color: #FFD700;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        /* Subtle tech decorative lines */
+        .tech-line-1 {
+            position: absolute;
+            background: linear-gradient(180deg, transparent 0%, #FFD700 50%, transparent 100%);
+            width: 1px;
+            height: 200px;
+            top: 150px;
+            right: 250px;
+            opacity: 0.3;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="logo-top-right">
+        <h1><span>AI</span> PASSPORT</h1>
+    </div>
+
+    <!-- The physical frames the user will align their OBS videos into -->
+    <div class="frame screen-frame">
+        <div class="screen-label">PRESENTATION</div>
+    </div>
+
+    <div class="frame cam-frame">
+        <div class="cam-label">SPEAKER</div>
+    </div>
+
+    <div class="tech-line-1"></div>
+
+    <div class="footer">
+        <h1 class="name">HITESH RATHEE</h1>
+        <h2 class="title">AI Passport</h2>
+    </div>
+</body>
+</html>

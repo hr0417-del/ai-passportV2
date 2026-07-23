@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Reveal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body, html { margin: 0; padding: 0; width: 1920px; height: 1080px; background: #020202; font-family: 'Inter', sans-serif; overflow: hidden; display: flex; justify-content: center; align-items: center; color: white;}
+        
+        /* The Card */
+        .card-container {
+            perspective: 1000px;
+            margin-right: 150px;
+        }
+        .card {
+            width: 450px; height: 700px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite, spinIn 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+        }
+        .card-face {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 50px rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .card-front {
+            background: linear-gradient(135deg, #111 0%, #000 100%);
+        }
+        .card-front::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,215,0,0.4) 0%, transparent 50%); border-radius: 20px; pointer-events: none;
+        }
+        .card-back {
+            background: #050505; transform: rotateY(180deg);
+        }
+        
+        .card-logo {
+            font-size: 60px; font-weight: 900; letter-spacing: 5px; color: #FFF;
+        }
+        .card-logo span { color: #FFD700; }
+        .chip {
+            width: 60px; height: 40px; background: #FFD700; border-radius: 5px; margin: 40px 0;
+            background-image: linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.1) 50%); background-size: 10px 10px;
+        }
+
+        /* Right Panel */
+        .info-panel {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 1.5s;
+        }
+        .info-panel h1 { font-size: 64px; font-weight: 900; margin: 0 0 10px 0; letter-spacing: 5px;}
+        .info-panel h2 { font-size: 24px; color: #FFD700; font-weight: 400; margin: 0 0 60px 0; letter-spacing: 10px;}
+        
+        .qr-placeholder {
+            width: 200px; height: 200px; background: #FFF; border-radius: 10px;
+            display: flex; justify-content: center; align-items: center; color: #000; font-weight: 900;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+        @keyframes spinIn {
+            0% { transform: scale(0.5) rotateY(180deg) translateY(100px); opacity: 0; }
+            100% { transform: scale(1) rotateY(0deg) translateY(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* Tiny camera frame placeholder */
+        .cam-frame {
+            position: absolute; bottom: 40px; right: 40px; width: 300px; height: 168px;
+            border: 1px solid rgba(255, 215, 0, 0.4); border-radius: 8px; z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-face card-front">
+                <div class="card-logo"><span>AI</span> PASS</div>
+                <div class="chip"></div>
+                <div style="color:#888; font-size:14px; letter-spacing: 5px;">NATIONAL LAUNCH</div>
+            </div>
+            <div class="card-face card-back"></div>
+        </div>
+    </div>
+    
+    <div class="info-panel">
+        <h1>THE FUTURE IS HERE</h1>
+        <h2>GET YOUR AI PASSPORT</h2>
+        <h3 style="color: #25D366; font-size: 32px; margin-top: -40px; margin-bottom: 40px; letter-spacing: 2px;">₹999 FOR 12 WEBINARS</h3>
+        <div class="qr-placeholder">SCAN ME<br>(REPLACE IN OBS)</div>
+        <p style="margin-top:20px; font-size:24px; letter-spacing: 2px;">aipassport.com</p>
+    </div>
+
+    <!-- Small webcam slot -->
+    <div class="cam-frame"></div>
+</body>
+</html>
