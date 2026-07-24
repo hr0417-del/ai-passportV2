@@ -5658,37 +5658,37 @@ p, .section-lead, .section-subtext {
 }
 
 /* ======================================================
-   HERO ROTATING CAROUSEL V2 — HIGH-VISIBILITY EXPANDED
+   HERO ROTATING CAROUSEL V2 — MAXIMUM VISIBILITY & LARGE IMAGES
    ====================================================== */
 
 .hero-rotating-section {
   position: relative;
   overflow: visible;
-  padding-top: calc(var(--header-height) + 40px) !important;
-  padding-bottom: 60px !important;
+  padding-top: calc(var(--header-height) + 20px) !important;
+  padding-bottom: 40px !important;
 }
 
 .hero-rotating-section .section-container {
   display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 48px !important;
+  grid-template-columns: 1.05fr 1.25fr !important;
+  gap: 36px !important;
   align-items: center !important;
   width: 100% !important;
-  max-width: 1400px !important;
+  max-width: 1440px !important;
   margin: 0 auto !important;
-  min-height: 540px !important;
+  min-height: 580px !important;
 }
 
 .hero-rotating-section .hero-text-block {
-  max-width: 680px !important;
+  max-width: 660px !important;
   text-align: left !important;
   z-index: 6 !important;
 }
 
 .hero-rotating-section .hero-image-block {
   width: 100% !important;
-  max-width: 680px !important;
-  margin: 0 auto !important;
+  max-width: 100% !important;
+  margin: 0 !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -5698,8 +5698,16 @@ p, .section-lead, .section-subtext {
 
 .hero-rotating-section .hero-passport-card-wrapper {
   width: 100% !important;
-  max-width: 640px !important;
-  transform: scale(1.1) !important;
+  max-width: 780px !important;
+  transform: scale(1.25) !important;
+  transform-origin: center right !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.hero-rotating-section .passport-shine-container {
+  width: 100% !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -5708,16 +5716,18 @@ p, .section-lead, .section-subtext {
 .hero-rotating-section .section-image {
   width: 100% !important;
   height: auto !important;
-  max-height: 540px !important;
+  max-height: 620px !important;
+  min-height: 420px !important;
   object-fit: contain !important;
   mix-blend-mode: screen !important;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8)) brightness(1.08) !important;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.9)) brightness(1.15) contrast(1.05) !important;
+  transform: scale(1.15) !important;
 }
 
 .hero-carousel-container {
   position: relative;
   width: 100%;
-  min-height: 560px;
+  min-height: 600px;
 }
 
 .hero-slide {
@@ -5847,9 +5857,10 @@ p, .section-lead, .section-subtext {
   }
   .hero-rotating-section .hero-passport-card-wrapper {
     transform: scale(1) !important;
-    max-width: 480px !important;
+    max-width: 520px !important;
   }
 }
+
 
 
 
