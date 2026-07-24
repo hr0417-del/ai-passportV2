@@ -5658,41 +5658,46 @@ p, .section-lead, .section-subtext {
 }
 
 /* ======================================================
-   HERO ROTATING CAROUSEL V2 — 45/55 CINEMATIC BRAND SPLIT
+   HERO ROTATING CAROUSEL V2 — 100% CLEAN FIXED GRID
    ====================================================== */
 
 .hero-rotating-section {
   position: relative;
   overflow: visible;
-  padding-top: calc(var(--header-height) + 16px) !important;
-  padding-bottom: 24px !important;
+  padding-top: calc(var(--header-height) + 24px) !important;
+  padding-bottom: 32px !important;
 }
 
-/* 45% Left Column / 55% Right Column Grid */
+/* Strict 48% Left / 52% Right Grid Layout (Zero Overlapping) */
 .hero-rotating-section .section-container {
   display: grid !important;
-  grid-template-columns: 45% 55% !important;
-  gap: 32px !important;
+  grid-template-columns: 48% 52% !important;
+  gap: 40px !important;
   align-items: center !important;
   width: 100% !important;
-  max-width: 1440px !important;
+  max-width: 1400px !important;
   margin: 0 auto !important;
-  min-height: 520px !important;
+  min-height: 500px !important;
+  position: relative !important;
 }
 
+/* Column 1: Left Text Block */
 .hero-rotating-section .hero-text-block {
-  max-width: 600px !important;
+  grid-column: 1 / 2 !important;
+  width: 100% !important;
+  max-width: 580px !important;
   text-align: left !important;
-  z-index: 6 !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
-/* Hero Text Block Rhythm & Fixed Height Layout */
+/* Hero Text Block Rhythm */
 .hero-rotating-section .webinar-badge {
   margin-bottom: 14px !important;
 }
 
 .hero-rotating-section .hero-title {
-  font-size: clamp(1.8rem, 3.2vw, 2.8rem) !important;
+  font-size: clamp(1.8rem, 3vw, 2.7rem) !important;
   font-weight: 700 !important;
   line-height: 1.15 !important;
   letter-spacing: -0.01em !important;
@@ -5701,7 +5706,7 @@ p, .section-lead, .section-subtext {
 }
 
 .hero-rotating-section .hero-tagline {
-  font-size: clamp(1.1rem, 1.8vw, 1.4rem) !important;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem) !important;
   font-weight: 600 !important;
   color: var(--color-gold) !important;
   margin-bottom: 12px !important;
@@ -5712,7 +5717,7 @@ p, .section-lead, .section-subtext {
   font-size: 0.95rem !important;
   line-height: 1.6 !important;
   color: var(--color-text-secondary) !important;
-  max-width: 540px !important;
+  max-width: 520px !important;
   margin-bottom: 16px !important;
 }
 
@@ -5767,24 +5772,26 @@ p, .section-lead, .section-subtext {
   gap: 14px;
 }
 
-/* Large Cinematic AI Passport Visual (55% Right Column) */
+/* Column 2: Right AI Passport Visual (Zero Left Shift) */
 .hero-rotating-section .hero-image-block {
+  grid-column: 2 / 3 !important;
   width: 100% !important;
   max-width: 100% !important;
-  margin: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  position: relative !important;
+  z-index: 5 !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  z-index: 5 !important;
-  margin-left: 0 !important;
   overflow: visible !important;
 }
 
 .hero-rotating-section .hero-passport-card-wrapper {
   width: 100% !important;
-  max-width: 780px !important;
-  transform: scale(1.22) !important;
-  transform-origin: center right !important;
+  max-width: 560px !important;
+  margin: 0 auto !important;
+  transform: none !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -5799,19 +5806,19 @@ p, .section-lead, .section-subtext {
 
 .hero-rotating-section .section-image {
   width: 100% !important;
+  max-width: 520px !important;
   height: auto !important;
-  max-height: 600px !important;
-  min-height: 420px !important;
+  max-height: 520px !important;
   object-fit: contain !important;
+  transform: none !important;
   mix-blend-mode: screen !important;
-  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.95)) brightness(1.15) contrast(1.05) !important;
-  transform: scale(1.12) !important;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95)) brightness(1.12) contrast(1.05) !important;
 }
 
 .hero-carousel-container {
   position: relative;
   width: 100%;
-  min-height: 540px;
+  min-height: 520px;
 }
 
 .hero-slide {
@@ -5836,18 +5843,20 @@ p, .section-lead, .section-subtext {
   z-index: 2;
 }
 
-/* Integrated Micro-Footer (Subtle Controls & Ticker, Zero Dead Space) */
+/* Integrated Micro-Footer (Centered Below Both Columns) */
 .hero-integrated-footer {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
-  margin-top: 20px;
-  padding-top: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   position: relative;
   z-index: 10;
+  width: 100%;
 }
+
 
 .hero-dots-container {
   display: inline-flex;
