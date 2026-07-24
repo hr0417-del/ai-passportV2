@@ -1081,8 +1081,8 @@ function initMobileMenu() {
 
 /* --- 11. Live Countdown Timer Logic --- */
 function initCountdowns() {
-  // Target Webinar Date: July 19, 2026, 14:00 IST (UTC+5:30) => 08:30 UTC
-  const targetDate = Date.UTC(2026, 6, 19, 8, 30, 0);
+  // Target Webinar Date: August 2, 2026, 14:00 IST (UTC+5:30) => 08:30 UTC
+  const targetDate = Date.UTC(2026, 7, 2, 8, 30, 0);
   
   const hoursContainers = document.querySelectorAll('.countdown-hours');
   const minsContainers = document.querySelectorAll('.countdown-minutes');
