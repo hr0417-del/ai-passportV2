@@ -5259,17 +5259,35 @@ p, .section-lead, .section-subtext {
   border: 1px solid rgba(255, 255, 255, 0.04);
   padding: 36px 28px;
   border-radius: 8px;
-  transition: border-color 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth), background-color 0.4s var(--transition-smooth);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s var(--transition-smooth), 
+              box-shadow 0.4s var(--transition-smooth), 
+              background-color 0.4s var(--transition-smooth);
 }
 
-.why-ai-card:hover {
+.why-ai-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.why-ai-card.visible:hover, .why-ai-card:hover {
   border-color: rgba(223, 207, 173, 0.2);
-  transform: translateY(-4px);
+  transform: translateY(-6px) !important;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
 }
+
+.why-ai-card:nth-child(1) { transition-delay: 0.00s, 0.00s, 0s, 0s, 0s; }
+.why-ai-card:nth-child(2) { transition-delay: 0.12s, 0.12s, 0s, 0s, 0s; }
+.why-ai-card:nth-child(3) { transition-delay: 0.24s, 0.24s, 0s, 0s, 0s; }
+.why-ai-card:nth-child(4) { transition-delay: 0.36s, 0.36s, 0s, 0s, 0s; }
+.why-ai-card:nth-child(5) { transition-delay: 0.48s, 0.48s, 0s, 0s, 0s; }
+.why-ai-card:nth-child(6) { transition-delay: 0.60s, 0.60s, 0s, 0s, 0s; }
 
 .why-ai-card h3 {
   font-family: var(--font-sans);

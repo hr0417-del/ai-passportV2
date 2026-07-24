@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initStatsCounters', initStatsCounters);
   initSafe('initCardSpotlight', initCardSpotlight);
   initSafe('initDynamicHero', initDynamicHero);
+  initSafe('initAIShiftCascade', initAIShiftCascade);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -275,44 +276,6 @@ function initSectionReveal() {
     if (section.classList.contains('hero-section')) return;
 
     // Custom reveals for V2.0 sections
-    if (section.id === 'why-ai') {
-      const headline = section.querySelector('#ai-shift-headline');
-      const cards = section.querySelectorAll('.why-ai-card');
-      
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 78%',
-          toggleActions: 'play none none reverse'
-        }
-      });
-
-      if (headline) {
-        tl.fromTo(headline,
-          { opacity: 0, y: 30 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.6, 
-            ease: 'power3.out',
-            onComplete: () => {
-              headline.classList.add('glitch-active');
-              setTimeout(() => headline.classList.remove('glitch-active'), 1400);
-            }
-          }
-        );
-      }
-
-      if (cards.length) {
-        tl.fromTo(cards,
-          { opacity: 0, y: 45 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' },
-          '-=0.3'
-        );
-      }
-      return;
-    }
-
     if (section.id === 'movement') {
       const header = section.querySelector('.movement-header');
       const audienceGrid = section.querySelector('.audience-grid');
@@ -1752,6 +1715,32 @@ function initDynamicHero() {
     }
   }, 7500); // Cycles every 7.5 seconds
 }
+
+
+/* --- 20. AI Shift Section Card Cascade Entrance --- */
+function initAIShiftCascade() {
+  const section = document.getElementById('why-ai');
+  if (!section) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const cards = section.querySelectorAll('.why-ai-card');
+        cards.forEach(card => card.classList.add('visible'));
+
+        const headline = section.querySelector('#ai-shift-headline');
+        if (headline) {
+          headline.classList.add('glitch-active');
+          setTimeout(() => headline.classList.remove('glitch-active'), 1400);
+        }
+        observer.unobserve(section);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  observer.observe(section);
+}
+
 
 
 
