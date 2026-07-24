@@ -1251,20 +1251,15 @@ function initTestimonialCarousel() {
   }
 }
 
-/* --- 11.5. Hero Rotating Carousel Engine --- */
+/* --- 11.5. Automatic Hero Crossfade Engine --- */
 function initHeroCarousel() {
-  const container = document.getElementById('hero-carousel-container');
+  const container = document.getElementById('hero-carousel-container') || document.getElementById('hero');
   const slides = document.querySelectorAll('.hero-slide');
-  const prevBtn = document.getElementById('hero-prev-btn');
-  const nextBtn = document.getElementById('hero-next-btn');
-  const dots = document.querySelectorAll('.hero-dot');
-  const tickerWords = document.querySelectorAll('.ticker-word');
   
   if (!slides || slides.length === 0) return;
 
   let currentSlide = 0;
   let autoRotateTimer = null;
-  let tickerIndex = 0;
 
   function goToSlide(index) {
     currentSlide = (index + slides.length) % slides.length;
@@ -1275,14 +1270,6 @@ function initHeroCarousel() {
         s.classList.remove('active');
       }
     });
-    dots.forEach((d, idx) => {
-      if (idx === currentSlide) {
-        d.classList.add('active');
-      } else {
-        d.classList.remove('active');
-      }
-    });
-    if (typeof playTickSound === 'function') playTickSound('tick');
   }
 
   function startAutoRotate() {
@@ -1296,50 +1283,12 @@ function initHeroCarousel() {
     if (autoRotateTimer) clearInterval(autoRotateTimer);
   }
 
-  // Ticker Sequence: Learn -> Build -> Verify -> Grow every 2.5s
-  function startTicker() {
-    if (!tickerWords || tickerWords.length === 0) return;
-    setInterval(() => {
-      tickerIndex = (tickerIndex + 1) % tickerWords.length;
-      tickerWords.forEach((w, idx) => {
-        if (idx === tickerIndex) {
-          w.classList.add('active');
-        } else {
-          w.classList.remove('active');
-        }
-      });
-    }, 2500);
-  }
-
-  // Event Listeners
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      goToSlide(currentSlide - 1);
-      startAutoRotate();
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      goToSlide(currentSlide + 1);
-      startAutoRotate();
-    });
-  }
-
-  dots.forEach((dot, idx) => {
-    dot.addEventListener('click', () => {
-      goToSlide(idx);
-      startAutoRotate();
-    });
-  });
-
   if (container) {
     container.addEventListener('mouseenter', stopAutoRotate);
     container.addEventListener('mouseleave', startAutoRotate);
   }
 
   startAutoRotate();
-  startTicker();
 }
 
 /* --- 12. Smooth Scroll-To-Top Loop Reset --- */
