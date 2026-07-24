@@ -1092,41 +1092,46 @@ function initCountdowns() {
   const secsContainers = document.querySelectorAll('.countdown-seconds');
   const wrappers = document.querySelectorAll('.countdown-display');
   
-  if (!wrappers.length) return;
+  if (!daysContainers.length && !wrappers.length) return;
   
-  // Inject countdown captions dynamically
-  wrappers.forEach(display => {
-    const parent = display.parentNode;
-    if (!parent) return;
-    const caption = parent.querySelector('.countdown-caption') || document.createElement('p');
-    caption.className = 'countdown-caption';
-    caption.textContent = 'Until the next live experience';
-    if (!parent.querySelector('.countdown-caption')) {
-      parent.insertBefore(caption, display.nextSibling);
-    }
-  });
-  
-  function adjustDigitSpans(container, length) {
-    let spans = container.querySelectorAll('.digit');
-    if (spans.length !== length) {
-      container.innerHTML = '';
-      for (let i = 0; i < length; i++) {
-        const span = document.createElement('span');
-        span.className = 'digit';
-        span.textContent = '0';
-        container.appendChild(span);
+  // Inject countdown captions dynamically for standalone countdown displays
+  if (wrappers.length) {
+    wrappers.forEach(display => {
+      const parent = display.parentNode;
+      if (!parent) return;
+      const caption = parent.querySelector('.countdown-caption') || document.createElement('p');
+      caption.className = 'countdown-caption';
+      caption.textContent = 'Until the next live experience';
+      if (!parent.querySelector('.countdown-caption')) {
+        parent.insertBefore(caption, display.nextSibling);
       }
-    }
+    });
   }
   
   function updateContainerDigits(container, valStr) {
+    if (!container) return;
+    // For inline badge text (e.g. strong elements inside hero live pill), directly update textContent
+    if (container.tagName === 'STRONG' || (container.tagName === 'SPAN' && !container.classList.contains('countdown-number'))) {
+      container.textContent = valStr;
+      return;
+    }
+    
     if (typeof gsap === 'undefined') {
       container.textContent = valStr;
       return;
     }
     try {
-      adjustDigitSpans(container, valStr.length);
-      const spans = container.querySelectorAll('.digit');
+      let spans = container.querySelectorAll('.digit');
+      if (spans.length !== valStr.length) {
+        container.innerHTML = '';
+        for (let i = 0; i < valStr.length; i++) {
+          const span = document.createElement('span');
+          span.className = 'digit';
+          span.textContent = '0';
+          container.appendChild(span);
+        }
+        spans = container.querySelectorAll('.digit');
+      }
       for (let i = 0; i < valStr.length; i++) {
         const char = valStr.charAt(i);
         const span = spans[i];
@@ -1157,6 +1162,10 @@ function initCountdowns() {
       wrappers.forEach(w => {
         w.innerHTML = "<div class='live-badge-wrapper'><span class='live-badge'>LIVE NOW</span> <span class='live-text'>Next Live National Webinar is in progress!</span></div>";
       });
+      daysContainers.forEach(el => el.textContent = '00');
+      hoursContainers.forEach(el => el.textContent = '00');
+      minsContainers.forEach(el => el.textContent = '00');
+      secsContainers.forEach(el => el.textContent = '00');
       return;
     }
     
