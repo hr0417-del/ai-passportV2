@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initAIDemoTabs', initAIDemoTabs);
   initSafe('initStatsCounters', initStatsCounters);
   initSafe('initCardSpotlight', initCardSpotlight);
+  initSafe('initDynamicHero', initDynamicHero);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -1670,4 +1671,45 @@ function initCardSpotlight() {
     });
   });
 }
+
+/* --- 19. Dynamic Rotating Hero Copy Loop --- */
+function initDynamicHero() {
+  const titleEl = document.getElementById('hero-dynamic-title');
+  const leadEl = document.getElementById('hero-dynamic-lead');
+  if (!titleEl || !leadEl) return;
+
+  const slides = [
+    {
+      title: "Don't Just Use AI. Build With It.",
+      lead: "AI Passport is your lifelong learning identity. Discover how AI is reshaping the world, attend live mentor sessions to create your first projects, and unlock professional certificates that showcase your actual skills."
+    },
+    {
+      title: "Master the AI Economy.",
+      lead: "Evolve into a specialized builder. Learn Python scripting, relational data science, full-stack endpoints, and security auditing through Ekaakshar Academy's 6-month professional tracks."
+    },
+    {
+      title: "Get More Done. Automate Everything.",
+      lead: "Save hours of daily prep. Design custom lesson worksheets, query contracts, summarize document archives, and deploy serverless webhooks in Ekaakshar's 4-week applied executive tracks."
+    }
+  ];
+
+  let idx = 0;
+  setInterval(() => {
+    idx = (idx + 1) % slides.length;
+    
+    if (typeof gsap !== 'undefined') {
+      gsap.timeline()
+        .to([titleEl, leadEl], { opacity: 0, y: -12, duration: 0.4, ease: 'power2.in', stagger: 0.05 })
+        .call(() => {
+          titleEl.textContent = slides[idx].title;
+          leadEl.textContent = slides[idx].lead;
+        })
+        .to([titleEl, leadEl], { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.08 });
+    } else {
+      titleEl.textContent = slides[idx].title;
+      leadEl.textContent = slides[idx].lead;
+    }
+  }, 7500); // Cycles every 7.5 seconds
+}
+
 
