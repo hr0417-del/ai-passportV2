@@ -114,73 +114,164 @@
   <!-- Smooth Scrolling Container -->
   <main class="scroll-container" id="scroll-container">
 
-    <!-- SECTION 1 — HERO -->
-    <section class="section hero-section" id="hero">
-      <div class="section-container">
-        <div class="hero-text-block">
-          <div class="webinar-badge" style="margin-bottom: 20px;">
-            <span class="badge-dot"></span>
-            <span class="badge-text" style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;">
-              🇮🇳 India's Practical AI Learning Ecosystem
-            </span>
-          </div>
-          <h1 id="hero-dynamic-title" style="font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700; line-height: 1.1; margin-bottom: 16px;">THE FUTURE WON'T WAIT. NEITHER SHOULD YOU.</h1>
-          
-          <h2 class="section-lead" id="hero-dynamic-lead" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 600; color: var(--color-gold); margin-bottom: 20px;">Don't Just Learn AI. Build With It.</h2>
-          
-          <p class="section-subtext" style="font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary); max-width: 620px; margin-bottom: 24px;">
-            The AI era belongs to people who can turn ideas into action. AI Passport helps students, professionals, educators, and businesses build practical AI skills through live learning, real-world projects, and verified credentials. Whether you're beginning your AI journey or advancing your career, every AI Passport programme is designed to help you build something that matters.
-          </p>
-          
-          <!-- Live Countdown Clock -->
-          <div class="countdown-wrapper">
-            <p class="countdown-date-label">📅 August 2 &nbsp;·&nbsp; 2:00 PM IST</p>
-            <div class="countdown-display">
-              <div class="countdown-item">
-                <span class="countdown-number countdown-days">00</span>
-                <span class="countdown-label">DAYS</span>
+    <!-- SECTION 1 — ROTATING HERO -->
+    <section class="section hero-section hero-rotating-section" id="hero">
+      
+      <!-- Carousel Track Container -->
+      <div class="hero-carousel-container" id="hero-carousel-container">
+        
+        <!-- Slide 1: THE FUTURE -->
+        <div class="hero-slide active" data-slide="1">
+          <div class="section-container">
+            <div class="hero-text-block">
+              <div class="webinar-badge" style="margin-bottom: 20px;">
+                <span class="badge-dot"></span>
+                <span class="badge-text" style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;">
+                  🇮🇳 India's Practical AI Learning Ecosystem
+                </span>
               </div>
-              <div class="countdown-divider">:</div>
-              <div class="countdown-item">
-                <span class="countdown-number countdown-hours">00</span>
-                <span class="countdown-label">HOURS</span>
+              <h1 class="hero-title" style="font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 16px;">THE FUTURE WON'T WAIT. NEITHER SHOULD YOU.</h1>
+              <h2 class="hero-tagline" style="font-size: clamp(1.3rem, 2.2vw, 2rem); font-weight: 600; color: var(--color-gold); margin-bottom: 20px;">Don't Just Learn AI. Build With It.</h2>
+              <p class="hero-body-text" style="font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary); max-width: 620px; margin-bottom: 24px;">
+                Every generation is shaped by a defining technology. This generation will be shaped by Artificial Intelligence. AI Passport helps students, professionals, educators, and businesses build practical AI capability through live learning, real-world projects, and verified credentials—so they're ready to thrive in an AI-powered world.
+              </p>
+
+              <!-- Live Countdown Clock -->
+              <div class="countdown-wrapper">
+                <p class="countdown-date-label">📅 August 2 &nbsp;·&nbsp; 2:00 PM IST</p>
+                <div class="countdown-display">
+                  <div class="countdown-item"><span class="countdown-number countdown-days">00</span><span class="countdown-label">DAYS</span></div>
+                  <div class="countdown-divider">:</div>
+                  <div class="countdown-item"><span class="countdown-number countdown-hours">00</span><span class="countdown-label">HOURS</span></div>
+                  <div class="countdown-divider">:</div>
+                  <div class="countdown-item"><span class="countdown-number countdown-minutes">00</span><span class="countdown-label">MINUTES</span></div>
+                  <div class="countdown-divider">:</div>
+                  <div class="countdown-item"><span class="countdown-number countdown-seconds">00</span><span class="countdown-label">SECONDS</span></div>
+                </div>
               </div>
-              <div class="countdown-divider">:</div>
-              <div class="countdown-item">
-                <span class="countdown-number countdown-minutes">00</span>
-                <span class="countdown-label">MINUTES</span>
-              </div>
-              <div class="countdown-divider">:</div>
-              <div class="countdown-item">
-                <span class="countdown-number countdown-seconds">00</span>
-                <span class="countdown-label">SECONDS</span>
+
+              <div class="btn-group" style="margin-top: 28px;">
+                <a href="live.html" class="btn btn-primary">Start Building Today</a>
+                <a href="academy.html" class="btn btn-secondary">Explore Programmes</a>
               </div>
             </div>
-          </div>
-
-          <div class="btn-group" style="margin-top: 32px;">
-            <a href="live.html" class="btn btn-primary">Start Building Live</a>
-            <a href="academy.html" class="btn btn-secondary">Explore AI Passport Academy</a>
-          </div>
-
-          <!-- Segmented Router Switcher -->
-          <div class="ecosystem-segment-control" style="display: inline-flex; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 4px; border-radius: 30px; margin-top: 24px;">
-            <a href="live.html" class="segment-btn active" style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-gold); padding: 8px 18px; border-radius: 20px; text-decoration: none; transition: background 0.3s;">AI Passport Live (₹999)</a>
-            <a href="academy.html" class="segment-btn" style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-secondary); padding: 8px 18px; border-radius: 20px; text-decoration: none; transition: background 0.3s;">AI Passport Academy</a>
+            
+            <div class="hero-image-block">
+              <div class="image-wrapper hero-passport-card-wrapper">
+                <div class="hero-passport-glow"></div>
+                <div class="passport-shine-container">
+                  <img src="FRAME 1.webp" alt="AI Passport Floating" class="section-image" loading="eager">
+                  <div class="passport-shine-sweep"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        
-        <div class="hero-image-block">
-          <div class="image-wrapper hero-passport-card-wrapper">
-            <div class="hero-passport-glow"></div>
-            <div class="passport-shine-container">
-              <img src="FRAME 1.webp" alt="AI Passport Floating" class="section-image" loading="eager">
-              <div class="passport-shine-sweep"></div>
+
+        <!-- Slide 2: THE BUILDER -->
+        <div class="hero-slide" data-slide="2">
+          <div class="section-container">
+            <div class="hero-text-block">
+              <div class="webinar-badge" style="margin-bottom: 20px;">
+                <span class="badge-dot" style="background: var(--color-blue); box-shadow: 0 0 10px var(--color-blue);"></span>
+                <span class="badge-text" style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; color: var(--color-blue);">
+                  🚀 Learn • Build • Verify
+                </span>
+              </div>
+              <h1 class="hero-title" style="font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 16px;">BUILD AI. BUILD YOUR FUTURE.</h1>
+              <h2 class="hero-tagline" style="font-size: clamp(1.3rem, 2.2vw, 2rem); font-weight: 600; color: var(--color-gold); margin-bottom: 20px;">Don't Just Learn AI. Build With It.</h2>
+              <p class="hero-body-text" style="font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary); max-width: 620px; margin-bottom: 28px;">
+                Go beyond watching tutorials. Create real AI projects. Automate workflows. Solve practical problems. Build a portfolio that demonstrates what you can actually do. Learning at AI Passport is measured by what you build—not just what you complete.
+              </p>
+
+              <div class="btn-group" style="margin-top: 32px;">
+                <a href="academy.html" class="btn btn-primary">Explore AI Passport Academy</a>
+                <a href="passport.html" class="btn btn-secondary">View Student Projects</a>
+              </div>
             </div>
-            <div class="qr-pulse-indicator" id="qr-pulse-hero"></div>
+            
+            <div class="hero-image-block">
+              <div class="image-wrapper hero-passport-card-wrapper">
+                <div class="hero-passport-glow" style="background: radial-gradient(circle, rgba(0,82,255,0.2) 0%, transparent 70%);"></div>
+                <div class="passport-shine-container">
+                  <img src="FRAME 4.webp" alt="AI Passport Academy Workstation" class="section-image" loading="lazy">
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <!-- Slide 3: THE PASSPORT -->
+        <div class="hero-slide" data-slide="3">
+          <div class="section-container">
+            <div class="hero-text-block">
+              <div class="webinar-badge" style="margin-bottom: 20px;">
+                <span class="badge-dot"></span>
+                <span class="badge-text" style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;">
+                  🛂 Your Lifelong AI Credential
+                </span>
+              </div>
+              <h1 class="hero-title" style="font-size: clamp(2rem, 4vw, 3.6rem); font-weight: 700; line-height: 1.1; margin-bottom: 16px;">YOUR AI JOURNEY DESERVES MORE THAN A CERTIFICATE.</h1>
+              <h2 class="hero-tagline" style="font-size: clamp(1.3rem, 2.2vw, 2rem); font-weight: 600; color: var(--color-gold); margin-bottom: 20px;">Earn an AI Passport. Build a Lifetime of Capability.</h2>
+              <p class="hero-body-text" style="font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary); max-width: 620px; margin-bottom: 28px;">
+                Every project. Every achievement. Every milestone. Your AI Passport grows with you—creating a lifelong record of your AI skills, verified credentials, and real-world accomplishments. Carry your capability wherever opportunity takes you.
+              </p>
+
+              <div class="btn-group" style="margin-top: 32px;">
+                <a href="passport.html" class="btn btn-primary">Get Your AI Passport</a>
+                <a href="passport.html" class="btn btn-secondary">Learn More</a>
+              </div>
+            </div>
+            
+            <div class="hero-image-block">
+              <div class="image-wrapper hero-passport-card-wrapper">
+                <div class="hero-passport-glow"></div>
+                <div class="passport-shine-container">
+                  <img src="FRAME 2.webp" alt="Physical & Digital AI Passport" class="section-image" loading="lazy">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Carousel Navigation Controls & Indicators -->
+      <div class="hero-controls-bar">
+        <button class="hero-arrow-btn hero-prev-btn" id="hero-prev-btn" aria-label="Previous Slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+
+        <div class="hero-dots-container" id="hero-dots-container">
+          <button class="hero-dot active" data-slide-index="0" aria-label="Slide 1"></button>
+          <button class="hero-dot" data-slide-index="1" aria-label="Slide 2"></button>
+          <button class="hero-dot" data-slide-index="2" aria-label="Slide 3"></button>
+        </div>
+
+        <button class="hero-arrow-btn hero-next-btn" id="hero-next-btn" aria-label="Next Slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Synchronized Sequential Pillar Ticker -->
+      <div class="hero-pillar-ticker-wrap">
+        <div class="hero-pillar-ticker" id="hero-pillar-ticker">
+          <span class="ticker-word active" data-word="0">Learn</span>
+          <span class="ticker-dot">•</span>
+          <span class="ticker-word" data-word="1">Build</span>
+          <span class="ticker-dot">•</span>
+          <span class="ticker-word" data-word="2">Verify</span>
+          <span class="ticker-dot">•</span>
+          <span class="ticker-word" data-word="3">Grow</span>
         </div>
       </div>
+
     </section>
 
     <!-- SECTION 2 — WHAT IS AI PASSPORT? -->
