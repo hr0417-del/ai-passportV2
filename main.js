@@ -1737,6 +1737,8 @@ function initAIShiftCascade() {
         observer.unobserve(section);
       }
     });
+  }, { threshold: 0.15 });
+
   observer.observe(section);
 }
 
