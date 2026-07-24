@@ -1251,33 +1251,35 @@ function initTestimonialCarousel() {
   }
 }
 
-/* --- 11.5. Hero Pathway Carousel Engine --- */
+/* --- 11.5. Hero Rotating Carousel Engine --- */
 function initHeroCarousel() {
-  const pathwayCards = document.querySelectorAll('.hero-pathway-card');
+  const container = document.getElementById('hero-carousel-container');
+  const slides = document.querySelectorAll('.hero-slide');
+  const prevBtn = document.getElementById('hero-prev-btn');
+  const nextBtn = document.getElementById('hero-next-btn');
   const dots = document.querySelectorAll('.hero-dot');
   const tickerWords = document.querySelectorAll('.ticker-word');
-  const track = document.getElementById('hero-pathways-track');
   
-  if (!pathwayCards || pathwayCards.length === 0) return;
+  if (!slides || slides.length === 0) return;
 
-  let currentCard = 0;
+  let currentSlide = 0;
   let autoRotateTimer = null;
   let tickerIndex = 0;
 
-  function goToPathway(index) {
-    currentCard = (index + pathwayCards.length) % pathwayCards.length;
-    pathwayCards.forEach((card, idx) => {
-      if (idx === currentCard) {
-        card.classList.add('active');
+  function goToSlide(index) {
+    currentSlide = (index + slides.length) % slides.length;
+    slides.forEach((s, idx) => {
+      if (idx === currentSlide) {
+        s.classList.add('active');
       } else {
-        card.classList.remove('active');
+        s.classList.remove('active');
       }
     });
-    dots.forEach((dot, idx) => {
-      if (idx === currentCard) {
-        dot.classList.add('active');
+    dots.forEach((d, idx) => {
+      if (idx === currentSlide) {
+        d.classList.add('active');
       } else {
-        dot.classList.remove('active');
+        d.classList.remove('active');
       }
     });
     if (typeof playTickSound === 'function') playTickSound('tick');
@@ -1286,15 +1288,15 @@ function initHeroCarousel() {
   function startAutoRotate() {
     stopAutoRotate();
     autoRotateTimer = setInterval(() => {
-      goToPathway(currentCard + 1);
-    }, 6000);
+      goToSlide(currentSlide + 1);
+    }, 7000);
   }
 
   function stopAutoRotate() {
     if (autoRotateTimer) clearInterval(autoRotateTimer);
   }
 
-  // Sequential Ticker: Learn -> Build -> Verify -> Grow every 2.5s
+  // Ticker Sequence: Learn -> Build -> Verify -> Grow every 2.5s
   function startTicker() {
     if (!tickerWords || tickerWords.length === 0) return;
     setInterval(() => {
@@ -1309,24 +1311,31 @@ function initHeroCarousel() {
     }, 2500);
   }
 
-  // Click listeners on dots and cards
+  // Event Listeners
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      goToSlide(currentSlide - 1);
+      startAutoRotate();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      goToSlide(currentSlide + 1);
+      startAutoRotate();
+    });
+  }
+
   dots.forEach((dot, idx) => {
     dot.addEventListener('click', () => {
-      goToPathway(idx);
+      goToSlide(idx);
       startAutoRotate();
     });
   });
 
-  pathwayCards.forEach((card, idx) => {
-    card.addEventListener('click', () => {
-      goToPathway(idx);
-      startAutoRotate();
-    });
-  });
-
-  if (track) {
-    track.addEventListener('mouseenter', stopAutoRotate);
-    track.addEventListener('mouseleave', startAutoRotate);
+  if (container) {
+    container.addEventListener('mouseenter', stopAutoRotate);
+    container.addEventListener('mouseleave', startAutoRotate);
   }
 
   startAutoRotate();
