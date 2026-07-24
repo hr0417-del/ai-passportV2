@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initStatsCounters', initStatsCounters);
   initSafe('initCardSpotlight', initCardSpotlight);
   initSafe('initDynamicHero', initDynamicHero);
+  initSafe('initAIShiftAnimations', initAIShiftAnimations);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -1716,3 +1717,71 @@ function initDynamicHero() {
 }
 
 
+/* --- AI SHIFT SECTION ANIMATIONS (A+B) --- */
+function initAIShiftAnimations() {
+  const headline = document.getElementById('ai-shift-headline');
+  const cards = document.querySelectorAll('#why-ai .why-ai-card');
+
+  if (!headline && !cards.length) return;
+
+  /* --- OPTION B: Glitch text effect on headline --- */
+  if (headline) {
+    // Set initial invisible state
+    headline.style.opacity = '0';
+
+    if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
+      ScrollTrigger.create({
+        trigger: '#why-ai',
+        start: 'top 72%',
+        once: true,
+        onEnter: () => {
+          // Fade in first
+          gsap.to(headline, { opacity: 1, duration: 0.01 });
+          // Trigger glitch class
+          headline.classList.add('glitch-active');
+          // Remove class after animation completes so it doesn't re-run
+          setTimeout(() => {
+            headline.classList.remove('glitch-active');
+          }, 1400);
+        }
+      });
+    } else {
+      // Fallback: no GSAP, just show immediately
+      headline.style.opacity = '1';
+    }
+  }
+
+  /* --- OPTION A: Staggered card reveal --- */
+  if (cards.length) {
+    // Set all cards to invisible start state
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(36px)';
+      card.style.transition = 'none';
+    });
+
+    if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
+      ScrollTrigger.create({
+        trigger: '#why-ai .why-ai-grid',
+        start: 'top 78%',
+        once: true,
+        onEnter: () => {
+          gsap.to(cards, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            stagger: 0.1,
+            clearProps: 'transform,opacity,transition'
+          });
+        }
+      });
+    } else {
+      // Fallback: reveal all immediately
+      cards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      });
+    }
+  }
+}

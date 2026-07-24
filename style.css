@@ -5570,3 +5570,30 @@ p, .section-lead, .section-subtext {
   gap: 6px;
 }
 
+
+/* ======================================================
+   AI SHIFT SECTION - GLITCH HEADLINE + STAGGER CARDS
+   ====================================================== */
+
+@keyframes glitchFlicker {
+  0%   { text-shadow: none; clip-path: none; opacity: 0; letter-spacing: 0.08em; }
+  5%   { opacity: 1; text-shadow: 2px 0 0 rgba(0,82,255,0.8), -2px 0 0 rgba(223,207,173,0.8); clip-path: inset(10% 0 80% 0); letter-spacing: 0.24em; }
+  10%  { text-shadow: none; clip-path: inset(60% 0 20% 0); letter-spacing: 0.04em; }
+  15%  { text-shadow: -3px 0 0 rgba(0,82,255,0.6), 3px 0 0 rgba(223,207,173,0.6); clip-path: none; letter-spacing: 0.08em; }
+  22%  { opacity: 0.7; text-shadow: 4px 0 0 rgba(0,82,255,0.5), -4px 0 0 rgba(255,80,80,0.4); clip-path: inset(30% 0 55% 0); }
+  30%  { text-shadow: none; clip-path: none; opacity: 1; letter-spacing: 0.08em; }
+  42%  { text-shadow: 1px 0 0 rgba(0,82,255,0.3), -1px 0 0 rgba(223,207,173,0.3); }
+  55%  { text-shadow: none; clip-path: inset(45% 0 40% 0); opacity: 0.9; }
+  65%  { clip-path: none; opacity: 1; text-shadow: none; }
+  82%  { text-shadow: 1px 0 0 rgba(0,82,255,0.1), -1px 0 0 rgba(223,207,173,0.1); }
+  100% { text-shadow: none; clip-path: none; opacity: 1; letter-spacing: normal; }
+}
+
+#ai-shift-headline.glitch-active {
+  animation: glitchFlicker 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: text-shadow, clip-path, opacity;
+}
+
+#why-ai .why-ai-card {
+  will-change: transform, opacity;
+}
