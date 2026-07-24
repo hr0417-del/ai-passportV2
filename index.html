@@ -114,93 +114,107 @@
   <!-- Smooth Scrolling Container -->
   <main class="scroll-container" id="scroll-container">
 
-    <!-- SECTION 1 — 50/50 HERO + BELOW ROTATING CAROUSEL -->
-    <section class="section hero-section hero-5050-section" id="hero">
+    <!-- SECTION 1 — HERO ARCHITECTURE (50/50 STATIC HERO + BELOW-HERO PATHWAY CAROUSEL) -->
+    <section class="section hero-section hero-architect-section" id="hero">
       
-      <!-- Top 50/50 Hero Container -->
-      <div class="section-container hero-top-container">
-        
-        <!-- Left 50%: Hero Text & CTAs (Static, No Shift) -->
-        <div class="hero-text-block">
-          <div class="webinar-badge">
-            <span class="badge-dot"></span>
-            <span class="badge-text">🇮🇳 India's Practical AI Learning Ecosystem</span>
-          </div>
-          <h1 class="hero-title">THE FUTURE WON'T WAIT.<br>NEITHER SHOULD YOU.</h1>
-          <h2 class="hero-tagline">Don't Just Learn AI. Build With It.</h2>
-          <p class="hero-body-text">
-            Every generation is shaped by a defining technology. This generation will be shaped by Artificial Intelligence. AI Passport helps students, professionals, educators, and businesses build practical AI capability through live learning, real-world projects, and verified credentials.
-          </p>
+      <!-- PART 1: MAIN 50/50 HERO SPLIT (Rock-Solid Top Grid — Zero Overlapping) -->
+      <div class="hero-split-container">
+        <div class="section-container">
+          
+          <!-- Left 50%: Hero Copy & Conversion Action -->
+          <div class="hero-text-block">
+            <div class="webinar-badge">
+              <span class="badge-dot"></span>
+              <span class="badge-text">🇮🇳 India's Practical AI Learning Ecosystem</span>
+            </div>
+            <h1 class="hero-title">THE FUTURE WON'T WAIT.<br>NEITHER SHOULD YOU.</h1>
+            <h2 class="hero-tagline">Don't Just Learn AI. Build With It.</h2>
+            <p class="hero-body-text">
+              The AI era belongs to people who can turn ideas into action. AI Passport helps students, professionals, educators, and businesses build practical AI capability through live learning, real-world projects, and verified credentials.
+            </p>
 
-          <!-- Live Countdown Badge -->
-          <div class="hero-live-pill">
-            <span class="hero-live-dot"></span>
-            <span class="hero-live-text">📅 Live Workshop &nbsp;·&nbsp; August 2, 2:00 PM IST &nbsp;·&nbsp; <strong class="countdown-days">00</strong>d : <strong class="countdown-hours">00</strong>h : <strong class="countdown-minutes">00</strong>m : <strong class="countdown-seconds">00</strong>s</span>
-          </div>
+            <!-- Compact Live Countdown Badge -->
+            <div class="hero-live-pill">
+              <span class="hero-live-dot"></span>
+              <span class="hero-live-text">📅 Live Workshop &nbsp;·&nbsp; August 2, 2:00 PM IST &nbsp;·&nbsp; <strong class="countdown-days">00</strong>d : <strong class="countdown-hours">00</strong>h : <strong class="countdown-minutes">00</strong>m : <strong class="countdown-seconds">00</strong>s</span>
+            </div>
 
-          <div class="btn-group">
-            <a href="live.html" class="btn btn-primary">Start Building Today</a>
-            <a href="academy.html" class="btn btn-secondary">Explore Programmes</a>
-          </div>
-        </div>
-
-        <!-- Right 50%: AI Passport Visual (Static, Clean Centerpiece) -->
-        <div class="hero-image-block">
-          <div class="image-wrapper hero-passport-card-wrapper">
-            <div class="hero-passport-glow"></div>
-            <div class="passport-shine-container">
-              <img src="FRAME 1.webp" alt="AI Passport 3D Visual" class="section-image" loading="eager">
+            <div class="btn-group">
+              <a href="live.html" class="btn btn-primary">Start Building Live</a>
+              <a href="academy.html" class="btn btn-secondary">Explore AI Passport Academy</a>
             </div>
           </div>
-        </div>
+          
+          <!-- Right 50%: Massive 3D AI Passport Brand Asset -->
+          <div class="hero-image-block">
+            <div class="image-wrapper hero-passport-card-wrapper">
+              <div class="hero-passport-glow"></div>
+              <div class="passport-shine-container">
+                <img src="FRAME 1.webp" alt="AI Passport Floating 3D Credential" class="section-image" loading="eager">
+              </div>
+            </div>
+          </div>
 
+        </div>
       </div>
 
-      <!-- Below-Hero Rotating Carousel (3 Narrative Cards) -->
-      <div class="hero-below-carousel">
-        <div class="below-carousel-header">
-          <span class="section-tag">DISCOVER THE AI PASSPORT ECOSYSTEM</span>
-        </div>
+      <!-- PART 2: BELOW-HERO 3-PATHWAY INTERACTIVE CAROUSEL -->
+      <div class="hero-pathway-carousel-wrapper">
+        <div class="movement-inner">
+          
+          <div class="hero-pathways-track" id="hero-pathways-track">
+            
+            <!-- Pathway Card 1: Live Learning -->
+            <div class="hero-pathway-card active" data-pathway="0">
+              <div class="pathway-card-badge">01. LIVE LEARNING</div>
+              <h3 class="pathway-card-title">AI Passport Live</h3>
+              <p class="pathway-card-desc">Interactive 2-hour live building experience. Transform zero code into working AI workflows in a single session.</p>
+              <div class="pathway-card-footer">
+                <a href="live.html" class="pathway-link">Start Live Session (₹999) &rarr;</a>
+              </div>
+            </div>
 
-        <div class="below-carousel-grid" id="below-carousel-grid">
-          <!-- Card 1: THE FUTURE -->
-          <div class="below-carousel-card active" data-slide="0">
-            <div class="card-badge">01 · THE FUTURE</div>
-            <h3>Why AI Capability Matters Today</h3>
-            <p>AI is transforming every industry. AI Passport empowers learners to move from passive consumers to active builders using live learning and real-world tools.</p>
-            <a href="live.html" class="card-link">Explore Live Learning &rarr;</a>
+            <!-- Pathway Card 2: Practical Projects -->
+            <div class="hero-pathway-card" data-pathway="1">
+              <div class="pathway-card-badge">02. PRACTICAL PROJECTS</div>
+              <h3 class="pathway-card-title">AI Passport Academy</h3>
+              <p class="pathway-card-desc">Deep mastery programmes for students, educators, and enterprise teams. Measured by what you build.</p>
+              <div class="pathway-card-footer">
+                <a href="academy.html" class="pathway-link">Explore Academy &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Pathway Card 3: Lifelong Credential -->
+            <div class="hero-pathway-card" data-pathway="2">
+              <div class="pathway-card-badge">03. LIFELONG CREDENTIAL</div>
+              <h3 class="pathway-card-title">Your AI Passport</h3>
+              <p class="pathway-card-desc">Verifiable digital ledger, skill badges, physical passport, and project portfolio that grows with your capability.</p>
+              <div class="pathway-card-footer">
+                <a href="passport.html" class="pathway-link">Get Your AI Passport &rarr;</a>
+              </div>
+            </div>
+
           </div>
 
-          <!-- Card 2: THE BUILDER -->
-          <div class="below-carousel-card" data-slide="1">
-            <div class="card-badge blue">02 · THE BUILDER</div>
-            <h3>Learn • Build • Verify</h3>
-            <p>Go beyond watching tutorials. Build real projects, automate repetitive workflows, and assemble a verifiable portfolio that proves what you can actually do.</p>
-            <a href="academy.html" class="card-link">Explore Academy &rarr;</a>
+          <!-- Subtle Carousel Controls -->
+          <div class="hero-integrated-footer">
+            <div class="hero-dots-container" id="hero-dots-container">
+              <button class="hero-dot active" data-slide-index="0" aria-label="Pathway 1"></button>
+              <button class="hero-dot" data-slide-index="1" aria-label="Pathway 2"></button>
+              <button class="hero-dot" data-slide-index="2" aria-label="Pathway 3"></button>
+            </div>
+
+            <div class="hero-pillar-ticker" id="hero-pillar-ticker">
+              <span class="ticker-word active" data-word="0">Learn</span>
+              <span class="ticker-dot">•</span>
+              <span class="ticker-word" data-word="1">Build</span>
+              <span class="ticker-dot">•</span>
+              <span class="ticker-word" data-word="2">Verify</span>
+              <span class="ticker-dot">•</span>
+              <span class="ticker-word" data-word="3">Grow</span>
+            </div>
           </div>
 
-          <!-- Card 3: THE PASSPORT -->
-          <div class="below-carousel-card" data-slide="2">
-            <div class="card-badge">03 · THE PASSPORT</div>
-            <h3>Your Lifelong AI Credential</h3>
-            <p>Every project, milestone, and verified achievement is recorded on your AI Passport—a permanent digital credential that grows throughout your career.</p>
-            <a href="passport.html" class="card-link">Get Your AI Passport &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Carousel Micro-Controls -->
-        <div class="below-carousel-controls">
-          <button class="below-arrow-btn" id="below-prev-btn" aria-label="Previous">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-          </button>
-          <div class="below-dots-container" id="below-dots-container">
-            <button class="below-dot active" data-index="0" aria-label="Card 1"></button>
-            <button class="below-dot" data-index="1" aria-label="Card 2"></button>
-            <button class="below-dot" data-index="2" aria-label="Card 3"></button>
-          </div>
-          <button class="below-arrow-btn" id="below-next-btn" aria-label="Next">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </button>
         </div>
       </div>
 

@@ -1251,26 +1251,34 @@ function initTestimonialCarousel() {
   }
 }
 
-/* --- 11.5. Below-Hero Rotating Carousel Engine --- */
+/* --- 11.5. Hero Pathway Carousel Engine --- */
 function initHeroCarousel() {
-  const cards = document.querySelectorAll('.below-carousel-card');
-  const prevBtn = document.getElementById('below-prev-btn');
-  const nextBtn = document.getElementById('below-next-btn');
-  const dots = document.querySelectorAll('.below-dot');
-  const grid = document.getElementById('below-carousel-grid');
+  const pathwayCards = document.querySelectorAll('.hero-pathway-card');
+  const dots = document.querySelectorAll('.hero-dot');
+  const tickerWords = document.querySelectorAll('.ticker-word');
+  const track = document.getElementById('hero-pathways-track');
   
-  if (!cards || cards.length === 0) return;
+  if (!pathwayCards || pathwayCards.length === 0) return;
 
   let currentCard = 0;
   let autoRotateTimer = null;
+  let tickerIndex = 0;
 
-  function goToCard(index) {
-    currentCard = (index + cards.length) % cards.length;
-    cards.forEach((c, idx) => {
-      c.classList.toggle('active', idx === currentCard);
+  function goToPathway(index) {
+    currentCard = (index + pathwayCards.length) % pathwayCards.length;
+    pathwayCards.forEach((card, idx) => {
+      if (idx === currentCard) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
     });
-    dots.forEach((d, idx) => {
-      d.classList.toggle('active', idx === currentCard);
+    dots.forEach((dot, idx) => {
+      if (idx === currentCard) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
     });
     if (typeof playTickSound === 'function') playTickSound('tick');
   }
@@ -1278,7 +1286,7 @@ function initHeroCarousel() {
   function startAutoRotate() {
     stopAutoRotate();
     autoRotateTimer = setInterval(() => {
-      goToCard(currentCard + 1);
+      goToPathway(currentCard + 1);
     }, 6000);
   }
 
@@ -1286,33 +1294,43 @@ function initHeroCarousel() {
     if (autoRotateTimer) clearInterval(autoRotateTimer);
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      goToCard(currentCard - 1);
-      startAutoRotate();
-    });
+  // Sequential Ticker: Learn -> Build -> Verify -> Grow every 2.5s
+  function startTicker() {
+    if (!tickerWords || tickerWords.length === 0) return;
+    setInterval(() => {
+      tickerIndex = (tickerIndex + 1) % tickerWords.length;
+      tickerWords.forEach((w, idx) => {
+        if (idx === tickerIndex) {
+          w.classList.add('active');
+        } else {
+          w.classList.remove('active');
+        }
+      });
+    }, 2500);
   }
 
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      goToCard(currentCard + 1);
-      startAutoRotate();
-    });
-  }
-
+  // Click listeners on dots and cards
   dots.forEach((dot, idx) => {
     dot.addEventListener('click', () => {
-      goToCard(idx);
+      goToPathway(idx);
       startAutoRotate();
     });
   });
 
-  if (grid) {
-    grid.addEventListener('mouseenter', stopAutoRotate);
-    grid.addEventListener('mouseleave', startAutoRotate);
+  pathwayCards.forEach((card, idx) => {
+    card.addEventListener('click', () => {
+      goToPathway(idx);
+      startAutoRotate();
+    });
+  });
+
+  if (track) {
+    track.addEventListener('mouseenter', stopAutoRotate);
+    track.addEventListener('mouseleave', startAutoRotate);
   }
 
   startAutoRotate();
+  startTicker();
 }
 
 /* --- 12. Smooth Scroll-To-Top Loop Reset --- */
