@@ -6017,31 +6017,144 @@ p, .section-lead, .section-subtext {
    AI PASSPORT V3 MASTER DESIGN SYSTEM & MODULES
    ====================================================== */
 
-/* Section 2: Framework Grid */
+/* Section 2: Crazy Framework Grid Animation System */
+.framework-section {
+  position: relative;
+}
+
+.framework-energy-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(rgba(223, 207, 173, 0.08) 1px, transparent 1px),
+    radial-gradient(rgba(0, 82, 255, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.framework-grid-container {
+  position: relative;
+  width: 100%;
+  perspective: 1200px;
+}
+
+.framework-laser-track {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 90%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(223,207,173,0.1), rgba(0,82,255,0.2), rgba(223,207,173,0.1));
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.framework-laser-pulse {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 120px;
+  height: 8px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), #ffffff, var(--color-gold), transparent);
+  border-radius: 4px;
+  filter: drop-shadow(0 0 12px var(--color-gold));
+  animation: laser-pulse-flow 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes laser-pulse-flow {
+  0% { left: -10%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 110%; opacity: 0; }
+}
+
 .framework-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   width: 100%;
-  margin-top: 32px;
+  position: relative;
+  z-index: 2;
 }
 
 .framework-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 14px;
-  padding: 28px 20px;
+  background: rgba(13, 13, 13, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 32px 24px;
   text-align: left;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(16px);
+  transform-style: preserve-3d;
+}
+
+.framework-card-aura {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(223, 207, 173, 0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.framework-card:hover .framework-card-aura {
+  opacity: 1;
 }
 
 .framework-card:hover {
-  background: rgba(223, 207, 173, 0.04);
-  border-color: rgba(223, 207, 173, 0.3);
-  transform: translateY(-6px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  background: rgba(223, 207, 173, 0.05);
+  border-color: var(--color-gold);
+  transform: translateY(-10px) rotateX(4deg) rotateY(-2deg) scale(1.02);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.8), 0 0 30px rgba(223, 207, 173, 0.2);
+}
+
+.framework-step-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  text-shadow: 0 0 10px rgba(223, 207, 173, 0.4);
+  transition: all 0.3s ease;
+}
+
+.framework-card:hover .framework-step-num {
+  transform: scale(1.15);
+  color: #ffffff;
+  text-shadow: 0 0 16px var(--color-gold);
+}
+
+.framework-icon {
+  font-size: 1.6rem;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.framework-card:hover .framework-icon {
+  transform: scale(1.25) rotate(8deg);
+}
+
+.framework-card-glow-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-blue));
+  transition: width 0.5s ease;
+}
+
+.framework-card:hover .framework-card-glow-bar {
+  width: 100%;
 }
 
 .framework-card-header {

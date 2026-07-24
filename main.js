@@ -1989,10 +1989,60 @@ function initEcosystemDiagram() {
   });
 }
 
+/* --- 17. Section 2 Crazy Framework Animation Engine --- */
+function initFrameworkAnimation() {
+  const cards = document.querySelectorAll('.framework-card');
+  if (!cards || cards.length === 0) return;
+
+  // 3D Magnetic Cursor Tilt
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      const tiltX = (y / (rect.height / 2)) * -12;
+      const tiltY = (x / (rect.width / 2)) * 12;
+
+      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-10px) scale(1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+
+    card.addEventListener('mouseenter', () => {
+      if (typeof playTickSound === 'function') playTickSound('tick');
+    });
+  });
+
+  // GSAP ScrollTrigger Reveal Sequence
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from(cards, {
+      scrollTrigger: {
+        trigger: '#framework',
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
+      },
+      y: 60,
+      opacity: 0,
+      scale: 0.9,
+      duration: 0.8,
+      stagger: 0.18,
+      ease: 'back.out(1.5)'
+    });
+  }
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initEcosystemDiagram);
+  document.addEventListener('DOMContentLoaded', () => {
+    initEcosystemDiagram();
+    initFrameworkAnimation();
+  });
 } else {
   initEcosystemDiagram();
+  initFrameworkAnimation();
 }
 
 
