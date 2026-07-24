@@ -46,11 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initScrollSpy', initScrollSpy);
   initSafe('initTestimonialCarousel', initTestimonialCarousel);
   initSafe('initVideoPlayer', initVideoPlayer);
-  initSafe('initAIDemoTabs', initAIDemoTabs);
   initSafe('initStatsCounters', initStatsCounters);
   initSafe('initCardSpotlight', initCardSpotlight);
   initSafe('initDynamicHero', initDynamicHero);
-  initSafe('initStackedCards', initStackedCards);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -1718,63 +1716,3 @@ function initDynamicHero() {
 }
 
 
-/* --- 16. AI Shift — Stacked Scroll Cards --- */
-function initStackedCards() {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  const scrollContainer = document.querySelector('.why-ai-scroll-container');
-  const stage = document.querySelector('.why-ai-sticky-stage');
-  const cards = document.querySelectorAll('.why-ai-stack-card');
-
-  if (!scrollContainer || !stage || !cards.length) return;
-
-  // Skip on mobile (cards render as normal flow list)
-  if (window.innerWidth <= 768) return;
-
-  const vh = window.innerHeight;
-  // Each card transition occupies 80vh of scroll
-  const scrollPerCard = vh * 0.8;
-
-  // Use GSAP to set all initial positions — overrides CSS transform
-  // Card 0: already centred (y = 0)
-  gsap.set(cards[0], { y: 0, scale: 1, opacity: 1 });
-
-  // Cards 1–5: pushed below viewport
-  cards.forEach((card, i) => {
-    if (i === 0) return;
-    gsap.set(card, { y: vh * 1.1, scale: 1, opacity: 1 });
-  });
-
-  // Animate each card in, and push the previous one back
-  cards.forEach((card, i) => {
-    if (i === 0) return;
-
-    // Slide current card up into center
-    gsap.to(card, {
-      y: 0,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: scrollContainer,
-        start: () => `top+=${(i - 1) * scrollPerCard}px top`,
-        end:   () => `top+=${i * scrollPerCard}px top`,
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-      }
-    });
-
-    // Scale + fade previous card to create depth
-    gsap.to(cards[i - 1], {
-      scale: 0.93,
-      y: -30,
-      opacity: 0.55,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: scrollContainer,
-        start: () => `top+=${(i - 1) * scrollPerCard}px top`,
-        end:   () => `top+=${i * scrollPerCard}px top`,
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-      }
-    });
-  });
-}
