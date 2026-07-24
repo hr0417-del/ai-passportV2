@@ -421,33 +421,49 @@
 
     <!-- SECTION 5: Immersive Roadmap -->
     <section class="section" id="pathway">
-      <div class="section-container reverse">
-        <div class="pathway-text-block" style="max-width: 100% !important; text-align: center !important;">
+      <div class="section-container">
+        <div class="text-block" style="text-align: left;">
           <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;">ROADMAP</span>
           <h2>Immersive Learning Journey</h2>
-          <p class="section-lead" style="margin-left:auto !important; margin-right:auto !important; max-width: 600px;">
+          <p class="section-lead" style="max-width: 600px; margin-bottom: 32px;">
             An active milestone path that animates as you scroll, guiding you from explorer to future AI leader.
           </p>
           
-          <div class="journey-grid-horizontal">
-            <div class="audience-card" style="align-items: flex-start; padding: 28px; text-align: left;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); text-transform: uppercase; margin-bottom: 12px; display: block; letter-spacing: 0.05em;">Step 01</span>
-              <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: var(--color-text-primary);">Sprint Live</h3>
-              <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.5; margin: 0;">Build core co-builder habits, coordinate prompt models, and deploy 3 functional projects in 12 live mentor sessions.</p>
+          <div class="pathway-steps" style="position: relative;">
+            <!-- SVG Drawing Line -->
+            <div class="pathway-line-container" style="position: absolute; left: 12px; top: 12px; bottom: 12px; width: 2px; z-index: 1;">
+              <svg class="pathway-svg" viewBox="0 0 2 600" fill="none" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+                <line x1="1" y1="0" x2="1" y2="600" stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-dasharray="6 6"/>
+                <path id="pathway-draw-line" d="M1 0 L1 600" stroke="var(--color-gold)" stroke-width="2" fill="none"/>
+              </svg>
             </div>
-            <div class="audience-card" style="align-items: flex-start; padding: 28px; text-align: left;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); text-transform: uppercase; margin-bottom: 12px; display: block; letter-spacing: 0.05em;">Step 02</span>
-              <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: var(--color-text-primary);">Activate Profile</h3>
-              <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.5; margin: 0;">Unlock your lifetime digital passport. Publish a public, verified profile displaying your project portfolio and skill badges.</p>
+            
+            <div class="step-card" data-step="1">
+              <div class="step-num">01</div>
+              <h3>Sprint Live</h3>
+              <p>Build core co-builder habits, coordinate prompt models, and deploy 3 functional projects in 12 live mentor sessions.</p>
             </div>
-            <div class="audience-card" style="align-items: flex-start; padding: 28px; text-align: left;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); text-transform: uppercase; margin-bottom: 12px; display: block; letter-spacing: 0.05em;">Step 03</span>
-              <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: var(--color-text-primary);">Grow Academy</h3>
-              <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.5; margin: 0;">Advance into specialized Ekaakshar Academy professional certificate tracks (Python, Data Science) to secure tech opportunities.</p>
+            
+            <div class="step-card" data-step="2">
+              <div class="step-num">02</div>
+              <h3>Activate Profile</h3>
+              <p>Unlock your lifetime digital passport. Publish a public, verified profile displaying your project portfolio and skill badges.</p>
+            </div>
+            
+            <div class="step-card" data-step="3">
+              <div class="step-num">03</div>
+              <h3>Grow Academy</h3>
+              <p>Advance into specialized Ekaakshar Academy professional certificate tracks (Python, Data Science) to secure tech opportunities.</p>
             </div>
           </div>
           
-          <p class="pathway-footer-text" style="margin-top: 36px;">Your passport grows as you do.</p>
+          <p class="pathway-footer-text" style="margin-top: 36px; padding-left: 60px;">Your passport grows as you do.</p>
+        </div>
+
+        <div class="image-block">
+          <div class="image-wrapper" style="position: sticky; top: 180px;">
+            <img src="FRAME 3.webp" alt="AI Passport Details Grid" class="section-image" loading="lazy">
+          </div>
         </div>
       </div>
     </section>
