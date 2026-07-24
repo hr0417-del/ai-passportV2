@@ -1728,42 +1728,50 @@ function initStackedCards() {
 
   if (!scrollContainer || !stage || !cards.length) return;
 
-  // Skip on mobile (cards are in normal flow)
+  // Skip on mobile (cards render as normal flow list)
   if (window.innerWidth <= 768) return;
 
-  const totalCards = cards.length;
-  // Each transition takes 80vh worth of scroll
-  const scrollPerCard = window.innerHeight * 0.8;
+  const vh = window.innerHeight;
+  // Each card transition occupies 80vh of scroll
+  const scrollPerCard = vh * 0.8;
 
+  // Use GSAP to set all initial positions — overrides CSS transform
+  // Card 0: already centred (y = 0)
+  gsap.set(cards[0], { y: 0, scale: 1, opacity: 1 });
+
+  // Cards 1–5: pushed below viewport
   cards.forEach((card, i) => {
-    if (i === 0) return; // first card already in position
+    if (i === 0) return;
+    gsap.set(card, { y: vh * 1.1, scale: 1, opacity: 1 });
+  });
 
-    // Slide current card up from below
-    gsap.fromTo(card,
-      { y: '110%' },
-      {
-        y: '0%',
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: scrollContainer,
-          start: () => `top+=${(i - 1) * scrollPerCard}px top`,
-          end: () => `top+=${i * scrollPerCard}px top`,
-          scrub: 0.8,
-          invalidateOnRefresh: true,
-        }
-      }
-    );
+  // Animate each card in, and push the previous one back
+  cards.forEach((card, i) => {
+    if (i === 0) return;
 
-    // Push previous card back slightly to create depth
-    gsap.to(cards[i - 1], {
-      scale: 0.94,
-      y: '-20px',
-      opacity: 0.65,
+    // Slide current card up into center
+    gsap.to(card, {
+      y: 0,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: scrollContainer,
         start: () => `top+=${(i - 1) * scrollPerCard}px top`,
-        end: () => `top+=${i * scrollPerCard}px top`,
+        end:   () => `top+=${i * scrollPerCard}px top`,
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+      }
+    });
+
+    // Scale + fade previous card to create depth
+    gsap.to(cards[i - 1], {
+      scale: 0.93,
+      y: -30,
+      opacity: 0.55,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: scrollContainer,
+        start: () => `top+=${(i - 1) * scrollPerCard}px top`,
+        end:   () => `top+=${i * scrollPerCard}px top`,
         scrub: 0.8,
         invalidateOnRefresh: true,
       }

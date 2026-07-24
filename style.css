@@ -5743,6 +5743,9 @@ p, .section-lead, .section-subtext {
 
 .why-ai-stack-card {
   position: absolute;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
   width: min(680px, 88vw);
   background: rgba(10, 10, 10, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.07);
@@ -5750,7 +5753,8 @@ p, .section-lead, .section-subtext {
   border-radius: 20px;
   padding: 52px 52px 48px;
   will-change: transform, opacity;
-  transform: translateY(110%);
+  /* push below viewport using vh — GSAP will animate this */
+  transform: translateY(110vh);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
@@ -5758,7 +5762,7 @@ p, .section-lead, .section-subtext {
 }
 
 .why-ai-stack-card[data-index="0"] {
-  transform: translateY(0%);
+  transform: translateY(0);
 }
 
 .stack-card-inner {
