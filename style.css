@@ -5259,7 +5259,7 @@ p, .section-lead, .section-subtext {
   border: 1px solid rgba(255, 255, 255, 0.04);
   padding: 36px 28px;
   border-radius: 8px;
-  transition: all 0.4s var(--transition-smooth);
+  transition: border-color 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth), background-color 0.4s var(--transition-smooth);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-sizing: border-box;

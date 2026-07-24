@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initStatsCounters', initStatsCounters);
   initSafe('initCardSpotlight', initCardSpotlight);
   initSafe('initDynamicHero', initDynamicHero);
-  initSafe('initAIShiftAnimations', initAIShiftAnimations);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -276,6 +275,44 @@ function initSectionReveal() {
     if (section.classList.contains('hero-section')) return;
 
     // Custom reveals for V2.0 sections
+    if (section.id === 'why-ai') {
+      const headline = section.querySelector('#ai-shift-headline');
+      const cards = section.querySelectorAll('.why-ai-card');
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      if (headline) {
+        tl.fromTo(headline,
+          { opacity: 0, y: 30 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.6, 
+            ease: 'power3.out',
+            onComplete: () => {
+              headline.classList.add('glitch-active');
+              setTimeout(() => headline.classList.remove('glitch-active'), 1400);
+            }
+          }
+        );
+      }
+
+      if (cards.length) {
+        tl.fromTo(cards,
+          { opacity: 0, y: 45 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' },
+          '-=0.3'
+        );
+      }
+      return;
+    }
+
     if (section.id === 'movement') {
       const header = section.querySelector('.movement-header');
       const audienceGrid = section.querySelector('.audience-grid');
@@ -1717,61 +1754,4 @@ function initDynamicHero() {
 }
 
 
-/* --- AI SHIFT SECTION ANIMATIONS (A+B) --- */
-function initAIShiftAnimations() {
-  const headline = document.getElementById('ai-shift-headline');
-  const cards    = document.querySelectorAll('#why-ai .why-ai-card');
 
-  if (!headline && !cards.length) return;
-
-  /* ---- OPTION B: Glitch headline on section enter ---- */
-  if (headline) {
-    headline.style.opacity = '0';
-
-    const headlineObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        headlineObserver.disconnect(); // fire once only
-
-        // Make visible, then trigger glitch CSS class
-        headline.style.opacity = '1';
-        headline.classList.add('glitch-active');
-
-        setTimeout(() => {
-          headline.classList.remove('glitch-active');
-        }, 1500);
-      });
-    }, { threshold: 0.3 });
-
-    headlineObserver.observe(headline);
-  }
-
-  /* ---- OPTION A: Staggered card slide-up on grid enter ---- */
-  if (cards.length) {
-    // Set initial hidden state via CSS transition-ready props
-    cards.forEach(card => {
-      card.style.opacity    = '0';
-      card.style.transform  = 'translateY(40px)';
-      card.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
-    });
-
-    const grid = document.querySelector('#why-ai .why-ai-grid');
-    if (!grid) return;
-
-    const gridObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        gridObserver.disconnect(); // fire once only
-
-        cards.forEach((card, i) => {
-          setTimeout(() => {
-            card.style.opacity   = '1';
-            card.style.transform = 'translateY(0)';
-          }, i * 110); // 110ms stagger between each card
-        });
-      });
-    }, { threshold: 0.15 });
-
-    gridObserver.observe(grid);
-  }
-}
