@@ -5658,19 +5658,66 @@ p, .section-lead, .section-subtext {
 }
 
 /* ======================================================
-   HERO ROTATING CAROUSEL V2
+   HERO ROTATING CAROUSEL V2 — HIGH-VISIBILITY EXPANDED
    ====================================================== */
 
 .hero-rotating-section {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  padding-top: calc(var(--header-height) + 40px) !important;
   padding-bottom: 60px !important;
+}
+
+.hero-rotating-section .section-container {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 48px !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  min-height: 540px !important;
+}
+
+.hero-rotating-section .hero-text-block {
+  max-width: 680px !important;
+  text-align: left !important;
+  z-index: 6 !important;
+}
+
+.hero-rotating-section .hero-image-block {
+  width: 100% !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 5 !important;
+  margin-left: 0 !important;
+}
+
+.hero-rotating-section .hero-passport-card-wrapper {
+  width: 100% !important;
+  max-width: 640px !important;
+  transform: scale(1.1) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.hero-rotating-section .section-image {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 540px !important;
+  object-fit: contain !important;
+  mix-blend-mode: screen !important;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8)) brightness(1.08) !important;
 }
 
 .hero-carousel-container {
   position: relative;
   width: 100%;
-  min-height: 520px;
+  min-height: 560px;
 }
 
 .hero-slide {
@@ -5678,12 +5725,11 @@ p, .section-lead, .section-subtext {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-  transform: scale(0.98);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(12px) scale(0.98);
   z-index: 1;
 }
 
@@ -5692,7 +5738,7 @@ p, .section-lead, .section-subtext {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: scale(1);
+  transform: translateY(0) scale(1);
   z-index: 2;
 }
 
@@ -5700,18 +5746,18 @@ p, .section-lead, .section-subtext {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  margin-top: 32px;
+  gap: 24px;
+  margin-top: 40px;
   position: relative;
   z-index: 10;
 }
 
 .hero-arrow-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -5721,33 +5767,34 @@ p, .section-lead, .section-subtext {
 }
 
 .hero-arrow-btn:hover {
-  background: rgba(223, 207, 173, 0.15);
+  background: rgba(223, 207, 173, 0.2);
   border-color: var(--color-gold);
   color: var(--color-gold);
-  transform: scale(1.08);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(223, 207, 173, 0.3);
 }
 
 .hero-dots-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .hero-dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .hero-dot.active {
-  width: 28px;
+  width: 32px;
   border-radius: 6px;
   background: var(--color-gold);
-  box-shadow: 0 0 12px rgba(223, 207, 173, 0.4);
+  box-shadow: 0 0 16px rgba(223, 207, 173, 0.5);
 }
 
 /* Sequential Pillar Ticker */
@@ -5759,33 +5806,50 @@ p, .section-lead, .section-subtext {
 .hero-pillar-ticker {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 8px 24px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 28px;
   border-radius: 30px;
 }
 
 .ticker-word {
   transition: all 0.4s ease;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .ticker-word.active {
   color: var(--color-gold);
-  text-shadow: 0 0 12px rgba(223, 207, 173, 0.5);
-  transform: scale(1.08);
+  text-shadow: 0 0 14px rgba(223, 207, 173, 0.6);
+  transform: scale(1.1);
 }
 
 .ticker-dot {
-  color: rgba(255, 255, 255, 0.15);
-  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.75rem;
 }
+
+@media (max-width: 1024px) {
+  .hero-rotating-section .section-container {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    text-align: center !important;
+  }
+  .hero-rotating-section .hero-text-block {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+  .hero-rotating-section .hero-passport-card-wrapper {
+    transform: scale(1) !important;
+    max-width: 480px !important;
+  }
+}
+
 
 
