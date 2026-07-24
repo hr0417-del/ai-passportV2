@@ -1720,68 +1720,58 @@ function initDynamicHero() {
 /* --- AI SHIFT SECTION ANIMATIONS (A+B) --- */
 function initAIShiftAnimations() {
   const headline = document.getElementById('ai-shift-headline');
-  const cards = document.querySelectorAll('#why-ai .why-ai-card');
+  const cards    = document.querySelectorAll('#why-ai .why-ai-card');
 
   if (!headline && !cards.length) return;
 
-  /* --- OPTION B: Glitch text effect on headline --- */
+  /* ---- OPTION B: Glitch headline on section enter ---- */
   if (headline) {
-    // Set initial invisible state
     headline.style.opacity = '0';
 
-    if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
-      ScrollTrigger.create({
-        trigger: '#why-ai',
-        start: 'top 72%',
-        once: true,
-        onEnter: () => {
-          // Fade in first
-          gsap.to(headline, { opacity: 1, duration: 0.01 });
-          // Trigger glitch class
-          headline.classList.add('glitch-active');
-          // Remove class after animation completes so it doesn't re-run
-          setTimeout(() => {
-            headline.classList.remove('glitch-active');
-          }, 1400);
-        }
+    const headlineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        headlineObserver.disconnect(); // fire once only
+
+        // Make visible, then trigger glitch CSS class
+        headline.style.opacity = '1';
+        headline.classList.add('glitch-active');
+
+        setTimeout(() => {
+          headline.classList.remove('glitch-active');
+        }, 1500);
       });
-    } else {
-      // Fallback: no GSAP, just show immediately
-      headline.style.opacity = '1';
-    }
+    }, { threshold: 0.3 });
+
+    headlineObserver.observe(headline);
   }
 
-  /* --- OPTION A: Staggered card reveal --- */
+  /* ---- OPTION A: Staggered card slide-up on grid enter ---- */
   if (cards.length) {
-    // Set all cards to invisible start state
+    // Set initial hidden state via CSS transition-ready props
     cards.forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(36px)';
-      card.style.transition = 'none';
+      card.style.opacity    = '0';
+      card.style.transform  = 'translateY(40px)';
+      card.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
     });
 
-    if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
-      ScrollTrigger.create({
-        trigger: '#why-ai .why-ai-grid',
-        start: 'top 78%',
-        once: true,
-        onEnter: () => {
-          gsap.to(cards, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: 'power2.out',
-            stagger: 0.1,
-            clearProps: 'transform,opacity,transition'
-          });
-        }
+    const grid = document.querySelector('#why-ai .why-ai-grid');
+    if (!grid) return;
+
+    const gridObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        gridObserver.disconnect(); // fire once only
+
+        cards.forEach((card, i) => {
+          setTimeout(() => {
+            card.style.opacity   = '1';
+            card.style.transform = 'translateY(0)';
+          }, i * 110); // 110ms stagger between each card
+        });
       });
-    } else {
-      // Fallback: reveal all immediately
-      cards.forEach(card => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-      });
-    }
+    }, { threshold: 0.15 });
+
+    gridObserver.observe(grid);
   }
 }
