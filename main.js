@@ -1685,16 +1685,16 @@ function initDynamicHero() {
 
   const slides = [
     {
-      title: "Don't Just Use AI. Build With It.",
-      lead: "AI Passport is your lifelong learning identity. Discover how AI is reshaping the world, attend live mentor sessions to create your first projects, and unlock professional certificates that showcase your actual skills."
+      title: "Don't Just Learn AI. Build With It.",
+      lead: "AI Passport is India's practical AI learning ecosystem. We don't sell recorded videos or theory—we give you the tools, live mentorship, and verified credentials to build working AI systems."
     },
     {
-      title: "Master the AI Economy.",
-      lead: "Evolve into a specialized builder. Learn Python scripting, relational data science, full-stack endpoints, and security auditing through Ekaakshar Academy's 6-month professional tracks."
+      title: "Build Skills. Build Projects. Build Capability.",
+      lead: "Transform from an AI consumer into an active builder. Write serverless webhooks, configure database endpoints, and automate complex workflows in live hands-on sessions."
     },
     {
-      title: "Get More Done. Automate Everything.",
-      lead: "Save hours of daily prep. Design custom lesson worksheets, query contracts, summarize document archives, and deploy serverless webhooks in Ekaakshar's 4-week applied executive tracks."
+      title: "The Quality Layer for Practical AI Education.",
+      lead: "Explore curated AI learning pathways—combining AI Passport's in-house programs with select institutional partner tracks to verify your real-world capability."
     }
   ];
 
