@@ -1084,6 +1084,7 @@ function initCountdowns() {
   // Target Webinar Date: August 2, 2026, 14:00 IST (UTC+5:30) => 08:30 UTC
   const targetDate = Date.UTC(2026, 7, 2, 8, 30, 0);
   
+  const daysContainers = document.querySelectorAll('.countdown-days');
   const hoursContainers = document.querySelectorAll('.countdown-hours');
   const minsContainers = document.querySelectorAll('.countdown-minutes');
   const secsContainers = document.querySelectorAll('.countdown-seconds');
@@ -1157,16 +1158,19 @@ function initCountdowns() {
       return;
     }
     
-    const totalHours = Math.floor(diff / (1000 * 60 * 60));
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
     
-    const hrsStr = totalHours.toString().padStart(2, '0');
+    const daysStr = days.toString().padStart(2, '0');
+    const hrsStr = hours.toString().padStart(2, '0');
     const minsStr = mins.toString().padStart(2, '0');
     const secsStr = secs.toString().padStart(2, '0');
     
+    daysContainers.forEach(container => updateContainerDigits(container, daysStr));
     hoursContainers.forEach(container => updateContainerDigits(container, hrsStr));
-    marginStr = minsContainers.forEach(container => updateContainerDigits(container, minsStr));
+    minsContainers.forEach(container => updateContainerDigits(container, minsStr));
     secsContainers.forEach(container => updateContainerDigits(container, secsStr));
   };
   
