@@ -215,41 +215,93 @@
       </div>
     </section>
 
-    <!-- SECTION 1.8: AI Demonstrations Showcase -->
+    <!-- SECTION 1.8: Project Portfolio Showcase -->
     <section class="section" id="ai-demos" style="background-color: #030303; padding: 140px 0;">
-      <div class="movement-inner text-center style-center" style="text-align: center;">
-        <span class="section-tag" style="color: var(--color-blue); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;">PRACTICAL CAPABILITY</span>
-        <h2>What You Will Be Capable Of Building</h2>
-        <p class="section-lead" style="margin-left:auto !important; margin-right:auto !important; max-width: 600px;">
-          Experience live simulated output examples showing real-world capability tracks.
+      <div class="movement-inner" style="text-align: center;">
+        <span class="section-tag" style="color: var(--color-blue); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;">STUDENT BUILDS</span>
+        <h2>Real Projects. Built by Real People.</h2>
+        <p class="section-lead" style="margin-left:auto !important; margin-right:auto !important; max-width: 580px;">
+          These are actual projects deployed by students during their AI Passport sprint sessions. Not simulations. Not demos. Real output.
         </p>
 
-        <div class="ai-demo-showcase">
-          <div class="ai-demo-tabs">
-            <button class="ai-demo-tab-btn active" data-tab="code" id="ai-demo-btn-code">Code & Development</button>
-            <button class="ai-demo-tab-btn" data-tab="presentations" id="ai-demo-btn-press">Outline & Pitch</button>
-            <button class="ai-demo-tab-btn" data-tab="data" id="ai-demo-btn-data">Data & Analytics</button>
-            <button class="ai-demo-tab-btn" data-tab="business" id="ai-demo-btn-biz">Automation Webhooks</button>
+        <div class="project-showcase-grid">
+
+          <!-- Project Card 1 -->
+          <div class="project-card">
+            <div class="project-card-accent" style="background: linear-gradient(135deg, rgba(0,82,255,0.15), rgba(0,82,255,0.03));"></div>
+            <div class="project-card-top">
+              <span class="project-badge" style="background: rgba(0,82,255,0.12); color: var(--color-blue); border-color: rgba(0,82,255,0.2);">Web App</span>
+              <span class="project-status">
+                <span class="project-status-dot" style="background: #00e676;"></span>
+                Live
+              </span>
+            </div>
+            <h3 class="project-title">AI Boarding Pass Generator</h3>
+            <p class="project-desc">A dynamic digital ticket builder that generates personalized AI cohort passes with live QR codes and user metadata.</p>
+            <div class="project-tags">
+              <span class="project-tag">HTML / CSS</span>
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">GPT-4o</span>
+            </div>
           </div>
 
-          <div class="ai-demo-window">
-            <div class="ai-demo-header-bar">
-              <div class="ai-demo-dots">
-                <span class="ai-demo-dot red"></span>
-                <span class="ai-demo-dot yellow"></span>
-                <span class="ai-demo-dot green"></span>
-              </div>
-              <div class="ai-demo-title-bar">AI Terminal Sandbox</div>
-              <div style="width: 36px;"></div>
+          <!-- Project Card 2 -->
+          <div class="project-card">
+            <div class="project-card-accent" style="background: linear-gradient(135deg, rgba(223,207,173,0.12), rgba(223,207,173,0.02));"></div>
+            <div class="project-card-top">
+              <span class="project-badge" style="background: rgba(223,207,173,0.1); color: var(--color-gold); border-color: rgba(223,207,173,0.2);">Automation</span>
+              <span class="project-status">
+                <span class="project-status-dot" style="background: #00e676;"></span>
+                Live
+              </span>
             </div>
-            <div class="ai-demo-content-body" id="ai-demo-window-content">
-              <!-- Typewritten contents injected via JS -->
-            </div>
-            <div class="ai-demo-cli-input-line" style="background: #050505; border-top: 1px solid rgba(255,255,255,0.03); padding: 12px 28px; display: flex; align-items: center; gap: 8px;">
-              <span style="color: var(--color-blue); font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: bold;">&gt;</span>
-              <input type="text" id="ai-demo-cli-input" placeholder="Type a command (help, code, data, business) and press Enter..." style="background: transparent; border: none; outline: none; color: var(--color-gold); font-family: 'Space Mono', monospace; font-size: 0.8rem; width: 100%;">
+            <h3 class="project-title">WhatsApp Registration Bot</h3>
+            <p class="project-desc">A serverless webhook pipeline that auto-confirms event registrations via WhatsApp, reducing follow-up time by 100%.</p>
+            <div class="project-tags">
+              <span class="project-tag">Webhooks</span>
+              <span class="project-tag">Twilio API</span>
+              <span class="project-tag">Make.com</span>
             </div>
           </div>
+
+          <!-- Project Card 3 -->
+          <div class="project-card">
+            <div class="project-card-accent" style="background: linear-gradient(135deg, rgba(0,200,150,0.1), rgba(0,200,150,0.02));"></div>
+            <div class="project-card-top">
+              <span class="project-badge" style="background: rgba(0,200,150,0.1); color: #00c896; border-color: rgba(0,200,150,0.2);">Analytics</span>
+              <span class="project-status">
+                <span class="project-status-dot" style="background: #00e676;"></span>
+                Live
+              </span>
+            </div>
+            <h3 class="project-title">Enrollment Data Dashboard</h3>
+            <p class="project-desc">A smart data visualization panel tracking cohort enrollment metrics, attendance scores, and progression analytics in real time.</p>
+            <div class="project-tags">
+              <span class="project-tag">Google Sheets API</span>
+              <span class="project-tag">Chart.js</span>
+              <span class="project-tag">OpenAI</span>
+            </div>
+          </div>
+
+          <!-- Project Card 4 -->
+          <div class="project-card">
+            <div class="project-card-accent" style="background: linear-gradient(135deg, rgba(180,100,255,0.1), rgba(180,100,255,0.02));"></div>
+            <div class="project-card-top">
+              <span class="project-badge" style="background: rgba(180,100,255,0.1); color: #b464ff; border-color: rgba(180,100,255,0.2);">Presentation</span>
+              <span class="project-status">
+                <span class="project-status-dot" style="background: #00e676;"></span>
+                Live
+              </span>
+            </div>
+            <h3 class="project-title">AI Strategy Pitch Deck</h3>
+            <p class="project-desc">A 12-slide strategic pitch deck built using GPT-4o with structured prompting for a real client AI adoption proposal.</p>
+            <div class="project-tags">
+              <span class="project-tag">GPT-4o</span>
+              <span class="project-tag">Canva AI</span>
+              <span class="project-tag">Structured Prompting</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
