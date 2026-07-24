@@ -5615,3 +5615,42 @@ p, .section-lead, .section-subtext {
 #why-ai .why-ai-card {
   will-change: transform, opacity;
 }
+
+/* ======================================================
+   CERTIFICATE VERIFICATION PAGE RESPONSIVE & PRINT
+   ====================================================== */
+
+@media (max-width: 768px) {
+  .official-certificate-container {
+    padding: 24px 18px !important;
+    border-width: 6px !important;
+  }
+  .cert-grid-header {
+    grid-template-columns: 1fr !important;
+  }
+  .cert-skills-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  #cert-participant-name {
+    font-size: 2rem !important;
+    padding: 0 12px 4px !important;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .official-certificate-container, .official-certificate-container * {
+    visibility: visible;
+  }
+  .official-certificate-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none !important;
+    border-width: 4px !important;
+  }
+}
+

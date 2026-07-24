@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Official AI Passport™ Certificate & Credential Verification Portal by Ekaakshar Education. Authenticate participant credentials, badges, and learning records.">
+  <meta name="robots" content="index, follow">
+  <title>Verify Certificate | AI Passport™ Official Credential Ledger</title>
+  
+  <link rel="canonical" href="https://aipassport.ekaakshareducation.com/verify.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="FRAME 1.webp">
+
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Overlays -->
+  <div class="film-grain"></div>
+  <div class="vignette-overlay"></div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="custom-cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-glow"></div>
+  </div>
+
+  <!-- Global Header -->
+  <header class="global-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-main">AI PASSPORT™</span>
+        <span class="logo-sub">by Ekaakshar</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="passport.html" class="nav-link">AI Passport</a>
+        <a href="live.html" class="nav-link">AI Passport Live</a>
+        <a href="academy.html" class="nav-link">AI Passport Academy</a>
+        <a href="verify.html" class="nav-link active">Verify</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <a href="live.html" class="nav-cta-btn">Join Live</a>
+
+      <button class="sound-toggle" id="sound-toggle" aria-label="Toggle Audio Feedback">
+        <svg class="sound-icon sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+          <line x1="23" y1="9" x2="17" y2="15"/>
+          <line x1="17" y1="9" x2="23" y2="15"/>
+        </svg>
+        <svg class="sound-icon sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display: none;">
+          <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        </svg>
+      </button>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Ambient Lights -->
+  <div class="holographic-glow-container">
+    <div class="ambient-glow electric-blue-glow"></div>
+    <div class="ambient-glow champagne-glow"></div>
+    <div class="particles-container" id="particles-container"></div>
+  </div>
+
+  <main class="scroll-container">
+
+    <!-- VERIFICATION HERO & SEARCH -->
+    <section class="section verify-hero-section" style="padding-top: 140px; padding-bottom: 40px;">
+      <div class="movement-inner text-center" style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;">AUTHENTICATION LEDGER</span>
+        <h1 style="font-size: clamp(2rem, 4.5vw, 3.2rem); margin: 16px 0;">Verify AI Passport™ Certificate</h1>
+        <p class="section-lead" style="margin: 0 auto 32px; color: var(--color-text-secondary); max-width: 640px;">
+          Cryptographic credential lookup for certificates issued by Ekaakshar Education. Enter any Certificate ID below to verify authenticity in real time.
+        </p>
+
+        <!-- Search Input Form -->
+        <div class="verify-search-wrapper" style="max-width: 580px; margin: 0 auto 24px; position: relative;">
+          <form id="verify-form" style="display: flex; gap: 12px; align-items: center; width: 100%;">
+            <div style="position: relative; flex: 1;">
+              <input 
+                type="text" 
+                id="verify-input" 
+                placeholder="e.g. AIP-L1-2026-000245" 
+                value="AIP-L1-2026-000245"
+                required
+                style="width: 100%; padding: 16px 20px; font-family: 'Space Mono', monospace; font-size: 0.95rem; color: #fff; background: rgba(13, 13, 13, 0.8); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; outline: none; transition: border-color 0.3s; box-sizing: border-box;"
+              >
+            </div>
+            <button 
+              type="submit" 
+              class="btn btn-primary"
+              style="padding: 16px 28px; font-size: 0.85rem; font-weight: 600; white-space: nowrap;"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 6px; vertical-align: text-bottom;">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              Verify Now
+            </button>
+          </form>
+        </div>
+
+        <!-- Sample Quick Buttons -->
+        <div class="verify-samples" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; font-size: 0.78rem; color: var(--color-text-secondary);">
+          <span style="color: rgba(255,255,255,0.4);">Try sample IDs:</span>
+          <button class="sample-id-btn" data-id="AIP-L1-2026-000245" style="background: rgba(223, 207, 173, 0.08); border: 1px solid rgba(223, 207, 173, 0.2); color: var(--color-gold); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+            AIP-L1-2026-000245 (Nishi Tyagi)
+          </button>
+          <button class="sample-id-btn" data-id="AIP-L1-2026-000108" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+            AIP-L1-2026-000108 (Rahul Sharma)
+          </button>
+          <button class="sample-id-btn" data-id="AIP-L1-2026-000512" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+            AIP-L1-2026-000512 (Ananya Verma)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERIFICATION RESULT CONTAINER -->
+    <section class="section" id="verify-result-section" style="padding-top: 20px; padding-bottom: 120px;">
+      <div class="movement-inner" style="max-width: 1040px; margin: 0 auto;">
+        
+        <!-- Status Bar -->
+        <div id="verify-status-banner" class="verify-status-banner verified-success" style="display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; background: rgba(0, 230, 118, 0.06); border: 1px solid rgba(0, 230, 118, 0.25); border-radius: 12px; margin-bottom: 36px; backdrop-filter: blur(10px);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span id="status-icon" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #00e676; color: #000; font-weight: bold; font-size: 1rem;">✓</span>
+            <div>
+              <p style="margin: 0; font-family: var(--font-sans); font-weight: 700; font-size: 0.95rem; color: #00e676; letter-spacing: 0.05em; text-transform: uppercase;" id="status-title">VERIFIED & AUTHENTICATED</p>
+              <p style="margin: 2px 0 0; font-size: 0.78rem; color: rgba(255,255,255,0.6);" id="status-subtext">Official Ekaakshar AI Passport™ Certificate Record Found on Public Ledger</p>
+            </div>
+          </div>
+          <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.4);" id="verification-timestamp">Verified Just Now</span>
+        </div>
+
+        <!-- DIGITAL CERTIFICATE CARD REPLICA -->
+        <div id="certificate-card-display" class="official-certificate-container" style="background: #ffffff; border: 12px solid #f6f3eb; border-radius: 16px; padding: 48px 40px; position: relative; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9); color: #1a1a1a; font-family: 'Cormorant Garamond', serif; overflow: hidden; max-width: 960px; margin: 0 auto;">
+          
+          <!-- Elegant Certificate Border Frame -->
+          <div style="position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px; border: 1px solid #d4af37; pointer-events: none; border-radius: 6px;"></div>
+          <div style="position: absolute; top: 16px; left: 16px; right: 16px; bottom: 16px; border: 1px solid #e0d0a0; pointer-events: none; border-radius: 4px;"></div>
+
+          <!-- Top Header & Passport Graphic Grid -->
+          <div class="cert-grid-header" style="display: grid; grid-template-columns: 1fr 220px; gap: 24px; align-items: start; position: relative; z-index: 1;">
+            <div>
+              <!-- Logo Header -->
+              <div style="text-align: center; margin-bottom: 24px;">
+                <div style="display: inline-flex; flex-direction: column; align-items: center;">
+                  <svg viewBox="0 0 100 100" width="42" height="42" fill="none" stroke="#b89438" stroke-width="2.5" style="margin-bottom: 6px;">
+                    <polygon points="50,10 90,30 90,70 50,90 10,70 10,30"></polygon>
+                    <circle cx="50" cy="50" r="18" fill="none" stroke="#b89438" stroke-width="2"></circle>
+                    <circle cx="50" cy="10" r="4" fill="#b89438"></circle>
+                    <circle cx="90" cy="30" r="4" fill="#b89438"></circle>
+                    <circle cx="90" cy="70" r="4" fill="#b89438"></circle>
+                    <circle cx="50" cy="90" r="4" fill="#b89438"></circle>
+                    <circle cx="10" cy="70" r="4" fill="#b89438"></circle>
+                    <circle cx="10" cy="30" r="4" fill="#b89438"></circle>
+                  </svg>
+                  <h2 style="font-family: var(--font-sans); font-size: 1.6rem; font-weight: 700; letter-spacing: 0.12em; color: #111; margin: 0; text-transform: uppercase;">AI PASSPORT™</h2>
+                  <p style="font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; font-style: italic; color: #b89438; margin: 2px 0 0; letter-spacing: 0.05em;">— Your Passport to the AI Future —</p>
+                </div>
+              </div>
+
+              <!-- Title Block -->
+              <div style="text-align: center; margin-bottom: 24px;">
+                <h3 style="font-family: var(--font-sans); font-size: 2rem; font-weight: 800; letter-spacing: 0.05em; color: #0a0a0a; margin: 0 0 4px; text-transform: uppercase;" id="cert-event-headline">AI PASSPORT LIVE</h3>
+                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: #b89438; margin: 0 0 12px; letter-spacing: 0.08em;" id="cert-event-subheadline">◆ The AI Revolution Begins ◆</p>
+                
+                <div style="display: inline-block; background: #0f0f0f; color: #dfcfad; font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 14px; border-radius: 12px; margin-bottom: 16px;" id="cert-level-badge">
+                  LEVEL 1 – AI EXPLORER
+                </div>
+
+                <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.1em; color: #222; text-transform: uppercase; margin: 0;" id="cert-type-label">CERTIFICATE OF PARTICIPATION</h4>
+              </div>
+            </div>
+
+            <!-- Side Passport Graphics & Badge -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+              <!-- Level Seal -->
+              <div style="width: 72px; height: 72px; border-radius: 50%; background: #0f0f0f; border: 2px solid #b89438; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #dfcfad; box-shadow: 0 6px 16px rgba(0,0,0,0.15);">
+                <span style="font-family: var(--font-sans); font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">LEVEL 1</span>
+                <span style="font-family: var(--font-sans); font-size: 0.5rem; font-weight: 600; color: #fff;">AI EXPLORER</span>
+                <span style="font-size: 0.6rem; margin-top: 2px;">★</span>
+              </div>
+
+              <!-- Passport Card graphic -->
+              <div style="width: 140px; height: 230px; background: #0a0a0a; border: 2px solid #d4af37; border-radius: 12px; padding: 12px; color: #dfcfad; display: flex; flex-direction: column; justify-content: space-between; align-items: center; box-shadow: 0 12px 24px rgba(0,0,0,0.3); text-align: center;">
+                <div style="width: 24px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin-bottom: 8px;"></div>
+                <div>
+                  <svg viewBox="0 0 100 100" width="28" height="28" fill="none" stroke="#b89438" stroke-width="3">
+                    <polygon points="50,10 90,30 90,70 50,90 10,70 10,30"></polygon>
+                  </svg>
+                  <p style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; color: #fff; margin: 4px 0 0; letter-spacing: 0.05em;">AI PASSPORT™</p>
+                  <p style="font-size: 0.45rem; color: #888; margin: 2px 0;">DISCOVER • BUILD • LEAD</p>
+                </div>
+                <div style="width: 60px; height: 60px; border-radius: 50%; border: 1px solid #b89438; background: radial-gradient(circle, rgba(184,148,56,0.3) 0%, rgba(0,0,0,0.9) 70%); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                  🌐
+                </div>
+                <div>
+                  <p style="font-family: var(--font-sans); font-size: 0.55rem; font-weight: 700; color: #dfcfad; margin: 0; text-transform: uppercase;">LEVEL 1</p>
+                  <p style="font-family: var(--font-sans); font-size: 0.5rem; color: #fff; margin: 0;">AI EXPLORER</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recipient Name Block -->
+          <div style="text-align: center; margin: 16px 0 24px; position: relative; z-index: 1;">
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: #555; margin: 0 0 6px;">Proudly Presented To</p>
+            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: #b89438; letter-spacing: 0.06em; margin: 0 0 12px; text-transform: uppercase; border-bottom: 2px solid #b89438; display: inline-block; padding: 0 32px 4px;" id="cert-participant-name">
+              NISHI TYAGI
+            </h3>
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #333; margin: 12px 0 0;">
+              For actively participating in the live national webinar:<br>
+              <strong style="color: #111;" id="cert-event-title">AI Passport Live – The AI Revolution Begins</strong><br>
+              <span style="font-size: 0.9rem; color: #666;">Held on: <span id="cert-issue-date">19 July 2026</span></span>
+            </p>
+          </div>
+
+          <!-- Capabilities Grid (10 Skills discovered) -->
+          <div style="margin: 24px 0; padding: 18px; background: #faf8f2; border: 1px solid #e8e2d2; border-radius: 8px; position: relative; z-index: 1;">
+            <p style="font-family: var(--font-sans); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #888; text-align: center; margin: 0 0 14px;">
+              DURING THIS SESSION, PARTICIPANTS DISCOVERED HOW AI CAN GENERATE:
+            </p>
+            <div class="cert-skills-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; text-align: center;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">📋</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Lesson Plans</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">📊</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Presentations</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">🧠</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Mind Maps</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">📝</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Quizzes</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">🎴</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Flashcards</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">📖</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Storybooks</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">📈</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Infographics</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">🎧</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Audio Overviews</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">🎬</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Videos</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.1rem; margin-bottom: 4px;">👆</span>
+                <span style="font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600; color: #333;">Interactive Experiences</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Award Paragraph -->
+          <p style="text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-style: italic; color: #444; margin: 0 0 24px; line-height: 1.5; position: relative; z-index: 1;" id="cert-description">
+            This certificate is awarded in recognition of your active participation in <strong>Level 1 – AI Explorer</strong>, where you explored how a single AI prompt can be transformed into a complete learning experience using modern AI workflows.
+          </p>
+
+          <!-- Footer Metadata & Authorised Signature -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; padding-top: 16px; border-top: 1px solid #e0d0a0; position: relative; z-index: 1;">
+            <div style="font-family: var(--font-sans); font-size: 0.72rem; color: #666;">
+              <p style="margin: 0 0 4px;">
+                <strong>Certificate ID:</strong> 
+                <span style="font-family: 'Space Mono', monospace; color: #111; font-weight: 700;" id="cert-id-display">AIP-L1-2026-000245</span>
+              </p>
+              <p style="margin: 0; color: #777;">
+                <strong>Issuer:</strong> Ekaakshar Education & AI Passport™ Board
+              </p>
+            </div>
+
+            <div style="text-align: center;">
+              <p style="font-family: var(--font-sans); font-size: 0.68rem; color: #888; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.05em;">Authorised Signatory</p>
+              <p style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #111; margin: -4px 0 0; line-height: 1;" id="cert-signatory">
+                Hitesh Rathee
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Action Bar Below Certificate -->
+        <div style="display: flex; justify-content: center; gap: 16px; margin-top: 32px;">
+          <button class="btn btn-secondary" id="btn-copy-link" style="padding: 12px 24px; font-size: 0.85rem;">
+            🔗 Copy Verification Link
+          </button>
+          <button class="btn btn-primary" onclick="window.print()" style="padding: 12px 24px; font-size: 0.85rem;">
+            🖨️ Print / Save as PDF
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <span class="logo-main">AI PASSPORT™</span>
+            <span class="logo-sub">by Ekaakshar</span>
+          </a>
+          <p class="footer-tagline">Building human capability in an automated world.</p>
+        </div>
+        
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <h4>Programs</h4>
+            <a href="live.html">AI Passport Live (₹999)</a>
+            <a href="academy.html">Professional Academy</a>
+          </div>
+          <div class="footer-col">
+            <h4>Credentials</h4>
+            <a href="passport.html">AI Passport Overview</a>
+            <a href="verify.html">Verify Certificate</a>
+          </div>
+          <div class="footer-col">
+            <h4>Organization</h4>
+            <a href="about.html">About Ekaakshar</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-bottom-container">
+          <div class="copyright">
+            &copy; 2026 Ekaakshar Education. All rights reserved.
+          </div>
+          <div class="footer-meta-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Service</a>
+          </div>
+          <button class="scroll-to-top-btn" id="scroll-to-top-btn" aria-label="Scroll back to top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- GSAP & ScrollTrigger scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Lenis for smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  
+  <!-- Shared Application Script -->
+  <script src="main.js" type="module"></script>
+</body>
+</html>

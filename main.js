@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initCardSpotlight', initCardSpotlight);
   initSafe('initDynamicHero', initDynamicHero);
   initSafe('initAIShiftCascade', initAIShiftCascade);
+  initSafe('initCertificateVerifier', initCertificateVerifier);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -1738,8 +1739,175 @@ function initAIShiftCascade() {
     });
   }, { threshold: 0.15 });
 
-  observer.observe(section);
+
+
+
+/* --- 21. Certificate Verification Portal Engine --- */
+function initCertificateVerifier() {
+  const form = document.getElementById('verify-form');
+  const input = document.getElementById('verify-input');
+  const sampleBtns = document.querySelectorAll('.sample-id-btn');
+  const statusBanner = document.getElementById('verify-status-banner');
+  const statusTitle = document.getElementById('status-title');
+  const statusSubtext = document.getElementById('status-subtext');
+  const statusIcon = document.getElementById('status-icon');
+  const timestamp = document.getElementById('verification-timestamp');
+  const certDisplay = document.getElementById('certificate-card-display');
+  const copyBtn = document.getElementById('btn-copy-link');
+
+  if (!form || !input) return;
+
+  // Sample Database matching official certificates
+  const certificateDB = {
+    "AIP-L1-2026-000245": {
+      name: "NISHI TYAGI",
+      level: "LEVEL 1 – AI EXPLORER",
+      event: "AI Passport Live – The AI Revolution Begins",
+      eventSub: "◆ The AI Revolution Begins ◆",
+      type: "CERTIFICATE OF PARTICIPATION",
+      date: "19 July 2026",
+      signatory: "Hitesh Rathee",
+      description: "This certificate is awarded in recognition of your active participation in Level 1 – AI Explorer, where you explored how a single AI prompt can be transformed into a complete learning experience using modern AI workflows."
+    },
+    "AIP-L1-2026-000108": {
+      name: "RAHUL SHARMA",
+      level: "LEVEL 1 – AI EXPLORER",
+      event: "AI Passport Live – The AI Revolution Begins",
+      eventSub: "◆ The AI Revolution Begins ◆",
+      type: "CERTIFICATE OF PARTICIPATION",
+      date: "19 July 2026",
+      signatory: "Hitesh Rathee",
+      description: "This certificate is awarded in recognition of your active participation in Level 1 – AI Explorer, where you explored how a single AI prompt can be transformed into a complete learning experience using modern AI workflows."
+    },
+    "AIP-L1-2026-000512": {
+      name: "ANANYA VERMA",
+      level: "LEVEL 1 – AI EXPLORER",
+      event: "AI Passport Live – The AI Revolution Begins",
+      eventSub: "◆ The AI Revolution Begins ◆",
+      type: "CERTIFICATE OF PARTICIPATION",
+      date: "19 July 2026",
+      signatory: "Hitesh Rathee",
+      description: "This certificate is awarded in recognition of your active participation in Level 1 – AI Explorer, where you explored how a single AI prompt can be transformed into a complete learning experience using modern AI workflows."
+    }
+  };
+
+  function performVerification(rawId) {
+    if (!rawId) return;
+    const certId = rawId.trim().toUpperCase();
+    input.value = certId;
+
+    const record = certificateDB[certId];
+
+    if (record) {
+      // Verified Success State
+      if (statusBanner) {
+        statusBanner.style.background = "rgba(0, 230, 118, 0.06)";
+        statusBanner.style.borderColor = "rgba(0, 230, 118, 0.25)";
+      }
+      if (statusTitle) {
+        statusTitle.textContent = "VERIFIED & AUTHENTICATED";
+        statusTitle.style.color = "#00e676";
+      }
+      if (statusSubtext) {
+        statusSubtext.textContent = "Official Ekaakshar AI Passport™ Certificate Record Found on Public Ledger";
+      }
+      if (statusIcon) {
+        statusIcon.textContent = "✓";
+        statusIcon.style.background = "#00e676";
+        statusIcon.style.color = "#000";
+      }
+      if (timestamp) {
+        timestamp.textContent = "Verified " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
+
+      // Update Digital Certificate Replica
+      const nameEl = document.getElementById('cert-participant-name');
+      const levelEl = document.getElementById('cert-level-badge');
+      const eventTitleEl = document.getElementById('cert-event-title');
+      const dateEl = document.getElementById('cert-issue-date');
+      const certIdEl = document.getElementById('cert-id-display');
+      const sigEl = document.getElementById('cert-signatory');
+      const descEl = document.getElementById('cert-description');
+
+      if (nameEl) nameEl.textContent = record.name;
+      if (levelEl) levelEl.textContent = record.level;
+      if (eventTitleEl) eventTitleEl.textContent = record.event;
+      if (dateEl) dateEl.textContent = record.date;
+      if (certIdEl) certIdEl.textContent = certId;
+      if (sigEl) sigEl.textContent = record.signatory;
+      if (descEl) descEl.innerHTML = record.description;
+
+      if (certDisplay) certDisplay.style.display = "block";
+
+    } else {
+      // Not Found State
+      if (statusBanner) {
+        statusBanner.style.background = "rgba(255, 68, 68, 0.06)";
+        statusBanner.style.borderColor = "rgba(255, 68, 68, 0.25)";
+      }
+      if (statusTitle) {
+        statusTitle.textContent = "CREDENTIAL NOT FOUND";
+        statusTitle.style.color = "#ff4444";
+      }
+      if (statusSubtext) {
+        statusSubtext.textContent = "No active Ekaakshar certificate record matches ID '" + certId + "'. Please verify format (e.g. AIP-L1-2026-000245).";
+      }
+      if (statusIcon) {
+        statusIcon.textContent = "✕";
+        statusIcon.style.background = "#ff4444";
+        statusIcon.style.color = "#fff";
+      }
+      if (timestamp) {
+        timestamp.textContent = "Checked Just Now";
+      }
+      if (certDisplay) certDisplay.style.display = "none";
+    }
+
+    // Scroll smoothly to results
+    const resultsSection = document.getElementById('verify-result-section');
+    if (resultsSection) {
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  // Handle Form Submission
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    performVerification(input.value);
+  });
+
+  // Handle Sample Button Clicks
+  sampleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-id');
+      performVerification(id);
+    });
+  });
+
+  // Handle Copy Verification Link
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const certId = input.value || "AIP-L1-2026-000245";
+      const shareUrl = window.location.origin + window.location.pathname + "?id=" + encodeURIComponent(certId);
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        const origText = copyBtn.textContent;
+        copyBtn.textContent = "✓ Link Copied!";
+        setTimeout(() => { copyBtn.textContent = origText; }, 2000);
+      });
+    });
+  }
+
+  // Parse URL parameter e.g. verify.html?id=AIP-L1-2026-000245
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramId = urlParams.get('id');
+  if (paramId) {
+    performVerification(paramId);
+  } else {
+    // Default verification on first page load
+    performVerification("AIP-L1-2026-000245");
+  }
 }
+
 
 
 
