@@ -5722,3 +5722,108 @@ p, .section-lead, .section-subtext {
   gap: 6px;
 }
 
+/* ======================================================
+   AI SHIFT — STACKED SCROLL CARDS
+   ====================================================== */
+
+.why-ai-scroll-container {
+  position: relative;
+  height: 500vh;
+}
+
+.why-ai-sticky-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.why-ai-stack-card {
+  position: absolute;
+  width: min(680px, 88vw);
+  background: rgba(10, 10, 10, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 2px solid var(--card-accent, rgba(255,255,255,0.1));
+  border-radius: 20px;
+  padding: 52px 52px 48px;
+  will-change: transform, opacity;
+  transform: translateY(110%);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.why-ai-stack-card[data-index="0"] {
+  transform: translateY(0%);
+}
+
+.stack-card-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 36px;
+}
+
+.stack-card-num {
+  font-family: var(--font-sans);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--card-accent, rgba(255,255,255,0.15));
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0.4;
+  letter-spacing: -0.03em;
+}
+
+.stack-card-body h3 {
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.stack-card-body p {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.stack-card-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Mobile: flatten to vertical list, no sticky */
+@media (max-width: 768px) {
+  .why-ai-scroll-container {
+    height: auto;
+  }
+  .why-ai-sticky-stage {
+    position: relative;
+    height: auto;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 20px 60px;
+    overflow: visible;
+  }
+  .why-ai-stack-card {
+    position: relative;
+    transform: none !important;
+    width: 100%;
+    padding: 36px 24px;
+  }
+  .stack-card-num { font-size: 2.2rem; }
+  .stack-card-body h3 { font-size: 1.25rem; }
+  .stack-card-inner { gap: 20px; }
+}

@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initStatsCounters', initStatsCounters);
   initSafe('initCardSpotlight', initCardSpotlight);
   initSafe('initDynamicHero', initDynamicHero);
+  initSafe('initStackedCards', initStackedCards);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -1717,3 +1718,55 @@ function initDynamicHero() {
 }
 
 
+/* --- 16. AI Shift — Stacked Scroll Cards --- */
+function initStackedCards() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  const scrollContainer = document.querySelector('.why-ai-scroll-container');
+  const stage = document.querySelector('.why-ai-sticky-stage');
+  const cards = document.querySelectorAll('.why-ai-stack-card');
+
+  if (!scrollContainer || !stage || !cards.length) return;
+
+  // Skip on mobile (cards are in normal flow)
+  if (window.innerWidth <= 768) return;
+
+  const totalCards = cards.length;
+  // Each transition takes 80vh worth of scroll
+  const scrollPerCard = window.innerHeight * 0.8;
+
+  cards.forEach((card, i) => {
+    if (i === 0) return; // first card already in position
+
+    // Slide current card up from below
+    gsap.fromTo(card,
+      { y: '110%' },
+      {
+        y: '0%',
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: scrollContainer,
+          start: () => `top+=${(i - 1) * scrollPerCard}px top`,
+          end: () => `top+=${i * scrollPerCard}px top`,
+          scrub: 0.8,
+          invalidateOnRefresh: true,
+        }
+      }
+    );
+
+    // Push previous card back slightly to create depth
+    gsap.to(cards[i - 1], {
+      scale: 0.94,
+      y: '-20px',
+      opacity: 0.65,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: scrollContainer,
+        start: () => `top+=${(i - 1) * scrollPerCard}px top`,
+        end: () => `top+=${i * scrollPerCard}px top`,
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+      }
+    });
+  });
+}
