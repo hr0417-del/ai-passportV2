@@ -1959,6 +1959,42 @@ function initCertificateVerifier() {
   }
 }
 
+/* --- 16. Section 4 Ecosystem Diagram Interactive Engine --- */
+function initEcosystemDiagram() {
+  const ecoNodes = document.querySelectorAll('.eco-node');
+  if (!ecoNodes || ecoNodes.length === 0) return;
+
+  ecoNodes.forEach(node => {
+    node.addEventListener('mouseenter', () => {
+      ecoNodes.forEach(n => n.style.opacity = '0.5');
+      node.style.opacity = '1';
+      const targetType = node.getAttribute('data-node');
+      const connectedNodes = document.querySelectorAll(`[data-node="${targetType}"], .eco-node-core`);
+      connectedNodes.forEach(cn => cn.style.opacity = '1');
+    });
+
+    node.addEventListener('mouseleave', () => {
+      ecoNodes.forEach(n => n.style.opacity = '1');
+    });
+
+    node.addEventListener('click', () => {
+      const type = node.getAttribute('data-node');
+      if (type === 'live') window.location.href = 'live.html';
+      else if (type === 'academy') window.location.href = 'academy.html';
+      else if (type === 'verify') window.location.href = 'verify.html';
+      else if (type === 'passport') window.location.href = 'passport.html';
+      else if (type === 'council') window.location.href = 'about.html';
+      else if (type === 'build' || type === 'outcomes') window.location.href = 'passport.html#projects';
+    });
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initEcosystemDiagram);
+} else {
+  initEcosystemDiagram();
+}
+
 
 
 

@@ -6013,6 +6013,603 @@ p, .section-lead, .section-subtext {
   }
 }
 
+/* ======================================================
+   AI PASSPORT V3 MASTER DESIGN SYSTEM & MODULES
+   ====================================================== */
+
+/* Section 2: Framework Grid */
+.framework-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.framework-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 28px 20px;
+  text-align: left;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.framework-card:hover {
+  background: rgba(223, 207, 173, 0.04);
+  border-color: rgba(223, 207, 173, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+
+.framework-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.framework-step-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+.framework-icon {
+  font-size: 1.4rem;
+}
+
+.framework-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+
+.framework-card-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 14px;
+}
+
+.framework-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.framework-list li {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+  padding-left: 14px;
+  margin-bottom: 6px;
+}
+
+.framework-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+}
+
+/* Section 3: Philosophy Quote Card */
+.philosophy-quote-card {
+  background: rgba(223, 207, 173, 0.03);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  border-radius: 16px;
+  padding: 36px 44px;
+  display: inline-block;
+  backdrop-filter: blur(12px);
+  margin-top: 12px;
+}
+
+.philosophy-quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-gold);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* Section 4: Interactive Ecosystem Diagram */
+.ecosystem-tree-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.eco-node {
+  background: rgba(13, 13, 13, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px 32px;
+  text-align: center;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 2;
+}
+
+.eco-node:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 24px rgba(223, 207, 173, 0.25);
+  transform: scale(1.03);
+}
+
+.eco-node-top {
+  border-color: rgba(223, 207, 173, 0.3);
+  background: rgba(223, 207, 173, 0.04);
+}
+
+.eco-node-tag {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.eco-node-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.eco-node-sub {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.eco-node-core {
+  border-color: rgba(223, 207, 173, 0.4);
+  padding: 24px 48px;
+  background: rgba(223, 207, 173, 0.06);
+}
+
+.eco-connector-vertical {
+  width: 2px;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(223, 207, 173, 0.5), rgba(255, 255, 255, 0.1));
+}
+
+.eco-connector-split {
+  width: 80%;
+  height: 36px;
+  border-left: 2px solid rgba(223, 207, 173, 0.3);
+  border-right: 2px solid rgba(223, 207, 173, 0.3);
+  border-top: 2px solid rgba(223, 207, 173, 0.3);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  margin-bottom: -2px;
+}
+
+.eco-pathways-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.eco-node-path {
+  padding: 16px;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.eco-path-title {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.eco-path-sub {
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+}
+
+.eco-connector-merge {
+  width: 80%;
+  height: 36px;
+  border-left: 2px solid rgba(223, 207, 173, 0.3);
+  border-right: 2px solid rgba(223, 207, 173, 0.3);
+  border-bottom: 2px solid rgba(223, 207, 173, 0.3);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.eco-node-action {
+  background: rgba(0, 82, 255, 0.05);
+  border-color: rgba(0, 82, 255, 0.3);
+  padding: 20px 40px;
+}
+
+.eco-node-outcomes {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 14px 32px;
+  border-radius: 30px;
+}
+
+.eco-outcomes-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+  margin: 0;
+}
+
+/* Section 5: Audience Cards Grid */
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.audience-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 32px 24px;
+  text-align: left;
+  transition: all 0.35s ease;
+}
+
+.audience-card:hover {
+  background: rgba(223, 207, 173, 0.03);
+  border-color: rgba(223, 207, 173, 0.25);
+  transform: translateY(-4px);
+}
+
+.audience-card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+}
+
+.audience-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.audience-card-desc {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Section 7: Credential Visual Cards Grid */
+.passport-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.passport-visual-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 18px 20px;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.passport-visual-card:hover {
+  border-color: rgba(223, 207, 173, 0.3);
+  background: rgba(223, 207, 173, 0.03);
+}
+
+.pvc-title {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  margin-bottom: 4px;
+}
+
+.pvc-desc {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Section 8: Academy Pathways Grid */
+.academy-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.academy-card {
+  background: rgba(13, 13, 13, 0.8);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  border-radius: 14px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  transition: all 0.35s ease;
+}
+
+.academy-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+.academy-card-badge {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  background: rgba(223, 207, 173, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.academy-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.academy-card-desc {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: 28px;
+}
+
+/* Section 9: Council Focus & Members Grid */
+.council-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.council-focus-card {
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.council-focus-card:hover {
+  border-color: rgba(223, 207, 173, 0.25);
+  background: rgba(223, 207, 173, 0.025);
+}
+
+.council-focus-card h4 {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  margin-bottom: 6px;
+}
+
+.council-focus-card p {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.council-members-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.council-member-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.35s ease;
+}
+
+.council-member-card:hover {
+  border-color: rgba(223, 207, 173, 0.3);
+  transform: translateY(-4px);
+}
+
+.member-avatar-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px auto;
+  border: 2px solid rgba(223, 207, 173, 0.4);
+  box-shadow: 0 0 16px rgba(223, 207, 173, 0.2);
+}
+
+.member-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.member-title {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  margin-bottom: 8px;
+}
+
+.member-bio {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Section 10: Community Stories Grid */
+.testimonials-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.community-story-card {
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 32px 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.35s ease;
+}
+
+.community-story-card:hover {
+  background: rgba(223, 207, 173, 0.03);
+  border-color: rgba(223, 207, 173, 0.25);
+  transform: translateY(-4px);
+}
+
+.story-text {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.story-author {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  margin-bottom: 2px;
+}
+
+.story-role {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* Section 11: Partner Categories Grid */
+.partner-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.partner-cat-card {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.partner-cat-card:hover {
+  border-color: rgba(223, 207, 173, 0.25);
+  background: rgba(223, 207, 173, 0.025);
+}
+
+.partner-cat-badge {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.partner-cat-text {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .framework-grid, .audience-grid, .academy-cards-grid,
+  .council-focus-grid, .testimonials-cards-grid, .partner-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .passport-cards-grid, .council-members-grid {
+    grid-template-columns: 1fr;
+  }
+  .eco-pathways-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .framework-grid, .audience-grid, .academy-cards-grid,
+  .council-focus-grid, .testimonials-cards-grid, .partner-categories-grid,
+  .eco-pathways-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 
 
