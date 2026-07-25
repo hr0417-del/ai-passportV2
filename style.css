@@ -7173,20 +7173,26 @@ p, .section-lead, .section-subtext {
   align-items: center;
 }
 
+.ecosystem-diagram-section {
+  background-color: #000000 !important;
+  background: #000000 !important;
+}
+
 .raw-passport-img {
   width: 230px;
   max-width: 250px;
   height: auto;
   object-fit: contain;
-  border-radius: 16px;
-  filter: drop-shadow(0 0 45px rgba(223, 207, 173, 0.4)) drop-shadow(0 20px 50px rgba(0, 0, 0, 0.95));
+  background: #000000;
+  border-radius: 0;
+  filter: drop-shadow(0 0 45px rgba(223, 207, 173, 0.45));
   animation: passport-levitate-pure 4s ease-in-out infinite;
   transition: transform 0.4s ease, filter 0.4s ease;
 }
 
 .orbit-core-passport-raw:hover .raw-passport-img {
   transform: scale(1.08) rotate(1.5deg);
-  filter: drop-shadow(0 0 65px var(--color-gold)) drop-shadow(0 0 85px rgba(223, 207, 173, 0.6));
+  filter: drop-shadow(0 0 65px var(--color-gold)) drop-shadow(0 0 90px rgba(223, 207, 173, 0.65));
 }
 
 @keyframes passport-levitate-pure {
