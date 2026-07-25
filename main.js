@@ -2183,53 +2183,6 @@ function initCapabilityWheel() {
   }
 }
 
-  capCards.forEach(card => {
-    const type = card.getAttribute('data-cap');
-    const targetLine = document.getElementById(`line-${type}`);
-
-    card.addEventListener('mouseenter', () => {
-      if (typeof playTickSound === 'function') playTickSound('tick');
-      
-      // Highlight Reactor Core
-      if (hub) {
-        hub.style.borderColor = 'var(--color-gold)';
-        hub.style.boxShadow = '0 0 60px rgba(223, 207, 173, 0.5), inset 0 0 30px rgba(223, 207, 173, 0.25)';
-      }
-
-      // Highlight Laser Line
-      if (targetLine) {
-        targetLine.style.stroke = 'var(--color-gold)';
-        targetLine.style.strokeWidth = '3px';
-        targetLine.style.filter = 'drop-shadow(0 0 10px var(--color-gold))';
-      }
-
-      // Update Inspector Panel Content
-      if (inspectorData[type]) {
-        const data = inspectorData[type];
-        if (badgeEl) badgeEl.textContent = data.badge;
-        if (titleEl) titleEl.textContent = data.title;
-        if (outcomeEl) outcomeEl.textContent = data.outcome;
-        if (ctaEl) ctaEl.href = data.link;
-        if (tagsEl) {
-          tagsEl.innerHTML = data.tags.map(t => `<span class="inspector-tag-pill">${t}</span>`).join('');
-        }
-      }
-    });
-
-    card.addEventListener('mouseleave', () => {
-      if (hub) {
-        hub.style.borderColor = '';
-        hub.style.boxShadow = '';
-      }
-      if (targetLine) {
-        targetLine.style.stroke = '';
-        targetLine.style.strokeWidth = '';
-        targetLine.style.filter = '';
-      }
-    });
-  });
-}
-
 /* --- 19. Magnetic Button Tracking Engine --- */
 function initMagneticButtons() {
   const btns = document.querySelectorAll('.btn-primary, .btn-secondary, .nav-cta-btn');
