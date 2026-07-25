@@ -7154,49 +7154,46 @@ p, .section-lead, .section-subtext {
   align-items: center;
 }
 
-/* Central Core Node */
-.orbit-core-node {
+/* Central Floating Original FRAME 1 Image (No Background Box) */
+.orbit-core-passport-raw {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(223, 207, 173, 0.22) 0%, rgba(10, 10, 10, 0.98) 75%);
-  border: 1.5px solid var(--color-gold);
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  padding: 0 !important;
+  z-index: 10;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 10;
-  box-shadow: 0 0 60px rgba(223, 207, 173, 0.35), inset 0 0 35px rgba(223, 207, 173, 0.2);
-  backdrop-filter: blur(20px);
-  padding: 12px;
 }
 
-.floating-passport-img {
-  width: 105px;
-  height: 105px;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(223, 207, 173, 0.4);
-  border: 1px solid rgba(223, 207, 173, 0.4);
-  animation: passport-float 4s ease-in-out infinite;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+.raw-passport-img {
+  width: 220px;
+  max-width: 240px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 35px rgba(223, 207, 173, 0.35)) drop-shadow(0 0 25px rgba(0, 0, 0, 0.9));
+  animation: passport-levitate-pure 4s ease-in-out infinite;
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-.orbit-core-node:hover .floating-passport-img {
-  transform: scale(1.1) rotate(2deg);
-  box-shadow: 0 0 45px var(--color-gold), 0 0 65px var(--color-gold);
+.orbit-core-passport-raw:hover .raw-passport-img {
+  transform: scale(1.08) rotate(1.5deg);
+  filter: drop-shadow(0 0 45px var(--color-gold)) drop-shadow(0 0 65px rgba(223, 207, 173, 0.6));
 }
 
-@keyframes passport-float {
+@keyframes passport-levitate-pure {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-8px) rotate(-1.5deg);
+    transform: translateY(-10px) rotate(-1.5deg);
   }
 }
 
