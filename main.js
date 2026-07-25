@@ -2059,16 +2059,66 @@ function initCapabilityWheel() {
   });
 }
 
+/* --- 19. Magnetic Button Tracking Engine --- */
+function initMagneticButtons() {
+  const btns = document.querySelectorAll('.btn-primary, .btn-secondary, .nav-cta-btn');
+  btns.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px) scale(1.04)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+
+    btn.addEventListener('mouseenter', () => {
+      if (typeof playTickSound === 'function') playTickSound('tick');
+    });
+  });
+}
+
+/* --- 20. Universal 3D Magnetic Card Tilt Engine --- */
+function init3DTiltCards() {
+  const cards = document.querySelectorAll('.academy-card, .council-focus-card, .insight-card, .audience-card, .hero-passport-card-wrapper');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      const tiltX = (y / (rect.height / 2)) * -8;
+      const tiltY = (x / (rect.width / 2)) * 8;
+
+      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-6px) scale(1.015)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+
+    card.addEventListener('mouseenter', () => {
+      if (typeof playTickSound === 'function') playTickSound('hover');
+    });
+  });
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initEcosystemDiagram();
     initFrameworkAnimation();
     initCapabilityWheel();
+    initMagneticButtons();
+    init3DTiltCards();
   });
 } else {
   initEcosystemDiagram();
   initFrameworkAnimation();
   initCapabilityWheel();
+  initMagneticButtons();
+  init3DTiltCards();
 }
 
 

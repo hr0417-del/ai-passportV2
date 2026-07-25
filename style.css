@@ -6870,6 +6870,91 @@ p, .section-lead, .section-subtext {
   .insights-grid { grid-template-columns: 1fr !important; }
 }
 
+/* ======================================================
+   1000X CRAZY ANIMATION SUITE & CRAZY INTERACTIONS
+   ====================================================== */
+
+/* 1. Circuit Electric Laser Flow for Ecosystem Connectors */
+.eco-connector-vertical, .eco-connector-split, .eco-connector-merge {
+  position: relative;
+  overflow: hidden;
+}
+
+.eco-connector-vertical::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
+  animation: circuit-flow-vertical 2.2s infinite linear;
+}
+
+@keyframes circuit-flow-vertical {
+  0% { top: -20px; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* 2. Breathing AIQ Neon Core */
+.aiq-callout-box {
+  position: relative;
+  animation: aiq-pulse 4s infinite ease-in-out;
+}
+
+@keyframes aiq-pulse {
+  0%, 100% {
+    border-color: rgba(223, 207, 173, 0.2);
+    box-shadow: 0 0 20px rgba(223, 207, 173, 0.05);
+  }
+  50% {
+    border-color: rgba(223, 207, 173, 0.6);
+    box-shadow: 0 0 36px rgba(223, 207, 173, 0.25), inset 0 0 16px rgba(223, 207, 173, 0.1);
+  }
+}
+
+/* 3. Metallic Sheen Light Sweep on Hover */
+.audience-card, .academy-card, .council-focus-card, .insight-card, .project-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.audience-card::before, .academy-card::before, .council-focus-card::before, .insight-card::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(135deg, transparent 45%, rgba(223, 207, 173, 0.12) 50%, transparent 55%);
+  transition: transform 0.8s ease;
+  pointer-events: none;
+}
+
+.audience-card:hover::before, .academy-card:hover::before, .council-focus-card:hover::before, .insight-card:hover::before {
+  transform: translate(50%, 50%);
+}
+
+/* 4. Pulsing Gold Halo on Hero Live Pill */
+.hero-live-pill {
+  position: relative;
+  box-shadow: 0 0 16px rgba(223, 207, 173, 0.15);
+  animation: pill-glow-pulse 3s infinite ease-in-out;
+}
+
+@keyframes pill-glow-pulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(223, 207, 173, 0.15); }
+  50% { box-shadow: 0 0 30px rgba(223, 207, 173, 0.4); }
+}
+
+/* 5. 3D Magnetic Cursor Tilt Utility */
+.tilt-card-3d {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  transform-style: preserve-3d;
+}
+
 
 
 
