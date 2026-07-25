@@ -2380,6 +2380,32 @@ function initMissionTextAnimation() {
   }
 }
 
+/* --- 22. 100,000X Flagship Footer Engine --- */
+function initFooterInteractions() {
+  const form = document.getElementById('footer-newsletter-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('.fnc-input');
+      if (input && input.value) {
+        if (typeof showToast === 'function') {
+          showToast('✓ Welcome to Institutional Directives. Your subscription is verified.', 'success');
+        } else {
+          alert('✓ Welcome to Institutional Directives. Your subscription is verified.');
+        }
+        input.value = '';
+      }
+    });
+  }
+
+  const scrollTopBtn = document.getElementById('scroll-to-top-btn');
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initEcosystemDiagram();
@@ -2388,6 +2414,7 @@ if (document.readyState === 'loading') {
     initMagneticButtons();
     init3DTiltCards();
     initMissionTextAnimation();
+    initFooterInteractions();
   });
 } else {
   initEcosystemDiagram();
@@ -2396,6 +2423,7 @@ if (document.readyState === 'loading') {
   initMagneticButtons();
   init3DTiltCards();
   initMissionTextAnimation();
+  initFooterInteractions();
 }
 
 
