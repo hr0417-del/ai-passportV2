@@ -1959,16 +1959,16 @@ function initCertificateVerifier() {
   }
 }
 
-/* --- 16. Section 4 Concept 1: Interactive Circuit Laser Pipeline Engine --- */
+/* --- 16. Section 4 Concept A: Interactive 3D Holographic Orbit Wheel Engine --- */
 function initEcosystemDiagram() {
-  const nodeCards = document.querySelectorAll('.eco-pipeline-card');
+  const satelliteNodes = document.querySelectorAll('.orbit-satellite-node');
   const drawerBadge = document.getElementById('edd-badge');
   const drawerTitle = document.getElementById('edd-title');
   const drawerDesc = document.getElementById('edd-desc');
   const drawerPills = document.getElementById('edd-pills');
   const drawerCta = document.getElementById('edd-cta');
 
-  if (!nodeCards || nodeCards.length === 0) return;
+  if (!satelliteNodes || satelliteNodes.length === 0) return;
 
   const ecoData = {
     council: {
@@ -1993,25 +1993,11 @@ function initEcosystemDiagram() {
       cta: 'passport.html'
     },
     academy: {
-      badge: 'MASTERY PROGRAMME',
-      title: '🎓 ACADEMY — Structured Capability Pathways',
-      desc: 'Comprehensive learning programmes designed for deep technical and practical AI capability development.',
-      pills: ['STRUCTURED LEARNING', 'REAL-WORLD CODE', 'EXPERT GUIDANCE'],
+      badge: 'CAPABILITY PATHWAYS',
+      title: '🎓 ACADEMY & LIVE — Structured Mastery & Workshops',
+      desc: 'Comprehensive learning programmes and live interactive build sessions for deep technical and practical AI capability development.',
+      pills: ['STRUCTURED LEARNING', 'LIVE WORKSHOPS', 'EXPERT GUIDANCE'],
       cta: 'academy.html'
-    },
-    live: {
-      badge: 'INTERACTIVE WORKSHOPS',
-      title: '⚡ LIVE WORKSHOPS — Hands-on Build Sessions',
-      desc: 'Live interactive build sessions where participants build production AI agents, automated workflows, and custom tools in real-time.',
-      pills: ['LIVE BUILDING', 'EXPERT COLLABORATION', 'REAL-TIME DEMOS'],
-      cta: 'live.html'
-    },
-    verify: {
-      badge: 'CREDENTIAL AUDITING',
-      title: '🛡 VERIFY — Public Verification Infrastructure',
-      desc: 'Public verification engine allowing employers, institutions, and partners to instantly audit verified builder credentials.',
-      pills: ['PUBLIC AUDITING', 'INSTITUTIONAL TRUST', 'VERIFIED BADGES'],
-      cta: 'verify.html'
     },
     build: {
       badge: 'PRACTICAL APPLICATION',
@@ -2029,12 +2015,12 @@ function initEcosystemDiagram() {
     }
   };
 
-  nodeCards.forEach(card => {
-    const key = card.getAttribute('data-econode');
-    
-    card.addEventListener('mouseenter', () => {
+  satelliteNodes.forEach(node => {
+    const key = node.getAttribute('data-econode');
+
+    node.addEventListener('mouseenter', () => {
       if (typeof playTickSound === 'function') playTickSound('tick');
-      
+
       const data = ecoData[key];
       if (data) {
         if (drawerBadge) drawerBadge.textContent = data.badge;
@@ -2047,7 +2033,7 @@ function initEcosystemDiagram() {
       }
     });
 
-    card.addEventListener('click', () => {
+    node.addEventListener('click', () => {
       const data = ecoData[key];
       if (data && data.cta) {
         window.location.href = data.cta;

@@ -7141,23 +7141,194 @@ p, .section-lead, .section-subtext {
 }
 
 /* ======================================================
-   CONCEPT 1: INTERACTIVE CIRCUIT LASER PIPELINE
+   CONCEPT A: INTERACTIVE 3D HOLOGRAPHIC ORBIT WHEEL
    ====================================================== */
-.circuit-pipeline-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 860px;
-  margin: 0 auto 40px auto;
+.orbit-stage-container {
   position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 520px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.eco-pipeline-card {
+/* Central Core Node */
+.orbit-core-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(223, 207, 173, 0.16) 0%, rgba(13, 13, 13, 0.95) 70%);
+  border: 1.5px solid var(--color-gold);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  box-shadow: 0 0 50px rgba(223, 207, 173, 0.25), inset 0 0 30px rgba(223, 207, 173, 0.15);
+  backdrop-filter: blur(20px);
+}
+
+.core-pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 100%;
-  background: rgba(13, 13, 13, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid rgba(223, 207, 173, 0.4);
+  transform: translate(-50%, -50%) scale(1);
+  animation: orbit-pulse-ring 3.6s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  pointer-events: none;
+}
+
+.core-pulse-ring.delay-1 { animation-delay: 1.2s; }
+.core-pulse-ring.delay-2 { animation-delay: 2.4s; }
+
+@keyframes orbit-pulse-ring {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+}
+
+.core-badge-wrap {
+  text-align: center;
+}
+
+.core-badge-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.core-badge-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.core-badge-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(223, 207, 173, 0.15);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Satellite Nodes Positioned Symmetrically */
+.orbit-satellite-node {
+  position: absolute;
+  width: 220px;
+  background: rgba(13, 13, 13, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 22px 28px;
+  padding: 16px 20px;
+  text-align: left;
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 12;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+.orbit-satellite-node:hover {
+  border-color: var(--color-gold);
+  background: rgba(223, 207, 173, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(223, 207, 173, 0.2);
+  transform: scale(1.06);
+}
+
+.pos-top {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pos-left {
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.pos-right {
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+.pos-bottom-left {
+  bottom: 20px;
+  left: 80px;
+}
+
+.pos-bottom-right {
+  bottom: 20px;
+  right: 80px;
+}
+
+.osn-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.osn-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 2px 0;
+}
+
+.osn-desc {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .orbit-stage-container {
+    height: auto;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .orbit-core-node {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 30px;
+  }
+  .orbit-satellite-node {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    transform: none !important;
+    width: 100%;
+    max-width: 400px;
+  }
+}
   text-align: left;
   backdrop-filter: blur(16px);
   cursor: pointer;
