@@ -7028,6 +7028,114 @@ p, .section-lead, .section-subtext {
 }
 
 /* ======================================================
+   CONCEPT A: 5-CARD MINIMALIST GLASS PILL GRID
+   ====================================================== */
+.minimal-cap-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.minimal-cap-card {
+  background: rgba(13, 13, 13, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: left;
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.minimal-cap-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(223, 207, 173, 0.18), transparent);
+  transition: all 0.6s ease;
+}
+
+.minimal-cap-card:hover::before {
+  left: 150%;
+}
+
+.minimal-cap-card:hover {
+  border-color: var(--color-gold);
+  background: rgba(223, 207, 173, 0.06);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(223, 207, 173, 0.18);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.mcc-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(223, 207, 173, 0.08);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  color: var(--color-gold);
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.minimal-cap-card:hover .mcc-icon-wrap {
+  background: rgba(223, 207, 173, 0.2);
+  border-color: var(--color-gold);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.mcc-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.mcc-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.mcc-desc {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .minimal-cap-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .minimal-cap-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ======================================================
    CONCEPT 1: INTERACTIVE CIRCUIT LASER PIPELINE
    ====================================================== */
 .circuit-pipeline-container {
