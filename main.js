@@ -1959,32 +1959,99 @@ function initCertificateVerifier() {
   }
 }
 
-/* --- 16. Section 4 Ecosystem Diagram Interactive Engine --- */
+/* --- 16. Section 4 Concept 1: Interactive Circuit Laser Pipeline Engine --- */
 function initEcosystemDiagram() {
-  const ecoNodes = document.querySelectorAll('.eco-node');
-  if (!ecoNodes || ecoNodes.length === 0) return;
+  const nodeCards = document.querySelectorAll('.eco-pipeline-card');
+  const drawerBadge = document.getElementById('edd-badge');
+  const drawerTitle = document.getElementById('edd-title');
+  const drawerDesc = document.getElementById('edd-desc');
+  const drawerPills = document.getElementById('edd-pills');
+  const drawerCta = document.getElementById('edd-cta');
 
-  ecoNodes.forEach(node => {
-    node.addEventListener('mouseenter', () => {
-      ecoNodes.forEach(n => n.style.opacity = '0.5');
-      node.style.opacity = '1';
-      const targetType = node.getAttribute('data-node');
-      const connectedNodes = document.querySelectorAll(`[data-node="${targetType}"], .eco-node-core`);
-      connectedNodes.forEach(cn => cn.style.opacity = '1');
+  if (!nodeCards || nodeCards.length === 0) return;
+
+  const ecoData = {
+    council: {
+      badge: 'GOVERNANCE & ALIGNMENT',
+      title: '🏛 AI PASSPORT COUNCIL™ — Institutional Advisory',
+      desc: 'The advisory council curates global framework standards, reviews ethical AI directives, and validates institutional capability credentials across industry tracks.',
+      pills: ['GLOBAL GOVERNANCE', 'FRAMEWORK ALIGNMENT', 'ETHICAL DIRECTIVES'],
+      cta: 'about.html'
+    },
+    framework: {
+      badge: 'INTELLECTUAL ENGINE',
+      title: '⚙ AI CAPABILITY FRAMEWORK™ — Signature Methodology',
+      desc: 'The 5-capability engine driving all learning and verification: Understand, Apply, Create, Evaluate, and Responsible AI capability.',
+      pills: ['CORE METHODOLOGY', '5 CAPABILITIES', 'PRACTICAL MASTERY'],
+      cta: '#capability-framework'
+    },
+    passport: {
+      badge: 'VERIFIABLE LEDGER',
+      title: '🆔 AI PASSPORT™ — Lifelong Digital Identity',
+      desc: 'A permanent digital ledger tracking all completed capability pathways, verified project builds, AIQ scores, and institutional credentials.',
+      pills: ['LIFELONG LEDGER', 'VERIFIED CREDENTIALS', 'DYNAMIC AIQ SCORE'],
+      cta: 'passport.html'
+    },
+    academy: {
+      badge: 'MASTERY PROGRAMME',
+      title: '🎓 ACADEMY — Structured Capability Pathways',
+      desc: 'Comprehensive learning programmes designed for deep technical and practical AI capability development.',
+      pills: ['STRUCTURED LEARNING', 'REAL-WORLD CODE', 'EXPERT GUIDANCE'],
+      cta: 'academy.html'
+    },
+    live: {
+      badge: 'INTERACTIVE WORKSHOPS',
+      title: '⚡ LIVE WORKSHOPS — Hands-on Build Sessions',
+      desc: 'Live interactive build sessions where participants build production AI agents, automated workflows, and custom tools in real-time.',
+      pills: ['LIVE BUILDING', 'EXPERT COLLABORATION', 'REAL-TIME DEMOS'],
+      cta: 'live.html'
+    },
+    verify: {
+      badge: 'CREDENTIAL AUDITING',
+      title: '🛡 VERIFY — Public Verification Infrastructure',
+      desc: 'Public verification engine allowing employers, institutions, and partners to instantly audit verified builder credentials.',
+      pills: ['PUBLIC AUDITING', 'INSTITUTIONAL TRUST', 'VERIFIED BADGES'],
+      cta: 'verify.html'
+    },
+    build: {
+      badge: 'PRACTICAL APPLICATION',
+      title: '🔨 BUILD REAL PROJECTS — Portfolio Engine',
+      desc: 'The core requirement of AI Passport: building original, portfolio-ready AI solutions and autonomous agent pipelines.',
+      pills: ['PORTFOLIO PROJECTS', 'AUTONOMOUS AGENTS', 'PRODUCTION CODE'],
+      cta: 'passport.html#projects'
+    },
+    outcomes: {
+      badge: 'GLOBAL IMPACT',
+      title: '🌐 VERIFIED OUTCOMES — Career & Community Growth',
+      desc: 'Connecting verified builders with high-impact AI careers, global community initiatives, and lifelong professional recognition.',
+      pills: ['CAREER ADVANCEMENT', 'GLOBAL COMMUNITY', 'LIFELONG IDENTITY'],
+      cta: 'contact.html'
+    }
+  };
+
+  nodeCards.forEach(card => {
+    const key = card.getAttribute('data-econode');
+    
+    card.addEventListener('mouseenter', () => {
+      if (typeof playTickSound === 'function') playTickSound('tick');
+      
+      const data = ecoData[key];
+      if (data) {
+        if (drawerBadge) drawerBadge.textContent = data.badge;
+        if (drawerTitle) drawerTitle.textContent = data.title;
+        if (drawerDesc) drawerDesc.textContent = data.desc;
+        if (drawerCta) drawerCta.href = data.cta;
+        if (drawerPills) {
+          drawerPills.innerHTML = data.pills.map(p => `<span class="edd-pill">${p}</span>`).join('');
+        }
+      }
     });
 
-    node.addEventListener('mouseleave', () => {
-      ecoNodes.forEach(n => n.style.opacity = '1');
-    });
-
-    node.addEventListener('click', () => {
-      const type = node.getAttribute('data-node');
-      if (type === 'live') window.location.href = 'live.html';
-      else if (type === 'academy') window.location.href = 'academy.html';
-      else if (type === 'verify') window.location.href = 'verify.html';
-      else if (type === 'passport') window.location.href = 'passport.html';
-      else if (type === 'council') window.location.href = 'about.html';
-      else if (type === 'build' || type === 'outcomes') window.location.href = 'passport.html#projects';
+    card.addEventListener('click', () => {
+      const data = ecoData[key];
+      if (data && data.cta) {
+        window.location.href = data.cta;
+      }
     });
   });
 }

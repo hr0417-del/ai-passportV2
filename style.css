@@ -7028,6 +7028,227 @@ p, .section-lead, .section-subtext {
 }
 
 /* ======================================================
+   CONCEPT 1: INTERACTIVE CIRCUIT LASER PIPELINE
+   ====================================================== */
+.circuit-pipeline-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 860px;
+  margin: 0 auto 40px auto;
+  position: relative;
+}
+
+.eco-pipeline-card {
+  width: 100%;
+  background: rgba(13, 13, 13, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 22px 28px;
+  text-align: left;
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.eco-pipeline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(223, 207, 173, 0.15), transparent);
+  transition: all 0.6s ease;
+}
+
+.eco-pipeline-card:hover::before {
+  left: 150%;
+}
+
+.eco-pipeline-card:hover {
+  border-color: var(--color-gold);
+  background: rgba(223, 207, 173, 0.06);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8), 0 0 28px rgba(223, 207, 173, 0.18);
+  transform: translateY(-3px) scale(1.015);
+}
+
+.epc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.epc-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--color-gold);
+}
+
+.epc-status {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  background: rgba(223, 207, 173, 0.15);
+  border: 1px solid rgba(223, 207, 173, 0.3);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.epc-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.epc-sub-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.epc-desc {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Shooting Laser Pulse Connectors */
+.circuit-laser-connector {
+  position: relative;
+  width: 2px;
+  height: 36px;
+  margin: 4px 0;
+}
+
+.laser-track-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(223, 207, 173, 0.2);
+}
+
+.shooting-laser-pulse {
+  position: absolute;
+  top: -100%;
+  left: -2px;
+  width: 6px;
+  height: 18px;
+  background: linear-gradient(180deg, transparent, var(--color-gold), #ffffff);
+  border-radius: 4px;
+  box-shadow: 0 0 12px var(--color-gold), 0 0 20px var(--color-gold);
+  animation: circuit-laser-shoot 2.2s infinite ease-in-out;
+}
+
+@keyframes circuit-laser-shoot {
+  0% { top: -40%; opacity: 0; }
+  30% { opacity: 1; }
+  100% { top: 120%; opacity: 0; }
+}
+
+/* Pathways 3-Grid */
+.eco-pipeline-pathways-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.sub-path {
+  padding: 18px 20px !important;
+}
+
+/* Interactive Detail Drawer */
+.eco-detail-drawer {
+  max-width: 860px;
+  margin: 30px auto 0 auto;
+  background: rgba(13, 13, 13, 0.92);
+  border: 1px solid rgba(223, 207, 173, 0.3);
+  border-radius: 16px;
+  padding: 26px 32px;
+  text-align: left;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(223, 207, 173, 0.12);
+  transition: all 0.4s ease;
+}
+
+.edd-header {
+  margin-bottom: 10px;
+}
+
+.edd-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.edd-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.edd-desc {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin-bottom: 18px;
+}
+
+.edd-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.edd-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.edd-pill {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  background: rgba(223, 207, 173, 0.08);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .eco-pipeline-pathways-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ======================================================
    CONCEPT 2: LINEAR STAGE PRISM SLIDER (Linear / Stripe Style)
    ====================================================== */
 .prism-navbar-container {
