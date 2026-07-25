@@ -7160,18 +7160,44 @@ p, .section-lead, .section-subtext {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(223, 207, 173, 0.18) 0%, rgba(13, 13, 13, 0.96) 70%);
+  background: radial-gradient(circle at center, rgba(223, 207, 173, 0.22) 0%, rgba(10, 10, 10, 0.98) 75%);
   border: 1.5px solid var(--color-gold);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 10;
-  box-shadow: 0 0 50px rgba(223, 207, 173, 0.28), inset 0 0 30px rgba(223, 207, 173, 0.15);
+  box-shadow: 0 0 60px rgba(223, 207, 173, 0.35), inset 0 0 35px rgba(223, 207, 173, 0.2);
   backdrop-filter: blur(20px);
+  padding: 12px;
+}
+
+.floating-passport-img {
+  width: 105px;
+  height: 105px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(223, 207, 173, 0.4);
+  border: 1px solid rgba(223, 207, 173, 0.4);
+  animation: passport-float 4s ease-in-out infinite;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.orbit-core-node:hover .floating-passport-img {
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 0 0 45px var(--color-gold), 0 0 65px var(--color-gold);
+}
+
+@keyframes passport-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1.5deg);
+  }
 }
 
 .core-pulse-ring {
