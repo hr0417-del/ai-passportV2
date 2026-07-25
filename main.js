@@ -2035,18 +2035,86 @@ function initFrameworkAnimation() {
   }
 }
 
-/* --- 18. Section 3 Radial Capability Wheel Engine --- */
+/* --- 18. Section 3 10,000X Radial Capability Matrix & Inspector Engine --- */
 function initCapabilityWheel() {
   const capCards = document.querySelectorAll('.capability-card');
-  const hub = document.querySelector('.radial-center-hub');
+  const hub = document.getElementById('radial-reactor-core');
+  const badgeEl = document.getElementById('inspector-badge');
+  const titleEl = document.getElementById('inspector-title');
+  const outcomeEl = document.getElementById('inspector-outcome');
+  const tagsEl = document.getElementById('inspector-tags');
+  const ctaEl = document.getElementById('inspector-cta');
+
   if (!capCards || capCards.length === 0) return;
 
+  const inspectorData = {
+    understand: {
+      badge: 'CAPABILITY 01 — FOUNDATIONS',
+      title: '🧠 Understand — Core AI Concepts & System Dynamics',
+      outcome: 'Mastering underlying AI concepts, transformer architectures, token dynamics, and model capability boundaries to make informed technology decisions.',
+      tags: ['AI FOUNDATIONS', 'MODEL DYNAMICS', 'SYSTEM CAPABILITY'],
+      link: 'academy.html'
+    },
+    apply: {
+      badge: 'CAPABILITY 02 — WORKFLOW ADOPTION',
+      title: '⚙ Apply — Practical Workflow Integration',
+      outcome: 'Directly integrating AI tools into daily workflows to automate repetitive tasks, optimize prep work, and streamline operational efficiency.',
+      tags: ['WORKFLOW AUTOMATION', 'TOOL ADOPTION', 'OPERATIONAL EFFICIENCY'],
+      link: 'live.html'
+    },
+    create: {
+      badge: 'CAPABILITY 03 — AGENT & SOFTWARE CREATION',
+      title: '🚀 Create — Custom AI Solutions & Automated Pipelines',
+      outcome: 'Architecting custom AI assistants, multi-step autonomous pipelines, and portfolio-ready software applications that solve real-world challenges.',
+      tags: ['AGENT ARCHITECTURE', 'PIPELINE CREATION', 'CUSTOM SOLUTIONS'],
+      link: 'passport.html#projects'
+    },
+    evaluate: {
+      badge: 'CAPABILITY 04 — AUDITING & QUALITY CONTROL',
+      title: '🔍 Evaluate — Output Auditing & Edge Case Testing',
+      outcome: 'Rigorously testing AI outputs for hallucinations, accuracy, security vulnerabilities, edge cases, and organizational compliance standards.',
+      tags: ['OUTPUT AUDITING', 'EDGE CASE TESTING', 'ACCURACY STANDARDS'],
+      link: 'verify.html'
+    },
+    responsible: {
+      badge: 'CAPABILITY 05 — GOVERNANCE & ETHICS',
+      title: '🌍 Responsible — Ethical AI & Human-Centered Governance',
+      outcome: 'Implementing ethical AI governance, data privacy protocols, safety guardrails, and human-centered design principles across projects.',
+      tags: ['ETHICAL GOVERNANCE', 'DATA PRIVACY', 'SAFETY PROTOCOLS'],
+      link: 'about.html'
+    }
+  };
+
   capCards.forEach(card => {
+    const type = card.getAttribute('data-cap');
+    const targetLine = document.getElementById(`line-${type}`);
+
     card.addEventListener('mouseenter', () => {
       if (typeof playTickSound === 'function') playTickSound('tick');
+      
+      // Highlight Reactor Core
       if (hub) {
         hub.style.borderColor = 'var(--color-gold)';
-        hub.style.boxShadow = '0 0 50px rgba(223, 207, 173, 0.4), inset 0 0 24px rgba(223, 207, 173, 0.2)';
+        hub.style.boxShadow = '0 0 60px rgba(223, 207, 173, 0.5), inset 0 0 30px rgba(223, 207, 173, 0.25)';
+      }
+
+      // Highlight Laser Line
+      if (targetLine) {
+        targetLine.style.stroke = 'var(--color-gold)';
+        targetLine.style.strokeWidth = '3px';
+        targetLine.style.filter = 'drop-shadow(0 0 10px var(--color-gold))';
+      }
+
+      // Update Inspector Panel Content
+      if (inspectorData[type]) {
+        const data = inspectorData[type];
+        if (badgeEl) badgeEl.textContent = data.badge;
+        if (titleEl) titleEl.textContent = data.title;
+        if (outcomeEl) outcomeEl.textContent = data.outcome;
+        if (ctaEl) ctaEl.href = data.link;
+        if (tagsEl) {
+          tagsEl.innerHTML = data.tags.map(t => `<span class="inspector-tag-pill">${t}</span>`).join('');
+        }
       }
     });
 
@@ -2054,6 +2122,11 @@ function initCapabilityWheel() {
       if (hub) {
         hub.style.borderColor = '';
         hub.style.boxShadow = '';
+      }
+      if (targetLine) {
+        targetLine.style.stroke = '';
+        targetLine.style.strokeWidth = '';
+        targetLine.style.filter = '';
       }
     });
   });
