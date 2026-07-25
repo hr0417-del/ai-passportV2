@@ -2035,14 +2035,40 @@ function initFrameworkAnimation() {
   }
 }
 
+/* --- 18. Section 3 Radial Capability Wheel Engine --- */
+function initCapabilityWheel() {
+  const capCards = document.querySelectorAll('.capability-card');
+  const hub = document.querySelector('.radial-center-hub');
+  if (!capCards || capCards.length === 0) return;
+
+  capCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      if (typeof playTickSound === 'function') playTickSound('tick');
+      if (hub) {
+        hub.style.borderColor = 'var(--color-gold)';
+        hub.style.boxShadow = '0 0 50px rgba(223, 207, 173, 0.4), inset 0 0 24px rgba(223, 207, 173, 0.2)';
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (hub) {
+        hub.style.borderColor = '';
+        hub.style.boxShadow = '';
+      }
+    });
+  });
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initEcosystemDiagram();
     initFrameworkAnimation();
+    initCapabilityWheel();
   });
 } else {
   initEcosystemDiagram();
   initFrameworkAnimation();
+  initCapabilityWheel();
 }
 
 
