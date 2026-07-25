@@ -7034,52 +7034,16 @@ p, .section-lead, .section-subtext {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Top Border Laser Flare */
-.top-laser-flare {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-  opacity: 0.4;
-  transition: opacity 0.4s ease, box-shadow 0.4s ease;
-}
-
-.minimal-cap-card:hover .top-laser-flare {
-  opacity: 1;
-  box-shadow: 0 0 12px var(--color-gold), 0 0 20px var(--color-gold);
-}
-
-/* Mini Capability Level Progress Meter */
-.cap-level-meter {
-  display: flex;
-  gap: 4px;
-  margin-top: 16px;
-}
-
-.meter-bar {
-  flex: 1;
-  height: 3px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.meter-bar.active {
-  background: var(--color-gold);
-  box-shadow: 0 0 6px rgba(223, 207, 173, 0.6);
-}
-
-.minimal-cap-card:hover .meter-bar.active {
-  box-shadow: 0 0 10px var(--color-gold);
+  max-width: 1240px;
+  margin: 0 auto 48px auto;
+  box-sizing: border-box;
 }
 
 .minimal-cap-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   background: rgba(13, 13, 13, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
