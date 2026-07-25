@@ -7141,13 +7141,13 @@ p, .section-lead, .section-subtext {
 }
 
 /* ======================================================
-   CONCEPT A: INTERACTIVE 3D HOLOGRAPHIC ORBIT WHEEL
+   CONTINUOUS ROTATING HOLOGRAPHIC ORBIT ENGINE (No Card Boxes)
    ====================================================== */
 .orbit-stage-container {
   position: relative;
   width: 100%;
   max-width: 900px;
-  height: 520px;
+  height: 560px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -7160,17 +7160,17 @@ p, .section-lead, .section-subtext {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 220px;
-  height: 220px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(223, 207, 173, 0.16) 0%, rgba(13, 13, 13, 0.95) 70%);
+  background: radial-gradient(circle at center, rgba(223, 207, 173, 0.18) 0%, rgba(13, 13, 13, 0.96) 70%);
   border: 1.5px solid var(--color-gold);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 10;
-  box-shadow: 0 0 50px rgba(223, 207, 173, 0.25), inset 0 0 30px rgba(223, 207, 173, 0.15);
+  box-shadow: 0 0 50px rgba(223, 207, 173, 0.28), inset 0 0 30px rgba(223, 207, 173, 0.15);
   backdrop-filter: blur(20px);
 }
 
@@ -7211,7 +7211,7 @@ p, .section-lead, .section-subtext {
 
 .core-badge-title {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #ffffff;
   margin: 0 0 4px 0;
@@ -7228,105 +7228,137 @@ p, .section-lead, .section-subtext {
   border-radius: 10px;
 }
 
-/* Satellite Nodes Positioned Symmetrically */
+/* Rotating Track Ring */
+.orbit-rotator-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 440px;
+  height: 440px;
+  margin-top: -220px;
+  margin-left: -220px;
+  border-radius: 50%;
+  border: 1px dashed rgba(223, 207, 173, 0.25);
+  animation: continuous-orbit-spin 32s linear infinite;
+  transform-origin: center center;
+  z-index: 12;
+}
+
+/* Hover Pause Effect: Hovering stage pauses animation */
+.orbit-stage-container:hover .orbit-rotator-ring,
+.orbit-stage-container:hover .orbit-satellite-node {
+  animation-play-state: paused !important;
+}
+
+/* 5 Satellite Nodes Positioning on Orbit Ring */
 .orbit-satellite-node {
   position: absolute;
-  width: 220px;
-  background: rgba(13, 13, 13, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 16px 20px;
-  text-align: left;
-  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 12;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
-  overflow: hidden;
+  z-index: 15;
+  animation: continuous-counter-spin 32s linear infinite;
+  transform-origin: center center;
 }
 
-.orbit-satellite-node:hover {
-  border-color: var(--color-gold);
-  background: rgba(223, 207, 173, 0.08);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(223, 207, 173, 0.2);
-  transform: scale(1.06);
-}
+.node-pos-1 { top: -45px; left: 50%; margin-left: -75px; }
+.node-pos-2 { top: 70px; right: -45px; }
+.node-pos-3 { bottom: 30px; right: -25px; }
+.node-pos-4 { bottom: 30px; left: -25px; }
+.node-pos-5 { top: 70px; left: -45px; }
 
-.pos-top {
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.pos-left {
-  top: 50%;
-  left: 20px;
-  transform: translateY(-50%);
-}
-
-.pos-right {
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-}
-
-.pos-bottom-left {
-  bottom: 20px;
-  left: 80px;
-}
-
-.pos-bottom-right {
-  bottom: 20px;
-  right: 80px;
-}
-
-.osn-tag {
+/* Text Heading Above Each Node */
+.orbit-node-heading {
   font-family: 'Space Mono', monospace;
-  font-size: 0.56rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   color: var(--color-gold);
-  display: block;
-  margin-bottom: 4px;
+  text-transform: uppercase;
+  background: rgba(13, 13, 13, 0.92);
+  border: 1px solid rgba(223, 207, 173, 0.3);
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
 }
 
-.osn-title {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 600;
+.orbit-satellite-node:hover .orbit-node-heading {
   color: #ffffff;
-  margin: 0 0 2px 0;
+  background: rgba(223, 207, 173, 0.25);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 20px rgba(223, 207, 173, 0.4);
+  transform: scale(1.08);
 }
 
-.osn-desc {
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  color: var(--color-text-secondary);
-  margin: 0;
+/* Clean Floating Node Circle (No Rectangular Card Box) */
+.orbit-node-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(13, 13, 13, 0.92);
+  border: 1.5px solid rgba(223, 207, 173, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 15px rgba(223, 207, 173, 0.1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.orbit-satellite-node:hover .orbit-node-circle {
+  border-color: var(--color-gold);
+  background: rgba(223, 207, 173, 0.2);
+  color: #ffffff;
+  transform: scale(1.15);
+  box-shadow: 0 0 35px var(--color-gold), 0 0 50px rgba(223, 207, 173, 0.4);
+}
+
+/* Rotation Animations */
+@keyframes continuous-orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes continuous-counter-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }
 
 @media (max-width: 860px) {
-  .orbit-stage-container {
+  .orbit-rotator-ring {
+    animation: none;
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
     height: auto;
+    margin: 0;
+    border: none;
+    display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
+  }
+  .orbit-satellite-node {
+    animation: none !important;
+    position: relative;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
   }
   .orbit-core-node {
     position: relative;
     top: auto;
     left: auto;
     transform: none;
-    margin-bottom: 30px;
-  }
-  .orbit-satellite-node {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    transform: none !important;
-    width: 100%;
-    max-width: 400px;
+    margin-bottom: 24px;
   }
 }
 
