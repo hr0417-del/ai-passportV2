@@ -6955,6 +6955,51 @@ p, .section-lead, .section-subtext {
   transform-style: preserve-3d;
 }
 
+/* 6. Section 2 Kinetic Text & Aura Ring System */
+.mission-section {
+  position: relative;
+}
+
+.mission-aura-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(223, 207, 173, 0.15);
+  box-shadow: 0 0 60px rgba(223, 207, 173, 0.08), inset 0 0 40px rgba(223, 207, 173, 0.05);
+  transform: translate(-50%, -50%) rotateX(65deg);
+  animation: ring-rotate 20s infinite linear;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes ring-rotate {
+  from { transform: translate(-50%, -50%) rotateX(65deg) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotateX(65deg) rotate(360deg); }
+}
+
+.word-span {
+  display: inline-block;
+  white-space: pre;
+  will-change: transform, opacity;
+  transform-origin: center bottom;
+}
+
+.highlight-people-do {
+  font-weight: 700;
+  color: var(--color-gold);
+  display: inline-block;
+  transition: all 0.4s ease;
+}
+
+.highlight-people-do.active-flare {
+  color: #ffffff;
+  text-shadow: 0 0 20px var(--color-gold), 0 0 35px var(--color-gold);
+  transform: scale(1.08);
+}
+
 
 
 

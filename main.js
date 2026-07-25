@@ -2105,6 +2105,79 @@ function init3DTiltCards() {
   });
 }
 
+/* --- 21. Section 2 Crazy Kinetic Text Animation Engine --- */
+function initMissionTextAnimation() {
+  const title = document.getElementById('mission-title');
+  const p1 = document.getElementById('mission-paragraph-1');
+  const p2 = document.getElementById('mission-paragraph-2');
+  const p3 = document.getElementById('mission-paragraph-3');
+
+  if (!title && !p1) return;
+
+  // Helper function to split text into word spans
+  const splitIntoWords = (element) => {
+    if (!element) return [];
+    const nodes = Array.from(element.childNodes);
+    element.innerHTML = '';
+    const spans = [];
+
+    nodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const words = node.textContent.split(/(\s+)/);
+        words.forEach(word => {
+          if (word.trim().length === 0) {
+            element.appendChild(document.createTextNode(word));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'word-span';
+            span.textContent = word;
+            element.appendChild(span);
+            spans.push(span);
+          }
+        });
+      } else {
+        element.appendChild(node);
+        if (node.classList && node.classList.contains('highlight-people-do')) {
+          spans.push(node);
+        }
+      }
+    });
+    return spans;
+  };
+
+  const titleWords = splitIntoWords(title);
+  const p1Words = splitIntoWords(p1);
+  const p2Words = splitIntoWords(p2);
+  const p3Words = splitIntoWords(p3);
+
+  const allWords = [...titleWords, ...p1Words, ...p2Words, ...p3Words];
+  if (allWords.length === 0) return;
+
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from(allWords, {
+      scrollTrigger: {
+        trigger: '#mission',
+        start: 'top 75%',
+        toggleActions: 'play none none reverse',
+        onEnter: () => {
+          const peopleDo = document.querySelector('.highlight-people-do');
+          if (peopleDo) {
+            setTimeout(() => { peopleDo.classList.add('active-flare'); }, 1200);
+          }
+        }
+      },
+      opacity: 0,
+      y: 28,
+      rotateX: -45,
+      duration: 0.65,
+      stagger: 0.03,
+      ease: 'power3.out'
+    });
+  }
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initEcosystemDiagram();
@@ -2112,6 +2185,7 @@ if (document.readyState === 'loading') {
     initCapabilityWheel();
     initMagneticButtons();
     init3DTiltCards();
+    initMissionTextAnimation();
   });
 } else {
   initEcosystemDiagram();
@@ -2119,6 +2193,7 @@ if (document.readyState === 'loading') {
   initCapabilityWheel();
   initMagneticButtons();
   init3DTiltCards();
+  initMissionTextAnimation();
 }
 
 
