@@ -7028,8 +7028,74 @@ p, .section-lead, .section-subtext {
 }
 
 /* ======================================================
-   10,000X REACTOR CORE & CAPABILITY INSPECTOR PANEL
+   CONCEPT 3: 3D LEVITATING GLASS CRYSTAL CORE
    ====================================================== */
+.crystal-hub-container {
+  width: 170px !important;
+  height: 170px !important;
+  background: rgba(13, 13, 13, 0.92) !important;
+  border-color: rgba(223, 207, 173, 0.4) !important;
+  perspective: 800px;
+}
+
+.crystal-core-3d {
+  position: absolute;
+  top: 15px;
+  width: 70px;
+  height: 70px;
+  transform-style: preserve-3d;
+  animation: crystal-float-3d 6s infinite ease-in-out;
+}
+
+@keyframes crystal-float-3d {
+  0%, 100% {
+    transform: translateY(0) rotateX(25deg) rotateY(0deg) rotateZ(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(35deg) rotateY(180deg) rotateZ(10deg);
+  }
+}
+
+.crystal-octahedron {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.crystal-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(223, 207, 173, 0.25), rgba(0, 82, 255, 0.15));
+  border: 1px solid rgba(223, 207, 173, 0.6);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 16px rgba(223, 207, 173, 0.2);
+}
+
+.cap-face-1 { transform: rotateY(0deg) translateZ(35px) rotateX(30deg); }
+.cap-face-2 { transform: rotateY(90deg) translateZ(35px) rotateX(30deg); }
+.cap-face-3 { transform: rotateY(180deg) translateZ(35px) rotateX(30deg); }
+.cap-face-4 { transform: rotateY(270deg) translateZ(35px) rotateX(30deg); }
+
+.crystal-spark-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 1px dashed var(--color-gold);
+  animation: spark-ring-spin 10s infinite linear;
+  opacity: 0.6;
+}
+
+@keyframes spark-ring-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 .reactor-ring-outer {
   position: absolute;
   width: 190px;

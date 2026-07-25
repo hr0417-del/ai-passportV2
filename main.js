@@ -2035,10 +2035,11 @@ function initFrameworkAnimation() {
   }
 }
 
-/* --- 18. Section 3 10,000X Radial Capability Matrix & Inspector Engine --- */
+/* --- 18. Section 3 Concept 3: 3D Levitating Crystal Core Engine --- */
 function initCapabilityWheel() {
   const capCards = document.querySelectorAll('.capability-card');
-  const hub = document.getElementById('radial-reactor-core');
+  const hub = document.getElementById('radial-crystal-core') || document.getElementById('radial-reactor-core');
+  const crystal3D = document.getElementById('crystal-core-3d');
   const badgeEl = document.getElementById('inspector-badge');
   const titleEl = document.getElementById('inspector-title');
   const outcomeEl = document.getElementById('inspector-outcome');
