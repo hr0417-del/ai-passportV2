@@ -2035,56 +2035,153 @@ function initFrameworkAnimation() {
   }
 }
 
-/* --- 18. Section 3 Concept 3: 3D Levitating Crystal Core Engine --- */
+/* --- 18. Section 3 Concept 2: Linear Stage Prism Slider Engine --- */
 function initCapabilityWheel() {
-  const capCards = document.querySelectorAll('.capability-card');
-  const hub = document.getElementById('radial-crystal-core') || document.getElementById('radial-reactor-core');
-  const crystal3D = document.getElementById('crystal-core-3d');
-  const badgeEl = document.getElementById('inspector-badge');
-  const titleEl = document.getElementById('inspector-title');
-  const outcomeEl = document.getElementById('inspector-outcome');
-  const tagsEl = document.getElementById('inspector-tags');
-  const ctaEl = document.getElementById('inspector-cta');
+  const tabs = document.querySelectorAll('.prism-tab-btn');
+  const activePill = document.getElementById('prism-active-pill');
+  const stageTag = document.getElementById('prism-stage-tag');
+  const stageTitle = document.getElementById('prism-stage-title');
+  const stageImpact = document.getElementById('prism-stage-impact');
+  const stagePills = document.getElementById('prism-stage-pills');
+  const stageCta = document.getElementById('prism-stage-cta');
+  const workstationBody = document.getElementById('prism-workstation-content');
+  const progressLine = document.querySelector('.stage-progress-line');
 
-  if (!capCards || capCards.length === 0) return;
+  if (!tabs || tabs.length === 0) return;
 
-  const inspectorData = {
+  const stageData = {
     understand: {
-      badge: 'FOUNDATIONS',
-      title: 'Understand — Core AI Concepts & System Dynamics',
-      outcome: 'Mastering underlying AI concepts, transformer architectures, token dynamics, and model capability boundaries to make informed technology decisions.',
-      tags: ['AI FOUNDATIONS', 'MODEL DYNAMICS', 'SYSTEM CAPABILITY'],
-      link: 'academy.html'
+      tag: 'STAGE 01 — FOUNDATION',
+      title: '🧠 Understand — System Dynamics',
+      impact: 'Mastering underlying AI concepts, transformer architectures, token economics, and model capability boundaries to make informed technology decisions.',
+      pills: ['Model Boundaries', 'Token Dynamics', 'System Capability'],
+      cta: 'academy.html',
+      progress: '20%',
+      workstation: `
+        <div class="workstation-line"><span class="code-gold">System.Initialize</span>(<span class="code-str">"Capability_Foundations"</span>);</div>
+        <div class="workstation-line"><span class="code-blue">Status:</span> Model architecture verified across 12 parameters.</div>
+        <div class="workstation-line"><span class="code-gold">Ledger.Record</span>(<span class="code-str">"UNDERSTAND_STAGE_PASSED"</span>);</div>
+        <div class="workstation-badge-box">
+          <span class="wbb-tag">VERIFIED MILESTONE</span>
+          <h5 class="wbb-title">AI Foundations Mastered</h5>
+        </div>
+      `
     },
     apply: {
-      badge: 'WORKFLOW ADOPTION',
-      title: 'Apply — Practical Workflow Integration',
-      outcome: 'Directly integrating AI tools into daily workflows to automate repetitive tasks, optimize prep work, and streamline operational efficiency.',
-      tags: ['WORKFLOW AUTOMATION', 'TOOL ADOPTION', 'OPERATIONAL EFFICIENCY'],
-      link: 'live.html'
+      tag: 'STAGE 02 — WORKFLOW INTEGRATION',
+      title: '⚙ Apply — Practical Adoption',
+      impact: 'Directly integrating AI tools into daily workflows to automate repetitive tasks, optimize prep work, and streamline operational efficiency.',
+      pills: ['Workflow Automation', 'Tool Integration', 'Operational Speed'],
+      cta: 'live.html',
+      progress: '40%',
+      workstation: `
+        <div class="workstation-line"><span class="code-gold">Workflow.Connect</span>(<span class="code-str">"Enterprise_Toolchain"</span>);</div>
+        <div class="workstation-line"><span class="code-blue">Output:</span> Time saved per task: <span class="code-gold">74.2%</span></div>
+        <div class="workstation-line"><span class="code-gold">Ledger.Record</span>(<span class="code-str">"APPLY_STAGE_PASSED"</span>);</div>
+        <div class="workstation-badge-box">
+          <span class="wbb-tag">VERIFIED MILESTONE</span>
+          <h5 class="wbb-title">Workflow Specialist Verified</h5>
+        </div>
+      `
     },
     create: {
-      badge: 'SOLUTIONS & AUTOMATION',
-      title: 'Create — Custom AI Solutions & Automated Pipelines',
-      outcome: 'Architecting custom AI assistants, multi-step autonomous pipelines, and portfolio-ready software applications that solve real-world challenges.',
-      tags: ['AGENT ARCHITECTURE', 'PIPELINE CREATION', 'CUSTOM SOLUTIONS'],
-      link: 'passport.html#projects'
+      tag: 'STAGE 03 — SOLUTIONS & AGENTS',
+      title: '🚀 Create — Custom AI Solutions',
+      impact: 'Architecting custom AI assistants, multi-step autonomous pipelines, and portfolio-ready software applications that solve real problems.',
+      pills: ['Agent Architecture', 'Pipeline Creation', 'Custom Solutions'],
+      cta: 'passport.html#projects',
+      progress: '60%',
+      workstation: `
+        <div class="workstation-line"><span class="code-gold">Agent.Deploy</span>(<span class="code-str">"Autonomous_Assistant_V2"</span>);</div>
+        <div class="workstation-line"><span class="code-blue">RAG Vector Index:</span> <span class="code-str">100k Nodes Active</span></div>
+        <div class="workstation-line"><span class="code-gold">Ledger.Record</span>(<span class="code-str">"CREATE_STAGE_PASSED"</span>);</div>
+        <div class="workstation-badge-box">
+          <span class="wbb-tag">VERIFIED MILESTONE</span>
+          <h5 class="wbb-title">AI Builder Credential Issued</h5>
+        </div>
+      `
     },
     evaluate: {
-      badge: 'AUDITING & QUALITY CONTROL',
-      title: 'Evaluate — Output Auditing & Edge Case Testing',
-      outcome: 'Rigorously testing AI outputs for hallucinations, accuracy, security vulnerabilities, edge cases, and organizational compliance standards.',
-      tags: ['OUTPUT AUDITING', 'EDGE CASE TESTING', 'ACCURACY STANDARDS'],
-      link: 'verify.html'
+      tag: 'STAGE 04 — AUDITING & QUALITY CONTROL',
+      title: '🔍 Evaluate — Output Auditing',
+      impact: 'Rigorously testing AI outputs for hallucinations, accuracy, security vulnerabilities, edge cases, and organizational compliance standards.',
+      pills: ['Output Auditing', 'Edge Case Testing', 'Accuracy Standards'],
+      cta: 'verify.html',
+      progress: '80%',
+      workstation: `
+        <div class="workstation-line"><span class="code-gold">Audit.Run</span>(<span class="code-str">"Hallucination_Check"</span>);</div>
+        <div class="workstation-line"><span class="code-blue">Accuracy Score:</span> <span class="code-gold">99.4% Verified</span></div>
+        <div class="workstation-line"><span class="code-gold">Ledger.Record</span>(<span class="code-str">"EVALUATE_STAGE_PASSED"</span>);</div>
+        <div class="workstation-badge-box">
+          <span class="wbb-tag">VERIFIED MILESTONE</span>
+          <h5 class="wbb-title">Output Quality Auditor Verified</h5>
+        </div>
+      `
     },
     responsible: {
-      badge: 'GOVERNANCE & ETHICS',
-      title: 'Responsible — Ethical AI & Human-Centered Governance',
-      outcome: 'Implementing ethical AI governance, data privacy protocols, safety guardrails, and human-centered design principles across projects.',
-      tags: ['ETHICAL GOVERNANCE', 'DATA PRIVACY', 'SAFETY PROTOCOLS'],
-      link: 'about.html'
+      tag: 'STAGE 05 — GOVERNANCE & ETHICS',
+      title: '🌍 Responsible — Ethical AI',
+      impact: 'Implementing ethical AI governance, data privacy protocols, safety guardrails, and human-centered design principles across projects.',
+      pills: ['Ethical Governance', 'Data Privacy', 'Safety Protocols'],
+      cta: 'about.html',
+      progress: '100%',
+      workstation: `
+        <div class="workstation-line"><span class="code-gold">Governance.Enforce</span>(<span class="code-str">"Privacy_Guardrails"</span>);</div>
+        <div class="workstation-line"><span class="code-blue">Compliance Status:</span> <span class="code-str">PASSED</span></div>
+        <div class="workstation-line"><span class="code-gold">Ledger.Record</span>(<span class="code-str">"RESPONSIBLE_STAGE_PASSED"</span>);</div>
+        <div class="workstation-badge-box">
+          <span class="wbb-tag">VERIFIED MILESTONE</span>
+          <h5 class="wbb-title">Responsible AI Leader Badge</h5>
+        </div>
+      `
     }
   };
+
+  const setStage = (tab, stageKey) => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Move Active Pill
+    if (activePill) {
+      const left = tab.offsetLeft;
+      const width = tab.offsetWidth;
+      activePill.style.left = `${left}px`;
+      activePill.style.width = `${width}px`;
+    }
+
+    // Update Content
+    const data = stageData[stageKey];
+    if (data) {
+      if (stageTag) stageTag.textContent = data.tag;
+      if (stageTitle) stageTitle.textContent = data.title;
+      if (stageImpact) stageImpact.textContent = data.impact;
+      if (stageCta) stageCta.href = data.cta;
+      if (progressLine) progressLine.style.width = data.progress;
+      if (stagePills) {
+        stagePills.innerHTML = data.pills.map(p => `<span class="competency-pill">${p}</span>`).join('');
+      }
+      if (workstationBody) {
+        workstationBody.innerHTML = data.workstation;
+      }
+    }
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      if (typeof playTickSound === 'function') playTickSound('tick');
+      const stageKey = tab.getAttribute('data-stage');
+      setStage(tab, stageKey);
+    });
+  });
+
+  // Initialize initial pill position
+  const activeTab = document.querySelector('.prism-tab-btn.active');
+  if (activeTab && activePill) {
+    setTimeout(() => {
+      setStage(activeTab, 'understand');
+    }, 100);
+  }
+}
 
   capCards.forEach(card => {
     const type = card.getAttribute('data-cap');

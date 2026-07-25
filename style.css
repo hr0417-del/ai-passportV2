@@ -7028,6 +7028,250 @@ p, .section-lead, .section-subtext {
 }
 
 /* ======================================================
+   CONCEPT 2: LINEAR STAGE PRISM SLIDER (Linear / Stripe Style)
+   ====================================================== */
+.prism-navbar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.prism-navbar {
+  position: relative;
+  display: inline-flex;
+  gap: 6px;
+  background: rgba(13, 13, 13, 0.9);
+  border: 1px solid rgba(223, 207, 173, 0.25);
+  border-radius: 40px;
+  padding: 6px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(223, 207, 173, 0.05);
+}
+
+.prism-active-pill {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  height: calc(100% - 12px);
+  width: 135px;
+  background: linear-gradient(135deg, rgba(223, 207, 173, 0.25), rgba(223, 207, 173, 0.1));
+  border: 1px solid rgba(223, 207, 173, 0.5);
+  border-radius: 30px;
+  box-shadow: 0 0 20px rgba(223, 207, 173, 0.2);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.prism-tab-btn {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.prism-tab-btn:hover {
+  color: #ffffff;
+}
+
+.prism-tab-btn.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.prism-tab-svg {
+  color: var(--color-gold);
+}
+
+/* 2-Column Live Showcase Stage */
+.prism-showcase-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  max-width: 1060px;
+  margin: 0 auto;
+  background: rgba(13, 13, 13, 0.85);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  border-radius: 20px;
+  padding: 44px;
+  text-align: left;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(223, 207, 173, 0.08);
+}
+
+.stage-progress-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 20%;
+  background: var(--color-gold);
+  box-shadow: 0 0 10px var(--color-gold);
+  transition: width 0.4s ease;
+}
+
+.stage-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.stage-title {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+}
+
+.stage-impact {
+  font-family: var(--font-sans);
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-bottom: 24px;
+}
+
+.competency-label {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.competency-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.competency-pill {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  background: rgba(223, 207, 173, 0.08);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  padding: 5px 12px;
+  border-radius: 14px;
+}
+
+/* Simulated Live Workstation Card */
+.live-workstation-card {
+  background: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
+}
+
+.workstation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.workstation-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot-red { width: 9px; height: 9px; border-radius: 50%; background: #ff5f56; }
+.dot-yellow { width: 9px; height: 9px; border-radius: 50%; background: #ffbd2e; }
+.dot-green { width: 9px; height: 9px; border-radius: 50%; background: #27c93f; }
+
+.workstation-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.workstation-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 8px var(--color-gold);
+}
+
+.workstation-body {
+  padding: 24px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.code-gold { color: var(--color-gold); font-weight: 700; }
+.code-str { color: #64b5f6; }
+.code-blue { color: #81c784; }
+
+.workstation-badge-box {
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: rgba(223, 207, 173, 0.06);
+  border: 1px solid rgba(223, 207, 173, 0.25);
+  border-radius: 10px;
+}
+
+.wbb-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+  display: block;
+}
+
+.wbb-title {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 4px 0 0 0;
+}
+
+@media (max-width: 900px) {
+  .prism-showcase-stage {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 28px 24px;
+  }
+  .prism-navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 20px;
+  }
+  .prism-active-pill {
+    display: none;
+  }
+}
+
+/* ======================================================
    CONCEPT 3: 3D LEVITATING GLASS CRYSTAL CORE
    ====================================================== */
 .crystal-hub-container {
