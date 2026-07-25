@@ -2156,25 +2156,36 @@ function initMissionTextAnimation() {
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.from(allWords, {
-      scrollTrigger: {
-        trigger: '#mission',
-        start: 'top 75%',
-        toggleActions: 'play none none reverse',
-        onEnter: () => {
-          const peopleDo = document.querySelector('.highlight-people-do');
-          if (peopleDo) {
-            setTimeout(() => { peopleDo.classList.add('active-flare'); }, 1200);
-          }
-        }
+    gsap.fromTo(allWords, 
+      {
+        opacity: 0.15,
+        y: 16,
+        color: 'rgba(255, 255, 255, 0.18)'
       },
-      opacity: 0,
-      y: 28,
-      rotateX: -45,
-      duration: 0.65,
-      stagger: 0.03,
-      ease: 'power3.out'
-    });
+      {
+        scrollTrigger: {
+          trigger: '#mission',
+          start: 'top 80%',
+          end: 'bottom 35%',
+          scrub: 0.8,
+          onUpdate: (self) => {
+            const peopleDo = document.querySelector('.highlight-people-do');
+            if (peopleDo) {
+              if (self.progress > 0.45) {
+                peopleDo.classList.add('active-flare');
+              } else {
+                peopleDo.classList.remove('active-flare');
+              }
+            }
+          }
+        },
+        opacity: 1,
+        y: 0,
+        color: '#ffffff',
+        stagger: 0.05,
+        ease: 'none'
+      }
+    );
   }
 }
 

@@ -6980,11 +6980,18 @@ p, .section-lead, .section-subtext {
   to { transform: translate(-50%, -50%) rotateX(65deg) rotate(360deg); }
 }
 
+.mission-kinetic-title, .mission-kinetic-text {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .word-span {
   display: inline-block;
-  white-space: pre;
+  white-space: pre-wrap;
   will-change: transform, opacity;
   transform-origin: center bottom;
+  text-align: center;
 }
 
 .highlight-people-do {
