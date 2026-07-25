@@ -2049,36 +2049,36 @@ function initCapabilityWheel() {
 
   const inspectorData = {
     understand: {
-      badge: 'CAPABILITY 01 — FOUNDATIONS',
-      title: '🧠 Understand — Core AI Concepts & System Dynamics',
+      badge: 'FOUNDATIONS',
+      title: 'Understand — Core AI Concepts & System Dynamics',
       outcome: 'Mastering underlying AI concepts, transformer architectures, token dynamics, and model capability boundaries to make informed technology decisions.',
       tags: ['AI FOUNDATIONS', 'MODEL DYNAMICS', 'SYSTEM CAPABILITY'],
       link: 'academy.html'
     },
     apply: {
-      badge: 'CAPABILITY 02 — WORKFLOW ADOPTION',
-      title: '⚙ Apply — Practical Workflow Integration',
+      badge: 'WORKFLOW ADOPTION',
+      title: 'Apply — Practical Workflow Integration',
       outcome: 'Directly integrating AI tools into daily workflows to automate repetitive tasks, optimize prep work, and streamline operational efficiency.',
       tags: ['WORKFLOW AUTOMATION', 'TOOL ADOPTION', 'OPERATIONAL EFFICIENCY'],
       link: 'live.html'
     },
     create: {
-      badge: 'CAPABILITY 03 — AGENT & SOFTWARE CREATION',
-      title: '🚀 Create — Custom AI Solutions & Automated Pipelines',
+      badge: 'SOLUTIONS & AUTOMATION',
+      title: 'Create — Custom AI Solutions & Automated Pipelines',
       outcome: 'Architecting custom AI assistants, multi-step autonomous pipelines, and portfolio-ready software applications that solve real-world challenges.',
       tags: ['AGENT ARCHITECTURE', 'PIPELINE CREATION', 'CUSTOM SOLUTIONS'],
       link: 'passport.html#projects'
     },
     evaluate: {
-      badge: 'CAPABILITY 04 — AUDITING & QUALITY CONTROL',
-      title: '🔍 Evaluate — Output Auditing & Edge Case Testing',
+      badge: 'AUDITING & QUALITY CONTROL',
+      title: 'Evaluate — Output Auditing & Edge Case Testing',
       outcome: 'Rigorously testing AI outputs for hallucinations, accuracy, security vulnerabilities, edge cases, and organizational compliance standards.',
       tags: ['OUTPUT AUDITING', 'EDGE CASE TESTING', 'ACCURACY STANDARDS'],
       link: 'verify.html'
     },
     responsible: {
-      badge: 'CAPABILITY 05 — GOVERNANCE & ETHICS',
-      title: '🌍 Responsible — Ethical AI & Human-Centered Governance',
+      badge: 'GOVERNANCE & ETHICS',
+      title: 'Responsible — Ethical AI & Human-Centered Governance',
       outcome: 'Implementing ethical AI governance, data privacy protocols, safety guardrails, and human-centered design principles across projects.',
       tags: ['ETHICAL GOVERNANCE', 'DATA PRIVACY', 'SAFETY PROTOCOLS'],
       link: 'about.html'

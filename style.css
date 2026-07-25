@@ -6804,11 +6804,11 @@ p, .section-lead, .section-subtext {
 
 .capability-card {
   position: absolute;
-  width: 220px;
-  background: rgba(13, 13, 13, 0.85);
+  width: 180px;
+  background: rgba(13, 13, 13, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 20px 18px;
+  border-radius: 12px;
+  padding: 14px 16px;
   text-align: left;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   backdrop-filter: blur(14px);
@@ -6819,18 +6819,38 @@ p, .section-lead, .section-subtext {
   border-color: var(--color-gold);
   background: rgba(223, 207, 173, 0.06);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 24px rgba(223, 207, 173, 0.2);
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
-.cap-top { top: 0%; left: 50%; transform: translateX(-50%); }
-.cap-top-right { top: 18%; right: 4%; }
-.cap-bottom-right { bottom: 6%; right: 10%; }
-.cap-bottom-left { bottom: 6%; left: 10%; }
-.cap-top-left { top: 18%; left: 4%; }
+.cap-top { top: 2%; left: 50%; transform: translateX(-50%); }
+.cap-top-right { top: 20%; right: 6%; }
+.cap-bottom-right { bottom: 8%; right: 12%; }
+.cap-bottom-left { bottom: 8%; left: 12%; }
+.cap-top-left { top: 20%; left: 6%; }
 
-.cap-icon { font-size: 1.5rem; display: block; margin-bottom: 8px; }
-.cap-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 4px; }
-.cap-desc { font-family: var(--font-sans); font-size: 0.78rem; line-height: 1.5; color: var(--color-text-secondary); margin: 0; }
+.cap-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(223, 207, 173, 0.08);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  color: var(--color-gold);
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.capability-card:hover .cap-icon {
+  background: rgba(223, 207, 173, 0.18);
+  border-color: var(--color-gold);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.cap-title { font-family: var(--font-serif); font-size: 1.08rem; font-weight: 600; color: #fff; margin-bottom: 4px; }
+.cap-desc { font-family: var(--font-sans); font-size: 0.74rem; line-height: 1.45; color: var(--color-text-secondary); margin: 0; }
 
 /* SECTION 5: AIQ CALLOUT BOX */
 .aiq-callout-box {
