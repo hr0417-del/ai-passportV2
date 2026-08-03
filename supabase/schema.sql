@@ -663,3 +663,98 @@ DO $$ BEGIN
 END $$;
 
 
+-- ==============================================================================
+-- 10. STAGE 6 CREDENTIALS & VERIFICATION TRUST MIGRATION
+-- ==============================================================================
+
+-- 1. Extend credentials table with programme_id, project_id, status, and revocation fields
+ALTER TABLE public.credentials 
+    ADD COLUMN IF NOT EXISTS programme_id UUID REFERENCES public.programmes(id) ON DELETE SET NULL,
+    ADD COLUMN IF NOT EXISTS project_id UUID REFERENCES public.projects(id) ON DELETE SET NULL,
+    ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'ISSUED' CHECK (status IN ('ISSUED', 'REVOKED')),
+    ADD COLUMN IF NOT EXISTS revoked_at TIMESTAMPTZ,
+    ADD COLUMN IF NOT EXISTS revocation_reason TEXT;
+
+-- Remove misleading Council default from issuer
+ALTER TABLE public.credentials 
+    ALTER COLUMN issuer DROP DEFAULT;
+
+-- Performance indexes
+CREATE INDEX IF NOT EXISTS idx_credentials_status ON public.credentials(status);
+CREATE INDEX IF NOT EXISTS idx_credentials_programme_id ON public.credentials(programme_id);
+CREATE INDEX IF NOT EXISTS idx_credentials_project_id ON public.credentials(project_id);
+
+-- 2. Lock capability_states: Read-only for learners (Authority Protection)
+DROP POLICY IF EXISTS "Users can manage their own capability states" ON public.capability_states;
+DROP POLICY IF EXISTS "Users can view their own capability states" ON public.capability_states;
+
+CREATE POLICY "Users can view their own capability states"
+    ON public.capability_states FOR SELECT TO authenticated
+    USING (auth.uid() = user_id);
+
+REVOKE INSERT, UPDATE, DELETE ON public.capability_states FROM authenticated;
+GRANT SELECT ON public.capability_states TO authenticated;
+
+-- 3. Cleanup older Stage 5 evidence triggers to avoid conflicting logic
+DROP TRIGGER IF EXISTS trg_protect_evidence_verification ON public.evidence;
+DROP TRIGGER IF EXISTS trg_protect_evidence_security_and_immutability ON public.evidence;
+DROP TRIGGER IF EXISTS trg_protect_evidence_authority_and_immutability ON public.evidence;
+
+-- 4. Install ONE Consolidated Evidence Authority & Immutability Security Trigger
+CREATE OR REPLACE FUNCTION public.protect_evidence_authority_and_immutability()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, extensions, pg_temp
+AS $$
+BEGIN
+    -- A. Prevent learners from deleting VERIFIED evidence
+    IF TG_OP = 'DELETE' AND OLD.verification_status = 'VERIFIED' THEN
+        IF (current_setting('role', true) <> 'service_role') THEN
+            RAISE EXCEPTION 'Verified evidence records are immutable and cannot be deleted by learners.';
+        END IF;
+        RETURN OLD;
+    END IF;
+
+    IF TG_OP = 'UPDATE' THEN
+        -- B. Prevent learners from altering content/metadata of VERIFIED evidence (is_public is the ONLY exception)
+        IF OLD.verification_status = 'VERIFIED' THEN
+            IF (current_setting('role', true) <> 'service_role') THEN
+                IF (NEW.url IS DISTINCT FROM OLD.url OR
+                    NEW.attachment_url IS DISTINCT FROM OLD.attachment_url OR
+                    NEW.capability_dimension IS DISTINCT FROM OLD.capability_dimension OR
+                    NEW.evidence_type IS DISTINCT FROM OLD.evidence_type OR
+                    NEW.source_type IS DISTINCT FROM OLD.source_type OR
+                    NEW.related_id IS DISTINCT FROM OLD.related_id OR
+                    NEW.project_id IS DISTINCT FROM OLD.project_id OR
+                    NEW.user_id IS DISTINCT FROM OLD.user_id OR
+                    NEW.metadata IS DISTINCT FROM OLD.metadata OR
+                    NEW.reviewer_notes IS DISTINCT FROM OLD.reviewer_notes OR
+                    NEW.verification_status IS DISTINCT FROM OLD.verification_status) THEN
+                    RAISE EXCEPTION 'Verified evidence content is immutable and cannot be modified by learners.';
+                END IF;
+            END IF;
+        END IF;
+
+        -- C. Prevent learners from self-assigning VERIFIED status
+        IF NEW.verification_status = 'VERIFIED' AND OLD.verification_status IS DISTINCT FROM 'VERIFIED' THEN
+            IF (current_setting('role', true) <> 'service_role') THEN
+                RAISE EXCEPTION 'Authoritative verification status can only be granted by an authorized reviewer.';
+            END IF;
+        END IF;
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'trg_protect_evidence_authority_and_immutability') THEN
+        CREATE TRIGGER trg_protect_evidence_authority_and_immutability
+        BEFORE UPDATE OR DELETE ON public.evidence
+        FOR EACH ROW EXECUTE FUNCTION public.protect_evidence_authority_and_immutability();
+    END IF;
+END $$;
+
+
+
