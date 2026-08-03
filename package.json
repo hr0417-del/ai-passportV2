@@ -13,6 +13,7 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.0",
     "obs-websocket-js": "^5.0.8"
   }
 }

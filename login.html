@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — MY AI PASSPORT™</title>
+  <meta name="description" content="Sign in to your authenticated AI Passport identity & capability workspace.">
+  
+  <!-- Fonts & Core Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 440px;
+      margin: 80px auto 40px auto;
+      padding: 0 24px;
+      box-sizing: border-box;
+    }
+
+    .auth-card {
+      background: rgba(13, 13, 13, 0.92);
+      border: 1px solid rgba(223, 207, 173, 0.25);
+      border-radius: 20px;
+      padding: 40px 32px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(223, 207, 173, 0.08);
+      position: relative;
+    }
+
+    .auth-card .top-laser-flare {
+      position: absolute;
+      top: 0;
+      left: 15%;
+      width: 70%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .auth-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: var(--color-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .auth-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      color: #ffffff;
+    }
+
+    .auth-sub {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+
+    /* Auth Tab Switcher */
+    .auth-tabs {
+      display: flex;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 28px;
+    }
+
+    .auth-tab-btn {
+      flex: 1;
+      padding: 10px 0;
+      background: transparent;
+      border: none;
+      color: var(--color-text-secondary);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .auth-tab-btn.active {
+      background: rgba(223, 207, 173, 0.15);
+      color: var(--color-gold);
+      border: 1px solid rgba(223, 207, 173, 0.3);
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      box-shadow: 0 0 16px rgba(223, 207, 173, 0.2);
+    }
+
+    .auth-submit-btn {
+      width: 100%;
+      padding: 14px 0;
+      margin-top: 10px;
+      background: var(--color-gold);
+      color: #000000;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .auth-submit-btn:hover {
+      background: #ffffff;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+    }
+
+    .auth-alert {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin-bottom: 18px;
+      display: none;
+    }
+
+    .auth-alert.error {
+      background: rgba(255, 60, 60, 0.12);
+      border: 1px solid rgba(255, 60, 60, 0.3);
+      color: #ff8080;
+    }
+
+    .auth-alert.info {
+      background: rgba(223, 207, 173, 0.12);
+      border: 1px solid rgba(223, 207, 173, 0.3);
+      color: var(--color-gold);
+    }
+
+    .demo-mode-bar {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+    }
+
+    .demo-btn {
+      background: transparent;
+      border: 1px dashed rgba(223, 207, 173, 0.4);
+      color: var(--color-gold);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .demo-btn:hover {
+      background: rgba(223, 207, 173, 0.1);
+      border-color: var(--color-gold);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Simple Nav -->
+  <header style="padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;">
+    <a href="index.html" class="auth-logo" style="text-decoration: none;">
+      🆔 AI PASSPORT™
+    </a>
+    <a href="index.html" style="color: var(--color-text-secondary); text-decoration: none; font-size: 0.85rem;">← Back to Website</a>
+  </header>
+
+  <!-- Auth Container -->
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="top-laser-flare"></div>
+      
+      <div class="auth-header">
+        <div class="auth-logo">🆔 MY AI PASSPORT™</div>
+        <h1 class="auth-title" id="auth-heading">Sign In</h1>
+        <p class="auth-sub" id="auth-subheading">Access your authenticated AI capability identity space</p>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" id="tab-signin" onclick="switchTab('signin')">SIGN IN</button>
+        <button class="auth-tab-btn" id="tab-register" onclick="switchTab('register')">CREATE PASSPORT</button>
+      </div>
+
+      <!-- Alert Box -->
+      <div id="auth-alert" class="auth-alert"></div>
+
+      <!-- Form -->
+      <form id="auth-form" onsubmit="handleAuthSubmit(event)">
+        <div class="form-group" id="group-fullname" style="display: none;">
+          <label class="form-label">FULL NAME</label>
+          <input type="text" id="input-fullname" class="form-input" placeholder="e.g. Hitesh Sharma">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">EMAIL ADDRESS</label>
+          <input type="email" id="input-email" class="form-input" placeholder="name@domain.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">PASSWORD</label>
+          <input type="password" id="input-password" class="form-input" placeholder="••••••••••••" required>
+        </div>
+
+        <button type="submit" class="auth-submit-btn" id="btn-submit">SIGN IN TO MY PASSPORT →</button>
+      </form>
+
+      <!-- Demo Shell Shortcut -->
+      <div class="demo-mode-bar">
+        <p style="font-size: 0.75rem; color: var(--color-text-secondary); margin-bottom: 10px;">Exploring Stage 1 Application Shell?</p>
+        <button type="button" class="demo-btn" onclick="enterDemoMode()">⚡ ENTER DEMO WORKSPACE (/app/)</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="padding: 24px; text-align: center; font-size: 0.75rem; color: var(--color-text-secondary);">
+    © 2026 AI Passport™ by Ekaakshar Education. All rights reserved.
+  </footer>
+
+  <script type="module">
+    import { supabase, isSupabaseConfigured } from './src/lib/supabase.js';
+
+    let currentTab = 'signin';
+
+    window.switchTab = function(tab) {
+      currentTab = tab;
+      const tabSignin = document.getElementById('tab-signin');
+      const tabRegister = document.getElementById('tab-register');
+      const groupFullname = document.getElementById('group-fullname');
+      const authHeading = document.getElementById('auth-heading');
+      const authSubheading = document.getElementById('auth-subheading');
+      const btnSubmit = document.getElementById('btn-submit');
+      const alertBox = document.getElementById('auth-alert');
+
+      alertBox.style.display = 'none';
+
+      if (tab === 'signin') {
+        tabSignin.classList.add('active');
+        tabRegister.classList.remove('active');
+        groupFullname.style.display = 'none';
+        authHeading.textContent = 'Sign In';
+        authSubheading.textContent = 'Access your authenticated AI capability identity space';
+        btnSubmit.textContent = 'SIGN IN TO MY PASSPORT →';
+      } else {
+        tabRegister.classList.add('active');
+        tabSignin.classList.remove('active');
+        groupFullname.style.display = 'block';
+        authHeading.textContent = 'Create Passport';
+        authSubheading.textContent = 'Issue your lifelong digital AI Passport identity';
+        btnSubmit.textContent = 'ISSUE DIGITAL PASSPORT →';
+      }
+    };
+
+    window.handleAuthSubmit = async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('input-email').value.trim();
+      const password = document.getElementById('input-password').value.trim();
+      const fullname = document.getElementById('input-fullname').value.trim();
+      const alertBox = document.getElementById('auth-alert');
+      const btnSubmit = document.getElementById('btn-submit');
+
+      if (!email || !password) return;
+
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = 'AUTHENTICATING...';
+
+      try {
+        if (!isSupabaseConfigured) {
+          // Demo fallback when Supabase keys not set in .env
+          showAlert('info', 'Notice: Supabase env keys pending. Entering authenticated app shell...');
+          setTimeout(() => {
+            localStorage.setItem('aip_auth_user', JSON.stringify({ email, full_name: fullname || 'AI Learner' }));
+            window.location.href = './app/index.html';
+          }, 800);
+          return;
+        }
+
+        if (currentTab === 'signin') {
+          const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+          showAlert('info', 'Authenticated! Redirecting to My AI Passport...');
+          setTimeout(() => { window.location.href = './app/index.html'; }, 600);
+        } else {
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { data: { full_name: fullname } }
+          });
+          if (error) throw error;
+          showAlert('info', 'Passport Created! Redirecting to workspace...');
+          setTimeout(() => { window.location.href = './app/index.html'; }, 600);
+        }
+      } catch (err) {
+        showAlert('error', err.message || 'Authentication failed. Please check credentials.');
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = currentTab === 'signin' ? 'SIGN IN TO MY PASSPORT →' : 'ISSUE DIGITAL PASSPORT →';
+      }
+    };
+
+    window.enterDemoMode = function() {
+      localStorage.setItem('aip_auth_user', JSON.stringify({ email: 'demo@aipasport.org', full_name: 'Demo Verified Builder' }));
+      window.location.href = './app/index.html';
+    };
+
+    function showAlert(type, text) {
+      const alertBox = document.getElementById('auth-alert');
+      alertBox.className = `auth-alert ${type}`;
+      alertBox.textContent = text;
+      alertBox.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

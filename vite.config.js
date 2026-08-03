@@ -12,6 +12,8 @@ export default defineConfig({
         about: 'about.html',
         contact: 'contact.html',
         verify: 'verify.html',
+        login: 'login.html',
+        app: 'app/index.html',
       }
     }
   }
