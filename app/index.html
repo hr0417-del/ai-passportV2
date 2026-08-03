@@ -242,19 +242,57 @@
       box-sizing: border-box;
     }
 
-    /* Stage 1 Placeholder Card Styling */
-    .stage1-placeholder-card {
-      background: rgba(13, 13, 13, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 40px;
-      max-width: 800px;
+    /* ==========================================================================
+       STAGE 2 OVERVIEW STYLES
+       ========================================================================== */
+    .overview-wrapper {
+      max-width: 1040px;
       margin: 0 auto;
-      text-align: left;
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
     }
 
-    .stage1-placeholder-card .top-laser-flare {
+    .overview-section {
+      width: 100%;
+    }
+
+    /* 1. Greeting Section */
+    .greeting-header {
+      text-align: left;
+    }
+    .greeting-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--color-gold);
+      margin-bottom: 6px;
+    }
+    .greeting-title {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      color: #ffffff;
+    }
+    .greeting-sub {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* 2. Digital AI Passport Card */
+    .digital-passport-card {
+      background: rgba(13, 13, 13, 0.95);
+      border: 1px solid rgba(223, 207, 173, 0.3);
+      border-radius: 20px;
+      padding: 28px 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(223, 207, 173, 0.06);
+    }
+    .passport-card-flare {
       position: absolute;
       top: 0;
       left: 10%;
@@ -262,63 +300,393 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
     }
-
-    .card-badge {
+    .passport-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .passport-brand-tag {
       font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.16em;
       color: var(--color-gold);
-      margin-bottom: 12px;
-      display: inline-block;
     }
-
-    .card-heading {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 0 0 12px 0;
+    .passport-status-pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      color: #00ff88;
     }
-
-    .card-body-text {
-      color: var(--color-text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.6;
+    .passport-card-body {
+      display: flex;
+      align-items: center;
+      gap: 24px;
       margin-bottom: 24px;
     }
-
-    .four-questions-grid {
+    .passport-avatar-box {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--color-gold);
+      color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: 1.6rem;
+      font-weight: 700;
+      box-shadow: 0 0 20px rgba(223, 207, 173, 0.3);
+    }
+    .passport-details-box {
+      flex: 1;
+    }
+    .passport-user-name {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: #ffffff;
+    }
+    .passport-meta-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      margin-top: 24px;
+    }
+    .meta-label {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+    }
+    .meta-value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .meta-value.monospace-gold {
+      font-family: 'Space Mono', monospace;
+      color: var(--color-gold);
+    }
+    .passport-card-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .passport-ledger-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--color-text-secondary);
+    }
+    .btn-passport-cta {
+      background: rgba(223, 207, 173, 0.12);
+      border: 1px solid rgba(223, 207, 173, 0.3);
+      color: var(--color-gold);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-passport-cta:hover {
+      background: var(--color-gold);
+      color: #000000;
     }
 
-    .question-box {
+    /* 3. Two-Column Grid (Continue Building & Next Move) */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+    }
+    .overview-card {
+      background: rgba(13, 13, 13, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .card-section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--color-gold);
+    }
+    .dimension-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(223, 207, 173, 0.12);
+      border: 1px solid rgba(223, 207, 173, 0.3);
+      color: var(--color-gold);
+    }
+    .next-move-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      color: #ffffff;
+    }
+    .next-move-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .next-challenge-box {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 10px;
-      padding: 16px 20px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
     }
-
-    .q-number {
+    .challenge-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.68rem;
+      margin-bottom: 6px;
+    }
+    .challenge-label {
       font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
       color: var(--color-gold);
     }
-
-    .q-title {
-      font-size: 0.95rem;
+    .challenge-time {
+      color: var(--color-text-secondary);
+    }
+    .challenge-name {
+      font-size: 0.92rem;
       font-weight: 600;
       color: #ffffff;
-      margin: 4px 0 2px 0;
     }
 
-    .q-desc {
-      font-size: 0.8rem;
+    /* Buttons & Empty States */
+    .btn-primary-action {
+      width: 100%;
+      padding: 12px 0;
+      background: var(--color-gold);
+      color: #000000;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-primary-action:hover {
+      background: #ffffff;
+    }
+    .btn-primary-action.inline-btn {
+      width: auto;
+      padding: 10px 20px;
+      margin-top: 14px;
+    }
+
+    .empty-card-body, .empty-section-box {
+      text-align: center;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+    }
+    .empty-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .empty-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* Section Headers */
+    .section-header-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0 0 4px 0;
+    }
+    .section-subtitle {
+      font-size: 0.85rem;
       color: var(--color-text-secondary);
       margin: 0;
+    }
+    .btn-text-link {
+      background: transparent;
+      border: none;
+      color: var(--color-gold);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* 4. AI Capability Snapshot Nodes */
+    .capability-node-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .capability-node-card {
+      background: rgba(13, 13, 13, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+    .node-dim-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+    }
+    .node-state-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .node-state-tag.state-explore {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--color-text-secondary);
+    }
+    .node-state-tag.state-develop {
+      background: rgba(0, 180, 255, 0.12);
+      color: #00b4ff;
+    }
+    .node-state-tag.state-demonstrate {
+      background: rgba(223, 207, 173, 0.15);
+      color: var(--color-gold);
+    }
+    .node-state-tag.state-advance {
+      background: rgba(0, 255, 136, 0.12);
+      color: #00ff88;
+    }
+    .node-evidence-count {
+      font-size: 0.65rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* 5 & 6. Projects & Credentials Grids */
+    .projects-grid, .credentials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .project-item-card, .credential-item-card {
+      background: rgba(13, 13, 13, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .project-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .project-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0;
+    }
+    .project-status-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(223, 207, 173, 0.12);
+      color: var(--color-gold);
+    }
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    /* 7. Journey Timeline */
+    .journey-timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      padding-left: 20px;
+      border-left: 1px solid rgba(223, 207, 173, 0.2);
+    }
+    .journey-timeline-item {
+      position: relative;
+    }
+    .journey-marker {
+      position: absolute;
+      left: -25px;
+      top: 4px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--color-gold);
+      box-shadow: 0 0 10px var(--color-gold);
+    }
+    .journey-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--color-gold);
+    }
+    .journey-event-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 2px 0 0 0;
+    }
+    .journey-event-desc {
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+      margin: 2px 0 0 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .two-col-grid { grid-template-columns: 1fr; }
+      .passport-meta-grid { grid-template-columns: repeat(2, 1fr); }
+      .capability-node-grid { grid-template-columns: repeat(3, 1fr); }
+      .projects-grid, .credentials-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -331,7 +699,7 @@
         <a href="../index.html" class="sidebar-logo">
           🆔 MY AI PASSPORT™
         </a>
-        <span class="sidebar-status-tag">🟢 STAGE 1 • ONLINE</span>
+        <span class="sidebar-status-tag">🟢 STAGE 2 • ONLINE</span>
       </div>
 
       <!-- Primary Nav (Only 6 Items as per spec) -->
@@ -395,113 +763,60 @@
     <!-- Main Workspace Container -->
     <div class="app-content">
 
-      <!-- View 1: Overview -->
-      <div id="view-overview" class="view-panel">
-        <div class="stage1-placeholder-card">
-          <div class="top-laser-flare"></div>
-          <span class="card-badge">STAGE 1 FOUNDATION • OVERVIEW</span>
-          <h2 class="card-heading">Welcome to My AI Passport™</h2>
-          <p class="card-body-text">
-            Your authenticated lifelong digital AI identity and capability workspace. Stage 1 has established your real Supabase session, PostgreSQL database schema, RLS security policies, and workspace shell.
-          </p>
+      <!-- View 1: Overview (Stage 2 Dynamic Container) -->
+      <div id="view-overview" class="view-panel"></div>
 
-          <div class="four-questions-grid">
-            <div class="question-box">
-              <span class="q-number">QUESTION 1</span>
-              <div class="q-title">What am I learning?</div>
-              <div class="q-desc">Structured capability modules & live build workshops.</div>
-            </div>
-            <div class="question-box">
-              <span class="q-number">QUESTION 2</span>
-              <div class="q-title">What have I built?</div>
-              <div class="q-desc">Practical evidence of production code & autonomous agents.</div>
-            </div>
-            <div class="question-box">
-              <span class="q-number">QUESTION 3</span>
-              <div class="q-title">What can I demonstrate?</div>
-              <div class="q-desc">5-dimension capability progression states (Explore ➔ Advance).</div>
-            </div>
-            <div class="question-box">
-              <span class="q-number">QUESTION 4</span>
-              <div class="q-title">What should I do next?</div>
-              <div class="q-desc">Contextual recommendations for maximum capability growth.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- View 2: My Passport -->
+      <!-- View 2: My Passport (Placeholder for Stage 3) -->
       <div id="view-passport" class="view-panel" style="display: none;">
         <div class="stage1-placeholder-card">
-          <div class="top-laser-flare"></div>
-          <span class="card-badge">STAGE 1 FOUNDATION • MY PASSPORT</span>
-          <h2 class="card-heading">Digital AI Passport Identity</h2>
-          <p class="card-body-text">
-            This module will house your 3D digital AI Passport Card, physical card activation status, QR verification codes, and public ledger controls in Stage 3.
-          </p>
-          <div id="passport-number-badge" style="background: rgba(223,207,173,0.08); border: 1px solid rgba(223,207,173,0.2); padding: 16px 20px; border-radius: 10px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--color-gold);">
-            🆔 PASSPORT ID: LOADING...
-          </div>
+          <span class="card-badge">MY PASSPORT VIEW</span>
+          <h2 class="card-heading">3D Digital AI Passport Identity</h2>
+          <p class="card-body-text">Stage 3 will feature interactive 3D card controls, physical card sync, QR verification, and ledger controls.</p>
         </div>
       </div>
 
-      <!-- View 3: Learn -->
+      <!-- View 3: Learn (Placeholder for Stage 4) -->
       <div id="view-learn" class="view-panel" style="display: none;">
         <div class="stage1-placeholder-card">
-          <div class="top-laser-flare"></div>
-          <span class="card-badge">STAGE 1 FOUNDATION • LEARN</span>
-          <h2 class="card-heading">Capability Pathways & Workshops</h2>
-          <p class="card-body-text">
-            Practical learning pathways designed around building real AI solutions. Stage 4 will connect active modules, live build sessions, and project prerequisites.
-          </p>
+          <span class="card-badge">LEARN PATHWAYS VIEW</span>
+          <h2 class="card-heading">Practical Capability Pathways</h2>
+          <p class="card-body-text">Stage 4 will connect active build modules and real-world AI projects.</p>
         </div>
       </div>
 
-      <!-- View 4: Projects -->
+      <!-- View 4: Projects (Placeholder for Stage 4) -->
       <div id="view-projects" class="view-panel" style="display: none;">
         <div class="stage1-placeholder-card">
-          <div class="top-laser-flare"></div>
-          <span class="card-badge">STAGE 1 FOUNDATION • PROJECTS</span>
-          <h2 class="card-heading">Projects as Evidence</h2>
-          <p class="card-body-text">
-            Projects demonstrate practical capability, not simply assignments. Stage 4 will enable project submissions, GitHub repo linking, live demo URLs, and capability dimension tagging.
-          </p>
+          <span class="card-badge">PROJECTS AS EVIDENCE VIEW</span>
+          <h2 class="card-heading">Project Submissions & Evidence</h2>
+          <p class="card-body-text">Stage 4 will enable project submissions, GitHub links, and capability dimension tagging.</p>
         </div>
       </div>
 
-      <!-- View 5: Credentials -->
+      <!-- View 5: Credentials (Placeholder for Stage 5) -->
       <div id="view-credentials" class="view-panel" style="display: none;">
         <div class="stage1-placeholder-card">
-          <div class="top-laser-flare"></div>
-          <span class="card-badge">STAGE 1 FOUNDATION • CREDENTIALS</span>
-          <h2 class="card-heading">Verified Credential Wallet</h2>
-          <p class="card-body-text">
-            Your verified credential wallet for certificates, skill badges, and pathway achievements. Stage 5 will feature verification hashing and PDF export controls.
-          </p>
+          <span class="card-badge">CREDENTIAL WALLET VIEW</span>
+          <h2 class="card-heading">Verified Credentials Wallet</h2>
+          <p class="card-body-text">Stage 5 will feature digital certificates, skill badges, and PDF verification exports.</p>
         </div>
       </div>
 
-      <!-- View 6: Capability -->
+      <!-- View 6: Capability (Placeholder for Stage 5) -->
       <div id="view-capability" class="view-panel" style="display: none;">
         <div class="stage1-placeholder-card">
-          <div class="top-laser-flare"></div>
-          <span class="card-badge">STAGE 1 FOUNDATION • CAPABILITY</span>
+          <span class="card-badge">CAPABILITY MATRIX VIEW</span>
           <h2 class="card-heading">AI Capability Framework™</h2>
-          <p class="card-body-text">
-            Evaluating capability across 5 core dimensions (Understand, Apply, Create, Evaluate, Responsible) using progression states (Explore ➔ Develop ➔ Demonstrate ➔ Advance). Stage 5 will map evidence directly into this matrix.
-          </p>
+          <p class="card-body-text">Stage 5 will map evidence directly into the 5-dimension capability matrix.</p>
         </div>
       </div>
 
-      <!-- View 7: Settings (Under User Avatar) -->
+      <!-- View 7: Settings -->
       <div id="view-settings" class="view-panel" style="display: none;">
         <div class="stage1-placeholder-card">
-          <div class="top-laser-flare"></div>
-          <span class="card-badge">STAGE 1 FOUNDATION • SETTINGS</span>
+          <span class="card-badge">SETTINGS VIEW</span>
           <h2 class="card-heading">Profile & Privacy Settings</h2>
-          <p class="card-body-text">
-            Manage your account settings, public passport handle, bio, and private vs public visibility toggles.
-          </p>
+          <p class="card-body-text">Manage account options, public handle, bio, and privacy settings.</p>
         </div>
       </div>
 
@@ -510,6 +825,7 @@
 
   <script type="module">
     import { getCurrentUser, getLearnerProfile, getPassportCard, supabase, isSupabaseConfigured } from '../src/lib/supabase.js';
+    import { renderOverview } from '../src/app/overview.js';
 
     document.addEventListener('DOMContentLoaded', async () => {
       initUserSession();
@@ -529,19 +845,9 @@
       }
 
       let profile = null;
-      let passport = null;
-
       try {
         profile = await getLearnerProfile(user.id);
-      } catch (err) {
-        console.warn('Profile pending initialization:', err);
-      }
-
-      try {
-        passport = await getPassportCard(user.id);
-      } catch (err) {
-        console.warn('Passport card pending initialization:', err);
-      }
+      } catch (err) {}
 
       const name = profile?.full_name || user.user_metadata?.full_name || user.email.split('@')[0];
       const initials = name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
@@ -549,29 +855,20 @@
       document.getElementById('user-avatar-initials').textContent = initials || 'VB';
       document.getElementById('user-display-name').textContent = name;
 
-      const passportNum = passport?.passport_number || 'AIP-L1-2026-PENDING';
-      const passportBadge = document.getElementById('passport-number-badge');
-      if (passportBadge) {
-        passportBadge.textContent = `🆔 PASSPORT ID: ${passportNum} • STATUS: ${passport?.status || 'ACTIVE'}`;
-      }
-
-      if (profile?.username) {
-        document.getElementById('link-public-preview').href = `../verify.html?id=${passportNum}`;
+      // Render Overview Content
+      const overviewContainer = document.getElementById('view-overview');
+      if (overviewContainer) {
+        await renderOverview(overviewContainer, user);
       }
     }
 
     window.switchView = function(viewId, btnElement) {
-      // Hide all panels
       document.querySelectorAll('.view-panel').forEach(el => el.style.display = 'none');
-      
-      // Deactivate all sidebar nav items
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
 
-      // Show selected panel
       const targetPanel = document.getElementById(`view-${viewId}`);
       if (targetPanel) targetPanel.style.display = 'block';
 
-      // Update Topbar Title
       const titles = {
         overview: 'Overview',
         passport: 'My Passport',
@@ -583,10 +880,7 @@
       };
       document.getElementById('page-title').textContent = titles[viewId] || 'Workspace';
 
-      // Set active nav class if passed
       if (btnElement) btnElement.classList.add('active');
-
-      // Close user dropdown if open
       document.getElementById('user-dropdown').style.display = 'none';
     };
 
