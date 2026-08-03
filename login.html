@@ -188,30 +188,6 @@
       border: 1px solid rgba(223, 207, 173, 0.3);
       color: var(--color-gold);
     }
-
-    .demo-mode-bar {
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: center;
-    }
-
-    .demo-btn {
-      background: transparent;
-      border: 1px dashed rgba(223, 207, 173, 0.4);
-      color: var(--color-gold);
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .demo-btn:hover {
-      background: rgba(223, 207, 173, 0.1);
-      border-color: var(--color-gold);
-    }
   </style>
 </head>
 <body>
@@ -264,12 +240,6 @@
         <button type="submit" class="auth-submit-btn" id="btn-submit">SIGN IN TO MY PASSPORT →</button>
       </form>
 
-      <!-- Demo Shell Shortcut -->
-      <div class="demo-mode-bar">
-        <p style="font-size: 0.75rem; color: var(--color-text-secondary); margin-bottom: 10px;">Exploring Stage 1 Application Shell?</p>
-        <button type="button" class="demo-btn" onclick="enterDemoMode()">⚡ ENTER DEMO WORKSPACE (/app/)</button>
-      </div>
-
     </div>
   </div>
 
@@ -282,6 +252,16 @@
     import { supabase, isSupabaseConfigured } from './src/lib/supabase.js';
 
     let currentTab = 'signin';
+
+    // If user is already authenticated, auto-redirect to /app/
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (isSupabaseConfigured) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          window.location.href = './app/index.html';
+        }
+      }
+    });
 
     window.switchTab = function(tab) {
       currentTab = tab;
@@ -327,13 +307,7 @@
 
       try {
         if (!isSupabaseConfigured) {
-          // Demo fallback when Supabase keys not set in .env
-          showAlert('info', 'Notice: Supabase env keys pending. Entering authenticated app shell...');
-          setTimeout(() => {
-            localStorage.setItem('aip_auth_user', JSON.stringify({ email, full_name: fullname || 'AI Learner' }));
-            window.location.href = './app/index.html';
-          }, 800);
-          return;
+          throw new Error('Supabase project credentials not configured in .env file.');
         }
 
         if (currentTab === 'signin') {
@@ -348,7 +322,7 @@
             options: { data: { full_name: fullname } }
           });
           if (error) throw error;
-          showAlert('info', 'Passport Created! Redirecting to workspace...');
+          showAlert('info', 'Passport Account Created! Redirecting to workspace...');
           setTimeout(() => { window.location.href = './app/index.html'; }, 600);
         }
       } catch (err) {
@@ -357,11 +331,6 @@
         btnSubmit.disabled = false;
         btnSubmit.textContent = currentTab === 'signin' ? 'SIGN IN TO MY PASSPORT →' : 'ISSUE DIGITAL PASSPORT →';
       }
-    };
-
-    window.enterDemoMode = function() {
-      localStorage.setItem('aip_auth_user', JSON.stringify({ email: 'demo@aipasport.org', full_name: 'Demo Verified Builder' }));
-      window.location.href = './app/index.html';
     };
 
     function showAlert(type, text) {

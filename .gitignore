@@ -7,4 +7,8 @@ dist/
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment and secrets
 .env
+.env.*
+!.env.example

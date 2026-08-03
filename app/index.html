@@ -378,13 +378,13 @@
         <div class="user-menu-wrap">
           <button class="user-avatar-btn" onclick="toggleUserDropdown()">
             <div class="avatar-circle" id="user-avatar-initials">VB</div>
-            <span id="user-display-name">Verified Builder</span>
+            <span id="user-display-name">Loading...</span>
             <span style="font-size: 0.6rem;">▼</span>
           </button>
 
           <div class="user-dropdown" id="user-dropdown">
             <a class="dropdown-item" onclick="switchView('settings')">⚙️ Profile & Settings</a>
-            <a class="dropdown-item" href="../passport.html" target="_blank">🌐 Public Passport Preview</a>
+            <a class="dropdown-item" id="link-public-preview" href="../passport.html" target="_blank">🌐 Public Passport Preview</a>
             <div style="border-top: 1px solid rgba(255,255,255,0.08); margin: 4px 0;"></div>
             <a class="dropdown-item" style="color: #ff7070;" onclick="handleSignOut()">🚪 Sign Out</a>
           </div>
@@ -402,7 +402,7 @@
           <span class="card-badge">STAGE 1 FOUNDATION • OVERVIEW</span>
           <h2 class="card-heading">Welcome to My AI Passport™</h2>
           <p class="card-body-text">
-            Your authenticated lifelong digital AI identity and capability workspace. Stage 1 has successfully established your secure backend, database schema, RLS security policies, and workspace shell.
+            Your authenticated lifelong digital AI identity and capability workspace. Stage 1 has established your real Supabase session, PostgreSQL database schema, RLS security policies, and workspace shell.
           </p>
 
           <div class="four-questions-grid">
@@ -439,8 +439,8 @@
           <p class="card-body-text">
             This module will house your 3D digital AI Passport Card, physical card activation status, QR verification codes, and public ledger controls in Stage 3.
           </p>
-          <div style="background: rgba(223,207,173,0.08); border: 1px solid rgba(223,207,173,0.2); padding: 16px 20px; border-radius: 10px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--color-gold);">
-            🆔 PASSPORT ID: AIP-L1-2026-000245 • STATUS: ACTIVATED
+          <div id="passport-number-badge" style="background: rgba(223,207,173,0.08); border: 1px solid rgba(223,207,173,0.2); padding: 16px 20px; border-radius: 10px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--color-gold);">
+            🆔 PASSPORT ID: LOADING...
           </div>
         </div>
       </div>
@@ -509,26 +509,55 @@
   </main>
 
   <script type="module">
-    import { getCurrentUser, getLearnerProfile, getPassportCard, supabase } from '../src/lib/supabase.js';
+    import { getCurrentUser, getLearnerProfile, getPassportCard, supabase, isSupabaseConfigured } from '../src/lib/supabase.js';
 
     document.addEventListener('DOMContentLoaded', async () => {
       initUserSession();
     });
 
     async function initUserSession() {
-      const storedUser = localStorage.getItem('aip_auth_user');
-      let name = 'Verified Builder';
-      
-      if (storedUser) {
-        try {
-          const parsed = JSON.parse(storedUser);
-          name = parsed.full_name || name;
-        } catch(e){}
+      if (!isSupabaseConfigured) {
+        window.location.href = '../login.html';
+        return;
       }
 
+      // Strict Route Protection: Must have active Supabase session
+      const user = await getCurrentUser();
+      if (!user) {
+        window.location.href = '../login.html';
+        return;
+      }
+
+      let profile = null;
+      let passport = null;
+
+      try {
+        profile = await getLearnerProfile(user.id);
+      } catch (err) {
+        console.warn('Profile pending initialization:', err);
+      }
+
+      try {
+        passport = await getPassportCard(user.id);
+      } catch (err) {
+        console.warn('Passport card pending initialization:', err);
+      }
+
+      const name = profile?.full_name || user.user_metadata?.full_name || user.email.split('@')[0];
       const initials = name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
+      
       document.getElementById('user-avatar-initials').textContent = initials || 'VB';
       document.getElementById('user-display-name').textContent = name;
+
+      const passportNum = passport?.passport_number || 'AIP-L1-2026-PENDING';
+      const passportBadge = document.getElementById('passport-number-badge');
+      if (passportBadge) {
+        passportBadge.textContent = `🆔 PASSPORT ID: ${passportNum} • STATUS: ${passport?.status || 'ACTIVE'}`;
+      }
+
+      if (profile?.username) {
+        document.getElementById('link-public-preview').href = `../verify.html?id=${passportNum}`;
+      }
     }
 
     window.switchView = function(viewId, btnElement) {
@@ -567,7 +596,6 @@
     };
 
     window.handleSignOut = async function() {
-      localStorage.removeItem('aip_auth_user');
       try {
         await supabase.auth.signOut();
       } catch(e){}
