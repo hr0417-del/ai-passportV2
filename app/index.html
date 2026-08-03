@@ -15,7 +15,7 @@
   <style>
     /* ==========================================================================
        MY AI PASSPORT™ — AUTHENTICATED WORKSPACE SHELL
-       Focus: Calmer, Premium, Functional (Apple / Linear / Stripe / Notion quality)
+       Focus: Institution + Technology + Identity (Apple / Linear / Stripe quality)
        ========================================================================== */
     body {
       background-color: #000000;
@@ -42,7 +42,7 @@
     }
 
     .sidebar-brand {
-      padding: 0 12px 24px 12px;
+      padding: 0 12px 20px 12px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
@@ -56,18 +56,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-
-    .sidebar-status-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem;
-      color: #00ff88;
-      background: rgba(0, 255, 136, 0.1);
-      border: 1px solid rgba(0, 255, 136, 0.25);
-      padding: 2px 8px;
-      border-radius: 10px;
-      display: inline-block;
-      margin-top: 8px;
     }
 
     /* Primary Nav Links */
@@ -126,49 +114,23 @@
       background: #000000;
     }
 
-    /* Top Command Header */
+    /* Top Command Header (Simplified) */
     .app-topbar {
-      height: 64px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      height: 60px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       padding: 0 32px;
       background: rgba(8, 8, 8, 0.8);
       backdrop-filter: blur(16px);
       box-sizing: border-box;
     }
 
-    .topbar-title {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #ffffff;
-      margin: 0;
-    }
-
     .topbar-right {
       display: flex;
       align-items: center;
       gap: 16px;
-    }
-
-    .btn-quick-add {
-      background: rgba(223, 207, 173, 0.15);
-      border: 1px solid rgba(223, 207, 173, 0.35);
-      color: var(--color-gold);
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-quick-add:hover {
-      background: var(--color-gold);
-      color: #000000;
     }
 
     /* User Profile Menu Button */
@@ -180,13 +142,18 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.1);
       padding: 4px 12px 4px 4px;
       border-radius: 20px;
       cursor: pointer;
       color: #ffffff;
       font-size: 0.82rem;
+      transition: all 0.2s ease;
+    }
+
+    .user-avatar-btn:hover {
+      border-color: rgba(223, 207, 173, 0.4);
     }
 
     .avatar-circle {
@@ -237,20 +204,20 @@
     /* Content Area Scroll Container */
     .app-content {
       flex: 1;
-      padding: 32px;
+      padding: 36px 40px;
       overflow-y: auto;
       box-sizing: border-box;
     }
 
     /* ==========================================================================
-       STAGE 2 OVERVIEW STYLES
+       STAGE 2 OVERVIEW REFINED STYLES
        ========================================================================== */
     .overview-wrapper {
-      max-width: 1040px;
+      max-width: 1140px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 36px;
+      gap: 44px;
     }
 
     .overview-section {
@@ -258,9 +225,6 @@
     }
 
     /* 1. Greeting Section */
-    .greeting-header {
-      text-align: left;
-    }
     .greeting-tag {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
@@ -271,10 +235,11 @@
     }
     .greeting-title {
       font-family: var(--font-serif);
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       font-weight: 700;
       margin: 0 0 8px 0;
       color: #ffffff;
+      letter-spacing: -0.01em;
     }
     .greeting-sub {
       color: var(--color-text-secondary);
@@ -282,21 +247,21 @@
       margin: 0;
     }
 
-    /* 2. Digital AI Passport Card */
+    /* 2. Digital AI Passport (Signature Centerpiece) */
     .digital-passport-card {
-      background: rgba(13, 13, 13, 0.95);
-      border: 1px solid rgba(223, 207, 173, 0.3);
+      background: rgba(12, 12, 12, 0.96);
+      border: 1px solid rgba(223, 207, 173, 0.35);
       border-radius: 20px;
-      padding: 28px 32px;
+      padding: 32px 36px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(223, 207, 173, 0.06);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 40px rgba(223, 207, 173, 0.07);
     }
     .passport-card-flare {
       position: absolute;
       top: 0;
-      left: 10%;
-      width: 80%;
+      left: 15%;
+      width: 70%;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
     }
@@ -308,15 +273,16 @@
     }
     .passport-brand-tag {
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       color: var(--color-gold);
     }
     .passport-status-pill {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      padding: 4px 10px;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 12px;
       border-radius: 12px;
       background: rgba(0, 255, 136, 0.1);
       border: 1px solid rgba(0, 255, 136, 0.3);
@@ -325,12 +291,12 @@
     .passport-card-body {
       display: flex;
       align-items: center;
-      gap: 24px;
-      margin-bottom: 24px;
+      gap: 28px;
+      margin-bottom: 28px;
     }
     .passport-avatar-box {
-      width: 72px;
-      height: 72px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       background: var(--color-gold);
       color: #000000;
@@ -338,62 +304,74 @@
       align-items: center;
       justify-content: center;
       font-family: var(--font-sans);
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      box-shadow: 0 0 20px rgba(223, 207, 173, 0.3);
+      box-shadow: 0 0 25px rgba(223, 207, 173, 0.35);
+      border: 2px solid rgba(255, 255, 255, 0.2);
     }
     .passport-details-box {
       flex: 1;
     }
     .passport-user-name {
       font-family: var(--font-serif);
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      margin: 0 0 12px 0;
+      margin: 0 0 2px 0;
       color: #ffffff;
+    }
+    .passport-user-handle {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
     }
     .passport-meta-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 14px 20px;
     }
     .meta-label {
       display: block;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
+      font-size: 0.65rem;
+      font-weight: 600;
       color: var(--color-text-secondary);
       margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
     .meta-value {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: #ffffff;
     }
-    .meta-value.monospace-gold {
+    .meta-value.passport-id-mono {
       font-family: 'Space Mono', monospace;
       color: var(--color-gold);
+      font-weight: 700;
     }
     .passport-card-footer {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 18px;
+      padding-top: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .passport-ledger-text {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
+    .passport-credibility-text {
+      font-size: 0.78rem;
       color: var(--color-text-secondary);
     }
     .btn-passport-cta {
-      background: rgba(223, 207, 173, 0.12);
-      border: 1px solid rgba(223, 207, 173, 0.3);
+      background: rgba(223, 207, 173, 0.14);
+      border: 1px solid rgba(223, 207, 173, 0.35);
       color: var(--color-gold);
-      padding: 8px 16px;
+      padding: 9px 18px;
       border-radius: 8px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -417,6 +395,12 @@
       flex-direction: column;
       justify-content: space-between;
     }
+    .overview-card.primary-card {
+      border-color: rgba(223, 207, 173, 0.25);
+    }
+    .overview-card.advisory-card {
+      background: rgba(10, 10, 10, 0.7);
+    }
     .card-header-bar {
       display: flex;
       justify-content: space-between;
@@ -424,16 +408,15 @@
       margin-bottom: 20px;
     }
     .card-section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       color: var(--color-gold);
     }
     .dimension-badge {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      padding: 3px 8px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 3px 10px;
       border-radius: 6px;
       background: rgba(223, 207, 173, 0.12);
       border: 1px solid rgba(223, 207, 173, 0.3);
@@ -462,12 +445,12 @@
     .challenge-meta {
       display: flex;
       justify-content: space-between;
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       margin-bottom: 6px;
     }
     .challenge-label {
-      font-family: 'Space Mono', monospace;
       color: var(--color-gold);
+      font-weight: 600;
     }
     .challenge-time {
       color: var(--color-text-secondary);
@@ -486,8 +469,8 @@
       color: #000000;
       border: none;
       border-radius: 8px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -495,30 +478,51 @@
     .btn-primary-action:hover {
       background: #ffffff;
     }
+    .btn-secondary-action {
+      width: 100%;
+      padding: 12px 0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary-action:hover {
+      background: rgba(223, 207, 173, 0.15);
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+    }
     .btn-primary-action.inline-btn {
       width: auto;
-      padding: 10px 20px;
+      padding: 10px 22px;
       margin-top: 14px;
     }
 
     .empty-card-body, .empty-section-box {
       text-align: center;
-      padding: 24px;
+      padding: 28px 24px;
       background: rgba(255, 255, 255, 0.02);
-      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border: 1px dashed rgba(255, 255, 255, 0.12);
       border-radius: 12px;
     }
     .empty-title {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: #ffffff;
       margin-bottom: 6px;
+      letter-spacing: 0.04em;
     }
     .empty-desc {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--color-text-secondary);
       margin-bottom: 16px;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* Section Headers */
@@ -544,59 +548,83 @@
       background: transparent;
       border: none;
       color: var(--color-gold);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
       cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-text-link:hover {
+      color: #ffffff;
     }
 
-    /* 4. AI Capability Snapshot Nodes */
+    /* 4. AI CAPABILITY SIGNATURE (Connected Node System) */
+    .capability-signature-container {
+      position: relative;
+      padding: 10px 0;
+    }
+    .capability-pipeline-line {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      width: 90%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(223,207,173,0.1), rgba(223,207,173,0.4), rgba(223,207,173,0.1));
+      z-index: 1;
+    }
     .capability-node-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 16px;
+      position: relative;
+      z-index: 2;
     }
     .capability-node-card {
-      background: rgba(13, 13, 13, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(14, 14, 14, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      padding: 18px 14px;
+      padding: 20px 14px;
       text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      transition: all 0.2s ease;
+    }
+    .capability-node-card:hover {
+      border-color: rgba(223, 207, 173, 0.4);
+      transform: translateY(-2px);
     }
     .node-dim-name {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--color-gold);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      letter-spacing: 0.08em;
     }
-    .node-state-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.62rem;
+    .node-state-pill {
+      font-size: 0.65rem;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 6px;
       display: inline-block;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
-    .node-state-tag.state-explore {
+    .node-state-pill.state-explore {
       background: rgba(255, 255, 255, 0.06);
       color: var(--color-text-secondary);
     }
-    .node-state-tag.state-develop {
+    .node-state-pill.state-develop {
       background: rgba(0, 180, 255, 0.12);
       color: #00b4ff;
     }
-    .node-state-tag.state-demonstrate {
+    .node-state-pill.state-demonstrate {
       background: rgba(223, 207, 173, 0.15);
       color: var(--color-gold);
     }
-    .node-state-tag.state-advance {
+    .node-state-pill.state-advance {
       background: rgba(0, 255, 136, 0.12);
       color: #00ff88;
     }
     .node-evidence-count {
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       color: var(--color-text-secondary);
     }
 
@@ -610,7 +638,7 @@
       background: rgba(13, 13, 13, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
-      padding: 20px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -628,8 +656,8 @@
       margin: 0;
     }
     .project-status-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem;
+      font-size: 0.6rem;
+      font-weight: 600;
       padding: 2px 6px;
       border-radius: 4px;
       background: rgba(223, 207, 173, 0.12);
@@ -648,15 +676,15 @@
       flex-direction: column;
       gap: 16px;
       position: relative;
-      padding-left: 20px;
-      border-left: 1px solid rgba(223, 207, 173, 0.2);
+      padding-left: 24px;
+      border-left: 1px solid rgba(223, 207, 173, 0.25);
     }
     .journey-timeline-item {
       position: relative;
     }
     .journey-marker {
       position: absolute;
-      left: -25px;
+      left: -29px;
       top: 4px;
       width: 9px;
       height: 9px;
@@ -665,28 +693,32 @@
       box-shadow: 0 0 10px var(--color-gold);
     }
     .journey-date {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.62rem;
+      font-size: 0.68rem;
+      font-weight: 600;
       color: var(--color-gold);
     }
     .journey-event-title {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 600;
       color: #ffffff;
       margin: 2px 0 0 0;
     }
     .journey-event-desc {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--color-text-secondary);
       margin: 2px 0 0 0;
     }
 
     /* Responsive adjustments */
     @media (max-width: 900px) {
+      .app-content { padding: 24px 20px; }
       .two-col-grid { grid-template-columns: 1fr; }
-      .passport-meta-grid { grid-template-columns: repeat(2, 1fr); }
-      .capability-node-grid { grid-template-columns: repeat(3, 1fr); }
+      .passport-meta-grid { grid-template-columns: 1fr; }
+      .passport-card-body { flex-direction: column; text-align: center; }
+      .capability-node-grid { grid-template-columns: repeat(2, 1fr); }
+      .capability-pipeline-line { display: none; }
       .projects-grid, .credentials-grid { grid-template-columns: 1fr; }
+      .section-header-block { flex-direction: column; align-items: flex-start; gap: 8px; }
     }
   </style>
 </head>
@@ -699,7 +731,6 @@
         <a href="../index.html" class="sidebar-logo">
           🆔 MY AI PASSPORT™
         </a>
-        <span class="sidebar-status-tag">🟢 STAGE 2 • ONLINE</span>
       </div>
 
       <!-- Primary Nav (Only 6 Items as per spec) -->
@@ -735,14 +766,10 @@
   <!-- Main Content Workspace -->
   <main class="app-main">
     
-    <!-- Topbar Header -->
+    <!-- Topbar Header (Simplified) -->
     <header class="app-topbar">
-      <h1 class="topbar-title" id="page-title">Overview</h1>
-      
       <div class="topbar-right">
-        <button class="btn-quick-add" onclick="switchView('projects')">+ ADD EVIDENCE</button>
-
-        <!-- Profile Menu Dropdown -->
+        <!-- User Profile Menu Dropdown -->
         <div class="user-menu-wrap">
           <button class="user-avatar-btn" onclick="toggleUserDropdown()">
             <div class="avatar-circle" id="user-avatar-initials">VB</div>
@@ -768,55 +795,49 @@
 
       <!-- View 2: My Passport (Placeholder for Stage 3) -->
       <div id="view-passport" class="view-panel" style="display: none;">
-        <div class="stage1-placeholder-card">
-          <span class="card-badge">MY PASSPORT VIEW</span>
-          <h2 class="card-heading">3D Digital AI Passport Identity</h2>
-          <p class="card-body-text">Stage 3 will feature interactive 3D card controls, physical card sync, QR verification, and ledger controls.</p>
+        <div class="empty-section-box">
+          <h2 class="empty-title">MY PASSPORT VIEW</h2>
+          <p class="empty-desc">Stage 3 will feature interactive 3D card controls, physical card sync, QR verification, and ledger controls.</p>
         </div>
       </div>
 
       <!-- View 3: Learn (Placeholder for Stage 4) -->
       <div id="view-learn" class="view-panel" style="display: none;">
-        <div class="stage1-placeholder-card">
-          <span class="card-badge">LEARN PATHWAYS VIEW</span>
-          <h2 class="card-heading">Practical Capability Pathways</h2>
-          <p class="card-body-text">Stage 4 will connect active build modules and real-world AI projects.</p>
+        <div class="empty-section-box">
+          <h2 class="empty-title">LEARN PATHWAYS VIEW</h2>
+          <p class="empty-desc">Stage 4 will connect active build modules and real-world AI projects.</p>
         </div>
       </div>
 
       <!-- View 4: Projects (Placeholder for Stage 4) -->
       <div id="view-projects" class="view-panel" style="display: none;">
-        <div class="stage1-placeholder-card">
-          <span class="card-badge">PROJECTS AS EVIDENCE VIEW</span>
-          <h2 class="card-heading">Project Submissions & Evidence</h2>
-          <p class="card-body-text">Stage 4 will enable project submissions, GitHub links, and capability dimension tagging.</p>
+        <div class="empty-section-box">
+          <h2 class="empty-title">PROJECTS AS EVIDENCE VIEW</h2>
+          <p class="empty-desc">Stage 4 will enable project submissions, GitHub links, and capability dimension tagging.</p>
         </div>
       </div>
 
       <!-- View 5: Credentials (Placeholder for Stage 5) -->
       <div id="view-credentials" class="view-panel" style="display: none;">
-        <div class="stage1-placeholder-card">
-          <span class="card-badge">CREDENTIAL WALLET VIEW</span>
-          <h2 class="card-heading">Verified Credentials Wallet</h2>
-          <p class="card-body-text">Stage 5 will feature digital certificates, skill badges, and PDF verification exports.</p>
+        <div class="empty-section-box">
+          <h2 class="empty-title">CREDENTIAL WALLET VIEW</h2>
+          <p class="empty-desc">Stage 5 will feature digital certificates, skill badges, and PDF verification exports.</p>
         </div>
       </div>
 
       <!-- View 6: Capability (Placeholder for Stage 5) -->
       <div id="view-capability" class="view-panel" style="display: none;">
-        <div class="stage1-placeholder-card">
-          <span class="card-badge">CAPABILITY MATRIX VIEW</span>
-          <h2 class="card-heading">AI Capability Framework™</h2>
-          <p class="card-body-text">Stage 5 will map evidence directly into the 5-dimension capability matrix.</p>
+        <div class="empty-section-box">
+          <h2 class="empty-title">CAPABILITY MATRIX VIEW</h2>
+          <p class="empty-desc">Stage 5 will map evidence directly into the 5-dimension capability matrix.</p>
         </div>
       </div>
 
       <!-- View 7: Settings -->
       <div id="view-settings" class="view-panel" style="display: none;">
-        <div class="stage1-placeholder-card">
-          <span class="card-badge">SETTINGS VIEW</span>
-          <h2 class="card-heading">Profile & Privacy Settings</h2>
-          <p class="card-body-text">Manage account options, public handle, bio, and privacy settings.</p>
+        <div class="empty-section-box">
+          <h2 class="empty-title">PROFILE & PRIVACY SETTINGS</h2>
+          <p class="empty-desc">Manage account options, public handle, bio, and privacy settings.</p>
         </div>
       </div>
 
@@ -849,7 +870,7 @@
         profile = await getLearnerProfile(user.id);
       } catch (err) {}
 
-      const name = profile?.full_name || user.user_metadata?.full_name || user.email.split('@')[0];
+      const name = profile?.full_name || user.user_metadata?.full_name || formatEmailName(user.email);
       const initials = name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
       
       document.getElementById('user-avatar-initials').textContent = initials || 'VB';
@@ -862,23 +883,18 @@
       }
     }
 
+    function formatEmailName(emailStr) {
+      if (!emailStr) return 'Builder';
+      const handle = emailStr.split('@')[0];
+      return handle.charAt(0).toUpperCase() + handle.slice(1);
+    }
+
     window.switchView = function(viewId, btnElement) {
       document.querySelectorAll('.view-panel').forEach(el => el.style.display = 'none');
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
 
       const targetPanel = document.getElementById(`view-${viewId}`);
       if (targetPanel) targetPanel.style.display = 'block';
-
-      const titles = {
-        overview: 'Overview',
-        passport: 'My Passport',
-        learn: 'Learn Pathways',
-        projects: 'Projects as Evidence',
-        credentials: 'Verified Credentials',
-        capability: 'Capability Framework',
-        settings: 'Profile & Settings'
-      };
-      document.getElementById('page-title').textContent = titles[viewId] || 'Workspace';
 
       if (btnElement) btnElement.classList.add('active');
       document.getElementById('user-dropdown').style.display = 'none';

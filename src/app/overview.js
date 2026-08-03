@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MY AI PASSPORT™ — STAGE 2 OVERVIEW ENGINE
+   MY AI PASSPORT™ — STAGE 2 OVERVIEW ENGINE (VISUAL & UX REFINED)
    ========================================================================== */
 
 import { supabase } from '../lib/supabase.js';
@@ -11,7 +11,7 @@ export async function renderOverview(containerEl, user) {
   containerEl.innerHTML = renderSkeleton();
 
   try {
-    // 1. Fetch All Overview Data in Parallel
+    // Fetch All Overview Data in Parallel
     const [
       profileRes,
       passportRes,
@@ -34,7 +34,6 @@ export async function renderOverview(containerEl, user) {
 
     const profile = profileRes.data || {};
     const passport = passportRes.data || {};
-    const privacy = privacyRes.data || {};
     const capabilities = capabilityRes.data || [];
     const learning = learningRes.data || [];
     const projects = projectsRes.data || [];
@@ -47,7 +46,10 @@ export async function renderOverview(containerEl, user) {
     if (hour >= 12 && hour < 17) timeOfDay = 'afternoon';
     if (hour >= 17 || hour < 5) timeOfDay = 'evening';
 
-    const firstName = (profile.full_name || user.user_metadata?.full_name || user.email.split('@')[0]).split(' ')[0];
+    // Derive Full Name & First Name properly
+    const fullName = profile.full_name || user.user_metadata?.full_name || formatEmailToName(user.email);
+    const firstName = fullName.trim().split(' ')[0];
+    const usernameTag = profile.username ? `@${profile.username}` : `@${user.email.split('@')[0]}`;
 
     // Compute Recommendation
     const nextMove = computeNextMove(learning, projects, credentials, capabilities);
@@ -65,38 +67,37 @@ export async function renderOverview(containerEl, user) {
           </div>
         </section>
 
-        <!-- 2. DIGITAL AI PASSPORT -->
+        <!-- 2. DIGITAL AI PASSPORT (SIGNATURE CENTERPIECE) -->
         <section class="overview-section passport-card-section">
           <div class="digital-passport-card">
             <div class="passport-card-flare"></div>
+            
             <div class="passport-card-top">
-              <div class="passport-brand-tag">🆔 DIGITAL AI PASSPORT™</div>
-              <div class="passport-status-pill ${passport.status === 'ACTIVE' ? 'active' : ''}">
-                🟢 ${passport.status || 'ACTIVATED'}
+              <div class="passport-brand-tag">AI PASSPORT™</div>
+              <div class="passport-status-pill">
+                ✓ VERIFIED AI PASSPORT
               </div>
             </div>
 
             <div class="passport-card-body">
               <div class="passport-avatar-box">
-                <div class="passport-avatar-initials">${getInitials(profile.full_name || firstName)}</div>
+                <div class="passport-avatar-initials">${getInitials(fullName)}</div>
               </div>
               <div class="passport-details-box">
-                <h2 class="passport-user-name">${escapeHtml(profile.full_name || firstName)}</h2>
+                <h2 class="passport-user-name">${escapeHtml(fullName)}</h2>
+                <div class="passport-user-handle">${escapeHtml(usernameTag)}</div>
+                
                 <div class="passport-meta-grid">
                   <div class="meta-item">
                     <span class="meta-label">PASSPORT ID</span>
-                    <span class="meta-value monospace-gold">${passport.passport_number || 'AIP-L1-2026-PENDING'}</span>
+                    <span class="meta-value passport-id-mono">${passport.passport_number || 'AIP-L1-2026-PENDING'}</span>
                   </div>
                   <div class="meta-item">
                     <span class="meta-label">MEMBER SINCE</span>
                     <span class="meta-value">${formatDate(profile.created_at || passport.issue_date)}</span>
                   </div>
                   <div class="meta-item">
-                    <span class="meta-label">ACTIVATION</span>
-                    <span class="meta-value">${passport.activation_status || 'ACTIVATED'}</span>
-                  </div>
-                  <div class="meta-item">
-                    <span class="meta-label">PATHWAY</span>
+                    <span class="meta-label">CURRENT PATH</span>
                     <span class="meta-value">Practical AI Builder</span>
                   </div>
                 </div>
@@ -104,7 +105,7 @@ export async function renderOverview(containerEl, user) {
             </div>
 
             <div class="passport-card-footer">
-              <span class="passport-ledger-text">AUTHENTICATED LEDGER RECORD • VERIFIED</span>
+              <span class="passport-credibility-text">Identity verified within the AI Passport Ecosystem.</span>
               <button class="btn-passport-cta" onclick="window.switchView('passport')">VIEW MY PASSPORT →</button>
             </div>
           </div>
@@ -113,8 +114,8 @@ export async function renderOverview(containerEl, user) {
         <!-- 3. CONTINUE BUILDING + YOUR NEXT MOVE (2-Column Grid) -->
         <section class="overview-section two-col-grid">
           
-          <!-- LEFT: CONTINUE BUILDING -->
-          <div class="overview-card build-card">
+          <!-- LEFT: CONTINUE BUILDING (PRIMARY ACTION) -->
+          <div class="overview-card build-card primary-card">
             <div class="card-header-bar">
               <span class="card-section-label">CONTINUE BUILDING</span>
               <span class="card-status-dot"></span>
@@ -122,8 +123,8 @@ export async function renderOverview(containerEl, user) {
             ${renderContinueBuilding(learning)}
           </div>
 
-          <!-- RIGHT: YOUR NEXT MOVE -->
-          <div class="overview-card next-move-card">
+          <!-- RIGHT: YOUR NEXT MOVE (ADVISORY CARD) -->
+          <div class="overview-card next-move-card advisory-card">
             <div class="card-header-bar">
               <span class="card-section-label">YOUR NEXT MOVE</span>
               <span class="dimension-badge">${nextMove.dimensionTag}</span>
@@ -140,39 +141,42 @@ export async function renderOverview(containerEl, user) {
                 <div class="challenge-name">${nextMove.challengeName}</div>
               </div>
 
-              <button class="btn-primary-action" onclick="window.switchView('${nextMove.actionRoute}')">
+              <button class="btn-secondary-action" onclick="window.switchView('${nextMove.actionRoute}')">
                 ${nextMove.actionLabel}
               </button>
             </div>
           </div>
         </section>
 
-        <!-- 4. AI CAPABILITY SNAPSHOT -->
+        <!-- 4. AI CAPABILITY SIGNATURE (CONNECTED NODE PIPELINE) -->
         <section class="overview-section capability-snapshot-section">
           <div class="section-header-block">
-            <div>
+            <div class="section-header-left">
               <h2 class="section-title">YOUR AI CAPABILITY</h2>
               <p class="section-subtitle">A snapshot of how your learning and verified work are developing your practical AI capability.</p>
             </div>
             <button class="btn-text-link" onclick="window.switchView('capability')">VIEW CAPABILITY PROFILE →</button>
           </div>
 
-          <div class="capability-node-grid">
-            ${renderCapabilityNodes(capabilities)}
+          <div class="capability-signature-container">
+            <div class="capability-pipeline-line"></div>
+            <div class="capability-node-grid">
+              ${renderCapabilitySignatureNodes(capabilities)}
+            </div>
           </div>
         </section>
 
         <!-- 5. WHAT YOU'VE BUILT -->
         <section class="overview-section projects-section">
           <div class="section-header-block">
-            <div>
+            <div class="section-header-left">
               <h2 class="section-title">WHAT YOU'VE BUILT</h2>
               <p class="section-subtitle">Your projects are evidence of what you can do with AI.</p>
             </div>
             <button class="btn-text-link" onclick="window.switchView('projects')">VIEW ALL PROJECTS →</button>
           </div>
 
-          <div class="projects-grid">
+          <div class="projects-content-container">
             ${renderProjects(projects)}
           </div>
         </section>
@@ -180,14 +184,14 @@ export async function renderOverview(containerEl, user) {
         <!-- 6. RECENT ACHIEVEMENTS -->
         <section class="overview-section achievements-section">
           <div class="section-header-block">
-            <div>
+            <div class="section-header-left">
               <h2 class="section-title">RECENT ACHIEVEMENTS</h2>
               <p class="section-subtitle">Verified credentials, badges, and pathway certifications.</p>
             </div>
             <button class="btn-text-link" onclick="window.switchView('credentials')">VIEW ALL CREDENTIALS →</button>
           </div>
 
-          <div class="credentials-grid">
+          <div class="credentials-content-container">
             ${renderCredentials(credentials)}
           </div>
         </section>
@@ -195,7 +199,7 @@ export async function renderOverview(containerEl, user) {
         <!-- 7. YOUR AI JOURNEY -->
         <section class="overview-section journey-section">
           <div class="section-header-block">
-            <div>
+            <div class="section-header-left">
               <h2 class="section-title">YOUR AI JOURNEY</h2>
               <p class="section-subtitle">Your AI Passport grows with every meaningful milestone.</p>
             </div>
@@ -212,10 +216,10 @@ export async function renderOverview(containerEl, user) {
   } catch (err) {
     console.error('Error rendering Overview data:', err);
     containerEl.innerHTML = `
-      <div class="stage1-placeholder-card">
-        <h2 class="card-heading" style="color: #ff7070;">Unable to Load Overview Data</h2>
-        <p class="card-body-text">${escapeHtml(err.message || 'Error connecting to database.')}</p>
-        <button class="auth-submit-btn" onclick="window.location.reload()">RETRY CONNECTION</button>
+      <div class="empty-section-box">
+        <h2 class="empty-title" style="color: #ff7070;">Unable to Load Overview Data</h2>
+        <p class="empty-desc">${escapeHtml(err.message || 'Error connecting to database.')}</p>
+        <button class="btn-primary-action inline-btn" onclick="window.location.reload()">RETRY CONNECTION</button>
       </div>
     `;
   }
@@ -235,7 +239,7 @@ function renderContinueBuilding(learningList) {
           <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 45%;"></div></div>
           <span class="progress-text">In Progress</span>
         </div>
-        <button class="btn-secondary-action" onclick="window.switchView('learn')">CONTINUE BUILDING →</button>
+        <button class="btn-primary-action" onclick="window.switchView('learn')">CONTINUE BUILDING →</button>
       </div>
     `;
   }
@@ -243,7 +247,6 @@ function renderContinueBuilding(learningList) {
   // Intentional Empty State
   return `
     <div class="empty-card-body">
-      <div class="empty-icon">🔨</div>
       <h3 class="empty-title">READY TO BUILD SOMETHING?</h3>
       <p class="empty-desc">Choose your next learning pathway or project to start developing practical capability.</p>
       <button class="btn-primary-action" onclick="window.switchView('learn')">EXPLORE LEARNING →</button>
@@ -251,7 +254,7 @@ function renderContinueBuilding(learningList) {
   `;
 }
 
-function renderCapabilityNodes(capabilities) {
+function renderCapabilitySignatureNodes(capabilities) {
   const defaultDimensions = [
     { dimension: 'UNDERSTAND', label: 'Understand', state: 'EXPLORE', evidenceCount: 0 },
     { dimension: 'APPLY', label: 'Apply', state: 'EXPLORE', evidenceCount: 0 },
@@ -270,8 +273,8 @@ function renderCapabilityNodes(capabilities) {
     return `
       <div class="capability-node-card">
         <div class="node-dim-name">${item.dimension}</div>
-        <div class="node-state-tag state-${item.state.toLowerCase()}">${item.state}</div>
-        <div class="node-evidence-count">${count} EVIDENCE ${count === 1 ? 'ITEM' : 'ITEMS'}</div>
+        <div class="node-state-pill state-${item.state.toLowerCase()}">${item.state}</div>
+        <div class="node-evidence-count">${count} EVIDENCE</div>
       </div>
     `;
   }).join('');
@@ -282,49 +285,57 @@ function renderProjects(projects) {
     return `
       <div class="empty-section-box">
         <div class="empty-title">YOUR FIRST BUILD STARTS HERE.</div>
-        <p class="empty-desc">Turn what you're learning into something real. Projects are evidence of practical capability.</p>
+        <p class="empty-desc">Turn what you're learning into something real. Projects demonstrate practical capability.</p>
         <button class="btn-primary-action inline-btn" onclick="window.switchView('projects')">START A PROJECT →</button>
       </div>
     `;
   }
 
-  return projects.map(p => `
-    <div class="project-item-card">
-      <div class="project-card-top">
-        <h3 class="project-title">${escapeHtml(p.title)}</h3>
-        <span class="project-status-tag status-${(p.status || 'IN_PROGRESS').toLowerCase()}">${p.status || 'IN_PROGRESS'}</span>
-      </div>
-      <p class="project-desc">${escapeHtml(p.description || 'Practical AI capability build.')}</p>
-      <div class="project-card-bottom">
-        <div class="project-tags">
-          ${(p.capability_dimensions || ['CREATE']).map(dim => `<span class="dim-chip">${dim}</span>`).join('')}
+  return `
+    <div class="projects-grid">
+      ${projects.map(p => `
+        <div class="project-item-card">
+          <div class="project-card-top">
+            <h3 class="project-title">${escapeHtml(p.title)}</h3>
+            <span class="project-status-tag status-${(p.status || 'IN_PROGRESS').toLowerCase()}">${p.status || 'IN_PROGRESS'}</span>
+          </div>
+          <p class="project-desc">${escapeHtml(p.description || 'Practical AI capability build.')}</p>
+          <div class="project-card-bottom">
+            <div class="project-tags">
+              ${(p.capability_dimensions || ['CREATE']).map(dim => `<span class="dim-chip">${dim}</span>`).join('')}
+            </div>
+            <button class="btn-text-action" onclick="window.switchView('projects')">VIEW PROJECT →</button>
+          </div>
         </div>
-        <button class="btn-text-action" onclick="window.switchView('projects')">VIEW PROJECT →</button>
-      </div>
+      `).join('')}
     </div>
-  `).join('');
+  `;
 }
 
 function renderCredentials(credentials) {
   if (!credentials || credentials.length === 0) {
     return `
       <div class="empty-section-box">
-        <div class="empty-title">YOUR ACHIEVEMENTS WILL APPEAR HERE.</div>
-        <p class="empty-desc">Complete programmes, build projects, and demonstrate capability to grow your AI Passport wallet.</p>
+        <div class="empty-title">YOUR PASSPORT GROWS WITH EVERY ACHIEVEMENT.</div>
+        <p class="empty-desc">Verified credentials and badges you earn will appear here as permanent proof of your capability.</p>
+        <button class="btn-primary-action inline-btn" onclick="window.switchView('learn')">EXPLORE LEARNING →</button>
       </div>
     `;
   }
 
-  return credentials.map(c => `
-    <div class="credential-item-card">
-      <div class="cred-badge-icon">🛡️</div>
-      <div class="cred-info">
-        <h4 class="cred-title">${escapeHtml(c.title)}</h4>
-        <div class="cred-meta">${c.badge_type || 'FOUNDATION'} • Issued ${formatDate(c.issue_date)}</div>
-      </div>
-      <span class="cred-verified-tag">✓ VERIFIED</span>
+  return `
+    <div class="credentials-grid">
+      ${credentials.map(c => `
+        <div class="credential-item-card">
+          <div class="cred-info">
+            <h4 class="cred-title">${escapeHtml(c.title)}</h4>
+            <div class="cred-meta">${c.badge_type || 'FOUNDATION'} • Issued ${formatDate(c.issue_date)}</div>
+          </div>
+          <span class="cred-verified-tag">✓ VERIFIED</span>
+        </div>
+      `).join('')}
     </div>
-  `).join('');
+  `;
 }
 
 function renderJourneyTimeline(journey) {
@@ -423,6 +434,12 @@ function formatDate(dateStr) {
   } catch(e) {
     return '2026';
   }
+}
+
+function formatEmailToName(emailStr) {
+  if (!emailStr) return 'Builder';
+  const handle = emailStr.split('@')[0];
+  return handle.charAt(0).toUpperCase() + handle.slice(1);
 }
 
 function getInitials(nameStr) {

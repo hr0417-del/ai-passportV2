@@ -326,7 +326,11 @@
           setTimeout(() => { window.location.href = './app/index.html'; }, 600);
         }
       } catch (err) {
-        showAlert('error', err.message || 'Authentication failed. Please check credentials.');
+        let msg = err.message || 'Authentication failed.';
+        if (msg.includes('rate limit')) {
+          msg = 'Supabase Email Rate Limit Exceeded. Please switch to SIGN IN with existing credentials, or create a user in Supabase Dashboard -> Auth -> Users.';
+        }
+        showAlert('error', msg);
       } finally {
         btnSubmit.disabled = false;
         btnSubmit.textContent = currentTab === 'signin' ? 'SIGN IN TO MY PASSPORT →' : 'ISSUE DIGITAL PASSPORT →';
