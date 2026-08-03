@@ -124,14 +124,30 @@ export async function renderPassportPage(containerEl, user) {
                   : 'Your AI Passport identity has been created. Your Passport ID will appear here once issued.'}
               </span>
               <div class="passport-action-group">
-                ${isPublicEnabled ? `
-                  <a class="btn-passport-cta" href="../verify.html?id=${passportNum || ''}" target="_blank">VIEW PUBLIC PASSPORT →</a>
-                  <button class="btn-passport-secondary" onclick="navigator.clipboard.writeText(window.location.href); alert('Passport link copied to clipboard!');">SHARE LINK</button>
-                ` : `
-                  <button class="btn-passport-cta" onclick="window.switchView('settings')">SET UP PUBLIC PASSPORT →</button>
-                  <button class="btn-passport-secondary" onclick="window.switchView('settings')">MANAGE PROFILE</button>
-                `}
+                <a class="btn-passport-cta" href="../passport.html?id=${passportNum || ''}" target="_blank">VIEW PUBLIC PASSPORT ↗</a>
+                <button class="btn-passport-secondary" onclick="window.handleSharePassportCard('${passportNum || ''}')">SHARE PASSPORT ↗</button>
+                <button class="btn-passport-secondary" onclick="window.showPassportQrModal('${passportNum || ''}')">SHOW QR 📱</button>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2B. PUBLIC PASSPORT CONTROLS CARD -->
+        <section class="passport-section">
+          <div style="background: rgba(12, 12, 12, 0.96); border: 1px solid rgba(223, 207, 173, 0.3); border-radius: 14px; padding: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--color-gold); letter-spacing: 0.15em; margin-bottom: 4px;">PUBLIC IDENTITY & PRIVACY</div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.25rem; color: #fff; margin: 0 0 4px 0;">PUBLIC PASSPORT</h3>
+              <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin: 0; max-width: 600px;">When enabled, people with your Passport link or QR code can view your public AI capability record and records you have chosen to make public.</p>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.75rem; color: ${isPublicEnabled ? '#00ff88' : 'var(--color-text-secondary)'}; font-weight: 700;">
+                ${isPublicEnabled ? '● PUBLIC PASSPORT ON' : '○ PUBLIC PASSPORT OFF'}
+              </span>
+              <button class="btn-primary-action" onclick="window.togglePublicPassportState(!${isPublicEnabled})">
+                ${isPublicEnabled ? 'DISABLE PUBLIC PASSPORT' : 'ENABLE PUBLIC PASSPORT'}
+              </button>
             </div>
           </div>
         </section>
@@ -439,3 +455,35 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
+
+window.togglePublicPassportState = async function(newVal) {
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    await supabase
+      .from('privacy_settings')
+      .upsert({ user_id: user.id, is_public_passport_enabled: newVal }, { onConflict: 'user_id' });
+
+    alert(`Public Passport is now ${newVal ? 'ENABLED (ON)' : 'DISABLED (OFF)'}.`);
+    window.location.reload();
+  } catch(e) {
+    alert('Error updating privacy setting.');
+  }
+};
+
+window.handleSharePassportCard = function(num) {
+  const url = `${window.location.origin}/passport.html?id=${num}`;
+  if (navigator.share) {
+    navigator.share({ title: 'My AI Passport', url }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(url);
+    alert('Public Passport link copied to clipboard!');
+  }
+};
+
+window.showPassportQrModal = function(num) {
+  const url = `${window.location.origin}/passport.html?id=${num}`;
+  alert(`CANONICAL QR TARGET URL:\n${url}`);
+};
+

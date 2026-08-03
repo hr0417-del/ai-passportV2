@@ -758,3 +758,173 @@ END $$;
 
 
 
+-- ============================================================================
+-- 11. STAGE 8 — PUBLIC AI PASSPORT & SHARING SECURITY MIGRATION
+-- ============================================================================
+
+-- A. Revoke direct anon SELECT on profiles to prevent email leakage
+REVOKE SELECT ON public.profiles FROM anon;
+
+-- Ensure authenticated users can still select their own profile
+DROP POLICY IF EXISTS "Public profiles are viewable by everyone." ON public.profiles;
+DROP POLICY IF EXISTS "Public profiles are readable by everyone" ON public.profiles;
+DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
+CREATE POLICY "Users can view own profile"
+ON public.profiles FOR SELECT
+TO authenticated
+USING (auth.uid() = id);
+
+-- B. Controlled SECURITY DEFINER Public Passport RPC
+CREATE OR REPLACE FUNCTION public.get_public_passport(p_identifier TEXT)
+RETURNS JSONB
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, extensions, pg_temp
+AS $$
+DECLARE
+    v_user_id UUID;
+    v_passport_num TEXT;
+    v_is_public BOOLEAN;
+    v_show_projects BOOLEAN;
+    v_show_evidence BOOLEAN;
+    v_show_credentials BOOLEAN;
+    v_card_status TEXT;
+    v_profile RECORD;
+    v_caps JSONB;
+    v_projects JSONB;
+    v_evidence JSONB;
+    v_credentials JSONB;
+BEGIN
+    IF p_identifier IS NULL OR TRIM(p_identifier) = '' THEN
+        RETURN jsonb_build_object('status', 'PASSPORT_NOT_AVAILABLE');
+    END IF;
+
+    -- 1. Identifier Lookup (Passport Number case-insensitive first, then username)
+    SELECT user_id, passport_number, status INTO v_user_id, v_passport_num, v_card_status
+    FROM public.passport_cards
+    WHERE UPPER(TRIM(passport_number)) = UPPER(TRIM(p_identifier))
+    LIMIT 1;
+
+    IF v_user_id IS NULL THEN
+        SELECT id INTO v_user_id
+        FROM public.profiles
+        WHERE LOWER(TRIM(username)) = LOWER(TRIM(p_identifier))
+        LIMIT 1;
+
+        IF v_user_id IS NOT NULL THEN
+            SELECT passport_number, status INTO v_passport_num, v_card_status
+            FROM public.passport_cards
+            WHERE user_id = v_user_id
+            LIMIT 1;
+        END IF;
+    END IF;
+
+    -- 2. Master Gate Check (Passport must exist & card must be ACTIVE)
+    IF v_user_id IS NULL OR v_card_status != 'ACTIVE' THEN
+        RETURN jsonb_build_object('status', 'PASSPORT_NOT_AVAILABLE');
+    END IF;
+
+    -- Check Privacy Settings
+    SELECT is_public_passport_enabled, show_projects, show_evidence, show_credentials
+    INTO v_is_public, v_show_projects, v_show_evidence, v_show_credentials
+    FROM public.privacy_settings
+    WHERE user_id = v_user_id;
+
+    IF v_is_public IS NOT TRUE THEN
+        RETURN jsonb_build_object('status', 'PASSPORT_NOT_AVAILABLE');
+    END IF;
+
+    -- 3. Fetch Approved Identity Fields (NO email, NO user_id, NO internal IDs)
+    SELECT full_name, username, avatar_url, bio, created_at INTO v_profile
+    FROM public.profiles WHERE id = v_user_id;
+
+    -- 4. Fetch Authoritative Capability States (NO internal IDs, NO timestamps)
+    SELECT COALESCE(jsonb_agg(jsonb_build_object(
+        'dimension', dimension,
+        'state', state
+    )), '[]'::jsonb) INTO v_caps
+    FROM public.capability_states
+    WHERE user_id = v_user_id;
+
+    -- 5. Fetch Public Projects (NO internal UUIDs)
+    IF v_show_projects IS TRUE THEN
+        SELECT COALESCE(jsonb_agg(jsonb_build_object(
+            'title', title,
+            'description', description,
+            'problem_statement', problem_statement,
+            'solution_summary', solution_summary,
+            'tools_used', tools_used,
+            'capability_dimensions', capability_dimensions,
+            'project_url', project_url,
+            'repo_url', repo_url,
+            'completion_date', completion_date,
+            'has_verified_evidence', (
+                v_show_evidence IS TRUE AND EXISTS (
+                    SELECT 1 FROM public.evidence e 
+                    WHERE e.project_id = projects.id 
+                      AND e.verification_status = 'VERIFIED'
+                      AND e.is_public = TRUE
+                )
+            )
+        )), '[]'::jsonb) INTO v_projects
+        FROM public.projects
+        WHERE user_id = v_user_id AND is_public = TRUE;
+    ELSE
+        v_projects := '[]'::jsonb;
+    END IF;
+
+    -- 6. Fetch Public Verified Evidence (NO private project leakage, NO internal UUIDs)
+    IF v_show_evidence IS TRUE THEN
+        SELECT COALESCE(jsonb_agg(jsonb_build_object(
+            'evidence_type', evidence_type,
+            'capability_dimension', capability_dimension,
+            'verification_status', verification_status,
+            'url', url
+        )), '[]'::jsonb) INTO v_evidence
+        FROM public.evidence
+        WHERE user_id = v_user_id AND is_public = TRUE AND verification_status = 'VERIFIED';
+    ELSE
+        v_evidence := '[]'::jsonb;
+    END IF;
+
+    -- 7. Fetch Public Issued Credentials (NO internal UUIDs, NO verification_hash)
+    IF v_show_credentials IS TRUE THEN
+        SELECT COALESCE(jsonb_agg(jsonb_build_object(
+            'credential_number', credential_number,
+            'title', title,
+            'issuer', issuer,
+            'issue_date', issue_date
+        )), '[]'::jsonb) INTO v_credentials
+        FROM public.credentials
+        WHERE user_id = v_user_id AND is_public = TRUE AND status = 'ISSUED';
+    ELSE
+        v_credentials := '[]'::jsonb;
+    END IF;
+
+    -- 8. Return Curated Public JSON Contract
+    RETURN jsonb_build_object(
+        'status', 'PUBLIC',
+        'identity', jsonb_build_object(
+            'full_name', v_profile.full_name,
+            'username', v_profile.username,
+            'avatar_url', v_profile.avatar_url,
+            'bio', v_profile.bio,
+            'passport_number', v_passport_num,
+            'member_since', v_profile.created_at
+        ),
+        'record', jsonb_build_object(
+            'projects_count', jsonb_array_length(v_projects),
+            'verified_evidence_count', jsonb_array_length(v_evidence),
+            'credentials_count', jsonb_array_length(v_credentials)
+        ),
+        'capabilities', v_caps,
+        'projects', v_projects,
+        'evidence', v_evidence,
+        'credentials', v_credentials
+    );
+END;
+$$;
+
+-- Secure Execution Privileges
+REVOKE ALL ON FUNCTION public.get_public_passport(TEXT) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.get_public_passport(TEXT) TO anon, authenticated;
