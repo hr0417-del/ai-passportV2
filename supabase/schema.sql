@@ -611,3 +611,55 @@ CREATE POLICY "Learners can view published modules" ON public.programme_modules
 GRANT SELECT ON public.programmes TO authenticated;
 GRANT SELECT ON public.programme_modules TO authenticated;
 
+
+-- ==============================================================================
+-- 9. STAGE 5 PROJECTS & EVIDENCE SCHEMA EXTENSION & SECURITY ENFORCEMENT
+-- ==============================================================================
+
+-- Extend projects table with canonical programme FK, AI role & reflection metadata
+ALTER TABLE public.projects 
+    ADD COLUMN IF NOT EXISTS programme_id UUID REFERENCES public.programmes(id) ON DELETE SET NULL,
+    ADD COLUMN IF NOT EXISTS ai_role_description TEXT,
+    ADD COLUMN IF NOT EXISTS reflection_text TEXT;
+
+-- Enforce learner workflow status constraint (omits VERIFIED)
+ALTER TABLE public.projects 
+    DROP CONSTRAINT IF EXISTS projects_status_check;
+
+ALTER TABLE public.projects 
+    ADD CONSTRAINT projects_status_check 
+    CHECK (status IN ('DRAFT', 'IN_PROGRESS', 'READY_TO_DEMONSTRATE', 'SUBMITTED', 'ARCHIVED'));
+
+-- Extend evidence table with explicit project FK
+ALTER TABLE public.evidence 
+    ADD COLUMN IF NOT EXISTS project_id UUID REFERENCES public.projects(id) ON DELETE CASCADE;
+
+-- Create performance indexes
+CREATE INDEX IF NOT EXISTS idx_projects_programme_id ON public.projects(programme_id);
+CREATE INDEX IF NOT EXISTS idx_projects_status ON public.projects(status);
+CREATE INDEX IF NOT EXISTS idx_evidence_project_id ON public.evidence(project_id);
+
+-- Authoritative Security Trigger for Evidence Verification Status
+-- Ensures authenticated learners cannot self-assign verification_status = 'VERIFIED'
+CREATE OR REPLACE FUNCTION public.protect_evidence_verification_status()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.verification_status = 'VERIFIED' AND (OLD IS NULL OR OLD.verification_status IS DISTINCT FROM 'VERIFIED') THEN
+        -- Only allow service_role or admin to set VERIFIED
+        IF (current_setting('role', true) <> 'service_role' AND current_setting('request.jwt.claim.role', true) <> 'service_role') THEN
+            NEW.verification_status := COALESCE(OLD.verification_status, 'UNVERIFIED');
+        END IF;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'trg_protect_evidence_verification') THEN
+        CREATE TRIGGER trg_protect_evidence_verification
+        BEFORE INSERT OR UPDATE ON public.evidence
+        FOR EACH ROW EXECUTE FUNCTION public.protect_evidence_verification_status();
+    END IF;
+END $$;
+
+

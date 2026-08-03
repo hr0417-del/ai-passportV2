@@ -58,12 +58,16 @@ export async function renderPassportPage(containerEl, user) {
       { id: 'demo', title: 'DEMONSTRATE', label: 'Demonstrate Skill', isDone: capabilities.some(c => c.state === 'DEMONSTRATE' || c.state === 'ADVANCE') }
     ];
 
-    // Passport Record Summary counts
+    // Passport Record Summary counts (Defensible Stage 5 Semantics)
     const activeLearningCount = learning.filter(l => l.state !== 'ADVANCE').length;
-    const projectsCount = projects.length;
+    // Projects Built count: Only projects that reached READY_TO_DEMONSTRATE or SUBMITTED (excludes DRAFT/IN_PROGRESS)
+    const builtProjectsCount = projects.filter(p => p.status === 'READY_TO_DEMONSTRATE' || p.status === 'SUBMITTED').length;
     const credentialsCount = credentials.length;
+    // Authoritative capabilities count: Only capability_states where state = DEMONSTRATE or ADVANCE
     const demoCapabilitiesCount = capabilities.filter(c => c.state === 'DEMONSTRATE' || c.state === 'ADVANCE').length;
-    const totalEvidenceCount = capabilities.reduce((sum, c) => sum + (c.evidence_ids?.length || 0), 0);
+    // Genuine evidence records count
+    const totalEvidenceCount = evidence.length;
+
 
     containerEl.innerHTML = `
       <div class="passport-page-wrapper">
@@ -167,7 +171,7 @@ export async function renderPassportPage(containerEl, user) {
               <div class="strip-divider">•</div>
               <div class="strip-item">
                 <span class="strip-label">Projects</span>
-                <span class="strip-value">${projectsCount > 0 ? `${projectsCount} Built` : 'None yet'}</span>
+                <span class="strip-value">${builtProjectsCount > 0 ? `${builtProjectsCount} Built` : 'None yet'}</span>
               </div>
               <div class="strip-divider">•</div>
               <div class="strip-item">
