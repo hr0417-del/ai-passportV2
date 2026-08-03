@@ -215,14 +215,22 @@
     }
 
     /* ==========================================================================
-       OVERVIEW & STAGE 3 MY PASSPORT STYLES
+       OVERVIEW & STAGE 3 MY PASSPORT STYLES (REFINED)
        ========================================================================== */
-    .overview-wrapper, .passport-page-wrapper {
+    .overview-wrapper {
       max-width: 1140px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 44px;
+      gap: 40px;
+    }
+
+    .passport-page-wrapper {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px; /* Tightened vertical spacing */
     }
 
     .overview-section, .passport-section {
@@ -236,29 +244,29 @@
       font-weight: 700;
       letter-spacing: 0.2em;
       color: var(--color-gold);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .greeting-title, .hero-title {
       font-family: var(--font-serif);
-      font-size: 2.3rem;
+      font-size: 1.95rem;
       font-weight: 700;
-      margin: 0 0 8px 0;
+      margin: 0 0 4px 0;
       color: #ffffff;
       letter-spacing: -0.01em;
       line-height: 1.25;
     }
     .greeting-sub, .hero-sub {
       color: var(--color-text-secondary);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       margin: 0;
     }
 
-    /* 2. Digital AI Passport Card */
+    /* 2. Digital AI Passport Identity Artifact */
     .digital-passport-card {
       background: rgba(12, 12, 12, 0.96);
       border: 1px solid rgba(223, 207, 173, 0.35);
       border-radius: 20px;
-      padding: 32px 36px;
+      padding: 28px 34px;
       position: relative;
       overflow: hidden;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 40px rgba(223, 207, 173, 0.07);
@@ -271,11 +279,22 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
     }
+    .passport-security-watermark {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.25em;
+      color: rgba(223, 207, 173, 0.18);
+      position: absolute;
+      bottom: 8px;
+      right: 20px;
+      pointer-events: none;
+      text-transform: uppercase;
+    }
     .passport-card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .passport-brand-tag {
       font-family: 'Space Mono', monospace;
@@ -290,15 +309,22 @@
       font-weight: 600;
       padding: 4px 12px;
       border-radius: 12px;
+    }
+    .passport-status-pill.status-active-pill {
       background: rgba(0, 255, 136, 0.1);
       border: 1px solid rgba(0, 255, 136, 0.3);
       color: #00ff88;
+    }
+    .passport-status-pill.status-pending-pill {
+      background: rgba(223, 207, 173, 0.1);
+      border: 1px solid rgba(223, 207, 173, 0.35);
+      color: var(--color-gold);
     }
     .passport-card-body {
       display: flex;
       align-items: center;
       gap: 28px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
     .passport-avatar-box {
       width: 80px;
@@ -316,9 +342,9 @@
       border: 2px solid rgba(255, 255, 255, 0.2);
     }
     .passport-avatar-box.master-avatar {
-      width: 90px;
-      height: 90px;
-      font-size: 2.1rem;
+      width: 86px;
+      height: 86px;
+      font-size: 2rem;
     }
     .passport-details-box {
       flex: 1;
@@ -342,7 +368,7 @@
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 12px;
-      padding: 14px 20px;
+      padding: 12px 18px;
     }
     .meta-label {
       display: block;
@@ -363,9 +389,14 @@
       color: var(--color-gold);
       font-weight: 700;
     }
+    .meta-value.meta-pending-text {
+      color: var(--color-gold);
+      font-weight: 500;
+      font-style: italic;
+    }
     .passport-card-footer {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 20px;
+      padding-top: 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -378,118 +409,167 @@
       font-size: 0.78rem;
       color: var(--color-text-secondary);
     }
-    .btn-passport-cta {
-      background: rgba(223, 207, 173, 0.14);
-      border: 1px solid rgba(223, 207, 173, 0.35);
-      color: var(--color-gold);
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-family: var(--font-sans);
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
+
+    /* 3. Build Your Passport (Connected Milestone Path) */
+    .build-passport-container {
+      background: transparent;
+      padding: 0;
+    }
+    .milestone-path-wrapper {
+      position: relative;
+      margin-top: 16px;
+      padding: 12px 0;
+    }
+    .milestone-path-line {
+      position: absolute;
+      top: 26px;
+      left: 8%;
+      width: 84%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(223,207,173,0.3), rgba(255,255,255,0.08));
+      z-index: 1;
+    }
+    .milestone-path-nodes {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+    .milestone-path-node {
+      background: rgba(14, 14, 14, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
       transition: all 0.2s ease;
     }
-    .btn-passport-cta:hover {
+    .milestone-path-node.node-done {
+      border-color: rgba(223, 207, 173, 0.35);
+    }
+    .milestone-path-node.node-current {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 20px rgba(223, 207, 173, 0.15);
+    }
+    .node-icon-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      margin: 0 auto 8px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--color-text-secondary);
+    }
+    .milestone-path-node.node-done .node-icon-circle {
+      background: rgba(223, 207, 173, 0.2);
+      color: var(--color-gold);
+    }
+    .milestone-path-node.node-current .node-icon-circle {
       background: var(--color-gold);
       color: #000000;
     }
-    .btn-passport-secondary {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+    .node-title {
+      font-size: 0.72rem;
+      font-weight: 700;
       color: #ffffff;
-      padding: 9px 16px;
-      border-radius: 8px;
-      font-family: var(--font-sans);
-      font-size: 0.78rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      margin-bottom: 2px;
+      letter-spacing: 0.04em;
     }
-    .btn-passport-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(223, 207, 173, 0.4);
-      color: var(--color-gold);
+    .node-label {
+      font-size: 0.68rem;
+      color: var(--color-text-secondary);
     }
 
-    /* 3. Build Your Passport (Product Onboarding) */
-    .build-passport-card {
-      background: rgba(13, 13, 13, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 28px;
-    }
-    .milestones-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-      margin-top: 20px;
-    }
-    .milestone-item {
+    /* 4. Passport Record Summary (De-cardified Horizontal Strip) */
+    .passport-record-strip {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 10px;
-      padding: 16px 14px;
+      border-radius: 12px;
+      padding: 14px 20px;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: all 0.2s ease;
-    }
-    .milestone-item.done {
-      border-color: rgba(0, 255, 136, 0.25);
-      background: rgba(0, 255, 136, 0.03);
-    }
-    .milestone-check {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--color-text-secondary);
-    }
-    .milestone-item.done .milestone-check {
-      color: #00ff88;
-    }
-    .milestone-label {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #ffffff;
-      line-height: 1.35;
-    }
-
-    /* 4. Passport Record Summary */
-    .record-summary-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
       gap: 16px;
     }
-    .record-stat-box {
-      background: rgba(13, 13, 13, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 20px 16px;
-      text-align: center;
-    }
-    .stat-value {
-      display: block;
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
+    .record-strip-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
       font-weight: 700;
+      letter-spacing: 0.12em;
       color: var(--color-gold);
-      margin-bottom: 4px;
     }
-    .stat-label {
-      font-size: 0.72rem;
+    .record-strip-items {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .strip-item {
+      display: flex;
+      gap: 6px;
+      font-size: 0.8rem;
+    }
+    .strip-label {
       color: var(--color-text-secondary);
-      font-weight: 500;
+    }
+    .strip-value {
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .strip-divider {
+      color: rgba(255, 255, 255, 0.15);
+      font-size: 0.7rem;
     }
 
-    /* Privacy Control Card */
-    .privacy-control-card {
+    /* Compact Empty States */
+    .empty-section-compact {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .empty-compact-text {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* Privacy Control Container */
+    .privacy-control-container {
       background: rgba(13, 13, 13, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
-      padding: 28px;
+      padding: 24px 28px;
+    }
+    .privacy-status-box {
+      margin-top: 14px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.82rem;
+    }
+    .privacy-status-label {
+      color: var(--color-text-secondary);
+      font-weight: 600;
+    }
+    .privacy-status-value.enabled {
+      color: #00ff88;
+      font-weight: 600;
+    }
+    .privacy-status-value.disabled {
+      color: var(--color-gold);
+      font-weight: 600;
     }
     .privacy-status-box {
       margin-top: 16px;

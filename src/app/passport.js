@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MY AI PASSPORT™ — STAGE 3 MY PASSPORT PAGE ENGINE
+   MY AI PASSPORT™ — STAGE 3 MY PASSPORT PAGE ENGINE (VISUAL & UX REFINEMENT)
    ========================================================================== */
 
 import { supabase } from '../lib/supabase.js';
@@ -46,14 +46,16 @@ export async function renderPassportPage(containerEl, user) {
     const fullName = profile.full_name || user.user_metadata?.full_name || formatEmailToName(user.email);
     const usernameTag = profile.username ? `@${profile.username}` : `@${user.email.split('@')[0]}`;
     const passportNum = passport.passport_number || null;
+    const isPassportVerified = passport.status === 'VERIFIED' || passport.status === 'ACTIVE';
+    const isPublicEnabled = Boolean(privacy.is_public_passport_enabled);
 
     // Milestone calculation for "Build Your Passport"
     const milestones = [
-      { id: 'created', label: 'Create your AI Passport', isDone: true },
-      { id: 'learn', label: 'Start your first learning pathway', isDone: learning.length > 0 },
-      { id: 'build', label: 'Build your first AI project', isDone: projects.length > 0 },
-      { id: 'earn', label: 'Earn your first credential', isDone: credentials.length > 0 },
-      { id: 'demo', label: 'Demonstrate your first capability', isDone: capabilities.some(c => c.state === 'DEMONSTRATE' || c.state === 'ADVANCE') }
+      { id: 'created', title: 'CREATE PASSPORT', label: 'Identity Established', isDone: true },
+      { id: 'learn', title: 'START LEARNING', label: 'Enroll Pathway', isDone: learning.length > 0 },
+      { id: 'build', title: 'BUILD', label: 'Build First Project', isDone: projects.length > 0 },
+      { id: 'earn', title: 'EARN', label: 'Earn Credential', isDone: credentials.length > 0 },
+      { id: 'demo', title: 'DEMONSTRATE', label: 'Demonstrate Skill', isDone: capabilities.some(c => c.state === 'DEMONSTRATE' || c.state === 'ADVANCE') }
     ];
 
     // Passport Record Summary counts
@@ -66,22 +68,23 @@ export async function renderPassportPage(containerEl, user) {
     containerEl.innerHTML = `
       <div class="passport-page-wrapper">
         
-        <!-- 1. HERO SECTION -->
+        <!-- 1. HERO SECTION (TIGHTENED SPACING) -->
         <section class="passport-section hero-section">
           <div class="hero-tag">MY AI PASSPORT</div>
-          <h1 class="hero-title">YOUR AI JOURNEY.<br>ONE LIFELONG IDENTITY.</h1>
+          <h1 class="hero-title">YOUR AI JOURNEY. ONE LIFELONG IDENTITY.</h1>
           <p class="hero-sub">A living record of what you learn, build, demonstrate, and achieve with AI.</p>
         </section>
 
-        <!-- 2. PASSPORT IDENTITY CARD -->
+        <!-- 2. DEFINITIVE DIGITAL AI PASSPORT ARTIFACT -->
         <section class="passport-section">
           <div class="digital-passport-card master-passport-card">
             <div class="passport-card-flare"></div>
+            <div class="passport-security-watermark">AI PASSPORT ECOSYSTEM · VERIFIED IDENTITY DOCUMENT · PRACTICAL BUILDER</div>
             
             <div class="passport-card-top">
               <div class="passport-brand-tag">AI PASSPORT™</div>
-              <div class="passport-status-pill">
-                ${passportNum ? '✓ VERIFIED AI PASSPORT' : 'PASSPORT ISSUANCE PENDING'}
+              <div class="passport-status-pill ${isPassportVerified ? 'status-active-pill' : 'status-pending-pill'}">
+                ${isPassportVerified ? '✓ VERIFIED AI PASSPORT' : 'PASSPORT ISSUANCE PENDING'}
               </div>
             </div>
 
@@ -96,7 +99,7 @@ export async function renderPassportPage(containerEl, user) {
                 <div class="passport-meta-grid">
                   <div class="meta-item">
                     <span class="meta-label">PASSPORT ID</span>
-                    <span class="meta-value ${passportNum ? 'passport-id-mono' : ''}">${passportNum || 'Pending issuance'}</span>
+                    <span class="meta-value ${passportNum ? 'passport-id-mono' : 'meta-pending-text'}">${passportNum || 'Pending issuance'}</span>
                   </div>
                   <div class="meta-item">
                     <span class="meta-label">MEMBER SINCE</span>
@@ -111,62 +114,76 @@ export async function renderPassportPage(containerEl, user) {
             </div>
 
             <div class="passport-card-footer flex-wrap-footer">
-              <span class="passport-credibility-text">Identity verified within the AI Passport Ecosystem.</span>
+              <span class="passport-credibility-text">
+                ${isPassportVerified 
+                  ? 'Identity verified within the AI Passport Ecosystem.' 
+                  : 'Your AI Passport identity has been created. Your Passport ID will appear here once issued.'}
+              </span>
               <div class="passport-action-group">
-                <a class="btn-passport-cta" href="../verify.html?id=${passportNum || ''}" target="_blank">VIEW PUBLIC PASSPORT 🌐</a>
-                <button class="btn-passport-secondary" onclick="navigator.clipboard.writeText(window.location.href); alert('Passport link copied to clipboard!');">SHARE 🔗</button>
-                <button class="btn-passport-secondary" onclick="window.switchView('settings')">MANAGE PROFILE ⚙️</button>
+                ${isPublicEnabled ? `
+                  <a class="btn-passport-cta" href="../verify.html?id=${passportNum || ''}" target="_blank">VIEW PUBLIC PASSPORT →</a>
+                  <button class="btn-passport-secondary" onclick="navigator.clipboard.writeText(window.location.href); alert('Passport link copied to clipboard!');">SHARE LINK</button>
+                ` : `
+                  <button class="btn-passport-cta" onclick="window.switchView('settings')">SET UP PUBLIC PASSPORT →</button>
+                  <button class="btn-passport-secondary" onclick="window.switchView('settings')">MANAGE PROFILE</button>
+                `}
               </div>
             </div>
           </div>
         </section>
 
-        <!-- 3. BUILD YOUR PASSPORT (PRODUCT ONBOARDING) -->
+        <!-- 3. BUILD YOUR PASSPORT (CONNECTED MILESTONE PATH) -->
         <section class="passport-section">
-          <div class="build-passport-card">
+          <div class="build-passport-container">
             <div class="section-header-left margin-bot-16">
               <h2 class="section-title">BUILD YOUR PASSPORT</h2>
               <p class="section-subtitle">Your AI Passport grows as you learn, build, demonstrate capability, and earn verified achievements.</p>
             </div>
 
-            <div class="milestones-grid">
-              ${milestones.map(m => `
-                <div class="milestone-item ${m.isDone ? 'done' : 'pending'}">
-                  <span class="milestone-check">${m.isDone ? '✓' : '○'}</span>
-                  <span class="milestone-label">${m.label}</span>
-                </div>
-              `).join('')}
+            <div class="milestone-path-wrapper">
+              <div class="milestone-path-line"></div>
+              <div class="milestone-path-nodes">
+                ${milestones.map((m, idx) => `
+                  <div class="milestone-path-node ${m.isDone ? 'node-done' : (idx === 1 ? 'node-current' : 'node-future')}">
+                    <div class="node-icon-circle">${m.isDone ? '✓' : idx + 1}</div>
+                    <div class="node-title">${m.title}</div>
+                    <div class="node-label">${m.label}</div>
+                  </div>
+                `).join('')}
+              </div>
             </div>
           </div>
         </section>
 
-        <!-- 4. PASSPORT RECORD SUMMARY -->
+        <!-- 4. PASSPORT RECORD (RESTRAINED HORIZONTAL STRIP) -->
         <section class="passport-section">
-          <div class="section-header-left margin-bot-16">
-            <h2 class="section-title">MY PASSPORT RECORD</h2>
-            <p class="section-subtitle">A summary of your verified evidence and activity in the AI Passport Ecosystem.</p>
-          </div>
-
-          <div class="record-summary-grid">
-            <div class="record-stat-box">
-              <span class="stat-value">${activeLearningCount}</span>
-              <span class="stat-label">Learning Pathways Active</span>
-            </div>
-            <div class="record-stat-box">
-              <span class="stat-value">${projectsCount}</span>
-              <span class="stat-label">Projects Built</span>
-            </div>
-            <div class="record-stat-box">
-              <span class="stat-value">${credentialsCount}</span>
-              <span class="stat-label">Verified Credentials</span>
-            </div>
-            <div class="record-stat-box">
-              <span class="stat-value">${demoCapabilitiesCount}</span>
-              <span class="stat-label">Capabilities Demonstrated</span>
-            </div>
-            <div class="record-stat-box">
-              <span class="stat-value">${totalEvidenceCount}</span>
-              <span class="stat-label">Evidence Items</span>
+          <div class="passport-record-strip">
+            <div class="record-strip-title">PASSPORT RECORD</div>
+            <div class="record-strip-items">
+              <div class="strip-item">
+                <span class="strip-label">Learning Pathways</span>
+                <span class="strip-value">${activeLearningCount > 0 ? `${activeLearningCount} Active` : 'None yet'}</span>
+              </div>
+              <div class="strip-divider">•</div>
+              <div class="strip-item">
+                <span class="strip-label">Projects</span>
+                <span class="strip-value">${projectsCount > 0 ? `${projectsCount} Built` : 'None yet'}</span>
+              </div>
+              <div class="strip-divider">•</div>
+              <div class="strip-item">
+                <span class="strip-label">Verified Credentials</span>
+                <span class="strip-value">${credentialsCount > 0 ? `${credentialsCount}` : 'None yet'}</span>
+              </div>
+              <div class="strip-divider">•</div>
+              <div class="strip-item">
+                <span class="strip-label">Capabilities Demonstrated</span>
+                <span class="strip-value">${demoCapabilitiesCount > 0 ? `${demoCapabilitiesCount}` : 'None yet'}</span>
+              </div>
+              <div class="strip-divider">•</div>
+              <div class="strip-item">
+                <span class="strip-label">Evidence Items</span>
+                <span class="strip-value">${totalEvidenceCount > 0 ? `${totalEvidenceCount}` : '0 Items'}</span>
+              </div>
             </div>
           </div>
         </section>
@@ -236,19 +253,19 @@ export async function renderPassportPage(containerEl, user) {
 
         <!-- 9. YOUR PASSPORT. YOUR CONTROL. (PRIVACY) -->
         <section class="passport-section privacy-control-section">
-          <div class="privacy-control-card">
+          <div class="privacy-control-container">
             <div class="section-header-block">
               <div class="section-header-left">
                 <h2 class="section-title">YOUR PASSPORT. YOUR CONTROL.</h2>
                 <p class="section-subtitle">Your private AI Passport contains your complete learning and capability journey. Your Public Passport contains only what you choose to share.</p>
               </div>
-              <button class="btn-primary-action inline-btn" onclick="window.switchView('settings')">MANAGE PUBLIC PASSPORT →</button>
+              <button class="btn-primary-action inline-btn" onclick="window.switchView('settings')">SET UP PUBLIC PASSPORT →</button>
             </div>
 
             <div class="privacy-status-box">
-              <span class="privacy-status-label">PUBLIC PASSPORT VISIBILITY:</span>
-              <span class="privacy-status-value ${privacy.is_public_passport_enabled ? 'enabled' : 'disabled'}">
-                ${privacy.is_public_passport_enabled ? '🟢 ENABLED (Publicly Shareable)' : '🔒 PRIVATE (Only visible to you)'}
+              <span class="privacy-status-label">CURRENT VISIBILITY STATE:</span>
+              <span class="privacy-status-value ${isPublicEnabled ? 'enabled' : 'disabled'}">
+                ${isPublicEnabled ? 'PUBLIC PASSPORT (Enabled)' : 'PRIVATE PASSPORT (Only visible to you)'}
               </span>
             </div>
           </div>
@@ -299,10 +316,9 @@ function renderCapabilitySignatureNodes(capabilities) {
 function renderProjects(projects) {
   if (!projects || projects.length === 0) {
     return `
-      <div class="empty-section-box">
-        <div class="empty-title">YOUR FIRST BUILD STARTS HERE.</div>
-        <p class="empty-desc">Turn what you're learning into something real. Projects demonstrate practical capability.</p>
-        <button class="btn-primary-action inline-btn" onclick="window.switchView('projects')">START A PROJECT →</button>
+      <div class="empty-section-compact">
+        <span class="empty-compact-text">YOUR FIRST BUILD STARTS HERE. Turn what you're learning into something real.</span>
+        <button class="btn-text-link" onclick="window.switchView('projects')">START A PROJECT →</button>
       </div>
     `;
   }
@@ -331,10 +347,9 @@ function renderProjects(projects) {
 function renderCredentials(credentials) {
   if (!credentials || credentials.length === 0) {
     return `
-      <div class="empty-section-box">
-        <div class="empty-title">YOUR PASSPORT GROWS WITH EVERY ACHIEVEMENT.</div>
-        <p class="empty-desc">Verified credentials and badges you earn will become part of your lifelong AI record.</p>
-        <button class="btn-primary-action inline-btn" onclick="window.switchView('learn')">EXPLORE LEARNING →</button>
+      <div class="empty-section-compact">
+        <span class="empty-compact-text">YOUR PASSPORT GROWS WITH EVERY ACHIEVEMENT. Verified credentials you earn will become part of your lifelong record.</span>
+        <button class="btn-text-link" onclick="window.switchView('learn')">EXPLORE LEARNING →</button>
       </div>
     `;
   }
@@ -357,9 +372,9 @@ function renderCredentials(credentials) {
 function renderJourneyTimeline(journey) {
   if (!journey || journey.length === 0) {
     return `
-      <div class="journey-timeline-empty">
-        <div class="journey-dot"></div>
-        <div class="journey-text">Joined AI Passport Ecosystem</div>
+      <div class="journey-timeline-compact">
+        <div class="journey-marker-dot"></div>
+        <div class="journey-compact-text">Joined AI Passport Ecosystem</div>
       </div>
     `;
   }
