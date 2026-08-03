@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -490,8 +490,11 @@
         <button class="nav-item" onclick="switchView('credentials', this)">
           <span class="nav-icon">🛡️</span> Credentials
         </button>
-        <button class="nav-item" onclick="switchView('capability', this)">
+                <button class="nav-item" onclick="switchView('capability', this)">
           <span class="nav-icon">⚙️</span> Capability
+        </button>
+        <button class="nav-item" id="nav-item-reviewer" onclick="switchView('reviewer', this)" style="border-top: 1px dashed rgba(255,255,255,0.1); margin-top: 8px; padding-top: 12px;">
+          <span class="nav-icon">⚖️</span> Governance
         </button>
       </nav>
     </div>
@@ -545,7 +548,11 @@
       <div id="view-credentials" class="view-panel" style="display: none;"></div>
 
       <!-- View 6: Capability (Stage 7 Dedicated Container) -->
+            <!-- View 6: Capability (Stage 7 Dedicated Container) -->
       <div id="view-capability" class="view-panel" style="display: none;"></div>
+
+      <!-- View 7: Reviewer Governance Console (Stage 9 Dedicated Container) -->
+      <div id="view-reviewer" class="view-panel" style="display: none;"></div>
 
       <!-- View 7: Settings -->
       <div id="view-settings" class="view-panel" style="display: none;">
@@ -566,6 +573,7 @@
     import { renderProjectsPage } from '../src/app/projects.js';
     import { renderCredentialsPage } from '../src/app/credentials.js';
     import { renderCapabilityPage } from '../src/app/capability.js';
+    import { initReviewerConsole } from '../src/app/reviewer.js';
 
     let currentUserSession = null;
 
@@ -638,6 +646,8 @@
         await renderCredentialsPage(targetPanel, currentUserSession, targetId);
       } else if (viewId === 'capability' && targetPanel && currentUserSession) {
         await renderCapabilityPage(targetPanel, currentUserSession, targetId);
+      } else if (viewId === 'reviewer' && targetPanel) {
+        await initReviewerConsole(targetPanel);
       }
 
       document.getElementById('user-dropdown').style.display = 'none';
@@ -657,3 +667,6 @@
   </script>
 </body>
 </html>
+
+
+
