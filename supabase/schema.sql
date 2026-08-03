@@ -509,3 +509,105 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO anon;
 -- Ensure default privileges for future tables
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon;
+
+
+-- ==============================================================================
+-- 8. STAGE 4 LEARN CATALOGUE MIGRATION & SECURITY POLICIES
+-- ==============================================================================
+
+-- Enums for Source Taxonomy & Delivery Format
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'learning_source_type') THEN
+        CREATE TYPE public.learning_source_type AS ENUM ('PASSPORT_ORIGINAL', 'PASSPORT_LIVE', 'PARTNER_PATHWAY');
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'learning_format') THEN
+        CREATE TYPE public.learning_format AS ENUM ('SELF_PACED', 'LIVE_WORKSHOP', 'COHORT', 'MASTERCLASS');
+    END IF;
+END $$;
+
+-- PROGRAMMES TABLE (Master Learning Pathway Catalogue)
+CREATE TABLE IF NOT EXISTS public.programmes (
+    id UUID PRIMARY KEY DEFAULT extensions.uuid_generate_v4(),
+    slug TEXT UNIQUE NOT NULL,
+    title TEXT NOT NULL,
+    subtitle TEXT,
+    short_description TEXT,
+    description TEXT,
+    source_type public.learning_source_type NOT NULL DEFAULT 'PASSPORT_ORIGINAL',
+    format public.learning_format NOT NULL DEFAULT 'SELF_PACED',
+    provider_name TEXT NOT NULL DEFAULT 'AI Passport',
+    provider_logo_url TEXT,
+    capability_dimensions public.capability_dimension[] NOT NULL DEFAULT '{}',
+    estimated_minutes INT,
+    level TEXT,
+    build_outcome_title TEXT,
+    enrollment_url TEXT,
+    is_featured BOOLEAN NOT NULL DEFAULT FALSE,
+    publication_status TEXT NOT NULL DEFAULT 'DRAFT' CHECK (publication_status IN ('DRAFT', 'PUBLISHED', 'ARCHIVED')),
+    sort_order INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- PROGRAMME MODULES TABLE (Curriculum Breakdown)
+CREATE TABLE IF NOT EXISTS public.programme_modules (
+    id UUID PRIMARY KEY DEFAULT extensions.uuid_generate_v4(),
+    programme_id UUID NOT NULL REFERENCES public.programmes(id) ON DELETE CASCADE,
+    slug TEXT NOT NULL,
+    sequence_order INT NOT NULL DEFAULT 1,
+    title TEXT NOT NULL,
+    description TEXT,
+    estimated_minutes INT,
+    is_published BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE(programme_id, sequence_order),
+    UNIQUE(programme_id, slug)
+);
+
+-- Performance Indexes (Cleaned of duplicates)
+CREATE INDEX IF NOT EXISTS idx_programmes_source_type ON public.programmes(source_type);
+CREATE INDEX IF NOT EXISTS idx_programmes_publication_status ON public.programmes(publication_status);
+CREATE INDEX IF NOT EXISTS idx_programmes_is_featured ON public.programmes(is_featured);
+CREATE INDEX IF NOT EXISTS idx_programme_modules_programme_id ON public.programme_modules(programme_id);
+
+-- Standardized updated_at Triggers
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'update_programmes_modtime') THEN
+        CREATE TRIGGER update_programmes_modtime 
+        BEFORE UPDATE ON public.programmes 
+        FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'update_programme_modules_modtime') THEN
+        CREATE TRIGGER update_programme_modules_modtime 
+        BEFORE UPDATE ON public.programme_modules 
+        FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+    END IF;
+END $$;
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE public.programmes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.programme_modules ENABLE ROW LEVEL SECURITY;
+
+-- RLS Security Policies (Strict Authoritative Publication Access)
+DROP POLICY IF EXISTS "Learners can view published programmes" ON public.programmes;
+CREATE POLICY "Learners can view published programmes" ON public.programmes
+    FOR SELECT TO authenticated
+    USING (publication_status = 'PUBLISHED');
+
+DROP POLICY IF EXISTS "Learners can view published modules" ON public.programme_modules;
+CREATE POLICY "Learners can view published modules" ON public.programme_modules
+    FOR SELECT TO authenticated
+    USING (
+        is_published = true
+        AND EXISTS (
+            SELECT 1 FROM public.programmes p
+            WHERE p.id = programme_modules.programme_id
+              AND p.publication_status = 'PUBLISHED'
+        )
+    );
+
+-- Data API Grants (Authenticated Select Only)
+GRANT SELECT ON public.programmes TO authenticated;
+GRANT SELECT ON public.programme_modules TO authenticated;
+
