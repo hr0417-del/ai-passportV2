@@ -11,7 +11,9 @@ export async function renderOverview(containerEl, user) {
   containerEl.innerHTML = renderSkeleton();
 
   try {
-    // Fetch All Overview Data in Parallel
+    // Safe query execution (uses maybeSingle so missing rows return null instead of throwing)
+    const isRealGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id);
+
     const [
       profileRes,
       passportRes,
@@ -21,24 +23,24 @@ export async function renderOverview(containerEl, user) {
       projectsRes,
       credentialsRes,
       journeyRes
-    ] = await Promise.all([
-      supabase.from('profiles').select('*').eq('id', user.id).single(),
-      supabase.from('passport_cards').select('*').eq('user_id', user.id).single(),
-      supabase.from('privacy_settings').select('*').eq('user_id', user.id).single(),
-      supabase.from('capability_states').select('*').eq('user_id', user.id),
-      supabase.from('learning_progress').select('*').eq('user_id', user.id),
-      supabase.from('projects').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).limit(3),
-      supabase.from('credentials').select('*').eq('user_id', user.id).order('issue_date', { ascending: false }).limit(3),
-      supabase.from('journey_events').select('*').eq('user_id', user.id).order('occurred_at', { ascending: false }).limit(5)
-    ]);
+    ] = isRealGuid ? await Promise.all([
+      supabase.from('profiles').select('*').eq('id', user.id).maybeSingle().catch(() => ({ data: null })),
+      supabase.from('passport_cards').select('*').eq('user_id', user.id).maybeSingle().catch(() => ({ data: null })),
+      supabase.from('privacy_settings').select('*').eq('user_id', user.id).maybeSingle().catch(() => ({ data: null })),
+      supabase.from('capability_states').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
+      supabase.from('learning_progress').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
+      supabase.from('projects').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).limit(3).catch(() => ({ data: [] })),
+      supabase.from('credentials').select('*').eq('user_id', user.id).order('issue_date', { ascending: false }).limit(3).catch(() => ({ data: [] })),
+      supabase.from('journey_events').select('*').eq('user_id', user.id).order('occurred_at', { ascending: false }).limit(5).catch(() => ({ data: [] }))
+    ]) : [{}, {}, {}, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }];
 
-    const profile = profileRes.data || {};
-    const passport = passportRes.data || {};
-    const capabilities = capabilityRes.data || [];
-    const learning = learningRes.data || [];
-    const projects = projectsRes.data || [];
-    const credentials = credentialsRes.data || [];
-    const journey = journeyRes.data || [];
+    const profile = (profileRes && profileRes.data) || {};
+    const passport = (passportRes && passportRes.data) || {};
+    const capabilities = (capabilityRes && capabilityRes.data) || [];
+    const learning = (learningRes && learningRes.data) || [];
+    const projects = (projectsRes && projectsRes.data) || [];
+    const credentials = (credentialsRes && credentialsRes.data) || [];
+    const journey = (journeyRes && journeyRes.data) || [];
 
     // Compute Greeting Time
     const hour = new Date().getHours();
