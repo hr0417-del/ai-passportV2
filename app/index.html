@@ -102,6 +102,11 @@
       font-size: 1.05rem;
       width: 20px;
       text-align: center;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.2s ease;
+    }
+    .nav-item.active .nav-icon {
+      color: var(--color-gold);
     }
 
     /* App Main Layout Body */
@@ -210,9 +215,9 @@
     }
 
     /* ==========================================================================
-       STAGE 2 OVERVIEW REFINED STYLES
+       OVERVIEW & STAGE 3 MY PASSPORT STYLES
        ========================================================================== */
-    .overview-wrapper {
+    .overview-wrapper, .passport-page-wrapper {
       max-width: 1140px;
       margin: 0 auto;
       display: flex;
@@ -220,12 +225,12 @@
       gap: 44px;
     }
 
-    .overview-section {
+    .overview-section, .passport-section {
       width: 100%;
     }
 
-    /* 1. Greeting Section */
-    .greeting-tag {
+    /* 1. Greeting & Hero */
+    .greeting-tag, .hero-tag {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
       font-weight: 700;
@@ -233,21 +238,22 @@
       color: var(--color-gold);
       margin-bottom: 6px;
     }
-    .greeting-title {
+    .greeting-title, .hero-title {
       font-family: var(--font-serif);
       font-size: 2.3rem;
       font-weight: 700;
       margin: 0 0 8px 0;
       color: #ffffff;
       letter-spacing: -0.01em;
+      line-height: 1.25;
     }
-    .greeting-sub {
+    .greeting-sub, .hero-sub {
       color: var(--color-text-secondary);
       font-size: 0.95rem;
       margin: 0;
     }
 
-    /* 2. Digital AI Passport (Signature Centerpiece) */
+    /* 2. Digital AI Passport Card */
     .digital-passport-card {
       background: rgba(12, 12, 12, 0.96);
       border: 1px solid rgba(223, 207, 173, 0.35);
@@ -309,6 +315,11 @@
       box-shadow: 0 0 25px rgba(223, 207, 173, 0.35);
       border: 2px solid rgba(255, 255, 255, 0.2);
     }
+    .passport-avatar-box.master-avatar {
+      width: 90px;
+      height: 90px;
+      font-size: 2.1rem;
+    }
     .passport-details-box {
       flex: 1;
     }
@@ -359,6 +370,10 @@
       justify-content: space-between;
       align-items: center;
     }
+    .passport-action-group {
+      display: flex;
+      gap: 10px;
+    }
     .passport-credibility-text {
       font-size: 0.78rem;
       color: var(--color-text-secondary);
@@ -373,11 +388,131 @@
       font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
       transition: all 0.2s ease;
     }
     .btn-passport-cta:hover {
       background: var(--color-gold);
       color: #000000;
+    }
+    .btn-passport-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-passport-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(223, 207, 173, 0.4);
+      color: var(--color-gold);
+    }
+
+    /* 3. Build Your Passport (Product Onboarding) */
+    .build-passport-card {
+      background: rgba(13, 13, 13, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .milestones-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .milestone-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+    .milestone-item.done {
+      border-color: rgba(0, 255, 136, 0.25);
+      background: rgba(0, 255, 136, 0.03);
+    }
+    .milestone-check {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+    }
+    .milestone-item.done .milestone-check {
+      color: #00ff88;
+    }
+    .milestone-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.35;
+    }
+
+    /* 4. Passport Record Summary */
+    .record-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .record-stat-box {
+      background: rgba(13, 13, 13, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .stat-value {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+
+    /* Privacy Control Card */
+    .privacy-control-card {
+      background: rgba(13, 13, 13, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .privacy-status-box {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.84rem;
+    }
+    .privacy-status-label {
+      color: var(--color-text-secondary);
+      font-weight: 600;
+    }
+    .privacy-status-value.enabled {
+      color: #00ff88;
+      font-weight: 600;
+    }
+    .privacy-status-value.disabled {
+      color: var(--color-gold);
+      font-weight: 600;
     }
 
     /* 3. Two-Column Grid (Continue Building & Next Move) */
@@ -504,7 +639,7 @@
 
     .empty-card-body, .empty-section-box {
       text-align: center;
-      padding: 28px 24px;
+      padding: 20px 20px;
       background: rgba(255, 255, 255, 0.02);
       border: 1px dashed rgba(255, 255, 255, 0.12);
       border-radius: 12px;
@@ -709,17 +844,20 @@
       margin: 2px 0 0 0;
     }
 
+    /* Responsive adjustments */
     @media (max-width: 900px) {
       .app-sidebar { display: none; }
       .app-main { width: 100%; }
       .app-content { padding: 24px 16px; }
+      .hero-title, .greeting-title { font-size: 1.6rem; }
       .two-col-grid { grid-template-columns: 1fr; }
       .passport-meta-grid { grid-template-columns: 1fr; }
       .passport-card-body { flex-direction: column; text-align: center; }
-      .capability-node-grid { grid-template-columns: repeat(2, 1fr); }
+      .capability-node-grid, .milestones-grid, .record-summary-grid { grid-template-columns: repeat(2, 1fr); }
       .capability-pipeline-line { display: none; }
       .projects-grid, .credentials-grid { grid-template-columns: 1fr; }
       .section-header-block { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .passport-card-footer.flex-wrap-footer { flex-direction: column; gap: 14px; text-align: center; }
     }
   </style>
 </head>
@@ -794,13 +932,8 @@
       <!-- View 1: Overview (Stage 2 Dynamic Container) -->
       <div id="view-overview" class="view-panel"></div>
 
-      <!-- View 2: My Passport (Placeholder for Stage 3) -->
-      <div id="view-passport" class="view-panel" style="display: none;">
-        <div class="empty-section-box">
-          <h2 class="empty-title">MY PASSPORT VIEW</h2>
-          <p class="empty-desc">Stage 3 will feature interactive 3D card controls, physical card sync, QR verification, and ledger controls.</p>
-        </div>
-      </div>
+      <!-- View 2: My Passport (Stage 3 Dedicated Container) -->
+      <div id="view-passport" class="view-panel" style="display: none;"></div>
 
       <!-- View 3: Learn (Placeholder for Stage 4) -->
       <div id="view-learn" class="view-panel" style="display: none;">
@@ -848,6 +981,9 @@
   <script type="module">
     import { getCurrentUser, getLearnerProfile, getPassportCard, supabase, isSupabaseConfigured } from '../src/lib/supabase.js';
     import { renderOverview } from '../src/app/overview.js';
+    import { renderPassportPage } from '../src/app/passport.js';
+
+    let currentUserSession = null;
 
     initUserSession();
 
@@ -865,6 +1001,8 @@
         return;
       }
 
+      currentUserSession = user;
+
       let profile = null;
       try {
         profile = await getLearnerProfile(user.id);
@@ -876,11 +1014,10 @@
       document.getElementById('user-avatar-initials').textContent = initials || 'VB';
       document.getElementById('user-display-name').textContent = name;
 
-      // Render Overview Content
-      const overviewContainer = document.getElementById('view-overview');
-      if (overviewContainer) {
-        await renderOverview(overviewContainer, user);
-      }
+      // Initial Render based on URL view param or default Overview
+      const urlParams = new URLSearchParams(window.location.search);
+      const requestedView = urlParams.get('view') || 'overview';
+      await window.switchView(requestedView);
     }
 
     function formatEmailName(emailStr) {
@@ -889,14 +1026,28 @@
       return handle.charAt(0).toUpperCase() + handle.slice(1);
     }
 
-    window.switchView = function(viewId, btnElement) {
+    window.switchView = async function(viewId, btnElement) {
       document.querySelectorAll('.view-panel').forEach(el => el.style.display = 'none');
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
 
       const targetPanel = document.getElementById(`view-${viewId}`);
       if (targetPanel) targetPanel.style.display = 'block';
 
-      if (btnElement) btnElement.classList.add('active');
+      if (btnElement) {
+        btnElement.classList.add('active');
+      } else {
+        // Find matching sidebar nav item by viewId
+        const matchNav = Array.from(document.querySelectorAll('.nav-item')).find(el => el.getAttribute('onclick')?.includes(viewId));
+        if (matchNav) matchNav.classList.add('active');
+      }
+
+      // Dynamic view renderers
+      if (viewId === 'overview' && targetPanel && currentUserSession) {
+        await renderOverview(targetPanel, currentUserSession);
+      } else if (viewId === 'passport' && targetPanel && currentUserSession) {
+        await renderPassportPage(targetPanel, currentUserSession);
+      }
+
       document.getElementById('user-dropdown').style.display = 'none';
     };
 

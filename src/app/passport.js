@@ -1,19 +1,19 @@
 /* ==========================================================================
-   MY AI PASSPORT™ — STAGE 2 OVERVIEW ENGINE (VISUAL & UX REFINED)
+   MY AI PASSPORT™ — STAGE 3 MY PASSPORT PAGE ENGINE
    ========================================================================== */
 
 import { supabase } from '../lib/supabase.js';
 
-export async function renderOverview(containerEl, user) {
+export async function renderPassportPage(containerEl, user) {
   if (!containerEl || !user) return;
 
-  // Render Skeleton Loading State first
+  // Skeleton loading state
   containerEl.innerHTML = renderSkeleton();
 
   try {
-    // Safe query execution (uses maybeSingle so missing rows return null instead of throwing)
     const isRealGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id);
 
+    // Fetch All User Data in Parallel
     const [
       profileRes,
       passportRes,
@@ -36,53 +36,57 @@ export async function renderOverview(containerEl, user) {
 
     const profile = (profileRes && profileRes.data) || {};
     const passport = (passportRes && passportRes.data) || {};
+    const privacy = (privacyRes && privacyRes.data) || {};
     const capabilities = (capabilityRes && capabilityRes.data) || [];
     const learning = (learningRes && learningRes.data) || [];
     const projects = (projectsRes && projectsRes.data) || [];
     const credentials = (credentialsRes && credentialsRes.data) || [];
     const journey = (journeyRes && journeyRes.data) || [];
 
-    // Compute Greeting Time
-    const hour = new Date().getHours();
-    let timeOfDay = 'morning';
-    if (hour >= 12 && hour < 17) timeOfDay = 'afternoon';
-    if (hour >= 17 || hour < 5) timeOfDay = 'evening';
-
-    // Derive Full Name & First Name properly
     const fullName = profile.full_name || user.user_metadata?.full_name || formatEmailToName(user.email);
-    const firstName = fullName.trim().split(' ')[0];
     const usernameTag = profile.username ? `@${profile.username}` : `@${user.email.split('@')[0]}`;
+    const passportNum = passport.passport_number || null;
 
-    // Compute Recommendation
-    const nextMove = computeNextMove(learning, projects, credentials, capabilities);
+    // Milestone calculation for "Build Your Passport"
+    const milestones = [
+      { id: 'created', label: 'Create your AI Passport', isDone: true },
+      { id: 'learn', label: 'Start your first learning pathway', isDone: learning.length > 0 },
+      { id: 'build', label: 'Build your first AI project', isDone: projects.length > 0 },
+      { id: 'earn', label: 'Earn your first credential', isDone: credentials.length > 0 },
+      { id: 'demo', label: 'Demonstrate your first capability', isDone: capabilities.some(c => c.state === 'DEMONSTRATE' || c.state === 'ADVANCE') }
+    ];
 
-    // Build Overview HTML
+    // Passport Record Summary counts
+    const activeLearningCount = learning.filter(l => l.state !== 'ADVANCE').length;
+    const projectsCount = projects.length;
+    const credentialsCount = credentials.length;
+    const demoCapabilitiesCount = capabilities.filter(c => c.state === 'DEMONSTRATE' || c.state === 'ADVANCE').length;
+    const totalEvidenceCount = capabilities.reduce((sum, c) => sum + (c.evidence_ids?.length || 0), 0);
+
     containerEl.innerHTML = `
-      <div class="overview-wrapper">
+      <div class="passport-page-wrapper">
         
-        <!-- 1. GREETING / IDENTITY -->
-        <section class="overview-section greeting-section">
-          <div class="greeting-header">
-            <div class="greeting-tag">KEEP BUILDING</div>
-            <h1 class="greeting-title">Good ${timeOfDay}, ${escapeHtml(firstName)}.</h1>
-            <p class="greeting-sub">Your learning, projects, credentials, and AI capability — all in one place.</p>
-          </div>
+        <!-- 1. HERO SECTION -->
+        <section class="passport-section hero-section">
+          <div class="hero-tag">MY AI PASSPORT</div>
+          <h1 class="hero-title">YOUR AI JOURNEY.<br>ONE LIFELONG IDENTITY.</h1>
+          <p class="hero-sub">A living record of what you learn, build, demonstrate, and achieve with AI.</p>
         </section>
 
-        <!-- 2. DIGITAL AI PASSPORT (SIGNATURE CENTERPIECE) -->
-        <section class="overview-section passport-card-section">
-          <div class="digital-passport-card">
+        <!-- 2. PASSPORT IDENTITY CARD -->
+        <section class="passport-section">
+          <div class="digital-passport-card master-passport-card">
             <div class="passport-card-flare"></div>
             
             <div class="passport-card-top">
               <div class="passport-brand-tag">AI PASSPORT™</div>
               <div class="passport-status-pill">
-                ✓ VERIFIED AI PASSPORT
+                ${passportNum ? '✓ VERIFIED AI PASSPORT' : 'PASSPORT ISSUANCE PENDING'}
               </div>
             </div>
 
             <div class="passport-card-body">
-              <div class="passport-avatar-box">
+              <div class="passport-avatar-box master-avatar">
                 <div class="passport-avatar-initials">${getInitials(fullName)}</div>
               </div>
               <div class="passport-details-box">
@@ -92,7 +96,7 @@ export async function renderOverview(containerEl, user) {
                 <div class="passport-meta-grid">
                   <div class="meta-item">
                     <span class="meta-label">PASSPORT ID</span>
-                    <span class="meta-value ${passport.passport_number ? 'passport-id-mono' : ''}">${passport.passport_number || 'Pending issuance'}</span>
+                    <span class="meta-value ${passportNum ? 'passport-id-mono' : ''}">${passportNum || 'Pending issuance'}</span>
                   </div>
                   <div class="meta-item">
                     <span class="meta-label">MEMBER SINCE</span>
@@ -106,58 +110,75 @@ export async function renderOverview(containerEl, user) {
               </div>
             </div>
 
-            <div class="passport-card-footer">
+            <div class="passport-card-footer flex-wrap-footer">
               <span class="passport-credibility-text">Identity verified within the AI Passport Ecosystem.</span>
-              <button class="btn-passport-cta" onclick="window.switchView('passport')">VIEW MY PASSPORT →</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- 3. CONTINUE BUILDING + YOUR NEXT MOVE (2-Column Grid) -->
-        <section class="overview-section two-col-grid">
-          
-          <!-- LEFT: CONTINUE BUILDING (PRIMARY ACTION) -->
-          <div class="overview-card build-card primary-card">
-            <div class="card-header-bar">
-              <span class="card-section-label">CONTINUE BUILDING</span>
-              <span class="card-status-dot"></span>
-            </div>
-            ${renderContinueBuilding(learning)}
-          </div>
-
-          <!-- RIGHT: YOUR NEXT MOVE (ADVISORY CARD) -->
-          <div class="overview-card next-move-card advisory-card">
-            <div class="card-header-bar">
-              <span class="card-section-label">YOUR NEXT MOVE</span>
-              <span class="dimension-badge">${nextMove.dimensionTag}</span>
-            </div>
-            <div class="next-move-content">
-              <h3 class="next-move-title">${nextMove.title}</h3>
-              <p class="next-move-desc">${nextMove.description}</p>
-              
-              <div class="next-challenge-box">
-                <div class="challenge-meta">
-                  <span class="challenge-label">NEXT CHALLENGE</span>
-                  <span class="challenge-time">⏱️ ${nextMove.estimatedTime}</span>
-                </div>
-                <div class="challenge-name">${nextMove.challengeName}</div>
+              <div class="passport-action-group">
+                <a class="btn-passport-cta" href="../verify.html?id=${passportNum || ''}" target="_blank">VIEW PUBLIC PASSPORT 🌐</a>
+                <button class="btn-passport-secondary" onclick="navigator.clipboard.writeText(window.location.href); alert('Passport link copied to clipboard!');">SHARE 🔗</button>
+                <button class="btn-passport-secondary" onclick="window.switchView('settings')">MANAGE PROFILE ⚙️</button>
               </div>
-
-              <button class="btn-secondary-action" onclick="window.switchView('${nextMove.actionRoute}')">
-                ${nextMove.actionLabel}
-              </button>
             </div>
           </div>
         </section>
 
-        <!-- 4. AI CAPABILITY SIGNATURE (CONNECTED NODE PIPELINE) -->
-        <section class="overview-section capability-snapshot-section">
+        <!-- 3. BUILD YOUR PASSPORT (PRODUCT ONBOARDING) -->
+        <section class="passport-section">
+          <div class="build-passport-card">
+            <div class="section-header-left margin-bot-16">
+              <h2 class="section-title">BUILD YOUR PASSPORT</h2>
+              <p class="section-subtitle">Your AI Passport grows as you learn, build, demonstrate capability, and earn verified achievements.</p>
+            </div>
+
+            <div class="milestones-grid">
+              ${milestones.map(m => `
+                <div class="milestone-item ${m.isDone ? 'done' : 'pending'}">
+                  <span class="milestone-check">${m.isDone ? '✓' : '○'}</span>
+                  <span class="milestone-label">${m.label}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. PASSPORT RECORD SUMMARY -->
+        <section class="passport-section">
+          <div class="section-header-left margin-bot-16">
+            <h2 class="section-title">MY PASSPORT RECORD</h2>
+            <p class="section-subtitle">A summary of your verified evidence and activity in the AI Passport Ecosystem.</p>
+          </div>
+
+          <div class="record-summary-grid">
+            <div class="record-stat-box">
+              <span class="stat-value">${activeLearningCount}</span>
+              <span class="stat-label">Learning Pathways Active</span>
+            </div>
+            <div class="record-stat-box">
+              <span class="stat-value">${projectsCount}</span>
+              <span class="stat-label">Projects Built</span>
+            </div>
+            <div class="record-stat-box">
+              <span class="stat-value">${credentialsCount}</span>
+              <span class="stat-label">Verified Credentials</span>
+            </div>
+            <div class="record-stat-box">
+              <span class="stat-value">${demoCapabilitiesCount}</span>
+              <span class="stat-label">Capabilities Demonstrated</span>
+            </div>
+            <div class="record-stat-box">
+              <span class="stat-value">${totalEvidenceCount}</span>
+              <span class="stat-label">Evidence Items</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. AI CAPABILITY AT A GLANCE -->
+        <section class="passport-section capability-snapshot-section">
           <div class="section-header-block">
             <div class="section-header-left">
               <h2 class="section-title">YOUR AI CAPABILITY</h2>
-              <p class="section-subtitle">A snapshot of how your learning and verified work are developing your practical AI capability.</p>
+              <p class="section-subtitle">Your evolving capability across the five dimensions of the AI Capability Framework™.</p>
             </div>
-            <button class="btn-text-link" onclick="window.switchView('capability')">VIEW CAPABILITY PROFILE →</button>
+            <button class="btn-text-link" onclick="window.switchView('capability')">EXPLORE MY CAPABILITY →</button>
           </div>
 
           <div class="capability-signature-container">
@@ -168,12 +189,12 @@ export async function renderOverview(containerEl, user) {
           </div>
         </section>
 
-        <!-- 5. WHAT YOU'VE BUILT -->
-        <section class="overview-section projects-section">
+        <!-- 6. WHAT YOU'VE BUILT -->
+        <section class="passport-section projects-section">
           <div class="section-header-block">
             <div class="section-header-left">
               <h2 class="section-title">WHAT YOU'VE BUILT</h2>
-              <p class="section-subtitle">Your projects are evidence of what you can do with AI.</p>
+              <p class="section-subtitle">Projects turn learning into evidence of practical capability.</p>
             </div>
             <button class="btn-text-link" onclick="window.switchView('projects')">VIEW ALL PROJECTS →</button>
           </div>
@@ -183,12 +204,12 @@ export async function renderOverview(containerEl, user) {
           </div>
         </section>
 
-        <!-- 6. RECENT ACHIEVEMENTS -->
-        <section class="overview-section achievements-section">
+        <!-- 7. VERIFIED ACHIEVEMENTS -->
+        <section class="passport-section achievements-section">
           <div class="section-header-block">
             <div class="section-header-left">
-              <h2 class="section-title">RECENT ACHIEVEMENTS</h2>
-              <p class="section-subtitle">Verified credentials, badges, and pathway certifications.</p>
+              <h2 class="section-title">VERIFIED ACHIEVEMENTS</h2>
+              <p class="section-subtitle">Credentials and badges that form part of your verified AI Passport.</p>
             </div>
             <button class="btn-text-link" onclick="window.switchView('credentials')">VIEW ALL CREDENTIALS →</button>
           </div>
@@ -198,12 +219,12 @@ export async function renderOverview(containerEl, user) {
           </div>
         </section>
 
-        <!-- 7. YOUR AI JOURNEY -->
-        <section class="overview-section journey-section">
+        <!-- 8. YOUR AI JOURNEY -->
+        <section class="passport-section journey-section">
           <div class="section-header-block">
             <div class="section-header-left">
               <h2 class="section-title">YOUR AI JOURNEY</h2>
-              <p class="section-subtitle">Your AI Passport grows with every meaningful milestone.</p>
+              <p class="section-subtitle">A timeline of meaningful milestones across your AI development.</p>
             </div>
             <button class="btn-text-link" onclick="window.switchView('passport')">VIEW FULL JOURNEY →</button>
           </div>
@@ -213,13 +234,33 @@ export async function renderOverview(containerEl, user) {
           </div>
         </section>
 
+        <!-- 9. YOUR PASSPORT. YOUR CONTROL. (PRIVACY) -->
+        <section class="passport-section privacy-control-section">
+          <div class="privacy-control-card">
+            <div class="section-header-block">
+              <div class="section-header-left">
+                <h2 class="section-title">YOUR PASSPORT. YOUR CONTROL.</h2>
+                <p class="section-subtitle">Your private AI Passport contains your complete learning and capability journey. Your Public Passport contains only what you choose to share.</p>
+              </div>
+              <button class="btn-primary-action inline-btn" onclick="window.switchView('settings')">MANAGE PUBLIC PASSPORT →</button>
+            </div>
+
+            <div class="privacy-status-box">
+              <span class="privacy-status-label">PUBLIC PASSPORT VISIBILITY:</span>
+              <span class="privacy-status-value ${privacy.is_public_passport_enabled ? 'enabled' : 'disabled'}">
+                ${privacy.is_public_passport_enabled ? '🟢 ENABLED (Publicly Shareable)' : '🔒 PRIVATE (Only visible to you)'}
+              </span>
+            </div>
+          </div>
+        </section>
+
       </div>
     `;
   } catch (err) {
-    console.error('Error rendering Overview data:', err);
+    console.error('Error rendering Passport page:', err);
     containerEl.innerHTML = `
       <div class="empty-section-box">
-        <h2 class="empty-title" style="color: #ff7070;">Unable to Load Overview Data</h2>
+        <h2 class="empty-title" style="color: #ff7070;">Unable to Load Passport Data</h2>
         <p class="empty-desc">${escapeHtml(err.message || 'Error connecting to database.')}</p>
         <button class="btn-primary-action inline-btn" onclick="window.location.reload()">RETRY CONNECTION</button>
       </div>
@@ -227,34 +268,7 @@ export async function renderOverview(containerEl, user) {
   }
 }
 
-/* --- Sub-render Helpers --- */
-
-function renderContinueBuilding(learningList) {
-  const active = learningList.find(l => l.state !== 'ADVANCE');
-  
-  if (active) {
-    return `
-      <div class="build-active-content">
-        <h3 class="build-course-title">${escapeHtml(active.programme_id || 'AI Systems Professional')}</h3>
-        <div class="build-module-tag">Module ${escapeHtml(active.module_id || '01')}</div>
-        <div class="build-progress-wrap">
-          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 45%;"></div></div>
-          <span class="progress-text">In Progress</span>
-        </div>
-        <button class="btn-primary-action" onclick="window.switchView('learn')">CONTINUE BUILDING →</button>
-      </div>
-    `;
-  }
-
-  // Intentional Empty State
-  return `
-    <div class="empty-card-body">
-      <h3 class="empty-title">READY TO BUILD SOMETHING?</h3>
-      <p class="empty-desc">Choose your next learning pathway or project to start developing practical capability.</p>
-      <button class="btn-primary-action" onclick="window.switchView('learn')">EXPLORE LEARNING →</button>
-    </div>
-  `;
-}
+/* --- Helpers --- */
 
 function renderCapabilitySignatureNodes(capabilities) {
   const defaultDimensions = [
@@ -319,7 +333,7 @@ function renderCredentials(credentials) {
     return `
       <div class="empty-section-box">
         <div class="empty-title">YOUR PASSPORT GROWS WITH EVERY ACHIEVEMENT.</div>
-        <p class="empty-desc">Verified credentials and badges you earn will appear here as permanent proof of your capability.</p>
+        <p class="empty-desc">Verified credentials and badges you earn will become part of your lifelong AI record.</p>
         <button class="btn-primary-action inline-btn" onclick="window.switchView('learn')">EXPLORE LEARNING →</button>
       </div>
     `;
@@ -366,64 +380,11 @@ function renderJourneyTimeline(journey) {
   `;
 }
 
-function computeNextMove(learning, projects, credentials, capabilities) {
-  if (!learning || learning.length === 0) {
-    return {
-      dimensionTag: 'STRENGTHEN UNDERSTAND',
-      title: 'Begin Your First Pathway',
-      description: 'Establish your practical foundation by enrolling in your first AI capability module.',
-      challengeName: 'Practical AI Capabilities & Foundations',
-      estimatedTime: '2 hours',
-      actionLabel: 'EXPLORE LEARNING →',
-      actionRoute: 'learn'
-    };
-  }
-
-  const activeLearning = learning.find(l => l.state !== 'ADVANCE');
-  if (activeLearning) {
-    return {
-      dimensionTag: 'DEVELOP APPLY',
-      title: 'Continue Active Module',
-      description: 'You are currently developing your ability to build and deploy AI systems.',
-      challengeName: `Complete Module: ${activeLearning.module_id}`,
-      estimatedTime: '3 hours',
-      actionLabel: 'CONTINUE LEARNING →',
-      actionRoute: 'learn'
-    };
-  }
-
-  if (projects.length === 0) {
-    return {
-      dimensionTag: 'DEMONSTRATE CREATE',
-      title: 'Build Your First Project',
-      description: 'Turn your learning into verifiable proof. Build an agent or RAG pipeline.',
-      challengeName: 'Build & Deploy AI Assistant',
-      estimatedTime: '4 hours',
-      actionLabel: 'START BUILDING →',
-      actionRoute: 'projects'
-    };
-  }
-
-  return {
-    dimensionTag: 'ADVANCE EVALUATE',
-    title: 'Submit Project Evidence',
-    description: 'Document your codebase and submit repo links for peer verification.',
-    challengeName: 'Verify Autonomous Agent System',
-    estimatedTime: '1 hour',
-    actionLabel: 'ADD EVIDENCE →',
-    actionRoute: 'projects'
-  };
-}
-
 function renderSkeleton() {
   return `
     <div class="overview-skeleton-wrapper">
       <div class="skeleton-box greeting-skeleton"></div>
       <div class="skeleton-box passport-skeleton"></div>
-      <div class="skeleton-grid-2">
-        <div class="skeleton-box card-skel"></div>
-        <div class="skeleton-box card-skel"></div>
-      </div>
     </div>
   `;
 }
