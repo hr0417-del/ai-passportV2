@@ -14,34 +14,25 @@ export async function renderPassportPage(containerEl, user) {
     const isRealGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id);
 
     // Fetch All User Data in Parallel
-    const [
-      profileRes,
-      passportRes,
-      privacyRes,
-      capabilityRes,
-      learningRes,
-      projectsRes,
-      credentialsRes,
-      journeyRes
+    let [
+      profile,
+      passport,
+      privacy,
+      capabilities,
+      learning,
+      projects,
+      credentials,
+      journey
     ] = isRealGuid ? await Promise.all([
-      supabase.from('profiles').select('*').eq('id', user.id).maybeSingle(),
-      supabase.from('passport_cards').select('*').eq('user_id', user.id).maybeSingle(),
-      supabase.from('privacy_settings').select('*').eq('user_id', user.id).maybeSingle(),
-      supabase.from('capability_states').select('*').eq('user_id', user.id),
-      supabase.from('learning_progress').select('*').eq('user_id', user.id),
-      supabase.from('projects').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).limit(3),
-      supabase.from('credentials').select('*').eq('user_id', user.id).order('issue_date', { ascending: false }).limit(3),
-      supabase.from('journey_events').select('*').eq('user_id', user.id).order('occurred_at', { ascending: false }).limit(5)
-    ]) : [{}, {}, {}, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }];
-
-    let profile = (profileRes && profileRes.data) || {};
-    let passport = (passportRes && passportRes.data) || {};
-    let privacy = (privacyRes && privacyRes.data) || {};
-    let capabilities = (capabilityRes && capabilityRes.data) || [];
-    let learning = (learningRes && learningRes.data) || [];
-    let projects = (projectsRes && projectsRes.data) || [];
-    let credentials = (credentialsRes && credentialsRes.data) || [];
-    let journey = (journeyRes && journeyRes.data) || [];
+      safeFetch(supabase.from('profiles').select('*').eq('id', user.id).maybeSingle(), {}),
+      safeFetch(supabase.from('passport_cards').select('*').eq('user_id', user.id).maybeSingle(), {}),
+      safeFetch(supabase.from('privacy_settings').select('*').eq('user_id', user.id).maybeSingle(), {}),
+      safeFetch(supabase.from('capability_states').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('learning_progress').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('projects').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).limit(3), []),
+      safeFetch(supabase.from('credentials').select('*').eq('user_id', user.id).order('issue_date', { ascending: false }).limit(3), []),
+      safeFetch(supabase.from('journey_events').select('*').eq('user_id', user.id).order('occurred_at', { ascending: false }).limit(5), [])
+    ]) : [{}, {}, {}, [], [], [], [], []];
 
     if (!passport.passport_number) {
       passport = {
@@ -534,4 +525,14 @@ window.showPassportQrModal = function(num) {
   const url = `${window.location.origin}/passport.html?id=${num}`;
   alert(`CANONICAL QR TARGET URL:\n${url}`);
 };
+
+async function safeFetch(queryPromise, fallbackData, timeoutMs = 1500) {
+  try {
+    const timeout = new Promise((resolve) => setTimeout(() => resolve({ data: fallbackData }), timeoutMs));
+    const result = await Promise.race([queryPromise, timeout]);
+    return (result && result.data) ? result.data : fallbackData;
+  } catch (e) {
+    return fallbackData;
+  }
+}
 
