@@ -152,54 +152,113 @@
       margin: 0 auto 40px auto;
     }
 
-    /* Journey Flow Grid */
+    /* 10,000X CONNECTED 7-STAGE PROGRESSION PIPELINE */
+    .journey-timeline-wrapper {
+      position: relative;
+      margin-top: 56px;
+      padding: 20px 0;
+    }
+
+    .journey-track-line {
+      position: absolute;
+      top: 40px;
+      left: 30px;
+      right: 30px;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        rgba(223, 207, 173, 0.2) 0%, 
+        rgba(223, 207, 173, 0.8) 50%, 
+        rgba(0, 255, 136, 0.8) 100%);
+      z-index: 1;
+    }
+
     .journey-flow-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 16px;
-      margin-top: 48px;
+      position: relative;
+      z-index: 2;
     }
 
     .journey-step-card {
-      background: linear-gradient(135deg, rgba(20, 21, 28, 0.95), rgba(10, 11, 15, 0.98));
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: linear-gradient(145deg, rgba(18, 19, 26, 0.98), rgba(10, 11, 15, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 2px solid var(--color-gold);
       border-radius: 16px;
-      padding: 26px 18px;
+      padding: 24px 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
       text-align: left;
       position: relative;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
     }
 
     .journey-step-card:hover {
-      border-color: rgba(223, 207, 173, 0.45);
-      transform: translateY(-5px);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9), 0 0 24px rgba(223, 207, 173, 0.1);
+      border-color: var(--color-gold);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(223, 207, 173, 0.15);
     }
 
-    .step-num {
+    .step-node-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .step-node-circle {
+      width: 38px;
+      height: 38px;
+      border: 1.5px solid var(--color-gold);
+      background: rgba(12, 12, 16, 0.98);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
       font-weight: 700;
       color: var(--color-gold);
+      box-shadow: 0 0 14px rgba(223, 207, 173, 0.25);
+    }
+
+    .step-stage-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .step-title {
       font-family: var(--font-serif);
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: #ffffff;
       margin: 0;
+      line-height: 1.2;
     }
 
     .step-desc {
       font-size: 0.8rem;
       color: var(--color-text-secondary);
-      line-height: 1.45;
+      line-height: 1.48;
       margin: 0;
+    }
+
+    .step-arrow-link {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     /* Cohort Cards */
@@ -585,52 +644,84 @@
   </section>
 
   <!-- THE OLYMPIAD JOURNEY -->
-  <section id="journey" style="padding: 90px 24px; text-align: center; max-width: 1200px; margin: 0 auto;">
+  <section id="journey" style="padding: 90px 24px; text-align: center; max-width: 1280px; margin: 0 auto;">
     <span class="section-eyebrow">SEVEN-STAGE PROGRESSION</span>
-    <h2 class="section-headline">ONE JOURNEY.<br>FROM READINESS TO CAPABILITY.</h2>
+    <h2 class="section-headline gold-gradient-text">ONE JOURNEY.<br>FROM READINESS TO CAPABILITY.</h2>
     <p class="section-subhead">A structured pathway guiding young thinkers from initial diagnostic assessment to a national celebration of innovation.</p>
 
-    <div class="journey-flow-grid">
-      <div class="journey-step-card">
-        <span class="step-num">01 DISCOVER</span>
-        <h3 class="step-title">AIQ™ Assessment</h3>
-        <p class="step-desc">Diagnostic AI readiness assessment layer evaluating baseline understanding and approach.</p>
-      </div>
+    <div class="journey-timeline-wrapper">
+      <div class="journey-track-line"></div>
 
-      <div class="journey-step-card">
-        <span class="step-num">02 UNDERSTAND</span>
-        <h3 class="step-title">Capability Insights</h3>
-        <p class="step-desc">Discover specific strength areas and developmental focus dimensions.</p>
-      </div>
+      <div class="journey-flow-grid">
+        <div class="journey-step-card">
+          <div class="step-node-header">
+            <div class="step-node-circle">01</div>
+            <span class="step-stage-tag">DISCOVER</span>
+          </div>
+          <h3 class="step-title">AIQ™ Assessment</h3>
+          <p class="step-desc">Diagnostic AI readiness assessment layer evaluating baseline understanding and approach.</p>
+          <div class="step-arrow-link">STAGE 01 <span>→</span></div>
+        </div>
 
-      <div class="journey-step-card">
-        <span class="step-num">03 PREPARE</span>
-        <h3 class="step-title">Learning & Workshops</h3>
-        <p class="step-desc">Engage in curated workshops, learning experiences and guided practice.</p>
-      </div>
+        <div class="journey-step-card">
+          <div class="step-node-header">
+            <div class="step-node-circle">02</div>
+            <span class="step-stage-tag">UNDERSTAND</span>
+          </div>
+          <h3 class="step-title">Capability Insights</h3>
+          <p class="step-desc">Discover specific strength areas and developmental focus dimensions across 5 pillars.</p>
+          <div class="step-arrow-link">STAGE 02 <span>→</span></div>
+        </div>
 
-      <div class="journey-step-card">
-        <span class="step-num">04 BUILD</span>
-        <h3 class="step-title">Applied Challenges</h3>
-        <p class="step-desc">Apply AI concepts to solve real problems, generate ideas, and create projects.</p>
-      </div>
+        <div class="journey-step-card">
+          <div class="step-node-header">
+            <div class="step-node-circle">03</div>
+            <span class="step-stage-tag">PREPARE</span>
+          </div>
+          <h3 class="step-title">Learning & Workshops</h3>
+          <p class="step-desc">Engage in curated workshops, learning experiences and guided practice labs.</p>
+          <div class="step-arrow-link">STAGE 03 <span>→</span></div>
+        </div>
 
-      <div class="journey-step-card">
-        <span class="step-num">05 COMPETE</span>
-        <h3 class="step-title">National Rounds</h3>
-        <p class="step-desc">Advance through adapted cohort challenges testing practical AI reasoning.</p>
-      </div>
+        <div class="journey-step-card">
+          <div class="step-node-header">
+            <div class="step-node-circle">04</div>
+            <span class="step-stage-tag">BUILD</span>
+          </div>
+          <h3 class="step-title">Applied Challenges</h3>
+          <p class="step-desc">Apply AI concepts to solve real problems, generate ideas, and create projects.</p>
+          <div class="step-arrow-link">STAGE 04 <span>→</span></div>
+        </div>
 
-      <div class="journey-step-card">
-        <span class="step-num">06 FINALE</span>
-        <h3 class="step-title">National Finale</h3>
-        <p class="step-desc">Top participants progress to live build demonstrations and national missions.</p>
-      </div>
+        <div class="journey-step-card">
+          <div class="step-node-header">
+            <div class="step-node-circle">05</div>
+            <span class="step-stage-tag">COMPETE</span>
+          </div>
+          <h3 class="step-title">National Rounds</h3>
+          <p class="step-desc">Advance through adapted cohort challenges testing practical AI reasoning.</p>
+          <div class="step-arrow-link">STAGE 05 <span>→</span></div>
+        </div>
 
-      <div class="journey-step-card">
-        <span class="step-num">07 CELEBRATE</span>
-        <h3 class="step-title">AI Fest™</h3>
-        <p class="step-desc">Celebrate youth innovation, technology, and future ideas together.</p>
+        <div class="journey-step-card">
+          <div class="step-node-header">
+            <div class="step-node-circle">06</div>
+            <span class="step-stage-tag">FINALE</span>
+          </div>
+          <h3 class="step-title">National Finale</h3>
+          <p class="step-desc">Top participants progress to live build demonstrations and national missions.</p>
+          <div class="step-arrow-link">STAGE 06 <span>→</span></div>
+        </div>
+
+        <div class="journey-step-card">
+          <div class="step-node-header">
+            <div class="step-node-circle">07</div>
+            <span class="step-stage-tag">CELEBRATE</span>
+          </div>
+          <h3 class="step-title">AI Fest™</h3>
+          <p class="step-desc">Celebrate youth innovation, technology, and future ideas together.</p>
+          <div class="step-arrow-link">STAGE 07 <span>✦</span></div>
+        </div>
       </div>
     </div>
   </section>
