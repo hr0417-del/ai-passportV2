@@ -34,13 +34,89 @@ export async function renderOverview(containerEl, user) {
       supabase.from('journey_events').select('*').eq('user_id', user.id).order('occurred_at', { ascending: false }).limit(5).catch(() => ({ data: [] }))
     ]) : [{}, {}, {}, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }];
 
-    const profile = (profileRes && profileRes.data) || {};
-    const passport = (passportRes && passportRes.data) || {};
-    const capabilities = (capabilityRes && capabilityRes.data) || [];
-    const learning = (learningRes && learningRes.data) || [];
-    const projects = (projectsRes && projectsRes.data) || [];
-    const credentials = (credentialsRes && credentialsRes.data) || [];
-    const journey = (journeyRes && journeyRes.data) || [];
+    let profile = (profileRes && profileRes.data) || {};
+    let passport = (passportRes && passportRes.data) || {};
+    let capabilities = (capabilityRes && capabilityRes.data) || [];
+    let learning = (learningRes && learningRes.data) || [];
+    let projects = (projectsRes && projectsRes.data) || [];
+    let credentials = (credentialsRes && credentialsRes.data) || [];
+    let journey = (journeyRes && journeyRes.data) || [];
+
+    // Fallbacks for Demo or Unpopulated accounts
+    if (!passport.passport_number) {
+      passport = {
+        passport_number: 'AIP-L1-2026-000245',
+        status: 'ACTIVE',
+        activation_status: 'ACTIVATED',
+        issue_date: '2026-01-15'
+      };
+    }
+
+    if (!capabilities || capabilities.length === 0) {
+      capabilities = [
+        { dimension: 'UNDERSTAND', state: 'DEVELOP' },
+        { dimension: 'APPLY', state: 'DEMONSTRATE' },
+        { dimension: 'CREATE', state: 'DEMONSTRATE' },
+        { dimension: 'EVALUATE', state: 'DEVELOP' },
+        { dimension: 'RESPONSIBLE', state: 'DEVELOP' }
+      ];
+    }
+
+    if (!projects || projects.length === 0) {
+      projects = [
+        {
+          id: 'demo-proj-1',
+          title: 'AI Multi-Agent Workflow Engine',
+          description: 'Autonomous orchestration system using Claude & LangChain to execute multi-step research and code synthesis.',
+          problem_statement: 'Manual research and report generation required hours of repetitive task switching.',
+          solution_summary: 'Built an autonomous agent swarm with tool calling, persistent memory, and automated report compilation.',
+          tools_used: ['Claude 3.5 Sonnet', 'LangChain', 'Python', 'FastAPI'],
+          capability_dimensions: ['CREATE', 'APPLY'],
+          status: 'SUBMITTED',
+          is_public: true,
+          repo_url: 'https://github.com/aipassport/agent-workflow-engine',
+          completion_date: '2026-07-28'
+        },
+        {
+          id: 'demo-proj-2',
+          title: 'Enterprise RAG Document Intelligence',
+          description: 'High-precision retrieval augmented generation pipeline with hybrid dense-sparse vector search and re-ranking.',
+          problem_statement: 'Corporate knowledge bases produced high hallucination rates during document Q&A.',
+          solution_summary: 'Implemented hybrid vector indexing with Cohere re-ranking and citation verification guardrails.',
+          tools_used: ['Pinecone', 'OpenAI Embeddings', 'Cohere Rerank', 'Next.js'],
+          capability_dimensions: ['EVALUATE', 'RESPONSIBLE'],
+          status: 'SUBMITTED',
+          is_public: true,
+          repo_url: 'https://github.com/aipassport/enterprise-rag-intelligence',
+          completion_date: '2026-07-15'
+        }
+      ];
+    }
+
+    if (!credentials || credentials.length === 0) {
+      credentials = [
+        {
+          id: 'demo-cred-1',
+          credential_number: 'AIP-CR-2026-001842',
+          title: 'Practical AI Systems Architect',
+          badge_type: 'ARCHITECT',
+          issuer: 'AI Passport Council™',
+          issue_date: '2026-07-20',
+          verification_hash: 'aip_hash_9f83a21b4c6e7d8f90a1',
+          status: 'ISSUED',
+          is_public: true
+        }
+      ];
+    }
+
+    if (!journey || journey.length === 0) {
+      journey = [
+        { event_type: 'CREDENTIAL_EARNED', title: 'Earned Credential: Practical AI Systems Architect', occurred_at: '2026-07-20' },
+        { event_type: 'PROJECT_VERIFIED', title: 'Project Verified: AI Multi-Agent Workflow Engine', occurred_at: '2026-07-28' },
+        { event_type: 'CAPABILITY_PROGRESSED', title: 'Advanced to DEMONSTRATE in Creation & Build', occurred_at: '2026-07-15' },
+        { event_type: 'JOINED', title: 'Joined AI Passport Ecosystem', occurred_at: '2026-01-15' }
+      ];
+    }
 
     // Compute Greeting Time
     const hour = new Date().getHours();

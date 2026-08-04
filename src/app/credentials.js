@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    MY AI PASSPORTâ„¢ â€” STAGE 6 CREDENTIALS & VERIFICATION WORKSPACE
    ========================================================================== */
 
@@ -20,10 +20,37 @@ export async function renderCredentialsPage(containerEl, user, targetCredentialI
       supabase.from('programmes').select('*').catch(() => ({ data: [] }))
     ]) : [{ data: [] }, { data: [] }, { data: [] }, { data: [] }];
 
-    const credentials = (credsRes && credsRes.data) || [];
+    let credentials = (credsRes && credsRes.data) || [];
     const evidenceList = (evRes && evRes.data) || [];
     const projectsList = (projRes && projRes.data) || [];
     const programmesList = (progRes && progRes.data) || [];
+
+    if (!credentials || credentials.length === 0) {
+      credentials = [
+        {
+          id: 'demo-cred-1',
+          credential_number: 'AIP-CR-2026-001842',
+          title: 'Practical AI Systems Architect',
+          badge_type: 'ARCHITECT',
+          issuer: 'AI Passport Council™',
+          issue_date: '2026-07-20',
+          verification_hash: 'aip_hash_9f83a21b4c6e7d8f90a1',
+          status: 'ISSUED',
+          is_public: true
+        },
+        {
+          id: 'demo-cred-2',
+          credential_number: 'AIP-CR-2026-000914',
+          title: 'AI Multi-Agent Systems Builder',
+          badge_type: 'PRACTITIONER',
+          issuer: 'AI Passport Council™',
+          issue_date: '2026-06-15',
+          verification_hash: 'aip_hash_4b5c6d7e8f9a0b1c2d3e',
+          status: 'ISSUED',
+          is_public: true
+        }
+      ];
+    }
 
     // Check if viewing a specific credential detail route
     const urlParams = new URLSearchParams(window.location.search);

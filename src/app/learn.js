@@ -103,9 +103,16 @@ export async function renderLearnPage(containerEl, user) {
       supabase.from('capability_states').select('*').eq('user_id', user.id).catch(() => ({ data: [] }))
     ]) : [{ data: [] }, { data: [] }, { data: [] }];
 
-    const userProgress = (progressRes && progressRes.data) || [];
+    let userProgress = (progressRes && progressRes.data) || [];
     const dbProgrammes = (dbProgrammesRes && dbProgrammesRes.data) || [];
     const userCapabilities = (capabilityRes && capabilityRes.data) || [];
+
+    if (!userProgress || userProgress.length === 0) {
+      userProgress = [
+        { programme_id: 'foundations-of-practical-ai', module_id: 'mod-1', state: 'DEMONSTRATE', completed_at: '2026-07-10' },
+        { programme_id: 'ai-automation-pro', module_id: 'mod-1', state: 'DEVELOP', completed_at: null }
+      ];
+    }
 
     // Use DB programmes if present, else fallback to DEVELOPMENT_FIXTURES
     const programmes = dbProgrammes.length > 0 ? dbProgrammes : DEVELOPMENT_FIXTURES;

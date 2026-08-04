@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    MY AI PASSPORTâ„¢ â€” STAGE 5 PROJECTS AS EVIDENCE ENGINE
    ========================================================================== */
 
@@ -47,9 +47,53 @@ export async function renderProjectsPage(containerEl, user, targetProjectId = nu
       supabase.from('programmes').select('*').eq('publication_status', 'PUBLISHED').catch(() => ({ data: [] }))
     ]) : [{ data: [] }, { data: [] }, { data: [] }];
 
-    const projects = (projectsRes && projectsRes.data) || [];
+    let projects = (projectsRes && projectsRes.data) || [];
     const evidenceList = (evidenceRes && evidenceRes.data) || [];
     const dbProgrammes = (dbProgrammesRes && dbProgrammesRes.data) || [];
+
+    if (!projects || projects.length === 0) {
+      projects = [
+        {
+          id: 'demo-proj-1',
+          title: 'AI Multi-Agent Workflow Engine',
+          description: 'Autonomous orchestration system using Claude & LangChain to execute multi-step research and code synthesis.',
+          problem_statement: 'Manual research and report generation required hours of repetitive task switching.',
+          solution_summary: 'Built an autonomous agent swarm with tool calling, persistent memory, and automated report compilation.',
+          tools_used: ['Claude 3.5 Sonnet', 'LangChain', 'Python', 'FastAPI'],
+          capability_dimensions: ['CREATE', 'APPLY'],
+          status: 'SUBMITTED',
+          is_public: true,
+          repo_url: 'https://github.com/aipassport/agent-workflow-engine',
+          updated_at: '2026-07-28'
+        },
+        {
+          id: 'demo-proj-2',
+          title: 'Enterprise RAG Document Intelligence',
+          description: 'High-precision retrieval augmented generation pipeline with hybrid dense-sparse vector search and re-ranking.',
+          problem_statement: 'Corporate knowledge bases produced high hallucination rates during document Q&A.',
+          solution_summary: 'Implemented hybrid vector indexing with Cohere re-ranking and citation verification guardrails.',
+          tools_used: ['Pinecone', 'OpenAI Embeddings', 'Cohere Rerank', 'Next.js'],
+          capability_dimensions: ['EVALUATE', 'RESPONSIBLE'],
+          status: 'SUBMITTED',
+          is_public: true,
+          repo_url: 'https://github.com/aipassport/enterprise-rag-intelligence',
+          updated_at: '2026-07-15'
+        },
+        {
+          id: 'demo-proj-3',
+          title: 'Responsible AI Bias & Guardrail Auditor',
+          description: 'Automated red-teaming framework for testing LLM safety boundaries, prompt injection resistance, and PII leakage.',
+          problem_statement: 'Customer-facing LLMs required rigorous safety testing prior to production deployment.',
+          solution_summary: 'Created an automated adversarial test suite evaluating 50+ risk vectors across 5 model providers.',
+          tools_used: ['Python', 'Llama Guard', 'Guardrails AI', 'Streamlit'],
+          capability_dimensions: ['RESPONSIBLE', 'UNDERSTAND'],
+          status: 'SUBMITTED',
+          is_public: true,
+          repo_url: 'https://github.com/aipassport/ai-guardrail-auditor',
+          updated_at: '2026-06-30'
+        }
+      ];
+    }
 
     const programmes = dbProgrammes.length > 0 ? dbProgrammes : PROGRAMME_BUILD_FIXTURES;
 
