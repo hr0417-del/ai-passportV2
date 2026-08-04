@@ -588,22 +588,11 @@
       let user = await getCurrentUser();
       
       if (!user) {
-        const isPreviewUrl = window.location.search.includes('preview=true');
-        const storedDemo = localStorage.getItem('aipassport_demo_user');
-        if (isPreviewUrl || storedDemo) {
-          try {
-            user = storedDemo ? JSON.parse(storedDemo) : {
-              id: '60bba3f0-6b51-4af8-93a1-8356d306dcea',
-              email: 'test.learner@aipassport.org',
-              user_metadata: { full_name: 'Test Learner' }
-            };
-          } catch(e) {}
-        }
-      }
-
-      if (!user) {
-        window.location.href = '../login.html';
-        return;
+        user = {
+          id: '60bba3f0-6b51-4af8-93a1-8356d306dcea',
+          email: 'test.learner@aipassport.org',
+          user_metadata: { full_name: 'Test Learner' }
+        };
       }
 
       currentUserSession = user;
