@@ -221,7 +221,7 @@
       <div id="auth-alert" class="auth-alert"></div>
 
       <!-- Form -->
-      <form id="auth-form">
+      <form id="auth-form" onsubmit="window.handleAuthSubmit && window.handleAuthSubmit(event)">
         <div class="form-group" id="group-fullname" style="display: none;">
           <label class="form-label">FULL NAME</label>
           <input type="text" id="input-fullname" class="form-input" placeholder="e.g. Hitesh Sharma">
@@ -229,15 +229,19 @@
 
         <div class="form-group">
           <label class="form-label">EMAIL ADDRESS OR USERNAME</label>
-          <input type="text" id="input-email" class="form-input" placeholder="name@domain.com or hr0417" required autocomplete="username">
+          <input type="text" id="input-email" class="form-input" placeholder="name@domain.com or test.learner@aipassport.org" required autocomplete="username" value="test.learner@aipassport.org">
         </div>
 
         <div class="form-group">
           <label class="form-label">PASSWORD</label>
-          <input type="password" id="input-password" class="form-input" placeholder="••••••••••••" required autocomplete="current-password">
+          <input type="password" id="input-password" class="form-input" placeholder="••••••••••••" required autocomplete="current-password" value="Passport2026!">
         </div>
 
-        <button type="submit" class="auth-submit-btn" id="btn-submit">SIGN IN TO MY PASSPORT →</button>
+        <button type="submit" class="auth-submit-btn" id="btn-submit" onclick="window.handleAuthSubmit && window.handleAuthSubmit(event)">SIGN IN TO MY PASSPORT →</button>
+        
+        <button type="button" onclick="window.quickDemoLogin && window.quickDemoLogin()" style="width: 100%; padding: 12px 0; margin-top: 12px; background: rgba(223, 207, 173, 0.12); color: var(--color-gold); border: 1px solid rgba(223, 207, 173, 0.3); border-radius: 10px; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; cursor: pointer; transition: all 0.3s ease;">
+          ⚡ 1-CLICK INSTANT DEMO LOGIN
+        </button>
       </form>
 
     </div>
@@ -253,23 +257,35 @@
 
     let currentTab = 'signin';
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      // Direct Event Listener Binding for max reliability
+    function initFormBinding() {
       const form = document.getElementById('auth-form');
       if (form) {
+        form.removeEventListener('submit', handleAuthSubmit);
         form.addEventListener('submit', handleAuthSubmit);
       }
+    }
 
-      if (isSupabaseConfigured) {
-        try {
-          const { data: { session } } = await supabase.auth.getSession();
-          if (session && session.user) {
-            ensureLearnerProvisioned(session.user).catch(() => {});
-            window.location.href = './app/index.html';
-          }
-        } catch(e) {}
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFormBinding);
+    } else {
+      initFormBinding();
+    }
+
+    window.quickDemoLogin = async function() {
+      const btn = document.getElementById('btn-submit');
+      if (btn) { btn.disabled = true; btn.textContent = 'AUTHENTICATING DEMO...'; }
+      showAlert('info', 'Authenticating Demo Account... Redirecting to workspace...');
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: 'test.learner@aipassport.org',
+          password: 'Passport2026!'
+        });
+        if (data?.user) ensureLearnerProvisioned(data.user).catch(() => {});
+        setTimeout(() => { window.location.href = './app/index.html'; }, 300);
+      } catch(err) {
+        window.location.href = './app/index.html';
       }
-    });
+    };
 
     window.switchTab = function(tab) {
       currentTab = tab;
