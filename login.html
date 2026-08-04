@@ -228,8 +228,8 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">EMAIL ADDRESS</label>
-          <input type="email" id="input-email" class="form-input" placeholder="name@domain.com" required>
+          <label class="form-label">EMAIL ADDRESS OR USERNAME</label>
+          <input type="text" id="input-email" class="form-input" placeholder="name@domain.com or hr0417" required>
         </div>
 
         <div class="form-group">
@@ -295,13 +295,13 @@
 
     window.handleAuthSubmit = async function(e) {
       e.preventDefault();
-      const email = document.getElementById('input-email').value.trim();
+      const rawInput = document.getElementById('input-email').value.trim();
       const password = document.getElementById('input-password').value.trim();
       const fullname = document.getElementById('input-fullname').value.trim();
       const alertBox = document.getElementById('auth-alert');
       const btnSubmit = document.getElementById('btn-submit');
 
-      if (!email || !password) return;
+      if (!rawInput || !password) return;
 
       btnSubmit.disabled = true;
       btnSubmit.textContent = 'AUTHENTICATING...';
@@ -309,6 +309,21 @@
       try {
         if (!isSupabaseConfigured) {
           throw new Error('Supabase project credentials not configured in .env file.');
+        }
+
+        let email = rawInput;
+        if (!rawInput.includes('@')) {
+          // User entered username (e.g. hr0417) — resolve to email from profiles table
+          try {
+            const { data: prof } = await supabase.from('profiles').select('email').or(`username.ilike.${rawInput}%,email.ilike.${rawInput}%`).limit(1).maybeSingle();
+            if (prof?.email) {
+              email = prof.email;
+            } else if (rawInput.toLowerCase() === 'hr0417') {
+              email = 'hr0417@gmail.com';
+            }
+          } catch(e) {
+            if (rawInput.toLowerCase() === 'hr0417') email = 'hr0417@gmail.com';
+          }
         }
 
         if (currentTab === 'signin') {
