@@ -594,8 +594,8 @@
 
       currentUserSession = user;
 
-      // Auto-provision default records (passport card, capability states, etc.) if missing
-      await ensureLearnerProvisioned(user);
+      // Auto-provision default records (passport card, capability states, etc.) if missing (non-blocking)
+      ensureLearnerProvisioned(user).catch(() => {});
 
       let profile = null;
       try {

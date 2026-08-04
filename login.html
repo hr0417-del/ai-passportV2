@@ -314,9 +314,9 @@
         if (currentTab === 'signin') {
           const { data, error } = await supabase.auth.signInWithPassword({ email, password });
           if (error) throw error;
-          if (data?.user) await ensureLearnerProvisioned(data.user);
+          if (data?.user) ensureLearnerProvisioned(data.user).catch(() => {});
           showAlert('info', 'Authenticated! Redirecting to My AI Passport...');
-          setTimeout(() => { window.location.href = './app/index.html'; }, 600);
+          setTimeout(() => { window.location.href = './app/index.html'; }, 300);
         } else {
           const { data, error } = await supabase.auth.signUp({
             email,
@@ -324,9 +324,9 @@
             options: { data: { full_name: fullname } }
           });
           if (error) throw error;
-          if (data?.user) await ensureLearnerProvisioned(data.user);
+          if (data?.user) ensureLearnerProvisioned(data.user).catch(() => {});
           showAlert('info', 'Passport Account Created! Redirecting to workspace...');
-          setTimeout(() => { window.location.href = './app/index.html'; }, 600);
+          setTimeout(() => { window.location.href = './app/index.html'; }, 300);
         }
       } catch (err) {
         let msg = err.message || 'Authentication failed.';
