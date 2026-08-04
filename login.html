@@ -357,13 +357,20 @@
           if (error) throw error;
 
           if (data?.user) ensureLearnerProvisioned(data.user).catch(() => {});
-          showAlert('info', 'Passport Account Created! Redirecting to workspace...');
-          setTimeout(() => { window.location.href = './app/index.html'; }, 300);
+
+          if (data?.session) {
+            showAlert('info', 'Passport Account Created! Redirecting to workspace...');
+            setTimeout(() => { window.location.href = './app/index.html'; }, 300);
+          } else {
+            showAlert('info', 'Passport Account Created! Please check your email inbox for the confirmation link before signing in.');
+          }
         }
       } catch (err) {
         let msg = err.message || 'Authentication failed.';
         if (msg.toLowerCase().includes('invalid login credentials')) {
-          msg = 'Invalid credentials. Please verify your email/username & password, or use CREATE PASSPORT tab to register.';
+          msg = 'Invalid email/username or password. If you forgot your password or registered recently, use CREATE PASSPORT tab to register a new passport.';
+        } else if (msg.toLowerCase().includes('email not confirmed')) {
+          msg = 'Email confirmation required. Please check your email inbox for the confirmation link, or disable "Confirm email" in Supabase Auth settings.';
         } else if (msg.includes('rate limit')) {
           msg = 'Supabase Rate Limit Exceeded. Please try again in 1 minute.';
         }
