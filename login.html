@@ -221,7 +221,7 @@
       <div id="auth-alert" class="auth-alert"></div>
 
       <!-- Form -->
-      <form id="auth-form" onsubmit="handleAuthSubmit(event)">
+      <form id="auth-form">
         <div class="form-group" id="group-fullname" style="display: none;">
           <label class="form-label">FULL NAME</label>
           <input type="text" id="input-fullname" class="form-input" placeholder="e.g. Hitesh Sharma">
@@ -229,12 +229,12 @@
 
         <div class="form-group">
           <label class="form-label">EMAIL ADDRESS OR USERNAME</label>
-          <input type="text" id="input-email" class="form-input" placeholder="name@domain.com or hr0417" required>
+          <input type="text" id="input-email" class="form-input" placeholder="name@domain.com or hr0417" required autocomplete="username">
         </div>
 
         <div class="form-group">
           <label class="form-label">PASSWORD</label>
-          <input type="password" id="input-password" class="form-input" placeholder="••••••••••••" required>
+          <input type="password" id="input-password" class="form-input" placeholder="••••••••••••" required autocomplete="current-password">
         </div>
 
         <button type="submit" class="auth-submit-btn" id="btn-submit">SIGN IN TO MY PASSPORT →</button>
@@ -253,14 +253,21 @@
 
     let currentTab = 'signin';
 
-    // If user is already authenticated, auto-redirect to /app/
     document.addEventListener('DOMContentLoaded', async () => {
+      // Direct Event Listener Binding for max reliability
+      const form = document.getElementById('auth-form');
+      if (form) {
+        form.addEventListener('submit', handleAuthSubmit);
+      }
+
       if (isSupabaseConfigured) {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session && session.user) {
-          await ensureLearnerProvisioned(session.user);
-          window.location.href = './app/index.html';
-        }
+        try {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session && session.user) {
+            ensureLearnerProvisioned(session.user).catch(() => {});
+            window.location.href = './app/index.html';
+          }
+        } catch(e) {}
       }
     });
 
@@ -293,30 +300,38 @@
       }
     };
 
-    window.handleAuthSubmit = async function(e) {
-      e.preventDefault();
+    async function handleAuthSubmit(e) {
+      if (e) e.preventDefault();
       const rawInput = document.getElementById('input-email').value.trim();
       const password = document.getElementById('input-password').value.trim();
       const fullname = document.getElementById('input-fullname').value.trim();
-      const alertBox = document.getElementById('auth-alert');
       const btnSubmit = document.getElementById('btn-submit');
 
-      if (!rawInput || !password) return;
+      if (!rawInput || !password) {
+        showAlert('error', 'Please enter your email/username and password.');
+        return;
+      }
 
       btnSubmit.disabled = true;
       btnSubmit.textContent = 'AUTHENTICATING...';
 
       try {
         if (!isSupabaseConfigured) {
-          throw new Error('Supabase project credentials not configured in .env file.');
+          throw new Error('Supabase project credentials missing.');
         }
 
         let email = rawInput;
         if (!rawInput.includes('@')) {
-          // User entered username (e.g. hr0417) — resolve to email from profiles table
+          // User entered username (e.g. hr0417) — resolve via ilike to email
           try {
-            const { data: prof } = await supabase.from('profiles').select('email').or(`username.ilike.${rawInput}%,email.ilike.${rawInput}%`).limit(1).maybeSingle();
-            if (prof?.email) {
+            const { data: prof } = await supabase
+              .from('profiles')
+              .select('email')
+              .ilike('username', rawInput + '%')
+              .limit(1)
+              .maybeSingle();
+
+            if (prof && prof.email) {
               email = prof.email;
             } else if (rawInput.toLowerCase() === 'hr0417') {
               email = 'hr0417@gmail.com';
@@ -329,8 +344,9 @@
         if (currentTab === 'signin') {
           const { data, error } = await supabase.auth.signInWithPassword({ email, password });
           if (error) throw error;
+
+          showAlert('info', 'Authenticated! Redirecting to workspace...');
           if (data?.user) ensureLearnerProvisioned(data.user).catch(() => {});
-          showAlert('info', 'Authenticated! Redirecting to My AI Passport...');
           setTimeout(() => { window.location.href = './app/index.html'; }, 300);
         } else {
           const { data, error } = await supabase.auth.signUp({
@@ -339,21 +355,26 @@
             options: { data: { full_name: fullname } }
           });
           if (error) throw error;
+
           if (data?.user) ensureLearnerProvisioned(data.user).catch(() => {});
           showAlert('info', 'Passport Account Created! Redirecting to workspace...');
           setTimeout(() => { window.location.href = './app/index.html'; }, 300);
         }
       } catch (err) {
         let msg = err.message || 'Authentication failed.';
-        if (msg.includes('rate limit')) {
-          msg = 'Supabase Email Rate Limit Exceeded. Please switch to SIGN IN with existing credentials, or create a user in Supabase Dashboard -> Auth -> Users.';
+        if (msg.toLowerCase().includes('invalid login credentials')) {
+          msg = 'Invalid credentials. Please verify your email/username & password, or use CREATE PASSPORT tab to register.';
+        } else if (msg.includes('rate limit')) {
+          msg = 'Supabase Rate Limit Exceeded. Please try again in 1 minute.';
         }
         showAlert('error', msg);
       } finally {
         btnSubmit.disabled = false;
         btnSubmit.textContent = currentTab === 'signin' ? 'SIGN IN TO MY PASSPORT →' : 'ISSUE DIGITAL PASSPORT →';
       }
-    };
+    }
+
+    window.handleAuthSubmit = handleAuthSubmit;
 
     function showAlert(type, text) {
       const alertBox = document.getElementById('auth-alert');
