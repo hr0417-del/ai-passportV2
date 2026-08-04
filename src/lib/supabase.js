@@ -4,27 +4,25 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+// Production credentials — the anon/publishable key is intentionally public.
+// See: https://supabase.com/docs/guides/api/api-keys
+const PROD_URL = 'https://uxuaisvdmvkircymwvdl.supabase.co';
+const PROD_ANON_KEY = 'sb_publishable_M6cxghtva7ZHqMLt2-RS1w_CfYeaMTF';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || PROD_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || PROD_ANON_KEY;
 
 export const isSupabaseConfigured = Boolean(
-  supabaseUrl && 
-  supabaseAnonKey && 
+  supabaseUrl &&
+  supabaseAnonKey &&
   supabaseUrl.startsWith('https://') &&
   !supabaseUrl.includes('your-project-ref')
 );
 
-if (!isSupabaseConfigured) {
-  console.error(
-    '❌ [MY AI PASSPORT] Supabase credentials missing or invalid in .env file.\n' +
-    'Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.'
-  );
-}
-
 // Initialize production Supabase client
 export const supabase = createClient(
-  supabaseUrl || 'https://placeholder.supabase.co',
-  supabaseAnonKey || 'placeholder-key',
+  supabaseUrl,
+  supabaseAnonKey,
   {
     auth: {
       persistSession: true,
