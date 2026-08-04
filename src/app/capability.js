@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    MY AI PASSPORTâ„¢ â€” STAGE 7 CAPABILITY INTELLIGENCE ENGINE
    ========================================================================== */
 
@@ -93,12 +93,12 @@ export async function renderCapabilityPage(containerEl, user, targetDimensionId 
 
     // Single Scoped Fetch of All Learner Signals & Authoritative State
     const [capStatesRes, evidenceRes, projectsRes, learnProgressRes, programmesRes, credsRes] = isRealGuid ? await Promise.all([
-      supabase.from('capability_states').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('evidence').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('projects').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('learning_progress').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('programmes').select('*').catch(() => ({ data: [] })),
-      supabase.from('credentials').select('*').eq('user_id', user.id).catch(() => ({ data: [] }))
+      supabase.from('capability_states').select('*').eq('user_id', user.id),
+      supabase.from('evidence').select('*').eq('user_id', user.id),
+      supabase.from('projects').select('*').eq('user_id', user.id),
+      supabase.from('learning_progress').select('*').eq('user_id', user.id),
+      supabase.from('programmes').select('*'),
+      supabase.from('credentials').select('*').eq('user_id', user.id)
     ]) : [{ data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }];
 
     const capStates = (capStatesRes && capStatesRes.data) || [];

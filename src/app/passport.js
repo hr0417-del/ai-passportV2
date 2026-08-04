@@ -24,14 +24,14 @@ export async function renderPassportPage(containerEl, user) {
       credentialsRes,
       journeyRes
     ] = isRealGuid ? await Promise.all([
-      supabase.from('profiles').select('*').eq('id', user.id).maybeSingle().catch(() => ({ data: null })),
-      supabase.from('passport_cards').select('*').eq('user_id', user.id).maybeSingle().catch(() => ({ data: null })),
-      supabase.from('privacy_settings').select('*').eq('user_id', user.id).maybeSingle().catch(() => ({ data: null })),
-      supabase.from('capability_states').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('learning_progress').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('projects').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).limit(3).catch(() => ({ data: [] })),
-      supabase.from('credentials').select('*').eq('user_id', user.id).order('issue_date', { ascending: false }).limit(3).catch(() => ({ data: [] })),
-      supabase.from('journey_events').select('*').eq('user_id', user.id).order('occurred_at', { ascending: false }).limit(5).catch(() => ({ data: [] }))
+      supabase.from('profiles').select('*').eq('id', user.id).maybeSingle(),
+      supabase.from('passport_cards').select('*').eq('user_id', user.id).maybeSingle(),
+      supabase.from('privacy_settings').select('*').eq('user_id', user.id).maybeSingle(),
+      supabase.from('capability_states').select('*').eq('user_id', user.id),
+      supabase.from('learning_progress').select('*').eq('user_id', user.id),
+      supabase.from('projects').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).limit(3),
+      supabase.from('credentials').select('*').eq('user_id', user.id).order('issue_date', { ascending: false }).limit(3),
+      supabase.from('journey_events').select('*').eq('user_id', user.id).order('occurred_at', { ascending: false }).limit(5)
     ]) : [{}, {}, {}, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }];
 
     let profile = (profileRes && profileRes.data) || {};

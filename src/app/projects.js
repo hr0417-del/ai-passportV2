@@ -42,9 +42,9 @@ export async function renderProjectsPage(containerEl, user, targetProjectId = nu
 
     // Fetch user projects, evidence, and programmes in parallel
     const [projectsRes, evidenceRes, dbProgrammesRes] = isRealGuid ? await Promise.all([
-      supabase.from('projects').select('*').eq('user_id', user.id).order('updated_at', { ascending: false }).catch(() => ({ data: [] })),
-      supabase.from('evidence').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('programmes').select('*').eq('publication_status', 'PUBLISHED').catch(() => ({ data: [] }))
+      supabase.from('projects').select('*').eq('user_id', user.id).order('updated_at', { ascending: false }),
+      supabase.from('evidence').select('*').eq('user_id', user.id),
+      supabase.from('programmes').select('*').eq('publication_status', 'PUBLISHED')
     ]) : [{ data: [] }, { data: [] }, { data: [] }];
 
     let projects = (projectsRes && projectsRes.data) || [];

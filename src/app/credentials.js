@@ -14,10 +14,10 @@ export async function renderCredentialsPage(containerEl, user, targetCredentialI
 
     // Fetch user credentials, evidence, projects, and programmes in parallel
     const [credsRes, evRes, projRes, progRes] = isRealGuid ? await Promise.all([
-      supabase.from('credentials').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).catch(() => ({ data: [] })),
-      supabase.from('evidence').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('projects').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('programmes').select('*').catch(() => ({ data: [] }))
+      supabase.from('credentials').select('*').eq('user_id', user.id).order('created_at', { ascending: false }),
+      supabase.from('evidence').select('*').eq('user_id', user.id),
+      supabase.from('projects').select('*').eq('user_id', user.id),
+      supabase.from('programmes').select('*')
     ]) : [{ data: [] }, { data: [] }, { data: [] }, { data: [] }];
 
     let credentials = (credsRes && credsRes.data) || [];

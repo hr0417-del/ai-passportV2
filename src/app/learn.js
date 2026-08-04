@@ -98,9 +98,9 @@ export async function renderLearnPage(containerEl, user) {
 
     // Fetch user progress and programmes in parallel
     const [progressRes, dbProgrammesRes, capabilityRes] = isRealGuid ? await Promise.all([
-      supabase.from('learning_progress').select('*').eq('user_id', user.id).catch(() => ({ data: [] })),
-      supabase.from('programmes').select('*').eq('publication_status', 'PUBLISHED').catch(() => ({ data: [] })),
-      supabase.from('capability_states').select('*').eq('user_id', user.id).catch(() => ({ data: [] }))
+      supabase.from('learning_progress').select('*').eq('user_id', user.id),
+      supabase.from('programmes').select('*').eq('publication_status', 'PUBLISHED'),
+      supabase.from('capability_states').select('*').eq('user_id', user.id)
     ]) : [{ data: [] }, { data: [] }, { data: [] }];
 
     let userProgress = (progressRes && progressRes.data) || [];
