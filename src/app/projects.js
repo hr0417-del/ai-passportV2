@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MY AI PASSPORTâ„¢ â€” STAGE 5 PROJECTS AS EVIDENCE ENGINE
+   MY AI PASSPORT™ â€” STAGE 5 PROJECTS AS EVIDENCE ENGINE
    ========================================================================== */
 
 import { supabase } from '../lib/supabase.js';
@@ -178,7 +178,7 @@ function renderProjectsMainView(containerEl, user, projects, evidenceList, progr
             <p class="banner-desc">Add an independent project and turn your practical work into part of your lifelong AI Passport.</p>
           </div>
           <div class="banner-right">
-            <button class="btn-secondary-action" onclick="window.openProjectWizard(null)">ADD INDEPENDENT PROJECT â†’</button>
+            <button class="btn-secondary-action" onclick="window.openProjectWizard(null)">ADD INDEPENDENT PROJECT →</button>
           </div>
         </div>
       </section>
@@ -201,8 +201,8 @@ function renderProjectsMainView(containerEl, user, projects, evidenceList, progr
         </div>
 
         <div class="modal-footer">
-          <button class="btn-secondary-action" id="wizard-prev-btn" onclick="window.prevWizardStep()" style="display: none;">â† BACK</button>
-          <button class="btn-primary-action" id="wizard-next-btn" onclick="window.nextWizardStep()">CONTINUE â†’</button>
+          <button class="btn-secondary-action" id="wizard-prev-btn" onclick="window.prevWizardStep()" style="display: none;">← BACK</button>
+          <button class="btn-primary-action" id="wizard-next-btn" onclick="window.nextWizardStep()">CONTINUE →</button>
         </div>
       </div>
     </div>
@@ -242,7 +242,7 @@ function renderUserProjectsGrid(projects, evidenceList, programmes) {
               <div class="project-dim-chips">
                 ${(p.capability_dimensions || []).map(d => `<span class="dim-chip">${d}</span>`).join('')}
               </div>
-              <a class="btn-secondary-action card-btn" href="?view=projects&id=${p.id}">VIEW PROJECT â†’</a>
+              <a class="btn-secondary-action card-btn" href="?view=projects&id=${p.id}">VIEW PROJECT →</a>
             </div>
           </div>
         `;
@@ -257,7 +257,7 @@ function renderEmptyProjectsState() {
       <span class="empty-card-tag">YOUR FIRST BUILD STARTS HERE</span>
       <h3 class="empty-card-title">Document What You Build With AI</h3>
       <p class="empty-card-desc">Create something with AI, document how you built it, attach evidence, and turn your work into part of your AI Passport.</p>
-      <button class="btn-primary-action inline-btn" onclick="window.openProjectWizard()">START YOUR FIRST PROJECT â†’</button>
+      <button class="btn-primary-action inline-btn" onclick="window.openProjectWizard()">START YOUR FIRST PROJECT →</button>
     </div>
   `;
 }
@@ -284,7 +284,7 @@ function renderBuildFromLearningCards(programmes) {
         <div class="programme-dim-tags">
           ${(p.capability_dimensions || []).map(d => `<span class="dim-chip">${d}</span>`).join('')}
         </div>
-        <button class="btn-secondary-action card-btn" onclick="window.openProjectWizard('${p.id}')">START THIS BUILD â†’</button>
+        <button class="btn-secondary-action card-btn" onclick="window.openProjectWizard('${p.id}')">START THIS BUILD →</button>
       </div>
     </div>
   `).join('');
@@ -304,7 +304,7 @@ function renderProjectDetailView(containerEl, project, evidenceList, user, progr
       
       <!-- Back Navigation Header -->
       <div class="detail-back-nav">
-        <a class="btn-text-link" href="?view=projects">â† BACK TO ALL PROJECTS</a>
+        <a class="btn-text-link" href="?view=projects">← BACK TO ALL PROJECTS</a>
       </div>
 
       <!-- Detail Hero Card -->
@@ -366,7 +366,7 @@ function renderProjectDetailView(containerEl, project, evidenceList, user, progr
                 ${linkedEvidence.map(ev => `
                   <div class="evidence-item-row">
                     <span class="ev-type-chip">${ev.evidence_type}</span>
-                    <a class="ev-url-link" href="${ev.url || '#'}" target="_blank">${escapeHtml(ev.url || 'Attached Document')} â†—</a>
+                    <a class="ev-url-link" href="${ev.url || '#'}" target="_blank">${escapeHtml(ev.url || 'Attached Document')} ↗</a>
                     <span class="ev-status">${ev.verification_status}</span>
                   </div>
                 `).join('')}
@@ -390,7 +390,7 @@ function renderProjectDetailView(containerEl, project, evidenceList, user, progr
 
           <div class="detail-section-box">
             <h3 class="box-title">CAPABILITY MAPPINGS</h3>
-            <p class="box-sub">Learner claims mapped to AI Capability Frameworkâ„¢:</p>
+            <p class="box-sub">Learner claims mapped to AI Capability Framework™:</p>
             <div class="dim-chip-wrap margin-top-8">
               ${(project.capability_dimensions || ['UNDERSTAND', 'APPLY']).map(d => `<span class="dim-chip">${d}</span>`).join('')}
             </div>
@@ -406,7 +406,7 @@ function renderProjectDetailView(containerEl, project, evidenceList, user, progr
           <!-- Actions -->
           <div class="detail-actions-box">
             ${project.status === 'IN_PROGRESS' || project.status === 'DRAFT' ? `
-              <button class="btn-primary-action full-width" onclick="window.markProjectReady('${project.id}')">MARK READY TO DEMONSTRATE â†’</button>
+              <button class="btn-primary-action full-width" onclick="window.markProjectReady('${project.id}')">MARK READY TO DEMONSTRATE →</button>
             ` : ''}
             <button class="btn-secondary-action full-width" onclick="window.toggleProjectPublic('${project.id}', ${!project.is_public})">
               ${project.is_public ? 'MAKE PRIVATE' : 'MAKE PUBLIC ON PASSPORT'}
@@ -537,7 +537,7 @@ function renderWizardStep() {
 
   badgeEl.textContent = `STEP ${currentStep} OF 5`;
   prevBtn.style.display = currentStep === 1 ? 'none' : 'inline-flex';
-  nextBtn.textContent = currentStep === 5 ? 'SAVE PROJECT â†’' : 'CONTINUE â†’';
+  nextBtn.textContent = currentStep === 5 ? 'SAVE PROJECT →' : 'CONTINUE →';
 
   switch (currentStep) {
     case 1:
@@ -598,7 +598,7 @@ function renderWizardStep() {
     case 4:
       titleEl.textContent = 'Capability Mappings';
       bodyEl.innerHTML = `
-        <p class="form-sub-text">Select which dimensions of the AI Capability Frameworkâ„¢ this project maps to (Learner Claims):</p>
+        <p class="form-sub-text">Select which dimensions of the AI Capability Framework™ this project maps to (Learner Claims):</p>
         <div class="checkbox-group-grid">
           ${['UNDERSTAND', 'APPLY', 'CREATE', 'EVALUATE', 'RESPONSIBLE'].map(dim => `
             <label class="checkbox-chip-label">

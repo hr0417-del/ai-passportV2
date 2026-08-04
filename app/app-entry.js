@@ -2,6 +2,7 @@
    MY AI PASSPORT™ — AUTHENTICATED WORKSPACE ENTRYPOINT
    ========================================================================== */
 
+import '../src/app/app.css';
 import { getCurrentUser, getLearnerProfile, getPassportCard, ensureLearnerProvisioned, supabase, isSupabaseConfigured } from '../src/lib/supabase.js';
 import { renderOverview } from '../src/app/overview.js';
 import { renderPassportPage } from '../src/app/passport.js';

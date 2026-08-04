@@ -1,10 +1,10 @@
 /* ==========================================================================
-   MY AI PASSPORTâ„¢ â€” STAGE 7 CAPABILITY INTELLIGENCE ENGINE
+   MY AI PASSPORT™ â€” STAGE 7 CAPABILITY INTELLIGENCE ENGINE
    ========================================================================== */
 
 import { supabase } from '../lib/supabase.js';
 
-// The 5 Canonical Dimensions of the AI Capability Frameworkâ„¢
+// The 5 Canonical Dimensions of the AI Capability Framework™
 export const CAPABILITY_DIMENSIONS = [
   {
     id: 'UNDERSTAND',
@@ -146,7 +146,7 @@ function renderCapabilityMainView(containerEl, user, capStates, evidenceList, pr
       <section class="capability-section hero-section">
         <div class="hero-top-row">
           <div>
-            <div class="hero-tag">AI CAPABILITY FRAMEWORKâ„¢</div>
+            <div class="hero-tag">AI CAPABILITY FRAMEWORK™</div>
             <h1 class="hero-title">YOUR AI CAPABILITY.<br>BUILT THROUGH EVIDENCE.</h1>
             <p class="hero-sub">A living view of how your ability to understand, apply, create, evaluate, and use AI responsibly develops through learning, building, evidence, and experience.</p>
           </div>
@@ -356,7 +356,7 @@ function renderDimensionDetail(dim, capStates, evidenceList, projectsList, learn
             ${verifiedEv.map(ev => `
               <div class="evidence-row">
                 <span class="ev-chip">${ev.evidence_type}</span>
-                <a href="${ev.url || '#'}" target="_blank" class="ev-link">${escapeHtml(ev.url || 'Attached Proof')} â†—</a>
+                <a href="${ev.url || '#'}" target="_blank" class="ev-link">${escapeHtml(ev.url || 'Attached Proof')} ↗</a>
                 <span class="ev-status">âœ“ VERIFIED</span>
               </div>
             `).join('')}
@@ -384,7 +384,7 @@ function renderDimensionDetail(dim, capStates, evidenceList, projectsList, learn
             ${mappedProjects.map(p => `
               <div class="mapped-proj-card">
                 <span class="proj-name">${escapeHtml(p.title)}</span>
-                <a href="?view=projects&id=${p.id}" class="btn-text-link">VIEW PROJECT â†’</a>
+                <a href="?view=projects&id=${p.id}" class="btn-text-link">VIEW PROJECT →</a>
               </div>
             `).join('')}
           </div>
@@ -402,7 +402,7 @@ function renderDimensionDetail(dim, capStates, evidenceList, projectsList, learn
             ${mappedProgrammes.map(prog => `
               <div class="signal-row">
                 <span class="signal-name">${escapeHtml(prog.title)}</span>
-                <button class="btn-text-link" onclick="window.switchView('learn')">EXPLORE PATHWAY â†’</button>
+                <button class="btn-text-link" onclick="window.switchView('learn')">EXPLORE PATHWAY →</button>
               </div>
             `).join('')}
           </div>
@@ -419,7 +419,7 @@ function renderDimensionDetail(dim, capStates, evidenceList, projectsList, learn
             ${relatedCreds.map(c => `
               <div class="rel-cred-item">
                 <span class="rel-cred-title">${escapeHtml(c.title)}</span>
-                <a href="?view=credentials&id=${c.id}" class="btn-text-link">VIEW CREDENTIAL â†’</a>
+                <a href="?view=credentials&id=${c.id}" class="btn-text-link">VIEW CREDENTIAL →</a>
               </div>
             `).join('')}
           </div>
