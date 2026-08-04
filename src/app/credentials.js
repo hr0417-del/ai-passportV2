@@ -1,5 +1,5 @@
-/* ==========================================================================
-   MY AI PASSPORT™ — STAGE 6 CREDENTIALS & VERIFICATION WORKSPACE
+﻿/* ==========================================================================
+   MY AI PASSPORTâ„¢ â€” STAGE 6 CREDENTIALS & VERIFICATION WORKSPACE
    ========================================================================== */
 
 import { supabase } from '../lib/supabase.js';
@@ -149,7 +149,7 @@ function renderCredentialsMainView(containerEl, credentials, evidenceList, proje
             <p class="banner-desc">Every issued credential contains a unique identifier and verification hash that can be authenticated by employers, institutions, or partners on the public authentication portal.</p>
           </div>
           <div class="banner-right">
-            <a href="../verify.html" target="_blank" class="btn-secondary-action">OPEN VERIFICATION PORTAL ↗</a>
+            <a href="../verify.html" target="_blank" class="btn-secondary-action">OPEN VERIFICATION PORTAL â†—</a>
           </div>
         </div>
       </section>
@@ -178,7 +178,7 @@ function renderCredentialCard(c, programmes, projects) {
       <div class="cred-card-top">
         <span class="badge-type-chip">${formatBadgeType(c.badge_type)}</span>
         <span class="cred-status-pill ${isRevoked ? 'status-revoked' : 'status-issued'}">
-          ${isRevoked ? '⚠ REVOKED' : '✓ ISSUED'}
+          ${isRevoked ? 'âš  REVOKED' : 'âœ“ ISSUED'}
         </span>
       </div>
 
@@ -207,8 +207,8 @@ function renderCredentialCard(c, programmes, projects) {
       ` : ''}
 
       <div class="cred-card-actions">
-        <a href="?preview=true&view=credentials&id=${c.id}" class="btn-secondary-action card-btn">VIEW CREDENTIAL →</a>
-        <a href="../verify.html?id=${encodeURIComponent(c.credential_number || '')}" target="_blank" class="btn-text-link">VERIFY ↗</a>
+        <a href="?view=credentials&id=${c.id}" class="btn-secondary-action card-btn">VIEW CREDENTIAL â†’</a>
+        <a href="../verify.html?id=${encodeURIComponent(c.credential_number || '')}" target="_blank" class="btn-text-link">VERIFY â†—</a>
       </div>
     </div>
   `;
@@ -221,8 +221,8 @@ function renderEmptyCredentialsState() {
       <h3 class="empty-card-title">Your Achievements Will Appear Here</h3>
       <p class="empty-card-desc">Credentials become part of your AI Passport when eligible learning, projects, or demonstrated achievements are authoritatively recognised.</p>
       <div class="empty-btn-group">
-        <button class="btn-primary-action" onclick="window.switchView('learn')">EXPLORE LEARNING PATHWAYS →</button>
-        <button class="btn-secondary-action" onclick="window.switchView('projects')">VIEW PROJECTS →</button>
+        <button class="btn-primary-action" onclick="window.switchView('learn')">EXPLORE LEARNING PATHWAYS â†’</button>
+        <button class="btn-secondary-action" onclick="window.switchView('projects')">VIEW PROJECTS â†’</button>
       </div>
     </div>
   `;
@@ -243,7 +243,7 @@ function renderPendingVerificationList(pendingEvidence, projects) {
               <span class="pending-chip">${e.evidence_type}</span>
               <div class="pending-info">
                 <h4 class="pending-title">${escapeHtml((projMatch && projMatch.title) || 'Attached Evidence')}</h4>
-                <span class="pending-sub">Capability Dimension: <strong>${e.capability_dimension}</strong> · Submitted: ${new Date(e.created_at || Date.now()).toLocaleDateString()}</span>
+                <span class="pending-sub">Capability Dimension: <strong>${e.capability_dimension}</strong> Â· Submitted: ${new Date(e.created_at || Date.now()).toLocaleDateString()}</span>
               </div>
             </div>
             <div class="pending-right">
@@ -270,7 +270,7 @@ function renderCredentialDetailView(containerEl, credential, projects, programme
       
       <!-- Back Navigation Header -->
       <div class="detail-back-nav">
-        <a class="btn-text-link" href="?preview=true&view=credentials">← BACK TO ALL CREDENTIALS</a>
+        <a class="btn-text-link" href="?view=credentials">â† BACK TO ALL CREDENTIALS</a>
       </div>
 
       <!-- Credential Detail Master Card -->
@@ -279,7 +279,7 @@ function renderCredentialDetailView(containerEl, credential, projects, programme
         <div class="detail-header-row">
           <span class="badge-type-chip">${formatBadgeType(credential.badge_type)}</span>
           <span class="cred-status-pill ${isRevoked ? 'status-revoked' : 'status-issued'}">
-            ${isRevoked ? '⚠ REVOKED CREDENTIAL' : '✓ AUTHENTIC & ISSUED'}
+            ${isRevoked ? 'âš  REVOKED CREDENTIAL' : 'âœ“ AUTHENTIC & ISSUED'}
           </span>
         </div>
 
@@ -309,7 +309,7 @@ function renderCredentialDetailView(containerEl, credential, projects, programme
           
           <div class="detail-section-box">
             <h3 class="box-title">RECOGNISES</h3>
-            <p class="box-text">Authoritative recognition of practical AI capability and verified learning achievement awarded under the AI Capability Framework™.</p>
+            <p class="box-text">Authoritative recognition of practical AI capability and verified learning achievement awarded under the AI Capability Frameworkâ„¢.</p>
           </div>
 
           ${progMatch ? `
@@ -346,7 +346,7 @@ function renderCredentialDetailView(containerEl, credential, projects, programme
           </div>
 
           <div class="detail-actions-box">
-            <a href="../verify.html?id=${encodeURIComponent(credential.credential_number || '')}" target="_blank" class="btn-primary-action full-width">VERIFY CREDENTIAL ↗</a>
+            <a href="../verify.html?id=${encodeURIComponent(credential.credential_number || '')}" target="_blank" class="btn-primary-action full-width">VERIFY CREDENTIAL â†—</a>
             <button class="btn-secondary-action full-width" onclick="window.toggleCredentialPublic('${credential.id}', ${!credential.is_public})">
               ${credential.is_public ? 'MAKE PRIVATE' : 'MAKE PUBLIC ON PASSPORT'}
             </button>
@@ -400,3 +400,4 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
+

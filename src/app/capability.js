@@ -1,10 +1,10 @@
-/* ==========================================================================
-   MY AI PASSPORT™ — STAGE 7 CAPABILITY INTELLIGENCE ENGINE
+﻿/* ==========================================================================
+   MY AI PASSPORTâ„¢ â€” STAGE 7 CAPABILITY INTELLIGENCE ENGINE
    ========================================================================== */
 
 import { supabase } from '../lib/supabase.js';
 
-// The 5 Canonical Dimensions of the AI Capability Framework™
+// The 5 Canonical Dimensions of the AI Capability Frameworkâ„¢
 export const CAPABILITY_DIMENSIONS = [
   {
     id: 'UNDERSTAND',
@@ -49,7 +49,7 @@ export const STATE_EXPLANATIONS = {
   ADVANCE: 'Authoritative recognition of deeper, sustained, and increasingly sophisticated capability within this dimension.'
 };
 
-// 20 Deterministic Next Frontier Guidance Combinations (5 dimensions × 4 states)
+// 20 Deterministic Next Frontier Guidance Combinations (5 dimensions Ã— 4 states)
 export const NEXT_FRONTIER_GUIDANCE = {
   UNDERSTAND: {
     EXPLORE: 'Begin exploring core AI principles, model capabilities, prompt structures, and systemic limitations through structured pathways.',
@@ -146,11 +146,11 @@ function renderCapabilityMainView(containerEl, user, capStates, evidenceList, pr
       <section class="capability-section hero-section">
         <div class="hero-top-row">
           <div>
-            <div class="hero-tag">AI CAPABILITY FRAMEWORK™</div>
+            <div class="hero-tag">AI CAPABILITY FRAMEWORKâ„¢</div>
             <h1 class="hero-title">YOUR AI CAPABILITY.<br>BUILT THROUGH EVIDENCE.</h1>
             <p class="hero-sub">A living view of how your ability to understand, apply, create, evaluate, and use AI responsibly develops through learning, building, evidence, and experience.</p>
           </div>
-          <button class="btn-secondary-action" onclick="window.toggleExplainabilityModal()">HOW IS CAPABILITY DETERMINED? 🛈</button>
+          <button class="btn-secondary-action" onclick="window.toggleExplainabilityModal()">HOW IS CAPABILITY DETERMINED? ðŸ›ˆ</button>
         </div>
       </section>
 
@@ -161,17 +161,17 @@ function renderCapabilityMainView(containerEl, user, capStates, evidenceList, pr
             <span class="sum-lbl">FRAMEWORK DIMENSIONS</span>
             <span class="sum-val">5 Dimensions</span>
           </div>
-          <div class="summary-divider">•</div>
+          <div class="summary-divider">â€¢</div>
           <div class="summary-item">
             <span class="sum-lbl">DEMONSTRATED</span>
             <span class="sum-val">${demoCount} Dimensions</span>
           </div>
-          <div class="summary-divider">•</div>
+          <div class="summary-divider">â€¢</div>
           <div class="summary-item">
             <span class="sum-lbl">ADVANCED</span>
             <span class="sum-val">${advanceCount} Dimensions</span>
           </div>
-          <div class="summary-divider">•</div>
+          <div class="summary-divider">â€¢</div>
           <div class="summary-item">
             <span class="sum-lbl">VERIFIED EVIDENCE</span>
             <span class="sum-val">${verifiedEvCount} Records</span>
@@ -276,7 +276,7 @@ function renderCapabilityMainView(containerEl, user, capStates, evidenceList, pr
             <span class="modal-step-badge">EXPLAINABILITY & TRUST</span>
             <h2 class="modal-title">How Is My Capability Determined?</h2>
           </div>
-          <button class="modal-close-btn" onclick="window.toggleExplainabilityModal()">✕</button>
+          <button class="modal-close-btn" onclick="window.toggleExplainabilityModal()">âœ•</button>
         </div>
         <div class="modal-body" style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5;">
           <p><strong style="color: #fff;">1. Learning & Projects Provide Context:</strong> When you complete learning pathways or build projects, you map those activities to capability dimensions. These form your active Learning Signals and Project Mappings.</p>
@@ -356,8 +356,8 @@ function renderDimensionDetail(dim, capStates, evidenceList, projectsList, learn
             ${verifiedEv.map(ev => `
               <div class="evidence-row">
                 <span class="ev-chip">${ev.evidence_type}</span>
-                <a href="${ev.url || '#'}" target="_blank" class="ev-link">${escapeHtml(ev.url || 'Attached Proof')} ↗</a>
-                <span class="ev-status">✓ VERIFIED</span>
+                <a href="${ev.url || '#'}" target="_blank" class="ev-link">${escapeHtml(ev.url || 'Attached Proof')} â†—</a>
+                <span class="ev-status">âœ“ VERIFIED</span>
               </div>
             `).join('')}
           </div>
@@ -369,7 +369,7 @@ function renderDimensionDetail(dim, capStates, evidenceList, projectsList, learn
           <div class="pending-evidence-box margin-top-16">
             <span class="pending-lbl">EVIDENCE IN DEVELOPMENT / IN REVIEW (${pendingEv.length}):</span>
             <div class="pending-sub-list">
-              ${pendingEv.map(pe => `<div class="pending-sub-item">• ${pe.evidence_type} (${pe.verification_status})</div>`).join('')}
+              ${pendingEv.map(pe => `<div class="pending-sub-item">â€¢ ${pe.evidence_type} (${pe.verification_status})</div>`).join('')}
             </div>
           </div>
         ` : ''}
@@ -384,7 +384,7 @@ function renderDimensionDetail(dim, capStates, evidenceList, projectsList, learn
             ${mappedProjects.map(p => `
               <div class="mapped-proj-card">
                 <span class="proj-name">${escapeHtml(p.title)}</span>
-                <a href="?preview=true&view=projects&id=${p.id}" class="btn-text-link">VIEW PROJECT →</a>
+                <a href="?view=projects&id=${p.id}" class="btn-text-link">VIEW PROJECT â†’</a>
               </div>
             `).join('')}
           </div>
@@ -402,7 +402,7 @@ function renderDimensionDetail(dim, capStates, evidenceList, projectsList, learn
             ${mappedProgrammes.map(prog => `
               <div class="signal-row">
                 <span class="signal-name">${escapeHtml(prog.title)}</span>
-                <button class="btn-text-link" onclick="window.switchView('learn')">EXPLORE PATHWAY →</button>
+                <button class="btn-text-link" onclick="window.switchView('learn')">EXPLORE PATHWAY â†’</button>
               </div>
             `).join('')}
           </div>
@@ -419,7 +419,7 @@ function renderDimensionDetail(dim, capStates, evidenceList, projectsList, learn
             ${relatedCreds.map(c => `
               <div class="rel-cred-item">
                 <span class="rel-cred-title">${escapeHtml(c.title)}</span>
-                <a href="?preview=true&view=credentials&id=${c.id}" class="btn-text-link">VIEW CREDENTIAL →</a>
+                <a href="?view=credentials&id=${c.id}" class="btn-text-link">VIEW CREDENTIAL â†’</a>
               </div>
             `).join('')}
           </div>
@@ -454,3 +454,4 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
+
