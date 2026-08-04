@@ -38,6 +38,7 @@ export default defineConfig({
         verify: 'verify.html',
         login: 'login.html',
         app: 'app/index.html',
+        olympiad: 'ai-olympiad.html'
       }
     }
   }
