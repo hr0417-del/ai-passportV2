@@ -105,7 +105,7 @@ export async function renderPassportPage(containerEl, user) {
     // Authoritative capabilities count: Only capability_states where state = DEMONSTRATE or ADVANCE
     const demoCapabilitiesCount = capabilities.filter(c => c.state === 'DEMONSTRATE' || c.state === 'ADVANCE').length;
     // Genuine evidence records count
-    const totalEvidenceCount = evidence.length;
+    const totalEvidenceCount = (projects || []).filter(p => p.repo_url).length;
 
 
     containerEl.innerHTML = `
