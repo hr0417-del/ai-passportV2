@@ -237,15 +237,41 @@
           <input type="password" id="input-password" class="form-input" placeholder="••••••••••••" required autocomplete="current-password" value="Passport2026!">
         </div>
 
-        <button type="submit" class="auth-submit-btn" id="btn-submit" onclick="window.handleAuthSubmit && window.handleAuthSubmit(event)">SIGN IN TO MY PASSPORT →</button>
+        <button type="submit" class="auth-submit-btn" id="btn-submit">SIGN IN TO MY PASSPORT →</button>
         
-        <button type="button" onclick="window.quickDemoLogin && window.quickDemoLogin()" style="width: 100%; padding: 12px 0; margin-top: 12px; background: rgba(223, 207, 173, 0.12); color: var(--color-gold); border: 1px solid rgba(223, 207, 173, 0.3); border-radius: 10px; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; cursor: pointer; transition: all 0.3s ease;">
+        <button type="button" id="btn-demo-login" onclick="quickDemoLogin()" style="width: 100%; padding: 12px 0; margin-top: 12px; background: rgba(223, 207, 173, 0.15); color: var(--color-gold); border: 1px solid rgba(223, 207, 173, 0.4); border-radius: 10px; font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(223, 207, 173, 0.15);">
           ⚡ 1-CLICK INSTANT DEMO LOGIN
         </button>
       </form>
 
     </div>
   </div>
+
+  <script>
+    function quickDemoLogin() {
+      try {
+        var btn = document.getElementById('btn-demo-login');
+        if (btn) {
+          btn.disabled = true;
+          btn.innerText = 'AUTHENTICATING DEMO...';
+        }
+        var alertBox = document.getElementById('auth-alert');
+        if (alertBox) {
+          alertBox.className = 'auth-alert info';
+          alertBox.textContent = 'Authenticated Demo Account! Redirecting to workspace...';
+          alertBox.style.display = 'block';
+        }
+        localStorage.setItem('aipassport_demo_user', JSON.stringify({
+          id: '60bba3f0-6b51-4af8-93a1-8356d306dcea',
+          email: 'test.learner@aipassport.org',
+          user_metadata: { full_name: 'Test Learner' }
+        }));
+      } catch(e) {}
+      setTimeout(function() {
+        window.location.href = './app/index.html?preview=true';
+      }, 300);
+    }
+  </script>
 
   <!-- Footer -->
   <footer style="padding: 24px; text-align: center; font-size: 0.75rem; color: var(--color-text-secondary);">
