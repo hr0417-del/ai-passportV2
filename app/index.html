@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -566,7 +566,7 @@
   </main>
 
   <script type="module">
-    import { getCurrentUser, getLearnerProfile, getPassportCard, supabase, isSupabaseConfigured } from '../src/lib/supabase.js';
+    import { getCurrentUser, getLearnerProfile, getPassportCard, ensureLearnerProvisioned, supabase, isSupabaseConfigured } from '../src/lib/supabase.js';
     import { renderOverview } from '../src/app/overview.js';
     import { renderPassportPage } from '../src/app/passport.js';
     import { renderLearnPage } from '../src/app/learn.js';
@@ -593,6 +593,9 @@
       }
 
       currentUserSession = user;
+
+      // Auto-provision default records (passport card, capability states, etc.) if missing
+      await ensureLearnerProvisioned(user);
 
       let profile = null;
       try {

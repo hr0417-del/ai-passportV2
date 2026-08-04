@@ -65,3 +65,71 @@ export async function getPassportCard(userId) {
   if (error) throw error;
   return data;
 }
+
+export async function ensureLearnerProvisioned(user) {
+  if (!user || !user.id) return;
+
+  try {
+    // 1. Ensure Profile
+    const { data: profile } = await supabase.from('profiles').select('id').eq('id', user.id).maybeSingle();
+    if (!profile) {
+      const username = (user.email ? user.email.split('@')[0] : 'learner') + '_' + Math.floor(1000 + Math.random() * 9000);
+      const fullName = user.user_metadata?.full_name || (user.email ? user.email.split('@')[0] : 'Learner');
+      await supabase.from('profiles').insert([{
+        id: user.id,
+        email: user.email,
+        full_name: fullName,
+        username: username,
+        role: 'LEARNER'
+      }]).catch(() => {});
+    }
+
+    // 2. Ensure Privacy Settings
+    const { data: priv } = await supabase.from('privacy_settings').select('user_id').eq('user_id', user.id).maybeSingle();
+    if (!priv) {
+      await supabase.from('privacy_settings').insert([{
+        user_id: user.id,
+        is_public_passport_enabled: true
+      }]).catch(() => {});
+    }
+
+    // 3. Ensure Passport Card
+    const { data: card } = await supabase.from('passport_cards').select('id').eq('user_id', user.id).maybeSingle();
+    if (!card) {
+      const seqNum = Math.floor(100000 + Math.random() * 899999);
+      const passportNum = `AIP-L1-2026-${seqNum}`;
+      await supabase.from('passport_cards').insert([{
+        user_id: user.id,
+        passport_number: passportNum,
+        status: 'ACTIVE',
+        activation_status: 'ACTIVATED'
+      }]).catch(() => {});
+    }
+
+    // 4. Ensure 5 Capability States
+    const { data: caps } = await supabase.from('capability_states').select('id').eq('user_id', user.id);
+    if (!caps || caps.length === 0) {
+      const dims = ['UNDERSTAND', 'APPLY', 'CREATE', 'EVALUATE', 'RESPONSIBLE'];
+      const rows = dims.map(d => ({
+        user_id: user.id,
+        dimension: d,
+        state: 'EXPLORE'
+      }));
+      await supabase.from('capability_states').insert(rows).catch(() => {});
+    }
+
+    // 5. Ensure Initial Journey Event
+    const { data: events } = await supabase.from('journey_events').select('id').eq('user_id', user.id);
+    if (!events || events.length === 0) {
+      await supabase.from('journey_events').insert([{
+        user_id: user.id,
+        event_type: 'JOINED',
+        title: 'Joined AI Passport Ecosystem',
+        description: 'Issued Digital Passport Identity Space'
+      }]).catch(() => {});
+    }
+  } catch (err) {
+    console.warn('[MY AI PASSPORT] Self-provisioning notice:', err);
+  }
+}
+

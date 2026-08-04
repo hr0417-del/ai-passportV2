@@ -249,7 +249,7 @@
   </footer>
 
   <script type="module">
-    import { supabase, isSupabaseConfigured } from './src/lib/supabase.js';
+    import { supabase, isSupabaseConfigured, ensureLearnerProvisioned } from './src/lib/supabase.js';
 
     let currentTab = 'signin';
 
@@ -257,7 +257,8 @@
     document.addEventListener('DOMContentLoaded', async () => {
       if (isSupabaseConfigured) {
         const { data: { session } } = await supabase.auth.getSession();
-        if (session) {
+        if (session && session.user) {
+          await ensureLearnerProvisioned(session.user);
           window.location.href = './app/index.html';
         }
       }
@@ -313,6 +314,7 @@
         if (currentTab === 'signin') {
           const { data, error } = await supabase.auth.signInWithPassword({ email, password });
           if (error) throw error;
+          if (data?.user) await ensureLearnerProvisioned(data.user);
           showAlert('info', 'Authenticated! Redirecting to My AI Passport...');
           setTimeout(() => { window.location.href = './app/index.html'; }, 600);
         } else {
@@ -322,6 +324,7 @@
             options: { data: { full_name: fullname } }
           });
           if (error) throw error;
+          if (data?.user) await ensureLearnerProvisioned(data.user);
           showAlert('info', 'Passport Account Created! Redirecting to workspace...');
           setTimeout(() => { window.location.href = './app/index.html'; }, 600);
         }
