@@ -124,14 +124,14 @@
     .olympiad-hero {
       position: relative;
       width: 100%;
-      height: 720px;
-      min-height: 680px;
-      max-height: 760px;
+      height: 780px;
+      min-height: 740px;
+      max-height: 820px;
       background-color: #000000;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      padding: 0 6%;
+      padding: 105px 6% 40px 6%;
       box-sizing: border-box;
       overflow: hidden;
     }
@@ -145,7 +145,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center center;
+      object-position: right center;
       pointer-events: none;
       z-index: 1;
       image-rendering: -webkit-optimize-contrast;
@@ -181,7 +181,7 @@
       font-weight: 700;
       color: var(--color-gold);
       letter-spacing: 0.2em;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       text-transform: uppercase;
     }
 
@@ -190,7 +190,7 @@
       font-size: clamp(2.8rem, 4.5vw, 4.2rem);
       font-weight: 700;
       line-height: 1.05;
-      margin: 0 0 12px 0;
+      margin: 0 0 10px 0;
     }
 
     .title-ivory {
@@ -205,17 +205,17 @@
 
     .olympiad-sub-title {
       font-family: 'Space Mono', monospace;
-      font-size: clamp(0.78rem, 1.4vw, 0.95rem);
+      font-size: clamp(0.76rem, 1.3vw, 0.92rem);
       font-weight: 700;
       color: var(--color-gold);
       letter-spacing: 0.16em;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       text-transform: uppercase;
     }
 
     .olympiad-primary-prop {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+      font-size: clamp(1.4rem, 2.5vw, 2.05rem);
       font-weight: 700;
       color: #ffffff;
       margin: 0 0 14px 0;
@@ -224,9 +224,9 @@
     }
 
     .olympiad-hero-desc {
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       color: rgba(255, 255, 255, 0.85);
-      margin: 0 0 24px 0;
+      margin: 0 0 20px 0;
       line-height: 1.55;
       max-width: 520px;
     }
@@ -236,7 +236,7 @@
       display: flex;
       align-items: center;
       gap: 28px;
-      margin: 0 0 28px 0;
+      margin: 0 0 24px 0;
       padding: 0;
       background: transparent;
       border: none;
@@ -276,13 +276,16 @@
 
     .olympiad-cta-group {
       display: flex;
+      flex-direction: row;
+      align-items: center;
       justify-content: flex-start;
-      gap: 18px;
-      flex-wrap: wrap;
+      gap: 16px;
+      flex-wrap: nowrap;
     }
 
     .olympiad-hero .btn-primary {
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
     }
 
     .olympiad-hero .btn-primary:hover {
@@ -292,6 +295,7 @@
 
     .olympiad-hero .btn-secondary {
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
     }
 
     .olympiad-hero .btn-secondary:hover {
@@ -624,11 +628,13 @@
 
     @media (max-width: 1024px) {
       .olympiad-hero {
-        padding: 110px 24px 50px 24px;
-        background: #08080c url('olympiad-hero-approved.jpg') right center / contain no-repeat;
+        height: auto;
+        min-height: 100vh;
+        padding: 100px 24px 50px 24px;
       }
       .hero-text-container {
-        max-width: 480px;
+        max-width: 500px;
+        width: 100%;
       }
       .journey-flow-5grid { grid-template-columns: repeat(3, 1fr); }
       .cohorts-4grid { grid-template-columns: repeat(2, 1fr); }
@@ -638,29 +644,34 @@
 
     @media (max-width: 768px) {
       .olympiad-hero {
-        min-height: auto;
-        padding: 110px 20px 50px 20px;
-        background: #08080c url('olympiad-hero-approved.jpg') center top / contain no-repeat;
+        height: auto;
+        min-height: 100vh;
+        padding: 95px 20px 40px 20px;
         justify-content: center;
         text-align: center;
       }
       .hero-text-container {
         max-width: 100%;
+        width: 100%;
         margin: 0 auto;
         align-items: center;
         text-align: center;
       }
-      .hero-stats-banner {
+      .hero-stats-strip {
         justify-content: center;
-        flex-direction: column;
         gap: 16px;
       }
       .stat-item {
         align-items: center;
       }
-      .stat-divider { width: 100%; height: 1px; }
       .olympiad-cta-group {
-        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+      }
+      .olympiad-cta-group .btn {
+        width: 100%;
+        text-align: center;
       }
       .journey-flow-5grid { grid-template-columns: 1fr; }
       .cohorts-4grid { grid-template-columns: 1fr; }
