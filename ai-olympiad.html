@@ -120,28 +120,22 @@
       margin: 0 auto 36px auto;
     }
 
-    /* SECTION 01: HERO (SINGLE FULL-BLEED CINEMATIC HERO IMAGE) */
+    /* SECTION 01: HERO (REBUILT FROM SCRATCH — SINGLE FULL-BLEED CINEMATIC HERO) */
     .olympiad-hero {
       position: relative;
       width: 100%;
-      height: 780px;
-      min-height: 740px;
-      max-height: 820px;
+      height: calc(100vh - 80px);
+      min-height: 640px;
+      max-height: 780px;
+      margin-top: 80px; /* Physically pushes hero below fixed 80px global header */
       background-color: #000000;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 105px 6% 40px 6%;
-      box-sizing: border-box;
       overflow: hidden;
+      box-sizing: border-box;
     }
 
     .hero-bg-artwork {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -151,52 +145,55 @@
       image-rendering: -webkit-optimize-contrast;
     }
 
-    .hero-text-container {
-      max-width: 560px;
-      width: 44%;
+    .hero-content-wrapper {
       position: relative;
       z-index: 3;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center; /* Vertically centers text block within visible hero area */
+      padding: 0 6%;
+      box-sizing: border-box;
+    }
+
+    .hero-text-container {
+      max-width: 540px;
+      width: 44%;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0;
-      backdrop-filter: none;
-      box-shadow: none;
     }
 
     .olympiad-badge {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 6px 16px;
+      gap: 8px;
+      padding: 5px 14px;
       border-radius: 30px;
       background: rgba(223, 207, 173, 0.12);
       border: 1px solid rgba(223, 207, 173, 0.35);
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 700;
       color: var(--color-gold);
-      letter-spacing: 0.2em;
-      margin-bottom: 12px;
+      letter-spacing: 0.18em;
+      margin-bottom: 8px;
       text-transform: uppercase;
     }
 
     .olympiad-main-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
       font-weight: 700;
       line-height: 1.05;
-      margin: 0 0 10px 0;
+      margin: 0 0 6px 0;
     }
 
     .title-ivory {
       color: #ffffff;
       text-shadow: 0 10px 30px rgba(0, 0, 0, 0.95);
-      margin-right: 12px;
+      margin-right: 10px;
     }
 
     .title-gold {
@@ -205,42 +202,41 @@
 
     .olympiad-sub-title {
       font-family: 'Space Mono', monospace;
-      font-size: clamp(0.76rem, 1.3vw, 0.92rem);
+      font-size: clamp(0.72rem, 1.2vw, 0.85rem);
       font-weight: 700;
       color: var(--color-gold);
-      letter-spacing: 0.16em;
-      margin-bottom: 16px;
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
       text-transform: uppercase;
     }
 
     .olympiad-primary-prop {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 2.5vw, 2.05rem);
+      font-size: clamp(1.3rem, 2.2vw, 1.85rem);
       font-weight: 700;
       color: #ffffff;
-      margin: 0 0 14px 0;
-      line-height: 1.25;
-      max-width: 520px;
+      margin: 0 0 10px 0;
+      line-height: 1.1;
+      max-width: 500px;
     }
 
     .olympiad-hero-desc {
-      font-size: 0.96rem;
+      font-size: 0.9rem;
       color: rgba(255, 255, 255, 0.85);
-      margin: 0 0 20px 0;
-      line-height: 1.55;
-      max-width: 520px;
+      margin: 0 0 16px 0;
+      line-height: 1.45;
+      max-width: 500px;
     }
 
-    /* Minimal Horizontal Info Strip (No Heavy Card) */
+    /* Minimal Horizontal Info Strip */
     .hero-stats-strip {
       display: flex;
       align-items: center;
-      gap: 28px;
-      margin: 0 0 24px 0;
+      gap: 24px;
+      margin: 0 0 18px 0;
       padding: 0;
       background: transparent;
       border: none;
-      flex-wrap: wrap;
     }
 
     .stat-item {
@@ -251,7 +247,7 @@
 
     .stat-number {
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
+      font-size: 1.45rem;
       font-weight: 700;
       color: var(--color-gold);
       margin: 0;
@@ -260,17 +256,17 @@
 
     .stat-label {
       font-family: 'Space Mono', monospace;
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 700;
       color: rgba(255, 255, 255, 0.65);
-      letter-spacing: 0.16em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       margin-top: 2px;
     }
 
     .stat-divider {
       width: 1px;
-      height: 32px;
+      height: 28px;
       background: rgba(255, 255, 255, 0.18);
     }
 
@@ -286,6 +282,8 @@
     .olympiad-hero .btn-primary {
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       white-space: nowrap;
+      padding: 13px 28px;
+      font-size: 0.82rem;
     }
 
     .olympiad-hero .btn-primary:hover {
@@ -296,6 +294,8 @@
     .olympiad-hero .btn-secondary {
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       white-space: nowrap;
+      padding: 13px 28px;
+      font-size: 0.82rem;
     }
 
     .olympiad-hero .btn-secondary:hover {
@@ -712,49 +712,51 @@
     </div>
   </header>
 
-  <!-- 01 — HERO (SINGLE FULL-BLEED CINEMATIC ENVIRONMENT) -->
+  <!-- 01 — HERO (REBUILT SINGLE FULL-BLEED CINEMATIC ENVIRONMENT) -->
   <section class="olympiad-hero">
     <img src="olympiad-hero-approved.jpg" alt="AI Olympiad™ 2027 Hero Artwork" class="hero-bg-artwork">
-    <div class="hero-text-container">
-      <div class="olympiad-badge">
-        <span>✦ AI PASSPORT™ PRESENTS</span>
-      </div>
-      
-      <h1 class="olympiad-main-title">
-        <span class="title-ivory">AI OLYMPIAD™</span>
-        <span class="title-gold">2027</span>
-      </h1>
-      <div class="olympiad-sub-title">INDIA'S AI READINESS & CAPABILITY CHALLENGE &nbsp;|&nbsp; GRADES 3–12</div>
-      
-      <div class="olympiad-primary-prop">
-        DON'T JUST LEARN AI.<br>PROVE WHAT YOU CAN DO WITH IT.
-      </div>
-      
-      <p class="olympiad-hero-desc">
-        A national AI experience designed to discover AI readiness, develop real capability and challenge the next generation of AI thinkers, creators and problem-solvers.
-      </p>
+    <div class="hero-content-wrapper">
+      <div class="hero-text-container">
+        <div class="olympiad-badge">
+          <span>✦ AI PASSPORT™ PRESENTS</span>
+        </div>
+        
+        <h1 class="olympiad-main-title">
+          <span class="title-ivory">AI OLYMPIAD™</span>
+          <span class="title-gold">2027</span>
+        </h1>
+        <div class="olympiad-sub-title">INDIA'S AI READINESS & CAPABILITY CHALLENGE &nbsp;|&nbsp; GRADES 3–12</div>
+        
+        <div class="olympiad-primary-prop">
+          DON'T JUST LEARN AI.<br>PROVE WHAT YOU CAN DO<br>WITH IT.
+        </div>
+        
+        <p class="olympiad-hero-desc">
+          A national AI experience designed to discover AI readiness, develop real capability and challenge the next generation of AI thinkers, creators and problem-solvers.
+        </p>
 
-      <!-- Minimal Horizontal Info Strip -->
-      <div class="hero-stats-strip">
-        <div class="stat-item">
-          <span class="stat-number">250+</span>
-          <span class="stat-label">SCHOOLS</span>
+        <!-- Minimal Horizontal Info Strip -->
+        <div class="hero-stats-strip">
+          <div class="stat-item">
+            <span class="stat-number">250+</span>
+            <span class="stat-label">SCHOOLS</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">25,000+</span>
+            <span class="stat-label">STUDENTS</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">3</span>
+            <span class="stat-label">REGIONS</span>
+          </div>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">25,000+</span>
-          <span class="stat-label">STUDENTS</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">3</span>
-          <span class="stat-label">REGIONS</span>
-        </div>
-      </div>
 
-      <div class="olympiad-cta-group">
-        <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary" style="padding: 15px 34px; font-size: 0.85rem;">REGISTER FOR AI OLYMPIAD</a>
-        <a href="#journey" class="btn btn-secondary" style="padding: 15px 34px; font-size: 0.85rem;">EXPLORE THE OLYMPIAD</a>
+        <div class="olympiad-cta-group">
+          <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary">REGISTER FOR AI OLYMPIAD</a>
+          <a href="#journey" class="btn btn-secondary">EXPLORE THE OLYMPIAD</a>
+        </div>
       </div>
     </div>
   </section>
