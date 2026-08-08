@@ -164,14 +164,39 @@
       pointer-events: none;
     }
 
+    @keyframes ambientHeroGlow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.75; transform: scale(1.06); }
+    }
+
+    .hero-glow-orb {
+      position: absolute;
+      top: 15%;
+      right: 12%;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 162, 255, 0.2) 0%, rgba(223, 207, 173, 0.12) 45%, transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+      z-index: 1;
+      animation: ambientHeroGlow 7s ease-in-out infinite;
+    }
+
     .hero-text-container {
-      max-width: 520px;
+      max-width: 530px;
       position: relative;
       z-index: 3;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
+      background: rgba(10, 11, 15, 0.55);
+      border: 1px solid rgba(223, 207, 173, 0.22);
+      border-radius: 24px;
+      padding: 32px 30px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(223, 207, 173, 0.08);
     }
 
     .olympiad-badge {
@@ -718,6 +743,7 @@
   <section class="olympiad-hero">
     <img src="olympiad-hero-approved.jpg" alt="AI Olympiad™ 2027 Hero Artwork" class="hero-bg-artwork">
     <div class="hero-vignette-layer"></div>
+    <div class="hero-glow-orb"></div>
     <div class="hero-text-container">
       <div class="olympiad-badge">
         <span>✦ AI PASSPORT™ PRESENTS</span>
