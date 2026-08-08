@@ -46,10 +46,39 @@
       overflow-x: hidden;
     }
 
+    @keyframes goldShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes laserPulseFlow {
+      0% { background-position: 0% 50%; opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { background-position: 200% 50%; opacity: 0.6; }
+    }
+
+    @keyframes formSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .gold-gradient-text {
-      background: linear-gradient(135deg, #ffffff 25%, var(--color-gold) 75%, #ffffff 100%);
+      background: linear-gradient(135deg, #ffffff 0%, var(--color-gold) 40%, #ffffff 70%, var(--color-gold-bright) 100%);
+      background-size: 250% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: goldShimmer 7s ease-in-out infinite alternate;
+    }
+
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .olympiad-section {
@@ -214,6 +243,22 @@
     .journey-timeline-wrapper {
       position: relative;
       margin-top: 50px;
+      padding: 10px 0;
+    }
+
+    .journey-laser-line {
+      position: absolute;
+      top: 40px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        rgba(223, 207, 173, 0.1) 0%, 
+        rgba(223, 207, 173, 0.8) 50%, 
+        rgba(0, 255, 136, 0.8) 100%);
+      background-size: 200% 100%;
+      animation: laserPulseFlow 4s linear infinite;
+      z-index: 1;
     }
 
     .journey-flow-5grid {
@@ -583,6 +628,7 @@
       <p class="section-subhead">A structured national journey from assessment to application and competition.</p>
 
       <div class="journey-timeline-wrapper">
+        <div class="journey-laser-line"></div>
         <div class="journey-flow-5grid">
           <div class="journey-step-card-clean">
             <span class="step-num-badge">01 — DISCOVER</span>
@@ -1198,6 +1244,22 @@
       var modal = document.getElementById('proto-modal');
       if (modal) modal.style.display = 'none';
     }
+
+    // Intersection Observer for Smooth Scroll Reveal Micro-Animations
+    document.addEventListener('DOMContentLoaded', function() {
+      var revealElements = document.querySelectorAll('.olympiad-section, .journey-step-card-clean, .cohort-card-clean, .level-card-clean, .fest-item-box');
+      revealElements.forEach(function(el) { el.classList.add('reveal-on-scroll'); });
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      revealElements.forEach(function(el) { observer.observe(el); });
+    });
   </script>
 </body>
 </html>
