@@ -124,7 +124,7 @@
     .olympiad-hero {
       position: relative;
       width: 100%;
-      min-height: 85vh;
+      min-height: 88vh;
       background-color: #08080c;
       display: flex;
       align-items: center;
@@ -145,6 +145,22 @@
       object-position: right center;
       pointer-events: none;
       z-index: 1;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      filter: contrast(1.05) brightness(1.02);
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    .hero-vignette-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 55%;
+      background: linear-gradient(90deg, #08080c 40%, rgba(8, 8, 12, 0.75) 75%, transparent 100%);
+      z-index: 2;
+      pointer-events: none;
     }
 
     .hero-text-container {
@@ -177,11 +193,27 @@
 
     .olympiad-main-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      font-size: clamp(3rem, 5.5vw, 5.2rem);
       font-weight: 700;
       line-height: 1.02;
       margin: 0 0 14px 0;
-      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .title-ivory {
+      color: #ffffff;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.95);
+    }
+
+    .title-gold {
+      color: var(--color-gold);
+      background: linear-gradient(135deg, #ffffff 0%, var(--color-gold) 60%, var(--color-gold-bright) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(223, 207, 173, 0.3);
     }
 
     .olympiad-sub-title {
@@ -205,7 +237,7 @@
 
     .olympiad-hero-desc {
       font-size: 1.05rem;
-      color: rgba(255, 255, 255, 0.82);
+      color: rgba(255, 255, 255, 0.85);
       margin: 0 0 32px 0;
       line-height: 1.6;
     }
@@ -215,15 +247,15 @@
       justify-content: flex-start;
       align-items: center;
       gap: 32px;
-      background: rgba(12, 13, 18, 0.88);
-      border: 1px solid rgba(223, 207, 173, 0.25);
-      border-radius: 18px;
-      padding: 20px 32px;
+      background: rgba(14, 15, 20, 0.75);
+      border: 1px solid rgba(223, 207, 173, 0.3);
+      border-radius: 20px;
+      padding: 18px 30px;
       width: 100%;
       box-sizing: border-box;
       margin: 0 0 36px 0;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(223, 207, 173, 0.1);
       flex-wrap: wrap;
     }
 
@@ -261,6 +293,25 @@
       justify-content: flex-start;
       gap: 18px;
       flex-wrap: wrap;
+    }
+
+    .olympiad-hero .btn-primary {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .olympiad-hero .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(223, 207, 173, 0.35);
+    }
+
+    .olympiad-hero .btn-secondary {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .olympiad-hero .btn-secondary:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-gold);
+      color: #ffffff;
     }
 
     /* SECTION 03: THE JOURNEY (5-STAGE HORIZONTAL/VERTICAL) */
@@ -667,12 +718,16 @@
   <!-- 01 — HERO -->
   <section class="olympiad-hero">
     <img src="olympiad-hero-approved.jpg" alt="AI Olympiad™ 2027 Hero Artwork" class="hero-bg-artwork">
+    <div class="hero-vignette-layer"></div>
     <div class="hero-text-container">
       <div class="olympiad-badge">
         <span>✦ AI PASSPORT™ PRESENTS</span>
       </div>
       
-      <h1 class="olympiad-main-title gold-gradient-text">AI OLYMPIAD™ 2027</h1>
+      <h1 class="olympiad-main-title">
+        <span class="title-ivory">AI OLYMPIAD™</span>
+        <span class="title-gold">2027</span>
+      </h1>
       <div class="olympiad-sub-title">INDIA'S AI READINESS & CAPABILITY CHALLENGE &nbsp;|&nbsp; GRADES 3–12</div>
       
       <div class="olympiad-primary-prop">
