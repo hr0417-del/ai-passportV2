@@ -328,13 +328,49 @@
       flex-direction: column;
       gap: 14px;
       text-align: left;
-      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .cohort-card-clean:hover {
-      border-color: rgba(223, 207, 173, 0.55);
-      transform: translateY(-5px);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+      border-color: var(--color-gold);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(223, 207, 173, 0.2);
+    }
+
+    .cohort-card-clean::after {
+      content: "CLICK TO REGISTER →";
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--color-gold);
+      margin-top: auto;
+      padding-top: 10px;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+
+    .cohort-card-clean:hover::after {
+      opacity: 1;
+    }
+
+    /* Mobile Sticky Quick-Bar */
+    .mobile-sticky-cta-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: rgba(14, 15, 20, 0.96);
+      border: 1px solid var(--color-gold);
+      border-radius: 30px;
+      padding: 12px 20px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 999;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(223, 207, 173, 0.25);
+      backdrop-filter: blur(12px);
+      animation: formSlide 0.3s ease-out;
     }
 
     .cohort-grade-tag {
@@ -685,7 +721,7 @@
       <p class="section-subhead">One Olympiad cannot treat every learner the same. AI Olympiad™ uses developmentally adapted assessment and challenge frameworks across four student cohorts.</p>
 
       <div class="cohorts-4grid">
-        <div class="cohort-card-clean">
+        <div class="cohort-card-clean" onclick="selectCohortGrade('3')">
           <span class="cohort-grade-tag">GRADES 3–5</span>
           <h3 class="cohort-title-name">AI EXPLORERS</h3>
           <div class="cohort-summary-text">
@@ -693,7 +729,7 @@
           </div>
         </div>
 
-        <div class="cohort-card-clean">
+        <div class="cohort-card-clean" onclick="selectCohortGrade('6')">
           <span class="cohort-grade-tag">GRADES 6–8</span>
           <h3 class="cohort-title-name">AI DISCOVERERS</h3>
           <div class="cohort-summary-text">
@@ -701,7 +737,7 @@
           </div>
         </div>
 
-        <div class="cohort-card-clean">
+        <div class="cohort-card-clean" onclick="selectCohortGrade('9')">
           <span class="cohort-grade-tag">GRADES 9–10</span>
           <h3 class="cohort-title-name">AI BUILDERS</h3>
           <div class="cohort-summary-text">
@@ -709,7 +745,7 @@
           </div>
         </div>
 
-        <div class="cohort-card-clean">
+        <div class="cohort-card-clean" onclick="selectCohortGrade('11')">
           <span class="cohort-grade-tag">GRADES 11–12</span>
           <h3 class="cohort-title-name">AI INNOVATORS</h3>
           <div class="cohort-summary-text">
@@ -1258,6 +1294,30 @@
       if (modal) modal.style.display = 'none';
     }
 
+    function selectCohortGrade(gradeVal) {
+      switchRegTab('student');
+      var gradeSelect = document.getElementById('std-grade');
+      if (gradeSelect) {
+        gradeSelect.value = gradeVal;
+      }
+      var regElem = document.getElementById('registration');
+      if (regElem) {
+        regElem.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Mobile Sticky CTA Bar Scroll Detection
+    window.addEventListener('scroll', function() {
+      var mobileBar = document.getElementById('mobile-reg-bar');
+      if (mobileBar && window.innerWidth <= 768) {
+        if (window.scrollY > 400) {
+          mobileBar.style.display = 'flex';
+        } else {
+          mobileBar.style.display = 'none';
+        }
+      }
+    });
+
     // Intersection Observer for Smooth Scroll Reveal Micro-Animations
     document.addEventListener('DOMContentLoaded', function() {
       var revealElements = document.querySelectorAll('.olympiad-section, .journey-step-card-clean, .cohort-card-clean, .level-card-clean, .fest-item-box');
@@ -1274,5 +1334,11 @@
       revealElements.forEach(function(el) { observer.observe(el); });
     });
   </script>
+
+  <!-- Mobile Floating Sticky CTA Bar -->
+  <div id="mobile-reg-bar" class="mobile-sticky-cta-bar">
+    <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold);">AI OLYMPIAD™ 2027</div>
+    <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary" style="padding: 8px 18px; font-size: 0.72rem;">REGISTER INTEREST</a>
+  </div>
 </body>
 </html>
