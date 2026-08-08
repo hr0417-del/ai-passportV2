@@ -122,12 +122,12 @@
 
     /* SECTION 01: HERO */
     .olympiad-hero {
-      min-height: 92vh;
+      min-height: 85vh;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      padding: 130px 5% 80px 5%;
-      background: #08080c url('olympiad-hero-approved.jpg') right center / cover no-repeat;
+      padding: 120px 5% 70px 5%;
+      background: #08080c url('olympiad-hero-approved.jpg') right center / contain no-repeat;
       position: relative;
       text-align: left;
       overflow: hidden;
@@ -573,11 +573,11 @@
 
     @media (max-width: 1024px) {
       .olympiad-hero {
-        padding: 120px 24px 60px 24px;
-        background-position: 75% center;
+        padding: 110px 24px 50px 24px;
+        background: #08080c url('olympiad-hero-approved.jpg') right center / contain no-repeat;
       }
       .hero-text-container {
-        max-width: 520px;
+        max-width: 480px;
       }
       .journey-flow-5grid { grid-template-columns: repeat(3, 1fr); }
       .cohorts-4grid { grid-template-columns: repeat(2, 1fr); }
@@ -587,11 +587,9 @@
 
     @media (max-width: 768px) {
       .olympiad-hero {
-        min-height: 100vh;
-        padding: 110px 20px 60px 20px;
-        background: 
-          linear-gradient(180deg, rgba(8, 8, 12, 0.92) 0%, rgba(8, 8, 12, 0.72) 45%, rgba(8, 8, 12, 0.95) 100%),
-          url('olympiad-hero-approved.jpg') center top / cover no-repeat;
+        min-height: auto;
+        padding: 110px 20px 50px 20px;
+        background: #08080c url('olympiad-hero-approved.jpg') center top / contain no-repeat;
         justify-content: center;
         text-align: center;
       }
