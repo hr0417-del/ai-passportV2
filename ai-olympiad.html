@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI Olympiad™ is a national AI readiness and capability initiative for students from Grades 3–12, combining AIQ™ assessment, learning, applied challenges, competition and AI Fest.">
+  <meta name="description" content="AI Olympiad™ 2027 — India's AI Readiness & Capability Challenge for students from Grades 3–12. 250+ Schools, 25,000+ Students across Punjab, Delhi NCR, and Himachal Pradesh.">
   <meta name="robots" content="index, follow">
-  <title>AI Olympiad™ | India's AI Readiness & Capability Challenge</title>
+  <title>AI Olympiad™ 2027 | India's AI Readiness & Capability Challenge</title>
 
   <link rel="canonical" href="https://aipassport.ekaakshareducation.com/ai-olympiad.html">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aipassport.ekaakshareducation.com/ai-olympiad.html">
-  <meta property="og:title" content="AI Olympiad™ | India's AI Readiness & Capability Challenge">
-  <meta property="og:description" content="Don't Just Learn AI. Prove What You Can Do With It. A national AI experience for students from Grade 3 to Grade 12.">
+  <meta property="og:title" content="AI Olympiad™ 2027 | India's AI Readiness & Capability Challenge">
+  <meta property="og:description" content="Don't Just Learn AI. Prove What You Can Do With It. Grades 3–12 National AI Capability Initiative.">
   <meta property="og:image" content="https://aipassport.ekaakshareducation.com/FRAME%201.webp">
 
   <!-- Favicon -->
@@ -22,18 +22,40 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="style.css">
 
   <style>
     /* ==========================================================================
-       AI OLYMPIAD™ 1000X ULTRA LUXURY PUBLIC STYLESHEET
+       AI OLYMPIAD™ 2027 — 10,000X ULTRA LUXURY PUBLIC STYLESHEET
        ========================================================================== */
+    :root {
+      --color-gold: #dfcfad;
+      --color-gold-bright: #f4ea8c;
+      --color-bg-dark: #08080c;
+      --color-card-dark: rgba(18, 19, 26, 0.95);
+    }
+
+    body {
+      background-color: var(--color-bg-dark);
+      color: #ffffff;
+      font-family: 'Inter', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #ffffff 25%, var(--color-gold) 75%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     .olympiad-hero {
       position: relative;
-      min-height: 94vh;
+      min-height: 96vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -53,12 +75,6 @@
       z-index: 1;
     }
 
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #ffffff 25%, var(--color-gold) 80%, #ffffff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
     .olympiad-badge {
       display: inline-flex;
       align-items: center;
@@ -72,24 +88,24 @@
       font-weight: 700;
       color: var(--color-gold);
       letter-spacing: 0.2em;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       text-transform: uppercase;
       box-shadow: 0 0 20px rgba(223, 207, 173, 0.15);
     }
 
     .olympiad-main-title {
-      font-family: var(--font-serif);
-      font-size: clamp(3rem, 7.5vw, 5.8rem);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 8vw, 6.2rem);
       font-weight: 700;
-      line-height: 1.05;
+      line-height: 1.02;
       letter-spacing: -0.02em;
-      margin: 0 0 16px 0;
+      margin: 0 0 14px 0;
       text-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
     }
 
     .olympiad-sub-title {
       font-family: 'Space Mono', monospace;
-      font-size: clamp(0.9rem, 2vw, 1.25rem);
+      font-size: clamp(0.88rem, 2vw, 1.2rem);
       font-weight: 700;
       color: var(--color-gold);
       letter-spacing: 0.18em;
@@ -98,21 +114,67 @@
     }
 
     .olympiad-primary-prop {
-      font-family: var(--font-serif);
-      font-size: clamp(1.5rem, 3.4vw, 2.3rem);
-      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3.8vw, 2.6rem);
+      font-weight: 700;
       color: #ffffff;
-      max-width: 840px;
-      margin: 0 auto 24px auto;
-      line-height: 1.25;
+      max-width: 900px;
+      margin: 0 auto 20px auto;
+      line-height: 1.2;
     }
 
     .olympiad-hero-desc {
       font-size: 1.08rem;
       color: var(--color-text-secondary);
-      max-width: 740px;
+      max-width: 760px;
       margin: 0 auto 36px auto;
       line-height: 1.6;
+    }
+
+    /* Hero Stats Bar */
+    .hero-stats-banner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 36px;
+      background: rgba(18, 19, 26, 0.85);
+      border: 1px solid rgba(223, 207, 173, 0.25);
+      border-radius: 18px;
+      padding: 20px 36px;
+      max-width: 860px;
+      margin: 0 auto 40px auto;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      margin: 0;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.12);
     }
 
     .olympiad-cta-group {
@@ -120,10 +182,10 @@
       justify-content: center;
       gap: 18px;
       flex-wrap: wrap;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
-    /* Section Headers */
+    /* Section Typography */
     .section-eyebrow {
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
@@ -136,8 +198,8 @@
     }
 
     .section-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
       font-weight: 700;
       color: #ffffff;
       line-height: 1.15;
@@ -147,12 +209,12 @@
     .section-subhead {
       font-size: 1.05rem;
       color: var(--color-text-secondary);
-      max-width: 750px;
+      max-width: 780px;
       line-height: 1.6;
       margin: 0 auto 40px auto;
     }
 
-    /* 10,000X CONNECTED 7-STAGE PROGRESSION PIPELINE */
+    /* 7-Stage Connected Pipeline */
     .journey-timeline-wrapper {
       position: relative;
       margin-top: 56px;
@@ -161,7 +223,7 @@
 
     .journey-track-line {
       position: absolute;
-      top: 40px;
+      top: 38px;
       left: 30px;
       right: 30px;
       height: 2px;
@@ -234,7 +296,7 @@
     }
 
     .step-title {
-      font-family: var(--font-serif);
+      font-family: 'Playfair Display', serif;
       font-size: 1.25rem;
       font-weight: 700;
       color: #ffffff;
@@ -297,7 +359,7 @@
     }
 
     .cohort-name {
-      font-family: var(--font-serif);
+      font-family: 'Playfair Display', serif;
       font-size: 1.45rem;
       font-weight: 700;
       color: #ffffff;
@@ -327,103 +389,92 @@
       font-size: 0.7rem;
     }
 
-    /* Mock Report Card */
-    .mock-report-card {
-      background: linear-gradient(135deg, rgba(18, 19, 25, 0.98), rgba(10, 10, 14, 0.98));
-      border: 1px solid rgba(223, 207, 173, 0.4);
-      border-radius: 22px;
-      padding: 40px;
-      max-width: 860px;
-      margin: 40px auto 0 auto;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(223, 207, 173, 0.08);
-      text-align: left;
+    .cohort-focus-item.highlight-focus {
+      font-weight: 700;
+      color: #ffffff;
     }
 
-    .report-header {
+    /* 3 Levels Section */
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .level-card {
+      background: linear-gradient(135deg, rgba(20, 21, 28, 0.96), rgba(10, 10, 14, 0.98));
+      border: 1px solid rgba(223, 207, 173, 0.3);
+      border-radius: 18px;
+      padding: 32px 26px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 18px;
-      margin-bottom: 24px;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+      position: relative;
+      transition: all 0.3s ease;
     }
 
-    .report-title {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
+    .level-card:hover {
+      border-color: var(--color-gold);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .level-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .level-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
       font-weight: 700;
       color: #ffffff;
       margin: 0;
     }
 
-    .report-badge {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--color-gold);
-      letter-spacing: 0.15em;
+    .level-desc {
+      font-size: 0.86rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+      margin: 0;
     }
 
-    .report-grid {
+    /* Identity Progression Chain */
+    .identity-chain-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .report-box {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .report-box-lbl {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--color-gold);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .report-box-val {
-      font-size: 0.88rem;
-      color: #ffffff;
-      line-height: 1.4;
-    }
-
-    /* Challenge Categories Grid */
-    .challenges-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
       margin-top: 40px;
     }
 
-    .challenge-card {
-      background: rgba(14, 15, 20, 0.92);
+    .identity-step-box {
+      background: rgba(14, 15, 20, 0.95);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
-      padding: 24px 18px;
-      text-align: left;
+      padding: 20px 14px;
+      text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
     }
 
-    .challenge-cat {
+    .identity-name {
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--color-gold);
-      letter-spacing: 0.15em;
     }
 
-    .challenge-desc {
-      font-size: 0.82rem;
-      color: var(--color-text-secondary);
-      line-height: 1.45;
+    .identity-role {
+      font-size: 0.8rem;
+      color: #ffffff;
+      font-weight: 600;
     }
 
     /* Registration Tabs & Form */
@@ -438,6 +489,7 @@
       justify-content: center;
       gap: 12px;
       margin-bottom: 40px;
+      flex-wrap: wrap;
     }
 
     .reg-tab-btn {
@@ -445,10 +497,10 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--color-text-secondary);
       font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.12em;
-      padding: 12px 28px;
+      padding: 12px 26px;
       border-radius: 30px;
       cursor: pointer;
       transition: all 0.25s ease;
@@ -480,46 +532,6 @@
 
     .form-group-full {
       grid-column: span 2;
-    }
-
-    .pill-select-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .pill-option {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: var(--color-text-secondary);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.74rem;
-      padding: 6px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      user-select: none;
-    }
-
-    .pill-option.selected {
-      background: rgba(223, 207, 173, 0.2);
-      border-color: var(--color-gold);
-      color: #ffffff;
-    }
-
-    .consent-checkbox-wrap {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-top: 10px;
-      font-size: 0.8rem;
-      color: var(--color-text-secondary);
-      line-height: 1.4;
-    }
-
-    .consent-checkbox-wrap input {
-      margin-top: 3px;
     }
 
     .inline-error-msg {
@@ -557,17 +569,19 @@
     @media (max-width: 1100px) {
       .journey-flow-grid { grid-template-columns: repeat(4, 1fr); }
       .cohorts-grid { grid-template-columns: repeat(2, 1fr); }
-      .challenges-grid { grid-template-columns: repeat(3, 1fr); }
+      .levels-grid { grid-template-columns: 1fr; }
+      .identity-chain-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 768px) {
       .journey-flow-grid { grid-template-columns: 1fr; }
       .cohorts-grid { grid-template-columns: 1fr; }
-      .challenges-grid { grid-template-columns: 1fr; }
+      .identity-chain-grid { grid-template-columns: repeat(2, 1fr); }
       .form-row { grid-template-columns: 1fr; }
       .form-group-full { grid-column: span 1; }
-      .report-grid { grid-template-columns: 1fr; }
       .reg-form-card { padding: 24px 18px; }
+      .hero-stats-banner { flex-direction: column; gap: 16px; }
+      .stat-divider { width: 100%; height: 1px; }
     }
   </style>
 </head>
@@ -583,7 +597,7 @@
       <nav class="nav-links">
         <a href="index.html" class="nav-link">Home</a>
         <a href="academy.html" class="nav-link">Academy</a>
-        <a href="ai-olympiad.html" class="nav-link active">AI Olympiad</a>
+        <a href="ai-olympiad.html" class="nav-link active">AI Olympiad™</a>
         <a href="passport.html" class="nav-link">AI Passport</a>
         <a href="passport.html#projects" class="nav-link">Projects</a>
         <a href="about.html" class="nav-link">Council</a>
@@ -601,53 +615,79 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- 01 — HERO SECTION -->
   <section class="olympiad-hero">
     <div class="hero-bg-network"></div>
-    <div style="position: relative; z-index: 2; max-width: 960px;">
+    <div style="position: relative; z-index: 2; max-width: 1000px;">
       <div class="olympiad-badge">
         <span>✦ AI PASSPORT™ PRESENTS</span>
       </div>
       
-      <h1 class="olympiad-main-title gold-gradient-text">AI OLYMPIAD™</h1>
+      <h1 class="olympiad-main-title gold-gradient-text">AI OLYMPIAD™ 2027</h1>
       <div class="olympiad-sub-title">INDIA'S AI READINESS & CAPABILITY CHALLENGE &nbsp;|&nbsp; GRADES 3–12</div>
       
       <div class="olympiad-primary-prop">
-        DON'T JUST LEARN AI. PROVE WHAT YOU CAN DO WITH IT.
+        DON'T JUST LEARN AI.<br>PROVE WHAT YOU CAN DO WITH IT.
       </div>
       
       <p class="olympiad-hero-desc">
-        A national AI experience for students from Grade 3 to Grade 12 — designed to discover AI readiness, develop real capability, challenge young minds and bring the country's emerging AI talent together.
+        A national AI experience designed to discover AI readiness, develop real capability, challenge young minds and bring India's emerging AI talent together.
       </p>
+
+      <!-- Stats Banner -->
+      <div class="hero-stats-banner">
+        <div class="stat-item">
+          <span class="stat-number">250+</span>
+          <span class="stat-label">SCHOOLS</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">25,000+</span>
+          <span class="stat-label">STUDENTS</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">3 REGIONS</span>
+          <span class="stat-label">Punjab • Delhi NCR • Himachal Pradesh</span>
+        </div>
+      </div>
 
       <div class="olympiad-cta-group">
-        <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary" style="padding: 14px 32px; font-size: 0.85rem;">REGISTER FOR AI OLYMPIAD</a>
-        <a href="#journey" class="btn btn-secondary" style="padding: 14px 32px; font-size: 0.85rem;">EXPLORE THE OLYMPIAD</a>
+        <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary" style="padding: 15px 34px; font-size: 0.85rem;">REGISTER FOR AI OLYMPIAD</a>
+        <a href="#journey" class="btn btn-secondary" style="padding: 15px 34px; font-size: 0.85rem;">EXPLORE THE OLYMPIAD</a>
       </div>
     </div>
   </section>
 
-  <!-- NOT ANOTHER OLYMPIAD -->
+  <!-- 02 — WHY AI OLYMPIAD -->
   <section style="padding: 90px 24px; background: rgba(6, 6, 9, 0.98); border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
-    <div style="max-width: 860px; margin: 0 auto;">
-      <span class="section-eyebrow">REDEFINING COMPETITION</span>
-      <h2 class="section-headline">NOT ANOTHER OLYMPIAD.</h2>
+    <div style="max-width: 900px; margin: 0 auto;">
+      <span class="section-eyebrow">REDEFINING CAPABILITY</span>
+      <h2 class="section-headline gold-gradient-text">BEYOND KNOWLEDGE.<br>INTO CAPABILITY.</h2>
       
-      <p class="section-subhead" style="margin-bottom: 24px;">
-        AI is changing how we learn, create, solve problems and work. The next generation will need more than knowledge about artificial intelligence. They will need the ability to understand it, use it, question it, create with it and use it responsibly.
+      <p class="section-subhead" style="margin-bottom: 28px;">
+        AI is changing how students learn, create, solve problems and work. The next generation will need more than knowledge about artificial intelligence.
       </p>
+
+      <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 32px;">
+        <span class="dim-chip" style="font-size: 0.8rem; padding: 10px 20px;">UNDERSTAND IT.</span>
+        <span class="dim-chip" style="font-size: 0.8rem; padding: 10px 20px;">USE IT.</span>
+        <span class="dim-chip" style="font-size: 0.8rem; padding: 10px 20px;">QUESTION IT.</span>
+        <span class="dim-chip" style="font-size: 0.8rem; padding: 10px 20px;">CREATE WITH IT.</span>
+        <span class="dim-chip" style="font-size: 0.8rem; padding: 10px 20px;">USE IT RESPONSIBLY.</span>
+      </div>
       
-      <div style="background: rgba(223, 207, 173, 0.06); border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 16px; padding: 32px; font-family: var(--font-serif); font-size: 1.35rem; color: #ffffff; line-height: 1.4;">
-        AI OLYMPIAD™ is designed to discover and develop that capability.
+      <div style="background: rgba(223, 207, 173, 0.06); border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 18px; padding: 32px; font-family: 'Playfair Display', serif; font-size: 1.35rem; color: #ffffff; line-height: 1.4;">
+        AI Olympiad™ 2027 is designed to discover that readiness and develop it into real-world capability.
       </div>
     </div>
   </section>
 
-  <!-- THE OLYMPIAD JOURNEY -->
+  <!-- 03 — THE JOURNEY (7-STAGE PROGRESSION) -->
   <section id="journey" style="padding: 90px 24px; text-align: center; max-width: 1280px; margin: 0 auto;">
     <span class="section-eyebrow">SEVEN-STAGE PROGRESSION</span>
-    <h2 class="section-headline gold-gradient-text">ONE JOURNEY.<br>FROM READINESS TO CAPABILITY.</h2>
-    <p class="section-subhead">A structured pathway guiding young thinkers from initial diagnostic assessment to a national celebration of innovation.</p>
+    <h2 class="section-headline gold-gradient-text">FROM POTENTIAL<br>TO PROOF.</h2>
+    <p class="section-subhead">AI capability isn't developed in a single test. It grows through discovery, learning, experimentation, challenge and application.</p>
 
     <div class="journey-timeline-wrapper">
       <div class="journey-track-line"></div>
@@ -659,7 +699,7 @@
             <span class="step-stage-tag">DISCOVER</span>
           </div>
           <h3 class="step-title">AIQ™ Assessment</h3>
-          <p class="step-desc">Diagnostic AI readiness assessment layer evaluating baseline understanding and approach.</p>
+          <p class="step-desc">Understand your starting point through diagnostic evaluation.</p>
           <div class="step-arrow-link">STAGE 01 <span>→</span></div>
         </div>
 
@@ -669,7 +709,7 @@
             <span class="step-stage-tag">UNDERSTAND</span>
           </div>
           <h3 class="step-title">Capability Insights</h3>
-          <p class="step-desc">Discover specific strength areas and developmental focus dimensions across 5 pillars.</p>
+          <p class="step-desc">Discover specific strength areas and developmental focus dimensions.</p>
           <div class="step-arrow-link">STAGE 02 <span>→</span></div>
         </div>
 
@@ -679,7 +719,7 @@
             <span class="step-stage-tag">PREPARE</span>
           </div>
           <h3 class="step-title">Learning & Workshops</h3>
-          <p class="step-desc">Engage in curated workshops, learning experiences and guided practice labs.</p>
+          <p class="step-desc">Build knowledge through guided learning and practical experiences.</p>
           <div class="step-arrow-link">STAGE 03 <span>→</span></div>
         </div>
 
@@ -689,7 +729,7 @@
             <span class="step-stage-tag">BUILD</span>
           </div>
           <h3 class="step-title">Applied Challenges</h3>
-          <p class="step-desc">Apply AI concepts to solve real problems, generate ideas, and create projects.</p>
+          <p class="step-desc">Use AI to explore ideas, solve problems and create.</p>
           <div class="step-arrow-link">STAGE 04 <span>→</span></div>
         </div>
 
@@ -698,8 +738,8 @@
             <div class="step-node-circle">05</div>
             <span class="step-stage-tag">COMPETE</span>
           </div>
-          <h3 class="step-title">National Rounds</h3>
-          <p class="step-desc">Advance through adapted cohort challenges testing practical AI reasoning.</p>
+          <h3 class="step-title">Regional & National</h3>
+          <p class="step-desc">Put capability to the test across regional and national rounds.</p>
           <div class="step-arrow-link">STAGE 05 <span>→</span></div>
         </div>
 
@@ -709,7 +749,7 @@
             <span class="step-stage-tag">FINALE</span>
           </div>
           <h3 class="step-title">National Finale</h3>
-          <p class="step-desc">Top participants progress to live build demonstrations and national missions.</p>
+          <p class="step-desc">Top-performing participants compete live at AI Fest™.</p>
           <div class="step-arrow-link">STAGE 06 <span>→</span></div>
         </div>
 
@@ -719,26 +759,26 @@
             <span class="step-stage-tag">CELEBRATE</span>
           </div>
           <h3 class="step-title">AI Fest™</h3>
-          <p class="step-desc">Celebrate youth innovation, technology, and future ideas together.</p>
+          <p class="step-desc">A national celebration of young AI talent, innovation and ideas.</p>
           <div class="step-arrow-link">STAGE 07 <span>✦</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GRADES 3-12 ARCHITECTURE -->
+  <!-- 04 — DEVELOPMENTAL COHORTS -->
   <section style="padding: 90px 24px; background: rgba(10, 11, 15, 0.95); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); text-align: center;">
     <div style="max-width: 1200px; margin: 0 auto;">
       <span class="section-eyebrow">DEVELOPMENTALLY ADAPTED COHORTS</span>
-      <h2 class="section-headline">ONE OLYMPIAD. DIFFERENT MINDS. DIFFERENT CHALLENGES.</h2>
-      <p class="section-subhead">Assessments and challenges are specifically adapted to developmental stages across four distinct student cohorts.</p>
+      <h2 class="section-headline gold-gradient-text">DIFFERENT AGES.<br>DIFFERENT WAYS OF THINKING.</h2>
+      <p class="section-subhead">One Olympiad cannot treat every learner the same. AI Olympiad™ uses developmentally adapted assessment and challenge frameworks across four student cohorts.</p>
 
       <div class="cohorts-grid">
         <div class="cohort-card">
           <span class="cohort-grade">GRADES 3–5</span>
           <h3 class="cohort-name">AI EXPLORERS</h3>
           <ul class="cohort-focus-list">
-            <li class="cohort-focus-item">Curiosity & Wonder</li>
+            <li class="cohort-focus-item highlight-focus">Curiosity & Wonder</li>
             <li class="cohort-focus-item">Pattern Recognition</li>
             <li class="cohort-focus-item">Digital Awareness</li>
             <li class="cohort-focus-item">Creative Thinking</li>
@@ -750,7 +790,7 @@
           <span class="cohort-grade">GRADES 6–8</span>
           <h3 class="cohort-name">AI DISCOVERERS</h3>
           <ul class="cohort-focus-list">
-            <li class="cohort-focus-item">AI Concepts & Logic</li>
+            <li class="cohort-focus-item highlight-focus">AI Concepts & Logic</li>
             <li class="cohort-focus-item">Prompt Thinking</li>
             <li class="cohort-focus-item">Problem Solving</li>
             <li class="cohort-focus-item">Information Judgement</li>
@@ -762,7 +802,7 @@
           <span class="cohort-grade">GRADES 9–10</span>
           <h3 class="cohort-name">AI BUILDERS</h3>
           <ul class="cohort-focus-list">
-            <li class="cohort-focus-item">Applied AI Workflows</li>
+            <li class="cohort-focus-item highlight-focus">Applied AI Workflows</li>
             <li class="cohort-focus-item">Structured Reasoning</li>
             <li class="cohort-focus-item">Creation & Synthesis</li>
             <li class="cohort-focus-item">Critical Evaluation</li>
@@ -774,7 +814,7 @@
           <span class="cohort-grade">GRADES 11–12</span>
           <h3 class="cohort-name">AI INNOVATORS</h3>
           <ul class="cohort-focus-list">
-            <li class="cohort-focus-item">Advanced Application</li>
+            <li class="cohort-focus-item highlight-focus">Advanced Application</li>
             <li class="cohort-focus-item">AI-Assisted Research</li>
             <li class="cohort-focus-item">Complex Problem Solving</li>
             <li class="cohort-focus-item">Responsible AI Governance</li>
@@ -783,42 +823,42 @@
         </div>
       </div>
 
-      <div style="margin-top: 36px; font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--color-gold); letter-spacing: 0.1em;">
+      <div style="margin-top: 40px; font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--color-gold); letter-spacing: 0.12em;">
         DIFFERENT AGE GROUPS. DIFFERENT ASSESSMENT ARCHITECTURE. ONE NATIONAL CAPABILITY JOURNEY.
       </div>
     </div>
   </section>
 
-  <!-- AIQ READINESS ASSESSMENT -->
+  <!-- 05 — AIQ™ READINESS ASSESSMENT -->
   <section style="padding: 90px 24px; text-align: center; max-width: 1000px; margin: 0 auto;">
     <span class="section-eyebrow">DIAGNOSTIC READINESS LAYER</span>
-    <h2 class="section-headline">IT STARTS WITH AIQ™</h2>
-    <div style="font-family: 'Space Mono', monospace; font-size: 0.9rem; color: var(--color-gold); margin-bottom: 20px; letter-spacing: 0.12em;">
-      BEFORE YOU COMPETE, DISCOVER HOW READY YOU ARE.
+    <h2 class="section-headline gold-gradient-text">KNOW WHERE YOU STAND.</h2>
+    <div style="font-family: 'Space Mono', monospace; font-size: 0.95rem; color: var(--color-gold); margin-bottom: 20px; letter-spacing: 0.12em;">
+      IT STARTS WITH AIQ™ &nbsp;—&nbsp; Before you compete, discover how ready you are.
     </div>
 
-    <p class="section-subhead" style="margin-bottom: 36px;">
-      AIQ™ is designed to provide structured insight into how a learner approaches AI-related understanding, application, creation, evaluation and responsible use.
+    <p class="section-subhead" style="margin-bottom: 32px;">
+      AIQ™ is the diagnostic readiness layer of AI Passport™. It provides structured insight into how a learner approaches AI-related:
     </p>
 
-    <!-- AI Capability Framework Pillars -->
+    <!-- 5 Capability Dimensions -->
     <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px;">
-      <span class="dim-chip" style="font-size: 0.75rem; padding: 8px 16px;">UNDERSTAND</span>
-      <span class="dim-chip" style="font-size: 0.75rem; padding: 8px 16px;">APPLY</span>
-      <span class="dim-chip" style="font-size: 0.75rem; padding: 8px 16px;">CREATE</span>
-      <span class="dim-chip" style="font-size: 0.75rem; padding: 8px 16px;">EVALUATE</span>
-      <span class="dim-chip" style="font-size: 0.75rem; padding: 8px 16px;">RESPONSIBLE</span>
+      <span class="dim-chip" style="font-size: 0.78rem; padding: 8px 18px;">UNDERSTANDING</span>
+      <span class="dim-chip" style="font-size: 0.78rem; padding: 8px 18px;">APPLICATION</span>
+      <span class="dim-chip" style="font-size: 0.78rem; padding: 8px 18px;">CREATION</span>
+      <span class="dim-chip" style="font-size: 0.78rem; padding: 8px 18px;">EVALUATION</span>
+      <span class="dim-chip" style="font-size: 0.78rem; padding: 8px 18px;">RESPONSIBLE USE</span>
     </div>
 
-    <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary" style="padding: 14px 32px; font-size: 0.85rem;">DISCOVER YOUR AI READINESS</a>
+    <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary" style="padding: 15px 34px; font-size: 0.85rem;">TAKE THE AIQ™ ASSESSMENT</a>
   </section>
 
-  <!-- BEYOND A SCORE -->
+  <!-- 06 — AIQ INSIGHTS -->
   <section style="padding: 90px 24px; background: rgba(8, 9, 12, 0.98); border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
     <div style="max-width: 1000px; margin: 0 auto;">
       <span class="section-eyebrow">DIAGNOSTIC DIRECTION</span>
-      <h2 class="section-headline">A NUMBER ISN'T THE DESTINATION.</h2>
-      <p class="section-subhead">The purpose of AIQ™ is not simply to rank learners. It turns assessment into practical growth direction.</p>
+      <h2 class="section-headline gold-gradient-text">A NUMBER ISN'T THE DESTINATION.</h2>
+      <p class="section-subhead">AIQ™ isn't designed simply to rank learners. It turns assessment into practical growth direction.</p>
 
       <!-- Mock Report Architecture UI -->
       <div class="mock-report-card">
@@ -833,7 +873,7 @@
         <div class="report-grid">
           <div class="report-box">
             <span class="report-box-lbl">CAPABILITY SNAPSHOT</span>
-            <div class="report-box-val">Balanced strength in Conceptual Understanding & Creative Synthesis</div>
+            <div class="report-box-val">Balanced strength in conceptual understanding and creative synthesis.</div>
           </div>
 
           <div class="report-box">
@@ -848,32 +888,32 @@
 
           <div class="report-box">
             <span class="report-box-lbl">RECOMMENDED NEXT STEPS</span>
-            <div class="report-box-val">Level 2 Applied AI Challenge & Responsible AI Workshop</div>
+            <div class="report-box-val">Applied AI Challenge, Responsible AI Workshop, Further Capability Development</div>
           </div>
         </div>
 
-        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.15em;">
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--color-gold); letter-spacing: 0.15em;">
           FROM ASSESSMENT TO ACTION.
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COMPETITION ARCHITECTURE -->
+  <!-- 07 — APPLIED AI -->
   <section style="padding: 90px 24px; text-align: center; max-width: 1200px; margin: 0 auto;">
-    <span class="section-eyebrow">APPLIED AI CHALLENGES</span>
-    <h2 class="section-headline">THEN THE CHALLENGE BEGINS.</h2>
-    <p class="section-subhead">The competition evolves beyond assessment into applied challenges. It rewards thinking and capability — not memorisation of AI terminology.</p>
+    <span class="section-eyebrow">DEMONSTRATED CAPABILITY</span>
+    <h2 class="section-headline gold-gradient-text">NOW, SHOW WHAT YOU CAN DO.</h2>
+    <p class="section-subhead">The competition moves beyond assessment into applied challenges. AI Olympiad™ rewards thinking and capability—not memorisation of AI terminology.</p>
 
-    <div class="challenges-grid">
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 40px;">
       <div class="challenge-card">
         <span class="challenge-cat">REASON</span>
-        <div class="challenge-desc">Analyse information, evaluate logic, and make better decisions using AI-supported reasoning.</div>
+        <div class="challenge-desc">Analyse information, evaluate logic and make better decisions using AI-supported reasoning.</div>
       </div>
 
       <div class="challenge-card">
         <span class="challenge-cat">CREATE</span>
-        <div class="challenge-desc">Use AI tools constructively to develop ideas, synthesize original content, and design solutions.</div>
+        <div class="challenge-desc">Use AI tools constructively to develop ideas, synthesise original content and design solutions.</div>
       </div>
 
       <div class="challenge-card">
@@ -883,107 +923,258 @@
 
       <div class="challenge-card">
         <span class="challenge-cat">EVALUATE</span>
-        <div class="challenge-desc">Question outputs, identify model limitations, detect halluncinations, and refine results.</div>
+        <div class="challenge-desc">Question outputs, identify limitations, detect hallucinations and refine results.</div>
       </div>
 
       <div class="challenge-card">
         <span class="challenge-cat">RESPONSIBLE</span>
-        <div class="challenge-desc">Demonstrate ethical judgement, safety awareness, and responsible AI usage boundaries.</div>
+        <div class="challenge-desc">Demonstrate ethical judgement, safety awareness and responsible AI usage.</div>
       </div>
     </div>
   </section>
 
-  <!-- NATIONAL FINALE -->
-  <section style="padding: 90px 24px; background: radial-gradient(circle at 50% 50%, rgba(223, 207, 173, 0.06) 0%, rgba(8, 8, 12, 0.98) 80%); border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
-    <div style="max-width: 960px; margin: 0 auto;">
+  <!-- 08 — AI OLYMPIAD 2027 (THREE LEVELS) -->
+  <section style="padding: 90px 24px; background: rgba(10, 11, 15, 0.95); border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
+    <div style="max-width: 1140px; margin: 0 auto;">
+      <span class="section-eyebrow">COMPETITION ARCHITECTURE</span>
+      <h2 class="section-headline gold-gradient-text">THREE LEVELS.<br>ONE NATIONAL JOURNEY.</h2>
+      <p class="section-subhead">A structured multi-tier progression taking young minds from initial diagnostic evaluation to the national stage.</p>
+
+      <div class="levels-grid">
+        <div class="level-card">
+          <span class="level-badge">LEVEL 01</span>
+          <h3 class="level-title">AI READINESS ASSESSMENT</h3>
+          <p class="level-desc">Discover where you stand through AIQ™ diagnostic assessment.</p>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06);">
+            AIQ™ ASSESSMENT ↓
+          </div>
+        </div>
+
+        <div class="level-card">
+          <span class="level-badge">LEVEL 02</span>
+          <h3 class="level-title">REGIONAL AI CHALLENGES</h3>
+          <p class="level-desc">Put capability into action. Students progress through applied challenges designed around reasoning, creativity, problem-solving, evaluation and responsible AI use.</p>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06);">
+            REGIONAL ROUNDS ↓
+          </div>
+        </div>
+
+        <div class="level-card">
+          <span class="level-badge">LEVEL 03</span>
+          <h3 class="level-title">NATIONAL FINALE</h3>
+          <p class="level-desc">THE NATIONAL COMPETITION AT AI FEST™. Top-performing participants from the regional challenges come together to compete nationally.</p>
+          <div style="font-size: 0.75rem; color: var(--color-text-secondary); margin-top: 8px;">
+            ✦ Live AI Challenges &nbsp;•&nbsp; Build Demonstrations &nbsp;•&nbsp; Innovation Showcase &nbsp;•&nbsp; Problem-Solving Missions &nbsp;•&nbsp; Awards & Recognition
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 — AI PASSPORT (YOUR AI JOURNEY NEEDS AN IDENTITY) -->
+  <section style="padding: 90px 24px; text-align: center; max-width: 1140px; margin: 0 auto;">
+    <span class="section-eyebrow">VERIFIED CAPABILITY ECOSYSTEM</span>
+    <h2 class="section-headline gold-gradient-text">YOUR AI JOURNEY<br>NEEDS AN IDENTITY.</h2>
+    <p class="section-subhead">AI Passport™ creates a verified identity around a learner's AI readiness, participation, capability and achievements.</p>
+
+    <div class="identity-chain-grid">
+      <div class="identity-step-box">
+        <span class="identity-name">AIQ™</span>
+        <span class="identity-role">Readiness</span>
+      </div>
+
+      <div class="identity-step-box">
+        <span class="identity-name">AI OLYMPIAD™</span>
+        <span class="identity-role">Participation</span>
+      </div>
+
+      <div class="identity-step-box">
+        <span class="identity-name">CHALLENGES</span>
+        <span class="identity-role">Application</span>
+      </div>
+
+      <div class="identity-step-box">
+        <span class="identity-name">PROJECTS</span>
+        <span class="identity-role">Creation</span>
+      </div>
+
+      <div class="identity-step-box">
+        <span class="identity-name">CREDENTIALS</span>
+        <span class="identity-role">Recognition</span>
+      </div>
+
+      <div class="identity-step-box">
+        <span class="identity-name">PROFILE</span>
+        <span class="identity-role">Progression</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 36px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--color-gold); letter-spacing: 0.15em;">
+      ONE IDENTITY. A JOURNEY OF CAPABILITY.
+    </div>
+  </section>
+
+  <!-- 10 — THE NATIONAL FINALE -->
+  <section style="padding: 90px 24px; background: radial-gradient(circle at 50% 50%, rgba(223, 207, 173, 0.08) 0%, rgba(8, 8, 12, 0.98) 80%); border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
+    <div style="max-width: 1000px; margin: 0 auto;">
       <span class="section-eyebrow">THE CULMINATION</span>
-      <h2 class="section-headline">FROM CLASSROOMS TO A NATIONAL STAGE.</h2>
-      <p class="section-subhead">The AI Olympiad journey culminates in a National Finale designed to bring outstanding young AI thinkers, creators and problem-solvers together.</p>
+      <h2 class="section-headline gold-gradient-text">THE BEST DON'T JUST COMPETE.<br>THEY CREATE.</h2>
+      <p class="section-subhead">The AI Olympiad™ 2027 journey culminates at AI Fest™—bringing outstanding young AI thinkers, creators and problem-solvers together for the National Finale.</p>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; text-align: left;">
-        <div style="background: rgba(14,15,20,0.9); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
-          <div style="font-family: var(--font-serif); font-weight: 700; color: #fff; margin-bottom: 6px;">Live AI Challenges</div>
-          <div style="font-size: 0.8rem; color: var(--color-text-secondary);">Real-time problem-solving arenas.</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; text-align: left;">
+        <div style="background: rgba(14,15,20,0.92); border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 14px; padding: 22px;">
+          <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; font-size: 1.1rem; margin-bottom: 6px;">Live AI Challenges</div>
+          <div style="font-size: 0.82rem; color: var(--color-text-secondary);">Real-time problem-solving arenas.</div>
         </div>
 
-        <div style="background: rgba(14,15,20,0.9); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
-          <div style="font-family: var(--font-serif); font-weight: 700; color: #fff; margin-bottom: 6px;">Build Demonstrations</div>
-          <div style="font-size: 0.8rem; color: var(--color-text-secondary);">Showcase student-built AI projects.</div>
+        <div style="background: rgba(14,15,20,0.92); border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 14px; padding: 22px;">
+          <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; font-size: 1.1rem; margin-bottom: 6px;">Build Demonstrations</div>
+          <div style="font-size: 0.82rem; color: var(--color-text-secondary);">Student-built AI projects brought to life.</div>
         </div>
 
-        <div style="background: rgba(14,15,20,0.9); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
-          <div style="font-family: var(--font-serif); font-weight: 700; color: #fff; margin-bottom: 6px;">Problem-Solving Missions</div>
-          <div style="font-size: 0.8rem; color: var(--color-text-secondary);">Collaborative national missions.</div>
+        <div style="background: rgba(14,15,20,0.92); border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 14px; padding: 22px;">
+          <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; font-size: 1.1rem; margin-bottom: 6px;">Innovation Showcase</div>
+          <div style="font-size: 0.82rem; color: var(--color-text-secondary);">Ideas, prototypes and creative applications.</div>
+        </div>
+
+        <div style="background: rgba(14,15,20,0.92); border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 14px; padding: 22px;">
+          <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; font-size: 1.1rem; margin-bottom: 6px;">National Missions</div>
+          <div style="font-size: 0.82rem; color: var(--color-text-secondary);">Collaborative problem-solving experiences.</div>
+        </div>
+
+        <div style="background: rgba(14,15,20,0.92); border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 14px; padding: 22px; grid-column: span 2;">
+          <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; font-size: 1.1rem; margin-bottom: 6px;">Awards & Recognition</div>
+          <div style="font-size: 0.82rem; color: var(--color-text-secondary);">Celebrating outstanding achievement and capability across India.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- AI FEST -->
-  <section style="padding: 90px 24px; text-align: center; max-width: 1000px; margin: 0 auto;">
-    <span class="section-eyebrow">CELEBRATING INNOVATION</span>
-    <h2 class="section-headline">AND THEN, WE CELEBRATE THE FUTURE.</h2>
-    <div style="font-family: 'Space Mono', monospace; font-size: 1.1rem; color: var(--color-gold); letter-spacing: 0.18em; margin-bottom: 20px;">
+  <!-- 11 — AI FEST™ -->
+  <section style="padding: 90px 24px; text-align: center; max-width: 900px; margin: 0 auto;">
+    <span class="section-eyebrow">NATIONAL CELEBRATION</span>
+    <h2 class="section-headline gold-gradient-text">AND THEN, WE CELEBRATE<br>WHAT'S POSSIBLE.</h2>
+    <div style="font-family: 'Space Mono', monospace; font-size: 1.2rem; color: var(--color-gold); letter-spacing: 0.2em; margin-bottom: 20px;">
       AI FEST™
     </div>
-    <p class="section-subhead">A celebration of curiosity, capability, creativity and the generation that will grow up with AI.</p>
+    <p class="section-subhead">A national celebration of curiosity, capability, creativity and innovation. A space where young people can experience AI, share ideas, demonstrate what they've built and celebrate the possibilities ahead.</p>
 
-    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; max-width: 800px; margin: 32px auto 0 auto;">
-      <span class="pill-option selected">Student Innovation Showcase</span>
-      <span class="pill-option selected">AI Demonstrations</span>
-      <span class="pill-option selected">Future Technology</span>
-      <span class="pill-option selected">Creator Experiences</span>
-      <span class="pill-option selected">Expert Conversations</span>
-      <span class="pill-option selected">Interactive Installations</span>
-      <span class="pill-option selected">Workshops & Build Zones</span>
+    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 32px;">
+      <span class="pill-option selected">National Finale</span>
+      <span class="pill-option selected">Innovation</span>
+      <span class="pill-option selected">Experiences</span>
+      <span class="pill-option selected">Recognition</span>
     </div>
   </section>
 
-  <!-- FOR SCHOOLS -->
+  <!-- 12 — NATIONAL REACH -->
   <section style="padding: 90px 24px; background: rgba(10, 11, 15, 0.95); border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
     <div style="max-width: 900px; margin: 0 auto;">
-      <span class="section-eyebrow">INSTITUTIONAL PARTNERSHIP</span>
-      <h2 class="section-headline">BRING AI OLYMPIAD™ TO YOUR SCHOOL.</h2>
-      <p class="section-subhead">A structured way for schools to understand, develop and showcase student AI readiness and capability.</p>
+      <span class="section-eyebrow">IMPACT & FOOTPRINT</span>
+      <h2 class="section-headline gold-gradient-text">A NATIONAL JOURNEY.<br>BUILT ONE SCHOOL AT A TIME.</h2>
+      
+      <div class="hero-stats-banner" style="margin-top: 36px;">
+        <div class="stat-item">
+          <span class="stat-number">250+</span>
+          <span class="stat-label">SCHOOLS</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">25,000+</span>
+          <span class="stat-label">STUDENTS</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">3 REGIONS</span>
+          <span class="stat-label">Punjab • Delhi NCR • Himachal Pradesh</span>
+        </div>
+      </div>
 
-      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 36px;">
-        <a href="#registration" onclick="switchRegTab('school')" class="btn btn-primary" style="padding: 14px 32px; font-size: 0.85rem;">REGISTER YOUR SCHOOL</a>
+      <p style="font-size: 1.02rem; color: var(--color-text-secondary); line-height: 1.6; margin-top: 28px;">
+        AI Olympiad™ 2027 brings a common national capability journey to students across different communities, schools and developmental stages.
+      </p>
+    </div>
+  </section>
+
+  <!-- 13 — FOR SCHOOLS -->
+  <section style="padding: 90px 24px; text-align: center; max-width: 1000px; margin: 0 auto;">
+    <span class="section-eyebrow">INSTITUTIONAL PARTNERSHIP</span>
+    <h2 class="section-headline gold-gradient-text">BRING THE JOURNEY<br>TO YOUR SCHOOL.</h2>
+    <p class="section-subhead">Give your students an opportunity to discover their AI readiness, develop practical capability and participate in a national AI experience.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 36px 0; text-align: left;">
+      <div style="background: rgba(14,15,20,0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--color-gold);">DISCOVER</div>
+        <div style="font-size: 0.85rem; color: #fff; margin-top: 4px;">Understand their AI readiness.</div>
+      </div>
+
+      <div style="background: rgba(14,15,20,0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--color-gold);">DEVELOP</div>
+        <div style="font-size: 0.85rem; color: #fff; margin-top: 4px;">Build practical capability.</div>
+      </div>
+
+      <div style="background: rgba(14,15,20,0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--color-gold);">APPLY</div>
+        <div style="font-size: 0.85rem; color: #fff; margin-top: 4px;">Use AI to solve meaningful challenges.</div>
+      </div>
+
+      <div style="background: rgba(14,15,20,0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--color-gold);">COMPETE</div>
+        <div style="font-size: 0.85rem; color: #fff; margin-top: 4px;">Progress through regional and national rounds.</div>
+      </div>
+
+      <div style="background: rgba(14,15,20,0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--color-gold);">CREATE</div>
+        <div style="font-size: 0.85rem; color: #fff; margin-top: 4px;">Develop ideas and projects.</div>
+      </div>
+
+      <div style="background: rgba(14,15,20,0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--color-gold);">EARN</div>
+        <div style="font-size: 0.85rem; color: #fff; margin-top: 4px;">Receive recognition and verified credentials.</div>
       </div>
     </div>
+
+    <a href="#registration" onclick="switchRegTab('school')" class="btn btn-primary" style="padding: 15px 34px; font-size: 0.85rem;">REGISTER YOUR SCHOOL</a>
   </section>
 
-  <!-- WHY THIS MATTERS -->
-  <section style="padding: 90px 24px; text-align: center; max-width: 860px; margin: 0 auto;">
-    <span class="section-eyebrow">EDITORIAL PERSPECTIVE</span>
-    <h2 class="section-headline">AI LITERACY IS BECOMING A FOUNDATIONAL CAPABILITY.</h2>
-    <p style="font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 24px;">
-      Students are already interacting with AI. The question is no longer whether they will use AI. The important questions are:
-    </p>
+  <!-- 14 — WHY THIS MATTERS -->
+  <section style="padding: 90px 24px; background: rgba(8, 9, 12, 0.98); border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
+    <div style="max-width: 860px; margin: 0 auto;">
+      <span class="section-eyebrow">EDITORIAL PERSPECTIVE</span>
+      <h2 class="section-headline gold-gradient-text">THE QUESTION IS NO LONGER<br>WHETHER STUDENTS WILL USE AI.</h2>
+      <p style="font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 24px;">
+        Students are already interacting with AI. The more important questions are:
+      </p>
 
-    <div style="background: rgba(14,15,20,0.9); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px; text-align: left; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px;">
-      <div style="color: #fff; font-weight: 600;">• Do they understand it?</div>
-      <div style="color: #fff; font-weight: 600;">• Can they use it effectively?</div>
-      <div style="color: #fff; font-weight: 600;">• Can they create with it?</div>
-      <div style="color: #fff; font-weight: 600;">• Can they evaluate what it produces?</div>
-      <div style="color: #fff; font-weight: 600;">• Can they use it responsibly?</div>
+      <div style="background: rgba(14,15,20,0.92); border: 1px solid rgba(223,207,173,0.25); border-radius: 18px; padding: 32px; text-align: left; display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px;">
+        <div style="color: #fff; font-weight: 700; font-size: 1.05rem;">• Do they understand it?</div>
+        <div style="color: #fff; font-weight: 700; font-size: 1.05rem;">• Can they use it effectively?</div>
+        <div style="color: #fff; font-weight: 700; font-size: 1.05rem;">• Can they create with it?</div>
+        <div style="color: #fff; font-weight: 700; font-size: 1.05rem;">• Can they evaluate what it produces?</div>
+        <div style="color: #fff; font-weight: 700; font-size: 1.05rem;">• Can they use it responsibly?</div>
+      </div>
+
+      <div style="font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--color-gold); letter-spacing: 0.15em; margin-bottom: 12px;">
+        AI LITERACY IS BECOMING A FOUNDATIONAL CAPABILITY.
+      </div>
+      <p style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #ffffff; margin: 0;">
+        AI Olympiad™ exists to turn those questions into a structured learning, challenge and capability journey.
+      </p>
     </div>
-
-    <p style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-gold);">
-      AI OLYMPIAD™ exists to turn those questions into a learning and capability journey.
-    </p>
   </section>
 
-  <!-- REGISTRATION SECTION -->
+  <!-- 15 — REGISTER SECTION -->
   <section id="registration" class="registration-section">
     <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-      <span class="section-eyebrow">EXPRESS YOUR INTEREST</span>
-      <h2 class="section-headline">BE PART OF AI OLYMPIAD™</h2>
-      <p class="section-subhead">Register your interest as a student, parent or school.</p>
+      <span class="section-eyebrow">START THE JOURNEY</span>
+      <h2 class="section-headline gold-gradient-text">AI OLYMPIAD™ 2027</h2>
+      <p class="section-subhead">Register your interest as a student/parent, school, or educator.</p>
 
       <!-- Tabs -->
       <div class="reg-tabs">
         <button id="tab-btn-student" class="reg-tab-btn active" onclick="switchRegTab('student')">STUDENT / PARENT</button>
         <button id="tab-btn-school" class="reg-tab-btn" onclick="switchRegTab('school')">SCHOOL</button>
+        <button id="tab-btn-educator" class="reg-tab-btn" onclick="switchRegTab('educator')">EDUCATOR</button>
       </div>
 
       <!-- Student / Parent Form -->
@@ -1067,14 +1258,14 @@
           </div>
 
           <div class="form-group form-group-full">
-            <label class="consent-checkbox-wrap">
-              <input type="checkbox" id="std-consent" required>
+            <label class="consent-checkbox-wrap" style="display: flex; gap: 10px; align-items: flex-start; color: var(--color-text-secondary); font-size: 0.8rem;">
+              <input type="checkbox" id="std-consent" required style="margin-top: 3px;">
               <span>I confirm that I am the parent/guardian or am authorised to submit this registration, and I agree to receive information related to AI Olympiad participation.</span>
             </label>
             <div class="inline-error-msg" id="err-std-consent">Please accept the consent confirmation.</div>
           </div>
 
-          <button type="submit" id="btn-submit-student" class="btn btn-primary" style="width: 100%; margin-top: 16px; padding: 14px 0; font-size: 0.85rem;">REGISTER INTEREST</button>
+          <button type="submit" id="btn-submit-student" class="btn btn-primary" style="width: 100%; margin-top: 16px; padding: 15px 0; font-size: 0.85rem;">REGISTER INTEREST</button>
         </form>
       </div>
 
@@ -1090,7 +1281,7 @@
 
             <div class="form-group">
               <label class="form-label">CITY *</label>
-              <input type="text" id="sch-city" class="form-input" placeholder="e.g. Mumbai" required>
+              <input type="text" id="sch-city" class="form-input" placeholder="e.g. Chandigarh" required>
               <div class="inline-error-msg" id="err-sch-city">Please enter city.</div>
             </div>
           </div>
@@ -1098,98 +1289,98 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">STATE *</label>
-              <input type="text" id="sch-state" class="form-input" placeholder="e.g. Maharashtra" required>
+              <input type="text" id="sch-state" class="form-input" placeholder="e.g. Punjab" required>
               <div class="inline-error-msg" id="err-sch-state">Please enter state.</div>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">SCHOOL WEBSITE</label>
-              <input type="url" id="sch-website" class="form-input" placeholder="https://school.edu.in">
-            </div>
-          </div>
-
-          <div class="form-row">
             <div class="form-group">
               <label class="form-label">CONTACT PERSON *</label>
               <input type="text" id="sch-contact" class="form-input" placeholder="e.g. Dr. Sunita Rao" required>
               <div class="inline-error-msg" id="err-sch-contact">Please enter contact person name.</div>
             </div>
-
-            <div class="form-group">
-              <label class="form-label">DESIGNATION *</label>
-              <input type="text" id="sch-designation" class="form-input" placeholder="e.g. Principal / HOD Computer Science" required>
-              <div class="inline-error-msg" id="err-sch-designation">Please enter designation.</div>
-            </div>
           </div>
 
           <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">DESIGNATION *</label>
+              <input type="text" id="sch-designation" class="form-input" placeholder="e.g. Principal / HOD CS" required>
+              <div class="inline-error-msg" id="err-sch-designation">Please enter designation.</div>
+            </div>
+
             <div class="form-group">
               <label class="form-label">OFFICIAL EMAIL *</label>
               <input type="email" id="sch-email" class="form-input" placeholder="principal@school.edu.in" required>
               <div class="inline-error-msg" id="err-sch-email">Please enter official email.</div>
             </div>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label class="form-label">CONTACT NUMBER *</label>
+            <input type="tel" id="sch-phone" class="form-input" placeholder="+91 98765 43210" required>
+            <div class="inline-error-msg" id="err-sch-phone">Please enter contact number.</div>
+          </div>
+
+          <button type="submit" id="btn-submit-school" class="btn btn-primary" style="width: 100%; margin-top: 16px; padding: 15px 0; font-size: 0.85rem;">REGISTER YOUR SCHOOL</button>
+        </form>
+      </div>
+
+      <!-- Educator Form -->
+      <div id="form-educator-card" class="reg-form-card" style="display: none;">
+        <form id="educator-reg-form" onsubmit="handleFormSubmit(event, 'educator')" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">EDUCATOR NAME *</label>
+              <input type="text" id="edu-name" class="form-input" placeholder="e.g. Prof. Vikram Mehta" required>
+              <div class="inline-error-msg" id="err-edu-name">Please enter your full name.</div>
+            </div>
 
             <div class="form-group">
-              <label class="form-label">CONTACT NUMBER *</label>
-              <input type="tel" id="sch-phone" class="form-input" placeholder="+91 98765 43210" required>
-              <div class="inline-error-msg" id="err-sch-phone">Please enter contact number.</div>
+              <label class="form-label">INSTITUTION / SCHOOL *</label>
+              <input type="text" id="edu-inst" class="form-input" placeholder="e.g. St. Xavier's Academy" required>
+              <div class="inline-error-msg" id="err-edu-inst">Please enter your institution.</div>
             </div>
           </div>
 
-          <div class="form-group form-group-full">
-            <label class="form-label">GRADES INTERESTED</label>
-            <div class="pill-select-group" id="sch-grades-group">
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 3</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 4</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 5</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 6</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 7</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 8</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 9</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 10</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 11</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Grade 12</span>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">EMAIL ADDRESS *</label>
+              <input type="email" id="edu-email" class="form-input" placeholder="vikram@academy.edu.in" required>
+              <div class="inline-error-msg" id="err-edu-email">Please enter a valid email.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">MOBILE NUMBER *</label>
+              <input type="tel" id="edu-phone" class="form-input" placeholder="+91 98765 43210" required>
+              <div class="inline-error-msg" id="err-edu-phone">Please enter contact number.</div>
             </div>
           </div>
 
-          <div class="form-group form-group-full">
-            <label class="form-label">PARTICIPATION INTEREST</label>
-            <div class="pill-select-group" id="sch-interest-group">
-              <span class="pill-option selected" onclick="togglePill(this)">Host AIQ™ Assessment</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Participate in AI Olympiad™</span>
-              <span class="pill-option selected" onclick="togglePill(this)">Preparation Workshops</span>
-              <span class="pill-option selected" onclick="togglePill(this)">National Competition</span>
-              <span class="pill-option selected" onclick="togglePill(this)">AI Fest</span>
-              <span class="pill-option selected" id="pill-inst-partner" onclick="togglePill(this)">Institutional Partnership</span>
-            </div>
-          </div>
-
-          <div class="form-group form-group-full">
-            <label class="form-label">ADDITIONAL MESSAGE</label>
-            <textarea id="sch-msg" class="form-input" rows="3" placeholder="Tell us more about your school's interest..."></textarea>
-          </div>
-
-          <button type="submit" id="btn-submit-school" class="btn btn-primary" style="width: 100%; margin-top: 16px; padding: 14px 0; font-size: 0.85rem;">REGISTER YOUR SCHOOL</button>
+          <button type="submit" id="btn-submit-educator" class="btn btn-primary" style="width: 100%; margin-top: 16px; padding: 15px 0; font-size: 0.85rem;">REGISTER AS EDUCATOR</button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- FINAL CLOSING CTA -->
+  <!-- 16 — FINAL CTA SECTION -->
   <section style="padding: 90px 24px; text-align: center; background: #040406; border-top: 1px solid rgba(255,255,255,0.06);">
-    <div style="max-width: 860px; margin: 0 auto;">
-      <h2 class="section-headline" style="font-size: clamp(2.2rem, 4.5vw, 3.8rem);">
+    <div style="max-width: 880px; margin: 0 auto;">
+      <div class="section-eyebrow">✦ AI PASSPORT™ PRESENTS</div>
+      <h2 class="section-headline gold-gradient-text" style="font-size: clamp(2.4rem, 5vw, 4rem);">
         THE FUTURE WON'T JUST USE AI.<br>
         IT WILL BE BUILT WITH IT.
       </h2>
 
-      <div style="font-family: 'Space Mono', monospace; font-size: 0.9rem; color: var(--color-gold); letter-spacing: 0.15em; margin: 20px 0 32px 0;">
-        AI OLYMPIAD™ &nbsp;—&nbsp; Discover readiness. Develop capability. Build. Compete. Celebrate.
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #ffffff; margin: 16px 0;">
+        AI OLYMPIAD™ 2027
+      </h3>
+
+      <div style="font-family: 'Space Mono', monospace; font-size: 0.9rem; color: var(--color-gold); letter-spacing: 0.15em; margin: 0 0 36px 0;">
+        Discover readiness. Develop capability. Build. Compete. Celebrate.
       </div>
 
-      <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-        <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary" style="padding: 14px 32px; font-size: 0.85rem;">REGISTER INTEREST</a>
-        <a href="#registration" onclick="switchRegTab('school')" class="btn btn-secondary" style="padding: 14px 32px; font-size: 0.85rem;">REGISTER YOUR SCHOOL</a>
+      <div style="display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;">
+        <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary" style="padding: 15px 34px; font-size: 0.85rem;">REGISTER INTEREST</a>
+        <a href="#registration" onclick="switchRegTab('school')" class="btn btn-secondary" style="padding: 15px 34px; font-size: 0.85rem;">REGISTER YOUR SCHOOL</a>
       </div>
     </div>
   </section>
@@ -1201,7 +1392,7 @@
       <div style="display: flex; gap: 20px;">
         <a href="index.html" style="color: var(--color-text-secondary); text-decoration: none;">Home</a>
         <a href="academy.html" style="color: var(--color-text-secondary); text-decoration: none;">Academy</a>
-        <a href="ai-olympiad.html" style="color: var(--color-gold); text-decoration: none;">AI Olympiad™</a>
+        <a href="ai-olympiad.html" style="color: var(--color-gold); text-decoration: none;">AI Olympiad™ 2027</a>
         <a href="verify.html" style="color: var(--color-text-secondary); text-decoration: none;">Verify</a>
       </div>
     </div>
@@ -1210,10 +1401,10 @@
   <!-- PROTOTYPE SUBMISSION MODAL -->
   <div id="proto-modal" class="proto-modal-backdrop">
     <div class="proto-modal-content">
-      <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.18em;">AI OLYMPIAD™ INITIATIVE</div>
-      <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: #ffffff; margin: 0;">REGISTRATION OPENING SOON</h3>
+      <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.18em;">AI OLYMPIAD™ 2027 INITIATIVE</div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #ffffff; margin: 0;">REGISTRATION OPENING SOON</h3>
       <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.5; margin: 0;">
-        Thank you for your interest in AI Olympiad™. Online registration will open soon. Your details are ready for when official registrations open.
+        Thank you for your interest in AI Olympiad™ 2027. Online registration will open soon. Your details are ready for when official registrations open.
       </p>
       <button class="btn btn-primary" onclick="closeProtoModal()" style="margin-top: 12px; padding: 12px 24px;">UNDERSTOOD</button>
     </div>
@@ -1224,30 +1415,35 @@
     function switchRegTab(tab) {
       var btnStd = document.getElementById('tab-btn-student');
       var btnSch = document.getElementById('tab-btn-school');
+      var btnEdu = document.getElementById('tab-btn-educator');
+
       var cardStd = document.getElementById('form-student-card');
       var cardSch = document.getElementById('form-school-card');
+      var cardEdu = document.getElementById('form-educator-card');
+
+      btnStd.classList.remove('active');
+      btnSch.classList.remove('active');
+      btnEdu.classList.remove('active');
+
+      cardStd.style.display = 'none';
+      cardSch.style.display = 'none';
+      cardEdu.style.display = 'none';
 
       if (tab === 'school') {
         btnSch.classList.add('active');
-        btnStd.classList.remove('active');
         cardSch.style.display = 'block';
-        cardStd.style.display = 'none';
+      } else if (tab === 'educator') {
+        btnEdu.classList.add('active');
+        cardEdu.style.display = 'block';
       } else {
         btnStd.classList.add('active');
-        btnSch.classList.remove('active');
         cardStd.style.display = 'block';
-        cardSch.style.display = 'none';
       }
-    }
-
-    function togglePill(el) {
-      el.classList.toggle('selected');
     }
 
     function handleFormSubmit(e, type) {
       e.preventDefault();
       
-      // Clear previous error states
       var errors = document.querySelectorAll('.inline-error-msg');
       errors.forEach(function(el) { el.style.display = 'none'; });
 
@@ -1290,6 +1486,17 @@
         if (!schDesig) { document.getElementById('err-sch-designation').style.display = 'block'; isValid = false; }
         if (!schEmail || !schEmail.includes('@')) { document.getElementById('err-sch-email').style.display = 'block'; isValid = false; }
         if (!schPhone || schPhone.length < 8) { document.getElementById('err-sch-phone').style.display = 'block'; isValid = false; }
+
+      } else if (type === 'educator') {
+        var eduName = document.getElementById('edu-name').value.trim();
+        var eduInst = document.getElementById('edu-inst').value.trim();
+        var eduEmail = document.getElementById('edu-email').value.trim();
+        var eduPhone = document.getElementById('edu-phone').value.trim();
+
+        if (!eduName) { document.getElementById('err-edu-name').style.display = 'block'; isValid = false; }
+        if (!eduInst) { document.getElementById('err-edu-inst').style.display = 'block'; isValid = false; }
+        if (!eduEmail || !eduEmail.includes('@')) { document.getElementById('err-edu-email').style.display = 'block'; isValid = false; }
+        if (!eduPhone || eduPhone.length < 8) { document.getElementById('err-edu-phone').style.display = 'block'; isValid = false; }
       }
 
       if (isValid) {
