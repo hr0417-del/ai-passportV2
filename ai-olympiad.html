@@ -122,21 +122,35 @@
 
     /* SECTION 01: HERO */
     .olympiad-hero {
+      position: relative;
+      width: 100%;
       min-height: 85vh;
+      background-color: #08080c;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       padding: 120px 5% 70px 5%;
-      background: #08080c url('olympiad-hero-approved.jpg') right center / contain no-repeat;
-      position: relative;
-      text-align: left;
+      box-sizing: border-box;
       overflow: hidden;
+    }
+
+    .hero-bg-artwork {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: right center;
+      pointer-events: none;
+      z-index: 1;
     }
 
     .hero-text-container {
       max-width: 580px;
       position: relative;
-      z-index: 2;
+      z-index: 3;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -652,6 +666,7 @@
 
   <!-- 01 — HERO -->
   <section class="olympiad-hero">
+    <img src="olympiad-hero-approved.jpg" alt="AI Olympiad™ 2027 Hero Artwork" class="hero-bg-artwork">
     <div class="hero-text-container">
       <div class="olympiad-badge">
         <span>✦ AI PASSPORT™ PRESENTS</span>
