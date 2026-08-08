@@ -120,16 +120,14 @@
       margin: 0 auto 36px auto;
     }
 
-    /* SECTION 01: HERO (REBUILT FROM SCRATCH — SINGLE FULL-BLEED CINEMATIC HERO) */
+    /* SECTION 01: HERO (DEBUGGED FULL-BLEED CINEMATIC HERO) */
     .olympiad-hero {
       position: relative;
       width: 100%;
-      height: calc(100vh - 80px);
-      min-height: 640px;
-      max-height: 780px;
-      margin-top: 80px; /* Physically pushes hero below fixed 80px global header */
+      min-height: calc(100vh - 80px);
+      height: auto;
+      margin-top: 80px; /* Clean offset below fixed 80px global header */
       background-color: #000000;
-      overflow: hidden;
       box-sizing: border-box;
     }
 
@@ -149,15 +147,15 @@
       position: relative;
       z-index: 3;
       width: 100%;
-      height: 100%;
+      min-height: calc(100vh - 80px);
       display: flex;
       align-items: center; /* Vertically centers text block within visible hero area */
-      padding: 0 6%;
+      padding: 40px 6%;
       box-sizing: border-box;
     }
 
     .hero-text-container {
-      max-width: 540px;
+      max-width: 560px;
       width: 44%;
       display: flex;
       flex-direction: column;
@@ -277,13 +275,18 @@
       justify-content: flex-start;
       gap: 16px;
       flex-wrap: nowrap;
+      width: 100%;
+    }
+
+    .olympiad-hero .btn {
+      padding: 13px 22px !important;
+      font-size: 0.78rem !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
     }
 
     .olympiad-hero .btn-primary {
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      white-space: nowrap;
-      padding: 13px 28px;
-      font-size: 0.82rem;
     }
 
     .olympiad-hero .btn-primary:hover {
@@ -293,9 +296,6 @@
 
     .olympiad-hero .btn-secondary {
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      white-space: nowrap;
-      padding: 13px 28px;
-      font-size: 0.82rem;
     }
 
     .olympiad-hero .btn-secondary:hover {
