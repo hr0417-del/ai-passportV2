@@ -127,56 +127,9 @@
       align-items: center;
       justify-content: center;
       padding: 140px 24px 80px 24px;
-      background: 
-        linear-gradient(180deg, rgba(8, 8, 12, 0.82) 0%, rgba(8, 8, 12, 0.94) 75%, rgba(8, 8, 12, 1) 100%),
-        radial-gradient(circle at 50% 30%, rgba(223, 207, 173, 0.25) 0%, transparent 60%),
-        url('olympiad-stage-hero.jpg') center/cover no-repeat;
+      background: radial-gradient(circle at 50% 30%, rgba(223, 207, 173, 0.12) 0%, rgba(8, 8, 12, 0.98) 75%);
       position: relative;
       text-align: center;
-      overflow: hidden;
-    }
-
-    .hero-stage-showcase-frame {
-      max-width: 900px;
-      margin: 40px auto 0 auto;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(223, 207, 173, 0.35);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(223, 207, 173, 0.15);
-      position: relative;
-      transition: transform 0.4s ease, border-color 0.4s ease;
-    }
-
-    .hero-stage-showcase-frame:hover {
-      transform: translateY(-6px);
-      border-color: var(--color-gold);
-    }
-
-    .stage-frame-img {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.92) contrast(1.05);
-    }
-
-    .stage-frame-overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 16px 24px;
-      background: linear-gradient(0deg, rgba(8, 8, 12, 0.95) 0%, transparent 100%);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .stage-frame-caption {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--color-gold);
-      letter-spacing: 0.18em;
     }
 
     .olympiad-badge {
@@ -696,15 +649,6 @@
       <div class="olympiad-cta-group">
         <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary" style="padding: 15px 34px; font-size: 0.85rem;">REGISTER FOR AI OLYMPIAD</a>
         <a href="#journey" class="btn btn-secondary" style="padding: 15px 34px; font-size: 0.85rem;">EXPLORE THE OLYMPIAD</a>
-      </div>
-
-      <!-- Stage Hero Showcase Frame -->
-      <div class="hero-stage-showcase-frame">
-        <img src="olympiad-stage-hero.jpg" alt="AI Olympiad™ 2027 National Finale Stage Arena" class="stage-frame-img" loading="lazy">
-        <div class="stage-frame-overlay">
-          <div class="stage-frame-caption">✦ NATIONAL FINALE AT AI FEST™ — LIVE STAGE ARENA</div>
-          <div style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: rgba(255,255,255,0.7);">GRADES 3–12</div>
-        </div>
       </div>
     </div>
   </section>
