@@ -459,6 +459,12 @@
       box-shadow: 0 0 24px rgba(223, 207, 173, 0.25);
     }
 
+    .reg-selector-btn:hover {
+      border-color: var(--color-gold);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
     .reg-form-card {
       background: rgba(16, 17, 22, 0.95);
       border: 1px solid rgba(223, 207, 173, 0.3);
@@ -468,6 +474,13 @@
       margin: 0 auto;
       text-align: left;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+      animation: formSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--color-gold) !important;
+      box-shadow: 0 0 16px rgba(223, 207, 173, 0.25) !important;
     }
 
     .form-row {
