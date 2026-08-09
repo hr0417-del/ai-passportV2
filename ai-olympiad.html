@@ -120,132 +120,167 @@
       margin: 0 auto 36px auto;
     }
 
-    /* SECTION 01: HERO (DEBUGGED FULL-BLEED CINEMATIC HERO) */
+    /* SECTION 01: HERO (OPTION 2 — HIGH-END GLASSMORPHIC EDITORIAL HERO) */
     .olympiad-hero {
       position: relative;
       width: 100%;
       min-height: calc(100vh - 80px);
-      height: auto;
-      margin-top: 80px; /* Clean offset below fixed 80px global header */
-      background-color: #000000;
+      margin-top: 80px; /* Sit cleanly below 80px fixed header */
+      background-color: #060609;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
       box-sizing: border-box;
+      overflow: hidden;
     }
 
-    .hero-bg-artwork {
+    @keyframes heroGlowPulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.75; transform: scale(1.08); }
+    }
+
+    .hero-glow-gold {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 88% 10%;
+      top: -10%;
+      right: 15%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(223, 207, 173, 0.16) 0%, rgba(223, 207, 173, 0.04) 45%, transparent 70%);
+      filter: blur(80px);
       pointer-events: none;
       z-index: 1;
-      image-rendering: -webkit-optimize-contrast;
+      animation: heroGlowPulse 8s ease-in-out infinite;
     }
 
-    .hero-content-wrapper {
+    .hero-glow-blue {
+      position: absolute;
+      bottom: -15%;
+      left: 10%;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 162, 255, 0.14) 0%, rgba(0, 102, 255, 0.03) 50%, transparent 70%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 1;
+      animation: heroGlowPulse 10s ease-in-out infinite reverse;
+    }
+
+    .hero-editorial-wrapper {
       position: relative;
       z-index: 3;
+      max-width: 900px;
       width: 100%;
-      min-height: calc(100vh - 80px);
-      display: flex;
-      align-items: center; /* Vertically centers text block within visible hero area */
-      padding: 40px 6%;
-      box-sizing: border-box;
-    }
-
-    .hero-text-container {
-      max-width: 560px;
-      width: 44%;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
+      align-items: center;
+      text-align: center;
     }
 
     .olympiad-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 5px 14px;
+      gap: 10px;
+      padding: 8px 22px;
       border-radius: 30px;
-      background: rgba(223, 207, 173, 0.12);
+      background: rgba(223, 207, 173, 0.1);
       border: 1px solid rgba(223, 207, 173, 0.35);
       font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--color-gold);
-      letter-spacing: 0.18em;
-      margin-bottom: 8px;
+      letter-spacing: 0.22em;
+      margin-bottom: 20px;
       text-transform: uppercase;
+      box-shadow: 0 0 24px rgba(223, 207, 173, 0.15);
     }
 
     .olympiad-main-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+      font-size: clamp(3.2rem, 6.8vw, 5.8rem);
       font-weight: 700;
-      line-height: 1.05;
-      margin: 0 0 6px 0;
+      line-height: 1.02;
+      margin: 0 0 14px 0;
+      letter-spacing: -0.01em;
     }
 
     .title-ivory {
       color: #ffffff;
-      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.95);
-      margin-right: 10px;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+      margin-right: 14px;
     }
 
     .title-gold {
       color: var(--color-gold);
+      background: linear-gradient(135deg, #ffffff 0%, var(--color-gold) 55%, var(--color-gold-bright) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 35px rgba(223, 207, 173, 0.3);
     }
 
     .olympiad-sub-title {
       font-family: 'Space Mono', monospace;
-      font-size: clamp(0.72rem, 1.2vw, 0.85rem);
+      font-size: clamp(0.85rem, 1.6vw, 1.1rem);
       font-weight: 700;
       color: var(--color-gold);
-      letter-spacing: 0.15em;
-      margin-bottom: 6px;
+      letter-spacing: 0.18em;
+      margin-bottom: 22px;
       text-transform: uppercase;
     }
 
     .olympiad-primary-prop {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+      font-size: clamp(1.6rem, 3.4vw, 2.5rem);
       font-weight: 700;
       color: #ffffff;
-      margin: 0 0 10px 0;
-      line-height: 1.1;
-      max-width: 500px;
+      margin: 0 auto 16px auto;
+      line-height: 1.2;
+      max-width: 820px;
     }
 
     .olympiad-hero-desc {
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.85);
-      margin: 0 0 16px 0;
-      line-height: 1.45;
-      max-width: 500px;
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 720px;
+      margin: 0 auto 32px auto;
+      line-height: 1.6;
     }
 
-    /* Minimal Horizontal Info Strip */
+    /* Glassmorphic Stats Strip */
     .hero-stats-strip {
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 24px;
-      margin: 0 0 18px 0;
-      padding: 0;
-      background: transparent;
-      border: none;
+      gap: 36px;
+      background: rgba(14, 15, 22, 0.7);
+      border: 1px solid rgba(223, 207, 173, 0.25);
+      border-radius: 20px;
+      padding: 20px 36px;
+      max-width: 780px;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0 auto 36px auto;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(223, 207, 173, 0.08);
+      flex-wrap: wrap;
     }
 
     .stat-item {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
     }
 
     .stat-number {
       font-family: 'Playfair Display', serif;
-      font-size: 1.45rem;
+      font-size: 1.85rem;
       font-weight: 700;
       color: var(--color-gold);
       margin: 0;
@@ -254,35 +289,32 @@
 
     .stat-label {
       font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
+      font-size: 0.68rem;
       font-weight: 700;
       color: rgba(255, 255, 255, 0.65);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
     .stat-divider {
       width: 1px;
-      height: 28px;
-      background: rgba(255, 255, 255, 0.18);
+      height: 36px;
+      background: rgba(255, 255, 255, 0.15);
     }
 
     .olympiad-cta-group {
       display: flex;
-      flex-direction: row;
+      justify-content: center;
       align-items: center;
-      justify-content: flex-start;
-      gap: 16px;
-      flex-wrap: nowrap;
-      width: 100%;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .olympiad-hero .btn {
-      padding: 13px 22px !important;
-      font-size: 0.78rem !important;
+      padding: 16px 36px !important;
+      font-size: 0.85rem !important;
       white-space: nowrap !important;
-      flex-shrink: 0 !important;
     }
 
     .olympiad-hero .btn-primary {
@@ -291,7 +323,7 @@
 
     .olympiad-hero .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(223, 207, 173, 0.35);
+      box-shadow: 0 14px 36px rgba(223, 207, 173, 0.38);
     }
 
     .olympiad-hero .btn-secondary {
@@ -628,13 +660,10 @@
 
     @media (max-width: 1024px) {
       .olympiad-hero {
-        height: auto;
-        min-height: 100vh;
-        padding: 100px 24px 50px 24px;
+        padding: 80px 20px 50px 20px;
       }
-      .hero-text-container {
-        max-width: 500px;
-        width: 100%;
+      .hero-editorial-wrapper {
+        max-width: 100%;
       }
       .journey-flow-5grid { grid-template-columns: repeat(3, 1fr); }
       .cohorts-4grid { grid-template-columns: repeat(2, 1fr); }
@@ -644,25 +673,18 @@
 
     @media (max-width: 768px) {
       .olympiad-hero {
-        height: auto;
-        min-height: 100vh;
-        padding: 95px 20px 40px 20px;
-        justify-content: center;
-        text-align: center;
-      }
-      .hero-text-container {
-        max-width: 100%;
-        width: 100%;
-        margin: 0 auto;
-        align-items: center;
-        text-align: center;
+        margin-top: 70px;
+        min-height: calc(100vh - 70px);
+        padding: 60px 16px 40px 16px;
       }
       .hero-stats-strip {
-        justify-content: center;
+        flex-direction: column;
         gap: 16px;
+        padding: 20px 16px;
       }
-      .stat-item {
-        align-items: center;
+      .stat-divider {
+        width: 60%;
+        height: 1px;
       }
       .olympiad-cta-group {
         flex-direction: column;
@@ -712,51 +734,50 @@
     </div>
   </header>
 
-  <!-- 01 — HERO (REBUILT SINGLE FULL-BLEED CINEMATIC ENVIRONMENT) -->
+  <!-- 01 — HERO (OPTION 2: GLASSMORPHIC EDITORIAL HERO) -->
   <section class="olympiad-hero">
-    <img src="olympiad-hero-approved.jpg?v=3840_new" alt="AI Olympiad™ 2027 Hero Artwork" class="hero-bg-artwork">
-    <div class="hero-content-wrapper">
-      <div class="hero-text-container">
-        <div class="olympiad-badge">
-          <span>✦ AI PASSPORT™ PRESENTS</span>
-        </div>
-        
-        <h1 class="olympiad-main-title">
-          <span class="title-ivory">AI OLYMPIAD™</span>
-          <span class="title-gold">2027</span>
-        </h1>
-        <div class="olympiad-sub-title">INDIA'S AI READINESS & CAPABILITY CHALLENGE &nbsp;|&nbsp; GRADES 3–12</div>
-        
-        <div class="olympiad-primary-prop">
-          DON'T JUST LEARN AI.<br>PROVE WHAT YOU CAN DO<br>WITH IT.
-        </div>
-        
-        <p class="olympiad-hero-desc">
-          A national AI experience designed to discover AI readiness, develop real capability and challenge the next generation of AI thinkers, creators and problem-solvers.
-        </p>
+    <div class="hero-glow-gold"></div>
+    <div class="hero-glow-blue"></div>
+    <div class="hero-editorial-wrapper">
+      <div class="olympiad-badge">
+        <span>✦ AI PASSPORT™ PRESENTS</span>
+      </div>
+      
+      <h1 class="olympiad-main-title">
+        <span class="title-ivory">AI OLYMPIAD™</span>
+        <span class="title-gold">2027</span>
+      </h1>
+      <div class="olympiad-sub-title">INDIA'S AI READINESS & CAPABILITY CHALLENGE &nbsp;|&nbsp; GRADES 3–12</div>
+      
+      <div class="olympiad-primary-prop">
+        DON'T JUST LEARN AI.<br>PROVE WHAT YOU CAN DO WITH IT.
+      </div>
+      
+      <p class="olympiad-hero-desc">
+        A national AI experience designed to discover AI readiness, develop real capability and challenge the next generation of AI thinkers, creators and problem-solvers.
+      </p>
 
-        <!-- Minimal Horizontal Info Strip -->
-        <div class="hero-stats-strip">
-          <div class="stat-item">
-            <span class="stat-number">250+</span>
-            <span class="stat-label">SCHOOLS</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number">25,000+</span>
-            <span class="stat-label">STUDENTS</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number">3</span>
-            <span class="stat-label">REGIONS</span>
-          </div>
+      <!-- Glassmorphic Stats Strip -->
+      <div class="hero-stats-strip">
+        <div class="stat-item">
+          <span class="stat-number">250+</span>
+          <span class="stat-label">SCHOOLS</span>
         </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">25,000+</span>
+          <span class="stat-label">STUDENTS</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">3</span>
+          <span class="stat-label">REGIONS</span>
+        </div>
+      </div>
 
-        <div class="olympiad-cta-group">
-          <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary">REGISTER FOR AI OLYMPIAD</a>
-          <a href="#journey" class="btn btn-secondary">EXPLORE THE OLYMPIAD</a>
-        </div>
+      <div class="olympiad-cta-group">
+        <a href="#registration" onclick="switchRegTab('student')" class="btn btn-primary">REGISTER FOR AI OLYMPIAD</a>
+        <a href="#journey" class="btn btn-secondary">EXPLORE THE OLYMPIAD</a>
       </div>
     </div>
   </section>
