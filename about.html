@@ -293,49 +293,133 @@
       </div>
     </section>
 
-    <!-- SECTION 4: COUNCIL ADVISORY PANELS -->
-    <section class="section" id="panels" style="padding: 100px 0; background-color: #030305; border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <!-- SECTION 4: COUNCIL MEMBERS & ADVISORY LEADERSHIP -->
+    <section class="section" id="members" style="padding: 100px 0; background-color: #030305; border-bottom: 1px solid rgba(255,255,255,0.05);">
       <div class="movement-inner text-center" style="max-width: 1200px; margin: 0 auto;">
-        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">EXPERTISE & LEADERSHIP</span>
-        <h2 style="font-size: clamp(2.2rem, 3.8vw, 3.2rem); margin: 12px 0 8px;">Advisory Panels</h2>
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">GOVERNING COUNCIL MEMBERS</span>
+        <h2 style="font-size: clamp(2.2rem, 3.8vw, 3.2rem); margin: 12px 0 8px;">Council Leadership</h2>
         <p class="section-lead" style="margin: 0 auto 54px; max-width: 820px; font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary);">
-          Organized domain councils comprising industry veterans, school leaders, AI engineers, and educational researchers.
+          Meet the distinguished legal scholars, AI ethicists, academic directors, and technology researchers governing the AI Passport ecosystem.
         </p>
 
-        <!-- 4 Council Member / Panel Cards -->
-        <div class="council-members-grid" style="max-width: 1000px; grid-template-columns: repeat(2, 1fr); gap: 28px;">
+        <!-- FEATURED MEMBER CARD: DR. YATIN KATHURIA -->
+        <div style="max-width: 900px; margin: 0 auto 50px; text-align: left;" class="council-member-card-featured">
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(223, 207, 173, 0.35); border-radius: 24px; padding: 40px; display: grid; grid-template-columns: 240px 1fr; gap: 36px; align-items: center; box-shadow: 0 24px 60px rgba(0,0,0,0.8), 0 0 35px rgba(223, 207, 173, 0.08);" class="form-row">
+            
+            <div style="text-align: center;">
+              <div style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px auto; border: 3px solid var(--color-gold); box-shadow: 0 0 30px rgba(223, 207, 173, 0.25);">
+                <img src="dr-yatin-kathuria.jpg" alt="Dr. Yatin Kathuria" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <a href="https://www.justai.in" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size: 0.72rem; padding: 8px 16px; width: 100%; text-align: center; box-sizing: border-box;">🌐 www.justai.in</a>
+            </div>
+
+            <div>
+              <span class="panel-badge" style="background: rgba(223, 207, 173, 0.12); border-color: rgba(223, 207, 173, 0.35); color: var(--color-gold);">AI LAW & RESPONSIBLE GOVERNANCE LEAD</span>
+              <h3 style="font-family: 'Playfair Display', serif; font-size: 2.1rem; color: #ffffff; margin: 8px 0 6px 0;">Dr. Yatin Kathuria</h3>
+              <p style="font-family: 'Space Mono', monospace; font-size: 0.82rem; color: var(--color-gold); margin-bottom: 14px;">Founder, JustAI &nbsp;|&nbsp; Assistant Professor of Law, UPES Dehradun &nbsp;|&nbsp; AI Ethicist</p>
+              
+              <p style="font-size: 0.92rem; color: rgba(255, 255, 255, 0.85); line-height: 1.65; margin-bottom: 18px;">
+                Academician, legal scholar, and entrepreneur specializing in Artificial Intelligence Law, AI Governance, Data Privacy, and Algorithmic Liability. Leads research and policy engagement at JustAI and UPES to foster responsible AI adoption across education and enterprise frameworks.
+              </p>
+
+              <!-- Tags -->
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                <span style="font-size: 0.68rem; padding: 4px 10px; border-radius: 4px; background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.1);">PhD in Law (Panjab Univ)</span>
+                <span style="font-size: 0.68rem; padding: 4px 10px; border-radius: 4px; background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.1);">LL.M. Constitutional Law</span>
+                <span style="font-size: 0.68rem; padding: 4px 10px; border-radius: 4px; background: rgba(0,162,255,0.1); color: #58c4ff; border: 1px solid rgba(0,162,255,0.2);">King's College London (AI in Ed)</span>
+                <span style="font-size: 0.68rem; padding: 4px 10px; border-radius: 4px; background: rgba(46,204,113,0.1); color: #2ecc71; border: 1px solid rgba(46,204,113,0.2);">Linux Foundation Risk & Compliance</span>
+              </div>
+
+              <button onclick="document.getElementById('dr-yatin-modal').style.display='flex'" class="btn btn-primary" style="font-size: 0.78rem; padding: 12px 24px;">View Academic & Policy Dossier &rarr;</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- UPCOMING COUNCIL NOMINATIONS -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto;" class="journey-flow-5grid">
           
-          <div class="council-member-card">
-            <span class="panel-badge">ACADEMIC & CURRICULUM PANEL</span>
-            <h3 class="member-name">School Leadership & K-12 Council</h3>
-            <p class="member-title">Curriculum Standards & Pedagogical Integration</p>
-            <p class="member-bio">Composed of visionary school principals, academic directors, and curriculum coordinators ensuring seamless AI integration into existing school frameworks.</p>
+          <div class="council-member-card" style="padding: 32px 24px; text-align: left;">
+            <span class="panel-badge">ACADEMIC LEADERSHIP PANEL</span>
+            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #ffffff; margin: 8px 0 6px;">School & University Deans</h4>
+            <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.5; margin: 0 0 16px 0;">Guiding institutional curriculum integration and K-12 AI readiness benchmarks across schools.</p>
+            <a href="#nominate" class="btn btn-secondary" style="font-size: 0.7rem; padding: 8px 14px;">Nominate Educator &rarr;</a>
           </div>
 
-          <div class="council-member-card">
-            <span class="panel-badge" style="background: rgba(223, 207, 173, 0.12); border-color: rgba(223, 207, 173, 0.3); color: var(--color-gold);">AI TECH & ENGINEERING PANEL</span>
-            <h3 class="member-name">Software & LLM Architecture Board</h3>
-            <p class="member-title">Technical Validation & Build Audits</p>
-            <p class="member-bio">Leading software engineers, prompt architects, and data scientists overseeing project difficulty levels, API integration standards, and automated evaluation metrics.</p>
+          <div class="council-member-card" style="padding: 32px 24px; text-align: left;">
+            <span class="panel-badge" style="background: rgba(223, 207, 173, 0.12); color: var(--color-gold); border-color: rgba(223, 207, 173, 0.3);">AI TECH & SOFTWARE BOARD</span>
+            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #ffffff; margin: 8px 0 6px;">System Architects & LLM Leads</h4>
+            <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.5; margin: 0 0 16px 0;">Auditing hands-on student code repositories, API integrations, and database schemas.</p>
+            <a href="#nominate" class="btn btn-secondary" style="font-size: 0.7rem; padding: 8px 14px;">Nominate Engineer &rarr;</a>
           </div>
 
-          <div class="council-member-card">
-            <span class="panel-badge" style="background: rgba(46, 204, 113, 0.12); border-color: rgba(46, 204, 113, 0.3); color: #2ecc71;">RESPONSIBLE AI & ETHICS PANEL</span>
-            <h3 class="member-name">AI Safety & Governance Council</h3>
-            <p class="member-title">Ethics, Privacy & Safety Guidelines</p>
-            <p class="member-bio">Specialists in AI policy, cybersecurity, and student data protection establishing transparent ethical usage protocols for classrooms and enterprise workspaces.</p>
-          </div>
-
-          <div class="council-member-card">
-            <span class="panel-badge" style="background: rgba(155, 89, 182, 0.12); border-color: rgba(155, 89, 182, 0.3); color: #9b59b6;">INDUSTRY & INSTITUTIONAL GROWTH</span>
-            <h3 class="member-name">Workforce & Recruiter Alliance</h3>
-            <p class="member-title">Career Verification & Enterprise Hiring</p>
-            <p class="member-bio">Corporate technology leaders and recruitment heads defining skill coordinates that align directly with high-growth AI roles and modern technology careers.</p>
+          <div class="council-member-card" style="padding: 32px 24px; text-align: left;">
+            <span class="panel-badge" style="background: rgba(155, 89, 182, 0.12); color: #9b59b6; border-color: rgba(155, 89, 182, 0.3);">WORKFORCE & HIRING ALLIANCE</span>
+            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #ffffff; margin: 8px 0 6px;">Enterprise Talent Directors</h4>
+            <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.5; margin: 0 0 16px 0;">Defining verifiable skill coordinates aligned with modern AI engineering and analytics roles.</p>
+            <a href="#nominate" class="btn btn-secondary" style="font-size: 0.7rem; padding: 8px 14px;">Nominate Executive &rarr;</a>
           </div>
 
         </div>
       </div>
     </section>
+
+    <!-- EXECUTIVE PROFILE MODAL: DR. YATIN KATHURIA -->
+    <div id="dr-yatin-modal" class="proto-modal-backdrop" style="display: none;" onclick="if(event.target===this) this.style.display='none'">
+      <div class="proto-modal-content" style="max-width: 680px; text-align: left; background: rgba(15, 16, 22, 0.98); border-color: var(--color-gold); padding: 36px; max-height: 85vh; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px;">
+          <div>
+            <span class="panel-badge" style="background: rgba(223, 207, 173, 0.15); color: var(--color-gold); border-color: var(--color-gold);">COUNCIL LEADERSHIP DOSSIER</span>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #ffffff; margin: 6px 0 2px 0;">Dr. Yatin Kathuria</h2>
+            <p style="font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--color-gold); margin: 0;">Founder, JustAI | Asst. Professor of Law, UPES Dehradun</p>
+          </div>
+          <button onclick="document.getElementById('dr-yatin-modal').style.display='none'" style="background: transparent; border: none; color: #ffffff; font-size: 1.5rem; cursor: pointer; padding: 0 8px;">&times;</button>
+        </div>
+
+        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.65; display: flex; flex-direction: column; gap: 18px;">
+          <div>
+            <h4 style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px;">EXECUTIVE SUMMARY</h4>
+            <p style="margin: 0;">Academician, legal scholar, and entrepreneur specializing in Artificial Intelligence Law, AI Governance, Data Privacy, and Intellectual Property Rights. Serves as Assistant Professor of Law at UPES Dehradun and leads research & policy engagement at JustAI (www.justai.in) to advance responsible AI adoption through education and interdisciplinary policy research.</p>
+          </div>
+
+          <div>
+            <h4 style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px;">ACADEMIC & PROFESSIONAL POSITIONS</h4>
+            <ul style="margin: 0; padding-left: 20px; color: var(--color-text-secondary); font-size: 0.85rem; display: flex; flex-direction: column; gap: 6px;">
+              <li><strong style="color: #fff;">Assistant Professor of Law</strong> — School of Law, UPES Dehradun (Jan 2026 – Present)</li>
+              <li><strong style="color: #fff;">Founder & Head (Research & Education)</strong> — JustAI.in (Jan 2024 – Present)</li>
+              <li><strong style="color: #fff;">Assistant Professor</strong> — Symbiosis Law School, NOIDA (Oct 2024 – Jan 2026)</li>
+              <li><strong style="color: #fff;">Assistant Professor</strong> — SRM University, Sonepat (Mar 2022 – Oct 2024)</li>
+              <li><strong style="color: #fff;">Assistant Professor</strong> — Christ University, Lavasa (Jul 2021 – Feb 2022)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px;">ACADEMIC QUALIFICATIONS</h4>
+            <p style="margin: 0 0 4px 0;"><strong style="color: #fff;">Ph.D. in Law</strong> — Department of Laws, Panjab University, Chandigarh (2016–2020)</p>
+            <p style="margin: 0;"><strong style="color: #fff;">LL.M. in Constitutional Law</strong> — Rajiv Gandhi National University of Law (RGNUL), Punjab (2014–2015)</p>
+          </div>
+
+          <div>
+            <h4 style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px;">CERTIFICATIONS & CREDENTIALS</h4>
+            <ul style="margin: 0; padding-left: 20px; color: var(--color-text-secondary); font-size: 0.85rem; display: flex; flex-direction: column; gap: 4px;">
+              <li>King's College London / FutureLearn — Certificate Course on AI in Education</li>
+              <li>Canva — AI in Classroom Certification</li>
+              <li>The Linux Foundation (LFS120) — Conversational AI: Compliance & Risk Mitigation</li>
+              <li>Google Cloud — Responsible AI: Applying AI Principles</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px;">RESEARCH & POLICY SPECIALIZATIONS</h4>
+            <p style="margin: 0;">Responsible AI Frameworks, Algorithmic Liability, AI & IPR, Data Protection Regulations. Co-author of "Responsible AI Impact Assessment Mechanism for India" (AIP Conference Proceedings).</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; text-align: right; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;">
+          <a href="https://www.justai.in" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 0.78rem; padding: 10px 20px;">Visit Official Platform (www.justai.in) &rarr;</a>
+        </div>
+      </div>
+    </div>
 
     <!-- SECTION 5: COUNCIL DIRECTIVES & INSIGHTS -->
     <section class="section" id="insights" style="padding: 100px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
