@@ -6560,17 +6560,27 @@ p, .section-lead, .section-subtext {
   margin: 0 auto;
 }
 
-.council-profiles-dual-grid {
+.council-profiles-dual-grid,
+.council-profiles-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 28px;
-  max-width: 1150px;
+  max-width: 1240px;
   margin: 0 auto 50px auto;
   text-align: left;
 }
 
-@media (max-width: 860px) {
-  .council-profiles-dual-grid {
+@media (max-width: 1024px) {
+  .council-profiles-dual-grid,
+  .council-profiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 720px) {
+  .council-profiles-dual-grid,
+  .council-profiles-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
