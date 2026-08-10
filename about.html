@@ -108,6 +108,22 @@
       background: rgba(223, 207, 173, 0.03);
       transform: translateY(-3px);
     }
+
+    .council-profiles-dual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      max-width: 1150px;
+      margin: 0 auto 50px auto;
+      text-align: left;
+    }
+
+    @media (max-width: 860px) {
+      .council-profiles-dual-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -303,7 +319,7 @@
         </p>
 
         <!-- FEATURED COUNCIL MEMBERS GRID (DR. YATIN KATHURIA & VIKRAM PAWAR) -->
-        <div style="max-width: 1100px; margin: 0 auto 50px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; text-align: left;" class="journey-flow-5grid">
+        <div class="council-profiles-dual-grid">
           
           <!-- MEMBER 1: DR. YATIN KATHURIA -->
           <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(223, 207, 173, 0.35); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 25px rgba(223, 207, 173, 0.08);">
