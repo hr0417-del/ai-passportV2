@@ -36,6 +36,7 @@ export default defineConfig({
         about: 'about.html',
         contact: 'contact.html',
         verify: 'verify.html',
+        projects: 'projects.html',
         login: 'login.html',
         app: 'app/index.html',
         olympiad: 'ai-olympiad.html'
