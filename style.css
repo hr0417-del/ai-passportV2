@@ -8419,6 +8419,245 @@ p, .section-lead, .section-subtext {
   }
 }
 
+/* ==========================================================================
+   B2C HOMEPAGE V1 NARRATIVE STYLING & COMPONENT HELPERS
+   ========================================================================== */
+
+/* Section 2: Gap Progression Row (ASK -> CREATE -> AUTOMATE -> BUILD -> SOLVE) */
+.gap-progression-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.gap-step-pill {
+  padding: 12px 22px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-secondary);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.gap-step-pill.highlight {
+  background: rgba(0, 162, 255, 0.12);
+  border-color: rgba(0, 162, 255, 0.4);
+  color: #58c4ff;
+  box-shadow: 0 0 20px rgba(0, 162, 255, 0.2);
+}
+
+.gap-arrow {
+  color: var(--color-gold);
+  font-size: 1.1rem;
+  opacity: 0.6;
+}
+
+/* Section 4: 4-Stage Journey Grid (LEARN • BUILD • ADVANCE • PROVE) */
+.stage-journey-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin: 48px 0;
+  text-align: left;
+}
+
+@media (max-width: 992px) {
+  .stage-journey-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 568px) {
+  .stage-journey-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stage-journey-card {
+  background: rgba(18, 19, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 32px 24px;
+  transition: all 0.35s ease;
+}
+
+.stage-journey-card:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(223, 207, 173, 0.1);
+}
+
+.stage-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.2em;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.stage-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.stage-desc {
+  font-size: 0.86rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Section 5: Grows Matrix Grid */
+.grows-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin: 36px 0;
+}
+
+@media (max-width: 900px) {
+  .grows-matrix-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grows-matrix-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.grows-item-badge {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  border-radius: 12px;
+  padding: 16px 12px;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.grows-item-badge:hover {
+  background: rgba(223, 207, 173, 0.08);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+/* Section 6: AI Passport Live Commercial Conversion Card (₹999) */
+.live-commercial-card {
+  background: rgba(18, 19, 26, 0.95);
+  border: 1px solid rgba(223, 207, 173, 0.4);
+  border-radius: 28px;
+  padding: 48px;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: left;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(223, 207, 173, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .live-commercial-card {
+    padding: 32px 24px;
+  }
+}
+
+.live-price-tag {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1;
+  margin: 16px 0;
+}
+
+.live-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 24px;
+  margin: 28px 0 36px 0;
+}
+
+@media (max-width: 600px) {
+  .live-features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.live-feat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.live-feat-check {
+  color: var(--color-gold);
+  font-weight: 700;
+}
+
+/* Section 7: Go Further Compact Ecosystem Cards */
+.go-further-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 48px 0;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .go-further-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.go-further-card {
+  background: rgba(18, 19, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.35s ease;
+}
+
+.go-further-card:hover {
+  border-color: rgba(0, 162, 255, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 162, 255, 0.1);
+}
+
+/* Section 9: Ledger Progression Flow */
+.ledger-progression-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 40px 0;
+}
+
+
 
 
 
