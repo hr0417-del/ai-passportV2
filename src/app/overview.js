@@ -2,7 +2,7 @@
    MY AI PASSPORT™ — STAGE 2 OVERVIEW ENGINE (VISUAL & UX REFINED)
    ========================================================================== */
 
-import { supabase } from '../lib/supabase.js';
+import { supabase, safeFetch } from '../lib/supabase.js';
 
 export async function renderOverview(containerEl, user) {
   if (!containerEl || !user) return;
@@ -526,14 +526,4 @@ function escapeHtml(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
-}
-
-async function safeFetch(queryPromise, fallbackData, timeoutMs = 1500) {
-  try {
-    const timeout = new Promise((resolve) => setTimeout(() => resolve({ data: fallbackData }), timeoutMs));
-    const result = await Promise.race([queryPromise, timeout]);
-    return (result && result.data) ? result.data : fallbackData;
-  } catch (e) {
-    return fallbackData;
-  }
 }

@@ -2,7 +2,7 @@
    MY AI PASSPORT™ â€” STAGE 7 CAPABILITY INTELLIGENCE ENGINE
    ========================================================================== */
 
-import { supabase } from '../lib/supabase.js';
+import { supabase, safeFetch } from '../lib/supabase.js';
 
 // The 5 Canonical Dimensions of the AI Capability Framework™
 export const CAPABILITY_DIMENSIONS = [
@@ -49,7 +49,7 @@ export const STATE_EXPLANATIONS = {
   ADVANCE: 'Authoritative recognition of deeper, sustained, and increasingly sophisticated capability within this dimension.'
 };
 
-// 20 Deterministic Next Frontier Guidance Combinations (5 dimensions Ã— 4 states)
+// 20 Deterministic Next Frontier Guidance Combinations (5 dimensions × 4 states)
 export const NEXT_FRONTIER_GUIDANCE = {
   UNDERSTAND: {
     EXPLORE: 'Begin exploring core AI principles, model capabilities, prompt structures, and systemic limitations through structured pathways.',
@@ -91,22 +91,15 @@ export async function renderCapabilityPage(containerEl, user, targetDimensionId 
   try {
     const isRealGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id);
 
-    // Single Scoped Fetch of All Learner Signals & Authoritative State
-    const [capStatesRes, evidenceRes, projectsRes, learnProgressRes, programmesRes, credsRes] = isRealGuid ? await Promise.all([
-      supabase.from('capability_states').select('*').eq('user_id', user.id),
-      supabase.from('evidence').select('*').eq('user_id', user.id),
-      supabase.from('projects').select('*').eq('user_id', user.id),
-      supabase.from('learning_progress').select('*').eq('user_id', user.id),
-      supabase.from('programmes').select('*'),
-      supabase.from('credentials').select('*').eq('user_id', user.id)
-    ]) : [{ data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }];
-
-    const capStates = (capStatesRes && capStatesRes.data) || [];
-    const evidenceList = (evidenceRes && evidenceRes.data) || [];
-    const projectsList = (projectsRes && projectsRes.data) || [];
-    const learningProgress = (learnProgressRes && learnProgressRes.data) || [];
-    const programmesList = (programmesRes && programmesRes.data) || [];
-    const credentialsList = (credsRes && credsRes.data) || [];
+    // Single Scoped Fetch of All Learner Signals & Authoritative State using safeFetch
+    const [capStates, evidenceList, projectsList, learningProgress, programmesList, credentialsList] = isRealGuid ? await Promise.all([
+      safeFetch(supabase.from('capability_states').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('evidence').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('projects').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('learning_progress').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('programmes').select('*'), []),
+      safeFetch(supabase.from('credentials').select('*').eq('user_id', user.id), [])
+    ]) : [[], [], [], [], [], []];
 
     // Check URL selected dimension
     const urlParams = new URLSearchParams(window.location.search);

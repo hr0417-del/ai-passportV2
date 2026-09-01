@@ -2,7 +2,7 @@
    MY AI PASSPORT™ — STAGE 3 MY PASSPORT PAGE ENGINE (VISUAL & UX REFINEMENT)
    ========================================================================== */
 
-import { supabase } from '../lib/supabase.js';
+import { supabase, safeFetch } from '../lib/supabase.js';
 
 export async function renderPassportPage(containerEl, user) {
   if (!containerEl || !user) return;
@@ -526,13 +526,4 @@ window.showPassportQrModal = function(num) {
   alert(`CANONICAL QR TARGET URL:\n${url}`);
 };
 
-async function safeFetch(queryPromise, fallbackData, timeoutMs = 1500) {
-  try {
-    const timeout = new Promise((resolve) => setTimeout(() => resolve({ data: fallbackData }), timeoutMs));
-    const result = await Promise.race([queryPromise, timeout]);
-    return (result && result.data) ? result.data : fallbackData;
-  } catch (e) {
-    return fallbackData;
-  }
-}
 

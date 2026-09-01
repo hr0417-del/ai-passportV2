@@ -2,7 +2,7 @@
    MY AI PASSPORT™ â€” STAGE 6 CREDENTIALS & VERIFICATION WORKSPACE
    ========================================================================== */
 
-import { supabase } from '../lib/supabase.js';
+import { supabase, safeFetch } from '../lib/supabase.js';
 
 export async function renderCredentialsPage(containerEl, user, targetCredentialId = null) {
   if (!containerEl || !user) return;
@@ -12,18 +12,15 @@ export async function renderCredentialsPage(containerEl, user, targetCredentialI
   try {
     const isRealGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id);
 
-    // Fetch user credentials, evidence, projects, and programmes in parallel
-    const [credsRes, evRes, projRes, progRes] = isRealGuid ? await Promise.all([
-      supabase.from('credentials').select('*').eq('user_id', user.id).order('created_at', { ascending: false }),
-      supabase.from('evidence').select('*').eq('user_id', user.id),
-      supabase.from('projects').select('*').eq('user_id', user.id),
-      supabase.from('programmes').select('*')
-    ]) : [{ data: [] }, { data: [] }, { data: [] }, { data: [] }];
+    // Fetch user credentials, evidence, projects, and programmes in parallel using safeFetch
+    const [credentialsList, evidenceList, projectsList, programmesList] = isRealGuid ? await Promise.all([
+      safeFetch(supabase.from('credentials').select('*').eq('user_id', user.id).order('created_at', { ascending: false }), []),
+      safeFetch(supabase.from('evidence').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('projects').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('programmes').select('*'), [])
+    ]) : [[], [], [], []];
 
-    let credentials = (credsRes && credsRes.data) || [];
-    const evidenceList = (evRes && evRes.data) || [];
-    const projectsList = (projRes && projRes.data) || [];
-    const programmesList = (progRes && progRes.data) || [];
+    let credentials = credentialsList;
 
     if (!credentials || credentials.length === 0) {
       credentials = [

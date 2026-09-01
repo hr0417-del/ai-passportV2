@@ -2,7 +2,7 @@
    MY AI PASSPORT™ â€” STAGE 5 PROJECTS AS EVIDENCE ENGINE
    ========================================================================== */
 
-import { supabase } from '../lib/supabase.js';
+import { supabase, safeFetch } from '../lib/supabase.js';
 
 // Development Fixtures for Programmes with Build Outcomes (used when DB is empty)
 const PROGRAMME_BUILD_FIXTURES = [
@@ -40,16 +40,14 @@ export async function renderProjectsPage(containerEl, user, targetProjectId = nu
   try {
     const isRealGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id);
 
-    // Fetch user projects, evidence, and programmes in parallel
-    const [projectsRes, evidenceRes, dbProgrammesRes] = isRealGuid ? await Promise.all([
-      supabase.from('projects').select('*').eq('user_id', user.id).order('updated_at', { ascending: false }),
-      supabase.from('evidence').select('*').eq('user_id', user.id),
-      supabase.from('programmes').select('*').eq('publication_status', 'PUBLISHED')
-    ]) : [{ data: [] }, { data: [] }, { data: [] }];
+    // Fetch user projects, evidence, and programmes in parallel using safeFetch
+    const [projectsList, evidenceList, dbProgrammes] = isRealGuid ? await Promise.all([
+      safeFetch(supabase.from('projects').select('*').eq('user_id', user.id).order('updated_at', { ascending: false }), []),
+      safeFetch(supabase.from('evidence').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('programmes').select('*').eq('publication_status', 'PUBLISHED'), [])
+    ]) : [[], [], []];
 
-    let projects = (projectsRes && projectsRes.data) || [];
-    const evidenceList = (evidenceRes && evidenceRes.data) || [];
-    const dbProgrammes = (dbProgrammesRes && dbProgrammesRes.data) || [];
+    let projects = projectsList;
 
     if (!projects || projects.length === 0) {
       projects = [

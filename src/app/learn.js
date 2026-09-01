@@ -2,7 +2,7 @@
    MY AI PASSPORT™ — STAGE 4 LEARN PAGE ENGINE (UX REFINEMENT PASS)
    ========================================================================== */
 
-import { supabase } from '../lib/supabase.js';
+import { supabase, safeFetch } from '../lib/supabase.js';
 
 // Isolated Development Fixtures (Used when DB catalogue table is empty)
 const DEVELOPMENT_FIXTURES = [
@@ -96,16 +96,14 @@ export async function renderLearnPage(containerEl, user) {
   try {
     const isRealGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id);
 
-    // Fetch user progress and programmes in parallel
-    const [progressRes, dbProgrammesRes, capabilityRes] = isRealGuid ? await Promise.all([
-      supabase.from('learning_progress').select('*').eq('user_id', user.id),
-      supabase.from('programmes').select('*').eq('publication_status', 'PUBLISHED'),
-      supabase.from('capability_states').select('*').eq('user_id', user.id)
-    ]) : [{ data: [] }, { data: [] }, { data: [] }];
+    // Fetch user progress and programmes in parallel using safeFetch
+    const [userProgressList, dbProgrammes, userCapabilities] = isRealGuid ? await Promise.all([
+      safeFetch(supabase.from('learning_progress').select('*').eq('user_id', user.id), []),
+      safeFetch(supabase.from('programmes').select('*').eq('publication_status', 'PUBLISHED'), []),
+      safeFetch(supabase.from('capability_states').select('*').eq('user_id', user.id), [])
+    ]) : [[], [], []];
 
-    let userProgress = (progressRes && progressRes.data) || [];
-    const dbProgrammes = (dbProgrammesRes && dbProgrammesRes.data) || [];
-    const userCapabilities = (capabilityRes && capabilityRes.data) || [];
+    let userProgress = userProgressList;
 
     if (!userProgress || userProgress.length === 0) {
       userProgress = [

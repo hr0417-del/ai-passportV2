@@ -19,6 +19,13 @@ async function initUserSession() {
   let user = await getCurrentUser();
   
   if (!user) {
+    try {
+      const stored = localStorage.getItem('aipassport_demo_user');
+      if (stored) user = JSON.parse(stored);
+    } catch(e) {}
+  }
+
+  if (!user) {
     user = {
       id: '60bba3f0-6b51-4af8-93a1-8356d306dcea',
       email: 'test.learner@aipassport.org',

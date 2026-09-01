@@ -139,4 +139,15 @@ export async function ensureLearnerProvisioned(user) {
   } catch (e) {}
 }
 
+export async function safeFetch(queryPromise, fallbackData, timeoutMs = 2000) {
+  try {
+    const timeout = new Promise((resolve) => setTimeout(() => resolve({ data: fallbackData }), timeoutMs));
+    const result = await Promise.race([queryPromise, timeout]);
+    return (result && result.data) ? result.data : fallbackData;
+  } catch (e) {
+    return fallbackData;
+  }
+}
+
+
 
