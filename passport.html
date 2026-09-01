@@ -3,11 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI Passport™ digital learning identity. Learn about the verified profile, dashboard, badges, and portfolios included with Ekaakshar programs.">
+  <meta name="description" content="AI Passport™ — Meet Your AI Passport™. One identity for your journey from learning AI to building with it. A growing AI capability identity connecting learning, projects, challenges, achievements, credentials, and portfolio.">
   <meta name="robots" content="index, follow">
-  <title>AI Passport™ | Your Lifelong AI Identity</title>
+  <title>AI Passport™ | Meet Your AI Passport™</title>
   
   <link rel="canonical" href="https://aipassport.ekaakshareducation.com/passport.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aipassport.ekaakshareducation.com/passport.html">
+  <meta property="og:title" content="AI Passport™ | Meet Your AI Passport™">
+  <meta property="og:description" content="One identity for your journey from learning AI to building with it.">
+  <meta property="og:image" content="https://aipassport.ekaakshareducation.com/FRAME%201.webp">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aipassport.ekaakshareducation.com/passport.html">
+  <meta property="twitter:title" content="AI Passport™ | Meet Your AI Passport™">
+  <meta property="twitter:description" content="One identity for your journey from learning AI to building with it.">
+  <meta property="twitter:image" content="https://aipassport.ekaakshareducation.com/FRAME%201.webp">
 
   <!-- Favicon -->
   <link rel="icon" type="image/webp" href="FRAME 1.webp">
@@ -15,14 +29,14 @@
   <!-- Premium Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
   
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Overlays -->
+  <!-- Film Grain & Vignette Overlays -->
   <div class="film-grain"></div>
   <div class="vignette-overlay"></div>
 
@@ -32,7 +46,7 @@
     <div class="cursor-glow"></div>
   </div>
 
-  <!-- Global Header -->
+  <!-- Global Header Navigation -->
   <header class="global-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
@@ -41,15 +55,18 @@
       </a>
       <nav class="nav-links">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="passport.html" class="nav-link active">AI Passport</a>
-        <a href="live.html" class="nav-link">AI Passport Live</a>
         <a href="academy.html" class="nav-link">Academy</a>
-        <a href="ai-olympiad.html" class="nav-link">AI Olympiad</a>
+        <a href="ai-olympiad.html" class="nav-link">AI Olympiad™</a>
+        <a href="passport.html" class="nav-link active">AI Passport</a>
+        <a href="passport.html#projects" class="nav-link">Projects</a>
+        <a href="about.html" class="nav-link">Council</a>
+        <a href="about.html#insights" class="nav-link">Insights</a>
         <a href="verify.html" class="nav-link">Verify</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="login.html" class="nav-link" style="color: var(--color-gold);">Sign In</a>
       </nav>
-      <a href="live.html" class="nav-cta-btn">Join Live</a>
+
+      <!-- Dominant Header CTA: START YOUR AI PASSPORT -->
+      <a href="live.html" class="nav-cta-btn">START YOUR AI PASSPORT</a>
 
       <button class="sound-toggle" id="sound-toggle" aria-label="Toggle Audio Feedback">
         <svg class="sound-icon sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -77,304 +94,560 @@
     <div class="particles-container" id="particles-container"></div>
   </div>
 
-  <main class="scroll-container">
+  <main class="scroll-container" id="scroll-container">
 
-    <!-- HERO / CONCEPT -->
-    <section class="section hero-section" id="hero">
+    <!-- SECTION 1 — HERO -->
+    <section class="section hero-section" id="hero" style="padding-top: 140px; padding-bottom: 90px;">
       <div class="section-container">
         <div class="hero-text-block">
-          <span class="hero-editorial-label">VERIFIED CAPABILITY CREDENTIAL</span>
-          <h1>Your Lifetime Learning Ledger for the Builder Era.</h1>
-          <p class="section-lead">Traditional certificates gather dust. Your AI Passport records verified capability. It is a live, shareable credential system featuring your physical passport card, public digital verification ledger, and real project builds.</p>
-          <p class="section-subtext">
-            Every paid Ekaakshar program activates your official AI Passport™. It serves as your verifiable record of prompts mastered, custom database architectures, full-stack model integrations, and practical skill badges.
-          </p>
           
-          <div class="btn-group">
-            <a href="live.html" class="btn btn-primary">Activate via Live Webinar (₹999)</a>
-            <a href="verify.html" class="btn btn-secondary">Verify Certificate</a>
+          <div class="webinar-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">✦ YOUR AI IDENTITY</span>
           </div>
+
+          <h1 class="hero-title" style="font-size: clamp(2.6rem, 5vw, 4.2rem); line-height: 1.08; margin-bottom: 12px;">
+            MEET YOUR<br>AI PASSPORT™
+          </h1>
+
+          <h2 class="hero-tagline" style="font-size: clamp(1.2rem, 2vw, 1.6rem); color: var(--color-gold); font-weight: 500; margin-bottom: 20px;">
+            ONE IDENTITY FOR YOUR JOURNEY FROM LEARNING AI TO BUILDING WITH IT.
+          </h2>
+
+          <p class="hero-body-text" style="font-size: 1.1rem; line-height: 1.75; color: rgba(255, 255, 255, 0.88); margin-bottom: 32px; max-width: 580px;">
+            AI Passport brings your AI learning, projects, achievements and developing capability together in one continuing journey.
+          </p>
+
+          <div class="btn-group">
+            <a href="live.html" class="btn btn-primary" style="padding: 16px 32px;">START YOUR JOURNEY &rarr;</a>
+            <a href="#big-idea" class="btn btn-secondary" style="padding: 16px 28px;">EXPLORE THE PASSPORT &darr;</a>
+          </div>
+
         </div>
+
         <div class="hero-image-block">
           <div class="image-wrapper hero-passport-card-wrapper">
             <div class="hero-passport-glow"></div>
-            <img src="FRAME 2.webp" alt="AI Passport Floating WebP" class="section-image" loading="eager">
-          </div>
-        </div>
-      </div>
-
-      <!-- Trust stats under hero -->
-      <div class="movement-inner" style="margin-top: 56px;">
-        <div class="trust-stats-grid">
-          <div class="trust-stat-card">
-            <h3 class="stat-counter" data-target="5000" data-suffix="+">0</h3>
-            <p>Registered Citizens</p>
-          </div>
-          <div class="trust-stat-card">
-            <h3 class="stat-counter" data-target="98" data-suffix="%">0</h3>
-            <p>Webhook Success</p>
-          </div>
-          <div class="trust-stat-card">
-            <h3 class="stat-counter" data-target="12" data-suffix="">0</h3>
-            <p>Live Sessions</p>
+            <div class="passport-shine-container">
+              <img src="FRAME 1.webp" alt="AI Passport Physical Card Identity" class="section-image" loading="eager">
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WHAT YOU RECEIVE SECTION -->
-    <section class="section" id="passport-features">
-      <div class="section-container reverse">
-        <div class="text-block">
-          <h2>What Your Passport Holds</h2>
-          <p class="section-lead">Ten integrated attributes forming a unified, verifiable digital workspace profile.</p>
-          
-          <div class="audience-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 32px; gap: 20px;">
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">01. AI Passport ID</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">Your Verified Credentials Key. A unique digital identifier validating your membership in the Founding AI Generation.</p>
-            </div>
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">02. Digital Profile</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">Showcase Your Builds. A public, shareable dashboard displaying your verified prompting skills, custom databases, and active milestones to colleges and employers.</p>
-            </div>
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">03. Personal Dashboard</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">Manage Project Deployments. Access recorded sessions, download project templates, and submit builds directly to Ekaakshar mentors.</p>
-            </div>
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">04. Progress Tracking</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">Map Your Growth. Clear ranking states mapping your progression from level 1 foundations up to level 5 leadership.</p>
-            </div>
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">05. Skill Badges</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">Earn Competency Seals. Unlocked icons verifying specialized skills (e.g., Prompt Engineering, Database Architecture).</p>
-            </div>
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">06. Certificate Wallet</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">Secure digital wallet preserving verified credentials with one-click sharing options.</p>
-            </div>
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">07. Project Portfolio</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">Live Project Vault. Direct hosting coordinates displaying the custom automation pipelines and full-stack pages you deploy.</p>
-            </div>
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">08. Learning History</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">Historical ledger tracking active workshops, speaker sessions, and hackathons attended.</p>
-            </div>
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">09. Community Access</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">Exclusive discord forums to collaborate with school leaders, builders, and educators.</p>
-            </div>
-            <div class="audience-card" style="align-items: flex-start; text-align: left; padding: 24px;">
-              <span style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--color-gold); margin-bottom: 8px;">10. Lifetime Record</span>
-              <p style="font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.4;">A permanent, tamper-proof record of verified capability that outlasts traditional school marks.</p>
-            </div>
-          </div>
-        </div>
-        <div class="image-block">
-          <div class="image-wrapper">
-            <img src="FRAME 3.webp" alt="AI Passport Details Grid" class="section-image" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EVERY PAID PROGRAMME INCLUDES -->
-    <section class="section" id="benefits" style="background-color: #030303;">
-      <div class="movement-inner text-center" style="text-align: center;">
-        <h2>Every Paid Programme Includes</h2>
-        <p class="section-lead" style="margin-left:auto !important; margin-right:auto !important;">Common core benefits provided to all Ekaakshar builders upon enrollment.</p>
+    <!-- SECTION 2 — THE BIG IDEA -->
+    <section class="section" id="big-idea" style="padding: 110px 0; border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05); background-color: #030305;">
+      <div class="movement-inner text-center" style="max-width: 960px; margin: 0 auto; text-align: center;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">THE CENTRAL IDEA</span>
         
-        <div class="benefits-grid">
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-            </div>
-            <h4>Lifetime Passport</h4>
-            <p>Permanent credentials mapping capability.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <circle cx="12" cy="10" r="3"/>
-                <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
-              </svg>
-            </div>
-            <h4>AI Passport ID</h4>
-            <p>Your unique verified digital identifier.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <line x1="9" y1="3" x2="9" y2="21"/>
-                <line x1="15" y1="3" x2="15" y2="21"/>
-                <line x1="3" y1="9" x2="21" y2="9"/>
-                <line x1="3" y1="15" x2="21" y2="15"/>
-              </svg>
-            </div>
-            <h4>Personal Dashboard</h4>
-            <p>Manage learning and project submissions.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-              </svg>
-            </div>
-            <h4>Progress Tracking</h4>
-            <p>Active mapping of your AI level milestone growth.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </div>
-            <h4>Live Instructor Learning</h4>
-            <p>Interact directly with AI builders during lessons.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <polyline points="16 18 22 12 16 6"/>
-                <polyline points="8 6 2 12 8 18"/>
-              </svg>
-            </div>
-            <h4>Hands-on Projects</h4>
-            <p>Develop real applications using APIs and frontends.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-                <polyline points="10 9 9 9 8 9"/>
-              </svg>
-            </div>
-            <h4>Practical Assignments</h4>
-            <p>Solve structured problems to lock in skill logic.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <h4>Digital Certificate</h4>
-            <p>Ledger-backed credentials verification.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
-            </div>
-            <h4>Community Access</h4>
-            <p>Collaborate inside private channels with other creators.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-              </svg>
-            </div>
-            <h4>Project Portfolio</h4>
-            <p>A hosted website presenting everything you build.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <circle cx="12" cy="8" r="7"/>
-                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-              </svg>
-            </div>
-            <h4>Skill Badges</h4>
-            <p>Claim visual micro-milestones for specific prompt tasks.</p>
-          </div>
-          <div class="benefit-item-card">
-            <div class="benefit-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                <path d="M12 2a10 10 0 0 1 7.54 16.59l-1.42-1.42A8 8 0 1 0 12 20v2a10 10 0 0 1 0-20z"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <h4>Future Guidelines</h4>
-            <p>Algorithm recommendations suggesting your next advanced steps.</p>
-          </div>
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.15; margin: 16px 0 24px;">
+          AI SKILLS SHOULD BE MORE<br>THAN A CERTIFICATE.
+        </h2>
+
+        <p class="section-lead" style="font-size: 1.1rem; line-height: 1.8; color: var(--color-text-secondary); margin-bottom: 32px;">
+          A course tells you what you studied. A portfolio shows what you created.<br>AI Passport connects the journey between the two.
+        </p>
+
+        <p style="font-size: 1.02rem; line-height: 1.75; color: rgba(255,255,255,0.85); margin-bottom: 36px; max-width: 780px; margin-left: auto; margin-right: auto;">
+          It brings together what you learn, what you build, the challenges you take on and the capabilities you develop.
+        </p>
+
+        <!-- Visual Sequence: LEARNING -> PROJECTS -> CAPABILITY -> ACHIEVEMENTS -> CREDENTIALS -->
+        <div class="gap-progression-row">
+          <span class="gap-step-pill">LEARNING</span>
+          <span class="gap-arrow">&rarr;</span>
+          <span class="gap-step-pill highlight">PROJECTS</span>
+          <span class="gap-arrow">&rarr;</span>
+          <span class="gap-step-pill highlight">CAPABILITY</span>
+          <span class="gap-arrow">&rarr;</span>
+          <span class="gap-step-pill">ACHIEVEMENTS</span>
+          <span class="gap-arrow">&rarr;</span>
+          <span class="gap-step-pill">CREDENTIALS</span>
         </div>
       </div>
     </section>
 
-    <!-- FINAL CTA -->
-    <section class="section final-cta-section" id="final-cta" style="background-color: #000000;">
-      <div class="movement-inner text-center" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 32px;">
-        <div style="max-width: 700px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
-          <h2>Activate Your Lifelong AI Identity</h2>
-          <p style="color: var(--color-text-secondary); line-height: 1.6;">
-            Your AI Passport is ready for initialization. Join the Founding Generation cohort in "The AI Revolution Begins" live program to claim your custom passport credentials today.
+    <!-- SECTION 3 — THE PASSPORT JOURNEY -->
+    <section class="section" id="journey" style="padding: 120px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="movement-inner text-center" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">5-STAGE PROGRESSION</span>
+        
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.4rem); margin: 12px 0 16px;">
+          YOUR PASSPORT GROWS WITH YOU.
+        </h2>
+
+        <p class="section-lead" style="margin: 0 auto 36px; max-width: 720px; font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary);">
+          A continuing journey that expands as you gain new skills, build projects, and unlock real-world capability.
+        </p>
+
+        <!-- 5-Stage Progression Cards -->
+        <div class="passport-5stage-grid">
+          
+          <div class="passport-5stage-card">
+            <span class="stage-num">01 &bull; STAGE</span>
+            <h3 class="stage-title">DISCOVER</h3>
+            <p class="stage-desc">Your first experiences with AI.</p>
+          </div>
+
+          <div class="passport-5stage-card">
+            <span class="stage-num">02 &bull; STAGE</span>
+            <h3 class="stage-title">EXPLORE</h3>
+            <p class="stage-desc">Experiment with AI tools and ideas.</p>
+          </div>
+
+          <div class="passport-5stage-card">
+            <span class="stage-num">03 &bull; STAGE</span>
+            <h3 class="stage-title">CREATE</h3>
+            <p class="stage-desc">Build projects with AI.</p>
+          </div>
+
+          <div class="passport-5stage-card">
+            <span class="stage-num">04 &bull; STAGE</span>
+            <h3 class="stage-title">APPLY</h3>
+            <p class="stage-desc">Use AI to solve real problems.</p>
+          </div>
+
+          <div class="passport-5stage-card">
+            <span class="stage-num">05 &bull; STAGE</span>
+            <h3 class="stage-title">PROVE</h3>
+            <p class="stage-desc">Demonstrate what you can do.</p>
+          </div>
+
+        </div>
+
+        <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(223, 207, 173, 0.3); border-radius: 16px; padding: 24px 32px; max-width: 780px; margin: 32px auto 0 auto;">
+          <p style="font-family: 'Space Mono', monospace; font-size: 0.82rem; color: var(--color-gold); letter-spacing: 0.12em; text-transform: uppercase; margin: 0;">
+            THE MORE YOU LEARN AND BUILD, THE MORE YOUR PASSPORT BECOMES A RECORD OF YOUR CAPABILITY.
           </p>
         </div>
+      </div>
+    </section>
 
-        <div class="btn-group">
-          <a href="live.html" class="btn btn-primary">Join AI Passport Live (₹999)</a>
-          <a href="academy.html" class="btn btn-secondary">Explore Academy Programs</a>
+    <!-- SECTION 4 — MORE THAN A CARD -->
+    <section class="section" id="more-than-a-card" style="padding: 120px 0; background-color: #030305; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="movement-inner text-center" style="max-width: 1200px; margin: 0 auto;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">IDENTITY OBJECT</span>
+        
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.4rem); margin: 12px 0 16px;">
+          MORE THAN A CARD.
+        </h2>
+
+        <p class="section-lead" style="margin: 0 auto 40px; max-width: 760px; font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary);">
+          The physical card is the visual identity. The digital Passport is the evolving record.
+        </p>
+
+        <!-- Central Passport Image + Surrounding 6 Attributes Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: center; text-align: left;">
+          
+          <div class="image-wrapper hero-passport-card-wrapper">
+            <div class="hero-passport-glow"></div>
+            <img src="FRAME 2.webp" alt="AI Passport Physical Card" class="section-image" loading="lazy">
+          </div>
+
+          <div class="card-attributes-grid" style="grid-template-columns: repeat(2, 1fr); margin: 0;">
+            
+            <div class="card-attr-item">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase;">01 &bull; IDENTIFIER</span>
+              <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin: 6px 0 4px 0;">AI PASSPORT ID</h4>
+              <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin: 0;">Your unique Passport identity.</p>
+            </div>
+
+            <div class="card-attr-item">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase;">02 &bull; PATHWAYS</span>
+              <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin: 6px 0 4px 0;">LEARNING</h4>
+              <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin: 0;">Your learning journey.</p>
+            </div>
+
+            <div class="card-attr-item">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #58c4ff; letter-spacing: 0.15em; text-transform: uppercase;">03 &bull; BUILDS</span>
+              <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin: 6px 0 4px 0;">PROJECTS</h4>
+              <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin: 0;">Things you have built.</p>
+            </div>
+
+            <div class="card-attr-item">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase;">04 &bull; MILESTONES</span>
+              <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin: 6px 0 4px 0;">ACHIEVEMENTS</h4>
+              <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin: 0;">Challenges, milestones and recognition.</p>
+            </div>
+
+            <div class="card-attr-item">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #2ecc71; letter-spacing: 0.15em; text-transform: uppercase;">05 &bull; RECORDS</span>
+              <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin: 6px 0 4px 0;">CREDENTIALS</h4>
+              <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin: 0;">Your verified learning and capability records.</p>
+            </div>
+
+            <div class="card-attr-item">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #58c4ff; letter-spacing: 0.15em; text-transform: uppercase;">06 &bull; SHOWCASE</span>
+              <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin: 6px 0 4px 0;">PORTFOLIO</h4>
+              <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin: 0;">A growing record of your work.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div style="margin-top: 40px;">
+          <p style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ffffff; margin: 0 0 4px 0;">
+            ONE PASSPORT.
+          </p>
+          <p style="font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; margin: 0;">
+            A JOURNEY THAT GROWS WITH YOU.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-cols">
-          <div class="footer-col branding">
-            <a href="index.html" class="footer-logo">AI PASSPORT™</a>
-            <p class="footer-tagline">Don't Just Learn AI. Build With It.</p>
-            <p class="footer-desc">India's Practical AI Learning Ecosystem. Designed and delivered by Ekaakshar Education.</p>
-          </div>
-          
-          <div class="footer-col links">
-            <h3>Ecosystem</h3>
-            <div class="footer-links">
-              <a href="passport.html">AI Passport</a>
-              <a href="live.html">AI Passport Live</a>
-              <a href="academy.html">AI Passport Academy</a>
+    <!-- SECTION 5 — DIGITAL PASSPORT -->
+    <section class="section" id="digital-passport" style="padding: 120px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="movement-inner text-center" style="max-width: 1100px; margin: 0 auto;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">ONLINE DASHBOARD</span>
+        
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.4rem); margin: 12px 0 16px;">
+          YOUR PASSPORT, ONLINE.
+        </h2>
+
+        <p class="section-lead" style="margin: 0 auto 36px; max-width: 760px; font-size: 1.05rem; line-height: 1.75; color: var(--color-text-secondary);">
+          Your physical Passport connects to a digital profile where your AI learning journey can continue to grow.
+        </p>
+
+        <!-- Conceptual Digital Passport Interface -->
+        <div class="digital-passport-preview-card">
+          <div class="digital-ui-header">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #58c4ff; letter-spacing: 0.15em; text-transform: uppercase;">PASSPORT ID: AIP-2026-8842</span>
+              <h3 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #fff; margin: 4px 0 0 0;">CANDIDATE CAPABILITY PROFILE</h3>
             </div>
+            <span style="padding: 6px 14px; border-radius: 20px; background: rgba(46,204,113,0.12); border: 1px solid rgba(46,204,113,0.3); color: #2ecc71; font-family: 'Space Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">
+              ● ACTIVE PASSPORT
+            </span>
           </div>
 
-          <div class="footer-col links">
-            <h3>Company</h3>
-            <div class="footer-links">
-              <a href="about.html">About Ekaakshar</a>
-              <a href="contact.html">Contact Us</a>
+          <div class="digital-ui-grid">
+            <div class="digital-ui-tile">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--color-gold); text-transform: uppercase;">CAPABILITY PROGRESS</span>
+              <h4 style="font-size: 1.1rem; color: #fff; margin: 6px 0 4px 0;">Stage 4: Autonomous Agents</h4>
+              <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0;">Tool calling & LLM workflows verified.</p>
+            </div>
+
+            <div class="digital-ui-tile">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.62rem; color: #58c4ff; text-transform: uppercase;">VERIFIED PROJECTS</span>
+              <h4 style="font-size: 1.1rem; color: #fff; margin: 6px 0 4px 0;">3 Hosted Code Builds</h4>
+              <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0;">Smart RAG Analyzer & Vision Auditor.</p>
+            </div>
+
+            <div class="digital-ui-tile">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.62rem; color: #2ecc71; text-transform: uppercase;">CREDENTIALS & BADGES</span>
+              <h4 style="font-size: 1.1rem; color: #fff; margin: 6px 0 4px 0;">5 Unlocked Badges</h4>
+              <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0;">Prompt Logic, Vector DB & Webhooks.</p>
             </div>
           </div>
         </div>
+
+        <div style="margin-top: 36px;">
+          <a href="verify.html" class="btn btn-primary" style="padding: 14px 32px;">EXPLORE YOUR DIGITAL PASSPORT &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6 — CAPABILITY -->
+    <section class="section" id="capability-framework" style="padding: 120px 0; background-color: #030305; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="movement-inner text-center" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">PROGRESSIVE CAPABILITY</span>
         
-        <div class="footer-bottom">
-          <div class="footer-copy">
-            &copy; 2026 Ekaakshar Education. All rights reserved.
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.4rem); margin: 12px 0 16px;">
+          FROM FIRST PROMPT TO REAL AI BUILDS.
+        </h2>
+
+        <p class="section-lead" style="margin: 0 auto 48px; max-width: 760px; font-size: 1.05rem; line-height: 1.75; color: var(--color-text-secondary);">
+          AI Passport is designed around progressive practical capability—not simply completing courses.
+        </p>
+
+        <!-- 7-Stage Capability Framework -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; text-align: left; max-width: 960px; margin: 0 auto 40px auto;">
+          
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 16px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 1.1rem; color: var(--color-gold); font-weight: 700;">01</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.78rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase;">PROMPT ENGINEERING & FOUNDATION MODELS</span>
           </div>
-          <div class="footer-meta-links">
-            <a href="/privacy-policy.html">Privacy Policy</a>
-            <a href="/terms-of-service.html">Terms of Service</a>
+
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 16px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 1.1rem; color: var(--color-gold); font-weight: 700;">02</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.78rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase;">MULTIMODAL AI & VISUAL DESIGN SYSTEMS</span>
           </div>
+
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 16px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 1.1rem; color: var(--color-gold); font-weight: 700;">03</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.78rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase;">WEB AUTOMATION & API INTEGRATION</span>
+          </div>
+
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(0, 162, 255, 0.35); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 16px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 1.1rem; color: #58c4ff; font-weight: 700;">04</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.78rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase;">AUTONOMOUS AGENTS & TOOL CALLING</span>
+          </div>
+
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 16px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 1.1rem; color: var(--color-gold); font-weight: 700;">05</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.78rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase;">RAG & VECTOR DATABASE ARCHITECTURE</span>
+          </div>
+
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 16px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 1.1rem; color: var(--color-gold); font-weight: 700;">06</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.78rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase;">FINE-TUNING & CUSTOM MODEL DEPLOYMENT</span>
+          </div>
+
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(46, 204, 113, 0.35); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 16px; grid-column: span 2;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 1.1rem; color: #2ecc71; font-weight: 700;">07</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.78rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase;">FULL-STACK AI PRODUCT LAUNCH</span>
+          </div>
+
+        </div>
+
+        <a href="academy.html" class="btn btn-secondary" style="padding: 14px 32px;">EXPLORE THE AI CAPABILITY FRAMEWORK &rarr;</a>
+      </div>
+    </section>
+
+    <!-- SECTION 7 — THE ECOSYSTEM -->
+    <section class="section" id="ecosystem" style="padding: 120px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="movement-inner text-center" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">CONNECTED LANDSCAPE</span>
+        
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.4rem); margin: 12px 0 16px;">
+          ONE PASSPORT. MANY WAYS TO GROW.
+        </h2>
+
+        <p class="section-lead" style="margin: 0 auto 40px; max-width: 760px; font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary);">
+          LIVE + ACADEMY + PROJECTS + OLYMPIAD &rarr; AI PASSPORT™
+        </p>
+
+        <!-- 4 Compact Ecosystem Cards -->
+        <div class="go-further-grid" style="grid-template-columns: repeat(4, 1fr);">
+          
+          <div class="go-further-card">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase;">LIVE</span>
+              <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ffffff; margin: 8px 0 8px 0;">EXPERIENCE AI.</h3>
+              <p style="font-size: 0.84rem; color: var(--color-text-secondary); line-height: 1.6;">Hands-on introductory live workshops.</p>
+            </div>
+            <div style="margin-top: 20px;">
+              <a href="live.html" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-size: 0.76rem;">Start Live &rarr;</a>
+            </div>
+          </div>
+
+          <div class="go-further-card" style="border-color: rgba(0, 162, 255, 0.35);">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: #58c4ff; letter-spacing: 0.15em; text-transform: uppercase;">ACADEMY</span>
+              <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ffffff; margin: 8px 0 8px 0;">BUILD DEEPER SKILLS.</h3>
+              <p style="font-size: 0.84rem; color: var(--color-text-secondary); line-height: 1.6;">Structured capability pathways.</p>
+            </div>
+            <div style="margin-top: 20px;">
+              <a href="academy.html" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-size: 0.76rem;">Explore Academy &rarr;</a>
+            </div>
+          </div>
+
+          <div class="go-further-card">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: #2ecc71; letter-spacing: 0.15em; text-transform: uppercase;">PROJECTS</span>
+              <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ffffff; margin: 8px 0 8px 0;">CREATE REAL THINGS.</h3>
+              <p style="font-size: 0.84rem; color: var(--color-text-secondary); line-height: 1.6;">Hosted applications & code builds.</p>
+            </div>
+            <div style="margin-top: 20px;">
+              <a href="passport.html#projects" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-size: 0.76rem;">View Projects &rarr;</a>
+            </div>
+          </div>
+
+          <div class="go-further-card">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase;">AI OLYMPIAD™</span>
+              <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ffffff; margin: 8px 0 8px 0;">TAKE ON CHALLENGES.</h3>
+              <p style="font-size: 0.84rem; color: var(--color-text-secondary); line-height: 1.6;">National AI build competitions.</p>
+            </div>
+            <div style="margin-top: 20px;">
+              <a href="ai-olympiad.html" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-size: 0.76rem;">Discover Olympiad &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8 — PROOF / LEDGER -->
+    <section class="section" id="ledger" style="padding: 120px 0; background-color: #030305; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="movement-inner text-center" style="max-width: 1000px; margin: 0 auto; text-align: center;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">VERIFIED LEDGER</span>
+        
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.15; margin: 12px 0 8px;">
+          DON'T JUST SAY YOU KNOW AI.
+        </h2>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--color-gold); margin-bottom: 24px;">
+          SHOW WHAT YOU CAN DO.
+        </h3>
+
+        <h4 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: #ffffff; margin-bottom: 16px;">
+          AI PASSPORT LEDGER™
+        </h4>
+
+        <p class="section-lead" style="margin: 0 auto 36px; max-width: 760px; font-size: 1.05rem; line-height: 1.75; color: var(--color-text-secondary);">
+          A structured record designed to connect learning milestones, projects and capability evidence to your AI Passport.
+        </p>
+
+        <!-- Visual Progression: LEARNED -> BUILT -> SUBMITTED -> VERIFIED -> RECORDED -->
+        <div class="ledger-progression-row">
+          <span class="gap-step-pill">LEARNED</span>
+          <span class="gap-arrow">&rarr;</span>
+          <span class="gap-step-pill highlight">BUILT</span>
+          <span class="gap-arrow">&rarr;</span>
+          <span class="gap-step-pill">SUBMITTED</span>
+          <span class="gap-arrow">&rarr;</span>
+          <span class="gap-step-pill highlight">VERIFIED</span>
+          <span class="gap-arrow">&rarr;</span>
+          <span class="gap-step-pill">RECORDED</span>
+        </div>
+
+        <div style="margin-top: 36px;">
+          <a href="verify.html" class="btn btn-primary" style="padding: 16px 36px;">EXPLORE THE LEDGER &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9 — FINAL CTA -->
+    <section class="section" id="final-cta" style="padding: 140px 0; text-align: center; background: radial-gradient(circle at center, rgba(223,207,173,0.04) 0%, transparent 70%);">
+      <div class="movement-inner" style="max-width: 860px; margin: 0 auto;">
+        
+        <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.6rem); line-height: 1.12; margin: 0 0 12px 0;">
+          YOUR AI JOURNEY HAS A START.
+        </h2>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--color-gold); margin-bottom: 24px;">
+          IT DOESN'T HAVE AN END.
+        </h3>
+
+        <p class="section-lead" style="margin: 0 auto 36px; max-width: 680px; font-size: 1.05rem; line-height: 1.75; color: var(--color-text-secondary);">
+          Start with your first experience. Keep building. Let your Passport grow with you.
+        </p>
+
+        <div class="btn-group" style="justify-content: center; gap: 16px;">
+          <a href="live.html" class="btn btn-primary" style="padding: 18px 36px; font-size: 0.95rem;">START YOUR AI PASSPORT &rarr;</a>
+          <a href="live.html" class="btn btn-secondary" style="padding: 18px 32px; font-size: 0.95rem;">EXPLORE AI PASSPORT LIVE &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 100,000X FLAGSHIP INSTITUTIONAL FOOTER -->
+    <footer class="footer flagship-footer">
+      <div class="footer-container">
+        
+        <!-- Top Institutional Newsletter Capsule -->
+        <div class="footer-newsletter-card">
+          <div class="fnc-info">
+            <span class="fnc-tag">INSTITUTIONAL DIRECTIVES</span>
+            <h4 class="fnc-title">Stay at the Forefront of AI Capability</h4>
+            <p class="fnc-desc">Receive weekly framework updates, verified project teardowns, and strategic AI directives directly from the AI Passport Council.</p>
+          </div>
+          <form class="fnc-form" id="footer-newsletter-form">
+            <input type="email" class="fnc-input" placeholder="Enter your work email..." required />
+            <button type="submit" class="btn btn-primary fnc-btn">Join Directive &rarr;</button>
+          </form>
+        </div>
+
+        <!-- 5-Column Architectural Grid -->
+        <div class="footer-5col-grid">
+          
+          <div class="footer-col branding-col">
+            <a href="index.html" class="footer-logo">AI PASSPORT™</a>
+            <p class="footer-tagline">Building AI Capability for the AI Era.</p>
+            <p class="footer-desc">India's Practical AI Learning Ecosystem. Designed & delivered by Ekaakshar Education.</p>
+            
+            <div class="footer-status-badge">
+              <span class="status-pulse-dot"></span>
+              <span class="status-badge-text">LEDGER V2.4 &bull; ONLINE</span>
+            </div>
+
+            <div class="footer-social-row">
+              <a href="https://twitter.com" target="_blank" class="social-svg-btn" aria-label="Twitter">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" class="social-svg-btn" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.75a1.48 1.48 0 1 0 0 2.96 1.48 1.48 0 0 0 0-2.96z"/></svg>
+              </a>
+              <a href="https://github.com" target="_blank" class="social-svg-btn" aria-label="GitHub">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </a>
+              <a href="https://youtube.com" target="_blank" class="social-svg-btn" aria-label="YouTube">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>
+            </div>
+          </div>
+          
+          <div class="footer-col links-col">
+            <h4 class="fcol-heading">Pathways</h4>
+            <div class="footer-links">
+              <a href="academy.html">Academy Programmes</a>
+              <a href="live.html">Live Build Workshops</a>
+              <a href="passport.html">AI Passport Ledger</a>
+              <a href="passport.html#projects">Verified Project Builds</a>
+              <a href="index.html#gap">AI Capability Journey</a>
+            </div>
+          </div>
+
+          <div class="footer-col links-col">
+            <h4 class="fcol-heading">Governance</h4>
+            <div class="footer-links">
+              <a href="about.html">AI Passport Council™</a>
+              <a href="about.html#governance">Ethical AI Directives</a>
+              <a href="about.html#insights">Insights & Research</a>
+              <a href="about.html#press">Press & Media Kit</a>
+              <a href="contact.html">Institutional Partnerships</a>
+            </div>
+          </div>
+
+          <div class="footer-col links-col">
+            <h4 class="fcol-heading">Verification</h4>
+            <div class="footer-links">
+              <a href="verify.html">Verify Credentials</a>
+              <a href="verify.html#audit">Public Ledger Audit</a>
+              <a href="verify.html#api">Developer Credential API</a>
+              <a href="verify.html#security">Security Whitepaper</a>
+              <a href="verify.html#status">Infrastructure Status</a>
+            </div>
+          </div>
+
+          <div class="footer-col global-col">
+            <h4 class="fcol-heading">Global Directives</h4>
+            <div class="global-nodes">
+              <div class="gnode-item"><span class="gnode-dot"></span> New Delhi (HQ)</div>
+              <div class="gnode-item"><span class="gnode-dot"></span> Bengaluru</div>
+              <div class="gnode-item"><span class="gnode-dot"></span> San Francisco</div>
+              <div class="gnode-item"><span class="gnode-dot"></span> London</div>
+              <div class="gnode-item"><span class="gnode-dot"></span> Singapore</div>
+            </div>
+          </div>
+
+        </div>
+        
+        <div class="footer-bottom-bar">
+          <div class="footer-copy-legal">
+            <p>&copy; 2026 Ekaakshar Education Services Pvt. Ltd. All rights reserved. &bull; ISO 27001 Certified Institution.</p>
+          </div>
+
+          <div class="footer-legal-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <span class="fdot-divider">&bull;</span>
+            <a href="terms-of-service.html">Terms of Service</a>
+            <span class="fdot-divider">&bull;</span>
+            <a href="verify.html#charter">Ethical Charter</a>
+          </div>
+
           <button class="scroll-to-top-btn" id="scroll-to-top-btn" aria-label="Scroll back to top">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+            <span>Back to Top</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
               <line x1="12" y1="19" x2="12" y2="5"></line>
               <polyline points="5 12 12 5 19 12"></polyline>
             </svg>
           </button>
         </div>
+
       </div>
     </footer>
 
@@ -385,10 +658,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
   <script src="main.js" type="module"></script>
-  <script type="module">
-    import { initPublicPassportView } from './src/app/public-passport.js';
-    initPublicPassportView();
-  </script>
 </body>
 </html>
-
