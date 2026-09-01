@@ -39,6 +39,7 @@ export default defineConfig({
         projects: 'projects.html',
         insights: 'insights.html',
         login: 'login.html',
+        record: 'record.html',
         app: 'app/index.html',
         olympiad: 'ai-olympiad.html'
       }
