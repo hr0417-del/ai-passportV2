@@ -8920,21 +8920,70 @@ html, body {
   }
 }
 
-/* 5. Card Grids & Multi-column Stacking on Mobile */
-@media (max-width: 900px) {
-  .journey-flow-5grid {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-  }
+/* Responsive Grid Utility Classes */
+.responsive-grid-split {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 48px;
+  align-items: start;
+}
 
-  .go-further-grid {
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.responsive-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.responsive-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.form-group-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* 5. Card Grids & Multi-column Stacking on Mobile (Aggressive Overrides) */
+@media (max-width: 991px) {
+  [style*="grid-template-columns"],
+  .responsive-grid-split,
+  .responsive-grid-2,
+  .responsive-grid-3,
+  .responsive-grid-4,
+  .responsive-grid-5,
+  .journey-flow-5grid,
+  .go-further-grid,
+  .speakers-grid,
+  .form-grid,
+  .form-group-row,
+  .section-container,
+  .section-container.reverse {
     grid-template-columns: 1fr !important;
     gap: 24px !important;
   }
 
-  .speakers-grid {
+  .movement-inner > div[style*="grid-template-columns"] {
     grid-template-columns: 1fr !important;
-    gap: 16px !important;
+  }
+
+  #register-card {
+    padding: 24px 18px !important;
+    border-radius: 18px !important;
   }
 }
 
@@ -8968,6 +9017,7 @@ html, body {
     justify-content: center !important;
   }
 }
+
 
 
 
