@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI Passport™ — Don't Just Learn AI. Build With It. Practical AI learning for the generation that will build what comes next. Join AI Passport Live on 20 September 2026.">
+  <meta name="description" content="AI Passport Live™ — A free 90-minute live experience introducing practical AI learning. Register free for 20 September 2026, 2:00 PM – 3:30 PM IST.">
   <meta name="robots" content="index, follow">
-  <title>AI Passport™ | Don't Just Learn AI. Build With It.</title>
+  <title>AI Passport Live™ | Free 90-Minute Live AI Experience</title>
   
   <link rel="canonical" href="https://aipassport.ekaakshareducation.com/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aipassport.ekaakshareducation.com/">
-  <meta property="og:title" content="AI Passport™ | Don't Just Learn AI. Build With It.">
-  <meta property="og:description" content="Practical AI learning for the generation that will build what comes next. Join AI Passport Live on 20 September 2026.">
+  <meta property="og:title" content="AI Passport Live™ | Free 90-Minute Live AI Experience">
+  <meta property="og:description" content="A free 90-minute live experience designed to introduce you to practical AI learning — and the AI Passport journey. Reserve your free seat for 20 September 2026.">
   <meta property="og:image" content="https://aipassport.ekaakshareducation.com/FRAME%201.webp">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://aipassport.ekaakshareducation.com/">
-  <meta property="twitter:title" content="AI Passport™ | Don't Just Learn AI. Build With It.">
-  <meta property="twitter:description" content="Don't Just Learn AI. Build With It. Practical AI Learning Experience.">
+  <meta property="twitter:title" content="AI Passport Live™ | Free 90-Minute Live AI Experience">
+  <meta property="twitter:description" content="Reserve your free seat for AI Passport Live on 20 September 2026. Don't Just Learn AI. Build With It.">
   <meta property="twitter:image" content="https://aipassport.ekaakshareducation.com/FRAME%201.webp">
 
   <!-- Favicon -->
@@ -33,6 +33,18 @@
   
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
+  <style>
+    .form-group-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) {
+      .form-group-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -56,12 +68,12 @@
       </div>
       <div class="loader-text-container">
         <h2 class="loader-headline" id="loader-headline">DON'T JUST LEARN AI. BUILD WITH IT.</h2>
-        <p class="loader-caption" id="loader-caption">Loading AI Passport™ Experience...</p>
+        <p class="loader-caption" id="loader-caption">Loading AI Passport Live™ Experience...</p>
       </div>
       <div class="loader-progress-bar">
         <div class="loader-progress"></div>
       </div>
-      <h3 class="loader-final-msg" id="loader-final-msg">Don't Just Learn AI. Build With It.</h3>
+      <h3 class="loader-final-msg" id="loader-final-msg">AI Passport Live™ &bull; 20 September 2026</h3>
     </div>
   </div>
 
@@ -85,7 +97,7 @@
       <!-- Right Utility Actions -->
       <div style="display: flex; align-items: center; gap: 12px;">
         <a href="verify.html" class="nav-link" style="font-family: 'Space Mono', monospace; font-size: 0.76rem; letter-spacing: 0.1em; color: var(--color-text-secondary);">VERIFY</a>
-        <a href="live.html" class="nav-cta-btn">JOIN AI PASSPORT LIVE</a>
+        <a href="#live-event" class="nav-cta-btn">REGISTER FREE</a>
       </div>
       
       <!-- Sound Toggle -->
@@ -118,15 +130,15 @@
 
   <main class="scroll-container" id="scroll-container">
 
-    <!-- 01 & 04 — HERO SECTION -->
-    <section class="section hero-section" id="hero" style="padding-top: 140px; padding-bottom: 90px;">
+    <!-- HERO SECTION WITH COMPACT EVENT INDICATOR -->
+    <section class="section hero-section" id="hero" style="padding-top: 140px; padding-bottom: 80px;">
       <div class="section-container">
         <div class="hero-text-block">
           
-          <!-- Upcoming Event Capsule -->
-          <div class="webinar-badge" style="margin-bottom: 18px;">
-            <span class="badge-dot"></span>
-            <span class="badge-text">✦ UPCOMING: AI PASSPORT LIVE &bull; 20 SEPT 2026 (2:00 PM – 3:30 PM)</span>
+          <!-- Compact Event Indicator Pill -->
+          <div class="webinar-badge" style="margin-bottom: 18px; background: rgba(0, 162, 255, 0.08); border-color: rgba(0, 162, 255, 0.3);">
+            <span class="badge-dot" style="background: #00a2ff; box-shadow: 0 0 8px #00a2ff;"></span>
+            <span class="badge-text" style="color: #ffffff;">✦ UPCOMING: AI PASSPORT LIVE™ &bull; 20 SEPT 2026 (2:00 PM – 3:30 PM IST) &bull; FREE REGISTRATION</span>
           </div>
 
           <h1 class="hero-title" style="font-size: clamp(2.8rem, 5.2vw, 4.4rem); line-height: 1.06; margin-bottom: 12px;">
@@ -138,18 +150,17 @@
           </h2>
 
           <p class="hero-body-text" style="font-size: 1.15rem; line-height: 1.75; color: rgba(255, 255, 255, 0.88); margin-bottom: 32px; max-width: 580px;">
-            Practical AI learning for the generation that will build what comes next.
+            Practical AI learning for the generation that will build what comes next. Join the upcoming 90-minute live experience.
           </p>
 
-          <!-- CTAs -->
+          <!-- Primary & Secondary CTAs -->
           <div class="btn-group" style="margin-bottom: 24px;">
-            <a href="live.html" class="btn btn-primary" style="padding: 16px 36px; font-size: 0.92rem;">JOIN AI PASSPORT LIVE &rarr;</a>
+            <a href="#live-event" class="btn btn-primary" style="padding: 16px 36px; font-size: 0.92rem; font-weight: 700;">REGISTER FREE &rarr;</a>
             <a href="passport.html" class="btn btn-secondary" style="padding: 16px 28px; font-size: 0.92rem;">EXPLORE AI PASSPORT &rarr;</a>
           </div>
 
-          <!-- Subtext -->
           <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.22em; text-transform: uppercase; margin: 0;">
-            LEARN &bull; BUILD &bull; PROVE
+            20 SEPTEMBER 2026 &bull; 2:00 PM – 3:30 PM IST &bull; FREE
           </p>
 
         </div>
@@ -165,8 +176,322 @@
       </div>
     </section>
 
-    <!-- 02 — THE REALITY: EVERYONE CAN USE AI. FEWER KNOW HOW TO BUILD. -->
-    <section class="section" id="reality" style="padding: 110px 0; border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05); background-color: #030305;">
+    <!-- SECTION — AI PASSPORT LIVE & EMBEDDED FREE REGISTRATION FORM -->
+    <section class="section" id="live-event" style="padding: 110px 0; background-color: #030305; border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="movement-inner" style="max-width: 1200px; margin: 0 auto;">
+        
+        <div style="display: grid; grid-template-columns: 1fr 1.05fr; gap: 48px; align-items: start;" class="journey-flow-5grid">
+          
+          <!-- LEFT COLUMN: AI PASSPORT LIVE INFORMATION -->
+          <div>
+            <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">START HERE</span>
+            
+            <h2 style="font-size: clamp(2.4rem, 4.2vw, 3.6rem); line-height: 1.1; margin: 12px 0 8px 0; color: #ffffff;">
+              AI PASSPORT LIVE™
+            </h2>
+
+            <p style="font-family: 'Space Mono', monospace; font-size: 0.95rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; margin: 0 0 20px 0;">
+              START HERE.
+            </p>
+
+            <p style="font-size: 1.1rem; line-height: 1.75; color: rgba(255, 255, 255, 0.9); margin-bottom: 32px;">
+              A free 90-minute live experience designed to introduce you to practical AI learning — and the AI Passport journey.
+            </p>
+
+            <!-- Confirmed Event Details Pill -->
+            <div style="background: rgba(18, 19, 26, 0.9); border: 1px solid rgba(0, 162, 255, 0.3); border-radius: 16px; padding: 24px; margin-bottom: 32px;">
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px;">
+                  <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">DATE</span>
+                  <strong style="font-family: 'Space Mono', monospace; font-size: 0.95rem; color: #ffffff;">20 SEPTEMBER 2026</strong>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px;">
+                  <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">TIME</span>
+                  <strong style="font-family: 'Space Mono', monospace; font-size: 0.95rem; color: var(--color-gold);">2:00 PM – 3:30 PM IST</strong>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">ACCESS</span>
+                  <strong style="font-family: 'Space Mono', monospace; font-size: 0.95rem; color: #2ecc71;">90 MINUTES &bull; LIVE &bull; FREE</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-wrapper" style="margin-bottom: 24px;">
+              <p class="countdown-date-label" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px;">
+                ⏳ LIVE EVENT COUNTDOWN
+              </p>
+              <div class="countdown-display">
+                <div class="countdown-item">
+                  <span class="countdown-number countdown-days">00</span>
+                  <span class="countdown-label">DAYS</span>
+                </div>
+                <div class="countdown-divider">:</div>
+                <div class="countdown-item">
+                  <span class="countdown-number countdown-hours">00</span>
+                  <span class="countdown-label">HOURS</span>
+                </div>
+                <div class="countdown-divider">:</div>
+                <div class="countdown-item">
+                  <span class="countdown-number countdown-minutes">00</span>
+                  <span class="countdown-label">MINUTES</span>
+                </div>
+                <div class="countdown-divider">:</div>
+                <div class="countdown-item">
+                  <span class="countdown-number countdown-seconds">00</span>
+                  <span class="countdown-label">SECONDS</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: EMBEDDED NATIVE FREE REGISTRATION FORM CARD -->
+          <div id="register-card" style="background: rgba(18, 19, 26, 0.95); border: 1px solid rgba(0, 162, 255, 0.35); border-radius: 24px; padding: 36px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 162, 255, 0.08); position: relative; overflow: hidden;">
+            
+            <!-- FORM CONTAINER -->
+            <form class="register-form" id="registration-form" novalidate style="display: flex; flex-direction: column; gap: 20px;">
+              
+              <div>
+                <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: #2ecc71; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 6px;">
+                  100% FREE REGISTRATION
+                </span>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #ffffff; margin: 0 0 4px 0;">
+                  RESERVE YOUR FREE SEAT
+                </h3>
+                <p style="font-family: 'Space Mono', monospace; font-size: 0.76rem; color: var(--color-gold); margin: 0;">
+                  20 SEPTEMBER 2026 &bull; 2:00 PM – 3:30 PM IST
+                </p>
+              </div>
+
+              <!-- Field 1: Full Name -->
+              <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                <label for="fullname" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase;">
+                  FULL NAME *
+                </label>
+                <input 
+                  type="text" 
+                  id="fullname" 
+                  name="fullname" 
+                  placeholder="Enter your name" 
+                  required
+                  style="width: 100%; padding: 14px 18px; font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #fff; background: rgba(10, 10, 14, 0.9); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; outline: none; transition: border-color 0.3s; box-sizing: border-box;"
+                >
+              </div>
+
+              <!-- Fields 2 & 3: Email & WhatsApp Number (Row on Desktop) -->
+              <div class="form-group-row">
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <label for="email" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase;">
+                    EMAIL ADDRESS *
+                  </label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your email" 
+                    required
+                    style="width: 100%; padding: 14px 18px; font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #fff; background: rgba(10, 10, 14, 0.9); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; outline: none; transition: border-color 0.3s; box-sizing: border-box;"
+                  >
+                </div>
+
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <label for="mobile" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase;">
+                    WHATSAPP NUMBER *
+                  </label>
+                  <input 
+                    type="tel" 
+                    id="mobile" 
+                    name="mobile" 
+                    placeholder="Enter your WhatsApp number" 
+                    required
+                    style="width: 100%; padding: 14px 18px; font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #fff; background: rgba(10, 10, 14, 0.9); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; outline: none; transition: border-color 0.3s; box-sizing: border-box;"
+                  >
+                </div>
+              </div>
+
+              <!-- Fields 4 & 5: Role & City -->
+              <div class="form-group-row">
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <label for="user-role" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase;">
+                    I AM A *
+                  </label>
+                  <select 
+                    id="user-role" 
+                    name="role" 
+                    required
+                    style="width: 100%; padding: 14px 18px; font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #fff; background: rgba(10, 10, 14, 0.9); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; outline: none; transition: border-color 0.3s; box-sizing: border-box; cursor: pointer;"
+                  >
+                    <option value="" disabled selected>Select your role...</option>
+                    <option value="Student">Student</option>
+                    <option value="Teacher / Educator">Teacher / Educator</option>
+                    <option value="Parent">Parent</option>
+                    <option value="Professional">Professional</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <label for="city" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase;">
+                    CITY
+                  </label>
+                  <input 
+                    type="text" 
+                    id="city" 
+                    name="city" 
+                    placeholder="Your city" 
+                    style="width: 100%; padding: 14px 18px; font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #fff; background: rgba(10, 10, 14, 0.9); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; outline: none; transition: border-color 0.3s; box-sizing: border-box;"
+                  >
+                </div>
+              </div>
+
+              <!-- Consent Checkbox Hidden / Auto-Accepted -->
+              <input type="checkbox" id="consent" name="consent" checked style="display: none;">
+
+              <!-- Submit Button -->
+              <button 
+                type="submit" 
+                class="btn btn-primary btn-submit"
+                style="padding: 18px 36px; font-size: 1rem; font-weight: 700; width: 100%; text-align: center; justify-content: center; margin-top: 8px;"
+              >
+                <span class="btn-text">REGISTER FREE &rarr;</span>
+              </button>
+
+            </form>
+
+            <!-- LOADER OVERLAY WHILE GENERATING CONFIRMATION -->
+            <div id="ticket-generation-loader" style="display: none; text-align: center; padding: 40px 20px;">
+              <div style="width: 48px; height: 48px; border: 3px solid rgba(0,162,255,0.2); border-top-color: var(--color-gold); border-radius: 50%; animation: spin 1s infinite linear; margin: 0 auto 20px;"></div>
+              <h4 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; margin: 0 0 8px;">SECURING YOUR FREE SEAT...</h4>
+              <p style="font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--color-gold); margin: 0;">Generating AI Passport Live™ Registration</p>
+              <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 24px; overflow: hidden;">
+                <div class="loader-ticket-progress" style="width: 100%; height: 100%; background: var(--color-gold); transform: scaleX(0); transform-origin: left center;"></div>
+              </div>
+            </div>
+
+            <!-- SUCCESS CONFIRMATION STATE (REPLACES FORM ON SUBMISSION) -->
+            <div id="registration-success" style="display: none; text-align: center; padding: 20px 10px;">
+              
+              <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(46, 204, 113, 0.15); border: 2px solid #2ecc71; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; color: #2ecc71;">
+                ✓
+              </div>
+
+              <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #ffffff; margin: 0 0 6px 0;">
+                YOU'RE IN.
+              </h3>
+
+              <p style="font-size: 1.05rem; color: var(--color-gold); margin-bottom: 24px; font-weight: 500;">
+                Your AI Passport Live registration is confirmed.
+              </p>
+
+              <div style="background: rgba(10, 10, 14, 0.9); border: 1px solid rgba(223, 207, 173, 0.3); border-radius: 14px; padding: 20px; text-align: left; margin-bottom: 24px;">
+                <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; margin: 0 0 8px 0;">
+                  EVENT SUMMARY
+                </p>
+                <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin: 0 0 8px 0;">
+                  AI PASSPORT LIVE™
+                </p>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.85); margin: 0 0 4px 0;">
+                  📅 20 September 2026 &bull; 2:00 PM – 3:30 PM IST
+                </p>
+                <p style="font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #2ecc71; margin: 0;">
+                  90 MINUTES &bull; LIVE &bull; FREE
+                </p>
+              </div>
+
+              <p style="font-size: 0.9rem; line-height: 1.6; color: var(--color-text-secondary); margin-bottom: 28px;">
+                Your joining details will be shared using the contact information provided during registration.
+              </p>
+
+              <a href="passport.html" class="btn btn-secondary" style="padding: 14px 28px; width: 100%; text-align: center; justify-content: center; box-sizing: border-box;">
+                BACK TO AI PASSPORT &rarr;
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION — WHAT IS AI PASSPORT LIVE? -->
+    <section class="section" id="what-is-live" style="padding: 110px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="movement-inner text-center" style="max-width: 1100px; margin: 0 auto; text-align: center;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">SESSION OVERVIEW</span>
+        
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 12px 0 16px;">
+          WHAT IS AI PASSPORT LIVE?
+        </h2>
+
+        <p class="section-lead" style="margin: 0 auto 40px; max-width: 760px; font-size: 1.1rem; line-height: 1.75; color: var(--color-text-secondary);">
+          AI Passport Live is a live introduction to practical AI learning. It is designed to move beyond simply using AI and help participants understand how AI can be learned, explored and applied through practical experiences.
+        </p>
+
+        <!-- 3 Visual Step Cards -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left;" class="journey-flow-5grid">
+          
+          <div class="go-further-card">
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #58c4ff; font-weight: 700; display: block; margin-bottom: 8px;">01 &bull; LEARN</span>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #ffffff; margin: 0 0 10px 0;">LEARN</h3>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">Understand practical AI and foundation models.</p>
+          </div>
+
+          <div class="go-further-card">
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--color-gold); font-weight: 700; display: block; margin-bottom: 8px;">02 &bull; EXPERIENCE</span>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #ffffff; margin: 0 0 10px 0;">EXPERIENCE</h3>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">Explore AI through a guided live experience.</p>
+          </div>
+
+          <div class="go-further-card">
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #2ecc71; font-weight: 700; display: block; margin-bottom: 8px;">03 &bull; DISCOVER</span>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #ffffff; margin: 0 0 10px 0;">DISCOVER</h3>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">See how the AI Passport journey can continue beyond the session.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION — WHO IS IT FOR? -->
+    <section class="section" id="who-is-it-for" style="padding: 100px 0; background-color: #030305; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="movement-inner text-center" style="max-width: 1100px; margin: 0 auto; text-align: center;">
+        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">AUDIENCES</span>
+        
+        <h2 style="font-size: clamp(2.2rem, 3.8vw, 3.2rem); margin: 12px 0 40px;">
+          WHO IS IT FOR?
+        </h2>
+
+        <!-- 3 Minimal Cards -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left;" class="journey-flow-5grid">
+          
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 28px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-bottom: 8px;">LEARNERS</span>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ffffff; margin: 0 0 8px 0;">STUDENTS</h3>
+            <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">Start exploring practical AI.</p>
+          </div>
+
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 28px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: #58c4ff; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-bottom: 8px;">EDUCATORS</span>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ffffff; margin: 0 0 8px 0;">TEACHERS</h3>
+            <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">Discover new ways to bring AI into learning.</p>
+          </div>
+
+          <div style="background: rgba(18, 19, 26, 0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 28px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: #2ecc71; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-bottom: 8px;">FAMILIES</span>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ffffff; margin: 0 0 8px 0;">PARENTS</h3>
+            <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">Understand the AI learning journey available to your child.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION — THE REALITY: EVERYONE CAN USE AI. FEWER KNOW HOW TO BUILD. -->
+    <section class="section" id="reality" style="padding: 110px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
       <div class="movement-inner text-center" style="max-width: 920px; margin: 0 auto; text-align: center;">
         <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">THE SHIFT</span>
         
@@ -193,8 +518,8 @@
       </div>
     </section>
 
-    <!-- 03 & 04 — INTRODUCING AI PASSPORT™ & THE PASSPORT EXPERIENCE -->
-    <section class="section" id="passport-intro" style="padding: 120px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+    <!-- SECTION — INTRODUCING AI PASSPORT™ & THE PASSPORT EXPERIENCE -->
+    <section class="section" id="passport-intro" style="padding: 120px 0; background-color: #030305; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
       <div class="section-container">
         
         <div class="hero-image-block">
@@ -233,107 +558,7 @@
       </div>
     </section>
 
-    <!-- 05 — EXPLAIN SIMPLY: LEARN → BUILD → PROVE -->
-    <section class="section" id="journey-simple" style="padding: 110px 0; background-color: #030305; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-      <div class="movement-inner text-center" style="max-width: 1200px; margin: 0 auto; text-align: center;">
-        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">YOUR AI JOURNEY</span>
-        
-        <h2 style="font-size: clamp(2.2rem, 4vw, 3.4rem); margin: 12px 0 16px;">
-          HOW IT WORKS.
-        </h2>
-
-        <p class="section-lead" style="margin: 0 auto 40px; max-width: 680px; font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary);">
-          A clear, practical process designed to turn AI curiosity into verifiable capability.
-        </p>
-
-        <!-- 4 Step Journey Grid: LEARN -> BUILD -> PROVE -> GROW -->
-        <div class="stage-journey-grid">
-          
-          <div class="stage-journey-card">
-            <span class="stage-num">01</span>
-            <h3 class="stage-title">LEARN</h3>
-            <p class="stage-desc">Build practical AI foundations through prompt logic, model architecture, and tool mastery.</p>
-          </div>
-
-          <div class="stage-journey-card">
-            <span class="stage-num">02</span>
-            <h3 class="stage-title">BUILD</h3>
-            <p class="stage-desc">Turn what you learn into real projects—from custom AI assistants to automated pipelines.</p>
-          </div>
-
-          <div class="stage-journey-card">
-            <span class="stage-num">03</span>
-            <h3 class="stage-title">PROVE</h3>
-            <p class="stage-desc">Create verifiable digital proof of what you can actually build and solve with AI.</p>
-          </div>
-
-          <div class="stage-journey-card">
-            <span class="stage-num">04</span>
-            <h3 class="stage-title">GROW</h3>
-            <p class="stage-desc">Continue expanding capability through advanced programmes, challenges, and the AI Olympiad™.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- 06, 07, 08 — UPCOMING EVENT: AI PASSPORT LIVE (CONFIRMED 20 SEPT 2026) -->
-    <section class="section" id="live-event" style="padding: 120px 0; background-color: #030305; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-      <div class="movement-inner text-center" style="max-width: 1100px; margin: 0 auto;">
-        
-        <div class="live-commercial-card">
-          <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.22em; text-transform: uppercase; display: block; margin-bottom: 10px;">
-            UPCOMING LIVE WORKSHOP
-          </span>
-
-          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4.2vw, 3.6rem); color: #ffffff; margin: 0 0 8px 0;">
-            AI PASSPORT LIVE
-          </h2>
-
-          <p style="font-size: 1.15rem; color: var(--color-gold); margin-bottom: 24px; font-weight: 500;">
-            A practical introduction to building with AI.
-          </p>
-
-          <!-- Confirmed Date & Time Box -->
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; background: rgba(10, 10, 14, 0.85); border: 1px solid rgba(0, 162, 255, 0.3); border-radius: 14px; padding: 20px; max-width: 760px; margin: 0 auto 28px; text-align: center;" class="journey-flow-5grid">
-            <div>
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: rgba(255,255,255,0.5); text-transform: uppercase; display: block; margin-bottom: 4px;">DATE</span>
-              <strong style="font-family: 'Space Mono', monospace; font-size: 0.95rem; color: #fff;">20 SEPT 2026</strong>
-            </div>
-            <div>
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: rgba(255,255,255,0.5); text-transform: uppercase; display: block; margin-bottom: 4px;">TIME</span>
-              <strong style="font-family: 'Space Mono', monospace; font-size: 0.95rem; color: var(--color-gold);">2:00 PM – 3:30 PM</strong>
-            </div>
-            <div>
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: rgba(255,255,255,0.5); text-transform: uppercase; display: block; margin-bottom: 4px;">FORMAT</span>
-              <strong style="font-family: 'Space Mono', monospace; font-size: 0.95rem; color: #fff;">90-MIN WORKSHOP</strong>
-            </div>
-          </div>
-
-          <!-- Price Tag -->
-          <div style="display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-bottom: 28px;">
-            <span class="live-price-tag" style="font-size: 2.4rem; color: var(--color-gold);">₹999</span>
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.76rem; color: rgba(255,255,255,0.6); text-transform: uppercase;">One-time activation fee</span>
-          </div>
-
-          <!-- Features -->
-          <div class="live-features-grid" style="margin-bottom: 32px;">
-            <div class="live-feat-item"><span class="live-feat-check">✓</span> 90-MINUTE LIVE HANDS-ON SESSION</div>
-            <div class="live-feat-item"><span class="live-feat-check">✓</span> BUILD YOUR FIRST AI PROJECT</div>
-            <div class="live-feat-item"><span class="live-feat-check">✓</span> PASSPORT ACTIVATION & RESOURCES</div>
-          </div>
-
-          <div>
-            <a href="live.html" class="btn btn-primary" style="padding: 18px 48px; font-size: 1.05rem; font-weight: 700; width: 100%; max-width: 420px; text-align: center; justify-content: center; box-sizing: border-box;">
-              JOIN AI PASSPORT LIVE &rarr;
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 10 — THEN, AND ONLY THEN, INTRODUCE THE BROADER ECOSYSTEM -->
+    <!-- SECTION — BROADER ECOSYSTEM -->
     <section class="section" id="ecosystem" style="padding: 110px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
       <div class="movement-inner text-center" style="max-width: 1200px; margin: 0 auto; text-align: center;">
         <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">CONTINUING ECOSYSTEM</span>
@@ -407,11 +632,11 @@
         </h2>
 
         <p style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--color-gold); font-style: italic; margin: 0 0 32px 0;">
-          AI PASSPORT™ &bull; 20 SEPTEMBER 2026
+          AI PASSPORT LIVE™ &bull; 20 SEPTEMBER 2026
         </p>
 
         <div class="btn-group" style="justify-content: center; gap: 16px;">
-          <a href="live.html" class="btn btn-primary" style="padding: 18px 42px; font-size: 0.95rem;">JOIN AI PASSPORT LIVE &rarr;</a>
+          <a href="#live-event" class="btn btn-primary" style="padding: 18px 42px; font-size: 0.95rem; font-weight: 700;">REGISTER FREE &rarr;</a>
           <a href="passport.html" class="btn btn-secondary" style="padding: 18px 32px; font-size: 0.95rem;">EXPLORE AI PASSPORT &rarr;</a>
         </div>
       </div>
