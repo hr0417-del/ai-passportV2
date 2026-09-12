@@ -822,28 +822,59 @@ function initRegistrationForm() {
     // Send form data to Webhook
     fetch(AIPASSPORT_CONFIG.webhookUrl, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain'
-      },
       body: JSON.stringify(formObject)
     })
-    .then(() => {
-      proceedToSuccess(dataName);
+    .then(response => {
+      if (!response.ok && response.status !== 0) {
+        throw new Error("HTTP error " + response.status);
+      }
+      return response.json().catch(() => ({ success: true }));
+    })
+    .then(result => {
+      if (result && (result.duplicate === true || result.success === false)) {
+        // Reset submit button state
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+          const btnTxt = submitBtn.querySelector('.btn-text');
+          if (btnTxt) btnTxt.textContent = 'REGISTER FREE →';
+        }
+        
+        // Show user-facing duplicate error message
+        const formStatus = document.getElementById('form-status');
+        if (formStatus) {
+          formStatus.style.display = 'block';
+          formStatus.style.color = '#ff4d4d';
+          formStatus.style.marginTop = '14px';
+          formStatus.style.padding = '12px 16px';
+          formStatus.style.background = 'rgba(255, 77, 77, 0.12)';
+          formStatus.style.border = '1px solid rgba(255, 77, 77, 0.35)';
+          formStatus.style.borderRadius = '10px';
+          formStatus.style.fontSize = '0.9rem';
+          formStatus.style.textAlign = 'center';
+          formStatus.style.lineHeight = '1.5';
+          formStatus.innerHTML = `⚠️ <strong>User Already Exists</strong><br>You have already registered with this email or mobile number. Please register with a new credential.`;
+        }
+        playTickSound('click');
+      } else {
+        const passportId = (result && result.passportId) ? result.passportId : null;
+        proceedToSuccess(dataName, passportId);
+      }
     })
     .catch(err => {
-      console.warn("Webhook submission warning, proceeding to success fallback:", err);
+      console.warn("Webhook submission warning, proceeding to fallback:", err);
       proceedToSuccess(dataName);
     });
   });
   
   // Success ticket reveal and celebration burst
-  function proceedToSuccess(name) {
+  function proceedToSuccess(name, passportId) {
     const randomId = Math.floor(1000 + Math.random() * 9000);
+    const assignedId = passportId ? (passportId.startsWith('#') ? passportId : `#${passportId}`) : `#2026-${randomId}`;
     const ticketName = document.getElementById('ticket-holder-name');
     const ticketId = document.getElementById('ticket-citizen-id');
     if (ticketName) ticketName.textContent = name.toUpperCase();
-    if (ticketId) ticketId.textContent = `#2026-${randomId}`;
+    if (ticketId) ticketId.textContent = assignedId;
     
     // Step 1: Collapse form
     if (typeof gsap !== 'undefined') {
