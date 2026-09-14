@@ -141,14 +141,7 @@ function getInlineHtmlEmail(firstName, passportId, userRole) {
 '              <h1 style="font-size: 24px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.15em; margin: 0 0 8px 0; text-transform: uppercase;">AI PASSPORT™</h1>' +
 '              <span style="font-size: 10px; font-weight: 600; color: #94A3B8; letter-spacing: 0.18em; text-transform: uppercase; display: block;">AI CAPABILITY &bull; VERIFIED PROGRESS &bull; REAL-WORLD PROOF</span>' +
 '            </td>' +
-'          </tr>' +
-'          <tr>' +
-'            <td align="center" style="padding-bottom: 32px;">' +
-'              <a href="https://aipassport.ekaakshareducation.com/" target="_blank">' +
-'                <img src="https://aipassport.ekaakshareducation.com/FRAME%201.webp" alt="AI Passport Verified Identity Card" width="280" style="display: block; width: 100%; max-width: 280px; height: auto; border: 1px solid rgba(223, 207, 173, 0.35); border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.85);" />' +
-'              </a>' +
-'            </td>' +
-'          </tr>' +
+
 '          <tr>' +
 '            <td align="left" style="padding-bottom: 24px;">' +
 '              <span style="font-size: 11px; font-weight: 700; color: #2ECC71; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 8px;">✓ SEAT CONFIRMED &bull; FREE REGISTRATION</span>' +
