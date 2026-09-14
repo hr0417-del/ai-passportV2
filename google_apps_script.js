@@ -59,8 +59,9 @@ function doPost(e) {
     var passportId = "AIP-2026-" + ("0000" + newRowNumber).slice(-4);
     
     // Append row
+    var now = new Date();
     sheet.appendRow([
-      new Date(),
+      now,
       fullname,
       email,
       mobile,
@@ -90,7 +91,10 @@ function doPost(e) {
 
 function sendConfirmationEmail(userEmail, userFullName, passportId, userRole) {
   var subject = "Your Seat is Confirmed — AI Passport Live™";
-  var plainText = "20 September 2026 • Teachers & Educators • 2:00–3:30 PM IST\n\nYour seat is confirmed for AI Passport Live™. Theme: AI in Education – Preparing the Teacher for Viksit Bharat. Passport ID: " + passportId;
+  var plainText = "20 September 2026 • Teachers & Educators • 2:00 PM – 3:30 PM IST\n\n" +
+                  "Your seat is confirmed for AI Passport Live™. A practical AI experience for teachers and educators.\n" +
+                  "Passport ID: " + passportId + "\n\n" +
+                  "Learn more: https://aipassport.ekaakshareducation.com/";
 
   // Extract clean first name
   var firstName = "Educator";
@@ -105,7 +109,8 @@ function sendConfirmationEmail(userEmail, userFullName, passportId, userRole) {
 
   GmailApp.sendEmail(userEmail, subject, plainText, {
     htmlBody: htmlBody,
-    name: "Ekaakshar Education",
+    name: "AI Passport™ by Ekaakshar Education",
+    replyTo: "aipassportindia@gmail.com",
     bcc: "ekaakshareducation@gmail.com"
   });
 }
@@ -118,85 +123,91 @@ function getInlineHtmlEmail(firstName, passportId, userRole) {
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">' +
 '  <title>Your Seat is Confirmed — AI Passport Live™</title>' +
 '  <style type="text/css">' +
-'    body { margin: 0; padding: 0; width: 100% !important; background-color: #06080F; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #E2E8F0; }' +
+'    body { margin: 0; padding: 0; width: 100% !important; background-color: #F1F5F9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #1E293B; }' +
 '    table { border-collapse: collapse !important; }' +
 '    a { text-decoration: none; }' +
-'    .btn-gold { background: linear-gradient(135deg, #DFCFAD 0%, #C5A880 100%); color: #08090E !important; font-weight: 700; padding: 14px 26px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }' +
-'    .btn-whatsapp { background: #25D366; color: #08090E !important; font-weight: 700; padding: 14px 26px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }' +
+'    .btn-primary { background-color: #0F172A; color: #FFFFFF !important; font-weight: 700; padding: 14px 28px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid #1E293B; }' +
+'    .btn-secondary { background-color: #F8FAFC; color: #0F172A !important; font-weight: 700; padding: 14px 28px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid #CBD5E1; }' +
 '    @media screen and (max-width: 600px) {' +
-'      .email-container { width: 100% !important; padding: 28px 18px !important; }' +
+'      .email-container { width: 100% !important; padding: 24px 16px !important; }' +
 '      .btn-stack { display: block !important; width: 100% !important; margin-bottom: 12px !important; text-align: center !important; box-sizing: border-box !important; }' +
 '    }' +
 '  </style>' +
 '</head>' +
-'<body style="margin: 0; padding: 0; background-color: #06080F; color: #E2E8F0; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Helvetica, Arial, sans-serif;">' +
-'  <div style="display: none; font-size: 1px; color: #06080F; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">20 September 2026 &bull; Teachers &amp; Educators &bull; 2:00&ndash;3:30 PM IST</div>' +
-'  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #06080F; padding: 40px 16px;">' +
+'<body style="margin: 0; padding: 0; background-color: #F1F5F9; color: #1E293B; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Helvetica, Arial, sans-serif;">' +
+'  <div style="display: none; font-size: 1px; color: #F1F5F9; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">20 September 2026 &bull; Teachers &amp; Educators &bull; 2:00 PM &ndash; 3:30 PM IST</div>' +
+'  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F1F5F9; padding: 32px 12px;">' +
 '    <tr>' +
 '      <td align="center">' +
-'        <table class="email-container" border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%; background-color: #0D101A; border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 20px; padding: 40px 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.85);">' +
+'        <table class="email-container" border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%; background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 40px 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">' +
 '          <tr>' +
-'            <td align="center" style="padding-bottom: 28px;">' +
-'              <span style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; font-size: 11px; font-weight: 700; color: #DFCFAD; letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-bottom: 6px;">EKAAKSHAR EDUCATION</span>' +
-'              <h1 style="font-size: 24px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.15em; margin: 0 0 8px 0; text-transform: uppercase;">AI PASSPORT™</h1>' +
-'              <span style="font-size: 10px; font-weight: 600; color: #94A3B8; letter-spacing: 0.18em; text-transform: uppercase; display: block;">AI CAPABILITY &bull; VERIFIED PROGRESS &bull; REAL-WORLD PROOF</span>' +
-'            </td>' +
-
-'          <tr>' +
-'            <td align="left" style="padding-bottom: 24px;">' +
-'              <span style="font-size: 11px; font-weight: 700; color: #2ECC71; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 8px;">✓ SEAT CONFIRMED &bull; FREE REGISTRATION</span>' +
-'              <h2 style="font-size: 26px; font-weight: 800; color: #FFFFFF; margin: 0 0 4px 0; line-height: 1.25;">YOUR SEAT IS CONFIRMED</h2>' +
-'              <div style="font-size: 16px; font-weight: 700; color: #DFCFAD; letter-spacing: 0.05em; margin-bottom: 14px;">AI Passport Live™</div>' +
-'              <p style="font-size: 15px; line-height: 1.65; color: #CBD5E1; margin: 0;">Dear <strong>' + firstName + '</strong>,<br><br>Welcome to AI Passport Live™. You are confirmed for this practical 90-minute experience designed specifically for teachers and educators.</p>' +
-'            </td>' +
-'          </tr>' +
-'          <tr>' +
-'            <td style="padding-bottom: 32px;">' +
-'              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #141824; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 22px 24px;">' +
-'                <tr><td style="padding-bottom: 12px; font-size: 12px; font-weight: 600; color: #94A3B8; letter-spacing: 0.05em;">PASSPORT ID</td><td align="right" style="padding-bottom: 12px; font-size: 15px; font-weight: 700; color: #DFCFAD; font-family: monospace; letter-spacing: 0.05em;">' + passportId + '</td></tr>' +
-'                <tr><td style="padding-bottom: 12px; font-size: 12px; font-weight: 600; color: #94A3B8; letter-spacing: 0.05em;">DATE</td><td align="right" style="padding-bottom: 12px; font-size: 14px; font-weight: 700; color: #FFFFFF;">Sunday, 20 September 2026</td></tr>' +
-'                <tr><td style="padding-bottom: 12px; font-size: 12px; font-weight: 600; color: #94A3B8; letter-spacing: 0.05em;">TIME</td><td align="right" style="padding-bottom: 12px; font-size: 14px; font-weight: 700; color: #DFCFAD;">2:00 PM &ndash; 3:30 PM IST</td></tr>' +
-'                <tr><td style="padding-bottom: 12px; font-size: 12px; font-weight: 600; color: #94A3B8; letter-spacing: 0.05em;">FOR</td><td align="right" style="padding-bottom: 12px; font-size: 14px; font-weight: 600; color: #FFFFFF;">Teachers &amp; Educators</td></tr>' +
-'                <tr><td style="font-size: 12px; font-weight: 600; color: #94A3B8; letter-spacing: 0.05em;">ACCESS</td><td align="right" style="font-size: 14px; font-weight: 700; color: #2ECC71;">90 MIN &bull; LIVE &bull; FREE</td></tr>' +
-'              </table>' +
-'            </td>' +
-'          </tr>' +
-'          <tr>' +
-'            <td align="center" style="padding-bottom: 36px;">' +
-'              <table border="0" cellpadding="0" cellspacing="0" width="100%">' +
+'            <td style="padding-bottom: 28px;">' +
+'              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #0F172A; border-radius: 12px; padding: 24px; text-align: center;">' +
 '                <tr>' +
 '                  <td align="center">' +
-'                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education+%E2%80%93+Preparing+the+Teacher+for+Viksit+Bharat&dates=20260920T083000Z/20260920T100000Z&details=A+free+90-minute+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2Flive.html&location=Online+Live+Webinar" target="_blank" class="btn-gold" style="margin-right: 8px; margin-bottom: 10px;">ADD TO GOOGLE CALENDAR</a>' +
-'                    <a href="https://api.whatsapp.com/send?text=I%E2%80%99m%20attending%20AI%20Passport%20Live%E2%84%A2%20by%20Ekaakshar%20Education%20on%2020%20September%202026.%0A%0AA%20practical%2090-minute%20session%20for%20teachers%20and%20educators%20on%20understanding%2C%20creating%2C%20automating%20and%20building%20with%20AI.%0A%0A2%3A00%20PM%20%E2%80%93%203%3A30%20PM%20IST%0AFree%20%E2%80%A2%20Live%0A%0ALearn%20more%3A%0Ahttps%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" class="btn-whatsapp" style="margin-bottom: 10px;">SHARE ON WHATSAPP</a>' +
+'                    <div style="font-size: 11px; font-weight: 700; color: #DFCFAD; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px;">EKAAKSHAR EDUCATION</div>' +
+'                    <h1 style="font-size: 24px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.15em; margin: 0 0 6px 0; text-transform: uppercase;">AI PASSPORT™</h1>' +
+'                    <div style="font-size: 11px; font-weight: 500; color: #94A3B8; letter-spacing: 0.08em;">Building AI capability for the AI era.</div>' +
 '                  </td>' +
 '                </tr>' +
 '              </table>' +
 '            </td>' +
 '          </tr>' +
 '          <tr>' +
-'            <td style="padding-bottom: 32px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px;">' +
-'              <h3 style="font-size: 15px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 16px 0;">WHAT YOU WILL EXPLORE</h3>' +
-'              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-size: 14px; line-height: 1.6; color: #CBD5E1;">' +
-'                <tr><td style="padding-bottom: 12px;"><strong style="color: #DFCFAD;">01 &mdash; UNDERSTAND</strong><br><span style="color: #94A3B8; font-size: 13px;">The AI landscape and what it means for educators.</span></td></tr>' +
-'                <tr><td style="padding-bottom: 12px;"><strong style="color: #DFCFAD;">02 &mdash; CREATE</strong><br><span style="color: #94A3B8; font-size: 13px;">Use AI to develop lessons, resources and learning content.</span></td></tr>' +
-'                <tr><td style="padding-bottom: 12px;"><strong style="color: #DFCFAD;">03 &mdash; AUTOMATE</strong><br><span style="color: #94A3B8; font-size: 13px;">Discover practical workflows for everyday academic tasks.</span></td></tr>' +
-'                <tr><td style="padding-bottom: 12px;"><strong style="color: #DFCFAD;">04 &mdash; BUILD</strong><br><span style="color: #94A3B8; font-size: 13px;">Move beyond prompts toward practical AI-powered tools.</span></td></tr>' +
-'                <tr><td style="padding-bottom: 12px;"><strong style="color: #DFCFAD;">05 &mdash; THINK AHEAD</strong><br><span style="color: #94A3B8; font-size: 13px;">Explore how to continue building your AI capability through AI Passport™.</span></td></tr>' +
+'            <td align="left" style="padding-bottom: 24px;">' +
+'              <span style="font-size: 11px; font-weight: 700; color: #16A34A; letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-bottom: 8px;">✓ SEAT CONFIRMED &bull; FREE REGISTRATION</span>' +
+'              <h2 style="font-size: 24px; font-weight: 800; color: #0F172A; margin: 0 0 6px 0; line-height: 1.25;">YOUR SEAT IS CONFIRMED</h2>' +
+'              <div style="font-size: 16px; font-weight: 700; color: #B45309; letter-spacing: 0.02em; margin-bottom: 12px;">AI Passport Live™</div>' +
+'              <p style="font-size: 15px; line-height: 1.6; color: #334155; margin: 0;">A practical AI experience for teachers and educators.</p>' +
+'              <p style="font-size: 15px; line-height: 1.6; color: #334155; margin: 12px 0 0 0;">Dear <strong>' + firstName + '</strong>,<br><br>Welcome to AI Passport Live™. Your registration is confirmed.</p>' +
+'            </td>' +
+'          </tr>' +
+'          <tr>' +
+'            <td style="padding-bottom: 28px;">' +
+'              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-left: 4px solid #0F172A; border-radius: 8px; padding: 20px 24px;">' +
+'                <tr><td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">PASSPORT ID</td><td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A; font-family: monospace;">' + passportId + '</td></tr>' +
+'                <tr><td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">DATE</td><td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A;">20 SEPTEMBER 2026</td></tr>' +
+'                <tr><td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">TIME</td><td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A;">2:00 PM &ndash; 3:30 PM IST</td></tr>' +
+'                <tr><td style="font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">FORMAT</td><td align="right" style="font-size: 14px; font-weight: 700; color: #16A34A;">ONLINE &bull; FREE</td></tr>' +
 '              </table>' +
 '            </td>' +
 '          </tr>' +
 '          <tr>' +
-'            <td align="center" style="padding-bottom: 28px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;">' +
-'              <div style="font-size: 13px; font-weight: 800; color: #DFCFAD; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.4;">DON&rsquo;T JUST LEARN AI.<br>BUILD WITH IT.</div>' +
+'            <td style="padding-bottom: 28px; border-top: 1px solid #E2E8F0; padding-top: 24px;">' +
+'              <h3 style="font-size: 14px; font-weight: 800; color: #0F172A; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 16px 0;">WHAT YOU&rsquo;LL EXPERIENCE</h3>' +
+'              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-size: 14px; line-height: 1.6; color: #334155;">' +
+'                <tr><td style="padding-bottom: 8px;">&bull; Understand how AI is changing teaching and learning</td></tr>' +
+'                <tr><td style="padding-bottom: 8px;">&bull; Explore practical AI tools and workflows</td></tr>' +
+'                <tr><td style="padding-bottom: 8px;">&bull; See how educators can use AI more effectively</td></tr>' +
+'                <tr><td style="padding-bottom: 8px;">&bull; Move beyond simply using AI toward building with it</td></tr>' +
+'                <tr><td style="padding-bottom: 8px;">&bull; Discover the AI Passport journey for developing practical AI capability</td></tr>' +
+'              </table>' +
 '            </td>' +
 '          </tr>' +
 '          <tr>' +
-'            <td align="center" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; font-size: 12px; color: #64748B; line-height: 1.6;">' +
-'              <p style="margin: 0 0 6px 0; font-weight: 700; color: #94A3B8; letter-spacing: 0.05em;">Ekaakshar Education</p>' +
-'              <p style="margin: 0 0 6px 0; font-weight: 600; color: #DFCFAD;">AI Passport Council™ &mdash; Standards &amp; Governance</p>' +
-'              <p style="margin: 0 0 10px 0; color: #64748B;">Building AI capability for the AI era.</p>' +
-'              <p style="margin: 0 0 4px 0;"><a href="https://aipassport.ekaakshareducation.com/" style="color: #DFCFAD; text-decoration: underline;">aipassport.ekaakshareducation.com</a></p>' +
-'              <p style="margin: 0; color: #94A3B8;">Helpline: +91 87962 55005</p>' +
+'            <td align="center" style="padding-bottom: 28px; border-top: 1px solid #E2E8F0; padding-top: 24px;">' +
+'              <table border="0" cellpadding="0" cellspacing="0" width="100%">' +
+'                <tr>' +
+'                  <td align="center">' +
+'                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education+%E2%80%93+Preparing+the+Teacher+for+Viksit+Bharat&dates=20260920T083000Z/20260920T100000Z&details=A+free+90-minute+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2Flive.html&location=Online+Live+Webinar" target="_blank" class="btn-primary" style="margin-right: 8px; margin-bottom: 10px;">ADD TO CALENDAR &rarr;</a>' +
+'                    <a href="https://api.whatsapp.com/send?text=I%27m%20attending%20AI%20Passport%20Live%E2%84%A2%20%E2%80%94%20a%20free%20practical%20AI%20webinar%20for%20teachers%20and%20educators%20on%2020%20September%202026%2C%20from%202%3A00%20PM%20to%203%3A30%20PM%20IST.%0A%0ALearn%20more%3A%0Ahttps%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" class="btn-secondary" style="margin-bottom: 10px;">SHARE ON WHATSAPP &rarr;</a>' +
+'                  </td>' +
+'                </tr>' +
+'              </table>' +
+'            </td>' +
+'          </tr>' +
+'          <tr>' +
+'            <td align="center" style="padding-bottom: 24px; border-top: 1px solid #E2E8F0; padding-top: 20px;">' +
+'              <div style="font-size: 12px; font-weight: 800; color: #0F172A; letter-spacing: 0.12em; text-transform: uppercase;">DON&rsquo;T JUST LEARN AI. BUILD WITH IT.</div>' +
+'            </td>' +
+'          </tr>' +
+'          <tr>' +
+'            <td align="center" style="border-top: 1px solid #E2E8F0; padding-top: 20px; font-size: 12px; color: #64748B; line-height: 1.6;">' +
+'              <p style="margin: 0 0 4px 0; font-weight: 700; color: #0F172A;">AI Passport™</p>' +
+'              <p style="margin: 0 0 4px 0; color: #64748B;">Building AI capability for the AI era.</p>' +
+'              <p style="margin: 0 0 8px 0; font-weight: 600; color: #475569;">Ekaakshar Education</p>' +
+'              <p style="margin: 0 0 4px 0;"><a href="https://aipassport.ekaakshareducation.com/" style="color: #0F172A; text-decoration: underline;">aipassport.ekaakshareducation.com</a></p>' +
+'              <p style="margin: 0; color: #64748B;">Helpline: 8796255005</p>' +
 '            </td>' +
 '          </tr>' +
 '        </table>' +
