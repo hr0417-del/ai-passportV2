@@ -2,7 +2,7 @@ function doGet(e) {
   return ContentService.createTextOutput(JSON.stringify({
     status: "online",
     service: "AI Passport Live API",
-    version: "2.5"
+    version: "2.6"
   })).setMimeType(ContentService.MimeType.JSON);
 }
 
@@ -92,7 +92,6 @@ function sendConfirmationEmail(userEmail, userFullName, passportId, userRole) {
   var subject = "Seat Confirmed: AI Passport Live™ (20 Sept 2026)";
   var plainText = "Your seat is confirmed for AI Passport Live™. Theme: AI in Education – Preparing the Teacher for Viksit Bharat. Date: Sunday, 20 September 2026, 2:00 PM - 3:30 PM IST. Passport ID: " + passportId;
 
-  // Render HTML from email_invitation file if present in Apps Script, or fallback to inline generator
   var htmlBody = "";
   try {
     var template = HtmlService.createTemplateFromFile('email_invitation');
@@ -145,7 +144,7 @@ function getInlineHtmlEmail(userFullName, passportId, userRole) {
 '          <tr>' +
 '            <td align="center" style="padding-bottom: 32px;">' +
 '              <a href="https://aipassport.ekaakshareducation.com/live.html" target="_blank">' +
-'                <img src="https://aipassport.ekaakshareducation.com/passport.png" alt="AI Passport Verified Identity Card" width="280" style="display: block; width: 100%; max-width: 280px; height: auto; border: 1px solid rgba(223, 207, 173, 0.35); border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.85);" />' +
+'                <img src="https://aipassport.ekaakshareducation.com/FRAME%201.webp" alt="AI Passport Verified Identity Card" width="280" style="display: block; width: 100%; max-width: 280px; height: auto; border: 1px solid rgba(223, 207, 173, 0.35); border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.85);" />' +
 '              </a>' +
 '            </td>' +
 '          </tr>' +
@@ -176,8 +175,8 @@ function getInlineHtmlEmail(userFullName, passportId, userRole) {
 '              <table border="0" cellpadding="0" cellspacing="0" width="100%">' +
 '                <tr>' +
 '                  <td align="center">' +
-'                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education+%E2%80%93+Preparing+the+Teacher+for+Viksit+Bharat&dates=20260920T083000Z/20260920T100000Z&details=A+free+90-minute+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2Flive.html&location=Online+Live+Webinar" target="_blank" class="btn-gold btn-stack" style="margin-right: 8px; margin-bottom: 12px;">ADD TO GOOGLE CALENDAR</a>' +
-'                    <a href="https://api.whatsapp.com/send?text=I%E2%80%99ve%20registered%20for%20AI%20Passport%20Live%E2%84%A2%20%E2%80%94%20a%20free%2090-minute%20live%20experience%20for%20teachers%20and%20educators%20on%2020%20September%202026%2C%202%3A00%E2%80%933%3A30%20PM%20IST.%0A%0ATheme%3A%20AI%20in%20Education%20%E2%80%94%20Preparing%20the%20Teacher%20for%20Viksit%20Bharat.%0A%0ALearn%20more%3A%20https%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" class="btn-whatsapp btn-stack" style="margin-bottom: 12px;">SHARE ON WHATSAPP</a>' +
+'                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education+%E2%80%93+Preparing+the+Teacher+for+Viksit+Bharat&dates=20260920T083000Z/20260920T100000Z&details=A+free+90-minute+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2Flive.html&location=Online+Live+Webinar" target="_blank" class="btn-gold" style="margin-right: 8px; margin-bottom: 10px;">ADD TO GOOGLE CALENDAR</a>' +
+'                    <a href="https://api.whatsapp.com/send?text=I%E2%80%99ve%20registered%20for%20AI%20Passport%20Live%E2%84%A2%20%E2%80%94%20a%20free%2090-minute%20live%20experience%20for%20teachers%20and%20educators%20on%2020%20September%202026%2C%202%3A00%E2%80%933%3A30%20PM%20IST.%0A%0ATheme%3A%20AI%20in%20Education%20%E2%80%94%20Preparing%20the%20Teacher%20for%20Viksit%20Bharat.%0A%0ALearn%20more%3A%20https%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" class="btn-whatsapp" style="margin-bottom: 10px;">SHARE ON WHATSAPP</a>' +
 '                  </td>' +
 '                </tr>' +
 '              </table>' +
