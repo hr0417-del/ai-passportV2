@@ -101,16 +101,7 @@ function sendConfirmationEmail(userEmail, userFullName, passportId, userRole) {
     }
   }
 
-  var htmlBody = "";
-  try {
-    var template = HtmlService.createTemplateFromFile('email_invitation');
-    template.firstName = firstName;
-    template.passport_id = passportId;
-    template.userRole = userRole;
-    htmlBody = template.evaluate().getContent();
-  } catch (e) {
-    htmlBody = getInlineHtmlEmail(firstName, passportId, userRole);
-  }
+  var htmlBody = getInlineHtmlEmail(firstName, passportId, userRole);
 
   GmailApp.sendEmail(userEmail, subject, plainText, {
     htmlBody: htmlBody,
@@ -160,7 +151,7 @@ function getInlineHtmlEmail(firstName, passportId, userRole) {
 '          </tr>' +
 '          <tr>' +
 '            <td align="left" style="padding-bottom: 24px;">' +
-'              <span style="font-size: 11px; font-weight: 700; color: #2ECC71; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 8px;">&check; SEAT CONFIRMED &bull; FREE REGISTRATION</span>' +
+'              <span style="font-size: 11px; font-weight: 700; color: #2ECC71; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 8px;">✓ SEAT CONFIRMED &bull; FREE REGISTRATION</span>' +
 '              <h2 style="font-size: 26px; font-weight: 800; color: #FFFFFF; margin: 0 0 4px 0; line-height: 1.25;">YOUR SEAT IS CONFIRMED</h2>' +
 '              <div style="font-size: 16px; font-weight: 700; color: #DFCFAD; letter-spacing: 0.05em; margin-bottom: 14px;">AI Passport Live™</div>' +
 '              <p style="font-size: 15px; line-height: 1.65; color: #CBD5E1; margin: 0;">Dear <strong>' + firstName + '</strong>,<br><br>Welcome to AI Passport Live™. You are confirmed for this practical 90-minute experience designed specifically for teachers and educators.</p>' +
