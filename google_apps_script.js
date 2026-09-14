@@ -137,7 +137,7 @@ function getInlineHtmlEmail(firstName, passportId, userRole) {
 '        <table class="email-container" border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%; background-color: #0D101A; border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 20px; padding: 40px 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.85);">' +
 '          <tr>' +
 '            <td align="center" style="padding-bottom: 28px;">' +
-'              <span style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; font-size: 11px; font-weight: 700; color: #DFCFAD; letter-spacing: 0.35em; text-transform: uppercase; display: block; margin-bottom: 8px;">E K A A K S H A R &nbsp; E D U C A T I O N</span>' +
+'              <span style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; font-size: 11px; font-weight: 700; color: #DFCFAD; letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-bottom: 6px;">EKAAKSHAR EDUCATION</span>' +
 '              <h1 style="font-size: 24px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.15em; margin: 0 0 8px 0; text-transform: uppercase;">AI PASSPORT™</h1>' +
 '              <span style="font-size: 10px; font-weight: 600; color: #94A3B8; letter-spacing: 0.18em; text-transform: uppercase; display: block;">AI CAPABILITY &bull; VERIFIED PROGRESS &bull; REAL-WORLD PROOF</span>' +
 '            </td>' +
