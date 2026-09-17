@@ -9018,16 +9018,16 @@ html, body {
   }
 }
 
-/* --- PROOF PROJECT ASSEMBLY LINE SYSTEM --- */
-.assembly-line-section {
+/* --- PROOF: AI PROJECT GALAXY SYSTEM --- */
+.galaxy-proof-section {
   position: relative;
-  height: 350vh;
+  height: 320vh;
   background: #030305;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   box-sizing: border-box;
 }
 
-.assembly-sticky-wrapper {
+.galaxy-sticky-wrapper {
   position: sticky;
   top: 0;
   height: 100vh;
@@ -9037,329 +9037,198 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  perspective: 1000px;
+  perspective: 1200px;
 }
 
-.assembly-header {
+/* 1. Stationary Central Content Anchor */
+.galaxy-center-content {
   position: absolute;
-  top: 50px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: 90%;
-  max-width: 800px;
+  max-width: 640px;
   text-align: center;
-  z-index: 25;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
+  z-index: 30;
+  pointer-events: auto;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.assembly-title {
+.galaxy-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 3.8vw, 3.2rem);
-  line-height: 1.15;
-  margin: 8px 0;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.12;
+  margin: 12px 0 16px 0;
   color: #ffffff;
 }
 
-.assembly-subtitle {
-  font-size: clamp(0.92rem, 1.2vw, 1.1rem);
-  color: rgba(255, 255, 255, 0.75);
-  margin: 0 auto;
+.galaxy-subtitle {
+  font-size: clamp(0.98rem, 1.3vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 auto 28px auto;
+  line-height: 1.6;
 }
 
-/* Horizontal Pathway Indicator: IDEA -> BUILD -> PROVE */
-.assembly-pathway {
-  position: absolute;
-  top: 175px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  z-index: 20;
-  pointer-events: none;
+.galaxy-center-cta {
+  display: inline-block;
+  margin-top: 4px;
 }
 
-.pathway-step {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  background: rgba(18, 19, 26, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.4s ease;
-}
-
-.pathway-step .step-num {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.4);
-  font-weight: 700;
-}
-
-.pathway-step .step-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.pathway-step.active {
-  background: rgba(223, 207, 173, 0.15);
-  border-color: var(--color-gold);
-  box-shadow: 0 0 20px rgba(223, 207, 173, 0.25);
-}
-
-.pathway-step.active .step-num {
-  color: var(--color-gold);
-}
-
-.pathway-step.active .step-label {
-  color: #ffffff;
-}
-
-.pathway-line {
-  width: 50px;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(223,207,173,0.4), rgba(255,255,255,0.1));
-}
-
-/* Secondary Peripheral Stream */
-.assembly-secondary-stream {
+/* 2. Surrounding Galaxy Cards Field */
+.galaxy-field {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 10;
   pointer-events: none;
-  z-index: 5;
 }
 
-.sec-item {
-  position: absolute;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.22);
-  background: rgba(18, 19, 26, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 4px 12px;
-  border-radius: 12px;
-  white-space: nowrap;
-  will-change: transform;
-}
-
-.sec-top-1 { top: 240px; left: 8%; }
-.sec-top-2 { top: 230px; right: 12%; }
-.sec-top-3 { top: 260px; left: 35%; }
-.sec-bot-1 { bottom: 120px; left: 10%; }
-.sec-bot-2 { bottom: 140px; right: 15%; }
-.sec-bot-3 { bottom: 110px; right: 38%; }
-
-/* Phase 1 Idea Fragments */
-.assembly-fragments-container {
+.galaxy-card {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.fragment-item {
-  position: absolute;
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1rem, 1.8vw, 1.6rem);
-  font-style: italic;
-  color: rgba(223, 207, 173, 0.6);
-  white-space: nowrap;
-  will-change: transform, opacity, filter;
-  transition: opacity 0.3s ease;
-}
-
-/* Phase 2 Primary BUILD Stage Card */
-.assembly-primary-stage {
-  position: absolute;
-  top: 52%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 15;
-  width: 90%;
-  max-width: 680px;
-  text-align: center;
-  pointer-events: none;
-}
-
-.assembly-primary-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   background: rgba(18, 19, 26, 0.85);
-  border: 1px solid rgba(223, 207, 173, 0.3);
-  border-radius: 20px;
-  padding: 36px 44px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(223, 207, 173, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 10px 16px;
+  white-space: nowrap;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   will-change: transform, opacity, filter;
-  transition: all 0.35s ease;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease, opacity 0.3s ease;
 }
 
-.assembly-card-eyebrow {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: var(--color-gold);
-  margin-bottom: 12px;
-  text-transform: uppercase;
+.card-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
-.assembly-card-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-  font-weight: 700;
+.card-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.card-name {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.78rem, 0.95vw, 0.88rem);
+  font-weight: 600;
   color: #ffffff;
   line-height: 1.25;
-  margin: 0 0 14px 0;
-  letter-spacing: -0.01em;
 }
 
-.assembly-card-meta {
+.card-cat {
   font-family: 'Space Mono', monospace;
-  font-size: 0.76rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #58c4ff;
-  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
 }
 
-/* Phase 3 Evidence Nodes */
-.assembly-evidence-container {
+/* Accent Color Themes */
+.galaxy-card.color-gold {
+  border-color: rgba(223, 207, 173, 0.3);
+}
+.galaxy-card.color-gold .card-icon { color: var(--color-gold); }
+.galaxy-card.color-gold .card-cat { color: var(--color-gold); }
+
+.galaxy-card.color-blue {
+  border-color: rgba(88, 196, 255, 0.3);
+}
+.galaxy-card.color-blue .card-icon { color: #58c4ff; }
+.galaxy-card.color-blue .card-cat { color: #58c4ff; }
+
+.galaxy-card.color-cyan {
+  border-color: rgba(0, 229, 255, 0.3);
+}
+.galaxy-card.color-cyan .card-icon { color: #00e5ff; }
+.galaxy-card.color-cyan .card-cat { color: #00e5ff; }
+
+.galaxy-card.color-teal {
+  border-color: rgba(0, 230, 153, 0.3);
+}
+.galaxy-card.color-teal .card-icon { color: #00e699; }
+.galaxy-card.color-teal .card-cat { color: #00e699; }
+
+.galaxy-card.color-violet {
+  border-color: rgba(179, 136, 255, 0.3);
+}
+.galaxy-card.color-violet .card-icon { color: #b388ff; }
+.galaxy-card.color-violet .card-cat { color: #b388ff; }
+
+.galaxy-card.color-magenta {
+  border-color: rgba(255, 105, 180, 0.3);
+}
+.galaxy-card.color-magenta .card-icon { color: #ff69b4; }
+.galaxy-card.color-magenta .card-cat { color: #ff69b4; }
+
+/* Card Hover Highlights */
+.galaxy-card:hover,
+.galaxy-card.active-hover {
+  border-color: #ffffff !important;
+  background: rgba(30, 32, 45, 0.95) !important;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.25) !important;
+  z-index: 100 !important;
+}
+
+/* 3. Lower Section Info Overlay */
+.galaxy-lower-info {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 12;
-}
-
-.evidence-node {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--color-gold);
-  box-shadow: 0 0 18px var(--color-gold), 0 0 30px rgba(223, 207, 173, 0.6);
-  opacity: 0;
-  will-change: transform, opacity;
-  transition: opacity 0.4s ease;
-}
-
-/* Phase 4 Abstract Passport Emblem & Final State */
-.assembly-final-state {
-  position: absolute;
-  top: 52%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
-  z-index: 25;
+  z-index: 35;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.5s ease;
   width: 90%;
   max-width: 600px;
 }
 
-.assembly-final-state.active {
+.galaxy-lower-info.active {
   opacity: 1;
   pointer-events: auto;
 }
 
-.abstract-passport-emblem {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 28px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.emblem-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(223, 207, 173, 0.35);
-}
-
-.emblem-ring.ring-1 {
-  width: 100%;
-  height: 100%;
-  animation: spinSlow 20s linear infinite;
-}
-
-.emblem-ring.ring-2 {
-  width: 75%;
-  height: 75%;
-  border-dasharray: 4 4;
-  animation: spinReverse 15s linear infinite;
-}
-
-.emblem-core {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--color-gold);
-}
-
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes spinReverse {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
-}
-
-.assembly-final-title {
+.galaxy-lower-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
   color: #ffffff;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.assembly-final-desc {
+.galaxy-lower-desc {
   font-size: 1.05rem;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 28px;
 }
 
 @media (max-width: 768px) {
-  .assembly-line-section {
-    height: 280vh;
+  .galaxy-proof-section {
+    height: 250vh;
   }
-  .assembly-header {
-    top: 35px;
+  .galaxy-card {
+    padding: 8px 12px;
   }
-  .assembly-pathway {
-    top: 145px;
-    gap: 8px;
+  .card-name {
+    font-size: 0.75rem;
   }
-  .pathway-step {
-    padding: 4px 10px;
-  }
-  .pathway-line {
-    width: 25px;
-  }
-  .assembly-primary-card {
-    padding: 24px 20px;
+  .card-cat {
+    font-size: 0.55rem;
   }
 }
+
 
 
 
