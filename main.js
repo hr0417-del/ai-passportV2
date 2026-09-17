@@ -59,13 +59,6 @@ function initPreloader() {
   const loader = document.getElementById('loader');
   if (!loader) return;
   
-  // Dynamically split hero title words for premium entrance reveal
-  const heroTitle = document.querySelector('.hero-section h1');
-  if (heroTitle) {
-    const words = heroTitle.textContent.split(' ');
-    heroTitle.innerHTML = words.map(w => `<span class="word-wrapper"><span class="word-inner">${w}</span></span>`).join(' ');
-  }
-  
   const introTimeline = gsap.timeline({ paused: true });
   
   introTimeline
@@ -78,25 +71,17 @@ function initPreloader() {
       }
     })
     // Fade in subtitle & badge
-    .from('.hero-section .hero-text-block .hero-subtitle', {
+    .from('.hero-section .hero-text-block .section-tag', {
       y: 15,
       opacity: 0,
       duration: 0.8,
       ease: 'power3.out'
     }, '-=0.4')
-    .from('.hero-section .hero-text-block .webinar-badge', {
-      y: 20,
-      opacity: 0,
-      duration: 1.0,
-      ease: 'power3.out'
-    }, '-=0.6')
-    // Apple-style vertical emerge for each word in the headline
-    .to('.hero-section .hero-text-block h1 .word-inner', { 
-      y: 0, 
-      opacity: 1, 
-      duration: 1.3, 
-      stagger: 0.08,
-      ease: 'power4.out' 
+    .from('.hero-section .hero-text-block h1', { 
+      y: 20, 
+      opacity: 0, 
+      duration: 1.0, 
+      ease: 'power3.out' 
     }, '-=0.6')
     .from('.hero-section .hero-text-block .section-lead', { 
       y: 30, 
