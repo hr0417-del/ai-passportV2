@@ -2487,6 +2487,238 @@ function initFooterInteractions() {
   }
 }
 
+/* --- 23. PROOF Interactive Spatial Experience Engine --- */
+function initProofSpatialExperience() {
+  const proofSection = document.getElementById('proof');
+  const stickyWrapper = document.getElementById('proof-sticky-wrapper');
+  const focalWord = document.getElementById('proof-focal-word');
+  const clusterHeaders = document.getElementById('proof-cluster-headers');
+  const projectItems = document.querySelectorAll('.proof-project-item');
+  const hoverCard = document.getElementById('proof-hover-card');
+  const hoverTitle = document.getElementById('proof-hover-title');
+  const hoverTags = document.getElementById('proof-hover-tags');
+  const finalState = document.getElementById('proof-final-state');
+
+  if (!proofSection || !projectItems.length) return;
+
+  // 1. Assign Spatial Base Coordinates & Cluster Positions
+  const clusterCoords = {
+    CREATE: { x: -32, y: -18 },
+    SEARCH: { x: 32, y: -18 },
+    AUTOMATE: { x: -34, y: 18 },
+    ANALYSE: { x: 34, y: 18 },
+    BUILD: { x: 0, y: 28 }
+  };
+
+  const clusterTags = clusterHeaders ? clusterHeaders.querySelectorAll('.cluster-tag') : [];
+  clusterTags.forEach(tag => {
+    const name = tag.getAttribute('data-cluster');
+    if (clusterCoords[name]) {
+      tag.style.left = `calc(50% + ${clusterCoords[name].x}vw)`;
+      tag.style.top = `calc(50% + ${clusterCoords[name].y}vh)`;
+    }
+  });
+
+  const itemData = [];
+  projectItems.forEach((item, index) => {
+    const angle = (index / projectItems.length) * Math.PI * 2 + (index % 3) * 0.5;
+    const distanceX = 18 + (index % 5) * 6 + (index % 2) * 8;
+    const distanceY = 15 + (index % 4) * 8 + (index % 3) * 5;
+    
+    const initX = Math.cos(angle) * distanceX * (index % 2 === 0 ? 1 : -1);
+    const initY = Math.sin(angle) * distanceY * (index % 3 === 0 ? 1 : -1);
+    const initScale = 0.75 + (index % 5) * 0.06;
+    const initOpacity = 0.45 + (index % 4) * 0.12;
+    const depthZ = (index % 5) * 20 - 40;
+
+    const cluster = item.getAttribute('data-cluster') || 'BUILD';
+    const clusterTarget = clusterCoords[cluster] || { x: 0, y: 0 };
+    
+    const clusterJitterX = ((index % 6) - 2.5) * 6;
+    const clusterJitterY = ((index % 4) - 1.5) * 5;
+
+    itemData.push({
+      element: item,
+      cluster: cluster,
+      initX: initX,
+      initY: initY,
+      initScale: initScale,
+      initOpacity: initOpacity,
+      depthZ: depthZ,
+      convX: Math.cos(angle) * (10 + (index % 3) * 5),
+      convY: Math.sin(angle) * (8 + (index % 3) * 4),
+      clustX: clusterTarget.x + clusterJitterX,
+      clustY: clusterTarget.y + clusterJitterY,
+      currX: initX,
+      currY: initY,
+      currScale: initScale,
+      currOpacity: initOpacity
+    });
+  });
+
+  let mouseX = 0, mouseY = 0;
+  let targetMouseX = 0, targetMouseY = 0;
+  let hoveredItem = null;
+
+  window.addEventListener('mousemove', (e) => {
+    if (!stickyWrapper) return;
+    const rect = stickyWrapper.getBoundingClientRect();
+    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+      targetMouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      targetMouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+      
+      if (hoveredItem && hoverCard) {
+        hoverCard.style.left = `${e.clientX}px`;
+        hoverCard.style.top = `${e.clientY}px`;
+      }
+    }
+  });
+
+  itemData.forEach(data => {
+    const item = data.element;
+    item.addEventListener('mouseenter', (e) => {
+      hoveredItem = item;
+      const title = item.getAttribute('data-title');
+      const tags = item.getAttribute('data-tags');
+      if (hoverTitle) hoverTitle.textContent = title;
+      if (hoverTags) hoverTags.innerHTML = tags;
+      if (hoverCard) {
+        hoverCard.classList.add('visible');
+        hoverCard.style.left = `${e.clientX}px`;
+        hoverCard.style.top = `${e.clientY}px`;
+      }
+      itemData.forEach(d => {
+        if (d.element !== item) {
+          d.element.style.opacity = '0.25';
+        }
+      });
+    });
+
+    item.addEventListener('mouseleave', () => {
+      hoveredItem = null;
+      if (hoverCard) hoverCard.classList.remove('visible');
+      itemData.forEach(d => {
+        d.element.style.opacity = '';
+      });
+    });
+  });
+
+  let scrollProgress = 0;
+
+  function updateScrollProgress() {
+    const rect = proofSection.getBoundingClientRect();
+    const sectionHeight = proofSection.offsetHeight - window.innerHeight;
+    if (sectionHeight <= 0) return;
+    const rawProgress = (-rect.top) / sectionHeight;
+    scrollProgress = Math.max(0, Math.min(1, rawProgress));
+  }
+
+  function renderFrame() {
+    updateScrollProgress();
+
+    mouseX += (targetMouseX - mouseX) * 0.08;
+    mouseY += (targetMouseY - mouseY) * 0.08;
+
+    const p = scrollProgress;
+
+    // Focal Word Transformation (BUILD -> PROVE)
+    if (focalWord) {
+      if (p < 0.25) {
+        focalWord.textContent = 'BUILD';
+        const op = Math.min(1, p / 0.15);
+        focalWord.style.opacity = op;
+        focalWord.style.transform = `scale(${0.8 + op * 0.2})`;
+      } else if (p >= 0.25 && p < 0.48) {
+        focalWord.textContent = 'BUILD';
+        focalWord.style.opacity = '1';
+        focalWord.style.transform = `scale(${1 + (p - 0.25) * 0.4})`;
+      } else if (p >= 0.48 && p < 0.55) {
+        const morphP = (p - 0.48) / 0.07;
+        if (morphP < 0.5) {
+          focalWord.textContent = 'BUILD';
+          focalWord.style.opacity = (1 - morphP * 2);
+        } else {
+          focalWord.textContent = 'PROVE';
+          focalWord.style.opacity = ((morphP - 0.5) * 2);
+        }
+      } else if (p >= 0.55 && p < 0.82) {
+        focalWord.textContent = 'PROVE';
+        focalWord.style.opacity = '0.9';
+        focalWord.style.transform = 'scale(1.1)';
+      } else {
+        focalWord.textContent = 'PROVE';
+        focalWord.style.opacity = Math.max(0.15, 1 - (p - 0.82) * 4);
+        focalWord.style.transform = `scale(${1.1 - (p - 0.82) * 0.4})`;
+      }
+    }
+
+    // Cluster Headers Visibility
+    if (clusterHeaders) {
+      if (p >= 0.50 && p < 0.82) {
+        clusterHeaders.style.opacity = Math.min(1, (p - 0.50) / 0.1);
+      } else if (p >= 0.82) {
+        clusterHeaders.style.opacity = Math.max(0, 1 - (p - 0.82) / 0.1);
+      } else {
+        clusterHeaders.style.opacity = '0';
+      }
+    }
+
+    // Final State Overlay Visibility
+    if (finalState) {
+      if (p >= 0.80) {
+        finalState.classList.add('active');
+      } else {
+        finalState.classList.remove('active');
+      }
+    }
+
+    // Animate Project Items
+    itemData.forEach((data, index) => {
+      let targetX, targetY, targetScale, targetOpacity;
+
+      if (p < 0.25) {
+        const phaseP = p / 0.25;
+        targetX = data.initX;
+        targetY = data.initY;
+        targetScale = data.initScale;
+        targetOpacity = data.initOpacity * Math.min(1, phaseP * 1.5);
+      } else if (p >= 0.25 && p < 0.50) {
+        const phaseP = (p - 0.25) / 0.25;
+        targetX = data.initX + (data.convX - data.initX) * phaseP;
+        targetY = data.initY + (data.convY - data.initY) * phaseP;
+        targetScale = data.initScale + (1.0 - data.initScale) * phaseP * 0.5;
+        targetOpacity = data.initOpacity + (0.9 - data.initOpacity) * phaseP;
+      } else if (p >= 0.50 && p < 0.80) {
+        const phaseP = (p - 0.50) / 0.30;
+        targetX = data.convX + (data.clustX - data.convX) * phaseP;
+        targetY = data.convY + (data.clustY - data.convY) * phaseP;
+        targetScale = 0.85 + (index % 3) * 0.08;
+        targetOpacity = 0.85;
+      } else {
+        const phaseP = (p - 0.80) / 0.20;
+        targetX = data.clustX * (1 - phaseP * 0.2);
+        targetY = data.clustY * (1 - phaseP * 0.2);
+        targetScale = 0.8;
+        targetOpacity = Math.max(0.2, 0.85 - phaseP * 0.5);
+      }
+
+      const parallaxFactorX = (data.depthZ + 50) * 0.08;
+      const parallaxFactorY = (data.depthZ + 50) * 0.08;
+      const finalX = targetX + mouseX * parallaxFactorX;
+      const finalY = targetY + mouseY * parallaxFactorY;
+
+      data.element.style.transform = `translate3d(calc(-50% + ${finalX}vw), calc(-50% + ${finalY}vh), ${data.depthZ}px) scale(${targetScale})`;
+      if (!hoveredItem) {
+        data.element.style.opacity = targetOpacity;
+      }
+    });
+
+    requestAnimationFrame(renderFrame);
+  }
+
+  requestAnimationFrame(renderFrame);
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initEcosystemDiagram();
@@ -2496,6 +2728,7 @@ if (document.readyState === 'loading') {
     init3DTiltCards();
     initMissionTextAnimation();
     initFooterInteractions();
+    initProofSpatialExperience();
   });
 } else {
   initEcosystemDiagram();
@@ -2505,6 +2738,7 @@ if (document.readyState === 'loading') {
   init3DTiltCards();
   initMissionTextAnimation();
   initFooterInteractions();
+  initProofSpatialExperience();
 }
 
 
