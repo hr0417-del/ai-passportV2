@@ -1743,8 +1743,8 @@ p {
 
 @media (max-width: 768px) {
   .hero-text-block {
-    max-width: 90%;
-    text-align: center;
+    max-width: 100%;
+    text-align: left !important;
   }
   
   .btn-group {
@@ -3288,13 +3288,13 @@ p, .section-lead, .section-subtext {
 
 /* --- Mobile Spacing & Alignment Optimizations (under 768px) --- */
 @media (max-width: 768px) {
-  /* Center Hero Text block horizontally */
-  .hero-text-block {
-    margin: 0 auto !important;
-    text-align: center !important;
+  /* Left align Hero Text block */
+  .hero-section .hero-text-block {
+    margin: 0 !important;
+    text-align: left !important;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start !important;
   }
 
   /* Center Speakers cards content */
