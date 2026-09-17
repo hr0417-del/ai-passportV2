@@ -1,8 +1,43 @@
 function doGet(e) {
+  var action = (e && e.parameter && e.parameter.action) ? e.parameter.action : "";
+  
+  if (action === "getAll" || action === "getStats") {
+    try {
+      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+      var rows = sheet.getDataRange().getValues();
+      var headers = rows[0] || [];
+      var data = [];
+      for (var i = 1; i < rows.length; i++) {
+        data.push({
+          timestamp: rows[i][0],
+          fullname: rows[i][1],
+          email: rows[i][2],
+          mobile: rows[i][3],
+          role: rows[i][4],
+          use_case: rows[i][5],
+          city: rows[i][6],
+          passportId: rows[i][7]
+        });
+      }
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "online",
+        service: "AI Passport Live API",
+        version: "4.2",
+        totalRegistrations: data.length,
+        registrations: data
+      })).setMimeType(ContentService.MimeType.JSON);
+    } catch(err) {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "error",
+        message: err.toString()
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+
   return ContentService.createTextOutput(JSON.stringify({
     status: "online",
     service: "AI Passport Live API",
-    version: "4.1"
+    version: "4.2"
   })).setMimeType(ContentService.MimeType.JSON);
 }
 
