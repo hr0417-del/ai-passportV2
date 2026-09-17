@@ -2487,231 +2487,251 @@ function initFooterInteractions() {
   }
 }
 
-/* --- 23. PROOF Interactive Spatial Experience Engine --- */
-function initProofSpatialExperience() {
-  const proofSection = document.getElementById('proof');
-  const stickyWrapper = document.getElementById('proof-sticky-wrapper');
-  const focalWord = document.getElementById('proof-focal-word');
-  const clusterHeaders = document.getElementById('proof-cluster-headers');
-  const projectItems = document.querySelectorAll('.proof-project-item');
-  const hoverCard = document.getElementById('proof-hover-card');
-  const hoverTitle = document.getElementById('proof-hover-title');
-  const hoverTags = document.getElementById('proof-hover-tags');
-  const finalState = document.getElementById('proof-final-state');
+/* --- 23. PROJECT ASSEMBLY LINE Motion Engine (IDEA -> BUILD -> PROVE) --- */
+function initProjectAssemblyLine() {
+  const section = document.getElementById('proof');
+  const stickyWrapper = document.getElementById('assembly-sticky-wrapper');
+  const header = document.querySelector('.assembly-header');
+  const stepIdea = document.getElementById('step-idea');
+  const stepBuild = document.getElementById('step-build');
+  const stepProve = document.getElementById('step-prove');
+  const primaryStage = document.getElementById('assembly-primary-stage');
+  const primaryCard = document.getElementById('assembly-primary-card');
+  const cardEyebrow = document.getElementById('assembly-card-eyebrow');
+  const cardTitle = document.getElementById('assembly-card-title');
+  const cardMeta = document.getElementById('assembly-card-meta');
+  const secondaryItems = document.querySelectorAll('.sec-item');
+  const fragmentItems = document.querySelectorAll('.fragment-item');
+  const evidenceNodes = document.querySelectorAll('.evidence-node');
+  const finalState = document.getElementById('assembly-final-state');
 
-  if (!proofSection || !projectItems.length) return;
+  if (!section || !primaryCard) return;
 
-  // 1. Assign Spatial Base Coordinates & Cluster Positions
-  const clusterCoords = {
-    CREATE: { x: -32, y: -18 },
-    SEARCH: { x: 32, y: -18 },
-    AUTOMATE: { x: -34, y: 18 },
-    ANALYSE: { x: 34, y: 18 },
-    BUILD: { x: 0, y: 28 }
-  };
-
-  const clusterTags = clusterHeaders ? clusterHeaders.querySelectorAll('.cluster-tag') : [];
-  clusterTags.forEach(tag => {
-    const name = tag.getAttribute('data-cluster');
-    if (clusterCoords[name]) {
-      tag.style.left = `calc(50% + ${clusterCoords[name].x}vw)`;
-      tag.style.top = `calc(50% + ${clusterCoords[name].y}vh)`;
+  // Showcase Projects List for BUILD Cycle (6 Featured Builds)
+  const projectsList = [
+    {
+      eyebrow: 'BUILD STAGE &bull; PROJECT 01 / 06',
+      title: 'AI LESSON PLAN GENERATOR',
+      meta: 'PROMPTING &bull; GENERATIVE AI &bull; WORKFLOW'
+    },
+    {
+      eyebrow: 'BUILD STAGE &bull; PROJECT 02 / 06',
+      title: 'DOCUMENT KNOWLEDGE SEARCH',
+      meta: 'RAG &bull; VECTOR SEARCH &bull; KNOWLEDGE'
+    },
+    {
+      eyebrow: 'BUILD STAGE &bull; PROJECT 03 / 06',
+      title: 'AI ASSESSMENT BUILDER',
+      meta: 'EVALUATION &bull; RUBRICS &bull; TEACHING'
+    },
+    {
+      eyebrow: 'BUILD STAGE &bull; PROJECT 04 / 06',
+      title: 'RESEARCH ASSISTANT',
+      meta: 'LITERATURE SYNTHESIS &bull; CITATIONS'
+    },
+    {
+      eyebrow: 'BUILD STAGE &bull; PROJECT 05 / 06',
+      title: 'DATA ANALYSIS COPILOT',
+      meta: 'INSIGHTS &bull; VISUALIZATION &bull; PYTHON'
+    },
+    {
+      eyebrow: 'BUILD STAGE &bull; PROJECT 06 / 06',
+      title: 'AI WORKFLOW AUTOMATION',
+      meta: 'PIPELINES &bull; API INTEGRATION &bull; NO-CODE'
     }
+  ];
+
+  // Setup initial fragment positions for Phase 1
+  const fragPositions = [
+    { startX: -45, startY: -15, endX: -15, endY: -5 },
+    { startX: 45, startY: -20, endX: 12, endY: -8 },
+    { startX: -40, startY: 20, endX: -18, endY: 5 },
+    { startX: 40, startY: 15, endX: 15, endY: 4 },
+    { startX: -50, startY: 0, endX: -10, endY: -2 },
+    { startX: 50, startY: 5, endX: 10, endY: 2 }
+  ];
+
+  fragmentItems.forEach((frag, idx) => {
+    const pos = fragPositions[idx % fragPositions.length];
+    frag.setAttribute('data-sx', pos.startX);
+    frag.setAttribute('data-sy', pos.startY);
+    frag.setAttribute('data-ex', pos.endX);
+    frag.setAttribute('data-ey', pos.endY);
   });
 
-  const itemData = [];
-  projectItems.forEach((item, index) => {
-    const angle = (index / projectItems.length) * Math.PI * 2 + (index % 3) * 0.5;
-    const distanceX = 18 + (index % 5) * 6 + (index % 2) * 8;
-    const distanceY = 15 + (index % 4) * 8 + (index % 3) * 5;
-    
-    const initX = Math.cos(angle) * distanceX * (index % 2 === 0 ? 1 : -1);
-    const initY = Math.sin(angle) * distanceY * (index % 3 === 0 ? 1 : -1);
-    const initScale = 0.75 + (index % 5) * 0.06;
-    const initOpacity = 0.45 + (index % 4) * 0.12;
-    const depthZ = (index % 5) * 20 - 40;
+  // Setup evidence nodes positions for Phase 3 Accumulation
+  evidenceNodes.forEach((node, idx) => {
+    const angle = (idx / evidenceNodes.length) * Math.PI * 2;
+    const radiusX = 22 + (idx % 2) * 6;
+    const radiusY = 16 + (idx % 3) * 5;
+    node.setAttribute('data-tx', Math.cos(angle) * radiusX);
+    node.setAttribute('data-ty', Math.sin(angle) * radiusY);
+  });
 
-    const cluster = item.getAttribute('data-cluster') || 'BUILD';
-    const clusterTarget = clusterCoords[cluster] || { x: 0, y: 0 };
-    
-    const clusterJitterX = ((index % 6) - 2.5) * 6;
-    const clusterJitterY = ((index % 4) - 1.5) * 5;
+  let activeIndex = -1;
+  let isObserverActive = false;
 
-    itemData.push({
-      element: item,
-      cluster: cluster,
-      initX: initX,
-      initY: initY,
-      initScale: initScale,
-      initOpacity: initOpacity,
-      depthZ: depthZ,
-      convX: Math.cos(angle) * (10 + (index % 3) * 5),
-      convY: Math.sin(angle) * (8 + (index % 3) * 4),
-      clustX: clusterTarget.x + clusterJitterX,
-      clustY: clusterTarget.y + clusterJitterY,
-      currX: initX,
-      currY: initY,
-      currScale: initScale,
-      currOpacity: initOpacity
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isObserverActive = entry.isIntersecting;
     });
-  });
+  }, { threshold: 0.05 });
+  observer.observe(section);
 
-  let mouseX = 0, mouseY = 0;
-  let targetMouseX = 0, targetMouseY = 0;
-  let hoveredItem = null;
-
-  window.addEventListener('mousemove', (e) => {
-    if (!stickyWrapper) return;
-    const rect = stickyWrapper.getBoundingClientRect();
-    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-      targetMouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      targetMouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-      
-      if (hoveredItem && hoverCard) {
-        hoverCard.style.left = `${e.clientX}px`;
-        hoverCard.style.top = `${e.clientY}px`;
-      }
-    }
-  });
-
-  itemData.forEach(data => {
-    const item = data.element;
-    item.addEventListener('mouseenter', (e) => {
-      hoveredItem = item;
-      const title = item.getAttribute('data-title');
-      const tags = item.getAttribute('data-tags');
-      if (hoverTitle) hoverTitle.textContent = title;
-      if (hoverTags) hoverTags.innerHTML = tags;
-      if (hoverCard) {
-        hoverCard.classList.add('visible');
-        hoverCard.style.left = `${e.clientX}px`;
-        hoverCard.style.top = `${e.clientY}px`;
-      }
-      itemData.forEach(d => {
-        if (d.element !== item) {
-          d.element.style.opacity = '0.25';
-        }
-      });
-    });
-
-    item.addEventListener('mouseleave', () => {
-      hoveredItem = null;
-      if (hoverCard) hoverCard.classList.remove('visible');
-      itemData.forEach(d => {
-        d.element.style.opacity = '';
-      });
-    });
-  });
-
-  let scrollProgress = 0;
-
-  function updateScrollProgress() {
-    const rect = proofSection.getBoundingClientRect();
-    const sectionHeight = proofSection.offsetHeight - window.innerHeight;
-    if (sectionHeight <= 0) return;
-    const rawProgress = (-rect.top) / sectionHeight;
-    scrollProgress = Math.max(0, Math.min(1, rawProgress));
+  function getScrollProgress() {
+    const rect = section.getBoundingClientRect();
+    const totalHeight = section.offsetHeight - window.innerHeight;
+    if (totalHeight <= 0) return 0;
+    const progress = (-rect.top) / totalHeight;
+    return Math.max(0, Math.min(1, progress));
   }
 
   function renderFrame() {
-    updateScrollProgress();
+    if (!isObserverActive) {
+      requestAnimationFrame(renderFrame);
+      return;
+    }
 
-    mouseX += (targetMouseX - mouseX) * 0.08;
-    mouseY += (targetMouseY - mouseY) * 0.08;
+    const p = getScrollProgress();
 
-    const p = scrollProgress;
-
-    // Focal Word Transformation (BUILD -> PROVE)
-    if (focalWord) {
-      if (p < 0.25) {
-        focalWord.textContent = 'BUILD';
-        const op = Math.min(1, p / 0.15);
-        focalWord.style.opacity = op;
-        focalWord.style.transform = `scale(${0.8 + op * 0.2})`;
-      } else if (p >= 0.25 && p < 0.48) {
-        focalWord.textContent = 'BUILD';
-        focalWord.style.opacity = '1';
-        focalWord.style.transform = `scale(${1 + (p - 0.25) * 0.4})`;
-      } else if (p >= 0.48 && p < 0.55) {
-        const morphP = (p - 0.48) / 0.07;
-        if (morphP < 0.5) {
-          focalWord.textContent = 'BUILD';
-          focalWord.style.opacity = (1 - morphP * 2);
-        } else {
-          focalWord.textContent = 'PROVE';
-          focalWord.style.opacity = ((morphP - 0.5) * 2);
-        }
-      } else if (p >= 0.55 && p < 0.82) {
-        focalWord.textContent = 'PROVE';
-        focalWord.style.opacity = '0.9';
-        focalWord.style.transform = 'scale(1.1)';
+    // 1. Pathway Steps Highlight Indicator
+    if (stepIdea && stepBuild && stepProve) {
+      if (p < 0.20) {
+        stepIdea.classList.add('active');
+        stepBuild.classList.remove('active');
+        stepProve.classList.remove('active');
+      } else if (p >= 0.20 && p < 0.70) {
+        stepIdea.classList.remove('active');
+        stepBuild.classList.add('active');
+        stepProve.classList.remove('active');
+      } else if (p >= 0.70 && p < 0.86) {
+        stepIdea.classList.remove('active');
+        stepBuild.classList.remove('active');
+        stepProve.classList.add('active');
       } else {
-        focalWord.textContent = 'PROVE';
-        focalWord.style.opacity = Math.max(0.15, 1 - (p - 0.82) * 4);
-        focalWord.style.transform = `scale(${1.1 - (p - 0.82) * 0.4})`;
+        stepIdea.classList.remove('active');
+        stepBuild.classList.remove('active');
+        stepProve.classList.remove('active');
       }
     }
 
-    // Cluster Headers Visibility
-    if (clusterHeaders) {
-      if (p >= 0.50 && p < 0.82) {
-        clusterHeaders.style.opacity = Math.min(1, (p - 0.50) / 0.1);
-      } else if (p >= 0.82) {
-        clusterHeaders.style.opacity = Math.max(0, 1 - (p - 0.82) / 0.1);
+    // 2. Secondary Peripheral Stream Motion
+    secondaryItems.forEach((item, idx) => {
+      const dir = idx % 2 === 0 ? 1 : -1;
+      const speed = 0.15 + (idx % 3) * 0.05;
+      const offsetX = ((p * 100 * speed * dir) % 40) - 20;
+      const opacity = p >= 0.85 ? Math.max(0, 1 - (p - 0.85) * 6) : 0.4;
+      item.style.transform = `translateX(${offsetX}px)`;
+      item.style.opacity = opacity;
+    });
+
+    // 3. Phase 1: IDEA Fragments Motion (0.0 to 0.20)
+    fragmentItems.forEach((frag) => {
+      const sx = parseFloat(frag.getAttribute('data-sx'));
+      const sy = parseFloat(frag.getAttribute('data-sy'));
+      const ex = parseFloat(frag.getAttribute('data-ex'));
+      const ey = parseFloat(frag.getAttribute('data-ey'));
+
+      if (p < 0.20) {
+        const fragP = Math.min(1, p / 0.18);
+        const currX = sx + (ex - sx) * fragP;
+        const currY = sy + (ey - sy) * fragP;
+        const opacity = Math.min(1, fragP * 1.5) * (1 - fragP * 0.5);
+        const scale = 0.8 + fragP * 0.3;
+        const blur = (1 - fragP) * 8;
+
+        frag.style.transform = `translate(calc(-50% + ${currX}vw), calc(-50% + ${currY}vh)) scale(${scale})`;
+        frag.style.opacity = opacity;
+        frag.style.filter = `blur(${blur}px)`;
       } else {
-        clusterHeaders.style.opacity = '0';
-      }
-    }
-
-    // Final State Overlay Visibility
-    if (finalState) {
-      if (p >= 0.80) {
-        finalState.classList.add('active');
-      } else {
-        finalState.classList.remove('active');
-      }
-    }
-
-    // Animate Project Items
-    itemData.forEach((data, index) => {
-      let targetX, targetY, targetScale, targetOpacity;
-
-      if (p < 0.25) {
-        const phaseP = p / 0.25;
-        targetX = data.initX;
-        targetY = data.initY;
-        targetScale = data.initScale;
-        targetOpacity = data.initOpacity * Math.min(1, phaseP * 1.5);
-      } else if (p >= 0.25 && p < 0.50) {
-        const phaseP = (p - 0.25) / 0.25;
-        targetX = data.initX + (data.convX - data.initX) * phaseP;
-        targetY = data.initY + (data.convY - data.initY) * phaseP;
-        targetScale = data.initScale + (1.0 - data.initScale) * phaseP * 0.5;
-        targetOpacity = data.initOpacity + (0.9 - data.initOpacity) * phaseP;
-      } else if (p >= 0.50 && p < 0.80) {
-        const phaseP = (p - 0.50) / 0.30;
-        targetX = data.convX + (data.clustX - data.convX) * phaseP;
-        targetY = data.convY + (data.clustY - data.convY) * phaseP;
-        targetScale = 0.85 + (index % 3) * 0.08;
-        targetOpacity = 0.85;
-      } else {
-        const phaseP = (p - 0.80) / 0.20;
-        targetX = data.clustX * (1 - phaseP * 0.2);
-        targetY = data.clustY * (1 - phaseP * 0.2);
-        targetScale = 0.8;
-        targetOpacity = Math.max(0.2, 0.85 - phaseP * 0.5);
-      }
-
-      const parallaxFactorX = (data.depthZ + 50) * 0.08;
-      const parallaxFactorY = (data.depthZ + 50) * 0.08;
-      const finalX = targetX + mouseX * parallaxFactorX;
-      const finalY = targetY + mouseY * parallaxFactorY;
-
-      data.element.style.transform = `translate3d(calc(-50% + ${finalX}vw), calc(-50% + ${finalY}vh), ${data.depthZ}px) scale(${targetScale})`;
-      if (!hoveredItem) {
-        data.element.style.opacity = targetOpacity;
+        frag.style.opacity = '0';
       }
     });
+
+    // 4. Phase 2: BUILD Primary Assembly Card Cycle (0.20 to 0.70)
+    if (primaryStage && primaryCard) {
+      if (p >= 0.18 && p < 0.70) {
+        primaryStage.style.opacity = '1';
+
+        const buildP = (p - 0.18) / 0.52;
+        const totalProjects = projectsList.length;
+        const indexFloat = buildP * totalProjects;
+        const currentIndex = Math.min(totalProjects - 1, Math.floor(indexFloat));
+        const subP = indexFloat - currentIndex;
+
+        if (currentIndex !== activeIndex) {
+          activeIndex = currentIndex;
+          const proj = projectsList[currentIndex];
+          if (cardEyebrow) cardEyebrow.innerHTML = proj.eyebrow;
+          if (cardTitle) cardTitle.innerHTML = proj.title;
+          if (cardMeta) cardMeta.innerHTML = proj.meta;
+        }
+
+        let scale = 1, opacity = 1, blur = 0, translateX = 0;
+        if (subP < 0.25) {
+          const enterP = subP / 0.25;
+          scale = 0.85 + enterP * 0.15;
+          opacity = enterP;
+          blur = (1 - enterP) * 6;
+          translateX = (1 - enterP) * -40;
+        } else if (subP >= 0.25 && subP < 0.75) {
+          scale = 1;
+          opacity = 1;
+          blur = 0;
+          translateX = 0;
+        } else {
+          const exitP = (subP - 0.75) / 0.25;
+          scale = 1 - exitP * 0.2;
+          opacity = 1 - exitP;
+          blur = exitP * 6;
+          translateX = exitP * 50;
+        }
+
+        primaryCard.style.transform = `translateX(${translateX}px) scale(${scale})`;
+        primaryCard.style.opacity = opacity;
+        primaryCard.style.filter = `blur(${blur}px)`;
+      } else {
+        primaryStage.style.opacity = '0';
+      }
+    }
+
+    // 5. Phase 3: PROVE Evidence Accumulation (0.70 to 0.86)
+    evidenceNodes.forEach((node, idx) => {
+      const tx = parseFloat(node.getAttribute('data-tx'));
+      const ty = parseFloat(node.getAttribute('data-ty'));
+
+      if (p >= 0.68 && p < 0.86) {
+        const evP = (p - 0.68) / 0.18;
+        const nodeThreshold = idx / evidenceNodes.length;
+        
+        if (evP >= nodeThreshold) {
+          const nodeP = Math.min(1, (evP - nodeThreshold) / 0.15);
+          node.style.opacity = Math.min(1, nodeP * 1.5);
+          node.style.transform = `translate(calc(-50% + ${tx * nodeP}vw), calc(-50% + ${ty * nodeP}vh)) scale(${0.5 + nodeP * 0.5})`;
+        } else {
+          node.style.opacity = '0';
+        }
+      } else if (p >= 0.86) {
+        const convP = Math.min(1, (p - 0.86) / 0.10);
+        const currX = tx * (1 - convP);
+        const currY = ty * (1 - convP);
+        node.style.transform = `translate(calc(-50% + ${currX}vw), calc(-50% + ${currY}vh)) scale(${1 - convP * 0.8})`;
+        node.style.opacity = Math.max(0, 1 - convP);
+      } else {
+        node.style.opacity = '0';
+      }
+    });
+
+    // 6. Phase 4: Abstract Passport & Final State Resolution (0.86 to 1.0)
+    if (finalState) {
+      if (p >= 0.85) {
+        finalState.classList.add('active');
+        if (header) header.style.opacity = Math.max(0, 1 - (p - 0.85) * 8);
+      } else {
+        finalState.classList.remove('active');
+        if (header) header.style.opacity = '1';
+      }
+    }
 
     requestAnimationFrame(renderFrame);
   }
@@ -2728,7 +2748,7 @@ if (document.readyState === 'loading') {
     init3DTiltCards();
     initMissionTextAnimation();
     initFooterInteractions();
-    initProofSpatialExperience();
+    initProjectAssemblyLine();
   });
 } else {
   initEcosystemDiagram();
@@ -2738,7 +2758,7 @@ if (document.readyState === 'loading') {
   init3DTiltCards();
   initMissionTextAnimation();
   initFooterInteractions();
-  initProofSpatialExperience();
+  initProjectAssemblyLine();
 }
 
 
