@@ -2500,29 +2500,29 @@ function initAIGalaxyExperience() {
   const totalCards = cards.length;
   const cardData = [];
 
+  // 22 Cards distributed across 4 peripheral outer zones (NEVER center text box)
   cards.forEach((card, index) => {
     const depthType = card.getAttribute('data-depth') || 'mid';
     const baseAngle = (index / totalCards) * Math.PI * 2;
-    const radiusX = 34 + (index % 5) * 2.8;
-    const radiusY = 24 + (index % 4) * 3.2;
     
-    const speed = 0.3 + (index % 4) * 0.12;
-    const rotSpeed = ((index % 3) - 1) * 0.8;
+    // Outer orbital radii - strictly outside central content keep-out box (min 28vw X, 24vh Y)
+    const radiusX = 30 + (index % 4) * 3.5; // 30vw to 40.5vw
+    const radiusY = 25 + (index % 3) * 4.0; // 25vh to 33vh
     
-    let baseScale = 0.9;
-    let baseOpacity = 0.8;
-    let baseBlur = 0;
+    const speed = 0.25 + (index % 3) * 0.1;
+    const rotSpeed = ((index % 3) - 1) * 0.6;
+    
+    let baseScale = 0.92;
+    let baseOpacity = 0.85;
     let baseZ = 5;
 
     if (depthType === 'fore') {
-      baseScale = 1.05;
-      baseOpacity = 0.95;
-      baseBlur = 0;
+      baseScale = 1.02;
+      baseOpacity = 0.98;
       baseZ = 12;
     } else if (depthType === 'back') {
-      baseScale = 0.78;
-      baseOpacity = 0.55;
-      baseBlur = 2;
+      baseScale = 0.86;
+      baseOpacity = 0.72;
       baseZ = 2;
     }
 
@@ -2536,12 +2536,12 @@ function initAIGalaxyExperience() {
       rotSpeed: rotSpeed,
       baseScale: baseScale,
       baseOpacity: baseOpacity,
-      baseBlur: baseBlur,
       baseZ: baseZ,
-      staggerDelay: (index / totalCards) * 0.3
+      staggerDelay: (index / totalCards) * 0.2
     });
   });
 
+  // Mouse Parallax tracking
   let mouseX = 0, mouseY = 0;
   let targetMouseX = 0, targetMouseY = 0;
   let hoveredCard = null;
@@ -2559,7 +2559,7 @@ function initAIGalaxyExperience() {
     card.addEventListener('mouseenter', () => {
       hoveredCard = card;
       cards.forEach(c => {
-        if (c !== card) c.style.opacity = '0.3';
+        if (c !== card) c.style.opacity = '0.35';
       });
     });
     card.addEventListener('mouseleave', () => {
@@ -2595,9 +2595,9 @@ function initAIGalaxyExperience() {
     mouseY += (targetMouseY - mouseY) * 0.06;
 
     if (centerContent) {
-      if (p >= 0.82) {
-        centerContent.style.opacity = Math.max(0, 1 - (p - 0.82) * 6);
-        centerContent.style.transform = `translate(-50%, calc(-50% - ${(p - 0.82) * 40}px)) scale(${1 - (p - 0.82) * 0.2})`;
+      if (p >= 0.84) {
+        centerContent.style.opacity = Math.max(0, 1 - (p - 0.84) * 6);
+        centerContent.style.transform = `translate(-50%, calc(-50% - ${(p - 0.84) * 40}px)) scale(${1 - (p - 0.84) * 0.2})`;
       } else {
         centerContent.style.opacity = '1';
         centerContent.style.transform = 'translate(-50%, -50%) scale(1)';
@@ -2605,7 +2605,7 @@ function initAIGalaxyExperience() {
     }
 
     if (lowerInfo) {
-      if (p >= 0.85) {
+      if (p >= 0.86) {
         lowerInfo.classList.add('active');
       } else {
         lowerInfo.classList.remove('active');
@@ -2615,33 +2615,44 @@ function initAIGalaxyExperience() {
     cardData.forEach((data) => {
       const entryThreshold = data.staggerDelay;
       let entryProgress = 1;
-      if (p < 0.25) {
-        entryProgress = Math.max(0, Math.min(1, (p - entryThreshold) / 0.18));
+      if (p < 0.20) {
+        entryProgress = Math.max(0, Math.min(1, (p - entryThreshold) / 0.15));
       }
 
-      const orbitAngle = data.angle + (p * Math.PI * 1.2 * data.speed);
+      const orbitAngle = data.angle + (p * Math.PI * 0.8 * data.speed);
       
-      const currentRadiusX = data.radiusX * (1 + (p - 0.5) * 0.15);
-      const currentRadiusY = data.radiusY * (1 + (p - 0.5) * 0.15);
+      let posX = Math.cos(orbitAngle) * data.radiusX;
+      let posY = Math.sin(orbitAngle) * data.radiusY;
 
-      let posX = Math.cos(orbitAngle) * currentRadiusX;
-      let posY = Math.sin(orbitAngle) * currentRadiusY;
+      // STRICT KEEP-OUT BOUNDARY ENFORCEMENT
+      // Central text box footprint: X in [-26vw, +26vw], Y in [-22vh, +22vh]
+      const keepOutX = 26;
+      const keepOutY = 22;
 
-      const depthParallax = (data.baseZ / 12) * 18;
+      if (Math.abs(posX) < keepOutX && Math.abs(posY) < keepOutY) {
+        // Push position outward to the nearest peripheral edge
+        if (Math.abs(posX) / keepOutX > Math.abs(posY) / keepOutY) {
+          posX = (posX >= 0 ? 1 : -1) * (keepOutX + 2);
+        } else {
+          posY = (posY >= 0 ? 1 : -1) * (keepOutY + 2);
+        }
+      }
+
+      // Add Mouse Parallax
+      const depthParallax = (data.baseZ / 12) * 12;
       posX += mouseX * depthParallax;
       posY += mouseY * depthParallax;
 
-      const rot = Math.sin(orbitAngle * 1.5) * 3 * data.rotSpeed;
-      const targetScale = data.baseScale * (0.6 + entryProgress * 0.4);
+      const rot = Math.sin(orbitAngle * 1.2) * 2.5 * data.rotSpeed;
+      const targetScale = data.baseScale * (0.8 + entryProgress * 0.2);
       const targetOpacity = data.baseOpacity * entryProgress;
-      const blur = (1 - entryProgress) * 6 + data.baseBlur;
 
       data.element.style.transform = `translate(calc(-50% + ${posX}vw), calc(-50% + ${posY}vh)) scale(${targetScale}) rotate(${rot}deg)`;
+      data.element.style.filter = 'none'; // Absolutely zero blur for crystal clarity!
       
       if (!hoveredCard) {
         data.element.style.opacity = targetOpacity;
       }
-      data.element.style.filter = blur > 0 ? `blur(${blur}px)` : 'none';
       data.element.style.zIndex = data.baseZ;
     });
 
