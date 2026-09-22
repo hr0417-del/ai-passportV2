@@ -1,18 +1,31 @@
 // ==========================================================================
-// MY AI PASSPORT™ — GOOGLE APPS SCRIPT WEB APP (v4.9 - NEW SPREADSHEET CREATOR)
+// MY AI PASSPORT™ — GOOGLE APPS SCRIPT WEB APP (v5.0 - 2 OCT LIVE WEBINAR)
 // Active Spreadsheet ID: 1WH3-GLtOS3pS3X4tUruX24SXGX9v9cLtskZQ92SVnto
-// Tab Target: "20 sept live" & "20 Sept Verified Sent"
+// Tab Target: "2 oct live" & "2 Oct Verified Sent"
 // ==========================================================================
 
 var SPREADSHEET_ID = "1WH3-GLtOS3pS3X4tUruX24SXGX9v9cLtskZQ92SVnto";
-var TAB_NAME = "20 sept live";
-var VERIFIED_TAB_NAME = "20 Sept Verified Sent";
+var TAB_NAME = "2 oct live";
+var VERIFIED_TAB_NAME = "2 Oct Verified Sent";
 
 function getTargetSheet(ss) {
   var sheet = ss.getSheetByName(TAB_NAME) || 
-              ss.getSheetByName("20 Sept Live") || 
-              ss.getSheetByName("20 sept Live") || 
-              ss.getSheets()[0];
+              ss.getSheetByName("2 Oct Live") || 
+              ss.getSheetByName("2 oct Live");
+              
+  if (!sheet) {
+    try {
+      sheet = ss.insertSheet(TAB_NAME);
+      var headers = ["Timestamp", "Full Name", "Email Address", "WhatsApp Mobile", "Role", "Primary AI Interest / Use Case", "Organization / Profession", "AI Passport ID", "City", "Source", "Consent", "Email Status", "WhatsApp Status", "Registration Status"];
+      sheet.appendRow(headers);
+      var headerRange = sheet.getRange(1, 1, 1, headers.length);
+      headerRange.setFontWeight("bold");
+      headerRange.setBackground("#0f172a");
+      headerRange.setFontColor("#ffffff");
+    } catch(e) {
+      sheet = ss.getSheets()[0];
+    }
+  }
   return sheet;
 }
 
