@@ -135,43 +135,63 @@
       
       <!-- Top Large Animated Countdown Banner (Full Width Above Hero 2-Column Grid) -->
       <div class="hero-top-countdown-banner" style="max-width: 1280px; margin: 0 auto 36px auto; padding: 0 20px; box-sizing: border-box; width: 100%;">
-        <div class="countdown-wrapper" style="background: rgba(15, 16, 22, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(223, 207, 173, 0.28); border-radius: 14px; padding: 16px 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+        <div class="countdown-wrapper" style="background: rgba(14, 15, 22, 0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(223, 207, 173, 0.32); border-radius: 16px; padding: 18px 28px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 30px rgba(223, 207, 173, 0.06); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
           
-          <!-- Left Live Info -->
+          <!-- Left Live Info Block -->
           <div style="display: flex; flex-direction: column; gap: 4px;">
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="width: 8px; height: 8px; background-color: #2ecc71; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #2ecc71;"></span>
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #2ecc71; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;">LIVE NATIONAL WEBINAR &bull; 2 OCTOBER 2026</span>
+              <span style="position: relative; display: flex; align-items: center; justify-content: center; width: 10px; height: 10px;">
+                <span style="position: absolute; width: 100%; height: 100%; background-color: #2ecc71; border-radius: 50%; opacity: 0.75; animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+                <span style="width: 8px; height: 8px; background-color: #2ecc71; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #2ecc71;"></span>
+              </span>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #2ecc71; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;">LIVE NATIONAL WEBINAR &bull; 2 OCTOBER 2026</span>
             </div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 1.15rem; color: #ffffff; font-weight: 700; letter-spacing: -0.01em;">
+            <div style="font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 1.8vw, 1.35rem); color: #ffffff; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25;">
               AI in Education — Preparing the Teacher for Viksit Bharat
             </div>
             <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); font-weight: 700; letter-spacing: 0.08em;">
-              2 OCTOBER 2026 &bull; 2:00 PM – 3:30 PM IST
+              2 OCTOBER 2026 &bull; 2:00 PM – 3:30 PM IST &bull; 90 MINS &bull; FREE
             </div>
           </div>
 
-          <!-- Right Large Animated Countdown -->
-          <div class="countdown-display" style="margin: 0; gap: 14px; display: flex; align-items: center;">
-            <div class="countdown-item" style="align-items: center;">
-              <span class="countdown-number countdown-days" style="font-size: 2.1rem; color: var(--color-gold); font-weight: 700; line-height: 1;">00</span>
-              <span class="countdown-label" style="font-size: 0.58rem; margin-top: 4px; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.15em;">DAYS</span>
+          <!-- Right Large Animated Countdown & CTA Group -->
+          <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+            
+            <div class="countdown-display" style="margin: 0; gap: 10px; display: flex; align-items: center;">
+              
+              <div class="countdown-item" style="align-items: center; background: rgba(8, 9, 14, 0.75); border: 1px solid rgba(223, 207, 173, 0.22); border-radius: 12px; padding: 10px 16px; min-width: 68px; text-align: center; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 20px rgba(0, 0, 0, 0.4);">
+                <span class="countdown-number countdown-days" style="font-size: 2.1rem; color: #DFCFAD; font-weight: 700; line-height: 1; font-family: 'Space Mono', monospace; text-shadow: 0 0 12px rgba(223, 207, 173, 0.3);">00</span>
+                <span class="countdown-label" style="font-size: 0.58rem; margin-top: 4px; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.15em; font-family: 'Space Mono', monospace;">DAYS</span>
+              </div>
+              
+              <div class="countdown-divider" style="font-size: 1.5rem; color: rgba(223, 207, 173, 0.4); transform: translateY(-4px); font-family: 'Space Mono', monospace;">:</div>
+              
+              <div class="countdown-item" style="align-items: center; background: rgba(8, 9, 14, 0.75); border: 1px solid rgba(223, 207, 173, 0.22); border-radius: 12px; padding: 10px 16px; min-width: 68px; text-align: center; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 20px rgba(0, 0, 0, 0.4);">
+                <span class="countdown-number countdown-hours" style="font-size: 2.1rem; color: #DFCFAD; font-weight: 700; line-height: 1; font-family: 'Space Mono', monospace; text-shadow: 0 0 12px rgba(223, 207, 173, 0.3);">00</span>
+                <span class="countdown-label" style="font-size: 0.58rem; margin-top: 4px; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.15em; font-family: 'Space Mono', monospace;">HOURS</span>
+              </div>
+              
+              <div class="countdown-divider" style="font-size: 1.5rem; color: rgba(223, 207, 173, 0.4); transform: translateY(-4px); font-family: 'Space Mono', monospace;">:</div>
+              
+              <div class="countdown-item" style="align-items: center; background: rgba(8, 9, 14, 0.75); border: 1px solid rgba(223, 207, 173, 0.22); border-radius: 12px; padding: 10px 16px; min-width: 68px; text-align: center; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 20px rgba(0, 0, 0, 0.4);">
+                <span class="countdown-number countdown-minutes" style="font-size: 2.1rem; color: #DFCFAD; font-weight: 700; line-height: 1; font-family: 'Space Mono', monospace; text-shadow: 0 0 12px rgba(223, 207, 173, 0.3);">00</span>
+                <span class="countdown-label" style="font-size: 0.58rem; margin-top: 4px; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.15em; font-family: 'Space Mono', monospace;">MINUTES</span>
+              </div>
+              
+              <div class="countdown-divider" style="font-size: 1.5rem; color: rgba(223, 207, 173, 0.4); transform: translateY(-4px); font-family: 'Space Mono', monospace;">:</div>
+              
+              <div class="countdown-item" style="align-items: center; background: rgba(8, 9, 14, 0.75); border: 1px solid rgba(223, 207, 173, 0.22); border-radius: 12px; padding: 10px 16px; min-width: 68px; text-align: center; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 20px rgba(0, 0, 0, 0.4);">
+                <span class="countdown-number countdown-seconds" style="font-size: 2.1rem; color: #DFCFAD; font-weight: 700; line-height: 1; font-family: 'Space Mono', monospace; text-shadow: 0 0 12px rgba(223, 207, 173, 0.3);">00</span>
+                <span class="countdown-label" style="font-size: 0.58rem; margin-top: 4px; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.15em; font-family: 'Space Mono', monospace;">SECONDS</span>
+              </div>
+
             </div>
-            <div class="countdown-divider" style="font-size: 1.5rem; color: rgba(223, 207, 173, 0.4); transform: translateY(-6px);">:</div>
-            <div class="countdown-item" style="align-items: center;">
-              <span class="countdown-number countdown-hours" style="font-size: 2.1rem; color: var(--color-gold); font-weight: 700; line-height: 1;">00</span>
-              <span class="countdown-label" style="font-size: 0.58rem; margin-top: 4px; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.15em;">HOURS</span>
-            </div>
-            <div class="countdown-divider" style="font-size: 1.5rem; color: rgba(223, 207, 173, 0.4); transform: translateY(-6px);">:</div>
-            <div class="countdown-item" style="align-items: center;">
-              <span class="countdown-number countdown-minutes" style="font-size: 2.1rem; color: var(--color-gold); font-weight: 700; line-height: 1;">00</span>
-              <span class="countdown-label" style="font-size: 0.58rem; margin-top: 4px; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.15em;">MINUTES</span>
-            </div>
-            <div class="countdown-divider" style="font-size: 1.5rem; color: rgba(223, 207, 173, 0.4); transform: translateY(-6px);">:</div>
-            <div class="countdown-item" style="align-items: center;">
-              <span class="countdown-number countdown-seconds" style="font-size: 2.1rem; color: var(--color-gold); font-weight: 700; line-height: 1;">00</span>
-              <span class="countdown-label" style="font-size: 0.58rem; margin-top: 4px; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.15em;">SECONDS</span>
-            </div>
+
+            <!-- Integrated Banner CTA -->
+            <a href="#live-event" class="btn btn-primary" style="padding: 14px 24px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; border-radius: 10px;">
+              REGISTER FREE &rarr;
+            </a>
+
           </div>
 
         </div>
