@@ -6,7 +6,7 @@
 /* --- CONFIGURATION --- */
 const AIPASSPORT_CONFIG = {
   // Connect to Google Sheets & Gmail Webhook
-  webhookUrl: "https://script.google.com/macros/s/AKfycbyc6SJB1Qf0x_OjoGw6Qy6rz38aMXwotYtKERw9lPGeslwPdoGOUpURLHBNCZ_iZmB_xg/exec"
+  webhookUrl: "https://script.google.com/macros/s/AKfycbxbqCYYHT3fone_pcnbAnUG_U2wAbU3HlCtbM-JzQui7jB0pMOixrePbStmmJAag9yy/exec"
 };
 
 // Register GSAP plugins safely
