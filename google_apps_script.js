@@ -8,7 +8,25 @@ var SPREADSHEET_ID = "1bdChBRpjvxYTVlxPL0DppuJMsO7j7fRkrhqqXVoihVs";
 var TAB_NAME = "2 oct live";
 var VERIFIED_TAB_NAME = "2 Oct Verified Sent";
 
+function getSpreadsheet() {
+  if (SPREADSHEET_ID && SPREADSHEET_ID.trim().length > 10) {
+    try {
+      return SpreadsheetApp.openById(SPREADSHEET_ID.trim());
+    } catch(err) {
+      Logger.log("openById failed, falling back to getActiveSpreadsheet: " + err);
+    }
+  }
+  try {
+    return SpreadsheetApp.getActiveSpreadsheet();
+  } catch(err) {
+    Logger.log("getActiveSpreadsheet failed: " + err);
+  }
+  return null;
+}
+
 function getTargetSheet(ss) {
+  if (!ss) ss = getSpreadsheet();
+  if (!ss) return null;
   var sheet = ss.getSheetByName(TAB_NAME) || 
               ss.getSheetByName("2 Oct Live") || 
               ss.getSheetByName("2 oct Live");
@@ -55,7 +73,7 @@ function doGet(e) {
 
   if (action === "getAll" || action === "getStats") {
     try {
-      var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+      var ss = getSpreadsheet();
       var sheet = getTargetSheet(ss);
       var rows = sheet.getDataRange().getValues();
       var data = [];
@@ -133,7 +151,7 @@ function createNewSpreadsheetFromSentEmails() {
     var CUTOFF_MS = new Date(2026, 8, 14, 0, 0, 0).getTime();
     
     // Read existing sheet data for mobile numbers & metadata lookup
-    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var ss = getSpreadsheet();
     var targetSheet = getTargetSheet(ss);
     var liveRows = targetSheet.getDataRange().getValues();
     
@@ -226,7 +244,7 @@ function createNewSpreadsheetFromSentEmails() {
 
 function processRegistration(data) {
   try {
-    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var ss = getSpreadsheet();
     var sheet = getTargetSheet(ss);
     
     var email = (data.email || "").toString().trim();
