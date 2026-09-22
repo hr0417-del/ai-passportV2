@@ -1,10 +1,10 @@
 // ==========================================================================
 // MY AI PASSPORT™ — GOOGLE APPS SCRIPT WEB APP (v5.0 - 2 OCT LIVE WEBINAR)
-// Active Spreadsheet ID: 1WH3-GLtOS3pS3X4tUruX24SXGX9v9cLtskZQ92SVnto
+// Active Spreadsheet ID: 1bdChBRpjvxYTVlxPL0DppuJMsO7j7fRkrhqqXVoihVs
 // Tab Target: "2 oct live" & "2 Oct Verified Sent"
 // ==========================================================================
 
-var SPREADSHEET_ID = "1WH3-GLtOS3pS3X4tUruX24SXGX9v9cLtskZQ92SVnto";
+var SPREADSHEET_ID = "1bdChBRpjvxYTVlxPL0DppuJMsO7j7fRkrhqqXVoihVs";
 var TAB_NAME = "2 oct live";
 var VERIFIED_TAB_NAME = "2 Oct Verified Sent";
 
