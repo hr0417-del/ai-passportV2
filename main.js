@@ -2023,6 +2023,8 @@ function initCertificateVerifier() {
     });
   }
 
+  window.performVerification = performVerification;
+
   // Parse URL parameter e.g. verify.html?id=AIP-2026-0279
   const urlParams = new URLSearchParams(window.location.search);
   const paramId = urlParams.get('id');
@@ -2652,6 +2654,7 @@ if (document.readyState === 'loading') {
     initMissionTextAnimation();
     initFooterInteractions();
     initAIGalaxyExperience();
+    initCertificateVerifier();
   });
 } else {
   initEcosystemDiagram();
@@ -2662,6 +2665,7 @@ if (document.readyState === 'loading') {
   initMissionTextAnimation();
   initFooterInteractions();
   initAIGalaxyExperience();
+  initCertificateVerifier();
 }
 
 

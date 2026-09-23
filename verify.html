@@ -138,12 +138,12 @@
               PASSPORT ID / CREDENTIAL ID
             </label>
 
-            <form id="verify-form" style="display: flex; gap: 12px; align-items: center; width: 100%;">
+            <form id="verify-form" action="javascript:void(0);" onsubmit="if(window.performVerification) window.performVerification(document.getElementById('verify-input').value); return false;" style="display: flex; gap: 12px; align-items: center; width: 100%;">
               <div style="position: relative; flex: 1;">
                 <input 
                   type="text" 
                   id="verify-input" 
-                  placeholder="Enter Passport ID" 
+                  placeholder="Enter Passport ID, Name, or Email" 
                   value="AIP-2026-0279"
                   required
                   style="width: 100%; padding: 16px 20px; font-family: 'Space Mono', monospace; font-size: 0.95rem; color: #fff; background: rgba(10, 10, 14, 0.9); border: 1px solid rgba(0, 162, 255, 0.35); border-radius: 10px; outline: none; transition: border-color 0.3s; box-sizing: border-box;"
@@ -151,6 +151,8 @@
               </div>
               <button 
                 type="submit" 
+                id="verify-submit-btn"
+                onclick="if(window.performVerification) window.performVerification(document.getElementById('verify-input').value); return false;"
                 class="btn btn-primary"
                 style="padding: 16px 28px; font-size: 0.85rem; font-weight: 600; white-space: nowrap;"
               >
@@ -161,13 +163,13 @@
             <!-- Sample Quick Buttons -->
             <div class="verify-samples" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 18px; font-size: 0.76rem; color: var(--color-text-secondary);">
               <span style="color: rgba(255,255,255,0.4);">Try sample IDs:</span>
-              <button class="sample-id-btn" data-id="AIP-2026-0279" style="background: rgba(223, 207, 173, 0.12); border: 1px solid rgba(223, 207, 173, 0.3); color: var(--color-gold); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+              <button type="button" class="sample-id-btn" data-id="AIP-2026-0279" onclick="if(window.performVerification) window.performVerification('AIP-2026-0279');" style="background: rgba(223, 207, 173, 0.12); border: 1px solid rgba(223, 207, 173, 0.3); color: var(--color-gold); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
                 AIP-2026-0279 (Lavi)
               </button>
-              <button class="sample-id-btn" data-id="AIP-2026-0261" style="background: rgba(88, 196, 255, 0.12); border: 1px solid rgba(88, 196, 255, 0.3); color: #58c4ff; padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+              <button type="button" class="sample-id-btn" data-id="AIP-2026-0261" onclick="if(window.performVerification) window.performVerification('AIP-2026-0261');" style="background: rgba(88, 196, 255, 0.12); border: 1px solid rgba(88, 196, 255, 0.3); color: #58c4ff; padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
                 AIP-2026-0261 (Priti Sinha)
               </button>
-              <button class="sample-id-btn" data-id="AIP-2026-0248" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+              <button type="button" class="sample-id-btn" data-id="AIP-2026-0248" onclick="if(window.performVerification) window.performVerification('AIP-2026-0248');" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
                 AIP-2026-0248 (Varsha Agrawal)
               </button>
             </div>
