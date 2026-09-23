@@ -1818,10 +1818,9 @@ function initCertificateVerifier() {
   const statusBanner = document.getElementById('verify-status-banner');
   const statusTitle = document.getElementById('status-title');
   const statusSubtext = document.getElementById('status-subtext');
-  const statusIcon = document.getElementById('status-icon');
-  const timestamp = document.getElementById('verification-timestamp');
-  const certDisplay = document.getElementById('certificate-card-display');
-  const copyBtn = document.getElementById('btn-copy-link');
+  const imgContainer = document.getElementById('official-cert-image-container');
+  const imgEl = document.getElementById('official-cert-image');
+  const downloadBtn = document.getElementById('download-cert-btn');
 
   if (!form || !input) return;
 
@@ -1883,11 +1882,18 @@ function initCertificateVerifier() {
       }
     } catch (err) {}
 
+    const nameEl = document.getElementById('cert-participant-name');
+    const levelEl = document.getElementById('cert-level-badge');
+    const eventTitleEl = document.getElementById('cert-event-title');
+    const dateEl = document.getElementById('cert-issue-date');
+    const certIdEl = document.getElementById('cert-id-display');
+    const sigEl = document.getElementById('cert-signatory');
+    const descEl = document.getElementById('cert-description');
+
     if (dbRecord) {
       const isRevoked = dbRecord.status === 'REVOKED';
       
       if (!isRevoked) {
-        // Active ISSUED State
         if (statusBanner) {
           statusBanner.style.background = "rgba(0, 230, 118, 0.06)";
           statusBanner.style.borderColor = "rgba(0, 230, 118, 0.25)";
@@ -1905,7 +1911,6 @@ function initCertificateVerifier() {
           statusIcon.style.color = "#000";
         }
       } else {
-        // Prominent REVOKED State
         if (statusBanner) {
           statusBanner.style.background = "rgba(255, 68, 68, 0.12)";
           statusBanner.style.borderColor = "rgba(255, 68, 68, 0.4)";
@@ -1928,14 +1933,6 @@ function initCertificateVerifier() {
         timestamp.textContent = "Verified " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       }
 
-      const nameEl = document.getElementById('cert-participant-name');
-      const levelEl = document.getElementById('cert-level-badge');
-      const eventTitleEl = document.getElementById('cert-event-title');
-      const dateEl = document.getElementById('cert-issue-date');
-      const certIdEl = document.getElementById('cert-id-display');
-      const sigEl = document.getElementById('cert-signatory');
-      const descEl = document.getElementById('cert-description');
-
       if (nameEl) nameEl.textContent = dbRecord.title || "AUTHENTIC HOLDER";
       if (levelEl) levelEl.textContent = dbRecord.badge_type || "VERIFIED CREDENTIAL";
       if (eventTitleEl) eventTitleEl.textContent = dbRecord.issuer || "AI PASSPORT";
@@ -1945,20 +1942,9 @@ function initCertificateVerifier() {
       if (descEl) descEl.innerHTML = `Official Credential issued by ${dbRecord.issuer}. Verification Hash: <span style="font-family: 'Space Mono', monospace; font-size: 0.75rem;">${dbRecord.verification_hash}</span>`;
 
       if (certDisplay) certDisplay.style.display = "block";
-
-      const imgContainer = document.getElementById('official-cert-image-container');
-      const imgEl = document.getElementById('official-cert-image');
-      const downloadBtn = document.getElementById('download-cert-btn');
-      if (record && record.certImage && imgContainer && imgEl) {
-        imgEl.src = record.certImage;
-        if (downloadBtn) downloadBtn.href = record.certImage;
-        imgContainer.style.display = 'block';
-      } else if (imgContainer) {
-        imgContainer.style.display = 'none';
-      }
+      if (imgContainer) imgContainer.style.display = "none";
 
     } else if (certificateDB[certId]) {
-      // 2. Legacy Fallback Fixtures
       record = certificateDB[certId];
       if (statusBanner) {
         statusBanner.style.background = "rgba(0, 230, 118, 0.06)";
@@ -1980,14 +1966,6 @@ function initCertificateVerifier() {
         timestamp.textContent = "Verified " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       }
 
-      const nameEl = document.getElementById('cert-participant-name');
-      const levelEl = document.getElementById('cert-level-badge');
-      const eventTitleEl = document.getElementById('cert-event-title');
-      const dateEl = document.getElementById('cert-issue-date');
-      const certIdEl = document.getElementById('cert-id-display');
-      const sigEl = document.getElementById('cert-signatory');
-      const descEl = document.getElementById('cert-description');
-
       if (nameEl) nameEl.textContent = record.name;
       if (levelEl) levelEl.textContent = record.level;
       if (eventTitleEl) eventTitleEl.textContent = record.event;
@@ -1998,9 +1976,6 @@ function initCertificateVerifier() {
 
       if (certDisplay) certDisplay.style.display = "block";
 
-      const imgContainer = document.getElementById('official-cert-image-container');
-      const imgEl = document.getElementById('official-cert-image');
-      const downloadBtn = document.getElementById('download-cert-btn');
       if (record && record.certImage && imgContainer && imgEl) {
         imgEl.src = record.certImage;
         if (downloadBtn) downloadBtn.href = record.certImage;
@@ -2010,7 +1985,6 @@ function initCertificateVerifier() {
       }
 
     } else {
-      // 3. Not Found State
       if (statusBanner) {
         statusBanner.style.background = "rgba(255, 68, 68, 0.06)";
         statusBanner.style.borderColor = "rgba(255, 68, 68, 0.25)";
@@ -2020,7 +1994,7 @@ function initCertificateVerifier() {
         statusTitle.style.color = "#ff4444";
       }
       if (statusSubtext) {
-        statusSubtext.textContent = "No active Ekaakshar certificate record matches ID '" + certId + "'. Please verify format (e.g. AIP-L1-2026-000245).";
+        statusSubtext.textContent = "No active Ekaakshar certificate record matches ID '" + certId + "'. Please verify format (e.g. AIP-2026-0279).";
       }
       if (statusIcon) {
         statusIcon.textContent = "✕";
@@ -2031,11 +2005,9 @@ function initCertificateVerifier() {
         timestamp.textContent = "Checked Just Now";
       }
       if (certDisplay) certDisplay.style.display = "none";
-      const imgContainer = document.getElementById('official-cert-image-container');
       if (imgContainer) imgContainer.style.display = 'none';
     }
 
-    // Scroll smoothly to results
     const resultsSection = document.getElementById('verify-result-section');
     if (resultsSection) {
       resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
