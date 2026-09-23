@@ -1859,28 +1859,52 @@ function initCertificateVerifier() {
     ...(certDBData || {})
   };
 
-  async function performVerification(rawId) {
-    if (!rawId) return;
-    const certId = rawId.trim().toUpperCase();
-    input.value = certId;
+  function findCertificateRecord(query) {
+    if (!query || !query.trim()) return null;
+    const q = query.trim().toLowerCase();
+    const qDigits = q.replace(/\D/g, '');
+    const upperQ = q.toUpperCase();
 
-    let record = null;
-    let dbRecord = null;
+    // 1. Direct match by exact key
+    if (certificateDB[upperQ]) {
+      return { certId: upperQ, record: certificateDB[upperQ] };
+    }
 
-    // 1. Try Live Supabase Query first
-    try {
-      const { createClient } = await import('@supabase/supabase-js');
-      const supabaseUrl = import.meta.env?.VITE_SUPABASE_URL || 'https://uxuaisvdmvkircymwvdl.supabase.co';
-      const supabaseKey = import.meta.env?.VITE_SUPABASE_ANON_KEY || '';
-      if (supabaseUrl && supabaseKey) {
-        const sb = createClient(supabaseUrl, supabaseKey);
-        const { data: res } = await sb.from('credentials')
-          .select('*')
-          .or(`credential_number.eq.${certId},verification_hash.eq.${certId}`)
-          .maybeSingle();
-        if (res) dbRecord = res;
+    // 2. Multi-field search (ID, Name, Email, Digits)
+    const entries = Object.entries(certificateDB);
+    for (const [key, record] of entries) {
+      const keyClean = key.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const qClean = q.replace(/[^a-z0-9]/g, '');
+
+      // Key match normalized (e.g. AIP20260279 or 0279)
+      if (keyClean === qClean || (qClean.length >= 3 && keyClean.endsWith(qClean))) {
+        return { certId: key, record };
       }
-    } catch (err) {}
+
+      // Name match (e.g. "Lavi", "Priti Sinha", "Varsha")
+      if (record.name && record.name.toLowerCase().includes(q)) {
+        return { certId: key, record };
+      }
+
+      // Email match (e.g. "lavi9014@gmail.com")
+      if (record.email && record.email.toLowerCase().includes(q)) {
+        return { certId: key, record };
+      }
+
+      // Numeric ID match (e.g. "279")
+      if (qDigits && qDigits.length >= 3) {
+        const keyDigits = key.replace(/\D/g, '');
+        if (keyDigits.endsWith(qDigits)) {
+          return { certId: key, record };
+        }
+      }
+    }
+    return null;
+  }
+
+  function performVerification(rawId) {
+    if (!rawId) return;
+    const query = rawId.trim();
 
     const nameEl = document.getElementById('cert-participant-name');
     const levelEl = document.getElementById('cert-level-badge');
@@ -1890,62 +1914,12 @@ function initCertificateVerifier() {
     const sigEl = document.getElementById('cert-signatory');
     const descEl = document.getElementById('cert-description');
 
-    if (dbRecord) {
-      const isRevoked = dbRecord.status === 'REVOKED';
-      
-      if (!isRevoked) {
-        if (statusBanner) {
-          statusBanner.style.background = "rgba(0, 230, 118, 0.06)";
-          statusBanner.style.borderColor = "rgba(0, 230, 118, 0.25)";
-        }
-        if (statusTitle) {
-          statusTitle.textContent = "VERIFIED & AUTHENTICATED";
-          statusTitle.style.color = "#00e676";
-        }
-        if (statusSubtext) {
-          statusSubtext.textContent = "Official AI Passport™ Credential Record Found on Public Ledger";
-        }
-        if (statusIcon) {
-          statusIcon.textContent = "✓";
-          statusIcon.style.background = "#00e676";
-          statusIcon.style.color = "#000";
-        }
-      } else {
-        if (statusBanner) {
-          statusBanner.style.background = "rgba(255, 68, 68, 0.12)";
-          statusBanner.style.borderColor = "rgba(255, 68, 68, 0.4)";
-        }
-        if (statusTitle) {
-          statusTitle.textContent = "⚠ CREDENTIAL REVOKED";
-          statusTitle.style.color = "#ff4444";
-        }
-        if (statusSubtext) {
-          statusSubtext.textContent = `This credential was formally revoked on ${dbRecord.revoked_at ? new Date(dbRecord.revoked_at).toLocaleDateString() : 'record'} and is NO LONGER VALID.`;
-        }
-        if (statusIcon) {
-          statusIcon.textContent = "⚠";
-          statusIcon.style.background = "#ff4444";
-          statusIcon.style.color = "#fff";
-        }
-      }
+    const match = findCertificateRecord(query);
 
-      if (timestamp) {
-        timestamp.textContent = "Verified " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      }
+    if (match) {
+      const { certId, record } = match;
+      input.value = certId;
 
-      if (nameEl) nameEl.textContent = dbRecord.title || "AUTHENTIC HOLDER";
-      if (levelEl) levelEl.textContent = dbRecord.badge_type || "VERIFIED CREDENTIAL";
-      if (eventTitleEl) eventTitleEl.textContent = dbRecord.issuer || "AI PASSPORT";
-      if (dateEl) dateEl.textContent = dbRecord.issue_date || new Date(dbRecord.created_at).toLocaleDateString();
-      if (certIdEl) certIdEl.textContent = dbRecord.credential_number || certId;
-      if (sigEl) sigEl.textContent = "AI Passport Council";
-      if (descEl) descEl.innerHTML = `Official Credential issued by ${dbRecord.issuer}. Verification Hash: <span style="font-family: 'Space Mono', monospace; font-size: 0.75rem;">${dbRecord.verification_hash}</span>`;
-
-      if (certDisplay) certDisplay.style.display = "block";
-      if (imgContainer) imgContainer.style.display = "none";
-
-    } else if (certificateDB[certId]) {
-      record = certificateDB[certId];
       if (statusBanner) {
         statusBanner.style.background = "rgba(0, 230, 118, 0.06)";
         statusBanner.style.borderColor = "rgba(0, 230, 118, 0.25)";
@@ -1976,37 +1950,44 @@ function initCertificateVerifier() {
 
       if (certDisplay) certDisplay.style.display = "block";
 
-      if (record && record.certImage && imgContainer && imgEl) {
-        imgEl.src = record.certImage;
-        if (downloadBtn) downloadBtn.href = record.certImage;
+      const imgSrc = record.certImage ? record.certImage.replace(/^\//, '') : '';
+      if (imgSrc && imgContainer && imgEl) {
+        imgEl.src = imgSrc;
+        if (downloadBtn) downloadBtn.href = imgSrc;
         imgContainer.style.display = 'block';
       } else if (imgContainer) {
         imgContainer.style.display = 'none';
       }
 
-    } else {
-      if (statusBanner) {
-        statusBanner.style.background = "rgba(255, 68, 68, 0.06)";
-        statusBanner.style.borderColor = "rgba(255, 68, 68, 0.25)";
+      const resultsSection = document.getElementById('verify-result-section');
+      if (resultsSection) {
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-      if (statusTitle) {
-        statusTitle.textContent = "CREDENTIAL NOT FOUND";
-        statusTitle.style.color = "#ff4444";
-      }
-      if (statusSubtext) {
-        statusSubtext.textContent = "No active Ekaakshar certificate record matches ID '" + certId + "'. Please verify format (e.g. AIP-2026-0279).";
-      }
-      if (statusIcon) {
-        statusIcon.textContent = "✕";
-        statusIcon.style.background = "#ff4444";
-        statusIcon.style.color = "#fff";
-      }
-      if (timestamp) {
-        timestamp.textContent = "Checked Just Now";
-      }
-      if (certDisplay) certDisplay.style.display = "none";
-      if (imgContainer) imgContainer.style.display = 'none';
+      return;
     }
+
+    // 2. Not Found State
+    if (statusBanner) {
+      statusBanner.style.background = "rgba(255, 68, 68, 0.06)";
+      statusBanner.style.borderColor = "rgba(255, 68, 68, 0.25)";
+    }
+    if (statusTitle) {
+      statusTitle.textContent = "CREDENTIAL NOT FOUND";
+      statusTitle.style.color = "#ff4444";
+    }
+    if (statusSubtext) {
+      statusSubtext.textContent = `No active Ekaakshar certificate record matches '${query}'. Search by Passport ID (e.g. AIP-2026-0279), Full Name, or Email Address.`;
+    }
+    if (statusIcon) {
+      statusIcon.textContent = "✕";
+      statusIcon.style.background = "#ff4444";
+      statusIcon.style.color = "#fff";
+    }
+    if (timestamp) {
+      timestamp.textContent = "Checked Just Now";
+    }
+    if (certDisplay) certDisplay.style.display = "none";
+    if (imgContainer) imgContainer.style.display = 'none';
 
     const resultsSection = document.getElementById('verify-result-section');
     if (resultsSection) {
@@ -2016,13 +1997,14 @@ function initCertificateVerifier() {
 
   // Handle Form Submission
   form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     performVerification(input.value);
   });
 
   // Handle Sample Button Clicks
   sampleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      if (e) e.preventDefault();
       const id = btn.getAttribute('data-id');
       performVerification(id);
     });
