@@ -1869,36 +1869,51 @@ function initCertificateVerifier() {
     const qDigits = q.replace(/\D/g, '');
     const upperQ = q.toUpperCase();
 
-    // 1. Direct match by exact key
+    // 1. Direct match by exact key, lower key, or numeric key
     if (certificateDB[upperQ]) {
       return { certId: upperQ, record: certificateDB[upperQ] };
     }
+    if (certificateDB[q]) {
+      return { certId: q, record: certificateDB[q] };
+    }
+    if (qDigits && certificateDB[qDigits]) {
+      return { certId: qDigits, record: certificateDB[qDigits] };
+    }
 
-    // 2. Multi-field search (ID, Name, Email, Digits)
+    // 2. Multi-field flexible search (ID, Name, Email, Phone, Digits)
     const entries = Object.entries(certificateDB);
     for (const [key, record] of entries) {
       const keyClean = key.toLowerCase().replace(/[^a-z0-9]/g, '');
       const qClean = q.replace(/[^a-z0-9]/g, '');
 
-      // Key match normalized (e.g. AIP20260279 or 0279)
-      if (keyClean === qClean || (qClean.length >= 3 && keyClean.endsWith(qClean))) {
+      // Key match normalized
+      if (keyClean === qClean || (qClean.length >= 1 && keyClean.endsWith(qClean))) {
         return { certId: key, record };
       }
 
-      // Name match (e.g. "Lavi", "Priti Sinha", "Varsha")
+      // Name match
       if (record.name && record.name.toLowerCase().includes(q)) {
         return { certId: key, record };
       }
 
-      // Email match (e.g. "lavi9014@gmail.com")
+      // Email match
       if (record.email && record.email.toLowerCase().includes(q)) {
         return { certId: key, record };
       }
 
-      // Numeric ID match (e.g. "279")
-      if (qDigits && qDigits.length >= 3) {
+      // Phone match
+      if (record.phone && qDigits && record.phone.includes(qDigits)) {
+        return { certId: key, record };
+      }
+
+      // Numeric ID match (any length >= 1)
+      if (qDigits && qDigits.length >= 1) {
         const keyDigits = key.replace(/\D/g, '');
-        if (keyDigits.endsWith(qDigits)) {
+        if (
+          keyDigits.endsWith(qDigits) ||
+          keyDigits.replace(/^2026/, '').endsWith(qDigits) ||
+          keyDigits.replace(/^2026/, '').replace(/^0+/, '').endsWith(qDigits)
+        ) {
           return { certId: key, record };
         }
       }
