@@ -1,3 +1,4 @@
+import certDBData from './scratch/certificateDB.json';
 /* ==========================================================================
    AI PASSPORT™ — MASTER INTERACTIVE ENGINE
    Preloader | Smooth Scroll | ScrollTrigger Section Reveal | Particles | Parallax
@@ -1855,7 +1856,8 @@ function initCertificateVerifier() {
       date: "19 July 2026",
       signatory: "Hitesh Rathee",
       description: "This certificate is awarded in recognition of your active participation in Level 1 – AI Explorer, where you explored how a single AI prompt can be transformed into a complete learning experience using modern AI workflows."
-    }
+    },
+    ...(certDBData || {})
   };
 
   async function performVerification(rawId) {
@@ -1943,6 +1945,17 @@ function initCertificateVerifier() {
       if (descEl) descEl.innerHTML = `Official Credential issued by ${dbRecord.issuer}. Verification Hash: <span style="font-family: 'Space Mono', monospace; font-size: 0.75rem;">${dbRecord.verification_hash}</span>`;
 
       if (certDisplay) certDisplay.style.display = "block";
+
+      const imgContainer = document.getElementById('official-cert-image-container');
+      const imgEl = document.getElementById('official-cert-image');
+      const downloadBtn = document.getElementById('download-cert-btn');
+      if (record && record.certImage && imgContainer && imgEl) {
+        imgEl.src = record.certImage;
+        if (downloadBtn) downloadBtn.href = record.certImage;
+        imgContainer.style.display = 'block';
+      } else if (imgContainer) {
+        imgContainer.style.display = 'none';
+      }
 
     } else if (certificateDB[certId]) {
       // 2. Legacy Fallback Fixtures

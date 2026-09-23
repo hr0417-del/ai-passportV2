@@ -161,14 +161,14 @@
             <!-- Sample Quick Buttons -->
             <div class="verify-samples" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 18px; font-size: 0.76rem; color: var(--color-text-secondary);">
               <span style="color: rgba(255,255,255,0.4);">Try sample IDs:</span>
-              <button class="sample-id-btn" data-id="AIP-L1-2026-000245" style="background: rgba(223, 207, 173, 0.08); border: 1px solid rgba(223, 207, 173, 0.2); color: var(--color-gold); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+              <button class="sample-id-btn" data-id="AIP-2026-0279" style="background: rgba(223, 207, 173, 0.12); border: 1px solid rgba(223, 207, 173, 0.3); color: var(--color-gold); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+                AIP-2026-0279 (Lavi)
+              </button>
+              <button class="sample-id-btn" data-id="AIP-2026-0261" style="background: rgba(88, 196, 255, 0.12); border: 1px solid rgba(88, 196, 255, 0.3); color: #58c4ff; padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+                AIP-2026-0261 (Priti Sinha)
+              </button>
+              <button class="sample-id-btn" data-id="AIP-L1-2026-000245" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
                 AIP-L1-2026-000245 (Nishi Tyagi)
-              </button>
-              <button class="sample-id-btn" data-id="AIP-L1-2026-000108" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
-                AIP-L1-2026-000108 (Rahul Sharma)
-              </button>
-              <button class="sample-id-btn" data-id="AIP-L1-2026-000512" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
-                AIP-L1-2026-000512 (Ananya Verma)
               </button>
             </div>
           </div>
@@ -329,6 +329,21 @@
           <button class="btn btn-primary" onclick="window.print()" style="padding: 12px 24px; font-size: 0.85rem;">
             🖨️ Print / Save as PDF
           </button>
+        </div>
+
+        <!-- OFFICIAL CERTIFICATE IMAGE DISPLAY CONTAINER -->
+        <div id="official-cert-image-container" style="display: none; margin-top: 36px; text-align: center;">
+          <h4 style="font-family: 'Space Mono', monospace; font-size: 0.76rem; color: var(--color-gold); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.15em;">
+            ✦ OFFICIAL ISSUED CERTIFICATE DOCUMENT
+          </h4>
+          <div style="background: rgba(18, 19, 26, 0.95); border: 1px solid rgba(223, 207, 173, 0.3); border-radius: 16px; padding: 16px; max-width: 860px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
+            <img id="official-cert-image" src="" alt="Official AI Passport Certificate" style="width: 100%; height: auto; border-radius: 8px; display: block;" />
+            <div style="margin-top: 14px; display: flex; justify-content: center;">
+              <a id="download-cert-btn" href="" download class="btn btn-secondary" style="padding: 10px 24px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 8px;">
+                ⬇️ Download Original Certificate Image (PNG)
+              </a>
+            </div>
+          </div>
         </div>
 
       </div>
