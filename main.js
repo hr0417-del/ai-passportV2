@@ -1998,6 +1998,17 @@ function initCertificateVerifier() {
 
       if (certDisplay) certDisplay.style.display = "block";
 
+      const imgContainer = document.getElementById('official-cert-image-container');
+      const imgEl = document.getElementById('official-cert-image');
+      const downloadBtn = document.getElementById('download-cert-btn');
+      if (record && record.certImage && imgContainer && imgEl) {
+        imgEl.src = record.certImage;
+        if (downloadBtn) downloadBtn.href = record.certImage;
+        imgContainer.style.display = 'block';
+      } else if (imgContainer) {
+        imgContainer.style.display = 'none';
+      }
+
     } else {
       // 3. Not Found State
       if (statusBanner) {
@@ -2020,6 +2031,8 @@ function initCertificateVerifier() {
         timestamp.textContent = "Checked Just Now";
       }
       if (certDisplay) certDisplay.style.display = "none";
+      const imgContainer = document.getElementById('official-cert-image-container');
+      if (imgContainer) imgContainer.style.display = 'none';
     }
 
     // Scroll smoothly to results
@@ -2046,7 +2059,7 @@ function initCertificateVerifier() {
   // Handle Copy Verification Link
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
-      const certId = input.value || "AIP-L1-2026-000245";
+      const certId = input.value || "AIP-2026-0279";
       const shareUrl = window.location.origin + window.location.pathname + "?id=" + encodeURIComponent(certId);
       navigator.clipboard.writeText(shareUrl).then(() => {
         const origText = copyBtn.textContent;
@@ -2056,14 +2069,14 @@ function initCertificateVerifier() {
     });
   }
 
-  // Parse URL parameter e.g. verify.html?id=AIP-L1-2026-000245
+  // Parse URL parameter e.g. verify.html?id=AIP-2026-0279
   const urlParams = new URLSearchParams(window.location.search);
   const paramId = urlParams.get('id');
   if (paramId) {
     performVerification(paramId);
   } else {
     // Default verification on first page load
-    performVerification("AIP-L1-2026-000245");
+    performVerification("AIP-2026-0279");
   }
 }
 
