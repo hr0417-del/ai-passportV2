@@ -1,4 +1,4 @@
-import certDBData from './scratch/certificateDB.json';
+import certDBData from './scratch/certificateDB.js';
 /* ==========================================================================
    AI PASSPORT™ — MASTER INTERACTIVE ENGINE
    Preloader | Smooth Scroll | ScrollTrigger Section Reveal | Particles | Parallax
@@ -1818,6 +1818,10 @@ function initCertificateVerifier() {
   const statusBanner = document.getElementById('verify-status-banner');
   const statusTitle = document.getElementById('status-title');
   const statusSubtext = document.getElementById('status-subtext');
+  const statusIcon = document.getElementById('status-icon');
+  const timestamp = document.getElementById('verification-timestamp');
+  const certDisplay = document.getElementById('certificate-card-display');
+  const copyBtn = document.getElementById('btn-copy-link');
   const imgContainer = document.getElementById('official-cert-image-container');
   const imgEl = document.getElementById('official-cert-image');
   const downloadBtn = document.getElementById('download-cert-btn');
