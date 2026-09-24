@@ -35,7 +35,6 @@ export default defineConfig({
         academy: 'academy.html',
         about: 'about.html',
         contact: 'contact.html',
-        verify: 'verify.html',
         projects: 'projects.html',
         insights: 'insights.html',
         login: 'login.html',
