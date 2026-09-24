@@ -182,11 +182,11 @@ function initVerificationPortal() {
       statusBanner.style.borderColor = "rgba(255, 68, 68, 0.25)";
     }
     if (statusTitle) {
-      statusTitle.textContent = "CREDENTIAL NOT FOUND";
+      statusTitle.textContent = "CERTIFICATE NOT VERIFIED";
       statusTitle.style.color = "#ff4444";
     }
     if (statusSubtext) {
-      statusSubtext.textContent = `No active Ekaakshar certificate record matches '${query}'. Search by Passport ID (e.g. AIP-2026-0279), Full Name, or Email Address.`;
+      statusSubtext.textContent = `No certificate record found in Google Drive repository for '${query}'.`;
     }
     if (statusIcon) {
       statusIcon.textContent = "✕";
