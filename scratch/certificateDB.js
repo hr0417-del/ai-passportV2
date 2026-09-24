@@ -51,19 +51,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Athira k for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/athira_png.png"
   },
-  "260": {
-    "name": "SONAL KALIA",
-    "email": "sonalkalia26@gmail.com",
-    "role": "School Teacher",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Sonal Kalia (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
-  },
   "261": {
     "name": "ELAYARASAN R",
     "email": "elaiking216@gmail.com",
@@ -233,19 +220,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Sandeep Kumar Verma for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
   },
-  "287": {
-    "name": "DR GAURAV KUMAR SINGH",
-    "email": "grvkmr095@gmail.com",
-    "role": "Principal / School Leader",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Dr Gaurav Kumar Singh for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/dr_gaurav_png.png"
-  },
   "289": {
     "name": "DEEPIKA PAHWA",
     "email": "deepikatulani904@gmail.com",
@@ -271,19 +245,6 @@ export const certDBData = {
     "signatory": "Hitesh Rathee & Nishant Singh Lakra",
     "description": "Official Certificate of Participation awarded to sandeep kaur (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
-  },
-  "295": {
-    "name": "MADAM SONA RAWAT",
-    "email": "msacademyzkp@gmail.com",
-    "role": "Education / Training Professional",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Madam Sona Rawat for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
   },
   "300": {
     "name": "GAYATHRI ADDAGALLA",
@@ -766,19 +727,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Athira k for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/athira_png.png"
   },
-  "20260260": {
-    "name": "SONAL KALIA",
-    "email": "sonalkalia26@gmail.com",
-    "role": "School Teacher",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Sonal Kalia (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
-  },
   "20260261": {
     "name": "ELAYARASAN R",
     "email": "elaiking216@gmail.com",
@@ -948,19 +896,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Sandeep Kumar Verma for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
   },
-  "20260287": {
-    "name": "DR GAURAV KUMAR SINGH",
-    "email": "grvkmr095@gmail.com",
-    "role": "Principal / School Leader",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Dr Gaurav Kumar Singh for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/dr_gaurav_png.png"
-  },
   "20260289": {
     "name": "DEEPIKA PAHWA",
     "email": "deepikatulani904@gmail.com",
@@ -986,19 +921,6 @@ export const certDBData = {
     "signatory": "Hitesh Rathee & Nishant Singh Lakra",
     "description": "Official Certificate of Participation awarded to sandeep kaur (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
-  },
-  "20260295": {
-    "name": "MADAM SONA RAWAT",
-    "email": "msacademyzkp@gmail.com",
-    "role": "Education / Training Professional",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Madam Sona Rawat for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
   },
   "20260300": {
     "name": "GAYATHRI ADDAGALLA",
@@ -1481,19 +1403,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Athira k for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/athira_png.png"
   },
-  "120260260": {
-    "name": "SONAL KALIA",
-    "email": "sonalkalia26@gmail.com",
-    "role": "School Teacher",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Sonal Kalia (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
-  },
   "120260261": {
     "name": "ELAYARASAN R",
     "email": "elaiking216@gmail.com",
@@ -1663,19 +1572,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Sandeep Kumar Verma for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
   },
-  "120260287": {
-    "name": "DR GAURAV KUMAR SINGH",
-    "email": "grvkmr095@gmail.com",
-    "role": "Principal / School Leader",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Dr Gaurav Kumar Singh for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/dr_gaurav_png.png"
-  },
   "120260289": {
     "name": "DEEPIKA PAHWA",
     "email": "deepikatulani904@gmail.com",
@@ -1701,19 +1597,6 @@ export const certDBData = {
     "signatory": "Hitesh Rathee & Nishant Singh Lakra",
     "description": "Official Certificate of Participation awarded to sandeep kaur (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
-  },
-  "120260295": {
-    "name": "MADAM SONA RAWAT",
-    "email": "msacademyzkp@gmail.com",
-    "role": "Education / Training Professional",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Madam Sona Rawat for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
   },
   "120260300": {
     "name": "GAYATHRI ADDAGALLA",
@@ -2274,32 +2157,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Athira k for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/athira_png.png"
   },
-  "AIP-2026-0260": {
-    "name": "SONAL KALIA",
-    "email": "sonalkalia26@gmail.com",
-    "role": "School Teacher",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Sonal Kalia (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
-  },
-  "AIP-L1-2026-0260": {
-    "name": "SONAL KALIA",
-    "email": "sonalkalia26@gmail.com",
-    "role": "School Teacher",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Sonal Kalia (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
-  },
   "AIP-2026-0263": {
     "name": "HARSHIT GUPTA",
     "email": "harshit1191@gmail.com",
@@ -2612,32 +2469,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Sandeep Kumar Verma for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
   },
-  "AIP-2026-0287": {
-    "name": "DR GAURAV KUMAR SINGH",
-    "email": "grvkmr095@gmail.com",
-    "role": "Principal / School Leader",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Dr Gaurav Kumar Singh for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/dr_gaurav_png.png"
-  },
-  "AIP-L1-2026-0287": {
-    "name": "DR GAURAV KUMAR SINGH",
-    "email": "grvkmr095@gmail.com",
-    "role": "Principal / School Leader",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Dr Gaurav Kumar Singh for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/dr_gaurav_png.png"
-  },
   "AIP-2026-0289": {
     "name": "DEEPIKA PAHWA",
     "email": "deepikatulani904@gmail.com",
@@ -2689,32 +2520,6 @@ export const certDBData = {
     "signatory": "Hitesh Rathee & Nishant Singh Lakra",
     "description": "Official Certificate of Participation awarded to sandeep kaur (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
-  },
-  "AIP-2026-0295": {
-    "name": "MADAM SONA RAWAT",
-    "email": "msacademyzkp@gmail.com",
-    "role": "Education / Training Professional",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Madam Sona Rawat for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
-  },
-  "AIP-L1-2026-0295": {
-    "name": "MADAM SONA RAWAT",
-    "email": "msacademyzkp@gmail.com",
-    "role": "Education / Training Professional",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Madam Sona Rawat for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
   },
   "AIP-2026-0300": {
     "name": "GAYATHRI ADDAGALLA",
@@ -3639,19 +3444,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Athira k for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/athira_png.png"
   },
-  "0260": {
-    "name": "SONAL KALIA",
-    "email": "sonalkalia26@gmail.com",
-    "role": "School Teacher",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Sonal Kalia (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
-  },
   "0263": {
     "name": "HARSHIT GUPTA",
     "email": "harshit1191@gmail.com",
@@ -3808,19 +3600,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Sandeep Kumar Verma for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
   },
-  "0287": {
-    "name": "DR GAURAV KUMAR SINGH",
-    "email": "grvkmr095@gmail.com",
-    "role": "Principal / School Leader",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Dr Gaurav Kumar Singh for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/dr_gaurav_png.png"
-  },
   "0289": {
     "name": "DEEPIKA PAHWA",
     "email": "deepikatulani904@gmail.com",
@@ -3846,19 +3625,6 @@ export const certDBData = {
     "signatory": "Hitesh Rathee & Nishant Singh Lakra",
     "description": "Official Certificate of Participation awarded to sandeep kaur (School Teacher) for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/deep_png.png"
-  },
-  "0295": {
-    "name": "MADAM SONA RAWAT",
-    "email": "msacademyzkp@gmail.com",
-    "role": "Education / Training Professional",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Madam Sona Rawat for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
   },
   "0300": {
     "name": "GAYATHRI ADDAGALLA",
@@ -4289,19 +4055,6 @@ export const certDBData = {
     "description": "Official Certificate of Participation awarded to Rafia Khatoon for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/rafia_png.png"
   },
-  "grvkmr095@gmail.com": {
-    "name": "DR GAURAV KUMAR SINGH",
-    "email": "grvkmr095@gmail.com",
-    "role": "Principal / School Leader",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Dr Gaurav Kumar Singh for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/dr_gaurav_png.png"
-  },
   "lavi9014@gmail.com": {
     "name": "LAVI",
     "email": "lavi9014@gmail.com",
@@ -4418,19 +4171,6 @@ export const certDBData = {
     "signatory": "Hitesh Rathee & Nishant Singh Lakra",
     "description": "Official Certificate of Participation awarded to Manisha Sharma for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
     "certImage": "/certificates/manisha_sharma_png.png"
-  },
-  "msacademyzkp@gmail.com": {
-    "name": "MADAM SONA RAWAT",
-    "email": "msacademyzkp@gmail.com",
-    "role": "Education / Training Professional",
-    "level": "LEVEL 1 – AI EXPLORER",
-    "event": "AI Passport Live – National Webinar for Educators",
-    "eventSub": "◆ Preparing the Teacher for Viksit Bharat ◆",
-    "type": "CERTIFICATE OF PARTICIPATION",
-    "date": "20 September 2026",
-    "signatory": "Hitesh Rathee & Nishant Singh Lakra",
-    "description": "Official Certificate of Participation awarded to Madam Sona Rawat for completing the AI Passport Live™ National Webinar on 20 September 2026. Verified on public ledger.",
-    "certImage": "/certificates/sona_png.png"
   },
   "rohitjatin854@gmail.com": {
     "name": "ROHIT GUPTA",
