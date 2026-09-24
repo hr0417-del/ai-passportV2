@@ -195,8 +195,32 @@
           <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.4);" id="verification-timestamp">Verified Just Now</span>
         </div>
 
+        <!-- OFFICIAL CERTIFICATE IMAGE DISPLAY CONTAINER (HERO PRIMARY DISPLAY) -->
+        <div id="official-cert-image-container" style="display: block; margin-bottom: 36px; text-align: center;">
+          <h4 style="font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--color-gold); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.18em;">
+            ✦ OFFICIAL ISSUED CERTIFICATE DOCUMENT
+          </h4>
+          <div style="background: rgba(18, 19, 26, 0.95); border: 2px solid rgba(223, 207, 173, 0.4); border-radius: 16px; padding: 20px; max-width: 960px; margin: 0 auto; box-shadow: 0 30px 70px rgba(0,0,0,0.9);">
+            <img id="official-cert-image" src="certificates/34.png" alt="Official AI Passport Certificate" style="width: 100%; height: auto; border-radius: 10px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+            <div style="margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;">
+              <a id="download-cert-btn" href="certificates/34.png" download class="btn btn-primary" style="padding: 12px 28px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;">
+                ⬇️ Download Original Certificate Image (PNG)
+              </a>
+              <a id="btn-add-linkedin" href="#" target="_blank" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.85rem; background: #0077b5; border-color: #0077b5; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                💼 Add to LinkedIn Profile
+              </a>
+              <button class="btn btn-secondary" id="btn-copy-link" style="padding: 12px 24px; font-size: 0.85rem;">
+                🔗 Copy Verification Link
+              </button>
+              <button class="btn btn-secondary" onclick="window.print()" style="padding: 12px 24px; font-size: 0.85rem;">
+                🖨️ Save as PDF / Print
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- DIGITAL CERTIFICATE CARD REPLICA -->
-        <div id="certificate-card-display" class="official-certificate-container" style="background: #ffffff; border: 12px solid #f6f3eb; border-radius: 16px; padding: 48px 40px; position: relative; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9); color: #1a1a1a; font-family: 'Cormorant Garamond', serif; overflow: hidden; max-width: 960px; margin: 0 auto;">
+        <div id="certificate-card-display" class="official-certificate-container" style="background: #ffffff; border: 12px solid #f6f3eb; border-radius: 16px; padding: 48px 40px; position: relative; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9); color: #1a1a1a; font-family: 'Cormorant Garamond', serif; overflow: hidden; max-width: 960px; margin: 36px auto 0;">
           
           <div style="position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px; border: 1px solid #d4af37; pointer-events: none; border-radius: 6px;"></div>
           <div style="position: absolute; top: 16px; left: 16px; right: 16px; bottom: 16px; border: 1px solid #e0d0a0; pointer-events: none; border-radius: 4px;"></div>
@@ -324,32 +348,7 @@
 
         </div>
 
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 32px;">
-          <a id="btn-add-linkedin" href="#" target="_blank" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.85rem; background: #0077b5; border-color: #0077b5; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-            💼 Add to LinkedIn Profile
-          </a>
-          <button class="btn btn-secondary" id="btn-copy-link" style="padding: 12px 24px; font-size: 0.85rem;">
-            🔗 Copy Verification Link
-          </button>
-          <button class="btn btn-primary" onclick="window.print()" style="padding: 12px 24px; font-size: 0.85rem;">
-            🖨️ Save as PDF / Print
-          </button>
-        </div>
 
-        <!-- OFFICIAL CERTIFICATE IMAGE DISPLAY CONTAINER -->
-        <div id="official-cert-image-container" style="display: block; margin-top: 36px; text-align: center;">
-          <h4 style="font-family: 'Space Mono', monospace; font-size: 0.76rem; color: var(--color-gold); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.15em;">
-            ✦ OFFICIAL ISSUED CERTIFICATE DOCUMENT
-          </h4>
-          <div style="background: rgba(18, 19, 26, 0.95); border: 1px solid rgba(223, 207, 173, 0.3); border-radius: 16px; padding: 16px; max-width: 860px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
-            <img id="official-cert-image" src="certificates/34.png" alt="Official AI Passport Certificate" style="width: 100%; height: auto; border-radius: 8px; display: block;" />
-            <div style="margin-top: 14px; display: flex; justify-content: center;">
-              <a id="download-cert-btn" href="certificates/34.png" download class="btn btn-secondary" style="padding: 10px 24px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 8px;">
-                ⬇️ Download Original Certificate Image (PNG)
-              </a>
-            </div>
-          </div>
-        </div>
 
       </div>
     </section>
@@ -612,7 +611,7 @@
         
         <div class="footer-bottom-bar">
           <div class="footer-copy-legal">
-            <p>&copy; 2026 Ekaakshar Education Services Pvt. Ltd. All rights reserved. &bull; ISO 27001 Certified Institution.</p>
+            <p>&copy; 2026 Ekaakshar Education. All rights reserved. &bull; ISO 27001 Certified Institution.</p>
           </div>
 
           <div class="footer-legal-links">
