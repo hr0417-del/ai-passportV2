@@ -143,8 +143,8 @@
                 <input 
                   type="text" 
                   id="verify-input" 
-                  placeholder="Enter Passport ID, Name, or Email" 
-                  value="AIP-2026-0279"
+                  placeholder="Enter Passport ID, Name, or Email (e.g. AIP-2026-0279)" 
+                  value=""
                   required
                   style="width: 100%; padding: 16px 20px; font-family: 'Space Mono', monospace; font-size: 0.95rem; color: #fff; background: rgba(10, 10, 14, 0.9); border: 1px solid rgba(0, 162, 255, 0.35); border-radius: 10px; outline: none; transition: border-color 0.3s; box-sizing: border-box;"
                 >
@@ -180,7 +180,7 @@
     </section>
 
     <!-- SECTION 02 — VERIFICATION RESULT DISPLAY -->
-    <section class="section" id="verify-result-section" style="padding-top: 10px; padding-bottom: 100px;">
+    <section class="section" id="verify-result-section" style="display: none; padding-top: 10px; padding-bottom: 100px;">
       <div class="movement-inner" style="max-width: 1040px; margin: 0 auto;">
         
         <!-- Status Bar -->
@@ -324,12 +324,15 @@
 
         </div>
 
-        <div style="display: flex; justify-content: center; gap: 16px; margin-top: 32px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 32px;">
+          <a id="btn-add-linkedin" href="#" target="_blank" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.85rem; background: #0077b5; border-color: #0077b5; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+            💼 Add to LinkedIn Profile
+          </a>
           <button class="btn btn-secondary" id="btn-copy-link" style="padding: 12px 24px; font-size: 0.85rem;">
             🔗 Copy Verification Link
           </button>
           <button class="btn btn-primary" onclick="window.print()" style="padding: 12px 24px; font-size: 0.85rem;">
-            🖨️ Print / Save as PDF
+            🖨️ Save as PDF / Print
           </button>
         </div>
 
@@ -639,5 +642,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
   <script src="main.js" type="module"></script>
+  <script src="js/verify-engine.js" type="module"></script>
 </body>
 </html>
