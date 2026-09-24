@@ -138,7 +138,7 @@
               PASSPORT ID / CREDENTIAL ID
             </label>
 
-            <form id="verify-form" action="javascript:void(0);" onsubmit="if(window.performVerification) window.performVerification(document.getElementById('verify-input').value); return false;" style="display: flex; gap: 12px; align-items: center; width: 100%;">
+            <form id="verify-form" action="javascript:void(0);" onsubmit="if(window.performVerification){ window.performVerification(document.getElementById('verify-input').value); } return false;" style="display: flex; gap: 12px; align-items: center; width: 100%;">
               <div style="position: relative; flex: 1;">
                 <input 
                   type="text" 
@@ -152,7 +152,6 @@
               <button 
                 type="submit" 
                 id="verify-submit-btn"
-                onclick="if(window.performVerification) window.performVerification(document.getElementById('verify-input').value); return false;"
                 class="btn btn-primary"
                 style="padding: 16px 28px; font-size: 0.85rem; font-weight: 600; white-space: nowrap;"
               >
