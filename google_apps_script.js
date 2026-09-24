@@ -313,7 +313,11 @@ function processRegistration(data) {
     
     if (email && data.skipEmail !== "true" && source !== "Sheet1 Sync") {
       try {
-        sendConfirmationEmail(email, fullname, passportId, role);
+        if (data.action === "sendCert" || data.type === "certificate") {
+          sendCertificateEmail(email, fullname, passportId, role);
+        } else {
+          sendConfirmationEmail(email, fullname, passportId, role);
+        }
       } catch(emailErr) {
         Logger.log("Email error: " + emailErr.toString());
       }
@@ -455,6 +459,59 @@ function createVerifiedSentSheet() {
 }
 
 function sendConfirmationEmail(email, fullname, passportId, role) {
+  if (!email) return;
+  
+  var subject = "SEAT CONFIRMED: AI in Education National Webinar — " + passportId;
+  var bccEmail = "ekaakshareducation@gmail.com";
+  
+  var htmlBody = `
+    <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 40px 20px; max-width: 650px; margin: 0 auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <span style="font-size: 11px; letter-spacing: 3px; color: #f59e0b; text-transform: uppercase; font-weight: 700; background: rgba(245, 158, 11, 0.1); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(245, 158, 11, 0.3);">
+          ● OFFICIAL SEAT CONFIRMATION
+        </span>
+        <h1 style="color: #ffffff; font-size: 24px; margin-top: 15px; margin-bottom: 5px; font-weight: 800;">
+          AI Passport™ National Webinar
+        </h1>
+        <p style="color: #94a3b8; font-size: 14px; margin: 0;">
+          Ekaakshar Education · National Teacher Empowerment Initiative
+        </p>
+      </div>
+
+      <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 24px; border-radius: 10px; margin-bottom: 25px;">
+        <h2 style="color: #38bdf8; font-size: 18px; margin-top: 0;">Greetings ${fullname},</h2>
+        <p style="color: #cbd5e1; font-size: 15px; line-height: 1.6;">
+          Your seat has been successfully reserved for the National Webinar: <strong>AI in Education — Preparing the Teacher for Viksit Bharat</strong>.
+        </p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 10px;">
+          <tr>
+            <td style="padding: 10px 0; color: #94a3b8; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.05);">AI Passport ID:</td>
+            <td style="padding: 10px 0; color: #f59e0b; font-size: 15px; font-weight: 700; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05); font-family: monospace;">${passportId}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 0; color: #94a3b8; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.05);">Role Registered:</td>
+            <td style="padding: 10px 0; color: #ffffff; font-size: 14px; text-align: right;">${role}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; color: #64748b; font-size: 12px; line-height: 1.5;">
+        <p style="margin: 0 0 5px 0; font-weight: 600; color: #94a3b8;">Ekaakshar Education</p>
+        <p style="margin: 0 0 10px 0; font-style: italic;">DON'T JUST LEARN AI. BUILD WITH IT.</p>
+        <p style="margin: 0;">If you have any questions, reply directly to this email or contact support at aipassportindia@gmail.com</p>
+      </div>
+    </div>
+  `;
+  
+  GmailApp.sendEmail(email, subject, "Your seat for the AI Passport National Webinar is confirmed. Passport ID: " + passportId, {
+    name: "AI Passport™ by Ekaakshar Education",
+    bcc: bccEmail,
+    htmlBody: htmlBody
+  });
+}
+
+function sendCertificateEmail(email, fullname, passportId, role) {
   if (!email) return;
   
   var subject = "Official Certificate: AI Passport Live™ National Webinar for Educators";
