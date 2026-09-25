@@ -167,6 +167,8 @@ function initVerificationPortal() {
       if (e) e.preventDefault();
       performVerification(input ? input.value : '');
     });
+  }
+
   if (input) {
     if (!input.value || !input.value.startsWith('AIP-2026-')) {
       input.value = 'AIP-2026-';
