@@ -529,12 +529,20 @@ function sendConfirmationEmail(email, fullname, passportId, role) {
                   <td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A; font-family: monospace;">${passportId}</td>
                 </tr>
                 <tr>
+                  <td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">DATE</td>
+                  <td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A;">2 OCTOBER 2026</td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">TIME</td>
+                  <td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A;">2:00 PM &ndash; 3:30 PM IST</td>
+                </tr>
+                <tr>
                   <td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">ROLE REGISTERED</td>
                   <td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A;">${role}</td>
                 </tr>
                 <tr>
                   <td style="font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">FORMAT</td>
-                  <td align="right" style="font-size: 14px; font-weight: 700; color: #16A34A;">ONLINE • FREE</td>
+                  <td align="right" style="font-size: 14px; font-weight: 700; color: #16A34A;">ONLINE &bull; FREE</td>
                 </tr>
               </table>
             </td>
@@ -546,10 +554,10 @@ function sendConfirmationEmail(email, fullname, passportId, role) {
               <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center">
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education&details=Free+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2F&location=Online+Live+Webinar" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; margin-right: 8px; margin-bottom: 12px;">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education&dates=20261002T083000Z/20261002T100000Z&details=Free+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2F&location=Online+Live+Webinar" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; margin-right: 8px; margin-bottom: 12px;">
                       ADD TO CALENDAR &rarr;
                     </a>
-                    <a href="https://api.whatsapp.com/send?text=I%27m%20attending%20AI%20Passport%20Live%E2%84%A2%20%E2%80%94%20a%20free%20practical%20AI%20webinar%20for%20teachers%20and%20educators!%20Learn%20more%3A%20https%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" style="background-color: #F8FAFC; color: #0F172A; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border: 1px solid #CBD5E1; margin-bottom: 12px;">
+                    <a href="https://api.whatsapp.com/send?text=I%27m%20attending%20AI%20Passport%20Live%E2%84%A2%20%E2%80%94%20a%20free%20practical%20AI%20webinar%20for%20teachers%20and%20educators%20on%202%20October%202026%2C%20from%202%3A00%20PM%20to%203%3A30%20PM%20IST.%20Learn%20more%3A%20https%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" style="background-color: #F8FAFC; color: #0F172A; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border: 1px solid #CBD5E1; margin-bottom: 12px;">
                       SHARE ON WHATSAPP &rarr;
                     </a>
                   </td>
