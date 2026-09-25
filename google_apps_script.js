@@ -461,7 +461,7 @@ function createVerifiedSentSheet() {
 function sendConfirmationEmail(email, fullname, passportId, role) {
   if (!email) return;
   
-  var subject = "SEAT CONFIRMED: AI Passport Live™ National Webinar — " + passportId;
+  var subject = "SEAT CONFIRMED: AI in Education — Preparing the Teacher for Viksit Bharat | " + passportId;
   var bccEmail = "ekaakshareducation@gmail.com";
   
   var htmlBody = `
@@ -487,10 +487,10 @@ function sendConfirmationEmail(email, fullname, passportId, role) {
                       EKAAKSHAR EDUCATION
                     </div>
                     <h1 style="font-size: 24px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.15em; margin: 0 0 6px 0; text-transform: uppercase;">
-                      AI PASSPORT™
+                      AI PASSPORT LIVE™
                     </h1>
                     <div style="font-size: 11px; font-weight: 500; color: #94A3B8; letter-spacing: 0.08em;">
-                      Building AI capability for the AI era.
+                      National Teacher Empowerment Initiative
                     </div>
                   </td>
                 </tr>
@@ -504,18 +504,15 @@ function sendConfirmationEmail(email, fullname, passportId, role) {
               <span style="font-size: 11px; font-weight: 700; color: #16A34A; letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-bottom: 8px;">
                 ✓ SEAT CONFIRMED • FREE REGISTRATION
               </span>
-              <h2 style="font-size: 24px; font-weight: 800; color: #0F172A; margin: 0 0 6px 0; line-height: 1.25;">
-                YOUR SEAT IS CONFIRMED
+              <h2 style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 0 0 6px 0; line-height: 1.3;">
+                AI in Education — Preparing the Teacher for Viksit Bharat
               </h2>
-              <div style="font-size: 16px; font-weight: 700; color: #B45309; letter-spacing: 0.02em; margin-bottom: 12px;">
-                AI Passport Live™
+              <div style="font-size: 15px; font-weight: 700; color: #B45309; letter-spacing: 0.02em; margin-bottom: 12px;">
+                AI Passport Live™ National Webinar
               </div>
-              <p style="font-size: 15px; line-height: 1.6; color: #334155; margin: 0;">
-                A practical AI experience for teachers and educators.
-              </p>
               <p style="font-size: 15px; line-height: 1.6; color: #334155; margin: 12px 0 0 0;">
                 Dear <strong>${fullname}</strong>,<br><br>
-                Welcome to AI Passport Live™. Your registration is confirmed.
+                Welcome to AI Passport Live™. Your seat is successfully reserved for the national webinar: <strong>AI in Education — Preparing the Teacher for Viksit Bharat</strong>.
               </p>
             </td>
           </tr>
@@ -527,6 +524,10 @@ function sendConfirmationEmail(email, fullname, passportId, role) {
                 <tr>
                   <td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">PASSPORT ID</td>
                   <td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A; font-family: monospace;">${passportId}</td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">PROGRAM THEME</td>
+                  <td align="right" style="padding-bottom: 10px; font-size: 13px; font-weight: 700; color: #0F172A;">AI in Education &bull; Viksit Bharat</td>
                 </tr>
                 <tr>
                   <td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">DATE</td>
@@ -554,10 +555,10 @@ function sendConfirmationEmail(email, fullname, passportId, role) {
               <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center">
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education&dates=20261002T083000Z/20261002T100000Z&details=Free+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2F&location=Online+Live+Webinar" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; margin-right: 8px; margin-bottom: 12px;">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education+%E2%80%93+Preparing+the+Teacher+for+Viksit+Bharat&dates=20261002T083000Z/20261002T100000Z&details=Free+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2F&location=Online+Live+Webinar" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; margin-right: 8px; margin-bottom: 12px;">
                       ADD TO CALENDAR &rarr;
                     </a>
-                    <a href="https://api.whatsapp.com/send?text=I%27m%20attending%20AI%20Passport%20Live%E2%84%A2%20%E2%80%94%20a%20free%20practical%20AI%20webinar%20for%20teachers%20and%20educators%20on%202%20October%202026%2C%20from%202%3A00%20PM%20to%203%3A30%20PM%20IST.%20Learn%20more%3A%20https%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" style="background-color: #F8FAFC; color: #0F172A; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border: 1px solid #CBD5E1; margin-bottom: 12px;">
+                    <a href="https://api.whatsapp.com/send?text=I%27m%20attending%20AI%20Passport%20Live%E2%84%A2%20%E2%80%94%20AI%20in%20Education%3A%20Preparing%20the%20Teacher%20for%20Viksit%20Bharat%20on%202%20October%202026%2C%20from%202%3A00%20PM%20to%203%3A30%20PM%20IST.%20Learn%20more%3A%20https%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" style="background-color: #F8FAFC; color: #0F172A; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border: 1px solid #CBD5E1; margin-bottom: 12px;">
                       SHARE ON WHATSAPP &rarr;
                     </a>
                   </td>
