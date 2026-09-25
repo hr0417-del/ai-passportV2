@@ -139,17 +139,14 @@
             </label>
 
             <form id="verify-form" action="javascript:void(0);" onsubmit="if(window.performVerification){ window.performVerification(document.getElementById('verify-input').value); } return false;" style="display: flex; gap: 12px; align-items: center; width: 100%;">
-              <div style="position: relative; flex: 1; display: flex; align-items: center; background: rgba(10, 10, 14, 0.9); border: 1px solid rgba(0, 162, 255, 0.35); border-radius: 10px; overflow: hidden; box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);">
-                <span style="font-family: 'Space Mono', monospace; font-size: 0.95rem; font-weight: 700; color: #38bdf8; background: rgba(0, 162, 255, 0.12); padding: 16px 14px; border-right: 1px solid rgba(0, 162, 255, 0.25); user-select: none; display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-                  AIP-2026-
-                </span>
+              <div style="position: relative; flex: 1; display: flex; align-items: center; background: rgba(10, 10, 14, 0.95); border: 1.5px solid #38bdf8; border-radius: 10px; overflow: hidden; box-shadow: 0 0 15px rgba(56, 189, 248, 0.2), inset 0 2px 6px rgba(0,0,0,0.5);">
                 <input 
                   type="text" 
                   id="verify-input" 
-                  placeholder="0279 (or candidate name)" 
-                  value=""
+                  placeholder="AIP-2026-0279 (Enter last 4 digits)" 
+                  value="AIP-2026-"
                   required
-                  style="flex: 1; width: 100%; padding: 16px 16px; font-family: 'Space Mono', monospace; font-size: 0.95rem; color: #fff; background: transparent; border: none; outline: none; box-sizing: border-box;"
+                  style="width: 100%; padding: 16px 20px; font-family: 'Space Mono', monospace; font-size: 1.05rem; font-weight: 700; color: #58c4ff; background: transparent; border: none; outline: none; box-sizing: border-box;"
                 >
               </div>
               <button 
@@ -164,15 +161,15 @@
 
             <!-- Sample Quick Buttons -->
             <div class="verify-samples" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 18px; font-size: 0.76rem; color: var(--color-text-secondary);">
-              <span style="color: rgba(255,255,255,0.4);">Try sample digits:</span>
-              <button type="button" class="sample-id-btn" data-id="0279" onclick="document.getElementById('verify-input').value='0279'; if(window.performVerification) window.performVerification('0279');" style="background: rgba(223, 207, 173, 0.12); border: 1px solid rgba(223, 207, 173, 0.3); color: var(--color-gold); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
-                0279 (Lavi)
+              <span style="color: rgba(255,255,255,0.4);">Try sample IDs:</span>
+              <button type="button" class="sample-id-btn" data-id="AIP-2026-0279" onclick="document.getElementById('verify-input').value='AIP-2026-0279'; if(window.performVerification) window.performVerification('AIP-2026-0279');" style="background: rgba(223, 207, 173, 0.12); border: 1px solid rgba(223, 207, 173, 0.3); color: var(--color-gold); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+                AIP-2026-0279 (Lavi)
               </button>
-              <button type="button" class="sample-id-btn" data-id="0272" onclick="document.getElementById('verify-input').value='0272'; if(window.performVerification) window.performVerification('0272');" style="background: rgba(88, 196, 255, 0.12); border: 1px solid rgba(88, 196, 255, 0.3); color: #58c4ff; padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
-                0272 (Ankit Singh)
+              <button type="button" class="sample-id-btn" data-id="AIP-2026-0272" onclick="document.getElementById('verify-input').value='AIP-2026-0272'; if(window.performVerification) window.performVerification('AIP-2026-0272');" style="background: rgba(88, 196, 255, 0.12); border: 1px solid rgba(88, 196, 255, 0.3); color: #58c4ff; padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+                AIP-2026-0272 (Ankit Singh)
               </button>
-              <button type="button" class="sample-id-btn" data-id="0284" onclick="document.getElementById('verify-input').value='0284'; if(window.performVerification) window.performVerification('0284');" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
-                0284 (Bibek)
+              <button type="button" class="sample-id-btn" data-id="AIP-2026-0284" onclick="document.getElementById('verify-input').value='AIP-2026-0284'; if(window.performVerification) window.performVerification('AIP-2026-0284');" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 15px; font-family: 'Space Mono', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;">
+                AIP-2026-0284 (Bibek)
               </button>
             </div>
           </div>
