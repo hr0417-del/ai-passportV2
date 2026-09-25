@@ -7,7 +7,7 @@ import certDBData from './scratch/certificateDB.js';
 /* --- CONFIGURATION --- */
 const AIPASSPORT_CONFIG = {
   // Connect to Google Sheets & Gmail Webhook
-  webhookUrl: "https://script.google.com/macros/s/AKfycbxbqCYYHT3fone_pcnbAnUG_U2wAbU3HlCtbM-JzQui7jB0pMOixrePbStmmJAag9yy/exec"
+  webhookUrl: "https://script.google.com/macros/s/AKfycbzHt68RFZ1QxTnLT9HN9Rfgynyzm_EpHkpqRwYzkzz6hI_XqDTTYJTcNUfOJ47C0bQU/exec"
 };
 
 // Register GSAP plugins safely
