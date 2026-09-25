@@ -58,10 +58,17 @@ export function performVerification(rawId) {
   const downloadBtn = document.getElementById('download-cert-btn');
   const linkedinBtn = document.getElementById('btn-add-linkedin');
 
-  const query = (rawId || (input ? input.value : '')).trim();
-  if (!query) return;
+  let rawQuery = (rawId || (input ? input.value : '')).trim();
+  if (!rawQuery) return;
 
-  const match = findCertificateRecord(query);
+  let query = rawQuery;
+  if (/^\d{1,4}$/.test(rawQuery)) {
+    query = `AIP-2026-${("0000" + rawQuery).slice(-4)}`;
+  } else if (/^aip-2026-\d{1,4}$/i.test(rawQuery)) {
+    query = rawQuery.toUpperCase();
+  }
+
+  const match = findCertificateRecord(query) || findCertificateRecord(rawQuery);
 
   if (resultSection) {
     resultSection.style.display = 'block';
