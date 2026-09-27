@@ -100,13 +100,22 @@ export function performVerification(rawId) {
     }
 
     const rawImgPath = record.certImage || '';
-    const cleanFilename = rawImgPath.replace(/^\/certificates\//, '').replace(/^certificates\//, '').replace(/^\//, '');
+    const cleanFilename = rawImgPath
+      .replace(/^\/public\/certificates\//, '')
+      .replace(/^public\/certificates\//, '')
+      .replace(/^\/certificates\//, '')
+      .replace(/^certificates\//, '')
+      .replace(/^\//, '');
     
     if (cleanFilename) {
       const pagePath = window.location.pathname;
       const baseDir = pagePath.substring(0, pagePath.lastIndexOf('/') + 1);
       
       const possibleSrcs = [
+        `public/certificates/${cleanFilename}`,
+        `./public/certificates/${cleanFilename}`,
+        `${baseDir}public/certificates/${cleanFilename}`,
+        `/public/certificates/${cleanFilename}`,
         `certificates/${cleanFilename}`,
         `./certificates/${cleanFilename}`,
         `${baseDir}certificates/${cleanFilename}`,
@@ -132,29 +141,41 @@ export function performVerification(rawId) {
         downloadBtn.setAttribute('target', '_self');
         downloadBtn.onclick = null;
 
-        fetch(possibleSrcs[0])
-          .then(res => {
-            if (!res.ok) throw new Error('Blob fetch failed');
-            return res.blob();
-          })
-          .then(blob => {
-            const blobUrl = URL.createObjectURL(blob);
-            downloadBtn.href = blobUrl;
-            downloadBtn.setAttribute('download', downloadFilename);
-          })
-          .catch(() => {
-            downloadBtn.onclick = (e) => {
-              if (e) e.preventDefault();
-              const activeSrc = (imgEl && imgEl.src) ? imgEl.src : possibleSrcs[0];
-              const a = document.createElement('a');
-              a.href = activeSrc;
-              a.download = downloadFilename;
-              a.target = '_blank';
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-            };
-          });
+        let fetchIdx = 0;
+        const tryFetchBlob = () => {
+          if (fetchIdx >= possibleSrcs.length) return;
+          const targetUrl = possibleSrcs[fetchIdx];
+          fetch(targetUrl)
+            .then(res => {
+              if (!res.ok) throw new Error('Fetch failed');
+              return res.blob();
+            })
+            .then(blob => {
+              const blobUrl = URL.createObjectURL(blob);
+              downloadBtn.href = blobUrl;
+              downloadBtn.setAttribute('download', downloadFilename);
+            })
+            .catch(() => {
+              fetchIdx++;
+              tryFetchBlob();
+            });
+        };
+        tryFetchBlob();
+
+        downloadBtn.onclick = (e) => {
+          if (downloadBtn.href && downloadBtn.href.startsWith('blob:')) {
+            return;
+          }
+          if (e) e.preventDefault();
+          const activeSrc = (imgEl && imgEl.src) ? imgEl.src : possibleSrcs[0];
+          const a = document.createElement('a');
+          a.href = activeSrc;
+          a.download = downloadFilename;
+          a.target = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        };
       }
     }
 
