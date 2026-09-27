@@ -1,11 +1,404 @@
 {
-  "2026": {
+  "247": {
+    "name": "VIJAYAKUMAR R",
+    "certId": "AIP-2026-0247",
+    "certImage": "/certificates/vijay_kumar.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vijaymphilchem13@gmail.com"
+  },
+  "256": {
+    "name": "PRASEETHA P M",
+    "certId": "AIP-2026-0256",
+    "certImage": "/certificates/praseetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pm.praseetha5@gmail.com"
+  },
+  "259": {
+    "name": "Athira k",
+    "certId": "AIP-2026-0259",
+    "certImage": "/certificates/athira.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "athirakichu1992@gmail.com"
+  },
+  "261": {
+    "name": "Elayarasan R",
+    "certId": "AIP-2026-0261",
+    "certImage": "/certificates/elayarasan.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "elaiking216@gmail.com"
+  },
+  "263": {
+    "name": "Harshit Gupta",
+    "certId": "AIP-2026-0263",
+    "certImage": "/certificates/harshit.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "harshit1191@gmail.com"
+  },
+  "266": {
+    "name": "Rohit Gupta",
+    "certId": "AIP-2026-0266",
+    "certImage": "/certificates/rohit.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rohitjatin854@gmail.com"
+  },
+  "267": {
+    "name": "Hema Sharma",
+    "certId": "AIP-2026-0267",
+    "certImage": "/certificates/hema.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "happeninhema@gmail.com"
+  },
+  "269": {
+    "name": "Roopali",
+    "certId": "AIP-2026-0269",
+    "certImage": "/certificates/roopali.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "roopali195@gmail.com"
+  },
+  "271": {
+    "name": "K .JAYA",
+    "certId": "AIP-2026-0271",
+    "certImage": "/certificates/k_jaya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "kjayagk@gmail.com"
+  },
+  "272": {
+    "name": "ANKIT SINGH SADHA",
+    "certId": "AIP-2026-0272",
+    "certImage": "/certificates/ankit_singh.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "ankitsinghsadha@gmail.com"
+  },
+  "279": {
+    "name": "Lavi",
+    "certId": "AIP-2026-0279",
+    "certImage": "/certificates/lavi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "lavi9014@gmail.com"
+  },
+  "281": {
+    "name": "Meenu",
+    "certId": "AIP-2026-0281",
+    "certImage": "/certificates/meenu.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "meenu4hindi@gmail.com"
+  },
+  "283": {
+    "name": "Neetu Mehndiratta",
+    "certId": "AIP-2026-0283",
+    "certImage": "/certificates/neetu.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "neetumehndiratta81@gmail.com"
+  },
+  "284": {
+    "name": "Bibek Kumar Barnwal",
+    "certId": "AIP-2026-0284",
+    "certImage": "/certificates/bibek.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "bibekkbaranwal@gmail.com"
+  },
+  "285": {
+    "name": "Suruchi Taneja",
+    "certId": "AIP-2026-0285",
+    "certImage": "/certificates/suruchi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "tanejasuruchi71@gmail.com"
+  },
+  "286": {
+    "name": "Sandeep Kumar Verma",
+    "certId": "AIP-2026-0286",
+    "certImage": "/certificates/sandeep.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vsandeep1981@gmail.com"
+  },
+  "287": {
+    "name": "Dr Gaurav Kumar Singh",
+    "certId": "AIP-2026-0287",
+    "certImage": "/certificates/dr_gaurav.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "grvkmr095@gmail.com"
+  },
+  "300": {
+    "name": "Gayathri Addagalla",
+    "certId": "AIP-2026-0300",
+    "certImage": "/certificates/gayathri.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "gayathrisf21@gmail.com"
+  },
+  "301": {
+    "name": "Aiswarya Prakash N",
+    "certId": "AIP-2026-0301",
+    "certImage": "/certificates/aiswarya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "aiswaryaprakash2@gmail.com"
+  },
+  "308": {
+    "name": "Moorthy A",
+    "certId": "AIP-2026-0308",
+    "certImage": "/certificates/moorthy_a.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "moorthy.a@rosenberg.edu.in"
+  },
+  "311": {
+    "name": "Roshani Nigam",
+    "certId": "AIP-2026-0311",
+    "certImage": "/certificates/roshani.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "nigamroshani24@gmail.com"
+  },
+  "315": {
+    "name": "Deep Kumar",
+    "certId": "AIP-2026-0315",
+    "certImage": "/certificates/deep.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "deepkumar86@gmail.com"
+  },
+  "322": {
+    "name": "Mehvish Rizwan Shaikh",
+    "certId": "AIP-2026-0322",
+    "certImage": "/certificates/mehvish.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "mehveshshaikh987@gmail.com"
+  },
+  "326": {
+    "name": "S SUBRAMANIAN",
+    "certId": "AIP-2026-0326",
+    "certImage": "/certificates/s_subramanian.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "subramaniansankar87@gmail.com"
+  },
+  "359": {
+    "name": "Samgeetha Sivakumar",
+    "certId": "AIP-2026-0359",
+    "certImage": "/certificates/samgeetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "samgeethasivakumar@gmail.com"
+  },
+  "362": {
+    "name": "S Saranya Devi",
+    "certId": "AIP-2026-0362",
+    "certImage": "/certificates/s_saranya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "saranyadevirajkumar@gmail.com"
+  },
+  "394": {
+    "name": "Rashmi Rawal",
+    "certId": "AIP-2026-0394",
+    "certImage": "/certificates/rashmi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rash.2567@gmail.com"
+  },
+  "397": {
+    "name": "UMMUL HAIRA K A",
+    "certId": "AIP-2026-0397",
+    "certImage": "/certificates/ummul.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "hairahussain08@gmail.com"
+  },
+  "398": {
+    "name": "Manjunath y sandaraki",
+    "certId": "AIP-2026-0398",
+    "certImage": "/certificates/manjunath.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "manumanu67776@gmail.com"
+  },
+  "399": {
+    "name": "Madam Sona Rawat",
+    "certId": "AIP-2026-0399",
+    "certImage": "/certificates/sona.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "msacademyzkp@gmail.com"
+  },
+  "402": {
+    "name": "Dola Bhattacharya",
+    "certId": "AIP-2026-0402",
+    "certImage": "/certificates/dola.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rpdola2402@gmail.com"
+  },
+  "404": {
+    "name": "Suman Keshav",
+    "certId": "AIP-2026-0404",
+    "certImage": "/certificates/suman.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "suman.keshav@ramjasrkp.com"
+  },
+  "405": {
+    "name": "Reshmi K",
+    "certId": "AIP-2026-0405",
+    "certImage": "/certificates/reshmi_k.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "reshmipny@gmail.com"
+  },
+  "406": {
+    "name": "Samia Razi",
+    "certId": "AIP-2026-0406",
+    "certImage": "/certificates/samia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "samia.razi@learn.apeejay.edu"
+  },
+  "407": {
+    "name": "Manisha",
+    "certId": "AIP-2026-0407",
+    "certImage": "/certificates/manisha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "409": {
+    "name": "Vibhuti Katyal",
+    "certId": "AIP-2026-0409",
+    "certImage": "/certificates/vibhuti.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vibhuti.katyal@learn.apeejay.edu"
+  },
+  "650": {
+    "name": "POONAM KAWATRA",
+    "certId": "AIP-2026-0650",
+    "certImage": "/certificates/poonam.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pykawatra2013@gmail.com"
+  },
+  "656": {
+    "name": "Rafia Khatoon",
+    "certId": "AIP-2026-0656",
+    "certImage": "/certificates/rafia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rafia.khatoon@learn.apeejay.edu"
+  },
+  "657": {
+    "name": "Imran Ahmad",
+    "certId": "AIP-2026-0657",
+    "certImage": "/certificates/imran_ahmad.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "imransami09@gmail.com"
+  },
+  "660": {
+    "name": "Chand Nanda",
+    "certId": "AIP-2026-0660",
+    "certImage": "/certificates/chand.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "chand.nanda@learn.apeejay.edu"
+  },
+  "661": {
     "name": "zenia dutta",
     "certId": "AIP-2026-0661",
     "certImage": "/certificates/zenia.png",
     "event": "AI Passport Live – National Webinar for Educators",
     "date": "20 September 2026",
     "email": "zenia.dutta@learn.apeejay.edu"
+  },
+  "662": {
+    "name": "Sangeeta Handa",
+    "certId": "AIP-2026-0662",
+    "certImage": "/certificates/sangeetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "sangeeta.handa@learn.apeejay.edu"
+  },
+  "664": {
+    "name": "Meenu Sehgal",
+    "certId": "AIP-2026-0664",
+    "certImage": "/certificates/meenu_sehgal.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "meenu.sehgal@learn.apeejay.edu"
+  },
+  "665": {
+    "name": "Pooja Bhardwaj",
+    "certId": "AIP-2026-0665",
+    "certImage": "/certificates/pooja.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pooja.bhardwaj@learn.apeejay.edu"
+  },
+  "666": {
+    "name": "Onila Mishra",
+    "certId": "AIP-2026-0666",
+    "certImage": "/certificates/onlila.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "sumaan92@gmail.com"
+  },
+  "672": {
+    "name": "Mahabubi",
+    "certId": "AIP-2026-0672",
+    "certImage": "/certificates/mahabubi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "673": {
+    "name": "Malathi",
+    "certId": "AIP-2026-0673",
+    "certImage": "/certificates/malathi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "674": {
+    "name": "Reena",
+    "certId": "AIP-2026-0674",
+    "certImage": "/certificates/reena.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "675": {
+    "name": "Shruti",
+    "certId": "AIP-2026-0675",
+    "certImage": "/certificates/shruti.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "676": {
+    "name": "Sonal",
+    "certId": "AIP-2026-0676",
+    "certImage": "/certificates/sonal.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "677": {
+    "name": "Sridevi",
+    "certId": "AIP-2026-0677",
+    "certImage": "/certificates/sridevi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
   },
   "AIP-2026-0301": {
     "name": "Aiswarya Prakash N",
@@ -16,6 +409,30 @@
     "email": "aiswaryaprakash2@gmail.com"
   },
   "aip-2026-0301": {
+    "name": "Aiswarya Prakash N",
+    "certId": "AIP-2026-0301",
+    "certImage": "/certificates/aiswarya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "aiswaryaprakash2@gmail.com"
+  },
+  "0301": {
+    "name": "Aiswarya Prakash N",
+    "certId": "AIP-2026-0301",
+    "certImage": "/certificates/aiswarya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "aiswaryaprakash2@gmail.com"
+  },
+  "AIP-2026-301": {
+    "name": "Aiswarya Prakash N",
+    "certId": "AIP-2026-0301",
+    "certImage": "/certificates/aiswarya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "aiswaryaprakash2@gmail.com"
+  },
+  "aip-2026-301": {
     "name": "Aiswarya Prakash N",
     "certId": "AIP-2026-0301",
     "certImage": "/certificates/aiswarya.png",
@@ -55,6 +472,30 @@
     "date": "20 September 2026",
     "email": "ankitsinghsadha@gmail.com"
   },
+  "0272": {
+    "name": "ANKIT SINGH SADHA",
+    "certId": "AIP-2026-0272",
+    "certImage": "/certificates/ankit_singh.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "ankitsinghsadha@gmail.com"
+  },
+  "AIP-2026-272": {
+    "name": "ANKIT SINGH SADHA",
+    "certId": "AIP-2026-0272",
+    "certImage": "/certificates/ankit_singh.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "ankitsinghsadha@gmail.com"
+  },
+  "aip-2026-272": {
+    "name": "ANKIT SINGH SADHA",
+    "certId": "AIP-2026-0272",
+    "certImage": "/certificates/ankit_singh.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "ankitsinghsadha@gmail.com"
+  },
   "ankit singh sadha": {
     "name": "ANKIT SINGH SADHA",
     "certId": "AIP-2026-0272",
@@ -80,6 +521,30 @@
     "email": "athirakichu1992@gmail.com"
   },
   "aip-2026-0259": {
+    "name": "Athira k",
+    "certId": "AIP-2026-0259",
+    "certImage": "/certificates/athira.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "athirakichu1992@gmail.com"
+  },
+  "0259": {
+    "name": "Athira k",
+    "certId": "AIP-2026-0259",
+    "certImage": "/certificates/athira.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "athirakichu1992@gmail.com"
+  },
+  "AIP-2026-259": {
+    "name": "Athira k",
+    "certId": "AIP-2026-0259",
+    "certImage": "/certificates/athira.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "athirakichu1992@gmail.com"
+  },
+  "aip-2026-259": {
     "name": "Athira k",
     "certId": "AIP-2026-0259",
     "certImage": "/certificates/athira.png",
@@ -119,6 +584,30 @@
     "date": "20 September 2026",
     "email": "bibekkbaranwal@gmail.com"
   },
+  "0284": {
+    "name": "Bibek Kumar Barnwal",
+    "certId": "AIP-2026-0284",
+    "certImage": "/certificates/bibek.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "bibekkbaranwal@gmail.com"
+  },
+  "AIP-2026-284": {
+    "name": "Bibek Kumar Barnwal",
+    "certId": "AIP-2026-0284",
+    "certImage": "/certificates/bibek.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "bibekkbaranwal@gmail.com"
+  },
+  "aip-2026-284": {
+    "name": "Bibek Kumar Barnwal",
+    "certId": "AIP-2026-0284",
+    "certImage": "/certificates/bibek.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "bibekkbaranwal@gmail.com"
+  },
   "bibek kumar barnwal": {
     "name": "Bibek Kumar Barnwal",
     "certId": "AIP-2026-0284",
@@ -144,6 +633,30 @@
     "email": "chand.nanda@learn.apeejay.edu"
   },
   "aip-2026-0660": {
+    "name": "Chand Nanda",
+    "certId": "AIP-2026-0660",
+    "certImage": "/certificates/chand.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "chand.nanda@learn.apeejay.edu"
+  },
+  "0660": {
+    "name": "Chand Nanda",
+    "certId": "AIP-2026-0660",
+    "certImage": "/certificates/chand.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "chand.nanda@learn.apeejay.edu"
+  },
+  "AIP-2026-660": {
+    "name": "Chand Nanda",
+    "certId": "AIP-2026-0660",
+    "certImage": "/certificates/chand.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "chand.nanda@learn.apeejay.edu"
+  },
+  "aip-2026-660": {
     "name": "Chand Nanda",
     "certId": "AIP-2026-0660",
     "certImage": "/certificates/chand.png",
@@ -183,6 +696,30 @@
     "date": "20 September 2026",
     "email": "deepkumar86@gmail.com"
   },
+  "0315": {
+    "name": "Deep Kumar",
+    "certId": "AIP-2026-0315",
+    "certImage": "/certificates/deep.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "deepkumar86@gmail.com"
+  },
+  "AIP-2026-315": {
+    "name": "Deep Kumar",
+    "certId": "AIP-2026-0315",
+    "certImage": "/certificates/deep.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "deepkumar86@gmail.com"
+  },
+  "aip-2026-315": {
+    "name": "Deep Kumar",
+    "certId": "AIP-2026-0315",
+    "certImage": "/certificates/deep.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "deepkumar86@gmail.com"
+  },
   "deep kumar": {
     "name": "Deep Kumar",
     "certId": "AIP-2026-0315",
@@ -208,6 +745,30 @@
     "email": "rpdola2402@gmail.com"
   },
   "aip-2026-0402": {
+    "name": "Dola Bhattacharya",
+    "certId": "AIP-2026-0402",
+    "certImage": "/certificates/dola.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rpdola2402@gmail.com"
+  },
+  "0402": {
+    "name": "Dola Bhattacharya",
+    "certId": "AIP-2026-0402",
+    "certImage": "/certificates/dola.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rpdola2402@gmail.com"
+  },
+  "AIP-2026-402": {
+    "name": "Dola Bhattacharya",
+    "certId": "AIP-2026-0402",
+    "certImage": "/certificates/dola.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rpdola2402@gmail.com"
+  },
+  "aip-2026-402": {
     "name": "Dola Bhattacharya",
     "certId": "AIP-2026-0402",
     "certImage": "/certificates/dola.png",
@@ -247,6 +808,30 @@
     "date": "20 September 2026",
     "email": "grvkmr095@gmail.com"
   },
+  "0287": {
+    "name": "Dr Gaurav Kumar Singh",
+    "certId": "AIP-2026-0287",
+    "certImage": "/certificates/dr_gaurav.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "grvkmr095@gmail.com"
+  },
+  "AIP-2026-287": {
+    "name": "Dr Gaurav Kumar Singh",
+    "certId": "AIP-2026-0287",
+    "certImage": "/certificates/dr_gaurav.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "grvkmr095@gmail.com"
+  },
+  "aip-2026-287": {
+    "name": "Dr Gaurav Kumar Singh",
+    "certId": "AIP-2026-0287",
+    "certImage": "/certificates/dr_gaurav.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "grvkmr095@gmail.com"
+  },
   "dr gaurav kumar singh": {
     "name": "Dr Gaurav Kumar Singh",
     "certId": "AIP-2026-0287",
@@ -272,6 +857,30 @@
     "email": "elaiking216@gmail.com"
   },
   "aip-2026-0261": {
+    "name": "Elayarasan R",
+    "certId": "AIP-2026-0261",
+    "certImage": "/certificates/elayarasan.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "elaiking216@gmail.com"
+  },
+  "0261": {
+    "name": "Elayarasan R",
+    "certId": "AIP-2026-0261",
+    "certImage": "/certificates/elayarasan.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "elaiking216@gmail.com"
+  },
+  "AIP-2026-261": {
+    "name": "Elayarasan R",
+    "certId": "AIP-2026-0261",
+    "certImage": "/certificates/elayarasan.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "elaiking216@gmail.com"
+  },
+  "aip-2026-261": {
     "name": "Elayarasan R",
     "certId": "AIP-2026-0261",
     "certImage": "/certificates/elayarasan.png",
@@ -311,6 +920,30 @@
     "date": "20 September 2026",
     "email": "gayathrisf21@gmail.com"
   },
+  "0300": {
+    "name": "Gayathri Addagalla",
+    "certId": "AIP-2026-0300",
+    "certImage": "/certificates/gayathri.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "gayathrisf21@gmail.com"
+  },
+  "AIP-2026-300": {
+    "name": "Gayathri Addagalla",
+    "certId": "AIP-2026-0300",
+    "certImage": "/certificates/gayathri.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "gayathrisf21@gmail.com"
+  },
+  "aip-2026-300": {
+    "name": "Gayathri Addagalla",
+    "certId": "AIP-2026-0300",
+    "certImage": "/certificates/gayathri.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "gayathrisf21@gmail.com"
+  },
   "gayathri addagalla": {
     "name": "Gayathri Addagalla",
     "certId": "AIP-2026-0300",
@@ -336,6 +969,30 @@
     "email": "harshit1191@gmail.com"
   },
   "aip-2026-0263": {
+    "name": "Harshit Gupta",
+    "certId": "AIP-2026-0263",
+    "certImage": "/certificates/harshit.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "harshit1191@gmail.com"
+  },
+  "0263": {
+    "name": "Harshit Gupta",
+    "certId": "AIP-2026-0263",
+    "certImage": "/certificates/harshit.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "harshit1191@gmail.com"
+  },
+  "AIP-2026-263": {
+    "name": "Harshit Gupta",
+    "certId": "AIP-2026-0263",
+    "certImage": "/certificates/harshit.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "harshit1191@gmail.com"
+  },
+  "aip-2026-263": {
     "name": "Harshit Gupta",
     "certId": "AIP-2026-0263",
     "certImage": "/certificates/harshit.png",
@@ -375,6 +1032,30 @@
     "date": "20 September 2026",
     "email": "happeninhema@gmail.com"
   },
+  "0267": {
+    "name": "Hema Sharma",
+    "certId": "AIP-2026-0267",
+    "certImage": "/certificates/hema.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "happeninhema@gmail.com"
+  },
+  "AIP-2026-267": {
+    "name": "Hema Sharma",
+    "certId": "AIP-2026-0267",
+    "certImage": "/certificates/hema.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "happeninhema@gmail.com"
+  },
+  "aip-2026-267": {
+    "name": "Hema Sharma",
+    "certId": "AIP-2026-0267",
+    "certImage": "/certificates/hema.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "happeninhema@gmail.com"
+  },
   "hema sharma": {
     "name": "Hema Sharma",
     "certId": "AIP-2026-0267",
@@ -400,6 +1081,30 @@
     "email": "imransami09@gmail.com"
   },
   "aip-2026-0657": {
+    "name": "Imran Ahmad",
+    "certId": "AIP-2026-0657",
+    "certImage": "/certificates/imran_ahmad.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "imransami09@gmail.com"
+  },
+  "0657": {
+    "name": "Imran Ahmad",
+    "certId": "AIP-2026-0657",
+    "certImage": "/certificates/imran_ahmad.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "imransami09@gmail.com"
+  },
+  "AIP-2026-657": {
+    "name": "Imran Ahmad",
+    "certId": "AIP-2026-0657",
+    "certImage": "/certificates/imran_ahmad.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "imransami09@gmail.com"
+  },
+  "aip-2026-657": {
     "name": "Imran Ahmad",
     "certId": "AIP-2026-0657",
     "certImage": "/certificates/imran_ahmad.png",
@@ -439,6 +1144,30 @@
     "date": "20 September 2026",
     "email": "kjayagk@gmail.com"
   },
+  "0271": {
+    "name": "K .JAYA",
+    "certId": "AIP-2026-0271",
+    "certImage": "/certificates/k_jaya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "kjayagk@gmail.com"
+  },
+  "AIP-2026-271": {
+    "name": "K .JAYA",
+    "certId": "AIP-2026-0271",
+    "certImage": "/certificates/k_jaya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "kjayagk@gmail.com"
+  },
+  "aip-2026-271": {
+    "name": "K .JAYA",
+    "certId": "AIP-2026-0271",
+    "certImage": "/certificates/k_jaya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "kjayagk@gmail.com"
+  },
   "k .jaya": {
     "name": "K .JAYA",
     "certId": "AIP-2026-0271",
@@ -464,6 +1193,30 @@
     "email": "lavi9014@gmail.com"
   },
   "aip-2026-0279": {
+    "name": "Lavi",
+    "certId": "AIP-2026-0279",
+    "certImage": "/certificates/lavi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "lavi9014@gmail.com"
+  },
+  "0279": {
+    "name": "Lavi",
+    "certId": "AIP-2026-0279",
+    "certImage": "/certificates/lavi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "lavi9014@gmail.com"
+  },
+  "AIP-2026-279": {
+    "name": "Lavi",
+    "certId": "AIP-2026-0279",
+    "certImage": "/certificates/lavi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "lavi9014@gmail.com"
+  },
+  "aip-2026-279": {
     "name": "Lavi",
     "certId": "AIP-2026-0279",
     "certImage": "/certificates/lavi.png",
@@ -501,6 +1254,27 @@
     "event": "AI Passport Live – National Webinar for Educators",
     "date": "20 September 2026"
   },
+  "0672": {
+    "name": "Mahabubi",
+    "certId": "AIP-2026-0672",
+    "certImage": "/certificates/mahabubi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "AIP-2026-672": {
+    "name": "Mahabubi",
+    "certId": "AIP-2026-0672",
+    "certImage": "/certificates/mahabubi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "aip-2026-672": {
+    "name": "Mahabubi",
+    "certId": "AIP-2026-0672",
+    "certImage": "/certificates/mahabubi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
   "mahabubi": {
     "name": "Mahabubi",
     "certId": "AIP-2026-0672",
@@ -516,6 +1290,27 @@
     "date": "20 September 2026"
   },
   "aip-2026-0673": {
+    "name": "Malathi",
+    "certId": "AIP-2026-0673",
+    "certImage": "/certificates/malathi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "0673": {
+    "name": "Malathi",
+    "certId": "AIP-2026-0673",
+    "certImage": "/certificates/malathi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "AIP-2026-673": {
+    "name": "Malathi",
+    "certId": "AIP-2026-0673",
+    "certImage": "/certificates/malathi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "aip-2026-673": {
     "name": "Malathi",
     "certId": "AIP-2026-0673",
     "certImage": "/certificates/malathi.png",
@@ -538,6 +1333,30 @@
     "email": "suman.keshav@ramjasrkp.com"
   },
   "aip-2026-0404": {
+    "name": "Suman Keshav",
+    "certId": "AIP-2026-0404",
+    "certImage": "/certificates/suman.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "suman.keshav@ramjasrkp.com"
+  },
+  "0404": {
+    "name": "Suman Keshav",
+    "certId": "AIP-2026-0404",
+    "certImage": "/certificates/suman.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "suman.keshav@ramjasrkp.com"
+  },
+  "AIP-2026-404": {
+    "name": "Suman Keshav",
+    "certId": "AIP-2026-0404",
+    "certImage": "/certificates/suman.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "suman.keshav@ramjasrkp.com"
+  },
+  "aip-2026-404": {
     "name": "Suman Keshav",
     "certId": "AIP-2026-0404",
     "certImage": "/certificates/suman.png",
@@ -575,6 +1394,27 @@
     "event": "AI Passport Live – National Webinar for Educators",
     "date": "20 September 2026"
   },
+  "0407": {
+    "name": "Manisha",
+    "certId": "AIP-2026-0407",
+    "certImage": "/certificates/manisha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "AIP-2026-407": {
+    "name": "Manisha",
+    "certId": "AIP-2026-0407",
+    "certImage": "/certificates/manisha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "aip-2026-407": {
+    "name": "Manisha",
+    "certId": "AIP-2026-0407",
+    "certImage": "/certificates/manisha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
   "manisha": {
     "name": "Manisha",
     "certId": "AIP-2026-0407",
@@ -591,6 +1431,30 @@
     "email": "manumanu67776@gmail.com"
   },
   "aip-2026-0398": {
+    "name": "Manjunath y sandaraki",
+    "certId": "AIP-2026-0398",
+    "certImage": "/certificates/manjunath.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "manumanu67776@gmail.com"
+  },
+  "0398": {
+    "name": "Manjunath y sandaraki",
+    "certId": "AIP-2026-0398",
+    "certImage": "/certificates/manjunath.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "manumanu67776@gmail.com"
+  },
+  "AIP-2026-398": {
+    "name": "Manjunath y sandaraki",
+    "certId": "AIP-2026-0398",
+    "certImage": "/certificates/manjunath.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "manumanu67776@gmail.com"
+  },
+  "aip-2026-398": {
     "name": "Manjunath y sandaraki",
     "certId": "AIP-2026-0398",
     "certImage": "/certificates/manjunath.png",
@@ -630,6 +1494,30 @@
     "date": "20 September 2026",
     "email": "meenu.sehgal@learn.apeejay.edu"
   },
+  "0664": {
+    "name": "Meenu Sehgal",
+    "certId": "AIP-2026-0664",
+    "certImage": "/certificates/meenu_sehgal.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "meenu.sehgal@learn.apeejay.edu"
+  },
+  "AIP-2026-664": {
+    "name": "Meenu Sehgal",
+    "certId": "AIP-2026-0664",
+    "certImage": "/certificates/meenu_sehgal.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "meenu.sehgal@learn.apeejay.edu"
+  },
+  "aip-2026-664": {
+    "name": "Meenu Sehgal",
+    "certId": "AIP-2026-0664",
+    "certImage": "/certificates/meenu_sehgal.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "meenu.sehgal@learn.apeejay.edu"
+  },
   "meenu sehgal": {
     "name": "Meenu Sehgal",
     "certId": "AIP-2026-0664",
@@ -655,6 +1543,30 @@
     "email": "meenu4hindi@gmail.com"
   },
   "aip-2026-0281": {
+    "name": "Meenu",
+    "certId": "AIP-2026-0281",
+    "certImage": "/certificates/meenu.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "meenu4hindi@gmail.com"
+  },
+  "0281": {
+    "name": "Meenu",
+    "certId": "AIP-2026-0281",
+    "certImage": "/certificates/meenu.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "meenu4hindi@gmail.com"
+  },
+  "AIP-2026-281": {
+    "name": "Meenu",
+    "certId": "AIP-2026-0281",
+    "certImage": "/certificates/meenu.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "meenu4hindi@gmail.com"
+  },
+  "aip-2026-281": {
     "name": "Meenu",
     "certId": "AIP-2026-0281",
     "certImage": "/certificates/meenu.png",
@@ -694,6 +1606,30 @@
     "date": "20 September 2026",
     "email": "mehveshshaikh987@gmail.com"
   },
+  "0322": {
+    "name": "Mehvish Rizwan Shaikh",
+    "certId": "AIP-2026-0322",
+    "certImage": "/certificates/mehvish.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "mehveshshaikh987@gmail.com"
+  },
+  "AIP-2026-322": {
+    "name": "Mehvish Rizwan Shaikh",
+    "certId": "AIP-2026-0322",
+    "certImage": "/certificates/mehvish.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "mehveshshaikh987@gmail.com"
+  },
+  "aip-2026-322": {
+    "name": "Mehvish Rizwan Shaikh",
+    "certId": "AIP-2026-0322",
+    "certImage": "/certificates/mehvish.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "mehveshshaikh987@gmail.com"
+  },
   "mehvish rizwan shaikh": {
     "name": "Mehvish Rizwan Shaikh",
     "certId": "AIP-2026-0322",
@@ -719,6 +1655,30 @@
     "email": "moorthy.a@rosenberg.edu.in"
   },
   "aip-2026-0308": {
+    "name": "Moorthy A",
+    "certId": "AIP-2026-0308",
+    "certImage": "/certificates/moorthy_a.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "moorthy.a@rosenberg.edu.in"
+  },
+  "0308": {
+    "name": "Moorthy A",
+    "certId": "AIP-2026-0308",
+    "certImage": "/certificates/moorthy_a.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "moorthy.a@rosenberg.edu.in"
+  },
+  "AIP-2026-308": {
+    "name": "Moorthy A",
+    "certId": "AIP-2026-0308",
+    "certImage": "/certificates/moorthy_a.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "moorthy.a@rosenberg.edu.in"
+  },
+  "aip-2026-308": {
     "name": "Moorthy A",
     "certId": "AIP-2026-0308",
     "certImage": "/certificates/moorthy_a.png",
@@ -758,6 +1718,30 @@
     "date": "20 September 2026",
     "email": "neetumehndiratta81@gmail.com"
   },
+  "0283": {
+    "name": "Neetu Mehndiratta",
+    "certId": "AIP-2026-0283",
+    "certImage": "/certificates/neetu.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "neetumehndiratta81@gmail.com"
+  },
+  "AIP-2026-283": {
+    "name": "Neetu Mehndiratta",
+    "certId": "AIP-2026-0283",
+    "certImage": "/certificates/neetu.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "neetumehndiratta81@gmail.com"
+  },
+  "aip-2026-283": {
+    "name": "Neetu Mehndiratta",
+    "certId": "AIP-2026-0283",
+    "certImage": "/certificates/neetu.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "neetumehndiratta81@gmail.com"
+  },
   "neetu mehndiratta": {
     "name": "Neetu Mehndiratta",
     "certId": "AIP-2026-0283",
@@ -783,6 +1767,30 @@
     "email": "sumaan92@gmail.com"
   },
   "aip-2026-0666": {
+    "name": "Onila Mishra",
+    "certId": "AIP-2026-0666",
+    "certImage": "/certificates/onlila.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "sumaan92@gmail.com"
+  },
+  "0666": {
+    "name": "Onila Mishra",
+    "certId": "AIP-2026-0666",
+    "certImage": "/certificates/onlila.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "sumaan92@gmail.com"
+  },
+  "AIP-2026-666": {
+    "name": "Onila Mishra",
+    "certId": "AIP-2026-0666",
+    "certImage": "/certificates/onlila.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "sumaan92@gmail.com"
+  },
+  "aip-2026-666": {
     "name": "Onila Mishra",
     "certId": "AIP-2026-0666",
     "certImage": "/certificates/onlila.png",
@@ -822,6 +1830,30 @@
     "date": "20 September 2026",
     "email": "pooja.bhardwaj@learn.apeejay.edu"
   },
+  "0665": {
+    "name": "Pooja Bhardwaj",
+    "certId": "AIP-2026-0665",
+    "certImage": "/certificates/pooja.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pooja.bhardwaj@learn.apeejay.edu"
+  },
+  "AIP-2026-665": {
+    "name": "Pooja Bhardwaj",
+    "certId": "AIP-2026-0665",
+    "certImage": "/certificates/pooja.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pooja.bhardwaj@learn.apeejay.edu"
+  },
+  "aip-2026-665": {
+    "name": "Pooja Bhardwaj",
+    "certId": "AIP-2026-0665",
+    "certImage": "/certificates/pooja.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pooja.bhardwaj@learn.apeejay.edu"
+  },
   "pooja bhardwaj": {
     "name": "Pooja Bhardwaj",
     "certId": "AIP-2026-0665",
@@ -847,6 +1879,30 @@
     "email": "pykawatra2013@gmail.com"
   },
   "aip-2026-0650": {
+    "name": "POONAM KAWATRA",
+    "certId": "AIP-2026-0650",
+    "certImage": "/certificates/poonam.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pykawatra2013@gmail.com"
+  },
+  "0650": {
+    "name": "POONAM KAWATRA",
+    "certId": "AIP-2026-0650",
+    "certImage": "/certificates/poonam.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pykawatra2013@gmail.com"
+  },
+  "AIP-2026-650": {
+    "name": "POONAM KAWATRA",
+    "certId": "AIP-2026-0650",
+    "certImage": "/certificates/poonam.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pykawatra2013@gmail.com"
+  },
+  "aip-2026-650": {
     "name": "POONAM KAWATRA",
     "certId": "AIP-2026-0650",
     "certImage": "/certificates/poonam.png",
@@ -886,6 +1942,30 @@
     "date": "20 September 2026",
     "email": "pm.praseetha5@gmail.com"
   },
+  "0256": {
+    "name": "PRASEETHA P M",
+    "certId": "AIP-2026-0256",
+    "certImage": "/certificates/praseetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pm.praseetha5@gmail.com"
+  },
+  "AIP-2026-256": {
+    "name": "PRASEETHA P M",
+    "certId": "AIP-2026-0256",
+    "certImage": "/certificates/praseetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pm.praseetha5@gmail.com"
+  },
+  "aip-2026-256": {
+    "name": "PRASEETHA P M",
+    "certId": "AIP-2026-0256",
+    "certImage": "/certificates/praseetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "pm.praseetha5@gmail.com"
+  },
   "praseetha p m": {
     "name": "PRASEETHA P M",
     "certId": "AIP-2026-0256",
@@ -911,6 +1991,30 @@
     "email": "rafia.khatoon@learn.apeejay.edu"
   },
   "aip-2026-0656": {
+    "name": "Rafia Khatoon",
+    "certId": "AIP-2026-0656",
+    "certImage": "/certificates/rafia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rafia.khatoon@learn.apeejay.edu"
+  },
+  "0656": {
+    "name": "Rafia Khatoon",
+    "certId": "AIP-2026-0656",
+    "certImage": "/certificates/rafia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rafia.khatoon@learn.apeejay.edu"
+  },
+  "AIP-2026-656": {
+    "name": "Rafia Khatoon",
+    "certId": "AIP-2026-0656",
+    "certImage": "/certificates/rafia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rafia.khatoon@learn.apeejay.edu"
+  },
+  "aip-2026-656": {
     "name": "Rafia Khatoon",
     "certId": "AIP-2026-0656",
     "certImage": "/certificates/rafia.png",
@@ -950,6 +2054,30 @@
     "date": "20 September 2026",
     "email": "rash.2567@gmail.com"
   },
+  "0394": {
+    "name": "Rashmi Rawal",
+    "certId": "AIP-2026-0394",
+    "certImage": "/certificates/rashmi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rash.2567@gmail.com"
+  },
+  "AIP-2026-394": {
+    "name": "Rashmi Rawal",
+    "certId": "AIP-2026-0394",
+    "certImage": "/certificates/rashmi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rash.2567@gmail.com"
+  },
+  "aip-2026-394": {
+    "name": "Rashmi Rawal",
+    "certId": "AIP-2026-0394",
+    "certImage": "/certificates/rashmi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rash.2567@gmail.com"
+  },
   "rashmi rawal": {
     "name": "Rashmi Rawal",
     "certId": "AIP-2026-0394",
@@ -980,6 +2108,27 @@
     "event": "AI Passport Live – National Webinar for Educators",
     "date": "20 September 2026"
   },
+  "0674": {
+    "name": "Reena",
+    "certId": "AIP-2026-0674",
+    "certImage": "/certificates/reena.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "AIP-2026-674": {
+    "name": "Reena",
+    "certId": "AIP-2026-0674",
+    "certImage": "/certificates/reena.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "aip-2026-674": {
+    "name": "Reena",
+    "certId": "AIP-2026-0674",
+    "certImage": "/certificates/reena.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
   "reena": {
     "name": "Reena",
     "certId": "AIP-2026-0674",
@@ -996,6 +2145,30 @@
     "email": "reshmipny@gmail.com"
   },
   "aip-2026-0405": {
+    "name": "Reshmi K",
+    "certId": "AIP-2026-0405",
+    "certImage": "/certificates/reshmi_k.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "reshmipny@gmail.com"
+  },
+  "0405": {
+    "name": "Reshmi K",
+    "certId": "AIP-2026-0405",
+    "certImage": "/certificates/reshmi_k.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "reshmipny@gmail.com"
+  },
+  "AIP-2026-405": {
+    "name": "Reshmi K",
+    "certId": "AIP-2026-0405",
+    "certImage": "/certificates/reshmi_k.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "reshmipny@gmail.com"
+  },
+  "aip-2026-405": {
     "name": "Reshmi K",
     "certId": "AIP-2026-0405",
     "certImage": "/certificates/reshmi_k.png",
@@ -1035,6 +2208,30 @@
     "date": "20 September 2026",
     "email": "rohitjatin854@gmail.com"
   },
+  "0266": {
+    "name": "Rohit Gupta",
+    "certId": "AIP-2026-0266",
+    "certImage": "/certificates/rohit.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rohitjatin854@gmail.com"
+  },
+  "AIP-2026-266": {
+    "name": "Rohit Gupta",
+    "certId": "AIP-2026-0266",
+    "certImage": "/certificates/rohit.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rohitjatin854@gmail.com"
+  },
+  "aip-2026-266": {
+    "name": "Rohit Gupta",
+    "certId": "AIP-2026-0266",
+    "certImage": "/certificates/rohit.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "rohitjatin854@gmail.com"
+  },
   "rohit gupta": {
     "name": "Rohit Gupta",
     "certId": "AIP-2026-0266",
@@ -1060,6 +2257,30 @@
     "email": "roopali195@gmail.com"
   },
   "aip-2026-0269": {
+    "name": "Roopali",
+    "certId": "AIP-2026-0269",
+    "certImage": "/certificates/roopali.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "roopali195@gmail.com"
+  },
+  "0269": {
+    "name": "Roopali",
+    "certId": "AIP-2026-0269",
+    "certImage": "/certificates/roopali.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "roopali195@gmail.com"
+  },
+  "AIP-2026-269": {
+    "name": "Roopali",
+    "certId": "AIP-2026-0269",
+    "certImage": "/certificates/roopali.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "roopali195@gmail.com"
+  },
+  "aip-2026-269": {
     "name": "Roopali",
     "certId": "AIP-2026-0269",
     "certImage": "/certificates/roopali.png",
@@ -1099,6 +2320,30 @@
     "date": "20 September 2026",
     "email": "nigamroshani24@gmail.com"
   },
+  "0311": {
+    "name": "Roshani Nigam",
+    "certId": "AIP-2026-0311",
+    "certImage": "/certificates/roshani.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "nigamroshani24@gmail.com"
+  },
+  "AIP-2026-311": {
+    "name": "Roshani Nigam",
+    "certId": "AIP-2026-0311",
+    "certImage": "/certificates/roshani.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "nigamroshani24@gmail.com"
+  },
+  "aip-2026-311": {
+    "name": "Roshani Nigam",
+    "certId": "AIP-2026-0311",
+    "certImage": "/certificates/roshani.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "nigamroshani24@gmail.com"
+  },
   "roshani nigam": {
     "name": "Roshani Nigam",
     "certId": "AIP-2026-0311",
@@ -1124,6 +2369,30 @@
     "email": "saranyadevirajkumar@gmail.com"
   },
   "aip-2026-0362": {
+    "name": "S Saranya Devi",
+    "certId": "AIP-2026-0362",
+    "certImage": "/certificates/s_saranya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "saranyadevirajkumar@gmail.com"
+  },
+  "0362": {
+    "name": "S Saranya Devi",
+    "certId": "AIP-2026-0362",
+    "certImage": "/certificates/s_saranya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "saranyadevirajkumar@gmail.com"
+  },
+  "AIP-2026-362": {
+    "name": "S Saranya Devi",
+    "certId": "AIP-2026-0362",
+    "certImage": "/certificates/s_saranya.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "saranyadevirajkumar@gmail.com"
+  },
+  "aip-2026-362": {
     "name": "S Saranya Devi",
     "certId": "AIP-2026-0362",
     "certImage": "/certificates/s_saranya.png",
@@ -1163,6 +2432,30 @@
     "date": "20 September 2026",
     "email": "subramaniansankar87@gmail.com"
   },
+  "0326": {
+    "name": "S SUBRAMANIAN",
+    "certId": "AIP-2026-0326",
+    "certImage": "/certificates/s_subramanian.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "subramaniansankar87@gmail.com"
+  },
+  "AIP-2026-326": {
+    "name": "S SUBRAMANIAN",
+    "certId": "AIP-2026-0326",
+    "certImage": "/certificates/s_subramanian.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "subramaniansankar87@gmail.com"
+  },
+  "aip-2026-326": {
+    "name": "S SUBRAMANIAN",
+    "certId": "AIP-2026-0326",
+    "certImage": "/certificates/s_subramanian.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "subramaniansankar87@gmail.com"
+  },
   "s subramanian": {
     "name": "S SUBRAMANIAN",
     "certId": "AIP-2026-0326",
@@ -1188,6 +2481,30 @@
     "email": "samgeethasivakumar@gmail.com"
   },
   "aip-2026-0359": {
+    "name": "Samgeetha Sivakumar",
+    "certId": "AIP-2026-0359",
+    "certImage": "/certificates/samgeetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "samgeethasivakumar@gmail.com"
+  },
+  "0359": {
+    "name": "Samgeetha Sivakumar",
+    "certId": "AIP-2026-0359",
+    "certImage": "/certificates/samgeetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "samgeethasivakumar@gmail.com"
+  },
+  "AIP-2026-359": {
+    "name": "Samgeetha Sivakumar",
+    "certId": "AIP-2026-0359",
+    "certImage": "/certificates/samgeetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "samgeethasivakumar@gmail.com"
+  },
+  "aip-2026-359": {
     "name": "Samgeetha Sivakumar",
     "certId": "AIP-2026-0359",
     "certImage": "/certificates/samgeetha.png",
@@ -1227,6 +2544,30 @@
     "date": "20 September 2026",
     "email": "samia.razi@learn.apeejay.edu"
   },
+  "0406": {
+    "name": "Samia Razi",
+    "certId": "AIP-2026-0406",
+    "certImage": "/certificates/samia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "samia.razi@learn.apeejay.edu"
+  },
+  "AIP-2026-406": {
+    "name": "Samia Razi",
+    "certId": "AIP-2026-0406",
+    "certImage": "/certificates/samia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "samia.razi@learn.apeejay.edu"
+  },
+  "aip-2026-406": {
+    "name": "Samia Razi",
+    "certId": "AIP-2026-0406",
+    "certImage": "/certificates/samia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "samia.razi@learn.apeejay.edu"
+  },
   "samia razi": {
     "name": "Samia Razi",
     "certId": "AIP-2026-0406",
@@ -1252,6 +2593,30 @@
     "email": "vsandeep1981@gmail.com"
   },
   "aip-2026-0286": {
+    "name": "Sandeep Kumar Verma",
+    "certId": "AIP-2026-0286",
+    "certImage": "/certificates/sandeep.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vsandeep1981@gmail.com"
+  },
+  "0286": {
+    "name": "Sandeep Kumar Verma",
+    "certId": "AIP-2026-0286",
+    "certImage": "/certificates/sandeep.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vsandeep1981@gmail.com"
+  },
+  "AIP-2026-286": {
+    "name": "Sandeep Kumar Verma",
+    "certId": "AIP-2026-0286",
+    "certImage": "/certificates/sandeep.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vsandeep1981@gmail.com"
+  },
+  "aip-2026-286": {
     "name": "Sandeep Kumar Verma",
     "certId": "AIP-2026-0286",
     "certImage": "/certificates/sandeep.png",
@@ -1291,6 +2656,30 @@
     "date": "20 September 2026",
     "email": "sangeeta.handa@learn.apeejay.edu"
   },
+  "0662": {
+    "name": "Sangeeta Handa",
+    "certId": "AIP-2026-0662",
+    "certImage": "/certificates/sangeetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "sangeeta.handa@learn.apeejay.edu"
+  },
+  "AIP-2026-662": {
+    "name": "Sangeeta Handa",
+    "certId": "AIP-2026-0662",
+    "certImage": "/certificates/sangeetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "sangeeta.handa@learn.apeejay.edu"
+  },
+  "aip-2026-662": {
+    "name": "Sangeeta Handa",
+    "certId": "AIP-2026-0662",
+    "certImage": "/certificates/sangeetha.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "sangeeta.handa@learn.apeejay.edu"
+  },
   "sangeeta handa": {
     "name": "Sangeeta Handa",
     "certId": "AIP-2026-0662",
@@ -1321,6 +2710,27 @@
     "event": "AI Passport Live – National Webinar for Educators",
     "date": "20 September 2026"
   },
+  "0675": {
+    "name": "Shruti",
+    "certId": "AIP-2026-0675",
+    "certImage": "/certificates/shruti.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "AIP-2026-675": {
+    "name": "Shruti",
+    "certId": "AIP-2026-0675",
+    "certImage": "/certificates/shruti.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "aip-2026-675": {
+    "name": "Shruti",
+    "certId": "AIP-2026-0675",
+    "certImage": "/certificates/shruti.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
   "shruti": {
     "name": "Shruti",
     "certId": "AIP-2026-0675",
@@ -1337,6 +2747,30 @@
     "email": "msacademyzkp@gmail.com"
   },
   "aip-2026-0399": {
+    "name": "Madam Sona Rawat",
+    "certId": "AIP-2026-0399",
+    "certImage": "/certificates/sona.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "msacademyzkp@gmail.com"
+  },
+  "0399": {
+    "name": "Madam Sona Rawat",
+    "certId": "AIP-2026-0399",
+    "certImage": "/certificates/sona.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "msacademyzkp@gmail.com"
+  },
+  "AIP-2026-399": {
+    "name": "Madam Sona Rawat",
+    "certId": "AIP-2026-0399",
+    "certImage": "/certificates/sona.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "msacademyzkp@gmail.com"
+  },
+  "aip-2026-399": {
     "name": "Madam Sona Rawat",
     "certId": "AIP-2026-0399",
     "certImage": "/certificates/sona.png",
@@ -1374,6 +2808,27 @@
     "event": "AI Passport Live – National Webinar for Educators",
     "date": "20 September 2026"
   },
+  "0676": {
+    "name": "Sonal",
+    "certId": "AIP-2026-0676",
+    "certImage": "/certificates/sonal.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "AIP-2026-676": {
+    "name": "Sonal",
+    "certId": "AIP-2026-0676",
+    "certImage": "/certificates/sonal.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "aip-2026-676": {
+    "name": "Sonal",
+    "certId": "AIP-2026-0676",
+    "certImage": "/certificates/sonal.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
   "sonal": {
     "name": "Sonal",
     "certId": "AIP-2026-0676",
@@ -1389,6 +2844,27 @@
     "date": "20 September 2026"
   },
   "aip-2026-0677": {
+    "name": "Sridevi",
+    "certId": "AIP-2026-0677",
+    "certImage": "/certificates/sridevi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "0677": {
+    "name": "Sridevi",
+    "certId": "AIP-2026-0677",
+    "certImage": "/certificates/sridevi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "AIP-2026-677": {
+    "name": "Sridevi",
+    "certId": "AIP-2026-0677",
+    "certImage": "/certificates/sridevi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026"
+  },
+  "aip-2026-677": {
     "name": "Sridevi",
     "certId": "AIP-2026-0677",
     "certImage": "/certificates/sridevi.png",
@@ -1434,6 +2910,30 @@
     "date": "20 September 2026",
     "email": "tanejasuruchi71@gmail.com"
   },
+  "0285": {
+    "name": "Suruchi Taneja",
+    "certId": "AIP-2026-0285",
+    "certImage": "/certificates/suruchi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "tanejasuruchi71@gmail.com"
+  },
+  "AIP-2026-285": {
+    "name": "Suruchi Taneja",
+    "certId": "AIP-2026-0285",
+    "certImage": "/certificates/suruchi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "tanejasuruchi71@gmail.com"
+  },
+  "aip-2026-285": {
+    "name": "Suruchi Taneja",
+    "certId": "AIP-2026-0285",
+    "certImage": "/certificates/suruchi.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "tanejasuruchi71@gmail.com"
+  },
   "suruchi taneja": {
     "name": "Suruchi Taneja",
     "certId": "AIP-2026-0285",
@@ -1459,6 +2959,30 @@
     "email": "hairahussain08@gmail.com"
   },
   "aip-2026-0397": {
+    "name": "UMMUL HAIRA K A",
+    "certId": "AIP-2026-0397",
+    "certImage": "/certificates/ummul.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "hairahussain08@gmail.com"
+  },
+  "0397": {
+    "name": "UMMUL HAIRA K A",
+    "certId": "AIP-2026-0397",
+    "certImage": "/certificates/ummul.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "hairahussain08@gmail.com"
+  },
+  "AIP-2026-397": {
+    "name": "UMMUL HAIRA K A",
+    "certId": "AIP-2026-0397",
+    "certImage": "/certificates/ummul.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "hairahussain08@gmail.com"
+  },
+  "aip-2026-397": {
     "name": "UMMUL HAIRA K A",
     "certId": "AIP-2026-0397",
     "certImage": "/certificates/ummul.png",
@@ -1498,6 +3022,30 @@
     "date": "20 September 2026",
     "email": "vibhuti.katyal@learn.apeejay.edu"
   },
+  "0409": {
+    "name": "Vibhuti Katyal",
+    "certId": "AIP-2026-0409",
+    "certImage": "/certificates/vibhuti.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vibhuti.katyal@learn.apeejay.edu"
+  },
+  "AIP-2026-409": {
+    "name": "Vibhuti Katyal",
+    "certId": "AIP-2026-0409",
+    "certImage": "/certificates/vibhuti.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vibhuti.katyal@learn.apeejay.edu"
+  },
+  "aip-2026-409": {
+    "name": "Vibhuti Katyal",
+    "certId": "AIP-2026-0409",
+    "certImage": "/certificates/vibhuti.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vibhuti.katyal@learn.apeejay.edu"
+  },
   "vibhuti katyal": {
     "name": "Vibhuti Katyal",
     "certId": "AIP-2026-0409",
@@ -1530,6 +3078,30 @@
     "date": "20 September 2026",
     "email": "vijaymphilchem13@gmail.com"
   },
+  "0247": {
+    "name": "VIJAYAKUMAR R",
+    "certId": "AIP-2026-0247",
+    "certImage": "/certificates/vijay_kumar.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vijaymphilchem13@gmail.com"
+  },
+  "AIP-2026-247": {
+    "name": "VIJAYAKUMAR R",
+    "certId": "AIP-2026-0247",
+    "certImage": "/certificates/vijay_kumar.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vijaymphilchem13@gmail.com"
+  },
+  "aip-2026-247": {
+    "name": "VIJAYAKUMAR R",
+    "certId": "AIP-2026-0247",
+    "certImage": "/certificates/vijay_kumar.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "vijaymphilchem13@gmail.com"
+  },
   "vijayakumar r": {
     "name": "VIJAYAKUMAR R",
     "certId": "AIP-2026-0247",
@@ -1555,6 +3127,30 @@
     "email": "zenia.dutta@learn.apeejay.edu"
   },
   "aip-2026-0661": {
+    "name": "zenia dutta",
+    "certId": "AIP-2026-0661",
+    "certImage": "/certificates/zenia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "zenia.dutta@learn.apeejay.edu"
+  },
+  "0661": {
+    "name": "zenia dutta",
+    "certId": "AIP-2026-0661",
+    "certImage": "/certificates/zenia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "zenia.dutta@learn.apeejay.edu"
+  },
+  "AIP-2026-661": {
+    "name": "zenia dutta",
+    "certId": "AIP-2026-0661",
+    "certImage": "/certificates/zenia.png",
+    "event": "AI Passport Live – National Webinar for Educators",
+    "date": "20 September 2026",
+    "email": "zenia.dutta@learn.apeejay.edu"
+  },
+  "aip-2026-661": {
     "name": "zenia dutta",
     "certId": "AIP-2026-0661",
     "certImage": "/certificates/zenia.png",

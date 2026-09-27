@@ -12,33 +12,33 @@ const certificateDB = {
 function findCertificateRecord(query) {
   if (!query || !query.trim()) return null;
   const q = query.trim().toLowerCase();
-  const qDigits = q.replace(/\D/g, '');
   const upperQ = q.toUpperCase();
 
-  // 1. Exact key match
+  // 1. Direct exact key match
   if (certificateDB[upperQ]) return { certId: upperQ, record: certificateDB[upperQ] };
   if (certificateDB[q]) return { certId: q, record: certificateDB[q] };
-  if (qDigits && certificateDB[qDigits]) return { certId: qDigits, record: certificateDB[qDigits] };
 
-  // 2. Flexible search (ID, Name, Digits)
+  // 2. Normalized auto-padded match e.g. "AIP-2026-301" -> "AIP-2026-0301"
+  const numMatch = q.match(/(?:aip-)?(?:2026-)?(\d{1,4})$/i);
+  if (numMatch) {
+    const padded = ("0000" + numMatch[1]).slice(-4);
+    const paddedKey = `AIP-2026-${padded}`;
+    if (certificateDB[paddedKey]) return { certId: paddedKey, record: certificateDB[paddedKey] };
+    if (certificateDB[padded]) return { certId: padded, record: certificateDB[padded] };
+  }
+
+  // 3. Flexible search (ID, Name, Digits)
   const entries = Object.entries(certificateDB);
   for (const [key, record] of entries) {
     const keyClean = key.toLowerCase().replace(/[^a-z0-9]/g, '');
     const qClean = q.replace(/[^a-z0-9]/g, '');
 
-    if (keyClean === qClean || (qClean.length >= 1 && keyClean.endsWith(qClean))) {
+    if (keyClean === qClean) {
       return { certId: record.certId || key, record };
     }
 
     if (record.name && record.name.toLowerCase().includes(q)) {
       return { certId: record.certId || key, record };
-    }
-
-    if (qDigits && qDigits.length >= 1) {
-      const keyDigits = key.replace(/\D/g, '');
-      if (keyDigits.endsWith(qDigits) || keyDigits.replace(/^2026/, '').endsWith(qDigits)) {
-        return { certId: record.certId || key, record };
-      }
     }
   }
   return null;
