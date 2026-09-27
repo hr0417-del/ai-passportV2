@@ -99,13 +99,65 @@ export function performVerification(rawId) {
       timestamp.textContent = "Verified " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
-    const imgSrc = record.certImage ? record.certImage.replace(/^\//, '') : '';
-    if (imgSrc && imgEl) {
-      imgEl.src = imgSrc;
+    const rawImgPath = record.certImage || '';
+    const cleanFilename = rawImgPath.replace(/^\/certificates\//, '').replace(/^certificates\//, '').replace(/^\//, '');
+    
+    if (cleanFilename) {
+      const pagePath = window.location.pathname;
+      const baseDir = pagePath.substring(0, pagePath.lastIndexOf('/') + 1);
+      
+      const possibleSrcs = [
+        `certificates/${cleanFilename}`,
+        `./certificates/${cleanFilename}`,
+        `${baseDir}certificates/${cleanFilename}`,
+        `/certificates/${cleanFilename}`
+      ];
+
+      const downloadFilename = `${(record.name || 'AI_Passport').trim().replace(/[^a-zA-Z0-9_-]+/g, '_')}_Certificate.png`;
+
+      if (imgEl) {
+        let srcIdx = 0;
+        imgEl.src = possibleSrcs[0];
+        imgEl.onerror = () => {
+          srcIdx++;
+          if (srcIdx < possibleSrcs.length) {
+            imgEl.src = possibleSrcs[srcIdx];
+          }
+        };
+      }
+
+      if (downloadBtn) {
+        downloadBtn.href = possibleSrcs[0];
+        downloadBtn.setAttribute('download', downloadFilename);
+        downloadBtn.setAttribute('target', '_self');
+        downloadBtn.onclick = null;
+
+        fetch(possibleSrcs[0])
+          .then(res => {
+            if (!res.ok) throw new Error('Blob fetch failed');
+            return res.blob();
+          })
+          .then(blob => {
+            const blobUrl = URL.createObjectURL(blob);
+            downloadBtn.href = blobUrl;
+            downloadBtn.setAttribute('download', downloadFilename);
+          })
+          .catch(() => {
+            downloadBtn.onclick = (e) => {
+              if (e) e.preventDefault();
+              const activeSrc = (imgEl && imgEl.src) ? imgEl.src : possibleSrcs[0];
+              const a = document.createElement('a');
+              a.href = activeSrc;
+              a.download = downloadFilename;
+              a.target = '_blank';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            };
+          });
+      }
     }
-    if (imgSrc && downloadBtn) {
-      downloadBtn.href = imgSrc;
-    }
+
     if (imgContainer) {
       imgContainer.style.display = 'block';
     }
