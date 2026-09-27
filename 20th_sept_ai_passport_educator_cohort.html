@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI PASSPORT™ - Educator Cohort</title>
+<style>
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: #000; color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  overflow: hidden; user-select: none;
+}
+
+/* APP CANVAS */
+#app {
+  width: 1920px; height: 1080px; position: absolute; transform-origin: top left;
+  background: #050505; overflow: hidden;
+}
+
+/* AMBIENT EFFECTS */
+#particles-canvas {
+  position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; z-index: 1;
+}
+#ambient-glow {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 1500px; height: 1500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+  pointer-events: none; z-index: 2;
+}
+
+/* BASE SLIDE CLASS */
+.slide {
+  position: absolute; top: 0; left: 0; width: 1920px; height: 1080px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  opacity: 0; pointer-events: none; transition: opacity 1.5s ease; z-index: 10;
+}
+.slide.visible { opacity: 1; pointer-events: auto; }
+
+/* TYPOGRAPHY COMPONENTS */
+.t-giant { font-size: 80px; font-weight: 300; letter-spacing: 0.1em; color: #fff; line-height: 1.4; opacity: 0; transition: opacity 1.5s ease, transform 1.5s ease; transform: translateY(20px); }
+.t-giant.visible { opacity: 1; transform: translateY(0); }
+.t-giant.gold { color: #D4AF37; }
+
+.t-main { font-size: 64px; font-weight: 300; letter-spacing: 0.1em; color: #fff; line-height: 1.5; opacity: 0; transition: opacity 1.5s ease; }
+.t-main.visible { opacity: 1; }
+
+.t-sub { font-size: 32px; font-weight: 300; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); opacity: 0; transition: opacity 1.5s ease; }
+.t-sub.visible { opacity: 1; }
+.t-sub.gold { color: #D4AF37; }
+.t-sub.blue { color: #3B82F6; }
+
+.t-italic { font-style: italic; }
+
+.t-arr { color: #3B82F6; font-size: 40px; margin: 0 20px; }
+
+/* INTRO / PASSPORT REVEAL */
+#s-intro-passport { z-index: 20; }
+#intro-line { width: 0; height: 2px; background: rgba(212, 175, 55, 0.6); transition: width 2.5s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); margin-bottom: 30px; }
+#intro-line.drawn { width: 500px; }
+#main-logo { font-size: 110px; font-weight: 300; letter-spacing: 0.15em; color: #D4AF37; text-shadow: 0 0 60px rgba(212, 175, 55, 0.3); margin-top: 40px; opacity: 0; transform: scale(0.95); transition: all 2.5s cubic-bezier(0.22, 1, 0.36, 1); }
+#main-logo.visible { opacity: 1; transform: scale(1); }
+.tm { font-size: 40px; vertical-align: super; -webkit-text-fill-color: rgba(212, 175, 55, 0.6); }
+
+/* GRID CARDS (LEARN -> BUILD -> PROVE -> GROW) */
+#grid-container {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 1800px; height: 300px; transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: 15; opacity: 0;
+}
+.m-card {
+  position: absolute; top: 50%; left: 50%; width: 400px; height: 220px;
+  background: rgba(10,10,10,0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+  padding: 40px; display: flex; flex-direction: column; justify-content: center;
+  opacity: 0; transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+.m-card.stacked { opacity: 1; }
+#mc-1.stacked { transform: translate(-50%, -50%) scale(1) rotate(-3deg); z-index: 1; }
+#mc-2.stacked { transform: translate(-49%, -49%) scale(1) rotate(1deg); z-index: 2; }
+#mc-3.stacked { transform: translate(-51%, -52%) scale(1) rotate(-1.5deg); z-index: 3; }
+#mc-4.stacked { transform: translate(-50%, -50%) scale(1) rotate(0deg); z-index: 4; box-shadow: 0 0 50px rgba(212, 175, 55, 0.15); border-color: rgba(212, 175, 55, 0.3); }
+
+.m-card.grid { opacity: 1; z-index: 1; }
+#mc-1.grid { left: 0; top: 40px; transform: translate(0, 0) scale(1) rotate(0); }
+#mc-2.grid { left: 460px; top: 40px; transform: translate(0, 0) scale(1) rotate(0); }
+#mc-3.grid { left: 920px; top: 40px; transform: translate(0, 0) scale(1) rotate(0); }
+#mc-4.grid { left: 1380px; top: 40px; transform: translate(0, 0) scale(1) rotate(0); }
+
+.mc-title { font-size: 32px; font-weight: 500; color: #fff; margin-bottom: 15px; letter-spacing: 0.1em; }
+.mc-desc { font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.4; }
+
+#master-journey { position: absolute; top: 200px; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 1.5s ease; z-index: 16; }
+
+/* PASSPORT CARD OBJECT */
+#final-passport {
+  position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
+  width: 600px; height: 900px; 
+  background-image: url('passport_card.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0; transition: all 2.5s cubic-bezier(0.22, 1, 0.36, 1); z-index: 50;
+}
+#final-passport.visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+/* PROGRAMME STRUCTURE */
+.prog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px 100px; margin: 60px 0; opacity: 0; transition: opacity 1.5s ease; }
+.prog-grid.visible { opacity: 1; }
+.prog-item { font-size: 40px; font-weight: 300; letter-spacing: 0.1em; color: #fff; display: flex; align-items: center; justify-content: center; }
+.prog-icon { color: #D4AF37; margin-right: 20px; font-size: 48px; }
+
+/* VERTICAL SEQUENCE */
+.v-seq { display: flex; flex-direction: column; align-items: center; gap: 30px; opacity: 0; transition: opacity 1.5s ease; }
+.v-seq.visible { opacity: 1; }
+.v-item { font-size: 40px; font-weight: 300; letter-spacing: 0.1em; color: #fff; }
+.v-item span { color: #D4AF37; font-weight: 400; margin-right: 20px; }
+
+/* PRICING */
+.price-box {
+  background: rgba(10,10,10,0.95); border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 20px; padding: 60px 120px; text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(212, 175, 55, 0.05);
+  opacity: 0; transform: translateY(30px); transition: all 1.5s ease;
+}
+.price-box.visible { opacity: 1; transform: translate(0, 0); }
+.price-box.special {
+  border-color: #D4AF37;
+  box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), inset 0 0 40px rgba(212, 175, 55, 0.1);
+  transform: translate(-250px, 0);
+}
+.pb-label { font-size: 28px; letter-spacing: 0.3em; color: rgba(255,255,255,0.6); margin-bottom: 20px; transition: color 1s ease; }
+.pb-price { font-size: 110px; font-weight: 300; color: #fff; margin-bottom: 20px; transition: color 1s ease, transform 1s ease; }
+.pb-price.gold { color: #D4AF37; text-shadow: 0 0 40px rgba(212, 175, 55, 0.4); font-weight: 400; }
+
+.scarcity { font-size: 32px; font-weight: 400; letter-spacing: 0.2em; color: #3B82F6; margin-top: 50px; opacity: 0; transition: opacity 1.5s ease; }
+.scarcity.visible { opacity: 1; }
+
+.cta-button {
+  margin-top: 60px; padding: 24px 60px; border: 1px solid #D4AF37; border-radius: 12px;
+  background: rgba(212, 175, 55, 0.1); font-size: 28px; font-weight: 400; letter-spacing: 0.2em; color: #D4AF37;
+  opacity: 0; transition: opacity 1.5s ease; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+}
+.cta-button.visible { opacity: 1; }
+
+</style>
+</head>
+<body>
+
+<div id="app">
+  <canvas id="particles-canvas"></canvas>
+  <div id="ambient-glow"></div>
+
+  <!-- S0-S3: OPENING -->
+  <div class="slide" id="s-opening">
+    <div class="t-giant" id="op-1">WHAT YOU JUST EXPERIENCED<br>WAS 90 MINUTES.</div>
+    <div class="t-giant" id="op-2" style="margin-top: 60px;">CAPABILITY TAKES PRACTICE.</div>
+    <div class="t-giant gold" id="op-3" style="margin-top: 60px;">SO WHAT HAPPENS NEXT?</div>
+  </div>
+
+  <!-- S4-S5: INTRODUCE AI PASSPORT -->
+  <div class="slide" id="s-intro-passport">
+    <div class="t-sub gold" id="ip-1" style="margin-bottom: 20px;">INTRODUCING</div>
+    <div id="intro-line"></div>
+    <div id="main-logo">AI PASSPORT<span class="tm">™</span></div>
+    <div class="t-giant" id="ip-2" style="margin-top: 60px;">DON'T JUST LEARN AI.<br><span style="color:#D4AF37;">BUILD WITH IT.</span></div>
+    <div class="t-main" id="ip-3" style="margin-top: 40px; font-size: 32px; color: rgba(255,255,255,0.6);">AI Passport™ is a growing record of what you learn,<br>what you build and what you can prove with AI.</div>
+  </div>
+
+  <!-- S6-S10: THE JOURNEY -->
+  <div class="slide" id="s-journey">
+    <div class="t-giant gold" id="master-journey">LEARN <span class="t-arr">→</span> BUILD <span class="t-arr">→</span> PROVE <span class="t-arr">→</span> GROW</div>
+    <div id="grid-container">
+      <div class="m-card" id="mc-1">
+        <div class="mc-title" style="color: #3B82F6;">LEARN</div>
+        <div class="mc-desc">Understand AI.<br>Develop practical capability.</div>
+      </div>
+      <div class="m-card" id="mc-2">
+        <div class="mc-title" style="color: #D4AF37;">BUILD</div>
+        <div class="mc-desc">Create real things with AI.</div>
+      </div>
+      <div class="m-card" id="mc-3">
+        <div class="mc-title" style="color: #3B82F6;">PROVE</div>
+        <div class="mc-desc">Show what you can actually do.</div>
+      </div>
+      <div class="m-card" id="mc-4">
+        <div class="mc-title" style="color: #D4AF37;">GROW</div>
+        <div class="mc-desc">Keep building capability over time.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S11-S13: PASSPORT REVEAL -->
+  <div class="slide" id="s-passport-reveal">
+    <div class="t-giant" id="pr-1" style="position: absolute; top: 150px;">YOUR AI CAPABILITY<br>SHOULD BE MORE THAN<br>A CERTIFICATE.</div>
+    <div class="t-sub" id="pr-2" style="position: absolute; top: 180px; letter-spacing: 0.2em; font-size: 28px;">LEARNING <span class="t-arr" style="font-size:24px;">+</span> PROJECTS <span class="t-arr" style="font-size:24px;">+</span> EVIDENCE <span class="t-arr" style="font-size:24px;">+</span> ACHIEVEMENTS</div>
+    
+    <div id="final-passport"></div>
+  </div>
+
+  <!-- S14-S17: THE COHORT REVEAL -->
+  <div class="slide" id="s-cohort-reveal">
+    <div class="t-main" id="cr-1">THE PASSPORT RECORDS THE JOURNEY.</div>
+    <div class="t-main" id="cr-2" style="margin-top: 40px; color: #3B82F6;">THE COHORT BUILDS THE CAPABILITY.</div>
+    
+    <div class="t-giant gold" id="cr-3" style="font-size: 110px; margin-top: 100px; text-shadow: 0 0 60px rgba(212, 175, 55, 0.3);">AI EDUCATOR COHORT</div>
+    <div class="t-sub" id="cr-4" style="margin-top: 40px;">FROM AI USER TO AI-CAPABLE EDUCATOR</div>
+    <div class="t-main" id="cr-5" style="font-size: 32px; color: rgba(255,255,255,0.6); margin-top: 30px;">A practical cohort to build real AI capability<br>for teaching, learning and everyday educational work.</div>
+  </div>
+
+  <!-- S18: PROGRAMME STRUCTURE -->
+  <div class="slide" id="s-structure">
+    <div class="t-giant gold" style="margin-bottom: 20px;">PROGRAMME STRUCTURE</div>
+    <div class="prog-grid" id="ps-grid">
+      <div class="prog-item"><span class="prog-icon">⏱</span> 10 HOURS</div>
+      <div class="prog-item"><span class="prog-icon">📅</span> 5 SATURDAYS</div>
+      <div class="prog-item"><span class="prog-icon">⏳</span> 2 HOURS EACH SATURDAY</div>
+      <div class="prog-item"><span class="prog-icon">🕓</span> 4:00–6:00 PM</div>
+    </div>
+    <div class="t-sub blue" id="ps-live" style="font-size: 40px; letter-spacing: 0.3em; margin-top: 40px;">LIVE · PRACTICAL · HANDS-ON</div>
+  </div>
+
+  <!-- S19: WHAT EDUCATORS WILL BUILD -->
+  <div class="slide" id="s-build">
+    <div class="t-giant gold" style="margin-bottom: 80px;">WHAT EDUCATORS WILL BUILD</div>
+    <div class="v-seq" id="wb-seq">
+      <div class="v-item"><span>UNDERSTAND</span> AI fundamentals and current capabilities.</div>
+      <div class="v-item"><span>CREATE</span> Practical AI-powered educational resources.</div>
+      <div class="v-item"><span>AUTOMATE</span> Repeatable workflows for everyday work.</div>
+      <div class="v-item"><span>BUILD</span> Useful AI-powered outcomes.</div>
+      <div class="v-item"><span>APPLY</span> Bring AI into real educational practice.</div>
+    </div>
+  </div>
+
+  <!-- S20-S23: CALLBACK & VALUE -->
+  <div class="slide" id="s-callback">
+    <div class="t-sub gold" id="cb-1" style="margin-bottom: 60px; font-size: 40px;">TODAY</div>
+    <div class="t-main" id="cb-2" style="font-size: 48px; letter-spacing: 0.15em;">UNDERSTAND <span class="t-arr">→</span> QUESTION <span class="t-arr">→</span> VERIFY <span class="t-arr">→</span> CREATE <span class="t-arr">→</span> BUILD</div>
+    <div class="t-giant gold" id="cb-3" style="margin-top: 100px;">THE COHORT<br>TAKES THIS FURTHER.</div>
+  </div>
+
+  <div class="slide" id="s-value">
+    <div class="t-giant" id="val-1" style="margin-bottom: 80px;">THIS IS NOT JUST ABOUT<br><span style="color:#D4AF37;">LEARNING AI.</span></div>
+    <div class="v-seq" id="val-seq">
+      <div class="v-item">LEARN HOW AI WORKS.</div>
+      <div class="v-item">BUILD WITH AI.</div>
+      <div class="v-item">CREATE REAL WORKFLOWS.</div>
+      <div class="v-item">DEVELOP REPEATABLE CAPABILITY.</div>
+    </div>
+    <div class="t-giant blue" id="val-final" style="margin-top: 80px;">TURN AI INTO PART OF YOUR PRACTICE.</div>
+  </div>
+
+  <!-- S24-S29: COMMERCIAL REVEAL & CTA -->
+  <div class="slide" id="s-commercial">
+    <div class="t-giant gold" id="com-title" style="margin-bottom: 60px;">AI EDUCATOR COHORT</div>
+    
+    <div class="price-box" id="com-price-box">
+      <div class="pb-label" id="com-label">STANDARD FEE</div>
+      <div class="pb-price" id="com-price">₹4,999</div>
+    </div>
+
+    <div id="com-qr" style="position: absolute; right: 250px; top: 50%; transform: translateY(-50%) translateX(50px); opacity: 0; transition: all 1.5s ease; text-align: center;">
+      <img src="payment_qr.jpg" style="width: 300px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(212, 175, 55, 0.2); border: 1px solid rgba(212,175,55,0.4);">
+      <div style="margin-top: 20px; font-size: 20px; letter-spacing: 0.2em; color: #D4AF37;">SCAN TO REGISTER</div>
+    </div>
+    
+    <div class="scarcity" id="com-scarcity">
+      ONLY 30 EDUCATORS<br><span style="color: #fff; font-size: 24px; margin-top: 15px; display: block;">FIRST COME · FIRST SERVED</span>
+    </div>
+
+    <!-- S27: SCHEDULE IN COMMERCIAL -->
+    <div class="t-sub" id="com-schedule" style="margin-top: 60px; line-height: 1.8;">
+      EVERY SATURDAY <span style="color:#D4AF37;">•</span> 4:00–6:00 PM <span style="color:#D4AF37;">•</span> 5 SATURDAYS <span style="color:#D4AF37;">•</span> 10 HOURS TOTAL <span style="color:#D4AF37;">•</span> LIVE COHORT
+    </div>
+    
+    <div class="t-giant" id="cta-title" style="margin-top: 60px; display: none;">READY TO BUILD WITH AI?</div>
+    <div class="cta-button" id="cta-button">[COHORT REGISTRATION LINK]<br><span style="color:#fff; font-size: 20px;">JOIN NOW</span></div>
+  </div>
+
+  <!-- S30: FINAL BRAND -->
+  <div class="slide" id="s-brand">
+    <div class="t-giant gold" style="font-size: 100px; margin-bottom: 40px; letter-spacing: 0.15em;">AI PASSPORT™</div>
+    <div class="t-main" style="margin-bottom: 80px;">DON'T JUST LEARN AI.<br><span style="color:#D4AF37;">BUILD WITH IT.</span></div>
+    <div class="t-sub blue" style="letter-spacing: 0.3em; margin-bottom: 120px;">LEARN → BUILD → PROVE → GROW</div>
+    <div class="t-sub" style="font-size: 20px; letter-spacing: 0.5em; opacity: 0.5;">EKAAKSHAR EDUCATION</div>
+  </div>
+
+</div>
+
+<script>
+// Particles
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = 1920; canvas.height = 1080;
+const particles = [];
+for(let i=0; i<60; i++) {
+  particles.push({
+    x: Math.random() * 1920, y: Math.random() * 1080,
+    size: Math.random() * 2 + 0.5,
+    speedX: (Math.random() - 0.5) * 0.4, speedY: (Math.random() - 0.5) * 0.4,
+    opacity: Math.random() * 0.6 + 0.2
+  });
+}
+function draw() {
+  ctx.clearRect(0,0,1920,1080);
+  particles.forEach(p => {
+    p.x += p.speedX; p.y += p.speedY;
+    if(p.x < 0) p.x = 1920; if(p.x > 1920) p.x = 0;
+    if(p.y < 0) p.y = 1080; if(p.y > 1080) p.y = 0;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(212, 175, 55, ${p.opacity})`; ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+// Scaler
+function resizeApp() {
+  const app = document.getElementById('app');
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  app.style.transform = `scale(${scale})`;
+  app.style.left = `${(window.innerWidth - 1920 * scale) / 2}px`;
+  app.style.top = `${(window.innerHeight - 1080 * scale) / 2}px`;
+}
+window.addEventListener('resize', resizeApp);
+resizeApp();
+
+// State Machine
+let currentState = 0;
+const TOTAL_STATES = 31;
+
+function updateState() {
+  const slides = document.querySelectorAll('.slide');
+  slides.forEach(s => s.classList.remove('visible'));
+
+  // S0 - S3: OPENING
+  if (currentState >= 1 && currentState <= 3) {
+    document.getElementById('s-opening').classList.add('visible');
+    if (currentState >= 1) document.getElementById('op-1').classList.add('visible'); else document.getElementById('op-1').classList.remove('visible');
+    if (currentState >= 2) document.getElementById('op-2').classList.add('visible'); else document.getElementById('op-2').classList.remove('visible');
+    if (currentState >= 3) document.getElementById('op-3').classList.add('visible'); else document.getElementById('op-3').classList.remove('visible');
+  }
+
+  // S4 - S5: INTRODUCE PASSPORT
+  if (currentState >= 4 && currentState <= 5) {
+    document.getElementById('s-intro-passport').classList.add('visible');
+    if (currentState >= 4) {
+      document.getElementById('ip-1').classList.add('visible');
+      document.getElementById('intro-line').classList.add('drawn');
+      document.getElementById('main-logo').classList.add('visible');
+    }
+    if (currentState >= 5) {
+      document.getElementById('ip-2').classList.add('visible');
+      document.getElementById('ip-3').classList.add('visible');
+    } else {
+      document.getElementById('ip-2').classList.remove('visible');
+      document.getElementById('ip-3').classList.remove('visible');
+    }
+  }
+
+  // S6 - S10: JOURNEY GRID
+  if (currentState >= 6 && currentState <= 10) {
+    document.getElementById('s-journey').classList.add('visible');
+    document.getElementById('grid-container').style.opacity = '1';
+    
+    for (let i = 1; i <= 4; i++) {
+      const card = document.getElementById(`mc-${i}`);
+      card.className = 'm-card';
+      if (currentState >= 6 && currentState <= 9) {
+        if (currentState - 5 >= i) card.classList.add('stacked');
+      } else if (currentState === 10) {
+        card.classList.add('grid');
+      }
+    }
+    if (currentState === 10) document.getElementById('master-journey').classList.add('visible');
+    else document.getElementById('master-journey').classList.remove('visible');
+  }
+
+  // S11 - S13: PASSPORT REVEAL
+  if (currentState >= 11 && currentState <= 13) {
+    document.getElementById('s-passport-reveal').classList.add('visible');
+    if (currentState >= 11) document.getElementById('pr-1').classList.add('visible'); else document.getElementById('pr-1').classList.remove('visible');
+    if (currentState >= 12) {
+      document.getElementById('pr-1').style.opacity = '0';
+      document.getElementById('pr-2').classList.add('visible');
+    } else {
+      document.getElementById('pr-2').classList.remove('visible');
+    }
+    if (currentState >= 13) {
+      document.getElementById('pr-2').style.opacity = '0';
+      document.getElementById('final-passport').classList.add('visible');
+    } else {
+      document.getElementById('final-passport').classList.remove('visible');
+    }
+  }
+
+  // S14 - S17: COHORT REVEAL
+  if (currentState >= 14 && currentState <= 17) {
+    document.getElementById('s-cohort-reveal').classList.add('visible');
+    if (currentState >= 14) document.getElementById('cr-1').classList.add('visible'); else document.getElementById('cr-1').classList.remove('visible');
+    if (currentState >= 15) document.getElementById('cr-2').classList.add('visible'); else document.getElementById('cr-2').classList.remove('visible');
+    if (currentState >= 16) {
+      document.getElementById('cr-1').style.display = 'none';
+      document.getElementById('cr-2').style.display = 'none';
+      document.getElementById('cr-3').classList.add('visible');
+      document.getElementById('cr-4').classList.add('visible');
+    } else {
+      document.getElementById('cr-1').style.display = 'block';
+      document.getElementById('cr-2').style.display = 'block';
+      document.getElementById('cr-3').classList.remove('visible');
+      document.getElementById('cr-4').classList.remove('visible');
+    }
+    if (currentState >= 17) document.getElementById('cr-5').classList.add('visible'); else document.getElementById('cr-5').classList.remove('visible');
+  }
+
+  // S18: STRUCTURE
+  if (currentState === 18) {
+    document.getElementById('s-structure').classList.add('visible');
+    setTimeout(() => { document.getElementById('ps-grid').classList.add('visible'); }, 500);
+    setTimeout(() => { document.getElementById('ps-live').classList.add('visible'); }, 1500);
+  } else {
+    document.getElementById('ps-grid').classList.remove('visible');
+    document.getElementById('ps-live').classList.remove('visible');
+  }
+
+  // S19: BUILD
+  if (currentState === 19) {
+    document.getElementById('s-build').classList.add('visible');
+    setTimeout(() => { document.getElementById('wb-seq').classList.add('visible'); }, 500);
+  } else {
+    document.getElementById('wb-seq').classList.remove('visible');
+  }
+
+  // S20 - S21: CALLBACK
+  if (currentState >= 20 && currentState <= 21) {
+    document.getElementById('s-callback').classList.add('visible');
+    if (currentState >= 20) { document.getElementById('cb-1').classList.add('visible'); document.getElementById('cb-2').classList.add('visible'); }
+    if (currentState >= 21) document.getElementById('cb-3').classList.add('visible'); else document.getElementById('cb-3').classList.remove('visible');
+  }
+
+  // S22 - S23: VALUE
+  if (currentState >= 22 && currentState <= 23) {
+    document.getElementById('s-value').classList.add('visible');
+    if (currentState >= 22) { document.getElementById('val-1').classList.add('visible'); document.getElementById('val-seq').classList.add('visible'); }
+    if (currentState >= 23) document.getElementById('val-final').classList.add('visible'); else document.getElementById('val-final').classList.remove('visible');
+  }
+
+  // S24 - S29: COMMERCIAL
+  if (currentState >= 24 && currentState <= 29) {
+    document.getElementById('s-commercial').classList.add('visible');
+    
+    // Base reveal
+    if (currentState >= 24) {
+      document.getElementById('com-title').style.display = 'block';
+      document.getElementById('com-price-box').classList.add('visible');
+    }
+    
+    // Price Shift
+    const pb = document.getElementById('com-price-box');
+    const lbl = document.getElementById('com-label');
+    const prc = document.getElementById('com-price');
+    const qr = document.getElementById('com-qr');
+    if (currentState >= 25) {
+      pb.classList.add('special');
+      lbl.innerHTML = 'SPECIAL COHORT PRICE';
+      lbl.style.color = '#D4AF37';
+      prc.innerHTML = '₹1,999';
+      prc.classList.add('gold');
+      qr.style.opacity = '1';
+      qr.style.transform = 'translateY(-50%) translateX(0)';
+    } else {
+      pb.classList.remove('special');
+      lbl.innerHTML = 'STANDARD FEE';
+      lbl.style.color = 'rgba(255,255,255,0.6)';
+      prc.innerHTML = '₹4,999';
+      prc.classList.remove('gold');
+      qr.style.opacity = '0';
+      qr.style.transform = 'translateY(-50%) translateX(50px)';
+    }
+
+    // Scarcity
+    if (currentState >= 26) document.getElementById('com-scarcity').classList.add('visible'); else document.getElementById('com-scarcity').classList.remove('visible');
+    
+    // Schedule
+    if (currentState >= 27) document.getElementById('com-schedule').classList.add('visible'); else document.getElementById('com-schedule').classList.remove('visible');
+
+    // CTA
+    if (currentState >= 28) {
+      document.getElementById('com-title').style.display = 'none';
+      document.getElementById('cta-title').style.display = 'block';
+      document.getElementById('cta-title').classList.add('visible');
+    } else {
+      document.getElementById('cta-title').style.display = 'none';
+      document.getElementById('cta-title').classList.remove('visible');
+    }
+    
+    if (currentState >= 29) document.getElementById('cta-button').classList.add('visible'); else document.getElementById('cta-button').classList.remove('visible');
+  }
+
+  // S30: BRAND
+  if (currentState === 30) {
+    document.getElementById('s-brand').classList.add('visible');
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' || e.code === 'ArrowRight') {
+    if (currentState < TOTAL_STATES) { currentState++; updateState(); }
+  } else if (e.code === 'ArrowLeft') {
+    if (currentState > 0) { currentState--; updateState(); }
+  } else if (e.code === 'KeyR') {
+    currentState = 0; updateState();
+  } else if (e.code === 'KeyF') {
+    if (!document.fullscreenElement) { document.documentElement.requestFullscreen().catch(() => {}); } else { document.exitFullscreen(); }
+  }
+});
+
+updateState();
+</script>
+</body>
+</html>

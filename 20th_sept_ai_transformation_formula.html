@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI TRANSFORMATION FORMULA™ - Educator Edition</title>
+<style>
+/* RESET & BASE */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: #000; color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden; user-select: none;
+}
+
+/* CANVAS */
+#app {
+  width: 1920px; height: 1080px; position: absolute; transform-origin: top left;
+  background: #050505; overflow: hidden;
+}
+
+/* BACKGROUNDS */
+#viewport {
+  width: 1920px; height: 1080px; position: absolute; top: 0; left: 0;
+  background: radial-gradient(circle at center, #111 0%, #050505 100%); z-index: 1;
+}
+#particles-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 2s ease; z-index: 3; }
+
+/* CAMERA */
+#camera {
+  position: absolute; top: 0; left: 0; width: 100%;
+  transition: transform 2s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 10;
+}
+
+/* GLOBAL OPACITY (For hiding stack at the end) */
+#stack-layer {
+  position: absolute; top: 0; left: 0; width: 100%;
+  transition: opacity 1.5s ease;
+}
+
+/* TIMELINE ARROWS / LINE */
+#stack-line-container {
+  position: absolute; left: 960px; top: 800px; height: 3500px; width: 2px;
+  transform: translateX(-50%); z-index: 5;
+}
+.pulse-arrow {
+  position: absolute; width: 2px; height: 0; background: #3B82F6;
+  box-shadow: 0 0 15px rgba(59,130,246,0.6);
+  transition: height 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#arrow-1 { top: 0; }
+#arrow-2 { top: 860px; }
+#arrow-3 { top: 1720px; }
+#arrow-4 { top: 2580px; }
+
+#single-line {
+  position: absolute; top: 0; left: 960px; transform: translateX(-50%); width: 2px; height: 0;
+  background: #D4AF37; box-shadow: 0 0 20px rgba(212,175,55,0.8); z-index: 6;
+  transition: height 2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;
+  opacity: 0;
+}
+
+/* CARDS */
+.card {
+  position: absolute; left: 960px; width: 1000px;
+  transform: translateX(-50%);
+  background: rgba(10,10,10,0.95);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+  padding: 50px 60px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  opacity: 0;
+  transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 10;
+}
+.card.visible { opacity: 1; }
+.card.faded { opacity: 0.3; }
+.card.line-dissolved { opacity: 0 !important; transform: translateX(-50%) scale(0.9); }
+
+/* CARD Y POSITIONS */
+#card-1 { top: 540px; transform: translate(-50%, -50%); }
+#card-2 { top: 1400px; transform: translate(-50%, -50%); }
+#card-3 { top: 2260px; transform: translate(-50%, -50%); }
+#card-4 { top: 3120px; transform: translate(-50%, -50%); }
+#card-5 { top: 3980px; transform: translate(-50%, -50%); }
+
+/* CARD INNER TYPOGRAPHY */
+.c-num { font-size: 20px; letter-spacing: 0.4em; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+.c-title { font-size: 48px; font-weight: 300; letter-spacing: 0.1em; color: #fff; margin-bottom: 30px; }
+.c-q { font-size: 24px; color: #D4AF37; letter-spacing: 0.1em; margin-bottom: 40px; font-style: italic; }
+
+.c-content {
+  width: 100%; opacity: 0; transform: translateY(20px);
+  transition: all 1s ease;
+}
+.c-content.visible { opacity: 1; transform: translateY(0); }
+
+.tag-cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px; }
+.tag { padding: 12px 24px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-size: 18px; letter-spacing: 0.1em; }
+.tag.gold { border-color: rgba(212,175,55,0.3); color: #D4AF37; }
+.tag.blue { border-color: rgba(59,130,246,0.3); color: #3B82F6; }
+
+.c-stmt { font-size: 24px; font-weight: 300; letter-spacing: 0.1em; color: #fff; line-height: 1.6; margin-top: 20px; }
+.c-strong { color: #D4AF37; }
+
+/* WORKFLOW COMPARISON (CARD 4) */
+.wf-compare { display: flex; width: 100%; justify-content: center; gap: 60px; text-align: left; opacity: 0; transition: opacity 1s ease; }
+.wf-compare.visible { opacity: 1; }
+.wf-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.wf-title { font-size: 24px; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin-bottom: 20px; text-align: center; }
+.wf-item { font-size: 24px; color: #fff; padding: 12px 24px; background: rgba(255,255,255,0.03); border-radius: 8px; width: 100%; text-align: center; }
+.wf-arr { color: rgba(255,255,255,0.3); font-size: 20px; }
+.wf-loop { color: #3B82F6; font-size: 24px; text-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
+.wf-human { border-left: 3px solid #D4AF37; }
+.wf-ai { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.1); box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.2), 0 0 20px rgba(59, 130, 246, 0.2); }
+
+#c4-new .wf-title {
+  color: #D4AF37;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3);
+  font-weight: 500;
+}
+#c4-new .wf-human {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+/* OPENING TEXT (State 0-1) */
+#opening {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  z-index: 20; transition: opacity 1.5s ease;
+}
+.op-main { font-size: 72px; font-weight: 300; letter-spacing: 0.1em; color: #fff; margin-bottom: 20px; opacity: 0; transition: opacity 1s ease; }
+.op-sub { font-size: 36px; font-style: italic; color: rgba(255,255,255,0.5); opacity: 0; transition: opacity 1s ease; }
+.op-shift-title { font-size: 24px; letter-spacing: 0.3em; color: #D4AF37; margin: 60px 0 30px; opacity: 0; transition: opacity 1s ease; }
+.op-shift-box {
+  font-size: 32px; font-weight: 300; letter-spacing: 0.1em; color: #fff; line-height: 2;
+  opacity: 0; transition: opacity 1s ease;
+}
+.op-shift-box span { color: #3B82F6; }
+
+/* ENDING OVERLAYS (State 15+) */
+#ending-layer {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 30; pointer-events: none;
+}
+.end-slide {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 100%; text-align: center; opacity: 0; transition: opacity 1.5s ease;
+}
+.end-slide.visible { opacity: 1; pointer-events: auto; }
+
+.f-seq { display: flex; align-items: center; justify-content: center; gap: 20px; font-size: 36px; font-weight: 300; letter-spacing: 0.1em; color: #fff; }
+.f-arr { color: rgba(255,255,255,0.3); }
+.f-gold { color: #D4AF37; }
+
+.end-stmt { font-size: 56px; font-weight: 300; letter-spacing: 0.1em; color: #fff; line-height: 1.6; }
+
+/* EDUCATOR EXAMPLE (State 18) */
+.ex-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 50px; width: 1200px; margin: 0 auto; text-align: left; }
+.ex-label { font-size: 24px; letter-spacing: 0.2em; color: #D4AF37; margin-bottom: 25px; }
+.ex-prob { font-size: 40px; font-weight: 300; color: #fff; font-style: italic; margin-bottom: 50px; }
+.ex-row { display: flex; gap: 30px; align-items: center; margin-bottom: 25px; }
+.ex-role { width: 160px; font-size: 28px; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); }
+.ex-path { font-size: 28px; letter-spacing: 0.1em; color: #fff; }
+.ex-final { font-size: 36px; font-weight: 400; letter-spacing: 0.1em; color: #D4AF37; text-align: center; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 50px; text-shadow: 0 0 30px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.2); }
+
+/* DEMO SETUP (State 19+) */
+.ds-line { font-size: 56px; font-weight: 300; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: 40px; opacity: 0; transition: opacity 1.5s ease; }
+.ds-line.visible { opacity: 1; }
+.ds-now { font-size: 72px; font-weight: 300; color: #fff; margin-bottom: 80px; opacity: 0; transition: opacity 1.5s ease; }
+.ds-now.visible { opacity: 1; }
+
+.ds-seq { display: flex; flex-direction: column; align-items: center; gap: 15px; font-size: 28px; letter-spacing: 0.1em; color: rgba(255,255,255,0.8); opacity: 0; transition: opacity 1.5s ease; }
+.ds-seq.visible { opacity: 1; }
+.ds-arr { color: #3B82F6; }
+
+.ds-climax { font-size: 80px; font-weight: 400; letter-spacing: 0.15em; color: #D4AF37; text-shadow: 0 0 50px rgba(212,175,55,0.4); margin-top: 80px; opacity: 0; transition: opacity 2.5s ease; }
+.ds-climax.visible { opacity: 1; }
+
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div id="viewport"></div>
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- OPENING -->
+  <div id="opening">
+    <div class="op-main" id="op-1">FROM AI USER<br>TO<br>AI-CAPABLE EDUCATOR</div>
+    <div class="op-sub" id="op-2">How AI changes the way we work</div>
+    <div class="op-shift-title" id="op-3">THE SHIFT:</div>
+    <div class="op-shift-box" id="op-4">
+      FROM<br>USING AI FOR ANSWERS<br><br>TO<br><span>USING AI TO BUILD WORKFLOWS</span>
+    </div>
+  </div>
+
+  <div id="camera">
+    <div id="stack-layer">
+      <!-- LINES -->
+      <div id="stack-line-container">
+        <div class="pulse-arrow" id="arrow-1"></div>
+        <div class="pulse-arrow" id="arrow-2"></div>
+        <div class="pulse-arrow" id="arrow-3"></div>
+        <div class="pulse-arrow" id="arrow-4"></div>
+      </div>
+      <div id="single-line"></div>
+
+      <!-- CARD 1 -->
+      <div class="card" id="card-1">
+        <div class="c-num">01</div>
+        <div class="c-title">THE PROBLEM</div>
+        <div class="c-q">WHAT TAKES TOO MUCH TIME?</div>
+        <div class="c-content" id="c1-content">
+          <div class="tag-cloud">
+            <div class="tag">PLANNING</div><div class="tag">CONTENT CREATION</div><div class="tag">DIFFERENTIATION</div>
+            <div class="tag">ASSESSMENT</div><div class="tag">RESEARCH</div><div class="tag">COMMUNICATION</div><div class="tag">ADMINISTRATION</div>
+          </div>
+          <div class="c-stmt">THE FIRST QUESTION ISN'T:<br><span style="color:rgba(255,255,255,0.5);">“WHICH AI TOOL SHOULD I USE?”</span><br><br>INSTEAD:<br><span class="c-strong">“WHAT PROBLEM AM I TRYING TO SOLVE?”</span></div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="card" id="card-2">
+        <div class="c-num">02</div>
+        <div class="c-title">THE AI LAYER</div>
+        <div class="c-q">WHAT CAN AI HELP WITH?</div>
+        <div class="c-content" id="c2-content">
+          <div class="tag-cloud">
+            <div class="tag blue">GENERATE</div><div class="tag blue">ANALYSE</div><div class="tag blue">SUMMARISE</div>
+            <div class="tag blue">TRANSFORM</div><div class="tag blue">PERSONALISE</div><div class="tag blue">RESEARCH</div><div class="tag blue">AUTOMATE</div>
+          </div>
+          <div class="c-stmt" style="margin-top: 40px;">TEACHER PROBLEM <span style="color:#3B82F6;">↓</span> AI CAPABILITY</div>
+          <div class="c-stmt c-strong" style="margin-top: 40px; font-size: 32px;">AI IS THE CAPABILITY LAYER.</div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="card" id="card-3">
+        <div class="c-num">03</div>
+        <div class="c-title">THE HUMAN LAYER</div>
+        <div class="c-q">WHAT STILL REQUIRES HUMAN INTELLIGENCE?</div>
+        <div class="c-content" id="c3-content">
+          <div class="tag-cloud">
+            <div class="tag gold">CONTEXT</div><div class="tag gold">JUDGEMENT</div><div class="tag gold">EMPATHY</div>
+            <div class="tag gold">CREATIVITY</div><div class="tag gold">ETHICS</div><div class="tag gold">EXPERIENCE</div><div class="tag gold">COMMUNICATION</div>
+          </div>
+          <div class="c-stmt" style="margin-top: 60px; font-size: 36px;">
+            <span style="color:#3B82F6;">AI GENERATES.</span><br><span class="c-strong">THE TEACHER DECIDES.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="card" id="card-4">
+        <div class="c-num">04</div>
+        <div class="c-title">THE NEW WORKFLOW</div>
+        <div class="wf-compare" id="c4-content">
+          <div class="wf-col" style="opacity: 0.5;">
+            <div class="wf-title">OLD WAY</div>
+            <div class="wf-item wf-human">Teacher</div><div class="wf-arr">↓</div>
+            <div class="wf-item wf-human">Research</div><div class="wf-arr">↓</div>
+            <div class="wf-item wf-human">Draft</div><div class="wf-arr">↓</div>
+            <div class="wf-item wf-human">Edit</div><div class="wf-arr">↓</div>
+            <div class="wf-item wf-human">Create</div><div class="wf-arr">↓</div>
+            <div class="wf-item wf-human">Assess</div>
+          </div>
+          <div class="wf-col" id="c4-new" style="opacity:0; transition: opacity 1s ease;">
+            <div class="wf-title" style="color:#D4AF37;">AI-ASSISTED WAY</div>
+            <div class="wf-item wf-human">Teacher defines goal</div><div class="wf-loop">↕</div>
+            <div class="wf-item wf-ai">AI researches / generates</div><div class="wf-loop">↕</div>
+            <div class="wf-item wf-human">Teacher reviews</div><div class="wf-loop">↕</div>
+            <div class="wf-item wf-ai">AI refines</div><div class="wf-loop">↕</div>
+            <div class="wf-item wf-human">Teacher adapts</div><div class="wf-loop">↕</div>
+            <div class="wf-item wf-human" style="border-color:#D4AF37;">Final resource</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="card" id="card-5">
+        <div class="c-num">05</div>
+        <div class="c-title">THE NEW CAPABILITY</div>
+        <div class="c-q">WHAT CAN THE EDUCATOR NOW DO?</div>
+        <div class="c-content" id="c5-content">
+          <div class="tag-cloud">
+            <div class="tag">BUILD FASTER</div><div class="tag">ITERATE FASTER</div><div class="tag">PERSONALISE MORE</div>
+            <div class="tag">EXPERIMENT MORE</div><div class="tag">AUTOMATE REPETITIVE WORK</div><div class="tag">CREATE NEW RESOURCES</div>
+          </div>
+          <div class="c-stmt" style="margin-top: 60px; font-size: 32px;">
+            THE VALUE ISN'T THE PROMPT.<br><span class="c-strong">THE VALUE IS THE CAPABILITY IT UNLOCKS.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENDING OVERLAYS -->
+  <div id="ending-layer">
+    <div class="end-slide" id="end-1">
+      <div class="f-seq">
+        PROBLEM <span class="f-arr">→</span> <span style="color:#3B82F6;">AI</span> <span class="f-arr">→</span> <span class="f-gold">HUMAN JUDGEMENT</span> <span class="f-arr">→</span> WORKFLOW <span class="f-arr">→</span> CAPABILITY
+      </div>
+    </div>
+    
+    <div class="end-slide" id="end-2">
+      <div class="f-seq" style="font-size: 48px;">
+        PROBLEM <span class="f-arr">→</span> <span class="f-gold">WORKFLOW</span> <span class="f-arr">→</span> RESULT
+      </div>
+    </div>
+    
+    <div class="end-slide" id="end-3">
+      <div class="end-stmt">AI IS MOST POWERFUL<br><span class="f-gold">WHEN IT BECOMES PART OF THE WORK.</span></div>
+    </div>
+
+    <!-- EDUCATOR EXAMPLE -->
+    <div class="end-slide" id="end-4">
+      <div class="ex-box">
+        <div class="ex-label">TEACHER PROBLEM:</div>
+        <div class="ex-prob">“Create a differentiated lesson resource for three levels of learners.”</div>
+        
+        <div class="ex-row">
+          <div class="ex-role" style="color:#3B82F6;">AI:</div>
+          <div class="ex-path">Research → Draft → Differentiate → Format</div>
+        </div>
+        
+        <div class="ex-row">
+          <div class="ex-role" style="color:#D4AF37;">TEACHER:</div>
+          <div class="ex-path">Review → Correct → Contextualise → Approve</div>
+        </div>
+        
+        <div class="ex-final">
+          ONE TEACHER <span class="f-arr">→</span> ONE WORKFLOW <span class="f-arr">→</span> MULTIPLE RESOURCES
+        </div>
+      </div>
+    </div>
+
+    <!-- DEMO SETUP -->
+    <div class="end-slide" id="end-5" style="background:#000; height:100vh; display:flex; flex-direction:column; justify-content:center;">
+      <div class="ds-line" id="ds-1">WE'VE TALKED ABOUT THE WORKFLOW.</div>
+      <div class="ds-now" id="ds-2">NOW LET'S BUILD ONE.</div>
+      <div class="ds-seq" id="ds-3">
+        <div>A REAL EDUCATOR PROBLEM.</div><div class="ds-arr">↓</div>
+        <div>A REAL AI WORKFLOW.</div><div class="ds-arr">↓</div>
+        <div>A REAL RESULT.</div>
+      </div>
+      <div class="ds-climax" id="ds-4">LIVE AI WORKFLOW DEMO</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function resizeApp() {
+  const app = document.getElementById('app');
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  app.style.transform = `scale(${scale})`;
+  app.style.left = `${(window.innerWidth - 1920 * scale) / 2}px`;
+  app.style.top = `${(window.innerHeight - 1080 * scale) / 2}px`;
+}
+window.addEventListener('resize', resizeApp);
+resizeApp();
+
+// Particles
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = 1920; canvas.height = 1080;
+const particles = [];
+for(let i=0; i<150; i++) {
+  particles.push({
+    x: Math.random() * 1920, y: Math.random() * 1080,
+    r: Math.random() * 1.5,
+    dx: (Math.random() - 0.5) * 0.2, dy: (Math.random() - 0.5) * 0.2,
+    alpha: Math.random() * 0.5
+  });
+}
+function drawParticles() {
+  ctx.clearRect(0, 0, 1920, 1080);
+  particles.forEach(p => {
+    p.x += p.dx; p.y += p.dy;
+    if(p.x < 0 || p.x > 1920) p.dx *= -1;
+    if(p.y < 0 || p.y > 1080) p.dy *= -1;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(212,175,55,${p.alpha})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// State Machine
+let currentState = 0;
+const TOTAL_STATES = 23; 
+
+const camera = document.getElementById('camera');
+const stackLayer = document.getElementById('stack-layer');
+const singleLine = document.getElementById('single-line');
+
+function updateState() {
+  // Opening (0-1)
+  const opening = document.getElementById('opening');
+  if (currentState <= 1) {
+    opening.style.opacity = '1';
+    if(currentState >= 0) { document.getElementById('op-1').style.opacity = '1'; document.getElementById('op-2').style.opacity = '1'; }
+    if(currentState >= 1) { document.getElementById('op-3').style.opacity = '1'; document.getElementById('op-4').style.opacity = '1'; }
+    else { document.getElementById('op-3').style.opacity = '0'; document.getElementById('op-4').style.opacity = '0'; }
+    camera.style.opacity = '0';
+  } else {
+    opening.style.opacity = '0';
+    camera.style.opacity = '1';
+  }
+
+  // Camera & Stack Logic (2-12)
+  if (currentState >= 2 && currentState <= 12) {
+    camera.style.transform = 'scale(1)';
+    stackLayer.style.opacity = '1';
+    
+    for(let i=1; i<=5; i++) {
+      const card = document.getElementById(`card-${i}`);
+      card.classList.remove('line-dissolved');
+      if (currentState < (i*2)) {
+        card.classList.remove('visible', 'faded');
+      } else if (currentState === (i*2) || currentState === (i*2)+1) {
+        card.classList.add('visible');
+        card.classList.remove('faded');
+      } else {
+        card.classList.add('visible', 'faded');
+      }
+    }
+
+    // Camera Panning
+    let camY = 0;
+    if (currentState >= 2 && currentState <= 3) camY = 540;
+    if (currentState >= 4 && currentState <= 5) camY = 1400;
+    if (currentState >= 6 && currentState <= 7) camY = 2260;
+    if (currentState >= 8 && currentState <= 10) camY = 3120; // 3 states for card 4
+    if (currentState >= 11 && currentState <= 12) camY = 3980;
+    camera.style.transform = `translateY(${540 - camY}px)`;
+
+    // Arrows
+    if(currentState >= 4) document.getElementById('arrow-1').style.height = '860px'; else document.getElementById('arrow-1').style.height = '0';
+    if(currentState >= 6) document.getElementById('arrow-2').style.height = '860px'; else document.getElementById('arrow-2').style.height = '0';
+    if(currentState >= 8) document.getElementById('arrow-3').style.height = '860px'; else document.getElementById('arrow-3').style.height = '0';
+    if(currentState >= 11) document.getElementById('arrow-4').style.height = '860px'; else document.getElementById('arrow-4').style.height = '0';
+
+    // Content Reveals
+    if(currentState >= 3) document.getElementById('c1-content').classList.add('visible'); else document.getElementById('c1-content').classList.remove('visible');
+    if(currentState >= 5) document.getElementById('c2-content').classList.add('visible'); else document.getElementById('c2-content').classList.remove('visible');
+    if(currentState >= 7) document.getElementById('c3-content').classList.add('visible'); else document.getElementById('c3-content').classList.remove('visible');
+    if(currentState >= 9) document.getElementById('c4-content').classList.add('visible'); else document.getElementById('c4-content').classList.remove('visible');
+    if(currentState >= 10) document.getElementById('c4-new').style.opacity = '1'; else document.getElementById('c4-new').style.opacity = '0';
+    if(currentState >= 12) document.getElementById('c5-content').classList.add('visible'); else document.getElementById('c5-content').classList.remove('visible');
+  }
+
+  // Zoom Out & Line Climax (13-14)
+  if (currentState >= 13 && currentState <= 14) {
+    camera.style.transform = `translateY(${540 - 2260}px) scale(0.2)`;
+    
+    if (currentState === 13) {
+      for(let i=1; i<=5; i++) {
+        document.getElementById(`card-${i}`).classList.remove('faded', 'line-dissolved');
+        document.getElementById(`card-${i}`).classList.add('visible');
+      }
+      singleLine.style.opacity = '0';
+      singleLine.style.height = '0';
+    }
+    if (currentState === 14) {
+      for(let i=1; i<=5; i++) {
+        document.getElementById(`card-${i}`).classList.add('line-dissolved');
+      }
+      document.getElementById('stack-line-container').style.opacity = '0';
+      singleLine.style.opacity = '1';
+      singleLine.style.height = '3600px';
+      canvas.style.opacity = '1'; // Show particles
+    }
+  } else if (currentState < 13) {
+    document.getElementById('stack-line-container').style.opacity = '1';
+    singleLine.style.opacity = '0';
+    singleLine.style.height = '0';
+    canvas.style.opacity = '0';
+  }
+
+  // Endings & Overlays (15+)
+  if (currentState >= 15) {
+    stackLayer.style.opacity = '0'; // Hide entire stack behind
+  }
+  
+  const endSlides = ['end-1', 'end-2', 'end-3', 'end-4', 'end-5'];
+  endSlides.forEach(id => document.getElementById(id).classList.remove('visible'));
+
+  if (currentState === 15) document.getElementById('end-1').classList.add('visible');
+  if (currentState === 16) document.getElementById('end-2').classList.add('visible');
+  if (currentState === 17) document.getElementById('end-3').classList.add('visible');
+  if (currentState === 18) document.getElementById('end-4').classList.add('visible');
+  
+  if (currentState >= 19) {
+    document.getElementById('end-5').classList.add('visible');
+    canvas.style.opacity = '0'; // Hide particles for final black screen
+    
+    if(currentState >= 19) document.getElementById('ds-1').classList.add('visible'); else document.getElementById('ds-1').classList.remove('visible');
+    if(currentState >= 20) document.getElementById('ds-2').classList.add('visible'); else document.getElementById('ds-2').classList.remove('visible');
+    if(currentState >= 21) document.getElementById('ds-3').classList.add('visible'); else document.getElementById('ds-3').classList.remove('visible');
+    if(currentState >= 22) document.getElementById('ds-4').classList.add('visible'); else document.getElementById('ds-4').classList.remove('visible');
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' || e.code === 'ArrowRight') {
+    if (currentState < TOTAL_STATES - 1) {
+      currentState++;
+      updateState();
+    }
+  } else if (e.code === 'ArrowLeft') {
+    if (currentState > 0) {
+      currentState--;
+      updateState();
+    }
+  } else if (e.code === 'KeyR') {
+    currentState = 0;
+    updateState();
+  } else if (e.code === 'KeyF') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+});
+
+updateState();
+</script>
+</body>
+</html>

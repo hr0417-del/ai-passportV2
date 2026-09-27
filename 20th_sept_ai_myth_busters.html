@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI MYTH BUSTERS™ - Educator Edition</title>
+<style>
+/* RESET & BASE */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* CANVAS */
+#app {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  transform-origin: top left;
+  background: #050505;
+  overflow: hidden;
+}
+
+/* INTRO */
+#intro-container {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  transition: opacity 1.5s ease;
+  z-index: 20;
+}
+#intro-line {
+  width: 0; height: 2px; background: rgba(59, 130, 246, 0.8);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#intro-line.drawn { width: 600px; }
+#intro-title {
+  font-size: 72px; font-weight: 300; letter-spacing: 0.15em; color: #fff;
+  margin-top: 40px; opacity: 0; transform: translateY(20px);
+  transition: all 1.5s ease 0.5s;
+}
+#intro-title.visible { opacity: 1; transform: translateY(0); }
+.tm { font-size: 32px; vertical-align: super; color: rgba(255,255,255,0.3); }
+#intro-subtitle {
+  font-size: 32px; font-weight: 300; letter-spacing: 0.1em; color: #D4AF37;
+  margin-top: 20px; opacity: 0; transform: translateY(20px);
+  transition: all 1.5s ease 1s; font-style: italic;
+}
+#intro-subtitle.visible { opacity: 1; transform: translateY(0); }
+
+.intro-fade {
+  font-size: 36px; font-weight: 300; letter-spacing: 0.15em; color: #fff;
+  margin-top: 40px; opacity: 0; transition: opacity 1.5s ease;
+}
+.intro-fade.visible { opacity: 1; }
+
+/* CARDS */
+.card-container {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px; height: 600px;
+  perspective: 2500px;
+  opacity: 0; pointer-events: none;
+  transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 10;
+}
+.card-container.active {
+  opacity: 1; pointer-events: auto;
+}
+.card-inner {
+  position: relative; width: 100%; height: 100%;
+  text-align: center;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+}
+.card-container.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front, .card-back {
+  position: absolute; width: 100%; height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: rgba(15,15,15,0.6); backdrop-filter: blur(30px);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 24px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 40px 60px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+.card-back {
+  transform: rotateY(180deg);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 0 40px rgba(59, 130, 246, 0.1);
+  padding: 40px;
+}
+
+/* CARD CONTENT */
+.myth-label { font-size: 24px; letter-spacing: 0.3em; color: rgba(255,255,255,0.4); margin-bottom: 35px; }
+.myth-text { font-size: 56px; font-weight: 300; color: #fff; text-align: center; line-height: 1.35; margin-bottom: 45px; }
+
+.reality-label { font-size: 20px; letter-spacing: 0.3em; color: #3B82F6; margin-bottom: 25px; }
+.reality-text { font-size: 28px; font-weight: 300; color: #fff; text-align: center; line-height: 1.4; margin-bottom: 20px; }
+
+.r-sub-list { display: flex; flex-direction: column; gap: 10px; font-size: 20px; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); margin-bottom: 25px; }
+.r-sub-inline { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 18px; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); margin-bottom: 25px; max-width: 600px; }
+.r-emphasis { font-size: 24px; color: #D4AF37; margin-bottom: 25px; letter-spacing: 0.1em; font-weight: 300; }
+
+.takeaway-box { 
+  background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px; padding: 20px 30px; text-align: center; width: 100%;
+}
+.takeaway-text { font-size: 24px; font-weight: 300; color: #D4AF37; line-height: 1.4; letter-spacing: 0.05em; }
+
+/* CUSTOM CARD CONTENT LAYOUTS */
+.vert-seq { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 18px; letter-spacing: 0.15em; color: rgba(255,255,255,0.8); }
+.vert-arr { color: #3B82F6; font-size: 16px; }
+
+.horiz-seq { display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 18px; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: 15px; }
+.horiz-seq-strong { display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 22px; letter-spacing: 0.1em; color: #D4AF37; margin-bottom: 25px; }
+
+/* CIRCLE ARRANGEMENT (State 15) */
+.card-container.circle-pos-1 { transform: translate(calc(-50% + 0px), calc(-50% - 380px)) scale(0.32); }
+.card-container.circle-pos-2 { transform: translate(calc(-50% + 329px), calc(-50% - 190px)) scale(0.32); }
+.card-container.circle-pos-3 { transform: translate(calc(-50% + 329px), calc(-50% + 190px)) scale(0.32); }
+.card-container.circle-pos-4 { transform: translate(calc(-50% + 0px), calc(-50% + 380px)) scale(0.32); }
+.card-container.circle-pos-5 { transform: translate(calc(-50% - 329px), calc(-50% + 190px)) scale(0.32); }
+.card-container.circle-pos-6 { transform: translate(calc(-50% - 329px), calc(-50% - 190px)) scale(0.32); }
+
+/* CENTER TEXT (State 15 & 16) */
+#center-sequence {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 5; pointer-events: none; opacity: 0; transition: opacity 1s ease;
+}
+#center-sequence.visible { opacity: 1; }
+.cs-vert { display: flex; flex-direction: column; align-items: center; gap: 15px; transition: opacity 1s ease; }
+.cs-horiz { display: flex; align-items: center; gap: 20px; position: absolute; opacity: 0; transition: opacity 1s ease; }
+.cs-word { font-size: 32px; font-weight: 300; letter-spacing: 0.2em; color: #fff; }
+.cs-arrow { font-size: 24px; color: #3B82F6; }
+
+/* FINAL TEXTS (States 17-19) */
+#final-screen {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: #050505; z-index: 30; opacity: 0; pointer-events: none; transition: opacity 2.5s ease;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+}
+#final-screen.visible { opacity: 1; pointer-events: auto; }
+
+.ft-line { font-size: 56px; font-weight: 300; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); margin-bottom: 40px; opacity: 0; transition: opacity 1.5s ease; }
+.ft-line.visible { opacity: 1; }
+
+.ft-main { font-size: 64px; font-weight: 400; color: #fff; margin-bottom: 80px; opacity: 0; transition: opacity 1.5s ease; }
+.ft-main.visible { opacity: 1; }
+
+.ft-climax { font-size: 80px; font-weight: 300; color: #D4AF37; letter-spacing: 0.15em; text-shadow: 0 0 40px rgba(212, 175, 55, 0.4); opacity: 0; transition: opacity 2.5s ease; }
+.ft-climax.visible { opacity: 1; }
+
+/* HANDOFF (State 20) */
+#handoff-screen {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: #000; z-index: 40; opacity: 0; pointer-events: none; transition: opacity 2s ease;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+}
+#handoff-screen.visible { opacity: 1; pointer-events: auto; }
+
+.ho-title { font-size: 72px; font-weight: 300; letter-spacing: 0.2em; color: #fff; margin-bottom: 20px; }
+.ho-sub { font-size: 24px; font-weight: 300; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); margin-bottom: 120px; }
+.ho-next { font-size: 18px; letter-spacing: 0.4em; color: #3B82F6; margin-bottom: 20px; }
+.ho-final { font-size: 48px; font-weight: 300; letter-spacing: 0.15em; color: #D4AF37; }
+
+</style>
+</head>
+<body>
+
+<div id="app">
+  
+  <!-- INTRO -->
+  <div id="intro-container">
+    <div id="intro-line"></div>
+    <div id="intro-title">AI MYTH BUSTERS<span class="tm">™</span></div>
+    <div id="intro-subtitle">Separating Fear From Reality</div>
+    <div id="intro-stmt1" class="intro-fade">AI IS EVOLVING.</div>
+    <div id="intro-stmt2" class="intro-fade">SO WHAT SHOULD EDUCATORS BELIEVE?</div>
+  </div>
+
+  <!-- MYTH 1 -->
+  <div class="card-container" id="card-1">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="myth-label">MYTH 01</div>
+        <div class="myth-text">“AI WILL REPLACE TEACHERS.”</div>
+      </div>
+      <div class="card-back">
+        <div class="reality-label">REALITY</div>
+        <div class="reality-text">AI can automate parts of teaching work.</div>
+        <div class="r-sub-inline">
+          <span>PLANNING</span> • <span>CONTENT CREATION</span> • <span>DIFFERENTIATION</span><br>
+          <span>ASSESSMENT SUPPORT</span> • <span>ADMINISTRATIVE TASKS</span>
+        </div>
+        <div class="r-emphasis" style="color: #fff;">BUT TEACHING IS MORE THAN CONTENT DELIVERY.</div>
+        <div class="takeaway-box">
+          <div class="takeaway-text">AI CAN SUPPORT TEACHING.<br><span style="color:#fff; font-size: 20px;">IT CANNOT REPLACE THE HUMAN RELATIONSHIP AT THE HEART OF IT.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 2 -->
+  <div class="card-container" id="card-2">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="myth-label">MYTH 02</div>
+        <div class="myth-text">“AI KNOWS EVERYTHING.”</div>
+      </div>
+      <div class="card-back">
+        <div class="reality-label">REALITY</div>
+        <div class="reality-text" style="font-size: 24px;">AI can generate, summarise, reason over information and connect patterns.</div>
+        <div class="reality-text" style="color: rgba(255,255,255,0.6); font-size: 20px; margin-bottom: 10px;">But it can also:</div>
+        <div class="r-sub-list">
+          <div>HALLUCINATE</div><div>MISUNDERSTAND</div><div>MISS CONTEXT</div>
+        </div>
+        <div class="r-emphasis">KNOWLEDGE IS NOT WISDOM.</div>
+        <div class="takeaway-box">
+          <div class="takeaway-text">VERIFY. CONTEXTUALISE. JUDGE.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 3 -->
+  <div class="card-container" id="card-3">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="myth-label">MYTH 03</div>
+        <div class="myth-text">“IF AI SOUNDS CONFIDENT,<br>IT MUST BE CORRECT.”</div>
+      </div>
+      <div class="card-back">
+        <div class="reality-label">REALITY</div>
+        <div class="reality-text" style="color: rgba(255,255,255,0.6); font-size: 20px; margin-bottom: 15px;">AI output can be:</div>
+        <div class="r-sub-inline">
+          <span>INCORRECT</span> • <span>OUTDATED</span> • <span>INCOMPLETE</span> • <span>MISLEADING</span>
+        </div>
+        <div class="r-emphasis" style="color: #fff; font-size: 22px;">AI OUTPUT IS A STARTING POINT — NOT AUTOMATIC TRUTH.</div>
+        <div class="takeaway-box" style="padding: 15px;">
+          <div class="vert-seq">
+            <div>ASK</div><div class="vert-arr">↓</div>
+            <div>CHECK</div><div class="vert-arr">↓</div>
+            <div>VERIFY</div><div class="vert-arr">↓</div>
+            <div style="color: #D4AF37;">USE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 4 -->
+  <div class="card-container" id="card-4">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="myth-label">MYTH 04</div>
+        <div class="myth-text">“YOU NEED TO KNOW CODING<br>TO USE AI.”</div>
+      </div>
+      <div class="card-back">
+        <div class="reality-label">REALITY</div>
+        <div class="reality-text" style="color: rgba(255,255,255,0.6); font-size: 20px; margin-bottom: 15px;">AI capability now spans:</div>
+        <div class="r-sub-inline">
+          <span>PROMPTING</span> • <span>RESEARCH</span> • <span>CONTENT CREATION</span><br>
+          <span>ANALYSIS</span> • <span>AUTOMATION</span> • <span>BUILDING</span>
+        </div>
+        <div class="r-emphasis" style="color: #fff; font-size: 20px;">CODING CAN EXPAND WHAT YOU BUILD.<br><span style="color: rgba(255,255,255,0.6);">BUT IT ISN'T THE ENTRY POINT.</span></div>
+        <div class="takeaway-box">
+          <div class="takeaway-text">AI LITERACY COMES BEFORE AI ENGINEERING.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 5 -->
+  <div class="card-container" id="card-5">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="myth-label">MYTH 05</div>
+        <div class="myth-text">“AI WILL MAKE STUDENTS<br>STOP LEARNING.”</div>
+      </div>
+      <div class="card-back">
+        <div class="reality-label">REALITY</div>
+        <div class="reality-text" style="font-size: 24px;">Students can use AI as a shortcut.</div>
+        <div class="r-emphasis" style="color: rgba(255,255,255,0.6); font-size: 20px;">WHAT ARE WE ASKING STUDENTS TO DO WITH AI?</div>
+        
+        <div class="horiz-seq">ASK <span class="vert-arr">→</span> COPY <span class="vert-arr">→</span> SUBMIT</div>
+        <div class="horiz-seq-strong">QUESTION <span class="vert-arr">→</span> EXPLORE <span class="vert-arr">→</span> CHALLENGE <span class="vert-arr">→</span> CREATE <span class="vert-arr">→</span> EXPLAIN</div>
+        
+        <div class="takeaway-box">
+          <div class="takeaway-text" style="font-size: 20px;">THE GOAL ISN'T TO KEEP AI OUT OF LEARNING.<br><span style="color: #fff;">IT'S TO TEACH STUDENTS HOW TO THINK WITH IT.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 6 -->
+  <div class="card-container" id="card-6">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="myth-label">MYTH 06</div>
+        <div class="myth-text" style="font-size: 64px; color: #D4AF37;">“AI IS JUST ANOTHER TOOL.”</div>
+      </div>
+      <div class="card-back">
+        <div class="reality-label">REALITY</div>
+        <div class="reality-text" style="font-size: 22px; color: rgba(255,255,255,0.6);">The calculator changed calculation.<br>The internet changed access to information.</div>
+        <div class="reality-text" style="font-size: 24px;">AI changes how we:</div>
+        <div class="r-sub-inline" style="color: #3B82F6;">
+          <span>SEARCH</span> • <span>CREATE</span> • <span>ANALYSE</span> • <span>COMMUNICATE</span> • <span>AUTOMATE</span> • <span>BUILD</span>
+        </div>
+        <div class="takeaway-box" style="padding: 30px;">
+          <div class="takeaway-text" style="font-size: 28px;">AI IS NOT JUST A NEW TOOL.<br><span style="color: #fff; font-size: 32px;">IT CHANGES THE WAY WE WORK WITH TOOLS.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER SEQUENCE (State 15-16) -->
+  <div id="center-sequence">
+    <div class="cs-vert" id="cs-vert">
+      <div class="cs-word">UNDERSTAND</div><div class="cs-arrow">↓</div>
+      <div class="cs-word">QUESTION</div><div class="cs-arrow">↓</div>
+      <div class="cs-word">VERIFY</div><div class="cs-arrow">↓</div>
+      <div class="cs-word">CREATE</div><div class="cs-arrow">↓</div>
+      <div class="cs-word" style="color:#D4AF37;">BUILD</div>
+    </div>
+    <div class="cs-horiz" id="cs-horiz">
+      <div class="cs-word">UNDERSTAND</div><div class="cs-arrow">→</div>
+      <div class="cs-word">QUESTION</div><div class="cs-arrow">→</div>
+      <div class="cs-word">VERIFY</div><div class="cs-arrow">→</div>
+      <div class="cs-word">CREATE</div><div class="cs-arrow">→</div>
+      <div class="cs-word" style="color:#D4AF37;">BUILD</div>
+    </div>
+  </div>
+
+  <!-- FINAL SCREEN (State 17-19) -->
+  <div id="final-screen">
+    <div class="ft-line" id="fs-1">THE QUESTION ISN'T WHETHER TEACHERS SHOULD USE AI.</div>
+    <div class="ft-main" id="fs-2">THE QUESTION IS:<br><span style="color: #3B82F6;">WHAT SHOULD WE BUILD WITH IT?</span></div>
+    <div class="ft-climax" id="fs-3">FROM AI USER<br>TO<br>AI-CAPABLE EDUCATOR</div>
+  </div>
+
+  <!-- HANDOFF SCREEN (State 20) -->
+  <div id="handoff-screen">
+    <div class="ho-title">BUILDING WITH AI</div>
+    <div class="ho-sub">FROM A TEACHER PROBLEM TO A WORKING AI WORKFLOW</div>
+    <div class="ho-next">NEXT</div>
+    <div class="ho-final">THE AI TRANSFORMATION FORMULA™</div>
+  </div>
+
+</div>
+
+<script>
+function resizeApp() {
+  const app = document.getElementById('app');
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  app.style.transform = `scale(${scale})`;
+  app.style.left = `${(window.innerWidth - 1920 * scale) / 2}px`;
+  app.style.top = `${(window.innerHeight - 1080 * scale) / 2}px`;
+}
+window.addEventListener('resize', resizeApp);
+resizeApp();
+
+// State Machine
+let currentState = 0;
+const TOTAL_STATES = 21; // 0 to 20
+
+function updateState() {
+  // INTRO (0-2)
+  const intro = document.getElementById('intro-container');
+  if (currentState <= 2) {
+    intro.style.opacity = '1';
+    if (currentState >= 0) {
+      document.getElementById('intro-line').classList.add('drawn');
+      document.getElementById('intro-title').classList.add('visible');
+      document.getElementById('intro-subtitle').classList.add('visible');
+    }
+    if (currentState >= 1) document.getElementById('intro-stmt1').classList.add('visible');
+    else document.getElementById('intro-stmt1').classList.remove('visible');
+    
+    if (currentState >= 2) document.getElementById('intro-stmt2').classList.add('visible');
+    else document.getElementById('intro-stmt2').classList.remove('visible');
+  } else {
+    intro.style.opacity = '0';
+  }
+
+  // CARDS (3-14, Circle at 15-16)
+  for (let i = 1; i <= 6; i++) {
+    const card = document.getElementById(`card-${i}`);
+    const frontState = (i * 2) + 1; // 3, 5, 7, 9, 11, 13
+    const backState = frontState + 1; // 4, 6, 8, 10, 12, 14
+    
+    card.className = 'card-container'; // reset
+    
+    if (currentState >= 15 && currentState <= 16) {
+      card.classList.add(`circle-pos-${i}`, 'flipped');
+      card.style.opacity = '0.4';
+    } else if (currentState < 17) {
+      card.style.opacity = ''; // CSS default
+      if (currentState === frontState) {
+        card.classList.add('active');
+      } else if (currentState === backState) {
+        card.classList.add('active', 'flipped');
+      }
+    } else {
+      card.style.opacity = '0';
+    }
+  }
+
+  // CENTER SEQUENCE (15-16)
+  const cSeq = document.getElementById('center-sequence');
+  const cVert = document.getElementById('cs-vert');
+  const cHoriz = document.getElementById('cs-horiz');
+  
+  if (currentState === 15 || currentState === 16) {
+    cSeq.classList.add('visible');
+    if (currentState === 15) {
+      cVert.style.opacity = '1';
+      cHoriz.style.opacity = '0';
+    } else {
+      cVert.style.opacity = '0';
+      cHoriz.style.opacity = '1';
+    }
+  } else {
+    cSeq.classList.remove('visible');
+  }
+
+  // FINAL SCREEN (17-19)
+  const fScreen = document.getElementById('final-screen');
+  if (currentState >= 17 && currentState < 20) {
+    fScreen.classList.add('visible');
+    
+    if (currentState >= 17) document.getElementById('fs-1').classList.add('visible');
+    else document.getElementById('fs-1').classList.remove('visible');
+    
+    if (currentState >= 18) document.getElementById('fs-2').classList.add('visible');
+    else document.getElementById('fs-2').classList.remove('visible');
+    
+    if (currentState >= 19) document.getElementById('fs-3').classList.add('visible');
+    else document.getElementById('fs-3').classList.remove('visible');
+  } else {
+    fScreen.classList.remove('visible');
+  }
+
+  // HANDOFF SCREEN (20)
+  const hScreen = document.getElementById('handoff-screen');
+  if (currentState === 20) {
+    hScreen.classList.add('visible');
+  } else {
+    hScreen.classList.remove('visible');
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' || e.code === 'ArrowRight') {
+    if (currentState < TOTAL_STATES - 1) {
+      currentState++;
+      updateState();
+    }
+  } else if (e.code === 'ArrowLeft') {
+    if (currentState > 0) {
+      currentState--;
+      updateState();
+    }
+  } else if (e.code === 'KeyR') {
+    currentState = 0;
+    updateState();
+  } else if (e.code === 'KeyF') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+});
+
+updateState();
+</script>
+</body>
+</html>
