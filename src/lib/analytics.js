@@ -342,8 +342,6 @@ export function trackConversion(conversionName = 'registration_success', metadat
     conversion_name: conversionName,
     form_name: metadata.form_name || 'webinar_registration',
     passport_id_generated: metadata.passport_id_generated || false,
-    currency: 'INR',
-    value: 1.0,
     ...metadata
   });
 }
