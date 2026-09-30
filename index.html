@@ -290,48 +290,205 @@
       </div>
     </section>
 
-    <!-- SECTION 3 — THE MASTER JOURNEY -->
-    <section class="section" id="journey" style="padding: 110px 0; background-color: #030305; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-      <div class="movement-inner text-center" style="max-width: 1200px; margin: 0 auto; text-align: center;">
-        <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">YOUR AI JOURNEY</span>
+    <!-- SECTION 3 — YOUR AI JOURNEY (CINEMATIC SCROLL EXPERIENCE) -->
+    <section class="section journey-cinematic-section" id="journey">
+      <div class="journey-pin-wrapper" id="journey-pin-wrapper">
         
-        <h2 style="font-size: clamp(2.2rem, 4vw, 3.4rem); margin: 12px 0 16px; color: #ffffff;">
-          LEARN. BUILD. PROVE. GROW.
-        </h2>
-
-        <p class="section-lead" style="margin: 0 auto 48px; max-width: 740px; font-size: 1.05rem; line-height: 1.7; color: var(--color-text-secondary);">
-          One journey. An evolving record of capability.
-        </p>
-
-        <!-- 4 Master Journey Cards -->
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: left;" class="journey-flow-5grid">
+        <!-- Atmospheric Ambient Layers -->
+        <div class="journey-bg-glow" id="journey-bg-glow"></div>
+        <div class="journey-blueprint-grid" id="journey-blueprint-grid"></div>
+        <div class="journey-light-field" id="journey-light-field"></div>
+        
+        <div class="journey-inner-container">
           
-          <div class="go-further-card" style="padding: 28px 24px;">
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.76rem; color: #58c4ff; font-weight: 700; display: block; margin-bottom: 12px; letter-spacing: 0.1em;">01 &bull; LEARN</span>
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.45rem; color: #ffffff; margin: 0 0 12px 0;">LEARN</h3>
-            <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.65; margin: 0;">Understand AI through practical learning.</p>
+          <!-- Header Area -->
+          <div class="journey-header" id="journey-header">
+            <span class="section-tag journey-eyebrow">YOUR AI JOURNEY</span>
+            <h2 class="journey-main-headline">EXPLORE. CREATE. INNOVATE. BUILD. LEAD.</h2>
+            <p class="journey-subheadline">Five ways you grow your capability with AI.</p>
+            
+            <!-- Live Progress Counter & Indicator -->
+            <div class="journey-progress-indicator" id="journey-progress-indicator">
+              <span class="journey-stage-counter" id="journey-stage-counter">01 / 05</span>
+              <div class="journey-counter-bar"><div class="journey-counter-fill" id="journey-counter-fill"></div></div>
+            </div>
           </div>
 
-          <div class="go-further-card" style="padding: 28px 24px;">
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.76rem; color: var(--color-gold); font-weight: 700; display: block; margin-bottom: 12px; letter-spacing: 0.1em;">02 &bull; BUILD</span>
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.45rem; color: #ffffff; margin: 0 0 12px 0;">BUILD</h3>
-            <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.65; margin: 0;">Turn knowledge into workflows, projects and useful solutions.</p>
+          <!-- DESKTOP HORIZONTAL STAGE CANVAS -->
+          <div class="journey-stage-canvas desktop-journey-canvas" id="desktop-journey-canvas">
+            
+            <!-- Progressive Connecting Journey Line -->
+            <svg class="journey-svg-line-container" viewBox="0 0 1000 40" preserveAspectRatio="none">
+              <line x1="50" y1="20" x2="950" y2="20" class="journey-line-bg" />
+              <line x1="50" y1="20" x2="950" y2="20" class="journey-line-progress" id="journey-line-progress-desktop" />
+            </svg>
+
+            <!-- 5 Stages Track -->
+            <div class="journey-stages-track" id="journey-stages-track">
+              
+              <!-- STAGE 01 -->
+              <div class="journey-stage-card stage-01 active" data-stage="1" id="dstage-1">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-d1" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-d1">✓</span>
+                  <span class="stage-num">01</span>
+                </div>
+                <span class="stage-name-tag">01 &bull; EXPLORE</span>
+                <h3 class="stage-title">DISCOVER WHAT AI CAN DO.</h3>
+                <p class="stage-body">Build awareness, curiosity and confidence through hands-on experiences.</p>
+              </div>
+
+              <!-- STAGE 02 -->
+              <div class="journey-stage-card stage-02" data-stage="2" id="dstage-2">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-d2" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-d2">✓</span>
+                  <span class="stage-num">02</span>
+                </div>
+                <span class="stage-name-tag">02 &bull; CREATE</span>
+                <h3 class="stage-title">TURN IDEAS INTO SOMETHING REAL.</h3>
+                <p class="stage-body">Use AI to create, experiment and bring your ideas to life.</p>
+              </div>
+
+              <!-- STAGE 03 -->
+              <div class="journey-stage-card stage-03" data-stage="3" id="dstage-3">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-d3" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-d3">✓</span>
+                  <span class="stage-num">03</span>
+                </div>
+                <span class="stage-name-tag">03 &bull; INNOVATE</span>
+                <h3 class="stage-title">FIND NEW WAYS TO SOLVE PROBLEMS.</h3>
+                <p class="stage-body">Experiment, challenge assumptions and discover what’s possible.</p>
+              </div>
+
+              <!-- STAGE 04 -->
+              <div class="journey-stage-card stage-04" data-stage="4" id="dstage-4">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-d4" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-d4">✓</span>
+                  <span class="stage-num">04</span>
+                </div>
+                <span class="stage-name-tag">04 &bull; BUILD</span>
+                <h3 class="stage-title">TURN CAPABILITY INTO REAL WORK.</h3>
+                <p class="stage-body">Create projects, workflows and solutions that demonstrate what you can do.</p>
+              </div>
+
+              <!-- STAGE 05 -->
+              <div class="journey-stage-card stage-05" data-stage="5" id="dstage-5">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-d5" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-d5">✓</span>
+                  <span class="stage-num">05</span>
+                </div>
+                <span class="stage-name-tag">05 &bull; LEAD</span>
+                <h3 class="stage-title">USE AI WITH PURPOSE.</h3>
+                <p class="stage-body">Keep growing, take on bigger challenges and create meaningful impact.</p>
+              </div>
+
+            </div>
           </div>
 
-          <div class="go-further-card" style="padding: 28px 24px;">
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.76rem; color: #2ecc71; font-weight: 700; display: block; margin-bottom: 12px; letter-spacing: 0.1em;">03 &bull; PROVE</span>
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.45rem; color: #ffffff; margin: 0 0 12px 0;">PROVE</h3>
-            <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.65; margin: 0;">Show what you can actually do through projects, credentials and evidence.</p>
+          <!-- MOBILE VERTICAL STAGE CANVAS -->
+          <div class="journey-stage-canvas mobile-journey-canvas" id="mobile-journey-canvas">
+            <div class="mobile-journey-track">
+              <div class="mobile-journey-line-bg"></div>
+              <div class="mobile-journey-line-progress" id="mobile-journey-line-progress"></div>
+
+              <div class="mobile-stage-item stage-01 active" data-stage="1" id="mstage-1">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-m1" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-m1">✓</span>
+                  <span class="stage-num">01</span>
+                </div>
+                <span class="stage-name-tag">01 &bull; EXPLORE</span>
+                <h3 class="stage-title">DISCOVER WHAT AI CAN DO.</h3>
+                <p class="stage-body">Build awareness, curiosity and confidence through hands-on experiences.</p>
+              </div>
+
+              <div class="mobile-stage-item stage-02" data-stage="2" id="mstage-2">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-m2" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-m2">✓</span>
+                  <span class="stage-num">02</span>
+                </div>
+                <span class="stage-name-tag">02 &bull; CREATE</span>
+                <h3 class="stage-title">TURN IDEAS INTO SOMETHING REAL.</h3>
+                <p class="stage-body">Use AI to create, experiment and bring your ideas to life.</p>
+              </div>
+
+              <div class="mobile-stage-item stage-03" data-stage="3" id="mstage-3">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-m3" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-m3">✓</span>
+                  <span class="stage-num">03</span>
+                </div>
+                <span class="stage-name-tag">03 &bull; INNOVATE</span>
+                <h3 class="stage-title">FIND NEW WAYS TO SOLVE PROBLEMS.</h3>
+                <p class="stage-body">Experiment, challenge assumptions and discover what’s possible.</p>
+              </div>
+
+              <div class="mobile-stage-item stage-04" data-stage="4" id="mstage-4">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-m4" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-m4">✓</span>
+                  <span class="stage-num">04</span>
+                </div>
+                <span class="stage-name-tag">04 &bull; BUILD</span>
+                <h3 class="stage-title">TURN CAPABILITY INTO REAL WORK.</h3>
+                <p class="stage-body">Create projects, workflows and solutions that demonstrate what you can do.</p>
+              </div>
+
+              <div class="mobile-stage-item stage-05" data-stage="5" id="mstage-5">
+                <div class="stamp-wrapper">
+                  <svg class="stamp-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-bg" />
+                    <circle cx="40" cy="40" r="36" class="stamp-circle-draw" id="stamp-draw-m5" />
+                  </svg>
+                  <span class="stamp-check" id="stamp-check-m5">✓</span>
+                  <span class="stage-num">05</span>
+                </div>
+                <span class="stage-name-tag">05 &bull; LEAD</span>
+                <h3 class="stage-title">USE AI WITH PURPOSE.</h3>
+                <p class="stage-body">Keep growing, take on bigger challenges and create meaningful impact.</p>
+              </div>
+            </div>
           </div>
 
-          <div class="go-further-card" style="padding: 28px 24px;">
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.76rem; color: #e74c3c; font-weight: 700; display: block; margin-bottom: 12px; letter-spacing: 0.1em;">04 &bull; GROW</span>
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.45rem; color: #ffffff; margin: 0 0 12px 0;">GROW</h3>
-            <p style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.65; margin: 0;">Keep developing your capability as AI evolves.</p>
+          <!-- FINAL PAYOFF DISPLAY -->
+          <div class="journey-final-payoff" id="journey-final-payoff">
+            <span class="payoff-badge">✦ JOURNEY COMPLETE</span>
+            <h4 class="payoff-text">EVERY STEP BUILDS YOUR CAPABILITY.</h4>
           </div>
 
         </div>
-
       </div>
     </section>
 

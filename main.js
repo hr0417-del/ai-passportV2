@@ -2505,6 +2505,129 @@ function initMobileStickyCTA() {
   handleScroll();
 }
 
+/* --- 25. Signature Cinematic Journey Scroll Engine --- */
+function initCinematicJourneySection() {
+  const section = document.getElementById('journey');
+  const pinWrapper = document.getElementById('journey-pin-wrapper');
+  if (!section || !pinWrapper) return;
+
+  const counterText = document.getElementById('journey-stage-counter');
+  const counterFill = document.getElementById('journey-counter-fill');
+  const desktopLine = document.getElementById('journey-line-progress-desktop');
+  const mobileLine = document.getElementById('mobile-journey-line-progress');
+  const blueprintGrid = document.getElementById('journey-blueprint-grid');
+  const lightField = document.getElementById('journey-light-field');
+  const finalPayoff = document.getElementById('journey-final-payoff');
+
+  const desktopCards = document.querySelectorAll('#desktop-journey-canvas .journey-stage-card');
+  const mobileCards = document.querySelectorAll('#mobile-journey-canvas .mobile-stage-item');
+
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  const isMobile = window.innerWidth < 768;
+
+  if (!isMobile) {
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: '+=1600',
+      pin: pinWrapper,
+      scrub: 0.5,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        
+        if (desktopLine) {
+          const offset = Math.max(0, 1000 - progress * 1000);
+          desktopLine.style.strokeDashoffset = offset;
+        }
+
+        const stageIndex = Math.min(5, Math.floor(progress * 5) + 1);
+        
+        if (counterText) counterText.textContent = `0${stageIndex} / 05`;
+        if (counterFill) counterFill.style.width = `${Math.min(100, (progress * 100).toFixed(0))}%`;
+
+        desktopCards.forEach((card, idx) => {
+          const cardNum = idx + 1;
+          const cardProgress = Math.min(1, Math.max(0, (progress - (idx * 0.18)) / 0.18));
+          
+          const stampDraw = document.getElementById(`stamp-draw-d${cardNum}`);
+          if (stampDraw) {
+            stampDraw.style.strokeDashoffset = Math.max(0, 230 - cardProgress * 230);
+          }
+
+          if (cardNum < stageIndex) {
+            card.classList.remove('active');
+            card.classList.add('completed');
+          } else if (cardNum === stageIndex) {
+            card.classList.add('active');
+            card.classList.remove('completed');
+          } else {
+            card.classList.remove('active', 'completed');
+          }
+        });
+
+        if (lightField) {
+          lightField.style.opacity = (stageIndex === 3) ? '1' : '0';
+        }
+
+        if (blueprintGrid) {
+          blueprintGrid.style.opacity = (stageIndex >= 4) ? '0.6' : '0';
+        }
+
+        if (finalPayoff) {
+          if (progress >= 0.85) {
+            finalPayoff.classList.add('visible');
+          } else {
+            finalPayoff.classList.remove('visible');
+          }
+        }
+      }
+    });
+  } else {
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 70%',
+      end: 'bottom 30%',
+      scrub: 0.3,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        if (mobileLine) {
+          mobileLine.style.height = `${(progress * 100).toFixed(0)}%`;
+        }
+        const stageIndex = Math.min(5, Math.floor(progress * 5) + 1);
+        if (counterText) counterText.textContent = `0${stageIndex} / 05`;
+
+        mobileCards.forEach((card, idx) => {
+          const cardNum = idx + 1;
+          const stampDraw = document.getElementById(`stamp-draw-m${cardNum}`);
+          if (stampDraw) {
+            const cardProgress = Math.min(1, Math.max(0, (progress - (idx * 0.18)) / 0.18));
+            stampDraw.style.strokeDashoffset = Math.max(0, 230 - cardProgress * 230);
+          }
+
+          if (cardNum < stageIndex) {
+            card.classList.remove('active');
+            card.classList.add('completed');
+          } else if (cardNum === stageIndex) {
+            card.classList.add('active');
+            card.classList.remove('completed');
+          } else {
+            card.classList.remove('active', 'completed');
+          }
+        });
+
+        if (finalPayoff) {
+          if (progress >= 0.85) {
+            finalPayoff.classList.add('visible');
+          } else {
+            finalPayoff.classList.remove('visible');
+          }
+        }
+      }
+    });
+  }
+}
+
 function runMobileInitializers() {
   initEcosystemDiagram();
   initFrameworkAnimation();
@@ -2515,6 +2638,7 @@ function runMobileInitializers() {
   initFooterInteractions();
   initAIGalaxyExperience();
   initMobileStickyCTA();
+  initCinematicJourneySection();
 }
 
 if (document.readyState === 'loading') {
