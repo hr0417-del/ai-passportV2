@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initHeroCarousel', initHeroCarousel);
   initSafe('initAIShiftCascade', initAIShiftCascade);
   initSafe('initCertificateVerifier', initCertificateVerifier);
+  initSafe('initCinematicJourneySection', initCinematicJourneySection);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -2519,6 +2520,8 @@ function initCinematicJourneySection() {
   const lightField = document.getElementById('journey-light-field');
   const finalPayoff = document.getElementById('journey-final-payoff');
 
+  const desktopTrack = document.getElementById('journey-stages-track');
+  const desktopCanvas = document.getElementById('desktop-journey-canvas');
   const desktopCards = document.querySelectorAll('#desktop-journey-canvas .journey-stage-card');
   const mobileCards = document.querySelectorAll('#mobile-journey-canvas .mobile-stage-item');
 
@@ -2527,14 +2530,26 @@ function initCinematicJourneySection() {
   const isMobile = window.innerWidth < 768;
 
   if (!isMobile) {
+    const getTrackScrollWidth = () => {
+      if (!desktopTrack || !desktopCanvas) return 0;
+      const totalWidth = desktopTrack.scrollWidth;
+      const visibleWidth = desktopCanvas.clientWidth;
+      return Math.max(0, totalWidth - visibleWidth);
+    };
+
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
-      end: '+=1600',
+      end: '+=2400',
       pin: pinWrapper,
-      scrub: 0.5,
+      scrub: 0.6,
       onUpdate: (self) => {
         const progress = self.progress;
+        const maxScroll = getTrackScrollWidth();
+
+        if (desktopTrack && maxScroll > 0) {
+          gsap.set(desktopTrack, { x: -progress * maxScroll });
+        }
         
         if (desktopLine) {
           const offset = Math.max(0, 1000 - progress * 1000);

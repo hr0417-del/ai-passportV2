@@ -9657,20 +9657,12 @@ h1, h2, h3, .hero-title, .section-title {
   background-color: #040508;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .journey-cinematic-section {
-    height: 240vh;
-  }
 }
 
 .journey-pin-wrapper {
   width: 100%;
   height: 100vh;
-  position: sticky;
-  top: 0;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9789,6 +9781,8 @@ h1, h2, h3, .hero-title, .section-title {
   width: 100%;
   margin: 20px 0 0;
   display: block;
+  overflow: hidden;
+  padding: 20px 0;
 }
 
 .journey-svg-line-container {
@@ -9815,24 +9809,27 @@ h1, h2, h3, .hero-title, .section-title {
 
 .journey-stages-track {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: stretch;
   position: relative;
-  width: 100%;
-  gap: 16px;
+  width: max-content;
+  gap: 40px;
+  padding: 0 calc(50vw - 210px);
+  will-change: transform;
 }
 
 .journey-stage-card {
-  flex: 1;
-  background: rgba(14, 15, 22, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  width: 420px;
+  flex-shrink: 0;
+  background: rgba(14, 15, 22, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  padding: 24px 20px;
+  padding: 32px 28px;
   box-sizing: border-box;
   text-align: left;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0.4;
-  transform: scale(0.96);
+  opacity: 0.35;
+  transform: scale(0.92);
   position: relative;
 }
 
