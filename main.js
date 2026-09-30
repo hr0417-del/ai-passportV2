@@ -500,7 +500,8 @@ function initParticles() {
   const container = document.getElementById('particles-container');
   if (!container) return;
   
-  const count = 25;
+  // Reduce particle count on mobile viewports for 60fps performance & battery savings
+  const count = window.innerWidth < 768 ? 6 : 25;
   
   for (let i = 0; i < count; i++) {
     const particle = document.createElement('div');
@@ -1053,12 +1054,15 @@ function initRegistrationForm() {
   }
 }
 
-/* --- 10. Mobile Menu Logic --- */
+/* --- 10. Mobile Menu Logic & Touch Navigation --- */
 function initMobileMenu() {
   const toggleBtn = document.querySelector('.mobile-menu-toggle');
   const navLinks = document.querySelector('.nav-links');
   
   if (toggleBtn && navLinks) {
+    if (!navLinks.id) navLinks.id = 'main-nav-links';
+    toggleBtn.setAttribute('aria-controls', 'main-nav-links');
+    
     toggleBtn.addEventListener('click', () => {
       toggleBtn.classList.toggle('active');
       navLinks.classList.toggle('mobile-open');
@@ -1066,18 +1070,22 @@ function initMobileMenu() {
       const isOpen = toggleBtn.classList.contains('active');
       toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       
+      // Lock body scroll on mobile to prevent background scroll leaking
+      document.body.classList.toggle('mobile-menu-active', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+
       const spans = toggleBtn.querySelectorAll('span');
       if (typeof gsap !== 'undefined') {
         if (isOpen) {
           gsap.to(spans[0], { y: 6, rotation: 45, duration: 0.3 });
           gsap.to(spans[1], { y: -6, rotation: -45, duration: 0.3 });
-          gsap.to(navLinks, { display: 'flex', opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', onComplete: () => {
+          gsap.to(navLinks, { display: 'flex', opacity: 1, y: 0, duration: 0.35, ease: 'power2.out', onComplete: () => {
             if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
           } });
         } else {
           gsap.to(spans[0], { y: 0, rotation: 0, duration: 0.3 });
           gsap.to(spans[1], { y: 0, rotation: 0, duration: 0.3 });
-          gsap.to(navLinks, { opacity: 0, y: -20, duration: 0.3, onComplete: () => {
+          gsap.to(navLinks, { opacity: 0, y: -15, duration: 0.25, onComplete: () => {
             navLinks.style.display = '';
             if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
           } });
@@ -1094,6 +1102,13 @@ function initMobileMenu() {
           toggleBtn.click();
         }
       });
+    });
+    
+    // Accessibility: Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggleBtn.classList.contains('active')) {
+        toggleBtn.click();
+      }
     });
   }
 }
@@ -2091,6 +2106,7 @@ function initCapabilityWheel() {
 
 /* --- 19. Magnetic Button Tracking Engine --- */
 function initMagneticButtons() {
+  if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768) return;
   const btns = document.querySelectorAll('.btn-primary, .btn-secondary, .nav-cta-btn');
   btns.forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
@@ -2112,6 +2128,7 @@ function initMagneticButtons() {
 
 /* --- 20. Universal 3D Magnetic Card Tilt Engine --- */
 function init3DTiltCards() {
+  if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768) return;
   const cards = document.querySelectorAll('.academy-card, .council-focus-card, .insight-card, .audience-card, .hero-passport-card-wrapper');
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -2420,18 +2437,75 @@ function initAIGalaxyExperience() {
   requestAnimationFrame(renderFrame);
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    initEcosystemDiagram();
-    initFrameworkAnimation();
-    initCapabilityWheel();
-    initMagneticButtons();
-    init3DTiltCards();
-    initMissionTextAnimation();
-    initFooterInteractions();
-    initAIGalaxyExperience();
-  });
-} else {
+/* --- 24. Restrained Mobile Sticky CTA Engine --- */
+function initMobileStickyCTA() {
+  if (window.innerWidth >= 768) return;
+
+  let bar = document.getElementById('mobile-sticky-cta-bar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'mobile-sticky-cta-bar';
+    bar.className = 'mobile-sticky-cta-bar';
+
+    const path = (window.location.pathname || '').toLowerCase();
+    let btnText = 'REGISTER FREE →';
+    let btnHref = 'live.html#register';
+    
+    if (path.includes('verify')) {
+      btnText = 'VERIFY PASSPORT →';
+      btnHref = '#verify-hero';
+    } else if (path.includes('passport')) {
+      btnText = 'EXPLORE LEDGER →';
+      btnHref = '#ledger';
+    } else if (path.includes('academy')) {
+      btnText = 'APPLY NOW →';
+      btnHref = '#apply';
+    } else if (path.includes('projects')) {
+      btnText = 'VIEW BUILDS →';
+      btnHref = '#projects';
+    } else if (path.includes('live')) {
+      btnText = 'REGISTER FREE →';
+      btnHref = '#register';
+    }
+
+    bar.innerHTML = `
+      <div class="msticky-inner">
+        <div class="msticky-text">
+          <span class="msticky-badge">✦ AI PASSPORT™</span>
+          <span class="msticky-sub">Practical AI Ecosystem</span>
+        </div>
+        <a href="${btnHref}" class="btn btn-primary msticky-btn">${btnText}</a>
+        <button class="msticky-close" aria-label="Dismiss sticky action">&times;</button>
+      </div>
+    `;
+    document.body.appendChild(bar);
+
+    const closeBtn = bar.querySelector('.msticky-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        bar.classList.add('dismissed');
+      });
+    }
+  }
+
+  const handleScroll = () => {
+    if (bar.classList.contains('dismissed')) return;
+    const scrollY = window.scrollY || window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    
+    if (scrollY > 300 && scrollY < docHeight - 250) {
+      bar.classList.add('visible');
+    } else {
+      bar.classList.remove('visible');
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+}
+
+function runMobileInitializers() {
   initEcosystemDiagram();
   initFrameworkAnimation();
   initCapabilityWheel();
@@ -2440,6 +2514,13 @@ if (document.readyState === 'loading') {
   initMissionTextAnimation();
   initFooterInteractions();
   initAIGalaxyExperience();
+  initMobileStickyCTA();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', runMobileInitializers);
+} else {
+  runMobileInitializers();
 }
 
 
