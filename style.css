@@ -9657,6 +9657,9 @@ h1, h2, h3, .hero-title, .section-title {
   background-color: #040508;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 !important;
+  min-height: auto !important;
+  overflow: visible !important;
 }
 
 .journey-pin-wrapper {

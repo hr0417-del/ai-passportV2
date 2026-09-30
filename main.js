@@ -2540,8 +2540,9 @@ function initCinematicJourneySection() {
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
-      end: '+=2400',
-      pin: pinWrapper,
+      end: '+=2200',
+      pin: section,
+      pinSpacing: true,
       scrub: 0.6,
       onUpdate: (self) => {
         const progress = self.progress;
