@@ -176,9 +176,10 @@ export function initAnalytics(customId = null) {
   }
   
   if (id) {
-    // Inject GA4 script tag asynchronously
+    // Inject GA4 script tag asynchronously if not present
     const scriptId = 'ga4-gtag-script';
-    if (!document.getElementById(scriptId)) {
+    if (typeof document !== 'undefined' && document.head && !document.getElementById(scriptId) && !window.__ga4_script_injected) {
+      window.__ga4_script_injected = true;
       const script = document.createElement('script');
       script.id = scriptId;
       script.async = true;
@@ -186,12 +187,16 @@ export function initAnalytics(customId = null) {
       document.head.appendChild(script);
     }
     
-    window.gtag('js', new Date());
-    window.gtag('config', id, {
-      send_page_view: false, // We control page view events explicitly
-      cookie_flags: 'SameSite=None;Secure',
-      ...attribution
-    });
+    // Configure GA4 safely once with debug_mode enabled for instant Realtime & DebugView reporting
+    if (!window.__ga4_configured) {
+      window.__ga4_configured = true;
+      window.gtag('js', new Date());
+      window.gtag('config', id, {
+        debug_mode: true,
+        cookie_flags: 'SameSite=None;Secure',
+        ...attribution
+      });
+    }
     
     if (isDebugMode()) {
       console.log(`%c[AI Passport Analytics]%c GA4 Initialized with ID: ${id}`, 'color: #00a2ff; font-weight: bold;', 'color: #aaa;');
