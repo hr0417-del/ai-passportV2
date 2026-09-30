@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- Google Analytics 4 (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQV0VX8N47"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QQV0VX8N47');
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In — MY AI PASSPORT™</title>
   <meta name="description" content="Sign in to your authenticated AI Passport identity & capability workspace.">
@@ -280,6 +288,9 @@
 
   <script type="module">
     import { supabase, isSupabaseConfigured, ensureLearnerProvisioned } from './src/lib/supabase.js';
+    import { initAnalytics, trackFormSubmit, trackConversion } from './src/lib/analytics.js';
+
+    initAnalytics();
 
     let currentTab = 'signin';
 

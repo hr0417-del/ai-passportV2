@@ -4,6 +4,10 @@
 
 import './app.css';
 import { getCurrentUser, getLearnerProfile, getPassportCard, ensureLearnerProvisioned, supabase, isSupabaseConfigured } from '../lib/supabase.js';
+import { initAnalytics } from '../lib/analytics.js';
+
+initAnalytics();
+
 import { renderOverview } from './overview.js';
 import { renderPassportPage } from './passport.js';
 import { renderLearnPage } from './learn.js';

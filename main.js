@@ -1,4 +1,5 @@
 import certDBData from './scratch/certificateDB.js';
+import { initAnalytics, trackFormSubmit, trackFormError, trackConversion, trackJourneyInteraction } from './src/lib/analytics.js';
 /* ==========================================================================
    AI PASSPORT™ — MASTER INTERACTIVE ENGINE
    Preloader | Smooth Scroll | ScrollTrigger Section Reveal | Particles | Parallax
@@ -27,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.warn(`Error initializing ${fnName}:`, e);
     }
   };
+
+  initSafe('initAnalytics', initAnalytics);
 
   initSafe('initPreloader', initPreloader);
   initSafe('initLenis', initLenis);
@@ -786,9 +789,16 @@ function initRegistrationForm() {
     if (consent) isValid = validateField(consent, consent.checked, "You must agree to receive updates *") && isValid;
     
     if (!isValid) {
+      trackFormError('webinar_registration', 'validation_error');
       playTickSound('click');
       return;
     }
+    
+    const selectedUseCase = document.getElementById('ai-use-case')?.value || 'Not specified';
+    trackFormSubmit('webinar_registration', {
+      role: role?.value || 'Educator',
+      use_case: selectedUseCase
+    });
     
     // Enter loading state
     if (submitBtn) {
@@ -821,6 +831,8 @@ function initRegistrationForm() {
     })
     .then(result => {
       if (result && (result.duplicate === true || result.success === false)) {
+        trackFormError('webinar_registration', 'duplicate_user', 'email_or_mobile');
+        
         // Reset submit button state
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -851,6 +863,7 @@ function initRegistrationForm() {
       }
     })
     .catch(err => {
+      trackFormError('webinar_registration', 'server_error');
       console.warn("Webhook submission warning, proceeding to fallback:", err);
       proceedToSuccess(dataName);
     });
@@ -858,6 +871,11 @@ function initRegistrationForm() {
   
   // Success ticket reveal and celebration burst
   function proceedToSuccess(name, passportId) {
+    trackConversion('registration_success', {
+      form_name: 'webinar_registration',
+      passport_id_generated: !!passportId
+    });
+    
     const randomId = Math.floor(1000 + Math.random() * 9000);
     const assignedId = passportId ? (passportId.startsWith('#') ? passportId : `#${passportId}`) : `#2026-${randomId}`;
     const ticketName = document.getElementById('ticket-holder-name');
