@@ -223,8 +223,16 @@ export function initAnalytics(customId = null) {
     trackSectionView
   };
   
-  // Initial Page View
-  trackPageView();
+  // Check if initial pageview was already fired by standard GA4 <head> tag
+  if (typeof window !== 'undefined') {
+    if (!window.__ga4_initial_pageview_tracked) {
+      window.__ga4_initial_pageview_tracked = true;
+      // If gtag script was dynamically injected by analytics.js (no <head> tag present), fire initial pageview once
+      if (window.__ga4_script_injected) {
+        trackPageView();
+      }
+    }
+  }
   
   // Auto-track UI interactions & observers safely
   setupAutoTrackers();
@@ -263,7 +271,7 @@ export function trackEvent(eventName, rawParams = {}) {
 }
 
 /**
- * Page View Event
+ * Page View Event (Used for SPA navigation or explicit page view calls)
  */
 export function trackPageView(pagePath = null, pageTitle = null) {
   const path = pagePath || (typeof window !== 'undefined' ? window.location.pathname : '');
