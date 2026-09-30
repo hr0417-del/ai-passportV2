@@ -35,31 +35,25 @@
 
 ---
 
-### ACTION 02: CREATE THE 12 CUSTOM DIMENSIONS
+### ACTION 02: CREATE THE CUSTOM DIMENSIONS (VERIFIED CREATED IN GA4)
 
 * **Exact Navigation Path:**  
-  `GA4 Left Sidebar` → `Admin ⚙️` → `Data Display` → `Custom definitions` → `Create custom dimension`
-* **Exact Click Sequence for Each Dimension:**
-  1. Click **Create custom dimension** (blue button).
-  2. Enter the **Dimension name**, select **Scope: Event**, and type the exact **Event parameter**.
-  3. Click **Save**.
+  `GA4 Left Sidebar` → `Admin ⚙️` → `Data Display` → `Custom definitions`
+* **Status:** ✅ **VERIFIED CREATED IN GA4 UI**
 
-Enter these 12 definitions exactly as specified below:
+The following custom definitions are active in your GA4 property:
 
-| # | Dimension Name | Scope | Event Parameter | Why It Matters / Business Purpose |
-| :-: | :--- | :---: | :--- | :--- |
-| **1** | `Form Name` | Event | `form_name` | Identifies which form was interacted with (`webinar_registration`, `footer_newsletter`). |
-| **2** | `Educator Role` | Event | `role` | Segment registrants (`School Teacher`, `Faculty`, `Principal`, `Academic Coordinator`). |
-| **3** | `Primary AI Use Case` | Event | `use_case` | Identify educator intent (`Lesson Planning`, `Content Creation`, `Assessment`). |
-| **4** | `Registration Error Type` | Event | `error_type` | Pinpoint funnel drop-off causes (`validation_error`, `duplicate_user`, `server_error`). |
-| **5** | `CTA Name` | Event | `cta_name` | Measure exact button copy performance (`REGISTER FREE`, `EXPLORE AI PASSPORT`). |
-| **6** | `CTA Location` | Event | `cta_location` | Track placement performance (`hero_section`, `nav_header`, `webinar_section`). |
-| **7** | `Homepage Section ID` | Event | `section_id` | Track section reach (`hero`, `mastery_levels`, `ai_journey`, `proof_projects`). |
-| **8** | `Homepage Section Name` | Event | `section_name` | Human-readable section label. |
-| **9** | `AI Journey Stage Name` | Event | `stage_name` | Track 5-stage progression (`EXPLORE`, `CREATE`, `INNOVATE`, `BUILD`, `LEAD`). |
-| **10** | `AI Journey Stage Level` | Event | `stage_level` | Numeric level (1 to 5) for stage completion sequencing. |
-| **11** | `Link / Action Type` | Event | `link_type` | Categorize outbound actions (`whatsapp`, `email`, `phone`, `outbound`). |
-| **12** | `Passport ID Generated` | Event | `passport_id_generated` | Confirm ticket generation (`true`/`false`). |
+| # | Dimension Name | Scope | Event Parameter | Status |
+| :-: | :--- | :---: | :--- | :---: |
+| **1** | `AI Journey Stage Name` | Event | `stage_name` | ✅ Active |
+| **2** | `CTA Name` | Event | `cta_name` | ✅ Active |
+| **3** | `Educator Role` | Event | `role` | ✅ Active |
+| **4** | `Form Name` | Event | `form_name` | ✅ Active |
+| **5** | `Homepage Section ID` | Event | `section_id` | ✅ Active |
+| **6** | `Link_Action Type` | Event | `link_type` | ✅ Active |
+| **7** | `Passport ID Generated` | Event | `passport_id_generated` | ✅ Active |
+| **8** | `Primary AI Use Case` | Event | `use_case` | ✅ Active |
+| **9** | `Registration Error Type` | Event | `error_type` | ✅ Active |
 
 ---
 
