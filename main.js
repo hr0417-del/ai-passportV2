@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initAIShiftCascade', initAIShiftCascade);
   initSafe('initCertificateVerifier', initCertificateVerifier);
   initSafe('initCinematicJourneySection', initCinematicJourneySection);
+  initSafe('initMasteryLevelsSection', initMasteryLevelsSection);
 });
 
 /* --- 1. Preloader & Intro Sequence --- */
@@ -2655,12 +2656,66 @@ function runMobileInitializers() {
   initAIGalaxyExperience();
   initMobileStickyCTA();
   initCinematicJourneySection();
+  initMasteryLevelsSection();
 }
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', runMobileInitializers);
 } else {
   runMobileInitializers();
+}
+
+/* --- 26. Section 2 Four Mastery Levels Reveal Engine --- */
+function initMasteryLevelsSection() {
+  const sec2 = document.getElementById('what-is-ai-passport');
+  if (!sec2 || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  const lineProgress = document.getElementById('mastery-line-progress-desktop');
+  const mobileLineProgress = document.getElementById('mobile-mastery-line-progress');
+  const desktopCards = sec2.querySelectorAll('.mastery-level-card');
+  const mobileItems = sec2.querySelectorAll('.mobile-mastery-item');
+
+  ScrollTrigger.create({
+    trigger: sec2,
+    start: 'top 75%',
+    end: 'bottom 20%',
+    onEnter: () => {
+      if (lineProgress) {
+        lineProgress.style.width = '100%';
+      }
+      
+      gsap.fromTo(desktopCards,
+        { opacity: 0, y: 25 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.7, 
+          stagger: 0.2, 
+          ease: 'power3.out' 
+        }
+      );
+    }
+  });
+
+  if (window.innerWidth < 768) {
+    mobileItems.forEach((item, index) => {
+      ScrollTrigger.create({
+        trigger: item,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        onToggle: (self) => {
+          if (self.isActive) {
+            mobileItems.forEach(el => el.classList.remove('active'));
+            item.classList.add('active');
+            if (mobileLineProgress) {
+              const pct = ((index + 1) / mobileItems.length) * 100;
+              mobileLineProgress.style.height = `${pct}%`;
+            }
+          }
+        }
+      });
+    });
+  }
 }
 
 

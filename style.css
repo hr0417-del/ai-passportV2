@@ -10072,3 +10072,406 @@ h1, h2, h3, .hero-title, .section-title {
     font-size: 0.82rem;
   }
 }
+
+/* ==========================================================================
+   SECTION 2 — WHAT IS AI PASSPORT? (4 MASTERY LEVELS)
+   ========================================================================== */
+
+.sec-what-is-passport {
+  padding: 110px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: #040508;
+  position: relative;
+  overflow: visible !important;
+  min-height: auto !important;
+}
+
+.sec2-inner-wrapper {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+.sec2-hero-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 54px;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.sec2-eyebrow {
+  color: var(--color-gold);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.sec2-headline {
+  font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  line-height: 1.12;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.01em;
+}
+
+.sec2-body {
+  font-family: var(--font-sans);
+  font-size: clamp(1.02rem, 1.25vw, 1.12rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 24px;
+  max-width: 540px;
+}
+
+.sec2-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--color-gold);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(223, 207, 173, 0.06);
+  border: 1px solid rgba(223, 207, 173, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+}
+
+.sec2-cta {
+  padding: 14px 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sec2-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(223, 207, 173, 0.2);
+}
+
+/* --- Section 2 Four Mastery Levels Architecture --- */
+.sec2-levels-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.sec2-levels-header {
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.sec2-levels-intro {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  color: var(--color-gold);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.sec2-intro-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* --- Desktop Horizontal Progression Track (>= 768px) --- */
+.mastery-levels-desktop {
+  position: relative;
+  width: 100%;
+  display: block;
+  margin-top: 12px;
+}
+
+.mastery-line-track {
+  position: absolute;
+  top: 27px;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.mastery-line-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
+}
+
+.mastery-line-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-gold), #58c4ff);
+  box-shadow: 0 0 10px rgba(223, 207, 173, 0.5);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mastery-stages-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.mastery-level-card {
+  background: rgba(14, 15, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  text-align: left;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mastery-level-card.level-04 {
+  border-color: rgba(223, 207, 173, 0.35);
+  background: rgba(18, 20, 30, 0.85);
+}
+
+.mastery-level-card:hover {
+  border-color: rgba(223, 207, 173, 0.45);
+  background: rgba(20, 23, 34, 0.95);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(223, 207, 173, 0.12);
+}
+
+.level-num-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.level-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s ease;
+}
+
+.mastery-level-card:hover .level-num,
+.mastery-level-card.active .level-num {
+  color: var(--color-gold);
+}
+
+.level-node-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #040508;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mastery-level-card:hover .level-node-dot,
+.mastery-level-card.active .level-node-dot {
+  border-color: var(--color-gold);
+  background: var(--color-gold);
+  box-shadow: 0 0 12px var(--color-gold);
+}
+
+.level-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.level-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--color-gold);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.level-descriptor {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin: 2px 0 6px 0;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.level-body {
+  font-size: 0.86rem;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.mastery-level-card:hover .level-body {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* --- Mobile Vertical Connected Track (< 768px) --- */
+.mastery-levels-mobile {
+  display: none;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .mastery-levels-desktop {
+    display: none !important;
+  }
+
+  .mastery-levels-mobile {
+    display: block !important;
+    margin-top: 16px;
+  }
+
+  .sec2-inner-wrapper {
+    gap: 48px;
+    padding: 0 16px;
+  }
+
+  .sec2-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .sec-what-is-passport {
+    padding: 64px 0 !important;
+  }
+
+  .mobile-mastery-track {
+    position: relative;
+    padding-left: 36px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mobile-mastery-line-bg {
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 17px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-mastery-line-progress {
+    position: absolute;
+    top: 24px;
+    left: 17px;
+    width: 2px;
+    height: 0%;
+    background: var(--color-gold);
+    box-shadow: 0 0 8px var(--color-gold);
+    transition: height 0.3s linear;
+  }
+
+  .mobile-mastery-item {
+    background: rgba(14, 15, 22, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 20px 18px;
+    position: relative;
+    opacity: 0.7;
+    transition: all 0.35s ease;
+  }
+
+  .mobile-mastery-item.active {
+    opacity: 1;
+    border-color: rgba(223, 207, 173, 0.45);
+    background: rgba(18, 20, 30, 0.95);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+
+  .mobile-level-badge {
+    position: absolute;
+    left: -54px;
+    top: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #040508;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-mastery-item.active .mobile-level-badge {
+    border-color: var(--color-gold);
+    background: rgba(18, 20, 30, 0.95);
+    box-shadow: 0 0 12px rgba(223, 207, 173, 0.4);
+  }
+
+  .mobile-level-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-gold);
+  }
+
+  .mobile-level-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--color-gold);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .mobile-level-descriptor {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+  }
+
+  .mobile-level-text {
+    font-size: 0.84rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+}
