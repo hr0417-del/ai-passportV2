@@ -283,9 +283,24 @@ function initVerificationPortal() {
       const certId = input ? input.value : "AIP-2026-0279";
       const shareUrl = window.location.origin + window.location.pathname + "?id=" + encodeURIComponent(certId);
       navigator.clipboard.writeText(shareUrl).then(() => {
-        const origText = copyBtn.textContent;
-        copyBtn.textContent = "✓ Link Copied!";
-        setTimeout(() => { copyBtn.textContent = origText; }, 2000);
+        const copyLabel = copyBtn.querySelector('.btn-copy-label');
+        if (copyLabel) {
+          const origText = copyLabel.textContent;
+          copyLabel.textContent = "✓ Verification Link Copied!";
+          copyBtn.classList.add('copied');
+          setTimeout(() => {
+            copyLabel.textContent = origText;
+            copyBtn.classList.remove('copied');
+          }, 2500);
+        } else {
+          const origText = copyBtn.textContent;
+          copyBtn.textContent = "✓ Link Copied!";
+          copyBtn.classList.add('copied');
+          setTimeout(() => {
+            copyBtn.textContent = origText;
+            copyBtn.classList.remove('copied');
+          }, 2500);
+        }
       });
     });
   }

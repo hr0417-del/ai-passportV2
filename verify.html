@@ -209,18 +209,54 @@
           </h4>
           <div style="background: rgba(18, 19, 26, 0.95); border: 2px solid rgba(223, 207, 173, 0.4); border-radius: 16px; padding: 20px; max-width: 960px; margin: 0 auto; box-shadow: 0 30px 70px rgba(0,0,0,0.9);">
             <img id="official-cert-image" src="public/certificates/lavi.png" alt="Official AI Passport Certificate" style="width: 100%; height: auto; border-radius: 10px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
-            <div class="cert-actions-wrapper" style="margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;">
-              <a id="download-cert-btn" href="public/certificates/lavi.png" download class="btn btn-primary" style="padding: 12px 28px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;">
-                ⬇️ Download Original Certificate Image (PNG)
+            <div class="cert-actions-wrapper">
+              <!-- Download Original Certificate PNG (Primary Action) -->
+              <a id="download-cert-btn" href="public/certificates/lavi.png" download class="cert-action-btn cert-action-primary">
+                <svg class="cert-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <div class="cert-btn-text-group">
+                  <span class="cert-btn-title">Download Certificate (PNG)</span>
+                  <span class="cert-btn-subtitle">Original High-Resolution Image</span>
+                </div>
               </a>
-              <a id="btn-add-linkedin" href="#" target="_blank" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.85rem; background: #0077b5; border-color: #0077b5; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-                💼 Add to LinkedIn Profile
+
+              <!-- Add to LinkedIn Profile (Social Credential) -->
+              <a id="btn-add-linkedin" href="#" target="_blank" class="cert-action-btn cert-action-linkedin">
+                <svg class="cert-btn-icon linkedin-svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.77a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/>
+                </svg>
+                <div class="cert-btn-text-group">
+                  <span class="cert-btn-title">Add to LinkedIn Profile</span>
+                  <span class="cert-btn-subtitle">Attach Verified Credential</span>
+                </div>
               </a>
-              <button class="btn btn-secondary" id="btn-copy-link" style="padding: 12px 24px; font-size: 0.85rem;">
-                🔗 Copy Verification Link
+
+              <!-- Copy Verification Link (Share Ledger URL) -->
+              <button type="button" class="cert-action-btn cert-action-utility" id="btn-copy-link">
+                <svg class="cert-btn-icon copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+                <div class="cert-btn-text-group">
+                  <span class="cert-btn-title btn-copy-label">Copy Verification Link</span>
+                  <span class="cert-btn-subtitle">Share Public Ledger URL</span>
+                </div>
               </button>
-              <button class="btn btn-secondary" onclick="window.print()" style="padding: 12px 24px; font-size: 0.85rem;">
-                🖨️ Save as PDF / Print
+
+              <!-- Save as PDF / Print -->
+              <button type="button" class="cert-action-btn cert-action-utility" onclick="window.print()">
+                <svg class="cert-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 6 2 18 2 18 9"/>
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                  <rect x="6" y="14" width="12" height="8"/>
+                </svg>
+                <div class="cert-btn-text-group">
+                  <span class="cert-btn-title">Save as PDF / Print</span>
+                  <span class="cert-btn-subtitle">Official Hardcopy Export</span>
+                </div>
               </button>
             </div>
           </div>

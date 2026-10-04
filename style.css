@@ -9354,18 +9354,9 @@ html, body {
   }
 
   .cert-actions-wrapper {
-    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
     width: 100% !important;
-  }
-
-  .cert-actions-wrapper .btn,
-  .cert-actions-wrapper a,
-  .cert-actions-wrapper button {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    justify-content: center !important;
-    min-height: 46px !important;
-    padding: 12px 16px !important;
   }
 
   #verify-status-banner {
@@ -10475,3 +10466,170 @@ h1, h2, h3, .hero-title, .section-title {
     margin: 0;
   }
 }
+
+/* ==========================================================================
+   HIGH-END CERTIFICATE ACTION BUTTONS
+   ========================================================================== */
+.cert-actions-wrapper {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .cert-actions-wrapper {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.cert-action-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  text-align: left;
+  outline: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.cert-action-btn:active {
+  transform: scale(0.985);
+}
+
+/* Icons */
+.cert-btn-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  transition: transform 0.28s ease, color 0.28s ease;
+}
+
+.cert-action-btn:hover .cert-btn-icon {
+  transform: translateY(-2px);
+}
+
+.cert-action-btn:hover .cert-btn-icon.copy-icon {
+  transform: rotate(-12deg);
+}
+
+/* Typography Group */
+.cert-btn-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cert-btn-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cert-btn-subtitle {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  opacity: 0.65;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 1. Primary Action (Download Gold) */
+.cert-action-primary {
+  background: linear-gradient(135deg, rgba(223, 207, 173, 0.16) 0%, rgba(184, 158, 107, 0.28) 100%);
+  border: 1.5px solid rgba(223, 207, 173, 0.45);
+  color: #dfcfad;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 25px rgba(223, 207, 173, 0.08);
+}
+
+.cert-action-primary .cert-btn-title {
+  color: #ffffff;
+}
+
+.cert-action-primary .cert-btn-subtitle {
+  color: #dfcfad;
+}
+
+.cert-action-primary:hover {
+  background: linear-gradient(135deg, rgba(223, 207, 173, 0.26) 0%, rgba(184, 158, 107, 0.42) 100%);
+  border-color: rgba(223, 207, 173, 0.8);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 35px rgba(223, 207, 173, 0.2);
+  transform: translateY(-2px);
+}
+
+/* 2. LinkedIn Action (Brand Blue) */
+.cert-action-linkedin {
+  background: linear-gradient(135deg, rgba(10, 102, 194, 0.22) 0%, rgba(0, 119, 181, 0.35) 100%);
+  border: 1.5px solid rgba(10, 102, 194, 0.55);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 25px rgba(10, 102, 194, 0.1);
+}
+
+.cert-action-linkedin .cert-btn-title {
+  color: #ffffff;
+}
+
+.cert-action-linkedin .cert-btn-subtitle {
+  color: #70b5f9;
+}
+
+.cert-action-linkedin:hover {
+  background: linear-gradient(135deg, rgba(10, 102, 194, 0.35) 0%, rgba(0, 119, 181, 0.55) 100%);
+  border-color: #0077b5;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 35px rgba(10, 102, 194, 0.25);
+  transform: translateY(-2px);
+}
+
+/* 3. Utility Actions (Glassmorphic) */
+.cert-action-utility {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.07) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.cert-action-utility .cert-btn-title {
+  color: #ffffff;
+}
+
+.cert-action-utility .cert-btn-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.cert-action-utility:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.14) 100%);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.cert-action-utility.copied {
+  background: linear-gradient(135deg, rgba(0, 230, 118, 0.2) 0%, rgba(0, 200, 83, 0.35) 100%) !important;
+  border-color: rgba(0, 230, 118, 0.6) !important;
+}
+
+.cert-action-utility.copied .cert-btn-title,
+.cert-action-utility.copied .cert-btn-subtitle {
+  color: #00e676 !important;
+}
+
