@@ -5642,19 +5642,103 @@ p, .section-lead, .section-subtext {
 }
 
 @media print {
-  body * {
-    visibility: hidden;
+  @page {
+    size: A4 landscape;
+    margin: 0;
   }
-  .official-certificate-container, .official-certificate-container * {
-    visibility: visible;
+  
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
-  .official-certificate-container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+
+  /* Hide website navigation, overlays, badges, forms, footers, action buttons */
+  header, footer, nav, .global-nav, .film-grain, .vignette-overlay,
+  .custom-cursor, .holographic-glow-container, .ambient-glow,
+  .particles-container, .hero-section, #verify-hero, #verify-status-banner,
+  .cert-actions-wrapper, #verification-fields, .webinar-badge,
+  .hero-title, .hero-tagline, .section-subtext, h1, h2, h3, h4 {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Show ONLY the official certificate image container and image */
+  #verify-result-section,
+  #official-cert-image-container,
+  #official-cert-image-container * {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  #verify-result-section {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .movement-inner {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #official-cert-image-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #ffffff !important;
     box-shadow: none !important;
-    border-width: 4px !important;
+    border: none !important;
+  }
+
+  #official-cert-image-container > div {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #official-cert-image {
+    max-width: 98vw !important;
+    max-height: 98vh !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: auto !important;
+    display: block !important;
   }
 }
 
