@@ -1,46 +1,58 @@
-import certDBData from '../scratch/certificateDB.js';
+import certDBData, { masterCertList } from '../scratch/certificateDB.js';
 
 /* ==========================================================================
    AI PASSPORT™ — OFFICIAL VERIFICATION PORTAL ENGINE
-   Strict Source of Truth: (Bulk 1) AI PASSPORT LIVE CERTIFICATE 20 SEPT 2026
+   Strict Source of Truth: Physical Certificate PNG Files & OCR Verification
+   Total Verified Certificates: 126 (52 Sept 2026 + 74 Oct 2026)
    ========================================================================== */
 
 const certificateDB = {
   ...certDBData
 };
 
+const allRecords = Array.isArray(masterCertList) ? masterCertList : [];
+
 function findCertificateRecord(query) {
   if (!query || !query.trim()) return null;
   const q = query.trim().toLowerCase();
   const upperQ = q.toUpperCase();
 
-  // 1. Direct exact key match
-  if (certificateDB[upperQ]) return { certId: upperQ, record: certificateDB[upperQ] };
-  if (certificateDB[q]) return { certId: q, record: certificateDB[q] };
-
-  // 2. Normalized auto-padded match e.g. "AIP-2026-301" -> "AIP-2026-0301"
+  // 1. Check Passport ID (e.g. "AIP-2026-0533", "0533", "533")
   const numMatch = q.match(/(?:aip-)?(?:2026-)?(\d{1,4})$/i);
   if (numMatch) {
     const padded = ("0000" + numMatch[1]).slice(-4);
-    const paddedKey = `AIP-2026-${padded}`;
-    if (certificateDB[paddedKey]) return { certId: paddedKey, record: certificateDB[paddedKey] };
-    if (certificateDB[padded]) return { certId: padded, record: certificateDB[padded] };
-  }
-
-  // 3. Flexible search (ID, Name, Digits)
-  const entries = Object.entries(certificateDB);
-  for (const [key, record] of entries) {
-    const keyClean = key.toLowerCase().replace(/[^a-z0-9]/g, '');
-    const qClean = q.replace(/[^a-z0-9]/g, '');
-
-    if (keyClean === qClean) {
-      return { certId: record.certId || key, record };
-    }
-
-    if (record.name && record.name.toLowerCase().includes(q)) {
-      return { certId: record.certId || key, record };
+    const targetId = `AIP-2026-${padded}`;
+    const idMatches = allRecords.filter(r => r.certId === targetId);
+    if (idMatches.length > 0) {
+      // If multiple records share this ID (e.g. across cohorts), pick the one matching name if provided, else latest
+      const nameMatch = idMatches.find(r => r.name.toLowerCase().includes(q));
+      const chosen = nameMatch || idMatches[idMatches.length - 1];
+      return { certId: chosen.certId, record: chosen };
     }
   }
+
+  // 2. Direct exact candidate name or email match
+  const exactMatch = allRecords.find(r => 
+    r.name.toLowerCase() === q || 
+    (r.email && r.email.toLowerCase() === q)
+  );
+  if (exactMatch) {
+    return { certId: exactMatch.certId, record: exactMatch };
+  }
+
+  // 3. Partial candidate name match
+  const partialMatch = allRecords.find(r => r.name.toLowerCase().includes(q));
+  if (partialMatch) {
+    return { certId: partialMatch.certId, record: partialMatch };
+  }
+
+  // 4. Fallback dictionary lookup
+  const direct = certificateDB[upperQ] || certificateDB[q];
+  if (direct) {
+    const rec = Array.isArray(direct) ? direct[direct.length - 1] : direct;
+    return { certId: rec.certId || upperQ, record: rec };
+  }
+
   return null;
 }
 
