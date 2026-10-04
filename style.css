@@ -10661,6 +10661,29 @@ h1, h2, h3, .hero-title, .section-title {
   transform: translateY(-2px);
 }
 
+/* 2. PDF Document Action (Official Amber / Red) */
+.cert-action-pdf {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.16) 0%, rgba(185, 28, 28, 0.28) 100%);
+  border: 1.5px solid rgba(239, 68, 68, 0.45);
+  color: #ff8a80;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 25px rgba(239, 68, 68, 0.08);
+}
+
+.cert-action-pdf .cert-btn-title {
+  color: #ffffff;
+}
+
+.cert-action-pdf .cert-btn-subtitle {
+  color: #ffab91;
+}
+
+.cert-action-pdf:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.26) 0%, rgba(185, 28, 28, 0.42) 100%);
+  border-color: rgba(239, 68, 68, 0.8);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 35px rgba(239, 68, 68, 0.2);
+  transform: translateY(-2px);
+}
+
 /* 2. LinkedIn Action (Brand Blue) */
 .cert-action-linkedin {
   background: linear-gradient(135deg, rgba(10, 102, 194, 0.22) 0%, rgba(0, 119, 181, 0.35) 100%);

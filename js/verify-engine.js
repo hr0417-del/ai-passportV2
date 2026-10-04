@@ -11,6 +11,7 @@ const certificateDB = {
 };
 
 const allRecords = Array.isArray(masterCertList) ? masterCertList : [];
+let currentRecord = null;
 
 function findCertificateRecord(query) {
   if (!query || !query.trim()) return null;
@@ -89,6 +90,7 @@ export function performVerification(rawId) {
   // --- MATCH FOUND (VERIFIED & AUTHENTICATED) ---
   if (match) {
     const { certId, record } = match;
+    currentRecord = record;
     if (input) input.value = certId;
 
     if (statusBanner) {
@@ -236,9 +238,130 @@ export function performVerification(rawId) {
   }
 }
 
+export async function downloadCertificatePDF() {
+  const pdfBtn = document.getElementById('download-pdf-btn');
+  const titleSpan = pdfBtn ? pdfBtn.querySelector('.cert-btn-title') : null;
+  const origText = titleSpan ? titleSpan.textContent : 'Download Certificate (PDF)';
+  if (titleSpan) titleSpan.textContent = 'Generating PDF...';
+
+  try {
+    const imgEl = document.getElementById('official-cert-image');
+    if (!imgEl || !imgEl.src) throw new Error('No certificate image found');
+
+    // Create an image element with crossOrigin anonymous
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = imgEl.src;
+
+    await new Promise((resolve) => {
+      if (img.complete && img.naturalWidth > 0) return resolve();
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+    });
+
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth || imgEl.naturalWidth || 1920;
+    canvas.height = img.naturalHeight || imgEl.naturalHeight || 1080;
+    const ctx = canvas.getContext('2d');
+
+    // Pure white canvas background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.98);
+
+    const { jsPDF } = await import('jspdf');
+    const doc = new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: 'a4'
+    });
+
+    const pageWidth = doc.internal.pageSize.getWidth(); // 297mm
+    const pageHeight = doc.internal.pageSize.getHeight(); // 210mm
+
+    const imgAspect = canvas.width / canvas.height;
+    const pageAspect = pageWidth / pageHeight;
+
+    let renderW = pageWidth;
+    let renderH = pageHeight;
+    let posX = 0;
+    let posY = 0;
+
+    if (imgAspect > pageAspect) {
+      renderW = pageWidth;
+      renderH = pageWidth / imgAspect;
+      posY = (pageHeight - renderH) / 2;
+    } else {
+      renderH = pageHeight;
+      renderW = pageHeight * imgAspect;
+      posX = (pageWidth - renderW) / 2;
+    }
+
+    doc.addImage(imgData, 'JPEG', posX, posY, renderW, renderH, undefined, 'FAST');
+
+    const cleanName = (currentRecord && currentRecord.name ? currentRecord.name : 'AI_Passport')
+      .trim()
+      .replace(/[^a-zA-Z0-9_-]+/g, '_');
+
+    doc.save(`${cleanName}_AI_Passport_Certificate.pdf`);
+
+    if (titleSpan) {
+      titleSpan.textContent = '✓ PDF Downloaded!';
+      if (pdfBtn) pdfBtn.classList.add('copied');
+      setTimeout(() => {
+        titleSpan.textContent = origText;
+        if (pdfBtn) pdfBtn.classList.remove('copied');
+      }, 2500);
+    }
+  } catch (err) {
+    console.error('PDF generation error:', err);
+    if (titleSpan) titleSpan.textContent = origText;
+    printCertificateIsolated();
+  }
+}
+
+export function printCertificateIsolated() {
+  const imgEl = document.getElementById('official-cert-image');
+  if (!imgEl || !imgEl.src) {
+    window.print();
+    return;
+  }
+  const printWindow = window.open('', '_blank');
+  if (printWindow) {
+    printWindow.document.write(`<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Certificate - AI Passport</title>
+    <style>
+      @page { size: A4 landscape; margin: 0; }
+      html, body {
+        margin: 0; padding: 0; background: #ffffff !important;
+        width: 100vw; height: 100vh; display: flex;
+        align-items: center; justify-content: center;
+      }
+      img {
+        max-width: 98vw; max-height: 98vh; width: auto; height: auto;
+        object-fit: contain; margin: auto; display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="${imgEl.src}" onload="window.focus(); window.print();" />
+  </body>
+</html>`);
+    printWindow.document.close();
+  } else {
+    window.print();
+  }
+}
+
 // Global scope binding
 window.performVerification = performVerification;
 window.verifyCertificate = performVerification;
+window.downloadCertificatePDF = downloadCertificatePDF;
+window.printCertificateIsolated = printCertificateIsolated;
 
 function initVerificationPortal() {
   const form = document.getElementById('verify-form');
@@ -246,6 +369,7 @@ function initVerificationPortal() {
   const sampleBtns = document.querySelectorAll('.sample-id-btn');
   const resultSection = document.getElementById('verify-result-section');
   const copyBtn = document.getElementById('btn-copy-link');
+  const pdfBtn = document.getElementById('download-pdf-btn');
 
   if (form) {
     form.addEventListener('submit', (e) => {
@@ -302,6 +426,13 @@ function initVerificationPortal() {
           }, 2500);
         }
       });
+    });
+  }
+
+  if (pdfBtn) {
+    pdfBtn.addEventListener('click', (e) => {
+      if (e) e.preventDefault();
+      downloadCertificatePDF();
     });
   }
 
