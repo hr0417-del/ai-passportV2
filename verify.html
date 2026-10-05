@@ -52,6 +52,146 @@
       margin: 28px auto 0;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 162, 255, 0.08);
       text-align: left;
+      box-sizing: border-box;
+    }
+
+    .cert-preview-card {
+      background: rgba(18, 19, 26, 0.95);
+      border: 2px solid rgba(223, 207, 173, 0.4);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.9);
+      box-sizing: border-box;
+    }
+
+    .verify-hero-section {
+      padding-top: 130px;
+      padding-bottom: 70px;
+    }
+
+    .verification-fields-section {
+      padding: 110px 0;
+      background-color: #030305;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .final-cta-section {
+      padding: 140px 0;
+      text-align: center;
+      background: radial-gradient(circle at center, rgba(223,207,173,0.04) 0%, transparent 70%);
+    }
+
+    /* Mobile Responsive Foundations (max-width: 768px) */
+    @media (max-width: 768px) {
+      .verify-hero-section {
+        padding-top: 90px !important;
+        padding-bottom: 35px !important;
+      }
+      .hero-title {
+        font-size: clamp(2.0rem, 7vw, 3.2rem) !important;
+        line-height: 1.12 !important;
+      }
+      .hero-tagline {
+        font-size: clamp(1.0rem, 3.8vw, 1.25rem) !important;
+      }
+      .verify-hero-card {
+        padding: 20px 16px !important;
+        margin-top: 18px !important;
+        border-radius: 16px !important;
+      }
+      #verify-form {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+      }
+      #verify-form > div {
+        width: 100% !important;
+      }
+      #verify-input {
+        padding: 14px 16px !important;
+        font-size: 16px !important;
+        width: 100% !important;
+      }
+      #verify-submit-btn {
+        width: 100% !important;
+        padding: 14px 20px !important;
+        font-size: 0.92rem !important;
+        min-height: 48px !important;
+        justify-content: center !important;
+      }
+      .verify-samples {
+        gap: 6px 8px !important;
+        margin-top: 14px !important;
+      }
+      .sample-id-btn {
+        padding: 6px 10px !important;
+        font-size: 0.7rem !important;
+        min-height: 30px !important;
+      }
+      .cert-preview-card {
+        padding: 12px 10px !important;
+        border-radius: 12px !important;
+        border-width: 1.5px !important;
+      }
+      #verify-status-banner {
+        padding: 14px 16px !important;
+        margin-bottom: 20px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+      }
+      #verification-timestamp {
+        align-self: flex-start !important;
+      }
+      .cert-actions-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        margin-top: 18px !important;
+      }
+      .cert-action-btn {
+        width: 100% !important;
+        padding: 14px 16px !important;
+        min-height: 52px !important;
+      }
+      .cert-btn-title {
+        white-space: normal !important;
+        word-break: normal !important;
+        font-size: 0.9rem !important;
+      }
+      .cert-btn-subtitle {
+        white-space: normal !important;
+        word-break: normal !important;
+        font-size: 0.7rem !important;
+      }
+      .cert-btn-icon {
+        width: 22px !important;
+        height: 22px !important;
+      }
+      .verification-fields-section {
+        padding: 60px 0 !important;
+      }
+      .verify-5col-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .final-cta-section {
+        padding: 65px 0 !important;
+      }
+      .final-cta-section .btn-group {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        width: 100% !important;
+      }
+      .final-cta-section .btn-group .btn {
+        width: 100% !important;
+        padding: 15px 20px !important;
+        justify-content: center !important;
+        font-size: 0.9rem !important;
+      }
     }
   </style>
 </head>
@@ -119,7 +259,7 @@
   <main class="scroll-container" id="scroll-container">
 
     <!-- SECTION 01 — HERO & VERIFICATION INTERFACE (PRIMARY UTILITY UI) -->
-    <section class="section hero-section" id="hero" style="padding-top: 130px; padding-bottom: 70px;">
+    <section class="section hero-section verify-hero-section" id="hero">
       <div class="section-container">
         <div class="hero-text-block" style="max-width: 100% !important; text-align: center !important; display: flex; flex-direction: column; align-items: center;">
           
@@ -207,7 +347,7 @@
           <h4 style="font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--color-gold); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.18em;">
             ✦ OFFICIAL ISSUED CERTIFICATE DOCUMENT
           </h4>
-          <div style="background: rgba(18, 19, 26, 0.95); border: 2px solid rgba(223, 207, 173, 0.4); border-radius: 16px; padding: 20px; max-width: 960px; margin: 0 auto; box-shadow: 0 30px 70px rgba(0,0,0,0.9);">
+          <div class="cert-preview-card">
             <img id="official-cert-image" src="public/certificates/lavi.png" alt="Official AI Passport Certificate" style="width: 100%; height: auto; border-radius: 10px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
             <div class="cert-actions-wrapper">
               <!-- Download Original Certificate PNG (Primary Action) -->
@@ -253,7 +393,7 @@
     </section>
 
     <!-- SECTION 03 — WHAT DOES VERIFICATION SHOW? -->
-    <section class="section" id="verification-fields" style="padding: 110px 0; background-color: #030305; border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+    <section class="section verification-fields-section" id="verification-fields">
       <div class="movement-inner text-center" style="max-width: 1140px; margin: 0 auto; text-align: center;">
         <span class="section-tag" style="color: var(--color-gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;">VERIFICATION DATA STRUCTURE</span>
         
@@ -296,7 +436,7 @@
     </section>
 
     <!-- SECTION 04 — FINAL CTA -->
-    <section class="section" id="final-cta" style="padding: 140px 0; text-align: center; background: radial-gradient(circle at center, rgba(223,207,173,0.04) 0%, transparent 70%);">
+    <section class="section final-cta-section" id="final-cta">
       <div class="movement-inner" style="max-width: 860px; margin: 0 auto;">
         
         <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.6rem); line-height: 1.12; margin: 0 0 12px 0;">

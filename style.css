@@ -9412,15 +9412,15 @@ html, body {
   }
 }
 
-@media (max-width: 600px) {
-  .verify-5col-grid {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
+@media (max-width: 768px) {
+  .verify-hero-section {
+    padding-top: 90px !important;
+    padding-bottom: 35px !important;
   }
 
   .verify-hero-card {
-    padding: 22px 16px !important;
-    margin-top: 20px !important;
+    padding: 20px 16px !important;
+    margin-top: 18px !important;
     border-radius: 16px !important;
   }
 
@@ -9432,26 +9432,73 @@ html, body {
 
   #verify-submit-btn {
     width: 100% !important;
-    padding: 16px !important;
-    font-size: 0.95rem !important;
+    padding: 14px 20px !important;
+    font-size: 0.92rem !important;
     min-height: 48px !important;
+  }
+
+  .cert-preview-card {
+    padding: 12px 10px !important;
+    border-radius: 12px !important;
+    border-width: 1.5px !important;
   }
 
   .cert-actions-wrapper {
     grid-template-columns: 1fr !important;
-    gap: 12px !important;
+    gap: 10px !important;
     width: 100% !important;
+    margin-top: 18px !important;
+  }
+
+  .cert-action-btn {
+    width: 100% !important;
+    padding: 14px 16px !important;
+    min-height: 52px !important;
+  }
+
+  .cert-btn-title,
+  .cert-btn-subtitle {
+    white-space: normal !important;
+    word-break: normal !important;
   }
 
   #verify-status-banner {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 10px !important;
-    padding: 16px 20px !important;
+    gap: 8px !important;
+    padding: 14px 16px !important;
+    margin-bottom: 20px !important;
   }
 
   #verification-timestamp {
-    align-self: flex-end !important;
+    align-self: flex-start !important;
+  }
+
+  .verification-fields-section {
+    padding: 60px 0 !important;
+  }
+
+  .verify-5col-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .final-cta-section {
+    padding: 65px 0 !important;
+  }
+
+  .final-cta-section .btn-group {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .final-cta-section .btn-group .btn {
+    width: 100% !important;
+    padding: 15px 20px !important;
+    justify-content: center !important;
+    font-size: 0.9rem !important;
   }
 }
 
