@@ -363,6 +363,15 @@ function processCohortRegistration(data) {
       "Applied"
     ]);
     
+    // Send C11 Cohort Confirmation Email
+    if (email && data.skipEmail !== "true") {
+      try {
+        sendCohortConfirmationEmail(email, fullname, passportId, role, organization);
+      } catch(mailErr) {
+        Logger.log("Cohort email send error: " + mailErr);
+      }
+    }
+    
     return ContentService.createTextOutput(JSON.stringify({
       success: true,
       message: "Application for " + cohortName + " successfully received!",
@@ -678,6 +687,160 @@ function shiftRegistrationsRange(startId, endId) {
   } catch(err) {
     return { status: "error", message: err.toString() };
   }
+}
+
+function sendCohortConfirmationEmail(email, fullname, passportId, role, org) {
+  if (!email) return;
+  
+  var subject = "SEAT CONFIRMED: Viksit Bharat: AI Educator Cohort — C11 | " + passportId;
+  var bccEmail = "ekaakshareducation@gmail.com";
+  
+  var htmlBody = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; color: #1E293B; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F8FAFC; padding: 32px 12px;">
+    <tr>
+      <td align="center">
+        <table border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%; background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 36px 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+          
+          <!-- Header Banner -->
+          <tr>
+            <td style="padding-bottom: 24px;">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #0F172A; border-radius: 12px; padding: 24px; text-align: center;">
+                <tr>
+                  <td align="center">
+                    <div style="font-size: 11px; font-weight: 700; color: #DFCFAD; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px;">
+                      EKAAKSHAR EDUCATION
+                    </div>
+                    <h1 style="font-size: 22px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.12em; margin: 0 0 6px 0; text-transform: uppercase;">
+                      AI PASSPORT™
+                    </h1>
+                    <div style="font-size: 11px; font-weight: 500; color: #94A3B8; letter-spacing: 0.08em;">
+                      Viksit Bharat: AI Educator Series — Cohort C11
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Welcome Greeting -->
+          <tr>
+            <td align="left" style="padding-bottom: 20px;">
+              <span style="font-size: 11px; font-weight: 700; color: #2563EB; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-bottom: 8px;">
+                &bull; COHORT ONBOARDING CONFIRMED &bull;
+              </span>
+              <h2 style="font-size: 20px; font-weight: 800; color: #0F172A; margin: 0 0 12px 0; line-height: 1.3;">
+                Welcome to C11 — Viksit Bharat: AI Educator Cohort
+              </h2>
+              <p style="font-size: 15px; line-height: 1.6; color: #334155; margin: 0 0 16px 0;">
+                Dear <strong>${fullname}</strong>,<br><br>
+                A warm welcome to <strong>C11 — Viksit Bharat: AI Educator Cohort</strong>, powered by AI Passport™ and Ekaakshar Education.
+              </p>
+              <p style="font-size: 15px; line-height: 1.6; color: #334155; margin: 0 0 16px 0;">
+                We’re delighted to have you join this focused cohort of educators beginning <strong>11 October 2026</strong>. Over the course of <strong>5 live sessions | 10 hours</strong>, we will explore how AI can move beyond experimentation and become a practical, responsible, and meaningful part of teaching and learning.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Passport Credential Card -->
+          <tr>
+            <td style="padding-bottom: 24px;">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-left: 4px solid #2563EB; border-radius: 8px; padding: 20px 24px;">
+                <tr>
+                  <td style="padding-bottom: 8px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">PARTICIPANT NAME</td>
+                  <td align="right" style="padding-bottom: 8px; font-size: 14px; font-weight: 700; color: #0F172A;">${fullname}</td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom: 8px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">AI PASSPORT ID</td>
+                  <td align="right" style="padding-bottom: 8px; font-size: 14px; font-weight: 700; color: #2563EB; font-family: monospace;">${passportId}</td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom: 8px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">COHORT</td>
+                  <td align="right" style="padding-bottom: 8px; font-size: 14px; font-weight: 700; color: #0F172A;">C11</td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom: 8px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">INSTITUTION</td>
+                  <td align="right" style="padding-bottom: 8px; font-size: 13px; font-weight: 700; color: #0F172A;">${org || 'Educator'}</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">LAUNCH DATE</td>
+                  <td align="right" style="font-size: 13px; font-weight: 700; color: #0F172A;">11 OCTOBER 2026</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Learning Journey Section -->
+          <tr>
+            <td style="padding-bottom: 24px; border-top: 1px solid #E2E8F0; padding-top: 24px;">
+              <h3 style="font-size: 14px; font-weight: 800; color: #0F172A; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 16px 0;">
+                YOUR C11 LEARNING JOURNEY (5 SESSIONS | 10 HOURS)
+              </h3>
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-size: 14px; line-height: 1.6; color: #334155;">
+                <tr><td style="padding-bottom: 10px; font-weight: 600; color: #0F172A;">01 &mdash; AI as Your Personal Assistant &amp; Thinking Partner</td></tr>
+                <tr><td style="padding-bottom: 10px; font-weight: 600; color: #0F172A;">02 &mdash; Generative AI for Curriculum &amp; Content Creation</td></tr>
+                <tr><td style="padding-bottom: 10px; font-weight: 600; color: #0F172A;">03 &mdash; AI in the Live Classroom: Pedagogical Integration</td></tr>
+                <tr><td style="padding-bottom: 10px; font-weight: 600; color: #0F172A;">04 &mdash; AI Ethics, Student Safety &amp; Responsible Use</td></tr>
+                <tr><td style="padding-bottom: 10px; font-weight: 600; color: #0F172A;">05 &mdash; Building Scalable &amp; Automated Teaching Workflows</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Actions Required -->
+          <tr>
+            <td align="center" style="padding-bottom: 24px; border-top: 1px solid #E2E8F0; padding-top: 24px;">
+              <h3 style="font-size: 14px; font-weight: 800; color: #0F172A; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 16px 0; text-align: left;">
+                ACTIONS REQUIRED BEFORE 11 OCTOBER
+              </h3>
+              
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="center" style="padding-bottom: 12px;">
+                    <a href="https://chat.whatsapp.com/FQpalASQ5Oj45ZqNzCJls9" target="_blank" style="background-color: #25D366; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; text-align: center;">
+                      JOIN C11 WHATSAPP COMMUNITY &rarr;
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Cohort+C11+%E2%80%94+Session+1&dates=20261011T103000Z/20261011T123000Z&details=Viksit+Bharat+AI+Educator+Cohort+C11+Launch+Session.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2Fcohort.html&location=Online+Live+Masterclass" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; text-align: center;">
+                      ADD C11 TO GOOGLE CALENDAR &rarr;
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="border-top: 1px solid #E2E8F0; padding-top: 20px; font-size: 12px; color: #64748B; line-height: 1.6;">
+              <p style="margin: 0 0 4px 0; font-weight: 700; color: #0F172A;">AI Passport™ | Viksit Bharat: AI Educator Cohort</p>
+              <p style="margin: 0 0 4px 0; color: #64748B;">Building AI capability for India's teachers.</p>
+              <p style="margin: 0 0 8px 0; font-weight: 600; color: #475569;">Ekaakshar Education Services Pvt. Ltd.</p>
+              <p style="margin: 0 0 4px 0;"><a href="https://aipassport.ekaakshareducation.com/" style="color: #0F172A; text-decoration: underline;">aipassport.ekaakshareducation.com</a></p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `;
+  
+  GmailApp.sendEmail(email, subject, "Welcome to C11 - Viksit Bharat: AI Educator Cohort. Passport ID: " + passportId, {
+    name: "AI Passport™ — Cohort C11",
+    bcc: bccEmail,
+    htmlBody: htmlBody
+  });
 }
 
 function sendConfirmationEmail(email, fullname, passportId, role) {
