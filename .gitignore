@@ -12,3 +12,14 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Scratch and temporary scripts
+/scratch/
+/scripts/*.mjs
+public/assets/carousel-second/
+
+# Sensitive data and telemetry records (root directory only)
+/data/
+
+
+

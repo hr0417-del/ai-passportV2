@@ -288,9 +288,14 @@ export function trackPageView(pagePath = null, pageTitle = null) {
  * CTA Click Event
  */
 export function trackCTA(ctaName, ctaLocation = 'unknown', destinationUrl = '', extraParams = {}) {
-  const isWebinarCta = ctaName?.toLowerCase().includes('register') || destinationUrl?.includes('#register') || destinationUrl?.includes('#live');
-  
-  const eventName = isWebinarCta ? 'webinar_cta_click' : 'cta_click';
+  let eventName = 'cta_click';
+  if (extraParams?.custom_event) {
+    eventName = extraParams.custom_event;
+  } else if (ctaName?.toLowerCase().includes('c11') || destinationUrl?.toLowerCase().includes('c11')) {
+    eventName = 'c11_cohort_cta_click';
+  } else if (ctaName?.toLowerCase().includes('register') || destinationUrl?.includes('#register') || destinationUrl?.includes('#live')) {
+    eventName = 'webinar_cta_click';
+  }
   
   trackEvent(eventName, {
     cta_name: ctaName,
@@ -451,7 +456,8 @@ function setupAutoTrackers() {
         
         // Standard CTA Tracking
         if (text && text.length < 80) {
-          trackCTA(text, location, href);
+          const customEvent = target.getAttribute('data-track-cta');
+          trackCTA(text, location, href, customEvent ? { custom_event: customEvent } : {});
         }
       } catch (err) {
         // Non-blocking

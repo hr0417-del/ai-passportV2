@@ -1,5 +1,6 @@
 import certDBData from './scratch/certificateDB.js';
 import { initAnalytics, trackFormSubmit, trackFormError, trackConversion, trackJourneyInteraction } from './src/lib/analytics.js';
+import { AI_PASSPORT_LIVE_DATA } from './src/data/liveEvents.js';
 /* ==========================================================================
    AI PASSPORT™ — MASTER INTERACTIVE ENGINE
    Preloader | Smooth Scroll | ScrollTrigger Section Reveal | Particles | Parallax
@@ -20,7 +21,10 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// Global instances
+let lenisInstance = null;
+
+function initAll() {
   const initSafe = (fnName, fn) => {
     try {
       if (typeof fn === 'function') fn();
@@ -55,10 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initSafe('initDynamicHero', initDynamicHero);
   initSafe('initHeroCarousel', initHeroCarousel);
   initSafe('initAIShiftCascade', initAIShiftCascade);
-  initSafe('initCertificateVerifier', initCertificateVerifier);
   initSafe('initCinematicJourneySection', initCinematicJourneySection);
   initSafe('initMasteryLevelsSection', initMasteryLevelsSection);
-});
+  initSafe('initLiveEcosystem', initLiveEcosystem);
+  initSafe('initLiveCarousel', initLiveCarousel);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAll);
+} else {
+  initAll();
+}
 
 /* --- 1. Preloader & Intro Sequence --- */
 function initPreloader() {
@@ -182,7 +193,6 @@ function initPreloader() {
 }
 
 /* --- 2. Smooth Scrolling (Lenis) --- */
-let lenisInstance;
 function initLenis() {
   if (typeof Lenis === 'undefined') return;
   lenisInstance = new Lenis({
@@ -2736,7 +2746,402 @@ function initMasteryLevelsSection() {
   }
 }
 
+/* --- 27. AI Passport™ LIVE Permanent Ecosystem Controller --- */
+function initLiveEcosystem() {
+  const anchorBar = document.querySelector('.live-anchor-bar');
+  if (!anchorBar) return;
 
+  const anchorLinks = anchorBar.querySelectorAll('.live-anchor-link');
+  const sections = Array.from(anchorLinks).map(link => {
+    const id = link.getAttribute('href')?.replace('#', '');
+    return id ? document.getElementById(id) : null;
+  }).filter(Boolean);
 
+  anchorLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (targetId && targetId.startsWith('#')) {
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
 
+  window.addEventListener('scroll', () => {
+    let currentId = '';
+    const scrollPos = window.scrollY + 180;
+    sections.forEach(section => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = section.getAttribute('id');
+      }
+    });
+    if (currentId) {
+      anchorLinks.forEach(link => {
+        if (link.getAttribute('href') === `#${currentId}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+  }, { passive: true });
 
+  initLiveGalleryEngine();
+  initScrollRevealEngine();
+}
+
+/* --- 28. Multi-Carousel & Universal Lightbox Gallery Engine --- */
+function initLiveGalleryEngine() {
+  const sessionCards = document.querySelectorAll('.gallery-session-card');
+  const lightbox = document.getElementById('universal-gallery-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
+  const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
+  const lightboxNextBtn = document.getElementById('lightbox-next-btn');
+  const lightboxArrowPrevBtn = document.getElementById('lightbox-arrow-prev-btn');
+  const lightboxArrowNextBtn = document.getElementById('lightbox-arrow-next-btn');
+  const lightboxCurrentNum = document.getElementById('lightbox-current-num');
+  const lightboxTotalNum = document.getElementById('lightbox-total-num');
+  const lightboxThumbsStrip = document.getElementById('lightbox-thumbnails-strip');
+
+  let activeLightboxSession = null;
+  let activeLightboxIndex = 0;
+
+  sessionCards.forEach(card => {
+    const compactWrapper = card.querySelector('.compact-carousel-wrapper');
+    if (!compactWrapper) return;
+
+    const viewport = card.querySelector('.compact-viewport');
+    const track = card.querySelector('.compact-track');
+    const slides = card.querySelectorAll('.compact-slide');
+    const prevBtn = card.querySelector('.compact-arrow.prev');
+    const nextBtn = card.querySelector('.compact-arrow.next');
+    const currentNumEl = card.querySelector('.compact-counter-current');
+    const totalNumEl = card.querySelector('.compact-counter-total');
+    const totalSlides = slides.length;
+
+    if (totalSlides === 0) return;
+
+    if (totalNumEl) {
+      totalNumEl.textContent = String(totalSlides).padStart(2, '0');
+    }
+
+    let currentIndex = 0;
+    let autoSlideTimer = null;
+    const AUTO_DELAY = 4500;
+
+    function startAutoSlide() {
+      stopAutoSlide();
+      autoSlideTimer = setInterval(() => {
+        setSlide((currentIndex + 1) % totalSlides);
+      }, AUTO_DELAY);
+    }
+
+    function stopAutoSlide() {
+      if (autoSlideTimer) {
+        clearInterval(autoSlideTimer);
+        autoSlideTimer = null;
+      }
+    }
+
+    function resetAutoSlide() {
+      stopAutoSlide();
+      startAutoSlide();
+    }
+
+    function setSlide(index) {
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
+      currentIndex = index;
+
+      if (track) {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+
+      if (currentNumEl) {
+        currentNumEl.textContent = String(currentIndex + 1).padStart(2, '0');
+      }
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof playTickSound === 'function') playTickSound('click');
+        setSlide(currentIndex - 1);
+        resetAutoSlide();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof playTickSound === 'function') playTickSound('click');
+        setSlide(currentIndex + 1);
+        resetAutoSlide();
+      });
+    }
+
+    // Touch swipe for compact card
+    if (viewport) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let isSwiping = false;
+
+      viewport.addEventListener('touchstart', (e) => {
+        stopAutoSlide();
+        const t = e.touches[0];
+        touchStartX = t.clientX;
+        touchStartY = t.clientY;
+        isSwiping = true;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', (e) => {
+        if (!isSwiping) return;
+        isSwiping = false;
+        const touch = e.changedTouches[0];
+        const distX = touch.clientX - touchStartX;
+        const distY = touch.clientY - touchStartY;
+        if (Math.abs(distX) > 36 && Math.abs(distX) > Math.abs(distY)) {
+          if (distX < 0) {
+            setSlide(currentIndex + 1);
+          } else {
+            setSlide(currentIndex - 1);
+          }
+        }
+        resetAutoSlide();
+      }, { passive: true });
+    }
+
+    // Hover pauses auto-slide
+    card.addEventListener('mouseenter', stopAutoSlide);
+    card.addEventListener('mouseleave', () => {
+      if (!lightbox || !lightbox.classList.contains('active')) {
+        startAutoSlide();
+      }
+    });
+
+    // Opening Lightbox from compact card viewport or Explore button
+    function triggerOpen(slideIndex) {
+      stopAutoSlide();
+      openUniversalLightbox(card, slideIndex);
+    }
+
+    if (viewport) {
+      viewport.addEventListener('click', (e) => {
+        // Only open if not clicking navigation arrows
+        if (e.target.closest('.compact-arrow')) return;
+        triggerOpen(currentIndex);
+      });
+    }
+
+    const openBtns = card.querySelectorAll('.gallery-modal-open-btn');
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerOpen(currentIndex);
+      });
+    });
+
+    // Start auto slide for this card
+    setSlide(0);
+    startAutoSlide();
+  });
+
+  // --- Universal Lightbox Engine ---
+  function openUniversalLightbox(sessionCard, startIndex = 0) {
+    if (!lightbox || !sessionCard) return;
+
+    activeLightboxSession = sessionCard;
+    const slides = Array.from(sessionCard.querySelectorAll('.compact-slide'));
+    const total = slides.length;
+    if (total === 0) return;
+
+    if (startIndex < 0) startIndex = 0;
+    if (startIndex >= total) startIndex = total - 1;
+    activeLightboxIndex = startIndex;
+
+    if (lightboxTotalNum) {
+      lightboxTotalNum.textContent = String(total).padStart(2, '0');
+    }
+
+    // Build dynamic thumbnail buttons
+    if (lightboxThumbsStrip) {
+      lightboxThumbsStrip.innerHTML = '';
+      slides.forEach((sl, idx) => {
+        const img = sl.querySelector('img');
+        const thumbBtn = document.createElement('button');
+        thumbBtn.type = 'button';
+        thumbBtn.className = `carousel-thumb-btn ${idx === activeLightboxIndex ? 'active' : ''}`;
+        thumbBtn.setAttribute('data-index', idx);
+        thumbBtn.setAttribute('aria-label', `Go to Slide ${idx + 1}`);
+
+        const thumbImg = document.createElement('img');
+        thumbImg.src = img ? img.src : '';
+        thumbImg.alt = `Slide ${idx + 1}`;
+        thumbBtn.appendChild(thumbImg);
+
+        thumbBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (typeof playTickSound === 'function') playTickSound('click');
+          updateLightboxSlide(idx);
+        });
+
+        lightboxThumbsStrip.appendChild(thumbBtn);
+      });
+    }
+
+    updateLightboxSlide(activeLightboxIndex);
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function updateLightboxSlide(index) {
+    if (!activeLightboxSession) return;
+    const slides = Array.from(activeLightboxSession.querySelectorAll('.compact-slide'));
+    const total = slides.length;
+    if (total === 0) return;
+
+    if (index < 0) index = total - 1;
+    if (index >= total) index = 0;
+    activeLightboxIndex = index;
+
+    const currentSlide = slides[activeLightboxIndex];
+    const img = currentSlide ? currentSlide.querySelector('img') : null;
+    if (img && lightboxImg) {
+      lightboxImg.src = img.getAttribute('data-full') || img.src;
+      lightboxImg.alt = img.alt || `Slide ${activeLightboxIndex + 1}`;
+    }
+
+    if (lightboxCurrentNum) {
+      lightboxCurrentNum.textContent = String(activeLightboxIndex + 1).padStart(2, '0');
+    }
+
+    if (lightboxThumbsStrip) {
+      const thumbs = lightboxThumbsStrip.querySelectorAll('.carousel-thumb-btn');
+      thumbs.forEach((th, idx) => {
+        th.classList.toggle('active', idx === activeLightboxIndex);
+        if (idx === activeLightboxIndex) {
+          th.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      });
+    }
+  }
+
+  function closeUniversalLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (lightboxCloseBtn) {
+    lightboxCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeUniversalLightbox();
+    });
+  }
+
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox-inner')) {
+        closeUniversalLightbox();
+      }
+    });
+  }
+
+  [lightboxPrevBtn, lightboxArrowPrevBtn].forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof playTickSound === 'function') playTickSound('click');
+        updateLightboxSlide(activeLightboxIndex - 1);
+      });
+    }
+  });
+
+  [lightboxNextBtn, lightboxArrowNextBtn].forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof playTickSound === 'function') playTickSound('click');
+        updateLightboxSlide(activeLightboxIndex + 1);
+      });
+    }
+  });
+
+  // Touch Swipe for Lightbox
+  if (lightbox) {
+    let lbTouchStartX = 0;
+    let lbTouchStartY = 0;
+    let lbSwiping = false;
+
+    lightbox.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      lbTouchStartX = t.clientX;
+      lbTouchStartY = t.clientY;
+      lbSwiping = true;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+      if (!lbSwiping) return;
+      lbSwiping = false;
+      const touch = e.changedTouches[0];
+      const distX = touch.clientX - lbTouchStartX;
+      const distY = touch.clientY - lbTouchStartY;
+      if (Math.abs(distX) > 40 && Math.abs(distX) > Math.abs(distY)) {
+        if (distX < 0) {
+          updateLightboxSlide(activeLightboxIndex + 1);
+        } else {
+          updateLightboxSlide(activeLightboxIndex - 1);
+        }
+      }
+    }, { passive: true });
+  }
+
+  // Keyboard navigation
+  window.addEventListener('keydown', (e) => {
+    const isLightboxActive = lightbox && lightbox.classList.contains('active');
+    if (e.key === 'Escape' && isLightboxActive) {
+      closeUniversalLightbox();
+      return;
+    }
+    if (isLightboxActive) {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        updateLightboxSlide(activeLightboxIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        updateLightboxSlide(activeLightboxIndex + 1);
+      }
+    }
+  });
+}
+
+/* --- 29. Restrained Smart High-Tech Motion & Scroll Reveal Engine --- */
+function initScrollRevealEngine() {
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  if (revealElements.length === 0) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealElements.forEach(el => el.classList.add('revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealElements.forEach(el => observer.observe(el));
+}

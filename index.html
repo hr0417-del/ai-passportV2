@@ -142,74 +142,105 @@
     <section class="section hero-section" id="hero" style="padding-top: 125px; padding-bottom: 60px; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-start !important;">
       
       <!-- Top Announcement Banner (Above Hero 2-Column Grid) -->
-      <div class="hero-top-countdown-banner" style="max-width: 1280px; margin: 0 auto 36px auto; padding: 0 20px; box-sizing: border-box; width: 100%;">
-        <div class="countdown-wrapper" style="background: rgba(14, 15, 22, 0.90); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(223, 207, 173, 0.25); border-radius: 14px; padding: 18px 26px; box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+      <div class="hero-live-announcement-banner">
+        <div class="dual-banner-container">
+          <div class="dual-banner-ambient-bar"></div>
           
-          <!-- Left Info Block: Eyebrow, Title, Metadata -->
-          <div style="display: flex; flex-direction: column; gap: 6px; max-width: 620px;">
+          <!-- Top Meta Row: Status Indicator on Left, Countdown on Right -->
+          <div class="dual-banner-top-bar">
+            <div class="dual-banner-status">
+              <span class="dual-banner-pulse-dot"></span>
+              <span class="dual-banner-status-text">HAPPENING 11 OCTOBER 2026</span>
+            </div>
             
-            <!-- Eyebrow -->
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="width: 7px; height: 7px; background-color: #2ecc71; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #2ecc71;"></span>
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: #2ecc71; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;">UPCOMING &bull; AI PASSPORT™ &bull; NATIONAL WEBINAR &bull; TEACHER SPECIAL</span>
-            </div>
-
-            <!-- Main Title (Primary Focal Point) -->
-            <div style="font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2vw, 1.45rem); color: #ffffff; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25;">
-              AI in Education — Preparing the Teacher for Viksit Bharat
-            </div>
-
-            <!-- Event Metadata -->
-            <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); font-weight: 700; letter-spacing: 0.08em;">
-              11 OCTOBER 2026 &bull; 2:00–3:30 PM IST &bull; 90 MIN &bull; FREE
-            </div>
-          </div>
-
-          <!-- Right Group: Countdown & CTA -->
-          <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-            
-            <!-- Countdown Block with STARTS IN label -->
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: rgba(255, 255, 255, 0.55); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; white-space: nowrap;">STARTS IN</span>
-              
-              <div class="countdown-display" style="margin: 0; gap: 8px; display: flex; align-items: center;">
-                
-                <div class="countdown-item" style="align-items: center; background: rgba(8, 9, 14, 0.7); border: 1px solid rgba(223, 207, 173, 0.2); border-radius: 10px; padding: 8px 12px; min-width: 54px; text-align: center;">
-                  <span class="countdown-number countdown-days" style="font-size: 1.5rem; color: #DFCFAD; font-weight: 700; line-height: 1; font-family: 'Space Mono', monospace;">00</span>
-                  <span class="countdown-label" style="font-size: 0.54rem; margin-top: 3px; color: rgba(255, 255, 255, 0.55); letter-spacing: 0.12em; font-family: 'Space Mono', monospace;">DAYS</span>
+            <div class="dual-banner-countdown-wrap">
+              <span class="dual-banner-starts-in">STARTS IN</span>
+              <div class="countdown-display dual-banner-countdown-display">
+                <div class="dual-banner-countdown-item">
+                  <span class="countdown-number countdown-days dual-banner-countdown-num">00</span>
+                  <span class="countdown-label dual-banner-countdown-lbl">DAYS</span>
                 </div>
-                
-                <div class="countdown-divider" style="font-size: 1.2rem; color: rgba(223, 207, 173, 0.35); transform: translateY(-3px); font-family: 'Space Mono', monospace;">:</div>
-                
-                <div class="countdown-item" style="align-items: center; background: rgba(8, 9, 14, 0.7); border: 1px solid rgba(223, 207, 173, 0.2); border-radius: 10px; padding: 8px 12px; min-width: 54px; text-align: center;">
-                  <span class="countdown-number countdown-hours" style="font-size: 1.5rem; color: #DFCFAD; font-weight: 700; line-height: 1; font-family: 'Space Mono', monospace;">00</span>
-                  <span class="countdown-label" style="font-size: 0.54rem; margin-top: 3px; color: rgba(255, 255, 255, 0.55); letter-spacing: 0.12em; font-family: 'Space Mono', monospace;">HOURS</span>
+                <div class="dual-banner-countdown-div">:</div>
+                <div class="dual-banner-countdown-item">
+                  <span class="countdown-number countdown-hours dual-banner-countdown-num">00</span>
+                  <span class="countdown-label dual-banner-countdown-lbl">HOURS</span>
                 </div>
-                
-                <div class="countdown-divider" style="font-size: 1.2rem; color: rgba(223, 207, 173, 0.35); transform: translateY(-3px); font-family: 'Space Mono', monospace;">:</div>
-                
-                <div class="countdown-item" style="align-items: center; background: rgba(8, 9, 14, 0.7); border: 1px solid rgba(223, 207, 173, 0.2); border-radius: 10px; padding: 8px 12px; min-width: 54px; text-align: center;">
-                  <span class="countdown-number countdown-minutes" style="font-size: 1.5rem; color: #DFCFAD; font-weight: 700; line-height: 1; font-family: 'Space Mono', monospace;">00</span>
-                  <span class="countdown-label" style="font-size: 0.54rem; margin-top: 3px; color: rgba(255, 255, 255, 0.55); letter-spacing: 0.12em; font-family: 'Space Mono', monospace;">MINS</span>
+                <div class="dual-banner-countdown-div">:</div>
+                <div class="dual-banner-countdown-item">
+                  <span class="countdown-number countdown-minutes dual-banner-countdown-num">00</span>
+                  <span class="countdown-label dual-banner-countdown-lbl">MINS</span>
                 </div>
-                
-                <div class="countdown-divider" style="font-size: 1.2rem; color: rgba(223, 207, 173, 0.35); transform: translateY(-3px); font-family: 'Space Mono', monospace;">:</div>
-                
-                <div class="countdown-item" style="align-items: center; background: rgba(8, 9, 14, 0.7); border: 1px solid rgba(223, 207, 173, 0.2); border-radius: 10px; padding: 8px 12px; min-width: 54px; text-align: center;">
-                  <span class="countdown-number countdown-seconds" style="font-size: 1.5rem; color: #DFCFAD; font-weight: 700; line-height: 1; font-family: 'Space Mono', monospace;">00</span>
-                  <span class="countdown-label" style="font-size: 0.54rem; margin-top: 3px; color: rgba(255, 255, 255, 0.55); letter-spacing: 0.12em; font-family: 'Space Mono', monospace;">SECS</span>
+                <div class="dual-banner-countdown-div">:</div>
+                <div class="dual-banner-countdown-item">
+                  <span class="countdown-number countdown-seconds dual-banner-countdown-num">00</span>
+                  <span class="countdown-label dual-banner-countdown-lbl">SECS</span>
                 </div>
-
               </div>
             </div>
-
-            <!-- CTA Button -->
-            <a href="#register-card" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.08em;">
-              REGISTER FREE &rarr;
-            </a>
-
+          </div>
+          
+          <!-- Dual Events Grid: 2 Equal Sections -->
+          <div class="dual-banner-events-grid">
+            <!-- LEFT: FREE WEBINAR -->
+            <div class="dual-banner-event-card">
+              <div class="dual-banner-card-body">
+                <span class="dual-banner-pill-badge">FREE WEBINAR</span>
+                <h3 class="dual-banner-event-title">AI in Education</h3>
+                <p class="dual-banner-event-sub">Preparing the Teacher for Viksit Bharat</p>
+                <div class="dual-banner-details-list">
+                  <span>11 OCTOBER 2026 &bull; 2:00–3:30 PM IST</span>
+                  <span>90 MIN &bull; FREE FOR EDUCATORS</span>
+                </div>
+              </div>
+              <a href="#register-card" class="btn btn-primary dual-banner-cta" data-track-cta="webinar_cta_click">REGISTER FOR WEBINAR &rarr;</a>
+            </div>
+            
+            <!-- Vertical Divider -->
+            <div class="dual-banner-divider"></div>
+            
+            <!-- RIGHT: C11 COHORT -->
+            <div class="dual-banner-event-card">
+              <div class="dual-banner-card-body">
+                <span class="dual-banner-pill-badge">C11 COHORT</span>
+                <h3 class="dual-banner-event-title">Viksit Bharat: AI Educator Cohort — C11</h3>
+                <p class="dual-banner-event-sub">Practical hands-on cohort for educators</p>
+                <div class="dual-banner-details-list">
+                  <span>STARTING 11 OCTOBER 2026</span>
+                  <span>10 HOURS &bull; 5 LIVE SESSIONS &bull; FOR EDUCATORS</span>
+                </div>
+              </div>
+              <a href="academy.html#choose-level" class="btn btn-primary dual-banner-cta" data-track-cta="c11_cohort_cta_click">REGISTER FOR C11 &rarr;</a>
+            </div>
           </div>
 
+          <!-- Mobile-Only Countdown Cluster (rendered at bottom on mobile) -->
+          <div class="dual-banner-mobile-countdown">
+            <div class="dual-banner-countdown-wrap">
+              <span class="dual-banner-starts-in">STARTS IN</span>
+              <div class="countdown-display dual-banner-countdown-display">
+                <div class="dual-banner-countdown-item">
+                  <span class="countdown-number countdown-days dual-banner-countdown-num">00</span>
+                  <span class="countdown-label dual-banner-countdown-lbl">DAYS</span>
+                </div>
+                <div class="dual-banner-countdown-div">:</div>
+                <div class="dual-banner-countdown-item">
+                  <span class="countdown-number countdown-hours dual-banner-countdown-num">00</span>
+                  <span class="countdown-label dual-banner-countdown-lbl">HOURS</span>
+                </div>
+                <div class="dual-banner-countdown-div">:</div>
+                <div class="dual-banner-countdown-item">
+                  <span class="countdown-number countdown-minutes dual-banner-countdown-num">00</span>
+                  <span class="countdown-label dual-banner-countdown-lbl">MINS</span>
+                </div>
+                <div class="dual-banner-countdown-div">:</div>
+                <div class="dual-banner-countdown-item">
+                  <span class="countdown-number countdown-seconds dual-banner-countdown-num">00</span>
+                  <span class="countdown-label dual-banner-countdown-lbl">SECS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
 

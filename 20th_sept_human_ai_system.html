@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI PASSPORT™ - Human AI System</title>
+<style>
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: #05050A; color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  overflow: hidden; user-select: none;
+}
+
+/* APP CANVAS */
+#app {
+  width: 1920px; height: 1080px; position: absolute; transform-origin: top left;
+  background: #05050A; overflow: hidden;
+}
+
+/* HOLOGRAM IMAGE */
+#hologram-container {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 607px; /* 1080 * 9/16 = 607.5 */
+  height: 1080px;
+  background-image: url('human_hologram.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 10;
+  /* Masking the edges to blend into the background seamlessly */
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+}
+
+/* LIGHT PULSES / ILLUMINATION OVERLAYS */
+.glow-overlay {
+  position: absolute; border-radius: 50%; filter: blur(40px); opacity: 0; pointer-events: none; z-index: 15;
+  background: radial-gradient(circle, rgba(212, 166, 42, 0.4) 0%, transparent 70%);
+}
+#glow-brain { top: 120px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; animation: pulseGlow 12s infinite; }
+#glow-chest { top: 320px; left: 50%; transform: translateX(-50%); width: 250px; height: 250px; animation: pulseGlow 15s infinite 4s; }
+#glow-lhand { top: 550px; left: calc(50% - 150px); width: 150px; height: 150px; animation: pulseGlow 10s infinite 2s; }
+#glow-rhand { top: 550px; left: calc(50% + 0px); width: 150px; height: 150px; animation: pulseGlow 10s infinite 2s; }
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0; transform: translateX(-50%) scale(0.8); }
+  50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+}
+
+/* NEURAL PATHWAYS (Golden lines) */
+.pathway {
+  position: absolute; background: linear-gradient(90deg, transparent, rgba(212, 166, 42, 0.6), transparent);
+  height: 2px; opacity: 0; z-index: 12;
+}
+#path-1 { top: 300px; left: calc(50% - 200px); width: 400px; transform: rotate(30deg); animation: shootLine 8s infinite; }
+#path-2 { top: 400px; left: calc(50% - 250px); width: 500px; transform: rotate(-20deg); animation: shootLine 11s infinite 3s; }
+#path-3 { top: 550px; left: calc(50% - 150px); width: 300px; transform: rotate(0deg); animation: shootLine 14s infinite 7s; }
+
+@keyframes shootLine {
+  0% { opacity: 0; transform: scaleX(0); }
+  10% { opacity: 1; transform: scaleX(1); }
+  20%, 100% { opacity: 0; transform: scaleX(1); }
+}
+
+/* DIGITAL CREATION (Near hands) */
+#digital-creation {
+  position: absolute; top: 600px; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 80px; border: 1px solid rgba(212, 166, 42, 0.4);
+  background: rgba(212, 166, 42, 0.05); border-radius: 8px; box-shadow: 0 0 20px rgba(212, 166, 42, 0.2);
+  opacity: 0; z-index: 20; animation: materialize 16s infinite 8s;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+}
+.dc-line { width: 60%; height: 2px; background: rgba(212, 166, 42, 0.5); }
+.dc-line.short { width: 40%; }
+
+@keyframes materialize {
+  0%, 100% { opacity: 0; transform: translateX(-50%) translateY(20px) scale(0.9); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  25% { opacity: 1; transform: translateX(-50%) translateY(-10px) scale(1); }
+  35% { opacity: 0; transform: translateX(-50%) translateY(-20px) scale(1.1); }
+}
+
+
+/* FLOATING TOOL NAMES */
+.tool-cluster { position: absolute; z-index: 30; display: flex; flex-direction: column; gap: 30px; }
+
+.tool-name {
+  font-size: 28px; font-weight: 300; letter-spacing: 0.15em; color: rgba(255,255,255,0.9);
+  text-shadow: 0 0 15px rgba(212, 166, 42, 0.2);
+  opacity: 0; 
+  /* Fallback animations if JS is not used, but we'll use CSS for the loop */
+}
+
+/* Brain Cluster - Top Left */
+#cluster-brain { top: 150px; left: 300px; text-align: right; align-items: flex-end; }
+/* Eyes Cluster - Top Right */
+#cluster-eyes { top: 200px; right: 300px; text-align: left; align-items: flex-start; }
+/* Imagination Cluster - Mid Left */
+#cluster-imagination { top: 400px; left: 250px; text-align: right; align-items: flex-end; }
+/* Hands Cluster - Mid Right */
+#cluster-hands { top: 500px; right: 250px; text-align: left; align-items: flex-start; }
+
+/* Individual tool animations */
+/* We'll assign different delays and durations to make it feel organic and random */
+@keyframes floatFade {
+  0% { opacity: 0; transform: translate(0, 10px); }
+  15% { opacity: 0.9; transform: translate(0, 0); text-shadow: 0 0 20px rgba(212, 166, 42, 0.5); }
+  35% { opacity: 0.9; transform: translate(0, -5px); text-shadow: 0 0 10px rgba(212, 166, 42, 0.2); }
+  50%, 100% { opacity: 0; transform: translate(0, -15px); }
+}
+
+@keyframes floatFadeAlt {
+  0%, 40% { opacity: 0; transform: translate(0, 10px); }
+  55% { opacity: 0.9; transform: translate(0, 0); text-shadow: 0 0 20px rgba(212, 166, 42, 0.5); }
+  75% { opacity: 0.9; transform: translate(0, -5px); text-shadow: 0 0 10px rgba(212, 166, 42, 0.2); }
+  90%, 100% { opacity: 0; transform: translate(0, -15px); }
+}
+
+/* FOOTER TEXT */
+#footer-text {
+  position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+  font-size: 24px; font-weight: 300; letter-spacing: 0.3em; color: rgba(255,255,255,0.7);
+  z-index: 40; text-align: center;
+}
+.brand-sig { font-size: 14px; letter-spacing: 0.4em; color: #D4A62A; margin-top: 15px; opacity: 0.6; }
+
+</style>
+</head>
+<body>
+
+<div id="app">
+  
+  <div id="hologram-container"></div>
+
+  <!-- Illumination Overlays -->
+  <div class="glow-overlay" id="glow-brain"></div>
+  <div class="glow-overlay" id="glow-chest"></div>
+  <div class="glow-overlay" id="glow-lhand"></div>
+  <div class="glow-overlay" id="glow-rhand"></div>
+
+  <!-- Neural Pathways -->
+  <div class="pathway" id="path-1"></div>
+  <div class="pathway" id="path-2"></div>
+  <div class="pathway" id="path-3"></div>
+
+  <!-- Digital Creation -->
+  <div id="digital-creation">
+    <div class="dc-line"></div>
+    <div class="dc-line short"></div>
+    <div class="dc-line"></div>
+  </div>
+
+  <!-- Floating Tool Names -->
+  <div class="tool-cluster" id="cluster-brain">
+    <div class="tool-name" style="animation: floatFade 20s infinite 0s;">ChatGPT</div>
+    <div class="tool-name" style="animation: floatFadeAlt 22s infinite 2s;">Claude</div>
+    <div class="tool-name" style="animation: floatFade 18s infinite 5s;">Gemini</div>
+    <div class="tool-name" style="animation: floatFadeAlt 25s infinite 8s;">Perplexity</div>
+  </div>
+
+  <div class="tool-cluster" id="cluster-eyes">
+    <div class="tool-name" style="animation: floatFadeAlt 19s infinite 1s;">Google Search</div>
+    <div class="tool-name" style="animation: floatFade 21s infinite 4s;">Perplexity</div>
+    <div class="tool-name" style="animation: floatFadeAlt 23s infinite 6s;">Gemini</div>
+    <div class="tool-name" style="animation: floatFade 17s infinite 9s;">NotebookLM</div>
+  </div>
+
+  <div class="tool-cluster" id="cluster-imagination">
+    <div class="tool-name" style="animation: floatFade 24s infinite 3s;">Midjourney</div>
+    <div class="tool-name" style="animation: floatFadeAlt 20s infinite 5s;">Adobe Firefly</div>
+    <div class="tool-name" style="animation: floatFade 22s infinite 7s;">Canva</div>
+    <div class="tool-name" style="animation: floatFadeAlt 18s infinite 11s;">Sora</div>
+  </div>
+
+  <div class="tool-cluster" id="cluster-hands">
+    <div class="tool-name" style="animation: floatFadeAlt 21s infinite 2s;">Antigravity</div>
+    <div class="tool-name" style="animation: floatFade 23s infinite 6s;">Cursor</div>
+    <div class="tool-name" style="animation: floatFadeAlt 19s infinite 9s;">Replit</div>
+    <div class="tool-name" style="animation: floatFade 25s infinite 12s;">Lovable</div>
+  </div>
+
+  <div id="footer-text">
+    ONE WORKFLOW. MULTIPLE AI TOOLS.
+    <div class="brand-sig">AI PASSPORT™</div>
+  </div>
+
+</div>
+
+<script>
+// Scaler for robust letterboxing
+function resizeApp() {
+  const app = document.getElementById('app');
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  app.style.transform = `scale(${scale})`;
+  app.style.left = `${(window.innerWidth - 1920 * scale) / 2}px`;
+  app.style.top = `${(window.innerHeight - 1080 * scale) / 2}px`;
+}
+window.addEventListener('resize', resizeApp);
+resizeApp();
+
+// Optional: Subtle parallax effect on mousemove for a slightly more dynamic feel
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+  
+  const hologram = document.getElementById('hologram-container');
+  hologram.style.transform = `translateX(-50%) translate(${x}px, ${y}px)`;
+  
+  const tools = document.querySelectorAll('.tool-cluster');
+  tools.forEach(cluster => {
+    cluster.style.transform = `translate(${-x * 0.5}px, ${-y * 0.5}px)`;
+  });
+});
+</script>
+</body>
+</html>

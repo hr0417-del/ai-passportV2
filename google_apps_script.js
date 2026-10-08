@@ -1,12 +1,12 @@
 // ==========================================================================
-// MY AI PASSPORT™ — GOOGLE APPS SCRIPT WEB APP (v5.0 - 2 OCT LIVE WEBINAR)
+// MY AI PASSPORT™ — GOOGLE APPS SCRIPT WEB APP (v6.0 - 11 OCT LIVE WEBINAR)
 // Active Spreadsheet ID: 1bdChBRpjvxYTVlxPL0DppuJMsO7j7fRkrhqqXVoihVs
-// Tab Target: "2 oct live" & "2 Oct Verified Sent"
+// Tab Target: "11 OCT"
 // ==========================================================================
 
 var SPREADSHEET_ID = "1bdChBRpjvxYTVlxPL0DppuJMsO7j7fRkrhqqXVoihVs";
-var TAB_NAME = "2 oct live";
-var VERIFIED_TAB_NAME = "2 Oct Verified Sent";
+var TAB_NAME = "11 OCT";
+var VERIFIED_TAB_NAME = "11 OCT Verified Sent";
 
 function getSpreadsheet() {
   if (SPREADSHEET_ID && SPREADSHEET_ID.trim().length > 10) {
@@ -28,13 +28,17 @@ function getTargetSheet(ss) {
   if (!ss) ss = getSpreadsheet();
   if (!ss) return null;
   var sheet = ss.getSheetByName(TAB_NAME) || 
-              ss.getSheetByName("2 Oct Live") || 
-              ss.getSheetByName("2 oct Live");
+              ss.getSheetByName("11 Oct") || 
+              ss.getSheetByName("11 oct live");
               
   if (!sheet) {
     try {
       sheet = ss.insertSheet(TAB_NAME);
-      var headers = ["Timestamp", "Full Name", "Email Address", "WhatsApp Mobile", "Role", "Primary AI Interest / Use Case", "Organization / Profession", "AI Passport ID", "City", "Source", "Consent", "Email Status", "WhatsApp Status", "Registration Status"];
+      var headers = [
+        "Timestamp", "Full Name", "Email Address", "WhatsApp Mobile", "Role", 
+        "Primary AI Interest / Use Case", "Organization / Profession", "AI Passport ID", 
+        "City", "Source", "Consent", "Email Status", "WhatsApp Status", "Registration Status"
+      ];
       sheet.appendRow(headers);
       var headerRange = sheet.getRange(1, 1, 1, headers.length);
       headerRange.setFontWeight("bold");
@@ -59,6 +63,11 @@ function doGet(e) {
   if (action === "createVerifiedSheet" || action === "buildVerified") {
     var result = createVerifiedSentSheet();
     return ContentService.createTextOutput(JSON.stringify(result, null, 2)).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  if (action === "shiftTo11Oct" || action === "migrateTo11Oct") {
+    var shiftResult = shiftRegistrationsRange("AIP-2026-0576", "AIP-2026-0601");
+    return ContentService.createTextOutput(JSON.stringify(shiftResult, null, 2)).setMimeType(ContentService.MimeType.JSON);
   }
 
   if (action === "sync" || action === "autosync") {
@@ -275,7 +284,7 @@ function processRegistration(data) {
       return ContentService.createTextOutput(JSON.stringify({
         success: false,
         duplicate: true,
-        message: "User already exists in '2 oct live' tab. Registration skipped."
+        message: "User already exists in '11 OCT' tab. Registration skipped."
       })).setMimeType(ContentService.MimeType.JSON);
     }
     
@@ -312,9 +321,9 @@ function processRegistration(data) {
     ]);
     
     // ==========================================================================
-    // ALL AUTOMATIC EMAILS ARE OFFICIALLY DISABLED / STOPPED AS REQUESTED
+    // AUTOMATIC CONFIRMATION EMAILS ENABLED FOR WEBINAR REGISTRATIONS
     // ==========================================================================
-    var ENABLE_AUTOMATIC_EMAILS = false;
+    var ENABLE_AUTOMATIC_EMAILS = true;
     
     if (ENABLE_AUTOMATIC_EMAILS && email && data.skipEmail !== "true" && source !== "Sheet1 Sync") {
       try {
@@ -456,6 +465,84 @@ function createVerifiedSentSheet() {
       message: "Successfully created new sheet '" + VERIFIED_TAB_NAME + "'!",
       newSheetName: VERIFIED_TAB_NAME,
       totalVerifiedRegistrations: masterRegistrations.length
+    };
+    
+  } catch(err) {
+    return { status: "error", message: err.toString() };
+  }
+}
+
+function shiftRegistrationsRange(startId, endId) {
+  try {
+    var ss = getSpreadsheet();
+    if (!ss) return { status: "error", message: "Could not open spreadsheet." };
+    
+    var sourceSheet = ss.getSheetByName("2 oct live") || ss.getSheetByName("2 Oct Live");
+    var targetSheet = getTargetSheet(ss);
+    
+    if (!sourceSheet) return { status: "error", message: "Source sheet '2 oct live' not found." };
+    if (!targetSheet) return { status: "error", message: "Target sheet '11 OCT' not found." };
+    
+    var startNum = parseInt(startId.replace(/\D/g, ""), 10);
+    var endNum = parseInt(endId.replace(/\D/g, ""), 10);
+    
+    var sRows = sourceSheet.getDataRange().getValues();
+    var tRows = targetSheet.getDataRange().getValues();
+    
+    // Build set of existing emails/ids in target tab to prevent duplicates
+    var existingInTarget = {};
+    for (var t = 1; t < tRows.length; t++) {
+      var tEmail = (tRows[t][2] || "").toString().toLowerCase().trim();
+      var tId = (tRows[t][7] || "").toString().trim();
+      if (tEmail) existingInTarget[tEmail] = true;
+      if (tId) existingInTarget[tId] = true;
+    }
+    
+    var shiftedRows = [];
+    
+    for (var r = 1; r < sRows.length; r++) {
+      var row = sRows[r];
+      var pid = (row[7] || row[1] || "").toString().trim();
+      var m = pid.match(/AIP-2026-(\d+)/);
+      if (m) {
+        var num = parseInt(m[1], 10);
+        if (num >= startNum && num <= endNum) {
+          var email = (row[2] || "").toString().toLowerCase().trim();
+          if (!existingInTarget[pid] && !existingInTarget[email]) {
+            // Standardize row length to target format (14 columns)
+            var cleanRow = [
+              row[0] || new Date(),
+              row[1] || "",
+              row[2] || "",
+              row[3] || "",
+              row[4] || "",
+              row[5] || "",
+              row[6] || "",
+              pid,
+              row[8] || "",
+              row[9] || "Website (Shifted from 2 Oct)",
+              row[10] || "on",
+              row[11] || "Sent",
+              row[12] || "Sent",
+              row[13] || "Registered"
+            ];
+            targetSheet.appendRow(cleanRow);
+            shiftedRows.push({ passportId: pid, name: row[1], email: email });
+            existingInTarget[pid] = true;
+            if (email) existingInTarget[email] = true;
+          }
+        }
+      }
+    }
+    
+    return {
+      status: "success",
+      message: "Successfully shifted " + shiftedRows.length + " registrations to '" + targetSheet.getName() + "' tab!",
+      sourceTab: sourceSheet.getName(),
+      targetTab: targetSheet.getName(),
+      totalShifted: shiftedRows.length,
+      shiftedRange: startId + " to " + endId,
+      shiftedList: shiftedRows
     };
     
   } catch(err) {
