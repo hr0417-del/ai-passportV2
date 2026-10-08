@@ -39,6 +39,7 @@ function getCohortSheet(ss) {
         "Timestamp", "Full Name", "Email Address", "WhatsApp Mobile", "Role", 
         "Organization / School", "City & State", "Subject / Grade Taught", 
         "Primary AI Goal / Use Case", "Cohort Name", "AI Passport ID", 
+        "Fee Paid", "UTR / Transaction Ref", "Payment Status",
         "Source", "Consent", "Status"
       ];
       sheet.appendRow(headers);
@@ -48,6 +49,22 @@ function getCohortSheet(ss) {
       headerRange.setFontColor("#f8fafc");
     } catch(e) {
       sheet = ss.getSheets()[0];
+    }
+  } else {
+    try {
+      if (sheet.getLastColumn() < 17 && sheet.getLastRow() >= 1) {
+        var existingHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+        if (existingHeaders.indexOf("Fee Paid") === -1 && existingHeaders.indexOf("UTR / Transaction Ref") === -1) {
+          var startCol = sheet.getLastColumn() + 1;
+          sheet.getRange(1, startCol, 1, 3).setValues([["Fee Paid", "UTR / Transaction Ref", "Payment Status"]]);
+          var newHeaderRange = sheet.getRange(1, startCol, 1, 3);
+          newHeaderRange.setFontWeight("bold");
+          newHeaderRange.setBackground("#1e293b");
+          newHeaderRange.setFontColor("#f8fafc");
+        }
+      }
+    } catch(hErr) {
+      Logger.log("Header check error: " + hErr);
     }
   }
   return sheet;
@@ -170,7 +187,7 @@ function doGet(e) {
   return ContentService.createTextOutput(JSON.stringify({
     status: "online",
     service: "AI Passport Live API",
-    version: "6.1",
+    version: "6.2",
     spreadsheetId: SPREADSHEET_ID,
     tabName: TAB_NAME,
     cohortTabName: COHORT_TAB_NAME
@@ -345,6 +362,9 @@ function processCohortRegistration(data) {
     
     var nextCohortNum = rows.length; // e.g. row count
     var passportId = "AIP-C11-" + ("0000" + nextCohortNum).slice(-4);
+    var feePaid = (data.fee_amount || "₹1,999").toString().trim();
+    var utrNumber = (data.utr_number || data.utr || "").toString().trim();
+    var paymentStatus = (data.payment_status || "Completed - Verification Pending").toString().trim();
     
     sheet.appendRow([
       new Date(),
@@ -358,15 +378,18 @@ function processCohortRegistration(data) {
       use_case,
       cohortName,
       passportId,
+      feePaid,
+      utrNumber,
+      paymentStatus,
       source,
       consent,
-      "Applied"
+      "Enrolled"
     ]);
     
     // Send C11 Cohort Confirmation Email
     if (email && data.skipEmail !== "true") {
       try {
-        sendCohortConfirmationEmail(email, fullname, passportId, role, organization);
+        sendCohortConfirmationEmail(email, fullname, passportId, role, organization, feePaid, utrNumber);
       } catch(mailErr) {
         Logger.log("Cohort email send error: " + mailErr);
       }
@@ -374,11 +397,13 @@ function processCohortRegistration(data) {
     
     return ContentService.createTextOutput(JSON.stringify({
       success: true,
-      message: "Application for " + cohortName + " successfully received!",
+      message: "Application for " + cohortName + " successfully received with payment details!",
       passportId: passportId,
       fullname: fullname,
       email: email,
       cohort: cohortName,
+      fee: feePaid,
+      utr: utrNumber,
       tab: sheet.getName()
     })).setMimeType(ContentService.MimeType.JSON);
     
@@ -689,11 +714,13 @@ function shiftRegistrationsRange(startId, endId) {
   }
 }
 
-function sendCohortConfirmationEmail(email, fullname, passportId, role, org) {
+function sendCohortConfirmationEmail(email, fullname, passportId, role, org, feePaid, utrNumber) {
   if (!email) return;
   
   var subject = "SEAT CONFIRMED: Viksit Bharat: AI Educator Cohort — C11 | " + passportId;
   var bccEmail = "ekaakshareducation@gmail.com";
+  var feeDisplay = feePaid || "₹1,999 (Recorded)";
+  var utrDisplay = utrNumber || "Recorded On File";
   
   var htmlBody = `
 <!DOCTYPE html>
@@ -763,6 +790,14 @@ function sendCohortConfirmationEmail(email, fullname, passportId, role, org) {
                 <tr>
                   <td style="padding-bottom: 8px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">COHORT</td>
                   <td align="right" style="padding-bottom: 8px; font-size: 14px; font-weight: 700; color: #0F172A;">C11</td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom: 8px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">TUITION FEE</td>
+                  <td align="right" style="padding-bottom: 8px; font-size: 14px; font-weight: 700; color: #16A34A;">${feeDisplay}</td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom: 8px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">UTR / TRANSACTION REF</td>
+                  <td align="right" style="padding-bottom: 8px; font-size: 13px; font-weight: 700; color: #0F172A; font-family: monospace;">${utrDisplay}</td>
                 </tr>
                 <tr>
                   <td style="padding-bottom: 8px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">INSTITUTION</td>

@@ -537,6 +537,77 @@
                   >
                 </div>
 
+                <!-- PAYMENT SECTION: ₹1,999 WITH UPI QR CODE -->
+                <div class="cohort-payment-box" style="background: linear-gradient(180deg, rgba(223, 207, 173, 0.08) 0%, rgba(15, 23, 42, 0.8) 100%); border: 1px solid rgba(223, 207, 173, 0.35); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 18px; margin-top: 6px;">
+                  
+                  <!-- Tuition Details -->
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 14px;">
+                    <div>
+                      <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px;">
+                        COHORT TUITION & CERTIFICATION
+                      </span>
+                      <div style="display: flex; align-items: baseline; gap: 10px;">
+                        <span style="font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 700; color: #ffffff; line-height: 1;">
+                          ₹1,999
+                        </span>
+                        <span style="font-size: 0.92rem; color: rgba(255, 255, 255, 0.4); text-decoration: line-through;">
+                          ₹4,999
+                        </span>
+                        <span style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: #2ecc71; background: rgba(46, 204, 113, 0.12); border: 1px solid rgba(46, 204, 113, 0.3); padding: 3px 8px; border-radius: 4px; font-weight: 700;">
+                          60% EDUCATOR SUBSIDY
+                        </span>
+                      </div>
+                      <div style="font-size: 0.76rem; color: rgba(255, 255, 255, 0.65); margin-top: 6px; line-height: 1.4;">
+                        Covers all 5 Live Sessions (10 Hours) · Level 1 AI Passport™ Credential · Capstone Evaluation · Lifetime Resource Bank.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- QR Scan Box -->
+                  <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; background: rgba(0, 0, 0, 0.4); border-radius: 10px; padding: 20px 14px; border: 1px solid rgba(255,255,255,0.05);">
+                    <div style="font-family: 'Space Mono', monospace; font-size: 0.74rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700;">
+                      SCAN TO PAY ₹1,999 VIA ANY UPI APP
+                    </div>
+
+                    <div style="background: #ffffff; padding: 12px; border-radius: 14px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 207, 173, 0.25); display: inline-block;">
+                      <img src="payment_qr.jpg" alt="UPI Payment QR Code for ₹1,999" style="width: 190px; height: 190px; display: block; border-radius: 6px; object-fit: contain;">
+                    </div>
+
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: rgba(255, 255, 255, 0.65);">
+                      <span style="background: rgba(255,255,255,0.06); padding: 3px 8px; border-radius: 4px;">Google Pay</span>
+                      <span style="background: rgba(255,255,255,0.06); padding: 3px 8px; border-radius: 4px;">PhonePe</span>
+                      <span style="background: rgba(255,255,255,0.06); padding: 3px 8px; border-radius: 4px;">Paytm</span>
+                      <span style="background: rgba(255,255,255,0.06); padding: 3px 8px; border-radius: 4px;">BHIM UPI</span>
+                    </div>
+
+                    <div style="font-size: 0.76rem; color: rgba(255, 255, 255, 0.75); line-height: 1.45; max-width: 380px;">
+                      Scan the QR code with any UPI app on your phone, complete the <strong>₹1,999</strong> payment, and enter the <strong>12-digit UTR / UPI Ref ID</strong> below.
+                    </div>
+                  </div>
+
+                  <!-- UTR / Transaction ID Field -->
+                  <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label for="cohort-utr" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--color-gold); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;">
+                      UPI TRANSACTION ID / UTR NUMBER *
+                    </label>
+                    <input 
+                      type="text" 
+                      id="cohort-utr" 
+                      name="utr_number" 
+                      class="cohort-input-field" 
+                      placeholder="Enter 12-digit UTR / UPI Ref ID (e.g. 428190382910)" 
+                      required
+                      style="border-color: rgba(223, 207, 173, 0.4); background: rgba(8, 10, 16, 0.95);"
+                    >
+                    <span style="font-size: 0.70rem; color: rgba(255, 255, 255, 0.5); font-family: 'Space Mono', monospace;">
+                      Available in your UPI app payment receipt / SMS confirmation
+                    </span>
+                  </div>
+
+                  <input type="hidden" name="fee_amount" value="₹1,999">
+                  <input type="hidden" name="payment_status" value="Completed - Verification Pending">
+                </div>
+
                 <!-- Consent Checkbox -->
                 <div class="form-checkbox-group" style="display: flex; align-items: flex-start; gap: 10px; margin-top: 4px;">
                   <input 
@@ -548,7 +619,7 @@
                     style="margin-top: 3px; accent-color: var(--color-gold); cursor: pointer;"
                   >
                   <label for="cohort-consent" style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.45; cursor: pointer;">
-                    I agree to receive cohort timetable updates, session Google Meet links, and onboarding files via email and WhatsApp.
+                    I have completed the ₹1,999 payment and entered my valid UTR reference. I agree to receive cohort timetable updates, Google Meet links, and onboarding materials via email and WhatsApp.
                   </label>
                 </div>
 
@@ -559,25 +630,25 @@
                   id="cohort-submit-btn" 
                   style="width: 100%; padding: 16px; font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 8px; margin-top: 10px; cursor: pointer;"
                 >
-                  <span class="btn-text">APPLY FOR COHORT C11 SEAT &rarr;</span>
+                  <span class="btn-text">PAY ₹1,999 & CONFIRM COHORT SEAT &rarr;</span>
                 </button>
 
                 <div style="text-align: center; font-size: 0.72rem; color: rgba(255,255,255,0.45); font-family: 'Space Mono', monospace; margin-top: 4px;">
-                  ✦ Verified AI Passport™ Educator Track &bull; Zero Spam Guarantee
+                  ✦ Instant Digital Onboarding Pass &bull; Verified Ekaakshar Education Track
                 </div>
 
               </form>
 
               <!-- SUCCESS CONFIRMATION STATE -->
               <div class="cohort-success-overlay" id="cohort-success-panel">
-                <span class="cohort-ticket-badge">APPLICATION SUBMITTED &bull; SEAT PROVISIONALLY RESERVED</span>
+                <span class="cohort-ticket-badge">APPLICATION & PAYMENT RECORDED &bull; SEAT CONFIRMED</span>
                 
                 <h3 style="font-family: 'Playfair Display', serif; font-size: 1.85rem; color: #ffffff; margin: 0;">
                   Welcome to Cohort C11!
                 </h3>
                 
                 <p style="font-size: 0.90rem; color: rgba(255,255,255,0.85); line-height: 1.6; max-width: 440px; margin: 0;">
-                  Your application has been recorded in the official AI Passport™ Cohort database. Our onboarding team is reviewing your details.
+                  Your registration and ₹1,999 payment reference have been recorded in the official AI Passport™ Cohort database.
                 </p>
 
                 <!-- Pass Card Details -->
@@ -589,6 +660,14 @@
                   <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
                     <span style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">PASSPORT ID</span>
                     <strong style="font-family: 'Space Mono', monospace; color: var(--color-gold); font-size: 0.90rem;" id="success-passport-id">AIP-C11-0001</strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+                    <span style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">INVESTMENT</span>
+                    <strong style="color: #2ecc71; font-size: 0.88rem;" id="success-fee-status">₹1,999 (Recorded)</strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+                    <span style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">UTR / REF</span>
+                    <strong style="font-family: 'Space Mono', monospace; color: #ffffff; font-size: 0.82rem;" id="success-utr-ref">—</strong>
                   </div>
                   <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
                     <span style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">COHORT</span>

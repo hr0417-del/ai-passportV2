@@ -1097,12 +1097,15 @@ function initCohortRegistrationForm() {
   const role = document.getElementById('cohort-role');
   const org = document.getElementById('cohort-org');
   const city = document.getElementById('cohort-city');
+  const utr = document.getElementById('cohort-utr');
   const consent = document.getElementById('cohort-consent');
   
   const formHeader = document.getElementById('cohort-form-header');
   const successPanel = document.getElementById('cohort-success-panel');
   const successApplicantName = document.getElementById('success-applicant-name');
   const successPassportId = document.getElementById('success-passport-id');
+  const successFeeStatus = document.getElementById('success-fee-status');
+  const successUtrRef = document.getElementById('success-utr-ref');
   
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
@@ -1130,7 +1133,7 @@ function initCohortRegistrationForm() {
     return true;
   }
   
-  const validateList = [fullname, email, mobile, role, org, city, consent].filter(Boolean);
+  const validateList = [fullname, email, mobile, role, org, city, utr, consent].filter(Boolean);
   validateList.forEach(el => {
     const evName = (el.tagName === 'SELECT' || el.type === 'checkbox') ? 'change' : 'input';
     el.addEventListener(evName, () => {
@@ -1146,8 +1149,10 @@ function initCohortRegistrationForm() {
         validateCohortField(org, org.value.trim().length > 0, "School / Institution is required *");
       } else if (el === city) {
         validateCohortField(city, city.value.trim().length > 0, "City & State is required *");
+      } else if (el === utr) {
+        validateCohortField(utr, utr.value.trim().length >= 4, "Please enter your 12-digit UPI Transaction / UTR ID *");
       } else if (el === consent) {
-        validateCohortField(consent, consent.checked, "Agreement is required *");
+        validateCohortField(consent, consent.checked, "Payment confirmation & agreement is required *");
       }
     });
   });
@@ -1162,7 +1167,8 @@ function initCohortRegistrationForm() {
     if (role) isValid = validateCohortField(role, role.value !== "", "Please select your educator role *") && isValid;
     if (org) isValid = validateCohortField(org, org.value.trim().length > 0, "School / Institution is required *") && isValid;
     if (city) isValid = validateCohortField(city, city.value.trim().length > 0, "City & State is required *") && isValid;
-    if (consent) isValid = validateCohortField(consent, consent.checked, "Agreement is required *") && isValid;
+    if (utr) isValid = validateCohortField(utr, utr.value.trim().length >= 4, "Please enter your 12-digit UPI Transaction / UTR ID *") && isValid;
+    if (consent) isValid = validateCohortField(consent, consent.checked, "Payment confirmation & agreement is required *") && isValid;
     
     if (!isValid) {
       if (typeof trackFormError === 'function') {
@@ -1176,7 +1182,8 @@ function initCohortRegistrationForm() {
       trackFormSubmit('cohort_registration', {
         role: role?.value || 'School Teacher',
         cohort: 'C11',
-        org: org?.value || ''
+        org: org?.value || '',
+        fee: '₹1,999'
       });
     }
     
@@ -1184,7 +1191,7 @@ function initCohortRegistrationForm() {
       submitBtn.disabled = true;
       submitBtn.classList.add('loading');
       const btnTxt = submitBtn.querySelector('.btn-text');
-      if (btnTxt) btnTxt.textContent = 'SUBMITTING APPLICATION...';
+      if (btnTxt) btnTxt.textContent = 'CONFIRMING PAYMENT & SEAT...';
     }
     playTickSound('click');
     
@@ -1196,6 +1203,9 @@ function initCohortRegistrationForm() {
     
     formObject.form_type = 'cohort';
     formObject.cohort = 'C11';
+    formObject.fee_amount = '₹1,999';
+    formObject.utr_number = (utr && utr.value.trim()) || '';
+    formObject.payment_status = 'Completed - Verification Pending';
     
     fetch(AIPASSPORT_CONFIG.webhookUrl, {
       method: 'POST',
@@ -1209,21 +1219,24 @@ function initCohortRegistrationForm() {
     })
     .then(result => {
       if (result && result.duplicate === true) {
-        alert(result.message || "You have already applied for Cohort C11!");
+        alert(result.message || "You have already registered for Cohort C11!");
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.classList.remove('loading');
           const btnTxt = submitBtn.querySelector('.btn-text');
-          if (btnTxt) btnTxt.textContent = 'APPLY FOR COHORT C11 SEAT →';
+          if (btnTxt) btnTxt.textContent = 'PAY ₹1,999 & CONFIRM COHORT SEAT →';
         }
         return;
       }
       
       const assignedId = (result && result.passportId) || ('AIP-C11-' + Math.floor(1000 + Math.random() * 9000));
       const applicantName = (fullname && fullname.value) || 'Educator';
+      const enteredUtr = (utr && utr.value.trim()) || 'Recorded';
       
       if (successApplicantName) successApplicantName.textContent = applicantName;
       if (successPassportId) successPassportId.textContent = assignedId;
+      if (successFeeStatus) successFeeStatus.textContent = '₹1,999 (Recorded)';
+      if (successUtrRef) successUtrRef.textContent = enteredUtr;
       
       if (form) form.style.display = 'none';
       if (formHeader) formHeader.style.display = 'none';
@@ -1240,9 +1253,12 @@ function initCohortRegistrationForm() {
       console.warn("Cohort registration offline fallback:", err);
       const assignedId = 'AIP-C11-' + Math.floor(1000 + Math.random() * 9000);
       const applicantName = (fullname && fullname.value) || 'Educator';
+      const enteredUtr = (utr && utr.value.trim()) || 'Recorded';
       
       if (successApplicantName) successApplicantName.textContent = applicantName;
       if (successPassportId) successPassportId.textContent = assignedId;
+      if (successFeeStatus) successFeeStatus.textContent = '₹1,999 (Recorded)';
+      if (successUtrRef) successUtrRef.textContent = enteredUtr;
       
       if (form) form.style.display = 'none';
       if (formHeader) formHeader.style.display = 'none';
