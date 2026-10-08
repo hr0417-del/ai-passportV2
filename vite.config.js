@@ -41,7 +41,8 @@ export default defineConfig({
         login: 'login.html',
         record: 'record.html',
         app: 'app/index.html',
-        olympiad: 'ai-olympiad.html'
+        olympiad: 'ai-olympiad.html',
+        cohort: 'cohort.html'
       }
     }
   }

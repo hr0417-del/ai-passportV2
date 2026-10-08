@@ -7,6 +7,7 @@
 var SPREADSHEET_ID = "1bdChBRpjvxYTVlxPL0DppuJMsO7j7fRkrhqqXVoihVs";
 var TAB_NAME = "11 OCT";
 var VERIFIED_TAB_NAME = "11 OCT Verified Sent";
+var COHORT_TAB_NAME = "C11 Cohort";
 
 function getSpreadsheet() {
   if (SPREADSHEET_ID && SPREADSHEET_ID.trim().length > 10) {
@@ -22,6 +23,34 @@ function getSpreadsheet() {
     Logger.log("getActiveSpreadsheet failed: " + err);
   }
   return null;
+}
+
+function getCohortSheet(ss) {
+  if (!ss) ss = getSpreadsheet();
+  if (!ss) return null;
+  var sheet = ss.getSheetByName(COHORT_TAB_NAME) || 
+              ss.getSheetByName("C11") || 
+              ss.getSheetByName("11 Oct Cohort");
+              
+  if (!sheet) {
+    try {
+      sheet = ss.insertSheet(COHORT_TAB_NAME);
+      var headers = [
+        "Timestamp", "Full Name", "Email Address", "WhatsApp Mobile", "Role", 
+        "Organization / School", "City & State", "Subject / Grade Taught", 
+        "Primary AI Goal / Use Case", "Cohort Name", "AI Passport ID", 
+        "Source", "Consent", "Status"
+      ];
+      sheet.appendRow(headers);
+      var headerRange = sheet.getRange(1, 1, 1, headers.length);
+      headerRange.setFontWeight("bold");
+      headerRange.setBackground("#1e293b");
+      headerRange.setFontColor("#f8fafc");
+    } catch(e) {
+      sheet = ss.getSheets()[0];
+    }
+  }
+  return sheet;
 }
 
 function getTargetSheet(ss) {
@@ -116,16 +145,35 @@ function doGet(e) {
     }
   }
 
+  if (action === "getCohort" || action === "getCohortStats") {
+    try {
+      var ss = getSpreadsheet();
+      var cSheet = getCohortSheet(ss);
+      var cRows = cSheet.getDataRange().getValues();
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        tab: cSheet.getName(),
+        totalApplications: Math.max(0, cRows.length - 1)
+      }, null, 2)).setMimeType(ContentService.MimeType.JSON);
+    } catch(cErr) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "error", message: cErr.toString() })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+
   if (action === "register" || params.email || params.fullname) {
+    if (params.form_type === "cohort" || params.type === "cohort" || params.cohort === "C11") {
+      return processCohortRegistration(params);
+    }
     return processRegistration(params);
   }
 
   return ContentService.createTextOutput(JSON.stringify({
     status: "online",
     service: "AI Passport Live API",
-    version: "4.9",
+    version: "6.1",
     spreadsheetId: SPREADSHEET_ID,
-    tabName: TAB_NAME
+    tabName: TAB_NAME,
+    cohortTabName: COHORT_TAB_NAME
   })).setMimeType(ContentService.MimeType.JSON);
 }
 
@@ -149,6 +197,10 @@ function doPost(e) {
   if (data.action === "createVerifiedSheet" || data.action === "buildVerified") {
     var result = createVerifiedSentSheet();
     return ContentService.createTextOutput(JSON.stringify(result, null, 2)).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  if (data.form_type === "cohort" || data.type === "cohort" || data.cohort === "C11") {
+    return processCohortRegistration(data);
   }
 
   return processRegistration(data);
@@ -248,6 +300,84 @@ function createNewSpreadsheetFromSentEmails() {
     
   } catch(err) {
     return { status: "error", message: err.toString() };
+  }
+}
+
+function processCohortRegistration(data) {
+  try {
+    var ss = getSpreadsheet();
+    var sheet = getCohortSheet(ss);
+    
+    var email = (data.email || "").toString().trim();
+    var mobile = (data.mobile || "").toString().trim();
+    var fullname = (data.fullname || "Educator").toString().trim();
+    var role = (data.role || "School Teacher").toString().trim();
+    var organization = (data.organization || data.school || "").toString().trim();
+    var city = (data.city || "").toString().trim();
+    var subject_grade = (data.subject_grade || data.subject || "").toString().trim();
+    var use_case = (data.use_case || data.primary_goal || "").toString().trim();
+    var cohortName = (data.cohort || "C11").toString().trim();
+    var source = (data.source || "Website Cohort Form").toString().trim();
+    var consent = (data.consent || "yes").toString().trim();
+    
+    var rows = sheet.getDataRange().getValues();
+    var isDuplicate = false;
+    
+    if (email || mobile) {
+      for (var i = 1; i < rows.length; i++) {
+        var rowEmail = (rows[i][2] || "").toString().trim().toLowerCase();
+        var rowMobile = (rows[i][3] || "").toString().trim();
+        
+        if ((email && rowEmail === email.toLowerCase()) || (mobile && rowMobile && rowMobile === mobile)) {
+          isDuplicate = true;
+          break;
+        }
+      }
+    }
+    
+    if (isDuplicate) {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        duplicate: true,
+        message: "You have already applied for " + cohortName + ". Your application is on file!"
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    var nextCohortNum = rows.length; // e.g. row count
+    var passportId = "AIP-C11-" + ("0000" + nextCohortNum).slice(-4);
+    
+    sheet.appendRow([
+      new Date(),
+      fullname,
+      email,
+      mobile,
+      role,
+      organization,
+      city,
+      subject_grade,
+      use_case,
+      cohortName,
+      passportId,
+      source,
+      consent,
+      "Applied"
+    ]);
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      success: true,
+      message: "Application for " + cohortName + " successfully received!",
+      passportId: passportId,
+      fullname: fullname,
+      email: email,
+      cohort: cohortName,
+      tab: sheet.getName()
+    })).setMimeType(ContentService.MimeType.JSON);
+    
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      error: err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
   }
 }
 

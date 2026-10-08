@@ -9,7 +9,7 @@ import { AI_PASSPORT_LIVE_DATA } from './src/data/liveEvents.js';
 /* --- CONFIGURATION --- */
 const AIPASSPORT_CONFIG = {
   // Connect to Google Sheets & Gmail Webhook
-  webhookUrl: "https://script.google.com/macros/s/AKfycbzHt68RFZ1QxTnLT9HN9Rfgynyzm_EpHkpqRwYzkzz6hI_XqDTTYJTcNUfOJ47C0bQU/exec"
+  webhookUrl: "https://script.google.com/macros/s/AKfycbxbqCYYHT3fone_pcnbAnUG_U2wAbU3HlCtbM-JzQui7jB0pMOixrePbStmmJAag9yy/exec"
 };
 
 // Register GSAP plugins safely
@@ -45,6 +45,7 @@ function initAll() {
   initSafe('initBuildersDivider', initBuildersDivider);
   initSafe('initAccordion', initAccordion);
   initSafe('initRegistrationForm', initRegistrationForm);
+  initSafe('initCohortRegistrationForm', initCohortRegistrationForm);
   initSafe('initCardHoverReactions', initCardHoverReactions);
   initSafe('initCountdowns', initCountdowns);
   initSafe('initMobileMenu', initMobileMenu);
@@ -1082,6 +1083,174 @@ function initRegistrationForm() {
       }
     });
   }
+}
+
+/* --- 9b. Cohort C11 Registration Form & Confirmation Pass --- */
+function initCohortRegistrationForm() {
+  const form = document.getElementById('cohort-registration-form');
+  if (!form) return;
+  
+  const submitBtn = form.querySelector('.btn-submit');
+  const fullname = document.getElementById('cohort-fullname');
+  const email = document.getElementById('cohort-email');
+  const mobile = document.getElementById('cohort-mobile');
+  const role = document.getElementById('cohort-role');
+  const org = document.getElementById('cohort-org');
+  const city = document.getElementById('cohort-city');
+  const consent = document.getElementById('cohort-consent');
+  
+  const formHeader = document.getElementById('cohort-form-header');
+  const successPanel = document.getElementById('cohort-success-panel');
+  const successApplicantName = document.getElementById('success-applicant-name');
+  const successPassportId = document.getElementById('success-passport-id');
+  
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  function validateCohortField(inputEl, condition, errorMsg) {
+    if (!inputEl) return false;
+    const group = inputEl.closest('.form-group') || inputEl.closest('.form-checkbox-group');
+    if (!group) return condition;
+    
+    const existingError = group.querySelector('.error-msg');
+    if (existingError) existingError.remove();
+    group.classList.remove('invalid');
+    
+    if (!condition) {
+      group.classList.add('invalid');
+      const span = document.createElement('span');
+      span.className = 'error-msg';
+      span.style.color = '#ff6b6b';
+      span.style.fontSize = '0.74rem';
+      span.style.fontFamily = "'Space Mono', monospace";
+      span.style.marginTop = '4px';
+      span.textContent = errorMsg;
+      group.appendChild(span);
+      return false;
+    }
+    return true;
+  }
+  
+  const validateList = [fullname, email, mobile, role, org, city, consent].filter(Boolean);
+  validateList.forEach(el => {
+    const evName = (el.tagName === 'SELECT' || el.type === 'checkbox') ? 'change' : 'input';
+    el.addEventListener(evName, () => {
+      if (el === fullname) {
+        validateCohortField(fullname, fullname.value.trim().length > 0, "Full Name is required *");
+      } else if (el === email) {
+        validateCohortField(email, emailPattern.test(email.value.trim()), "Please enter a valid email *");
+      } else if (el === mobile) {
+        validateCohortField(mobile, mobile.value.trim().length >= 8, "Enter a valid WhatsApp number *");
+      } else if (el === role) {
+        validateCohortField(role, role.value !== "", "Please select your educator role *");
+      } else if (el === org) {
+        validateCohortField(org, org.value.trim().length > 0, "School / Institution is required *");
+      } else if (el === city) {
+        validateCohortField(city, city.value.trim().length > 0, "City & State is required *");
+      } else if (el === consent) {
+        validateCohortField(consent, consent.checked, "Agreement is required *");
+      }
+    });
+  });
+  
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    let isValid = true;
+    if (fullname) isValid = validateCohortField(fullname, fullname.value.trim().length > 0, "Full Name is required *") && isValid;
+    if (email) isValid = validateCohortField(email, emailPattern.test(email.value.trim()), "Please enter a valid email *") && isValid;
+    if (mobile) isValid = validateCohortField(mobile, mobile.value.trim().length >= 8, "Enter a valid WhatsApp number *") && isValid;
+    if (role) isValid = validateCohortField(role, role.value !== "", "Please select your educator role *") && isValid;
+    if (org) isValid = validateCohortField(org, org.value.trim().length > 0, "School / Institution is required *") && isValid;
+    if (city) isValid = validateCohortField(city, city.value.trim().length > 0, "City & State is required *") && isValid;
+    if (consent) isValid = validateCohortField(consent, consent.checked, "Agreement is required *") && isValid;
+    
+    if (!isValid) {
+      if (typeof trackFormError === 'function') {
+        trackFormError('cohort_registration', 'validation_error');
+      }
+      playTickSound('click');
+      return;
+    }
+    
+    if (typeof trackFormSubmit === 'function') {
+      trackFormSubmit('cohort_registration', {
+        role: role?.value || 'School Teacher',
+        cohort: 'C11',
+        org: org?.value || ''
+      });
+    }
+    
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add('loading');
+      const btnTxt = submitBtn.querySelector('.btn-text');
+      if (btnTxt) btnTxt.textContent = 'SUBMITTING APPLICATION...';
+    }
+    playTickSound('click');
+    
+    const formData = new FormData(form);
+    const formObject = {};
+    formData.forEach((value, key) => {
+      formObject[key] = value;
+    });
+    
+    formObject.form_type = 'cohort';
+    formObject.cohort = 'C11';
+    
+    fetch(AIPASSPORT_CONFIG.webhookUrl, {
+      method: 'POST',
+      body: JSON.stringify(formObject)
+    })
+    .then(response => {
+      if (!response.ok && response.status !== 0) {
+        throw new Error("HTTP error " + response.status);
+      }
+      return response.json().catch(() => ({ success: true }));
+    })
+    .then(result => {
+      if (result && result.duplicate === true) {
+        alert(result.message || "You have already applied for Cohort C11!");
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+          const btnTxt = submitBtn.querySelector('.btn-text');
+          if (btnTxt) btnTxt.textContent = 'APPLY FOR COHORT C11 SEAT →';
+        }
+        return;
+      }
+      
+      const assignedId = (result && result.passportId) || ('AIP-C11-' + Math.floor(1000 + Math.random() * 9000));
+      const applicantName = (fullname && fullname.value) || 'Educator';
+      
+      if (successApplicantName) successApplicantName.textContent = applicantName;
+      if (successPassportId) successPassportId.textContent = assignedId;
+      
+      if (form) form.style.display = 'none';
+      if (formHeader) formHeader.style.display = 'none';
+      if (successPanel) {
+        successPanel.style.display = 'flex';
+        if (typeof gsap !== 'undefined') {
+          gsap.from(successPanel, { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out' });
+        }
+      }
+      
+      playTickSound('toggle');
+    })
+    .catch(err => {
+      console.warn("Cohort registration offline fallback:", err);
+      const assignedId = 'AIP-C11-' + Math.floor(1000 + Math.random() * 9000);
+      const applicantName = (fullname && fullname.value) || 'Educator';
+      
+      if (successApplicantName) successApplicantName.textContent = applicantName;
+      if (successPassportId) successPassportId.textContent = assignedId;
+      
+      if (form) form.style.display = 'none';
+      if (formHeader) formHeader.style.display = 'none';
+      if (successPanel) {
+        successPanel.style.display = 'flex';
+      }
+    });
+  });
 }
 
 /* --- 10. Mobile Menu Logic & Touch Navigation --- */
