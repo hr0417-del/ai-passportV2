@@ -63,7 +63,6 @@ function initAll() {
   initSafe('initCinematicJourneySection', initCinematicJourneySection);
   initSafe('initMasteryLevelsSection', initMasteryLevelsSection);
   initSafe('initLiveEcosystem', initLiveEcosystem);
-  initSafe('initLiveCarousel', initLiveCarousel);
 }
 
 if (document.readyState === 'loading') {
@@ -874,9 +873,33 @@ function initRegistrationForm() {
       }
     })
     .catch(err => {
-      trackFormError('webinar_registration', 'server_error');
-      console.warn("Webhook submission warning, proceeding to fallback:", err);
-      proceedToSuccess(dataName);
+      trackFormError('webinar_registration', 'server_error', err?.message || 'network_error');
+      console.error("Webhook submission error:", err);
+      
+      // Reset submit button state
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        const btnTxt = submitBtn.querySelector('.btn-text');
+        if (btnTxt) btnTxt.textContent = 'REGISTER FREE →';
+      }
+      
+      // Show honest, actionable error message to user
+      const formStatus = document.getElementById('form-status');
+      if (formStatus) {
+        formStatus.style.display = 'block';
+        formStatus.style.color = '#ff4d4d';
+        formStatus.style.marginTop = '14px';
+        formStatus.style.padding = '12px 16px';
+        formStatus.style.background = 'rgba(255, 77, 77, 0.12)';
+        formStatus.style.border = '1px solid rgba(255, 77, 77, 0.35)';
+        formStatus.style.borderRadius = '10px';
+        formStatus.style.fontSize = '0.9rem';
+        formStatus.style.textAlign = 'center';
+        formStatus.style.lineHeight = '1.5';
+        formStatus.innerHTML = `⚠️ <strong>Registration Error</strong><br>We could not complete your registration at this moment. Please check your internet connection and try again.`;
+      }
+      playTickSound('click');
     });
   });
   
@@ -887,8 +910,8 @@ function initRegistrationForm() {
       passport_id_generated: !!passportId
     });
     
-    const randomId = Math.floor(1000 + Math.random() * 9000);
-    const assignedId = passportId ? (passportId.startsWith('#') ? passportId : `#${passportId}`) : `#2026-${randomId}`;
+    // Honest credential identifier: use real passportId if returned, otherwise honest CONFIRMED status
+    const assignedId = passportId ? (passportId.startsWith('#') ? passportId : `#${passportId}`) : 'CONFIRMED';
     const ticketName = document.getElementById('ticket-holder-name');
     const ticketId = document.getElementById('ticket-citizen-id');
     if (ticketName) ticketName.textContent = name.toUpperCase();
@@ -1250,21 +1273,14 @@ function initCohortRegistrationForm() {
       playTickSound('toggle');
     })
     .catch(err => {
-      console.warn("Cohort registration offline fallback:", err);
-      const assignedId = 'AIP-C11-' + Math.floor(1000 + Math.random() * 9000);
-      const applicantName = (fullname && fullname.value) || 'Educator';
-      const enteredUtr = (utr && utr.value.trim()) || 'Recorded';
-      
-      if (successApplicantName) successApplicantName.textContent = applicantName;
-      if (successPassportId) successPassportId.textContent = assignedId;
-      if (successFeeStatus) successFeeStatus.textContent = '₹1,999 (Recorded)';
-      if (successUtrRef) successUtrRef.textContent = enteredUtr;
-      
-      if (form) form.style.display = 'none';
-      if (formHeader) formHeader.style.display = 'none';
-      if (successPanel) {
-        successPanel.style.display = 'flex';
+      console.error("Cohort registration submission error:", err);
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        const btnTxt = submitBtn.querySelector('.btn-text');
+        if (btnTxt) btnTxt.textContent = 'PAY ₹1,999 & CONFIRM COHORT SEAT →';
       }
+      alert("Unable to submit application due to a connection error. Please check your network and try again.");
     });
   });
 }
@@ -1328,10 +1344,13 @@ function initMobileMenu() {
   }
 }
 
-/* --- 11. Live Countdown Timer Logic --- */
+/* --- 11. Live Countdown Timer Logic (Three-Phase Lifecycle Engine) --- */
 function initCountdowns() {
-  // Target Event Date: October 11, 2026, 14:00 IST (UTC+5:30) => 08:30 UTC
-  const targetDate = Date.UTC(2026, 9, 11, 8, 30, 0);
+  // Target Event: 11 October 2026, 2:00 PM – 3:30 PM IST (Asia/Kolkata, UTC+5:30)
+  // Start: 2026-10-11 14:00:00 IST (08:30 UTC)
+  // End:   2026-10-11 15:30:00 IST (10:00 UTC)
+  const startTime = Date.parse('2026-10-11T14:00:00+05:30');
+  const endTime = Date.parse('2026-10-11T15:30:00+05:30');
   
   const daysContainers = document.querySelectorAll('.countdown-days');
   const hoursContainers = document.querySelectorAll('.countdown-hours');
@@ -1374,15 +1393,17 @@ function initCountdowns() {
         for (let i = 0; i < valStr.length; i++) {
           const span = document.createElement('span');
           span.className = 'digit';
-          span.textContent = '0';
+          span.textContent = valStr.charAt(i);
+          span.setAttribute('data-val', valStr.charAt(i));
           container.appendChild(span);
         }
-        spans = container.querySelectorAll('.digit');
+        return;
       }
       for (let i = 0; i < valStr.length; i++) {
         const char = valStr.charAt(i);
         const span = spans[i];
-        if (span && span.textContent !== char) {
+        if (span && span.getAttribute('data-val') !== char) {
+          span.setAttribute('data-val', char);
           span.textContent = char;
           gsap.fromTo(span,
             { scaleY: 0.4, y: -6, opacity: 0.5 },
@@ -1402,12 +1423,15 @@ function initCountdowns() {
   }
   
   const updateTimer = () => {
-    const now = new Date().getTime();
-    const diff = targetDate - now;
+    const now = Date.now();
     
-    if (diff <= 0) {
+    // Phase 2: DURING EVENT (2:00 PM – 3:30 PM IST)
+    if (now >= startTime && now <= endTime) {
       wrappers.forEach(w => {
-        w.innerHTML = "<div class='live-badge-wrapper'><span class='live-badge'>LIVE NOW</span> <span class='live-text'>Next Live National Webinar is in progress!</span></div>";
+        w.innerHTML = `<div class='live-badge-wrapper live-pulse-active' style='display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 20px;background:rgba(235,87,87,0.12);border:1px solid rgba(235,87,87,0.35);border-radius:100px;'>
+          <span class='live-badge' style='background:#eb5757;color:#fff;font-family:"Space Mono",monospace;font-size:0.76rem;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:0.1em;'>🔴 LIVE NOW</span>
+          <span class='live-text' style='color:#fff;font-size:0.88rem;font-weight:600;'>Session in Progress (Concludes 3:30 PM IST)</span>
+        </div>`;
       });
       daysContainers.forEach(el => el.textContent = '00');
       hoursContainers.forEach(el => el.textContent = '00');
@@ -1416,15 +1440,32 @@ function initCountdowns() {
       return;
     }
     
+    // Phase 3: AFTER EVENT (Post-Session Archive & Highlights)
+    if (now > endTime) {
+      wrappers.forEach(w => {
+        w.innerHTML = `<div class='live-badge-wrapper concluded' style='display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 20px;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);border-radius:100px;'>
+          <span class='live-badge' style='background:#2ecc71;color:#000;font-family:"Space Mono",monospace;font-size:0.74rem;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:0.08em;'>✓ CONCLUDED</span>
+          <span class='live-text' style='color:#fff;font-size:0.86rem;font-weight:500;'>Explore Verified Archive, Highlights &amp; PDF Below</span>
+        </div>`;
+      });
+      daysContainers.forEach(el => el.textContent = '00');
+      hoursContainers.forEach(el => el.textContent = '00');
+      minsContainers.forEach(el => el.textContent = '00');
+      secsContainers.forEach(el => el.textContent = '00');
+      return;
+    }
+    
+    // Phase 1: BEFORE EVENT (Active Live Countdown to Start Time)
+    const diff = Math.max(0, startTime - now);
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
     
-    const daysStr = days.toString().padStart(2, '0');
-    const hrsStr = hours.toString().padStart(2, '0');
-    const minsStr = mins.toString().padStart(2, '0');
-    const secsStr = secs.toString().padStart(2, '0');
+    const daysStr = String(days).padStart(2, '0');
+    const hrsStr = String(hours).padStart(2, '0');
+    const minsStr = String(mins).padStart(2, '0');
+    const secsStr = String(secs).padStart(2, '0');
     
     daysContainers.forEach(container => updateContainerDigits(container, daysStr));
     hoursContainers.forEach(container => updateContainerDigits(container, hrsStr));
