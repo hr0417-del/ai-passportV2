@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Passport™ LIVE — Outreach & Deliverability Command Console</title>
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(15, 20, 32, 0.85);
+      --card-hover: rgba(22, 30, 48, 0.95);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(223, 207, 173, 0.4);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --gold: #dfcfad;
+      --gold-dark: #b89b5f;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --purple: #c084fc;
+      --amber: #f59e0b;
+      --red: #f43f5e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1440px; margin: 0 auto; }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .eyebrow-pill {
+      background: rgba(223, 207, 173, 0.15);
+      border: 1px solid rgba(223, 207, 173, 0.3);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+    h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+    .meta-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+    .header-badges {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: var(--green);
+      text-transform: uppercase;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--green);
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.5; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.5; }
+    }
+    .badge-deliverability {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 6px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Pacing Strip */
+    .pacing-strip {
+      background: linear-gradient(135deg, rgba(20, 26, 42, 0.9) 0%, rgba(12, 16, 26, 0.9) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 22px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      align-items: center;
+    }
+    .pacing-item { display: flex; flex-direction: column; gap: 4px; }
+    .pacing-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); font-weight: 600; }
+    .pacing-value { font-size: 17px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .countdown-val { color: var(--amber); font-family: monospace; font-size: 20px; font-weight: 700; }
+    .eta-val { color: var(--accent); font-family: monospace; font-size: 16px; }
+
+    /* Dual Progress Meters */
+    .dual-progress-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 900px) {
+      .dual-progress-grid { grid-template-columns: 1fr; }
+    }
+    .progress-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px 22px;
+    }
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .progress-title { font-size: 13px; font-weight: 600; color: var(--text); }
+    .progress-stats-right { font-size: 14px; font-weight: 700; }
+    .bar-bg {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 100px;
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .bar-fill-batch2 { background: linear-gradient(90deg, #dfcfad 0%, #38bdf8 100%); }
+    .bar-fill-cohort { background: linear-gradient(90deg, #38bdf8 0%, #10b981 100%); }
+    .progress-sub {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .kpi-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+    }
+    .kpi-card.gold::before { background: var(--gold); }
+    .kpi-card.blue::before { background: var(--accent); }
+    .kpi-card.green::before { background: var(--green); }
+    .kpi-card.purple::before { background: var(--purple); }
+    .kpi-card.amber::before { background: var(--amber); }
+
+    .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; }
+    .kpi-value { font-size: 32px; font-weight: 800; margin: 4px 0 2px; color: #fff; letter-spacing: -0.5px; }
+    .kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+    /* Live Activity Ticker */
+    .activity-ticker {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .ticker-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--green);
+      font-weight: 700;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ticker-body {
+      font-size: 13px;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+
+    /* Controls Strip */
+    .controls-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .tabs-group { display: flex; gap: 6px; background: rgba(255, 255, 255, 0.04); padding: 4px; border-radius: 8px; }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: #fff; }
+    .tab-btn.active {
+      background: rgba(223, 207, 173, 0.18);
+      color: var(--gold);
+    }
+    .right-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .grade-select {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: #fff;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+    }
+    .search-input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 8px 14px;
+      color: #fff;
+      font-size: 13px;
+      min-width: 260px;
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--gold); }
+    .btn-action {
+      background: rgba(223, 207, 173, 0.15);
+      border: 1px solid rgba(223, 207, 173, 0.35);
+      color: var(--gold);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      background: rgba(223, 207, 173, 0.28);
+      color: #fff;
+    }
+
+    /* Table Container */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 14px 16px;
+      font-size: 11px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--card-border);
+      color: #cbd5e1;
+      vertical-align: middle;
+    }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    .badge-grade {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .badge-aplus { background: rgba(223, 207, 173, 0.15); color: var(--gold); border: 1px solid rgba(223, 207, 173, 0.3); }
+    .badge-a { background: rgba(56, 189, 248, 0.15); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.3); }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .status-sent { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .status-queued { background: rgba(255, 255, 255, 0.06); color: var(--text-muted); }
+
+    .batch-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      color: #94a3b8;
+    }
+    .batch-badge.b2 { background: rgba(56, 189, 248, 0.12); color: var(--accent); }
+    .batch-badge.b1 { background: rgba(223, 207, 173, 0.12); color: var(--gold); }
+
+    .btn-preview {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: #94a3b8;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-preview:hover {
+      background: rgba(223, 207, 173, 0.2);
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: #0d121c;
+      border: 1px solid rgba(223, 207, 173, 0.3);
+      border-radius: 14px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-title { font-size: 18px; font-weight: 700; color: #fff; }
+    .btn-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .modal-body {
+      padding: 20px 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 16px;
+      font-size: 12px;
+    }
+    .meta-grid div { display: flex; flex-direction: column; gap: 2px; }
+    .meta-lbl { font-size: 10px; text-transform: uppercase; color: var(--text-dim); font-weight: 700; }
+    .meta-val { color: #f1f5f9; font-weight: 600; }
+
+    .email-preview-box {
+      background: #06080d;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 18px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+    }
+    .modal-footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <div class="eyebrow">
+          <span>AI Passport™ LIVE</span>
+          <span class="eyebrow-pill">Issue 01 Briefing</span>
+        </div>
+        <h1>Executive Outreach & Deliverability Console</h1>
+        <div class="meta-subtitle">Delhi Grade A+ & A Principals Outreach • Real-Time Multi-Batch Operations</div>
+      </div>
+      <div class="header-badges">
+        <div class="badge-live">
+          <div class="pulse-dot"></div>
+          <span>Live Pacing Active</span>
+        </div>
+        <div class="badge-deliverability">
+          <span>🛡️ Authentic 1-to-1 Mode (PDF Attached • Zero Tracking Pixels)</span>
+        </div>
+        <div style="font-size: 12px; color: var(--text-muted); display: flex; flex-direction: column; text-align: right;">
+          <span>From: <strong>aipassportindia@gmail.com</strong></span>
+          <span>BCC: <strong>ekaakshareducation@gmail.com ✓</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pacing & Live Countdown Strip -->
+    <div class="pacing-strip">
+      <div class="pacing-item">
+        <div class="pacing-label">Next Scheduled Dispatch</div>
+        <div class="pacing-value">
+          <span>⏳ in</span>
+          <span class="countdown-val" id="countdown-timer">--s</span>
+        </div>
+      </div>
+      <div class="pacing-item">
+        <div class="pacing-label">Active Pacing Rate</div>
+        <div class="pacing-value" style="color: var(--accent);">
+          <span>⚡ 35 emails / hr</span>
+          <span style="font-size: 11px; color: var(--text-muted); font-weight: normal;">(~103s delay)</span>
+        </div>
+      </div>
+      <div class="pacing-item">
+        <div class="pacing-label">Projected Batch 2 Completion</div>
+        <div class="pacing-value">
+          <span class="eta-val" id="eta-display">Calculating...</span>
+        </div>
+      </div>
+      <div class="pacing-item">
+        <div class="pacing-label">Google SMTP Health</div>
+        <div class="pacing-value" style="color: var(--green);">
+          <span>✅ 100% (250 OK)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dual Progress Meters -->
+    <div class="dual-progress-grid">
+      <!-- Batch 2 Active Session -->
+      <div class="progress-box">
+        <div class="progress-top">
+          <span class="progress-title">🚀 Batch 2 Active Session Progress</span>
+          <span class="progress-stats-right" style="color: var(--gold);" id="b2-counts">0 / 150 (0%)</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill bar-fill-batch2" id="b2-bar"></div>
+        </div>
+        <div class="progress-sub">
+          <span id="b2-remaining-sub">150 remaining in this run</span>
+          <span>Target: 150 Grade A+/A Leaders</span>
+        </div>
+      </div>
+
+      <!-- Master Delhi Cohort -->
+      <div class="progress-box">
+        <div class="progress-top">
+          <span class="progress-title">🏛️ Master Delhi Cohort Reach (Grade A+ & A)</span>
+          <span class="progress-stats-right" style="color: var(--accent);" id="cohort-counts">0 / 485 (0%)</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill bar-fill-cohort" id="cohort-bar"></div>
+        </div>
+        <div class="progress-sub">
+          <span id="cohort-remaining-sub">337 total queued</span>
+          <span>Batch 1: 148 sent • Total: 485 Schools</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI Metric Cards Grid -->
+    <div class="kpi-grid">
+      <div class="kpi-card gold">
+        <div class="kpi-label">Batch 2 Sent Today</div>
+        <div class="kpi-value" id="kpi-b2-sent">0</div>
+        <div class="kpi-sub" id="kpi-b2-sub">Target: 150 emails</div>
+      </div>
+      <div class="kpi-card blue">
+        <div class="kpi-label">Master Cohort Sent</div>
+        <div class="kpi-value" id="kpi-cohort-sent">0</div>
+        <div class="kpi-sub" id="kpi-cohort-sub">Of 485 Total Schools</div>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-label">Queue Remaining</div>
+        <div class="kpi-value" id="kpi-remaining">0</div>
+        <div class="kpi-sub">Grade A+/A Delhi Leaders</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-label">Delivery Health</div>
+        <div class="kpi-value">100%</div>
+        <div class="kpi-sub">Google 250 Handshake OK</div>
+      </div>
+      <div class="kpi-card purple">
+        <div class="kpi-label">Attached Asset</div>
+        <div class="kpi-value" style="font-size: 20px; margin-top: 10px;">1.57 MB PDF</div>
+        <div class="kpi-sub">Session Highlights Attached</div>
+      </div>
+    </div>
+
+    <!-- Live Activity Ticker -->
+    <div class="activity-ticker">
+      <div class="ticker-tag">
+        <div class="pulse-dot"></div>
+        <span>Latest Dispatch:</span>
+      </div>
+      <div class="ticker-body" id="ticker-content">Listening for campaign events...</div>
+    </div>
+
+    <!-- Controls Strip -->
+    <div class="controls-strip">
+      <div class="tabs-group">
+        <button class="tab-btn active" data-filter="all" onclick="setFilter('all')">All Cohort (<span id="cnt-all">0</span>)</button>
+        <button class="tab-btn" data-filter="b2" onclick="setFilter('b2')">Active Batch 2 (<span id="cnt-b2">0</span>)</button>
+        <button class="tab-btn" data-filter="b1" onclick="setFilter('b1')">Batch 1 Sent (<span id="cnt-b1">0</span>)</button>
+        <button class="tab-btn" data-filter="queued" onclick="setFilter('queued')">Remaining Queue (<span id="cnt-queued">0</span>)</button>
+      </div>
+
+      <div class="right-controls">
+        <select class="grade-select" id="grade-filter" onchange="renderTable()">
+          <option value="all">All Grades (A+ & A)</option>
+          <option value="A+">Grade A+ Only</option>
+          <option value="A">Grade A Only</option>
+        </select>
+        <input type="text" class="search-input" id="search-input" placeholder="Search school, principal, or email..." oninput="renderTable()" />
+        <button class="btn-action" onclick="exportCsv()">📥 Export CSV</button>
+        <button class="btn-action" onclick="fetchStats()">🔄 Sync</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Batch</th>
+            <th>Grade</th>
+            <th>Personalized Salutation</th>
+            <th>School Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Sent Time (IST)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="recipients-tbody">
+          <tr><td colspan="10" style="text-align: center; padding: 36px; color: var(--text-muted);">Loading real-time outreach console...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Modal Preview -->
+  <div class="modal-backdrop" id="preview-modal" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--gold); letter-spacing: 1px; font-weight: 700;">Email Preview & Deliverability Record</div>
+          <div class="modal-title" id="modal-principal-title">Principal Preview</div>
+        </div>
+        <button class="btn-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="meta-grid">
+          <div><span class="meta-lbl">School Name</span><span class="meta-val" id="modal-school">—</span></div>
+          <div><span class="meta-lbl">Recipient Email</span><span class="meta-val" id="modal-email">—</span></div>
+          <div><span class="meta-lbl">Grade / Board</span><span class="meta-val" id="modal-grade">—</span></div>
+          <div><span class="meta-lbl">Google Message ID</span><span class="meta-val" id="modal-msgid" style="font-family: monospace; font-size: 11px; word-break: break-all;">—</span></div>
+          <div><span class="meta-lbl">Sender</span><span class="meta-val">Hitesh Rathee & Nishant Singh Lakra &lt;aipassportindia@gmail.com&gt;</span></div>
+          <div><span class="meta-lbl">Attached PDF</span><span class="meta-val" style="color: var(--purple);">AI Passport LIVE — 02 October 2026 — Session Highlights.pdf (1.57 MB)</span></div>
+        </div>
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 8px; font-weight: 700;">Human Plain-Text Email Rendered:</div>
+        <div class="email-preview-box" id="modal-email-body">Loading...</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-action" id="modal-gmail-btn" style="background: rgba(56, 189, 248, 0.15); color: var(--accent); border-color: rgba(56, 189, 248, 0.3);">📧 Open in Gmail</button>
+        <button class="btn-action" onclick="copyModalText()">📋 Copy Text</button>
+        <button class="btn-action" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let globalRecipients = [];
+    let globalStats = {};
+    let currentFilter = 'all';
+    let nextDispatchSeconds = 103;
+    let countdownInterval = null;
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
+      });
+      renderTable();
+    }
+
+    async function fetchStats() {
+      try {
+        const res = await fetch('/api/track/stats?t=' + Date.now());
+        const data = await res.json();
+        if (!data || !data.recipients) return;
+
+        globalRecipients = data.recipients;
+        globalStats = data.stats;
+
+        // Dual Progress Updates
+        // 1. Batch 2
+        const b2Sent = globalStats.batch2Sent || 0;
+        const b2Target = globalStats.batch2Target || 150;
+        const b2Percent = globalStats.batch2Percent || 0;
+        document.getElementById('b2-counts').textContent = b2Sent + ' / ' + b2Target + ' (' + b2Percent + '%)';
+        document.getElementById('b2-bar').style.width = b2Percent + '%';
+        document.getElementById('b2-remaining-sub').textContent = (globalStats.batch2Remaining || 0) + ' remaining in this run';
+
+        // 2. Master Cohort
+        const cSent = globalStats.cohortSent || 0;
+        const cTotal = globalStats.cohortTotal || 485;
+        const cPercent = globalStats.cohortPercent || 0;
+        document.getElementById('cohort-counts').textContent = cSent + ' / ' + cTotal + ' (' + cPercent + '%)';
+        document.getElementById('cohort-bar').style.width = cPercent + '%';
+        document.getElementById('cohort-remaining-sub').textContent = (globalStats.cohortRemaining || 0) + ' total queued in database';
+
+        // KPI Cards
+        document.getElementById('kpi-b2-sent').textContent = b2Sent;
+        document.getElementById('kpi-b2-sub').textContent = 'Target: ' + b2Target + ' emails';
+        document.getElementById('kpi-cohort-sent').textContent = cSent;
+        document.getElementById('kpi-cohort-sub').textContent = cPercent + '% of ' + cTotal + ' Schools';
+        document.getElementById('kpi-remaining').textContent = globalStats.cohortRemaining || 0;
+
+        // ETA & Pacing
+        if (globalStats.batch2EtaIso) {
+          const etaDate = new Date(globalStats.batch2EtaIso);
+          document.getElementById('eta-display').textContent = 'Today ~' + etaDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' IST';
+        } else {
+          document.getElementById('eta-display').textContent = 'Calculating...';
+        }
+
+        // Countdown reset
+        if (typeof globalStats.nextDispatchInSec === 'number') {
+          nextDispatchSeconds = globalStats.nextDispatchInSec;
+        }
+
+        // Ticker
+        const sentRecs = globalRecipients.filter(r => r.sentAt).sort((a,b) => new Date(b.sentAt) - new Date(a.sentAt));
+        if (sentRecs.length > 0) {
+          const latest = sentRecs[0];
+          const timeAgo = formatTimeAgo(latest.sentAt);
+          document.getElementById('ticker-content').innerHTML =
+            '<strong>' + latest.recipientId + '</strong> &bull; ' + latest.schoolName + ' &bull; <em>' + latest.email + '</em> (' + latest.salutation + ') &bull; Dispatched ' + timeAgo;
+        }
+
+        // Tab counts
+        document.getElementById('cnt-all').textContent = globalRecipients.length;
+        document.getElementById('cnt-b2').textContent = globalRecipients.filter(r => r.batchNum === 2).length;
+        document.getElementById('cnt-b1').textContent = globalRecipients.filter(r => r.batchNum === 1).length;
+        document.getElementById('cnt-queued').textContent = globalRecipients.filter(r => r.status === 'QUEUED').length;
+
+        renderTable();
+      } catch (err) {
+        console.error('Fetch stats error:', err);
+      }
+    }
+
+    // Countdown tick
+    function startCountdownTimer() {
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        if (nextDispatchSeconds > 0) {
+          nextDispatchSeconds--;
+        }
+        const mins = Math.floor(nextDispatchSeconds / 60);
+        const secs = nextDispatchSeconds % 60;
+        const formatted = (mins > 0 ? mins + 'm ' : '') + (secs < 10 && mins > 0 ? '0' : '') + secs + 's';
+        document.getElementById('countdown-timer').textContent = formatted;
+      }, 1000);
+    }
+
+    function formatTimeAgo(isoString) {
+      if (!isoString) return '';
+      const sec = Math.floor((Date.now() - new Date(isoString).getTime()) / 1000);
+      if (sec < 60) return sec + 's ago';
+      if (sec < 3600) return Math.floor(sec / 60) + 'm ago';
+      return Math.floor(sec / 3600) + 'h ago';
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('recipients-tbody');
+      const searchQuery = (document.getElementById('search-input').value || '').toLowerCase().trim();
+      const gradeQuery = document.getElementById('grade-filter').value;
+
+      let filtered = globalRecipients.filter(r => {
+        // Tab filter
+        if (currentFilter === 'b2' && r.batchNum !== 2) return false;
+        if (currentFilter === 'b1' && r.batchNum !== 1) return false;
+        if (currentFilter === 'queued' && r.status !== 'QUEUED') return false;
+
+        // Grade filter
+        if (gradeQuery !== 'all' && r.grade !== gradeQuery) return false;
+
+        // Search query
+        if (searchQuery) {
+          const matchSchool = (r.schoolName || '').toLowerCase().includes(searchQuery);
+          const matchName = (r.contactName || '').toLowerCase().includes(searchQuery);
+          const matchSalutation = (r.salutation || '').toLowerCase().includes(searchQuery);
+          const matchEmail = (r.email || '').toLowerCase().includes(searchQuery);
+          const matchId = (r.recipientId || '').toLowerCase().includes(searchQuery);
+          if (!matchSchool && !matchName && !matchSalutation && !matchEmail && !matchId) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 36px; color: var(--text-muted);">No matching school leaders found.</td></tr>';
+        return;
+      }
+
+      // Sort: Active Batch 2 sent first, then Batch 1, then Queued
+      filtered.sort((a, b) => {
+        if (a.sentAt && b.sentAt) return new Date(b.sentAt) - new Date(a.sentAt);
+        if (a.sentAt) return -1;
+        if (b.sentAt) return 1;
+        return a.recipientId.localeCompare(b.recipientId);
+      });
+
+      tbody.innerHTML = filtered.map((r, i) => {
+        const gradeBadge = r.grade === 'A+' ? 'badge-aplus' : 'badge-a';
+        const batchBadgeClass = r.batchNum === 2 ? 'batch-badge b2' : (r.batchNum === 1 ? 'batch-badge b1' : 'batch-badge');
+        const statusBadge = r.status === 'SENT' 
+          ? '<span class="status-badge status-sent">✓ Dispatched</span>' 
+          : '<span class="status-badge status-queued">⏳ Queued</span>';
+        const sentTime = r.sentAt 
+          ? new Date(r.sentAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) 
+          : '—';
+
+        return '<tr>' +
+          '<td style="color: var(--text-dim);">' + (i + 1) + '</td>' +
+          '<td><code style="font-size: 11px; color: var(--gold);">' + r.recipientId + '</code></td>' +
+          '<td><span class="' + batchBadgeClass + '">' + r.batchLabel + '</span></td>' +
+          '<td><span class="badge-grade ' + gradeBadge + '">' + r.grade + '</span></td>' +
+          '<td><strong style="color: #fff;">' + r.salutation + '</strong></td>' +
+          '<td style="max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + r.schoolName + '</td>' +
+          '<td><a href="mailto:' + r.email + '" style="color: inherit; text-decoration: none;">' + r.email + '</a></td>' +
+          '<td>' + statusBadge + '</td>' +
+          '<td style="font-family: monospace; font-size: 11px;">' + sentTime + '</td>' +
+          '<td><button class="btn-preview" data-id="' + r.recipientId + '" onclick="openPreview(this.getAttribute(\'data-id\'))">Inspect</button></td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    async function openPreview(recipientId) {
+      const rec = globalRecipients.find(r => r.recipientId === recipientId);
+      if (!rec) return;
+
+      document.getElementById('modal-principal-title').textContent = rec.salutation + ' (' + rec.recipientId + ')';
+      document.getElementById('modal-school').textContent = rec.schoolName;
+      document.getElementById('modal-email').textContent = rec.email;
+      document.getElementById('modal-grade').textContent = 'Grade ' + rec.grade + ' • ' + (rec.board || 'CBSE');
+      document.getElementById('modal-msgid').textContent = rec.messageId || 'Pending Batch 2 Dispatch';
+
+      const emailText = rec.salutation + '\n\n' +
+        'What happens when educators move beyond talking about AI and start exploring what it can actually do in the classroom?\n\n' +
+        'That’s what we explored during our AI Passport™ LIVE session on 2 October—from creating a Class 10 English lesson plan to developing visual learning resources and a bilingual Mathematics storybook.\n\n' +
+        'At Ekaakshar Education, we’re exploring how technology can support teachers while keeping their judgement, creativity and experience at the centre of learning.\n\n' +
+        'We hope you find the recap interesting.\n\n' +
+        'Warm regards,\n\n' +
+        'Hitesh Rathee & Nishant Singh Lakra\n' +
+        'AI Educators & Founders\n' +
+        'Ekaakshar Education';
+
+      document.getElementById('modal-email-body').textContent = emailText;
+      document.getElementById('modal-gmail-btn').onclick = () => {
+        const subject = encodeURIComponent('AI Passport™ LIVE | What Educators Experienced');
+        window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + rec.email + '&su=' + subject, '_blank');
+      };
+
+      document.getElementById('preview-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('preview-modal').style.display = 'none';
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === 'preview-modal') closeModal();
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    function copyModalText() {
+      const text = document.getElementById('modal-email-body').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Email copy copied to clipboard!');
+      });
+    }
+
+    function exportCsv() {
+      if (globalRecipients.length === 0) return;
+      const headers = ['Recipient ID', 'Batch', 'Grade', 'Board', 'Salutation', 'Principal Name', 'School Name', 'Email', 'Mobile', 'Status', 'Sent Time (IST)', 'Google Message ID'];
+      const rows = globalRecipients.map(r => [
+        r.recipientId,
+        r.batchLabel,
+        r.grade,
+        r.board,
+        r.salutation,
+        r.contactName,
+        '"' + (r.schoolName || '').replace(/"/g, '""') + '"',
+        r.email,
+        r.mobile,
+        r.status,
+        r.sentAt ? new Date(r.sentAt).toISOString() : '',
+        r.messageId || ''
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'ai_passport_delhi_outreach_report_' + new Date().toISOString().slice(0,10) + '.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Init
+    fetchStats();
+    startCountdownTimer();
+    setInterval(fetchStats, 2000);
+  </script>
+</body>
+</html>

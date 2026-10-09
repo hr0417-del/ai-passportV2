@@ -3017,8 +3017,35 @@ function initLiveEcosystem() {
     }
   }, { passive: true });
 
+  initProgrammeFilters();
   initLiveGalleryEngine();
   initScrollRevealEngine();
+}
+
+/* --- Programme Catalog Filter Engine (All | Free | Paid) --- */
+function initProgrammeFilters() {
+  const filterBtns = document.querySelectorAll('.programme-filter-btn');
+  const cards = document.querySelectorAll('.programme-catalog-card');
+  if (!filterBtns.length || !cards.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter') || 'all';
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      cards.forEach(card => {
+        const tier = card.getAttribute('data-tier') || 'all';
+        if (filter === 'all' || tier === filter) {
+          card.style.display = 'flex';
+          card.style.opacity = '1';
+        } else {
+          card.style.display = 'none';
+          card.style.opacity = '0';
+        }
+      });
+    });
+  });
 }
 
 /* --- 28. Multi-Carousel & Universal Lightbox Gallery Engine --- */
