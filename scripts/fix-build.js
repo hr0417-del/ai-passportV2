@@ -50,4 +50,13 @@ if (fs.existsSync(distDir) && fs.existsSync(assetsDir)) {
       console.log('[FIX-BUILD] SUCCESS! dist/app/index.html updated with script tag.');
     }
   }
+
+  // 3. Ensure dashboard.html and static data snapshots are synced to dist/ for GitHub Pages
+  const templateDashboard = path.resolve(rootDir, 'src/templates/campaign_dashboard.html');
+  if (fs.existsSync(templateDashboard)) {
+    fs.copyFileSync(templateDashboard, path.resolve(rootDir, 'dashboard.html'));
+    fs.copyFileSync(templateDashboard, path.resolve(distDir, 'dashboard.html'));
+    console.log('[FIX-BUILD] Synced campaign_dashboard.html to dashboard.html and dist/dashboard.html');
+  }
 }
+

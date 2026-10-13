@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /dashboard.html
+Disallow: /dashboard
+Disallow: /data/
 
 Sitemap: https://aipassport.ekaakshareducation.com/sitemap.xml

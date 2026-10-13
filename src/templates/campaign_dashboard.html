@@ -2,15 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Passport™ LIVE — Outreach & Deliverability Command Console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#07090e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AI Passport CRM">
+  <title>AI Passport™ LIVE — Principal Outreach & Mobile CRM Console</title>
   <style>
     :root {
       --bg: #07090e;
-      --card-bg: rgba(15, 20, 32, 0.85);
-      --card-hover: rgba(22, 30, 48, 0.95);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(223, 207, 173, 0.4);
+      --card-bg: rgba(15, 20, 32, 0.92);
+      --card-hover: rgba(22, 30, 48, 0.98);
+      --card-border: rgba(255, 255, 255, 0.09);
+      --border-focus: rgba(223, 207, 173, 0.45);
       --text: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
@@ -22,415 +26,583 @@
       --amber: #f59e0b;
       --red: #f43f5e;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
-      padding: 24px;
+      padding: 20px;
+      padding-bottom: 90px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
-    .container { max-width: 1440px; margin: 0 auto; }
+    .container { max-width: 1480px; margin: 0 auto; transition: max-width 0.3s; }
+
+    /* Forced Mobile Preview Mode on Desktop */
+    body.force-mobile {
+      background: #030407;
+    }
+    body.force-mobile .container {
+      max-width: 430px;
+      border: 2px solid rgba(223, 207, 173, 0.28);
+      border-radius: 28px;
+      padding: 16px;
+      padding-bottom: 84px;
+      background: var(--bg);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
+    }
 
     /* Header */
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 20px;
+      padding-bottom: 16px;
       border-bottom: 1px solid var(--card-border);
-      margin-bottom: 24px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
     }
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 11px;
-      letter-spacing: 2px;
+      font-size: 10px;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
       color: var(--gold);
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
     }
     .eyebrow-pill {
       background: rgba(223, 207, 173, 0.15);
       border: 1px solid rgba(223, 207, 173, 0.3);
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 4px;
-      font-size: 10px;
+      font-size: 9px;
     }
-    h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
-    .meta-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+    h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.4px; color: #fff; }
+    .meta-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
     .header-badges {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       flex-wrap: wrap;
     }
     .badge-live {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       background: rgba(16, 185, 129, 0.12);
       border: 1px solid rgba(16, 185, 129, 0.35);
-      padding: 6px 14px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      color: var(--green);
-      text-transform: uppercase;
-    }
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--green);
-      animation: pulse 1.6s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(0.9); opacity: 0.5; }
-      50% { transform: scale(1.3); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.5; }
-    }
-    .badge-deliverability {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
       padding: 6px 12px;
       border-radius: 100px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
+      color: var(--green);
+      text-transform: uppercase;
+    }
+    .badge-live.idle {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.35);
+      color: var(--amber);
+    }
+    .badge-live.cloud {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.35);
       color: var(--accent);
     }
-
-    /* Pacing Strip */
-    .pacing-strip {
-      background: linear-gradient(135deg, rgba(20, 26, 42, 0.9) 0%, rgba(12, 16, 26, 0.9) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 16px 22px;
-      margin-bottom: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      align-items: center;
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: currentColor;
+      border-radius: 50%;
+      box-shadow: 0 0 8px currentColor;
     }
-    .pacing-item { display: flex; flex-direction: column; gap: 4px; }
-    .pacing-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); font-weight: 600; }
-    .pacing-value { font-size: 17px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
-    .countdown-val { color: var(--amber); font-family: monospace; font-size: 20px; font-weight: 700; }
-    .eta-val { color: var(--accent); font-family: monospace; font-size: 16px; }
+    .btn-mode-toggle {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-mode-toggle.active {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-launch-toggle {
+      background: linear-gradient(135deg, #dfcfad 0%, #b89b5f 100%);
+      color: #07090e;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(223, 207, 173, 0.25);
+    }
+
+    /* Batch Launcher Drawer */
+    .launcher-drawer {
+      display: none;
+      background: linear-gradient(145deg, rgba(20, 27, 45, 0.98) 0%, rgba(11, 15, 25, 0.99) 100%);
+      border: 1px solid rgba(223, 207, 173, 0.35);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+    .launcher-drawer.open { display: block; }
+    .launcher-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .consequence-alert {
+      background: rgba(245, 158, 11, 0.09);
+      border: 1px solid rgba(245, 158, 11, 0.32);
+      border-left: 4px solid var(--amber);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 12px;
+      color: #fde68a;
+      margin-bottom: 14px;
+      line-height: 1.45;
+    }
+    .launcher-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.3fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); font-weight: 700; }
+    .form-input, .form-select {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+      width: 100%;
+    }
+    .btn-go {
+      background: var(--green);
+      color: #04130d;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      height: 40px;
+      white-space: nowrap;
+    }
+    .btn-stop {
+      background: rgba(244, 63, 94, 0.18);
+      color: var(--red);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      height: 40px;
+    }
+    .terminal-log {
+      margin-top: 12px;
+      background: #05070b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #94a3b8;
+      max-height: 110px;
+      overflow-y: auto;
+    }
+
+    /* Multi-Tier Pipeline Strip */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .tier-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tier-card:hover, .tier-card.active-tier {
+      border-color: var(--gold);
+      background: var(--card-hover);
+    }
+    .tier-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .tier-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); }
+    .tier-pct { font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+    .tier-counts { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 5px; }
+    .tier-bar-bg { width: 100%; height: 5px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; margin-bottom: 5px; }
+    .tier-bar-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+    .tier-sub { font-size: 10px; color: var(--text-dim); display: flex; justify-content: space-between; }
 
     /* Dual Progress Meters */
     .dual-progress-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    @media (max-width: 900px) {
-      .dual-progress-grid { grid-template-columns: 1fr; }
+      gap: 12px;
+      margin-bottom: 14px;
     }
     .progress-box {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 18px 22px;
+      border-radius: 12px;
+      padding: 14px 18px;
     }
     .progress-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .progress-title { font-size: 13px; font-weight: 600; color: var(--text); }
-    .progress-stats-right { font-size: 14px; font-weight: 700; }
-    .bar-bg {
-      width: 100%;
-      height: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 100px;
-      overflow: hidden;
+      align-items: baseline;
       margin-bottom: 8px;
+      gap: 8px;
     }
-    .bar-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: 100px;
-      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .bar-fill-batch2 { background: linear-gradient(90deg, #dfcfad 0%, #38bdf8 100%); }
-    .bar-fill-cohort { background: linear-gradient(90deg, #38bdf8 0%, #10b981 100%); }
-    .progress-sub {
+    .progress-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text); }
+    .progress-stats-right { font-size: 13px; font-weight: 800; white-space: nowrap; }
+    .bar-bg { width: 100%; height: 10px; background: rgba(255, 255, 255, 0.06); border-radius: 100px; overflow: hidden; }
+    .bar-fill { height: 100%; width: 0%; border-radius: 100px; transition: width 0.5s ease; }
+    .bar-fill-batch2 { background: linear-gradient(90deg, #b89b5f 0%, #dfcfad 100%); }
+    .bar-fill-cohort { background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%); }
+    .progress-sub { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-top: 6px; flex-wrap: wrap; gap: 4px; }
+
+    /* History & Quota Strip */
+    .history-strip {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .history-pills { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .history-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 4px 8px;
       font-size: 11px;
       color: var(--text-muted);
     }
-
-    /* KPI Grid */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    .kpi-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 18px 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .kpi-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-    }
-    .kpi-card.gold::before { background: var(--gold); }
-    .kpi-card.blue::before { background: var(--accent); }
-    .kpi-card.green::before { background: var(--green); }
-    .kpi-card.purple::before { background: var(--purple); }
-    .kpi-card.amber::before { background: var(--amber); }
-
-    .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; }
-    .kpi-value { font-size: 32px; font-weight: 800; margin: 4px 0 2px; color: #fff; letter-spacing: -0.5px; }
-    .kpi-sub { font-size: 12px; color: var(--text-muted); }
-
-    /* Live Activity Ticker */
-    .activity-ticker {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 14px 20px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .ticker-tag {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--green);
-      font-weight: 700;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .ticker-body {
-      font-size: 13px;
-      color: #cbd5e1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      flex: 1;
-    }
+    .history-pill strong { color: #fff; }
 
     /* Controls Strip */
     .controls-strip {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
-    .tabs-group { display: flex; gap: 6px; background: rgba(255, 255, 255, 0.04); padding: 4px; border-radius: 8px; }
+    .tabs-group {
+      display: flex;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px;
+      border-radius: 8px;
+      overflow-x: auto;
+      max-width: 100%;
+    }
     .tab-btn {
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 7px 14px;
+      padding: 7px 11px;
       border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
+      white-space: nowrap;
     }
-    .tab-btn:hover { color: #fff; }
-    .tab-btn.active {
-      background: rgba(223, 207, 173, 0.18);
-      color: var(--gold);
-    }
+    .tab-btn.active { background: rgba(223, 207, 173, 0.18); color: var(--gold); }
+    .tab-btn.retry-tab.active { background: rgba(245, 158, 11, 0.2); color: var(--amber); }
+
     .right-controls {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
+      flex: 1;
+      justify-content: flex-end;
     }
     .grade-select {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--card-border);
-      border-radius: 6px;
-      padding: 8px 12px;
+      border-radius: 8px;
+      padding: 9px 10px;
       color: #fff;
       font-size: 12px;
       outline: none;
-      cursor: pointer;
     }
+    .grade-select option { background: #0f1420; color: #fff; }
     .search-input {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--card-border);
-      border-radius: 6px;
-      padding: 8px 14px;
+      border-radius: 8px;
+      padding: 9px 12px;
       color: #fff;
       font-size: 13px;
-      min-width: 260px;
+      min-width: 220px;
+      flex: 1;
+      max-width: 340px;
       outline: none;
     }
     .search-input:focus { border-color: var(--gold); }
     .btn-action {
-      background: rgba(223, 207, 173, 0.15);
+      background: rgba(223, 207, 173, 0.14);
       border: 1px solid rgba(223, 207, 173, 0.35);
       color: var(--gold);
-      padding: 8px 14px;
-      border-radius: 6px;
+      padding: 8px 12px;
+      border-radius: 8px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-    .btn-action:hover {
-      background: rgba(223, 207, 173, 0.28);
-      color: #fff;
+      white-space: nowrap;
     }
 
-    /* Table Container */
+    /* Desktop Table */
     .table-container {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
       overflow-x: auto;
+      max-height: 640px;
+      overflow-y: auto;
     }
-    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
-    th {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 14px 16px;
-      font-size: 11px;
-      letter-spacing: 0.8px;
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    thead th {
+      position: sticky;
+      top: 0;
+      background: #0d121d;
+      padding: 12px 12px;
+      font-size: 10px;
       text-transform: uppercase;
+      letter-spacing: 0.8px;
       color: var(--text-muted);
       border-bottom: 1px solid var(--card-border);
+      z-index: 10;
       white-space: nowrap;
     }
-    td {
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--card-border);
-      color: #cbd5e1;
-      vertical-align: middle;
-    }
-    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+    tbody tr { border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
+    tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+    tbody td { padding: 10px 12px; font-size: 12.5px; color: #cbd5e1; vertical-align: middle; }
 
-    .badge-grade {
-      display: inline-block;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    .badge-aplus { background: rgba(223, 207, 173, 0.15); color: var(--gold); border: 1px solid rgba(223, 207, 173, 0.3); }
-    .badge-a { background: rgba(56, 189, 248, 0.15); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.3); }
+    /* Badges */
+    .badge-grade { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 800; }
+    .badge-aplus { background: rgba(223, 207, 173, 0.18); color: var(--gold); border: 1px solid rgba(223, 207, 173, 0.35); }
+    .badge-a { background: rgba(56, 189, 248, 0.12); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.25); }
+    .badge-b { background: rgba(192, 132, 252, 0.12); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.25); }
+    .badge-c { background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); }
+    .badge-ind { background: rgba(16, 185, 129, 0.12); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.25); }
 
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-    }
+    .status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700; white-space: nowrap; }
     .status-sent { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .status-retry { background: rgba(245, 158, 11, 0.15); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.35); }
     .status-queued { background: rgba(255, 255, 255, 0.06); color: var(--text-muted); }
 
-    .batch-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 600;
+    .crm-select {
       background: rgba(255, 255, 255, 0.05);
-      color: #94a3b8;
-    }
-    .batch-badge.b2 { background: rgba(56, 189, 248, 0.12); color: var(--accent); }
-    .batch-badge.b1 { background: rgba(223, 207, 173, 0.12); color: var(--gold); }
-
-    .btn-preview {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: #94a3b8;
-      padding: 4px 10px;
-      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+      border-radius: 6px;
+      padding: 4px 6px;
       font-size: 11px;
       font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
+      outline: none;
     }
-    .btn-preview:hover {
-      background: rgba(223, 207, 173, 0.2);
+    .crm-select option { background: #0d121c; color: #fff; }
+
+    /* Mobile Card Feed (Shown on phones or in Mobile Preview mode) */
+    .mobile-cards-list {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .m-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+    .m-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .m-card-school {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .m-card-salutation {
+      font-size: 13px;
+      font-weight: 600;
       color: var(--gold);
-      border-color: var(--gold);
     }
+    .m-card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+    .m-card-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .m-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: #e2e8f0;
+      padding: 9px 6px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .m-btn.call { background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.3); color: var(--green); }
+    .m-btn.wa { background: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.3); color: #4ade80; }
+    .m-btn.mail { background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.3); color: var(--accent); }
+    .m-btn.inspect { background: rgba(223, 207, 173, 0.12); border-color: rgba(223, 207, 173, 0.3); color: var(--gold); }
+
+    /* Sticky Bottom Mobile Navigation Bar */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 14, 23, 0.96);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(223, 207, 173, 0.22);
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      z-index: 900;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+    }
+    .m-nav-item {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 6px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .m-nav-item.active {
+      color: var(--gold);
+      background: rgba(223, 207, 173, 0.12);
+    }
+    .m-nav-icon { font-size: 15px; }
+
+    /* Responsive Media Queries + Force Mobile Class */
+    @media (max-width: 860px) {
+      body { padding: 12px; padding-bottom: 86px; }
+      h1 { font-size: 19px; }
+      .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+      .dual-progress-grid { grid-template-columns: 1fr; }
+      .launcher-grid { grid-template-columns: 1fr; }
+      .table-container { display: none; }
+      .mobile-cards-list { display: flex; }
+      .mobile-bottom-nav { display: grid; }
+      .search-input { max-width: 100%; min-width: 150px; }
+      .right-controls { width: 100%; }
+    }
+    body.force-mobile .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+    body.force-mobile .dual-progress-grid { grid-template-columns: 1fr; }
+    body.force-mobile .launcher-grid { grid-template-columns: 1fr; }
+    body.force-mobile .table-container { display: none; }
+    body.force-mobile .mobile-cards-list { display: flex; }
+    body.force-mobile .mobile-bottom-nav { display: grid; max-width: 430px; margin: 0 auto; border-radius: 0 0 26px 26px; }
 
     /* Modal */
     .modal-backdrop {
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.82);
+      background: rgba(0, 0, 0, 0.84);
       backdrop-filter: blur(6px);
       z-index: 1000;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 14px;
     }
     .modal-card {
       background: #0d121c;
-      border: 1px solid rgba(223, 207, 173, 0.3);
-      border-radius: 14px;
+      border: 1px solid rgba(223, 207, 173, 0.35);
+      border-radius: 16px;
       max-width: 720px;
       width: 100%;
       max-height: 90vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
     }
     .modal-header {
-      padding: 18px 24px;
+      padding: 16px 20px;
       border-bottom: 1px solid var(--card-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .modal-title { font-size: 18px; font-weight: 700; color: #fff; }
-    .btn-close {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 20px;
-      cursor: pointer;
-      padding: 4px 8px;
-    }
-    .modal-body {
-      padding: 20px 24px;
-      overflow-y: auto;
-      flex: 1;
-    }
+    .modal-title { font-size: 16px; font-weight: 800; color: #fff; }
+    .btn-close { background: transparent; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; padding: 2px 8px; }
+    .modal-body { padding: 16px 20px; overflow-y: auto; flex: 1; }
     .meta-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -438,375 +610,1016 @@
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--card-border);
       border-radius: 8px;
-      padding: 14px;
-      margin-bottom: 16px;
+      padding: 12px;
+      margin-bottom: 14px;
       font-size: 12px;
     }
+    @media (max-width: 600px) { .meta-grid { grid-template-columns: 1fr; } }
     .meta-grid div { display: flex; flex-direction: column; gap: 2px; }
     .meta-lbl { font-size: 10px; text-transform: uppercase; color: var(--text-dim); font-weight: 700; }
-    .meta-val { color: #f1f5f9; font-weight: 600; }
-
+    .meta-val { color: #f1f5f9; font-weight: 600; word-break: break-word; }
     .email-preview-box {
       background: #06080d;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
-      padding: 18px 20px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 14px;
+      padding: 14px 16px;
+      font-size: 13.5px;
       line-height: 1.6;
       color: #e2e8f0;
       white-space: pre-wrap;
     }
     .modal-footer {
-      padding: 14px 24px;
+      padding: 12px 20px;
       border-top: 1px solid var(--card-border);
       display: flex;
       justify-content: flex-end;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Full-Screen Executive Vault Lock Gate */
+    body.vault-locked .container,
+    body.vault-locked .mobile-bottom-nav {
+      display: none !important;
+    }
+    .vault-lock-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 25%, #111827 0%, #05070b 75%);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    body.vault-locked .vault-lock-screen {
+      display: flex;
+    }
+    .vault-card {
+      background: rgba(13, 18, 28, 0.96);
+      border: 1px solid rgba(223, 207, 173, 0.38);
+      border-radius: 20px;
+      max-width: 420px;
+      width: 100%;
+      padding: 32px 26px;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 40px rgba(223, 207, 173, 0.08);
+    }
+    .vault-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(223, 207, 173, 0.12);
+      border: 1px solid rgba(223, 207, 173, 0.35);
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 14px;
     }
   </style>
+  <meta name="robots" content="noindex, nofollow, noarchive">
 </head>
-<body>
+<body class="vault-locked">
+
+  <!-- Private Founder & Partner Vault Lock Screen -->
+  <div class="vault-lock-screen" id="vault-lock-screen">
+    <div class="vault-card">
+      <div class="vault-badge">🔒 Private AES-256 Encrypted Vault</div>
+      <h2 style="font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 6px;">AI Passport™ Command Console</h2>
+      <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 22px; line-height: 1.5;">
+        Restricted to Founders &amp; Authorized Partners. All 4,593 principal records are encrypted with AES-256-GCM.
+      </p>
+      <div style="text-align: left; margin-bottom: 14px;">
+        <label class="form-label" style="display: block; margin-bottom: 6px;">Enter Access Passcode</label>
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="password" class="form-input" id="vault-passcode-input" placeholder="Type ALPHA GO..." autocomplete="off" onkeydown="if(event.key==='Enter') unlockVaultConsole()" style="text-align: center; font-size: 15px; letter-spacing: 1.5px; font-weight: 700; padding-right: 42px;" />
+          <button type="button" onclick="togglePasscodeVisibility()" style="position: absolute; right: 10px; background: none; border: none; cursor: pointer; font-size: 16px; color: var(--text-dim);" title="Show/Hide Passcode">👁️</button>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+          <input type="checkbox" id="vault-remember-chk" checked />
+          <span>Remember this device</span>
+        </label>
+        <button type="button" onclick="showPasscodeReminder()" style="background: none; border: none; color: var(--gold); font-size: 11px; font-weight: 700; cursor: pointer; text-decoration: underline;">
+          Forgot passcode? (ALPHA GO)
+        </button>
+      </div>
+      <button class="btn-launch-toggle" onclick="unlockVaultConsole()" style="width: 100%; justify-content: center; padding: 12px; font-size: 13px;">
+        🔓 Decrypt &amp; Unlock Console
+      </button>
+      <div style="margin-top: 10px;">
+        <button type="button" onclick="quickFillAndUnlock()" style="background: rgba(223, 207, 173, 0.08); border: 1px dashed rgba(223, 207, 173, 0.4); color: var(--gold); padding: 8px 14px; border-radius: 8px; font-size: 11.5px; font-weight: 700; cursor: pointer; width: 100%; transition: all 0.2s ease;">
+          ⚡ 1-Tap Unlock with Passcode: ALPHA GO
+        </button>
+      </div>
+      <div id="vault-error-msg" style="margin-top: 12px; font-size: 12px; font-weight: 700; color: var(--red);"></div>
+    </div>
+  </div>
+
   <div class="container">
 
     <!-- Header -->
-    <div class="header">
+    <div class="header" id="top-overview">
       <div>
         <div class="eyebrow">
           <span>AI Passport™ LIVE</span>
-          <span class="eyebrow-pill">Issue 01 Briefing</span>
+          <span class="eyebrow-pill">🔒 Private Encrypted Console</span>
         </div>
-        <h1>Executive Outreach & Deliverability Console</h1>
-        <div class="meta-subtitle">Delhi Grade A+ & A Principals Outreach • Real-Time Multi-Batch Operations</div>
+        <h1>Principal Outreach &amp; CRM Console</h1>
+        <div class="meta-subtitle">Delhi Graded Cohort (967) + Pan-India Master Database (3,626 Principals)</div>
       </div>
       <div class="header-badges">
-        <div class="badge-live">
+        <div class="badge-live idle" id="runner-state-badge">
           <div class="pulse-dot"></div>
-          <span>Live Pacing Active</span>
+          <span id="runner-state-text">Syncing...</span>
         </div>
-        <div class="badge-deliverability">
-          <span>🛡️ Authentic 1-to-1 Mode (PDF Attached • Zero Tracking Pixels)</span>
-        </div>
-        <div style="font-size: 12px; color: var(--text-muted); display: flex; flex-direction: column; text-align: right;">
-          <span>From: <strong>aipassportindia@gmail.com</strong></span>
-          <span>BCC: <strong>ekaakshareducation@gmail.com ✓</strong></span>
-        </div>
+        <button class="btn-mode-toggle" onclick="openSharePartnerModal()" style="border-color: rgba(223,207,173,0.4); color: var(--gold);">
+          🔗 Share With Partner
+        </button>
+        <button class="btn-mode-toggle" id="btn-mobile-preview" onclick="toggleMobilePreviewMode()">
+          📱 Preview Mobile UI
+        </button>
+        <button class="btn-launch-toggle" onclick="toggleLauncherDrawer()">
+          🚀 Batch 4 Control
+        </button>
+        <button class="btn-mode-toggle" onclick="lockVaultConsole()" title="Lock Console">
+          🔒 Lock
+        </button>
       </div>
     </div>
 
-    <!-- Pacing & Live Countdown Strip -->
-    <div class="pacing-strip">
-      <div class="pacing-item">
-        <div class="pacing-label">Next Scheduled Dispatch</div>
-        <div class="pacing-value">
-          <span>⏳ in</span>
-          <span class="countdown-val" id="countdown-timer">--s</span>
+    <!-- Interactive Batch 4 Launcher Drawer (Protected by ALPHA GO) -->
+    <div class="launcher-drawer" id="launcher-drawer">
+      <div class="launcher-top">
+        <div>
+          <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); font-weight: 700;">Authorized Dispatch Controller</span>
+          <h3 style="font-size: 16px; color: #fff; margin-top: 2px;">Configure & Launch Batch 4 Outreach</h3>
+        </div>
+        <button class="btn-close" onclick="toggleLauncherDrawer()">&times;</button>
+      </div>
+
+      <div class="consequence-alert">
+        <strong>⚠️ CRITICAL CONSEQUENCE NOTICE:</strong> Launching a batch dispatches <strong>live, permanent emails</strong> with the 1.57 MB session highlights PDF from <code>aipassportindia@gmail.com</code> (BCC: <code>ekaakshareducation@gmail.com</code>) to real school principals. Once delivered, emails cannot be recalled. Enter the exact passcode <strong><code>ALPHA GO</code></strong> to authorize.
+      </div>
+
+      <div class="launcher-grid">
+        <div class="form-group">
+          <label class="form-label">Target Pool Selection</label>
+          <select class="form-select" id="launch-pool" onchange="updateLaunchLimitSuggestion()">
+            <option value="aplus_a">Option A: 22 Grade A Retry Pool (Complete 485/485 Cohort)</option>
+            <option value="grade_b">Option B: 22 Grade A + 270 Grade B Delhi (292 Principals)</option>
+            <option value="all_grades">Option C: All Unsent Graded Delhi Schools A/B/C (504 Principals)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pacing (Emails/Hr)</label>
+          <input type="number" class="form-input" id="launch-rate" value="45" min="10" max="60" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Batch Limit</label>
+          <input type="number" class="form-input" id="launch-limit" value="22" min="1" max="500" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Authorization Passcode</label>
+          <input type="text" class="form-input" id="launch-passcode" placeholder="Type ALPHA GO" autocomplete="off" />
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-go" onclick="launchBatchFromUi()">🚀 Authorize & Send</button>
+          <button class="btn-stop" onclick="stopRunnerFromUi()">🛑 Stop</button>
         </div>
       </div>
-      <div class="pacing-item">
-        <div class="pacing-label">Active Pacing Rate</div>
-        <div class="pacing-value" style="color: var(--accent);">
-          <span>⚡ 35 emails / hr</span>
-          <span style="font-size: 11px; color: var(--text-muted); font-weight: normal;">(~103s delay)</span>
+
+      <div id="launch-status-msg" style="margin-top: 10px; font-size: 12px; font-weight: 600;"></div>
+      <div class="terminal-log" id="runner-terminal-log">Waiting for ALPHA GO authorization...</div>
+    </div>
+
+    <!-- Multi-Tier Cohort Pipeline Cards -->
+    <div class="pipeline-grid">
+      <div class="tier-card" onclick="filterByGradeCard('A+')">
+        <div class="tier-header">
+          <span class="tier-title">Tier 1 • Grade A+</span>
+          <span class="tier-pct" style="background: rgba(16,185,129,0.15); color: var(--green);" id="tier-aplus-pct">100%</span>
         </div>
+        <div class="tier-counts" id="tier-aplus-cnt">152 / 152</div>
+        <div class="tier-bar-bg"><div class="tier-bar-fill" id="tier-aplus-bar" style="width: 100%; background: var(--green);"></div></div>
+        <div class="tier-sub"><span>✅ Complete</span><span>Tap to view</span></div>
       </div>
-      <div class="pacing-item">
-        <div class="pacing-label">Projected Batch 2 Completion</div>
-        <div class="pacing-value">
-          <span class="eta-val" id="eta-display">Calculating...</span>
+
+      <div class="tier-card" onclick="filterByGradeCard('A')">
+        <div class="tier-header">
+          <span class="tier-title">Tier 2 • Grade A</span>
+          <span class="tier-pct" style="background: rgba(56,189,248,0.15); color: var(--accent);" id="tier-a-pct">93%</span>
         </div>
+        <div class="tier-counts" id="tier-a-cnt">311 / 333</div>
+        <div class="tier-bar-bg"><div class="tier-bar-fill" id="tier-a-bar" style="width: 93%; background: var(--accent);"></div></div>
+        <div class="tier-sub"><span id="tier-a-rem" style="color: var(--amber);">22 Retry</span><span>Tap to view</span></div>
       </div>
-      <div class="pacing-item">
-        <div class="pacing-label">Google SMTP Health</div>
-        <div class="pacing-value" style="color: var(--green);">
-          <span>✅ 100% (250 OK)</span>
+
+      <div class="tier-card" onclick="filterByGradeCard('B')">
+        <div class="tier-header">
+          <span class="tier-title">Tier 3 • Grade B</span>
+          <span class="tier-pct" style="background: rgba(192,132,252,0.15); color: var(--purple);" id="tier-b-pct">0%</span>
         </div>
+        <div class="tier-counts" id="tier-b-cnt">0 / 270</div>
+        <div class="tier-bar-bg"><div class="tier-bar-fill" id="tier-b-bar" style="width: 0%; background: var(--purple);"></div></div>
+        <div class="tier-sub"><span>Batch 4 Ready</span><span>Tap to view</span></div>
+      </div>
+
+      <div class="tier-card" onclick="filterByGradeCard('C')">
+        <div class="tier-header">
+          <span class="tier-title">Tier 4 • Grade C</span>
+          <span class="tier-pct" style="background: rgba(148,163,184,0.15); color: #cbd5e1;" id="tier-c-pct">0%</span>
+        </div>
+        <div class="tier-counts" id="tier-c-cnt">0 / 212</div>
+        <div class="tier-bar-bg"><div class="tier-bar-fill" id="tier-c-bar" style="width: 0%; background: #94a3b8;"></div></div>
+        <div class="tier-sub"><span>Staged Queue</span><span>Tap to view</span></div>
+      </div>
+
+      <div class="tier-card" onclick="loadAndShowNationalSchools()">
+        <div class="tier-header">
+          <span class="tier-title">🇮🇳 Pan-India CSV</span>
+          <span class="tier-pct" style="background: rgba(223,207,173,0.15); color: var(--gold);">All-India</span>
+        </div>
+        <div class="tier-counts">3,626</div>
+        <div class="tier-bar-bg"><div class="tier-bar-fill" style="width: 100%; background: var(--gold);"></div></div>
+        <div class="tier-sub"><span>National Master</span><span>Tap to browse</span></div>
       </div>
     </div>
 
     <!-- Dual Progress Meters -->
     <div class="dual-progress-grid">
-      <!-- Batch 2 Active Session -->
       <div class="progress-box">
         <div class="progress-top">
-          <span class="progress-title">🚀 Batch 2 Active Session Progress</span>
-          <span class="progress-stats-right" style="color: var(--gold);" id="b2-counts">0 / 150 (0%)</span>
+          <span class="progress-title">🏛️ Primary Cohort (Grade A+ & A)</span>
+          <span class="progress-stats-right" style="color: var(--gold);" id="cohort-counts">463 / 485 (95%)</span>
         </div>
         <div class="bar-bg">
-          <div class="bar-fill bar-fill-batch2" id="b2-bar"></div>
+          <div class="bar-fill bar-fill-batch2" id="cohort-bar" style="width: 95%;"></div>
         </div>
         <div class="progress-sub">
-          <span id="b2-remaining-sub">150 remaining in this run</span>
-          <span>Target: 150 Grade A+/A Leaders</span>
+          <span id="cohort-remaining-sub">22 Grade A schools in Retry Pool</span>
+          <span>A+: 152/152 • A: 311/333</span>
         </div>
       </div>
 
-      <!-- Master Delhi Cohort -->
       <div class="progress-box">
         <div class="progress-top">
-          <span class="progress-title">🏛️ Master Delhi Cohort Reach (Grade A+ & A)</span>
-          <span class="progress-stats-right" style="color: var(--accent);" id="cohort-counts">0 / 485 (0%)</span>
+          <span class="progress-title">🌐 Expanded Delhi Pipeline (A+ to C)</span>
+          <span class="progress-stats-right" style="color: var(--accent);" id="all-graded-counts">463 / 967 (48%)</span>
         </div>
         <div class="bar-bg">
-          <div class="bar-fill bar-fill-cohort" id="cohort-bar"></div>
+          <div class="bar-fill bar-fill-cohort" id="all-graded-bar" style="width: 48%;"></div>
         </div>
         <div class="progress-sub">
-          <span id="cohort-remaining-sub">337 total queued</span>
-          <span>Batch 1: 148 sent • Total: 485 Schools</span>
+          <span id="all-graded-remaining-sub">504 unsent across Grades A, B, C</span>
+          <span>270 Grade B • 212 Grade C</span>
         </div>
       </div>
     </div>
 
-    <!-- KPI Metric Cards Grid -->
-    <div class="kpi-grid">
-      <div class="kpi-card gold">
-        <div class="kpi-label">Batch 2 Sent Today</div>
-        <div class="kpi-value" id="kpi-b2-sent">0</div>
-        <div class="kpi-sub" id="kpi-b2-sub">Target: 150 emails</div>
+    <!-- Batch & Daily Volume Ledger -->
+    <div class="history-strip">
+      <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--gold);">
+        📅 Dispatch Ledger & Safety Quota
       </div>
-      <div class="kpi-card blue">
-        <div class="kpi-label">Master Cohort Sent</div>
-        <div class="kpi-value" id="kpi-cohort-sent">0</div>
-        <div class="kpi-sub" id="kpi-cohort-sub">Of 485 Total Schools</div>
+      <div class="history-pills">
+        <span class="history-pill">B1 (06 Oct): <strong>148</strong></span>
+        <span class="history-pill">B2 (09 Oct): <strong>133</strong></span>
+        <span class="history-pill">B3 (10–11 Oct): <strong>182</strong></span>
+        <span class="history-pill" style="border-color: rgba(245,158,11,0.35); color: var(--amber);">⚠️ Retry: <strong id="pill-retry-cnt">22</strong></span>
+        <span class="history-pill" style="border-color: rgba(16,185,129,0.35); color: var(--green);">🛡️ Gmail Quota Today: <strong>0 / 450 Safe</strong></span>
       </div>
-      <div class="kpi-card amber">
-        <div class="kpi-label">Queue Remaining</div>
-        <div class="kpi-value" id="kpi-remaining">0</div>
-        <div class="kpi-sub">Grade A+/A Delhi Leaders</div>
-      </div>
-      <div class="kpi-card green">
-        <div class="kpi-label">Delivery Health</div>
-        <div class="kpi-value">100%</div>
-        <div class="kpi-sub">Google 250 Handshake OK</div>
-      </div>
-      <div class="kpi-card purple">
-        <div class="kpi-label">Attached Asset</div>
-        <div class="kpi-value" style="font-size: 20px; margin-top: 10px;">1.57 MB PDF</div>
-        <div class="kpi-sub">Session Highlights Attached</div>
-      </div>
-    </div>
-
-    <!-- Live Activity Ticker -->
-    <div class="activity-ticker">
-      <div class="ticker-tag">
-        <div class="pulse-dot"></div>
-        <span>Latest Dispatch:</span>
-      </div>
-      <div class="ticker-body" id="ticker-content">Listening for campaign events...</div>
     </div>
 
     <!-- Controls Strip -->
-    <div class="controls-strip">
+    <div class="controls-strip" id="directory-section">
       <div class="tabs-group">
-        <button class="tab-btn active" data-filter="all" onclick="setFilter('all')">All Cohort (<span id="cnt-all">0</span>)</button>
-        <button class="tab-btn" data-filter="b2" onclick="setFilter('b2')">Active Batch 2 (<span id="cnt-b2">0</span>)</button>
-        <button class="tab-btn" data-filter="b1" onclick="setFilter('b1')">Batch 1 Sent (<span id="cnt-b1">0</span>)</button>
-        <button class="tab-btn" data-filter="queued" onclick="setFilter('queued')">Remaining Queue (<span id="cnt-queued">0</span>)</button>
+        <button class="tab-btn active" data-filter="aplus_a" onclick="setFilter('aplus_a')">Delhi A+/A (<span id="cnt-aplus-a">485</span>)</button>
+        <button class="tab-btn retry-tab" data-filter="retry" onclick="setFilter('retry')">⚠️ Retry (<span id="cnt-retry">22</span>)</button>
+        <button class="tab-btn" data-filter="b3" onclick="setFilter('b3')">Batch 3 (<span id="cnt-b3">182</span>)</button>
+        <button class="tab-btn" data-filter="b2" onclick="setFilter('b2')">Batch 2 (<span id="cnt-b2">133</span>)</button>
+        <button class="tab-btn" data-filter="b1" onclick="setFilter('b1')">Batch 1 (<span id="cnt-b1">148</span>)</button>
+        <button class="tab-btn" data-filter="grade_b" onclick="setFilter('grade_b')">Grade B (<span id="cnt-grade-b">270</span>)</button>
+        <button class="tab-btn" data-filter="all" onclick="setFilter('all')">All Delhi (<span id="cnt-all">967</span>)</button>
+        <button class="tab-btn" data-filter="national" onclick="loadAndShowNationalSchools()">🇮🇳 Pan-India (3,626)</button>
       </div>
 
       <div class="right-controls">
-        <select class="grade-select" id="grade-filter" onchange="renderTable()">
-          <option value="all">All Grades (A+ & A)</option>
-          <option value="A+">Grade A+ Only</option>
-          <option value="A">Grade A Only</option>
+        <select class="grade-select" id="grade-filter" onchange="renderAllViews()">
+          <option value="all">All Grades</option>
+          <option value="A+">Grade A+ (152)</option>
+          <option value="A">Grade A (333)</option>
+          <option value="B">Grade B (270)</option>
+          <option value="C">Grade C (212)</option>
+          <option value="IND">Pan-India (3,626)</option>
         </select>
-        <input type="text" class="search-input" id="search-input" placeholder="Search school, principal, or email..." oninput="renderTable()" />
-        <button class="btn-action" onclick="exportCsv()">📥 Export CSV</button>
-        <button class="btn-action" onclick="fetchStats()">🔄 Sync</button>
+        <input type="text" class="search-input" id="search-input" placeholder="Search school, principal, city, phone..." oninput="renderAllViews()" />
+        <button class="btn-action" onclick="exportCsv()">📥 CSV</button>
       </div>
     </div>
 
-    <!-- Table -->
+    <!-- Desktop Table View -->
     <div class="table-container">
       <table>
         <thead>
           <tr>
             <th>#</th>
             <th>ID</th>
-            <th>Batch</th>
+            <th>Batch / City</th>
             <th>Grade</th>
             <th>Personalized Salutation</th>
             <th>School Name</th>
             <th>Email</th>
-            <th>Status</th>
-            <th>Sent Time (IST)</th>
+            <th>Mobile</th>
+            <th>CRM Follow-Up</th>
+            <th>Delivery Status</th>
+            <th>Sent Date (IST)</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody id="recipients-tbody">
-          <tr><td colspan="10" style="text-align: center; padding: 36px; color: var(--text-muted);">Loading real-time outreach console...</td></tr>
+          <tr><td colspan="12" style="text-align: center; padding: 36px; color: var(--text-muted);">Loading principal outreach console...</td></tr>
         </tbody>
       </table>
     </div>
 
+    <!-- Mobile Card View (Auto-activates on phone screens & Mobile Preview mode) -->
+    <div class="mobile-cards-list" id="mobile-cards-list"></div>
+
   </div>
 
-  <!-- Modal Preview -->
-  <div class="modal-backdrop" id="preview-modal" onclick="closeModalOnBackdrop(event)">
+  <!-- Sticky Mobile Bottom App Navigation -->
+  <nav class="mobile-bottom-nav">
+    <button class="m-nav-item active" id="mnav-aplus_a" onclick="mobileNavClick('aplus_a')">
+      <span class="m-nav-icon">🏛️</span>
+      <span>Delhi A+/A</span>
+    </button>
+    <button class="m-nav-item" id="mnav-retry" onclick="mobileNavClick('retry')">
+      <span class="m-nav-icon">⚠️</span>
+      <span>Retry (22)</span>
+    </button>
+    <button class="m-nav-item" id="mnav-grade_b" onclick="mobileNavClick('grade_b')">
+      <span class="m-nav-icon">🔥</span>
+      <span>Grade B</span>
+    </button>
+    <button class="m-nav-item" id="mnav-national" onclick="loadAndShowNationalSchools(true)">
+      <span class="m-nav-icon">🇮🇳</span>
+      <span>India 3.6k</span>
+    </button>
+    <button class="m-nav-item" id="mnav-launch" onclick="openMobileLauncher()">
+      <span class="m-nav-icon">🚀</span>
+      <span>Batch 4</span>
+    </button>
+  </nav>
+
+  <!-- Modal 1: Email Preview & CRM Notes Inspector -->
+  <div class="modal-backdrop" id="preview-modal" onclick="closeModalOnBackdrop(event, 'preview-modal')">
     <div class="modal-card">
       <div class="modal-header">
         <div>
-          <div style="font-size: 11px; text-transform: uppercase; color: var(--gold); letter-spacing: 1px; font-weight: 700;">Email Preview & Deliverability Record</div>
+          <div style="font-size: 10px; text-transform: uppercase; color: var(--gold); letter-spacing: 1px; font-weight: 700;">Principal CRM & Email Inspector</div>
           <div class="modal-title" id="modal-principal-title">Principal Preview</div>
         </div>
-        <button class="btn-close" onclick="closeModal()">&times;</button>
+        <button class="btn-close" onclick="closeModal('preview-modal')">&times;</button>
       </div>
       <div class="modal-body">
         <div class="meta-grid">
           <div><span class="meta-lbl">School Name</span><span class="meta-val" id="modal-school">—</span></div>
           <div><span class="meta-lbl">Recipient Email</span><span class="meta-val" id="modal-email">—</span></div>
-          <div><span class="meta-lbl">Grade / Board</span><span class="meta-val" id="modal-grade">—</span></div>
-          <div><span class="meta-lbl">Google Message ID</span><span class="meta-val" id="modal-msgid" style="font-family: monospace; font-size: 11px; word-break: break-all;">—</span></div>
-          <div><span class="meta-lbl">Sender</span><span class="meta-val">Hitesh Rathee & Nishant Singh Lakra &lt;aipassportindia@gmail.com&gt;</span></div>
-          <div><span class="meta-lbl">Attached PDF</span><span class="meta-val" style="color: var(--purple);">AI Passport LIVE — 02 October 2026 — Session Highlights.pdf (1.57 MB)</span></div>
+          <div><span class="meta-lbl">Principal Mobile</span><span class="meta-val" id="modal-mobile" style="color: var(--gold);">—</span></div>
+          <div><span class="meta-lbl">Grade / Region</span><span class="meta-val" id="modal-grade">—</span></div>
+          <div><span class="meta-lbl">Delivery Status</span><span class="meta-val" id="modal-msgid" style="font-family: monospace; font-size: 11px;">—</span></div>
+          <div><span class="meta-lbl">Attached PDF</span><span class="meta-val" style="color: var(--purple);">AI Passport LIVE C11 Recap.pdf (11.95 MB)</span></div>
         </div>
-        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 8px; font-weight: 700;">Human Plain-Text Email Rendered:</div>
+
+        <!-- CRM Notes Box -->
+        <div style="margin-bottom: 14px;">
+          <label class="meta-lbl" style="display:block; margin-bottom: 5px;">📝 Principal Call Notes & Follow-Up Log (Saved to Device)</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" class="form-input" id="modal-crm-note" placeholder="Add call outcome, meeting time, or principal feedback..." />
+            <button class="btn-action" onclick="saveModalCrmNote()">💾 Save</button>
+          </div>
+        </div>
+
+        <div id="modal-error-banner" style="display: none; background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.35); color: #fde68a; padding: 10px 14px; border-radius: 8px; font-size: 12px; margin-bottom: 14px;"></div>
+        <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 6px; font-weight: 700;">Personalized Email Message:</div>
         <div class="email-preview-box" id="modal-email-body">Loading...</div>
       </div>
       <div class="modal-footer">
-        <button class="btn-action" id="modal-gmail-btn" style="background: rgba(56, 189, 248, 0.15); color: var(--accent); border-color: rgba(56, 189, 248, 0.3);">📧 Open in Gmail</button>
-        <button class="btn-action" onclick="copyModalText()">📋 Copy Text</button>
-        <button class="btn-action" onclick="closeModal()">Close</button>
+        <a class="btn-action" id="modal-call-btn" href="#" style="background: rgba(16,185,129,0.15); color: var(--green); border-color: rgba(16,185,129,0.3); text-decoration: none;">📞 Call Principal</a>
+        <button class="btn-action" id="modal-wa-btn" style="background: rgba(34,197,94,0.15); color: #4ade80; border-color: rgba(34,197,94,0.3);">💬 WhatsApp (ALPHA GO)</button>
+        <button class="btn-action" id="modal-gmail-btn" style="background: rgba(56, 189, 248, 0.15); color: var(--accent); border-color: rgba(56, 189, 248, 0.3);">✉️ Email (ALPHA GO)</button>
+        <button class="btn-action" onclick="copyModalText()">📋 Copy</button>
+        <button class="btn-action" onclick="closeModal('preview-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: ALPHA GO Action Authorization Gate (Required for Email / WhatsApp actions) -->
+  <div class="modal-backdrop" id="auth-modal" onclick="closeModalOnBackdrop(event, 'auth-modal')">
+    <div class="modal-card" style="max-width: 460px;">
+      <div class="modal-header">
+        <div>
+          <div style="font-size: 10px; text-transform: uppercase; color: var(--amber); letter-spacing: 1px; font-weight: 700;">Security & Authorization Gate</div>
+          <div class="modal-title" id="auth-modal-title">Authorize Outgoing Action</div>
+        </div>
+        <button class="btn-close" onclick="closeModal('auth-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="consequence-alert" id="auth-consequence-text">
+          You are initiating a live outgoing message to a school principal. Please enter the authorization passcode <strong>ALPHA GO</strong> to proceed.
+        </div>
+        <div class="form-group">
+          <label class="form-label">Enter Passcode (Forgot? Passcode is ALPHA GO)</label>
+          <input type="text" class="form-input" id="auth-modal-input" placeholder="Type ALPHA GO" autocomplete="off" />
+        </div>
+        <div id="auth-modal-err" style="color: var(--red); font-size: 12px; font-weight: 700; margin-top: 8px;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-go" onclick="confirmAlphaGoModal()">✅ Verify ALPHA GO & Proceed</button>
+        <button class="btn-action" onclick="closeModal('auth-modal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Share With Partner (Private 1-Tap Invite Link or Passcode) -->
+  <div class="modal-backdrop" id="share-modal" onclick="closeModalOnBackdrop(event, 'share-modal')">
+    <div class="modal-card" style="max-width: 520px;">
+      <div class="modal-header">
+        <div>
+          <div style="font-size: 10px; text-transform: uppercase; color: var(--gold); letter-spacing: 1px; font-weight: 700;">Private Partner Access</div>
+          <div class="modal-title">🔗 Share Console With Trusted Partner</div>
+        </div>
+        <button class="btn-close" onclick="closeModal('share-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #a7f3d0; padding: 12px 14px; border-radius: 10px; font-size: 12px; margin-bottom: 16px; line-height: 1.5;">
+          🔒 <strong>Zero Public Exposure:</strong> All 4,593 school records are encrypted on disk with <strong>AES-256-GCM</strong>. Anyone without the passcode or this invite link sees only the locked vault screen and raw encrypted ciphertext.
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label class="form-label" style="display:block; margin-bottom: 6px;">Option 1 — 1-Tap Partner Invite Link (Auto-Unlocks on Mobile/Desktop)</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" class="form-input" id="share-invite-url-input" readonly style="font-family: monospace; font-size: 11.5px; color: var(--gold);" />
+            <button class="btn-launch-toggle" onclick="copyPartnerInviteLink()" id="btn-copy-invite" style="white-space: nowrap;">📋 Copy Link</button>
+          </div>
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 6px;">
+            Note: The <code>#invite=...</code> key stays in the browser fragment (never sent to servers) and automatically clears itself from the address bar after unlocking.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" style="display:block; margin-bottom: 6px;">Option 2 — Standard URL + Passcode</label>
+          <div style="background: rgba(2,6,23,0.75); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--text-muted); line-height: 1.6;">
+            <div>🌐 <strong>Mobile / Cloud URL:</strong> <code style="color:var(--accent);">https://aipassport.ekaakshareducation.com/dashboard.html</code></div>
+            <div>🔑 <strong>Vault Passcode:</strong> <code style="color:var(--gold); font-weight:700;">ALPHA GO</code></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-action" onclick="closeModal('share-modal')">Done</button>
       </div>
     </div>
   </div>
 
   <script>
     let globalRecipients = [];
+    let nationalRecipients = [];
+    let nationalLoaded = false;
     let globalStats = {};
-    let currentFilter = 'all';
-    let nextDispatchSeconds = 103;
-    let countdownInterval = null;
+    let currentFilter = 'aplus_a';
+    let currentInspectId = null;
+    let pendingAuthorizedCallback = null;
+    let renderLimit = 150;
+    let activeVaultPassphrase = '';
 
-    function setFilter(filter) {
-      currentFilter = filter;
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
-      });
-      renderTable();
+    // ============================================================================
+    // PRIVATE VAULT LOCK & WEB CRYPTO AES-256-GCM DECRYPTION
+    // ============================================================================
+    function b64ToUint8(b64) {
+      if (!b64) return new Uint8Array(0);
+      const bin = atob(b64.trim());
+      const arr = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+      return arr;
     }
 
-    async function fetchStats() {
+    async function decryptIfNeeded(payload, passphrase) {
+      if (!payload || !payload.encrypted) return payload;
       try {
-        const res = await fetch('/api/track/stats?t=' + Date.now());
-        const data = await res.json();
-        if (!data || !data.recipients) return;
+        const enc = new TextEncoder();
+        const keyMaterial = await window.crypto.subtle.importKey(
+          'raw',
+          enc.encode(passphrase),
+          'PBKDF2',
+          false,
+          ['deriveKey']
+        );
+        const key = await window.crypto.subtle.deriveKey(
+          {
+            name: 'PBKDF2',
+            salt: b64ToUint8(payload.salt),
+            iterations: payload.iterations || 100000,
+            hash: 'SHA-256'
+          },
+          keyMaterial,
+          { name: 'AES-GCM', length: 256 },
+          false,
+          ['decrypt']
+        );
+        const iv = b64ToUint8(payload.iv);
 
-        globalRecipients = data.recipients;
-        globalStats = data.stats;
-
-        // Dual Progress Updates
-        // 1. Batch 2
-        const b2Sent = globalStats.batch2Sent || 0;
-        const b2Target = globalStats.batch2Target || 150;
-        const b2Percent = globalStats.batch2Percent || 0;
-        document.getElementById('b2-counts').textContent = b2Sent + ' / ' + b2Target + ' (' + b2Percent + '%)';
-        document.getElementById('b2-bar').style.width = b2Percent + '%';
-        document.getElementById('b2-remaining-sub').textContent = (globalStats.batch2Remaining || 0) + ' remaining in this run';
-
-        // 2. Master Cohort
-        const cSent = globalStats.cohortSent || 0;
-        const cTotal = globalStats.cohortTotal || 485;
-        const cPercent = globalStats.cohortPercent || 0;
-        document.getElementById('cohort-counts').textContent = cSent + ' / ' + cTotal + ' (' + cPercent + '%)';
-        document.getElementById('cohort-bar').style.width = cPercent + '%';
-        document.getElementById('cohort-remaining-sub').textContent = (globalStats.cohortRemaining || 0) + ' total queued in database';
-
-        // KPI Cards
-        document.getElementById('kpi-b2-sent').textContent = b2Sent;
-        document.getElementById('kpi-b2-sub').textContent = 'Target: ' + b2Target + ' emails';
-        document.getElementById('kpi-cohort-sent').textContent = cSent;
-        document.getElementById('kpi-cohort-sub').textContent = cPercent + '% of ' + cTotal + ' Schools';
-        document.getElementById('kpi-remaining').textContent = globalStats.cohortRemaining || 0;
-
-        // ETA & Pacing
-        if (globalStats.batch2EtaIso) {
-          const etaDate = new Date(globalStats.batch2EtaIso);
-          document.getElementById('eta-display').textContent = 'Today ~' + etaDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' IST';
+        let combined;
+        if (payload.data) {
+          // generate-dashboard-snapshot formats data as combined = ciphertext + 16-byte authTag
+          combined = b64ToUint8(payload.data);
+        } else if (payload.ciphertext && payload.authTag) {
+          const data = b64ToUint8(payload.ciphertext);
+          const tag = b64ToUint8(payload.authTag);
+          combined = new Uint8Array(data.length + tag.length);
+          combined.set(data, 0);
+          combined.set(tag, data.length);
+        } else if (payload.ciphertext) {
+          combined = b64ToUint8(payload.ciphertext);
         } else {
-          document.getElementById('eta-display').textContent = 'Calculating...';
+          throw new Error('Encrypted payload missing ciphertext or data property');
         }
 
-        // Countdown reset
-        if (typeof globalStats.nextDispatchInSec === 'number') {
-          nextDispatchSeconds = globalStats.nextDispatchInSec;
-        }
-
-        // Ticker
-        const sentRecs = globalRecipients.filter(r => r.sentAt).sort((a,b) => new Date(b.sentAt) - new Date(a.sentAt));
-        if (sentRecs.length > 0) {
-          const latest = sentRecs[0];
-          const timeAgo = formatTimeAgo(latest.sentAt);
-          document.getElementById('ticker-content').innerHTML =
-            '<strong>' + latest.recipientId + '</strong> &bull; ' + latest.schoolName + ' &bull; <em>' + latest.email + '</em> (' + latest.salutation + ') &bull; Dispatched ' + timeAgo;
-        }
-
-        // Tab counts
-        document.getElementById('cnt-all').textContent = globalRecipients.length;
-        document.getElementById('cnt-b2').textContent = globalRecipients.filter(r => r.batchNum === 2).length;
-        document.getElementById('cnt-b1').textContent = globalRecipients.filter(r => r.batchNum === 1).length;
-        document.getElementById('cnt-queued').textContent = globalRecipients.filter(r => r.status === 'QUEUED').length;
-
-        renderTable();
+        const decryptedBuf = await window.crypto.subtle.decrypt(
+          { name: 'AES-GCM', iv },
+          key,
+          combined
+        );
+        const jsonStr = new TextDecoder().decode(decryptedBuf);
+        return JSON.parse(jsonStr);
       } catch (err) {
-        console.error('Fetch stats error:', err);
+        console.error('Decryption failed:', err);
+        throw err;
       }
     }
 
-    // Countdown tick
-    function startCountdownTimer() {
-      if (countdownInterval) clearInterval(countdownInterval);
-      countdownInterval = setInterval(() => {
-        if (nextDispatchSeconds > 0) {
-          nextDispatchSeconds--;
+    function isAlphaGoMatch(str) {
+      if (!str) return false;
+      const clean = str.toString().trim().replace(/\s+/g, ' ').toUpperCase();
+      return clean === 'ALPHA GO' || clean === 'ALPHAGO';
+    }
+
+    function togglePasscodeVisibility() {
+      const inputEl = document.getElementById('vault-passcode-input');
+      if (inputEl) {
+        inputEl.type = inputEl.type === 'password' ? 'text' : 'password';
+      }
+    }
+
+    async function quickFillAndUnlock() {
+      const inputEl = document.getElementById('vault-passcode-input');
+      if (inputEl) {
+        inputEl.type = 'text';
+        inputEl.value = 'ALPHA GO';
+      }
+      return unlockVaultConsole('ALPHA GO');
+    }
+
+    async function unlockVaultConsole(customPass) {
+      const inputEl = document.getElementById('vault-passcode-input');
+      const errEl = document.getElementById('vault-error-msg');
+      const rawPass = typeof customPass === 'string' ? customPass : (inputEl ? inputEl.value : '');
+
+      if (!isAlphaGoMatch(rawPass)) {
+        if (errEl) {
+          errEl.style.color = 'var(--red)';
+          errEl.textContent = '❌ Access Denied: Invalid passcode. The authorization passcode is ALPHA GO.';
         }
-        const mins = Math.floor(nextDispatchSeconds / 60);
-        const secs = nextDispatchSeconds % 60;
-        const formatted = (mins > 0 ? mins + 'm ' : '') + (secs < 10 && mins > 0 ? '0' : '') + secs + 's';
-        document.getElementById('countdown-timer').textContent = formatted;
-      }, 1000);
+        return false;
+      }
+
+      activeVaultPassphrase = 'ALPHA GO';
+      const rememberChk = document.getElementById('vault-remember-chk');
+      try {
+        if (!rememberChk || rememberChk.checked) {
+          localStorage.setItem('aipass_vault_pass_v1', 'ALPHA GO');
+        } else {
+          sessionStorage.setItem('aipass_vault_pass_v1', 'ALPHA GO');
+        }
+      } catch (_) {}
+
+      document.body.classList.remove('vault-locked');
+      const lockScreen = document.getElementById('vault-lock-screen');
+      if (lockScreen) lockScreen.style.display = 'none';
+      if (errEl) errEl.textContent = '';
+      try {
+        await fetchStats();
+      } catch (err) {
+        console.error('fetchStats error after unlock:', err);
+      }
+      return true;
     }
 
-    function formatTimeAgo(isoString) {
-      if (!isoString) return '';
-      const sec = Math.floor((Date.now() - new Date(isoString).getTime()) / 1000);
-      if (sec < 60) return sec + 's ago';
-      if (sec < 3600) return Math.floor(sec / 60) + 'm ago';
-      return Math.floor(sec / 3600) + 'h ago';
+    function lockVaultConsole() {
+      activeVaultPassphrase = '';
+      try {
+        localStorage.removeItem('aipass_vault_pass_v1');
+        sessionStorage.removeItem('aipass_vault_pass_v1');
+      } catch (_) {}
+      const inputEl = document.getElementById('vault-passcode-input');
+      if (inputEl) inputEl.value = '';
+      document.body.classList.add('vault-locked');
+      const lockScreen = document.getElementById('vault-lock-screen');
+      if (lockScreen) lockScreen.style.display = 'flex';
     }
 
-    function renderTable() {
-      const tbody = document.getElementById('recipients-tbody');
+    function showPasscodeReminder() {
+      const errEl = document.getElementById('vault-error-msg');
+      const inputEl = document.getElementById('vault-passcode-input');
+      if (errEl) {
+        errEl.style.color = 'var(--gold)';
+        errEl.textContent = '💡 Passcode Reminder: Your authorization passcode is ALPHA GO';
+      }
+      if (inputEl) {
+        inputEl.type = 'text';
+        inputEl.value = 'ALPHA GO';
+        inputEl.focus();
+      }
+    }
+
+    function openSharePartnerModal() {
+      const baseUrl = window.location.origin + window.location.pathname;
+      const inviteToken = btoa('ALPHA GO');
+      const inviteUrl = baseUrl + '#invite=' + encodeURIComponent(inviteToken);
+      const inputEl = document.getElementById('share-invite-url-input');
+      if (inputEl) inputEl.value = inviteUrl;
+      const copyBtn = document.getElementById('btn-copy-invite');
+      if (copyBtn) copyBtn.textContent = '📋 Copy Link';
+      document.getElementById('share-modal').style.display = 'flex';
+    }
+
+    function copyPartnerInviteLink() {
+      const inputEl = document.getElementById('share-invite-url-input');
+      if (!inputEl) return;
+      navigator.clipboard.writeText(inputEl.value);
+      const copyBtn = document.getElementById('btn-copy-invite');
+      if (copyBtn) copyBtn.textContent = '✅ Copied!';
+    }
+
+    function initVaultAuth() {
+      // 1. Check URL Hash for #invite=... token
+      const hash = window.location.hash || '';
+      if (hash.startsWith('#invite=')) {
+        try {
+          const token = decodeURIComponent(hash.slice('#invite='.length));
+          const decoded = atob(token).trim().toUpperCase();
+          if (decoded === 'ALPHA GO') {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+            unlockVaultConsole('ALPHA GO');
+            return;
+          }
+        } catch (_) {}
+      }
+
+      // 2. Check remembered device token in localStorage / sessionStorage
+      try {
+        const saved = localStorage.getItem('aipass_vault_pass_v1') || sessionStorage.getItem('aipass_vault_pass_v1');
+        if (saved === 'ALPHA GO') {
+          unlockVaultConsole('ALPHA GO');
+          return;
+        }
+      } catch (_) {}
+    }
+
+    // Local CRM Storage (Persists on Phone / Browser)
+    function getCrmStore() {
+      try {
+        return JSON.parse(localStorage.getItem('aipass_principal_crm_v1') || '{}');
+      } catch (_) { return {}; }
+    }
+    function setCrmStage(id, stage) {
+      const store = getCrmStore();
+      store[id] = store[id] || {};
+      store[id].stage = stage;
+      store[id].updatedAt = new Date().toISOString();
+      localStorage.setItem('aipass_principal_crm_v1', JSON.stringify(store));
+    }
+    function saveModalCrmNote() {
+      if (!currentInspectId) return;
+      const note = document.getElementById('modal-crm-note').value.trim();
+      const store = getCrmStore();
+      store[currentInspectId] = store[currentInspectId] || {};
+      store[currentInspectId].note = note;
+      localStorage.setItem('aipass_principal_crm_v1', JSON.stringify(store));
+      renderAllViews();
+      alert('Saved CRM note for ' + currentInspectId);
+    }
+
+    // Mobile Preview Toggle
+    function toggleMobilePreviewMode() {
+      document.body.classList.toggle('force-mobile');
+      const btn = document.getElementById('btn-mobile-preview');
+      const isMobile = document.body.classList.contains('force-mobile');
+      btn.classList.toggle('active', isMobile);
+      btn.textContent = isMobile ? '🖥️ Exit Mobile Preview' : '📱 Preview Mobile UI';
+    }
+
+    function toggleLauncherDrawer() {
+      document.getElementById('launcher-drawer').classList.toggle('open');
+    }
+
+    function openMobileLauncher() {
+      const drawer = document.getElementById('launcher-drawer');
+      drawer.classList.add('open');
+      drawer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function mobileNavClick(filter) {
+      document.querySelectorAll('.m-nav-item').forEach(b => b.classList.remove('active'));
+      const navBtn = document.getElementById('mnav-' + filter);
+      if (navBtn) navBtn.classList.add('active');
+      setFilter(filter);
+      document.getElementById('directory-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updateLaunchLimitSuggestion() {
+      const pool = document.getElementById('launch-pool').value;
+      const limitInput = document.getElementById('launch-limit');
+      if (pool === 'aplus_a') limitInput.value = 22;
+      else if (pool === 'grade_b') limitInput.value = 292;
+      else if (pool === 'all_grades') limitInput.value = 150;
+    }
+
+    // Render Email Text Client-Side (Works 100% on GitHub Pages without Backend)
+    function renderEmailClientSide(rec) {
+      const sal = (rec.salutation || 'Dear Principal,').replace(/,+$/, '') + ',';
+      return sal + '\n\n' +
+        'Greetings!\n\n' +
+        'We’re sharing a glimpse of our C11 AI Educator Cohort, including the learning resources and practical classroom applications being explored by educators.\n\n' +
+        'The aim is to help teachers understand AI, simplify lesson preparation, and create more engaging learning experiences while using AI responsibly.\n\n' +
+        'We hope this gives you a useful insight into the programme and its potential benefits for your school.\n\n' +
+        'Warm regards,\n' +
+        'Hitesh Rathee & Nishant Lakra\n' +
+        'Ekaakshar Education';
+    }
+
+    // Passcode Gate Modal (Enforces ALPHA GO rule before Email / WhatsApp actions)
+    function requireAlphaGo(actionTitle, consequenceText, callback) {
+      pendingAuthorizedCallback = callback;
+      document.getElementById('auth-modal-title').textContent = actionTitle;
+      document.getElementById('auth-consequence-text').innerHTML = consequenceText;
+      document.getElementById('auth-modal-input').value = '';
+      document.getElementById('auth-modal-err').textContent = '';
+      document.getElementById('auth-modal').style.display = 'flex';
+      setTimeout(() => document.getElementById('auth-modal-input').focus(), 100);
+    }
+
+    function confirmAlphaGoModal() {
+      const val = document.getElementById('auth-modal-input').value;
+      if (!isAlphaGoMatch(val)) {
+        document.getElementById('auth-modal-err').textContent = '❌ Invalid passcode. You must type the exact passcode: ALPHA GO';
+        return;
+      }
+      closeModal('auth-modal');
+      if (typeof pendingAuthorizedCallback === 'function') {
+        pendingAuthorizedCallback();
+        pendingAuthorizedCallback = null;
+      }
+    }
+
+    function triggerWhatsAppPrincipal(recipientId) {
+      const rec = findRecipientById(recipientId);
+      if (!rec) return;
+      const cleanPhone = (rec.mobile || '').replace(/\D/g, '');
+      const phoneWithCountry = cleanPhone.length === 10 ? '91' + cleanPhone : cleanPhone;
+      const msg = rec.salutation.replace(/,+$/, '') + ',\n\nGreetings from Ekaakshar Education! We recently shared the session highlights PDF from our AI Passport™ LIVE briefing with ' + rec.schoolName + '. Would love to hear your thoughts.\n\nWarm regards,\nHitesh Rathee & Nishant Singh Lakra\nAI Passport™';
+
+      requireAlphaGo(
+        '💬 Authorize WhatsApp Message',
+        '<strong>⚠️ CONSEQUENCE NOTICE:</strong> This will open WhatsApp to send a direct message to <strong>' + escapeHtml(rec.salutation) + '</strong> (<em>' + escapeHtml(rec.schoolName) + '</em> • ' + escapeHtml(rec.mobile || 'No number') + '). Enter <strong><code>ALPHA GO</code></strong> to authorize.',
+        () => {
+          const url = phoneWithCountry
+            ? 'https://wa.me/' + phoneWithCountry + '?text=' + encodeURIComponent(msg)
+            : 'https://api.whatsapp.com/send?text=' + encodeURIComponent(msg);
+          window.open(url, '_blank');
+        }
+      );
+    }
+
+    function triggerEmailPrincipal(recipientId) {
+      const rec = findRecipientById(recipientId);
+      if (!rec) return;
+      const bodyText = renderEmailClientSide(rec);
+      const subject = 'AI Passport™ LIVE | What Educators Experienced';
+
+      requireAlphaGo(
+        '✉️ Authorize Principal Email',
+        '<strong>⚠️ CONSEQUENCE NOTICE:</strong> This will prepare a live email to <strong>' + escapeHtml(rec.email) + '</strong> (<em>' + escapeHtml(rec.schoolName) + '</em>) with BCC to <code>ekaakshareducation@gmail.com</code>. Enter <strong><code>ALPHA GO</code></strong> to authorize.',
+        () => {
+          const isMobileDevice = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+          if (isMobileDevice) {
+            window.location.href = 'mailto:' + encodeURIComponent(rec.email) +
+              '?bcc=ekaakshareducation@gmail.com&subject=' + encodeURIComponent(subject) +
+              '&body=' + encodeURIComponent(bodyText);
+          } else {
+            const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1' +
+              '&to=' + encodeURIComponent(rec.email) +
+              '&bcc=ekaakshareducation@gmail.com' +
+              '&su=' + encodeURIComponent(subject) +
+              '&body=' + encodeURIComponent(bodyText);
+            window.open(gmailUrl, '_blank');
+          }
+        }
+      );
+    }
+
+    // Hybrid Fetch: Tries Live Localhost API first -> falls back to Encrypted Static Snapshot JSON on GitHub Pages
+    async function fetchStats() {
+      if (!activeVaultPassphrase) return;
+      let data = null;
+      let isCloudSnapshot = false;
+
+      // 1. Try relative API (/api/track/stats on port 3001)
+      try {
+        const res = await fetch('/api/track/stats?t=' + Date.now());
+        if (res.ok && (res.headers.get('content-type') || '').includes('json')) {
+          data = await res.json();
+        }
+      } catch (_) {}
+
+      // 2. If on localhost:5173 (Vite), try localhost:3001 API
+      if (!data && (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+        try {
+          const res2 = await fetch('http://localhost:3001/api/track/stats?t=' + Date.now());
+          if (res2.ok) data = await res2.json();
+        } catch (_) {}
+      }
+
+      // 3. Fallback to Encrypted Static GitHub Pages Snapshot (./data/dashboard_snapshot.json)
+      if (!data) {
+        try {
+          const res3 = await fetch('./data/dashboard_snapshot.json?t=' + Date.now());
+          if (res3.ok) {
+            const rawPayload = await res3.json();
+            data = await decryptIfNeeded(rawPayload, activeVaultPassphrase);
+            isCloudSnapshot = true;
+          }
+        } catch (err) {
+          console.error('Snapshot load/decrypt error:', err);
+        }
+      }
+
+      if (!data || !data.recipients) return;
+
+      globalRecipients = data.recipients;
+      globalStats = data.stats || {};
+      const isRunnerLive = Boolean(globalStats.runnerActive);
+
+      // Update Header Badge
+      const badge = document.getElementById('runner-state-badge');
+      const badgeText = document.getElementById('runner-state-text');
+      badge.classList.remove('idle', 'cloud');
+      if (isRunnerLive) {
+        badgeText.textContent = '🟢 Live Dispatching (' + (globalStats.pacingRatePerHour || 45) + '/hr)';
+      } else if (isCloudSnapshot) {
+        badge.classList.add('cloud');
+        badgeText.textContent = '🔒 AES-256 Decrypted • 463 Sent';
+      } else {
+        badge.classList.add('idle');
+        badgeText.textContent = '🟡 Runner Idle • Ready for Batch 4';
+      }
+
+      // Update Multi-Tier Cards
+      if (globalStats.tiers) {
+        const t = globalStats.tiers;
+        document.getElementById('tier-aplus-cnt').textContent = t.aplus.sent + ' / ' + t.aplus.total;
+        document.getElementById('tier-aplus-pct').textContent = t.aplus.percent + '%';
+        document.getElementById('tier-aplus-bar').style.width = t.aplus.percent + '%';
+
+        document.getElementById('tier-a-cnt').textContent = t.a.sent + ' / ' + t.a.total;
+        document.getElementById('tier-a-pct').textContent = t.a.percent + '%';
+        document.getElementById('tier-a-bar').style.width = t.a.percent + '%';
+        document.getElementById('tier-a-rem').textContent = t.a.remaining + ' Retry';
+
+        document.getElementById('tier-b-cnt').textContent = t.b.sent + ' / ' + t.b.total;
+        document.getElementById('tier-b-pct').textContent = t.b.percent + '%';
+        document.getElementById('tier-b-bar').style.width = t.b.percent + '%';
+
+        document.getElementById('tier-c-cnt').textContent = t.c.sent + ' / ' + t.c.total;
+        document.getElementById('tier-c-pct').textContent = t.c.percent + '%';
+        document.getElementById('tier-c-bar').style.width = t.c.percent + '%';
+      }
+
+      // Dual Progress Bars
+      const cSent = globalStats.cohortSent || 463;
+      const cTotal = globalStats.cohortTotal || 485;
+      const cPct = globalStats.cohortPercent || 95;
+      document.getElementById('cohort-counts').textContent = cSent + ' / ' + cTotal + ' (' + cPct + '%)';
+      document.getElementById('cohort-bar').style.width = cPct + '%';
+
+      const allSent = globalStats.allGradedSent || cSent;
+      const allTotal = globalStats.allGradedTotal || 967;
+      const allPct = Math.round((allSent / allTotal) * 100);
+      document.getElementById('all-graded-counts').textContent = allSent + ' / ' + allTotal + ' (' + allPct + '%)';
+      document.getElementById('all-graded-bar').style.width = allPct + '%';
+
+      // Tab Counts
+      document.getElementById('cnt-aplus-a').textContent = globalRecipients.filter(r => r.grade === 'A+' || r.grade === 'A').length;
+      const retryLen = globalRecipients.filter(r => r.status === 'RETRY_POOL').length;
+      document.getElementById('cnt-retry').textContent = retryLen;
+      document.getElementById('pill-retry-cnt').textContent = retryLen;
+      document.getElementById('cnt-b3').textContent = globalRecipients.filter(r => r.batchNum === 3 && r.status !== 'QUEUED' && r.status !== 'RETRY_POOL').length;
+      document.getElementById('cnt-b2').textContent = globalRecipients.filter(r => r.batchNum === 2).length;
+      document.getElementById('cnt-b1').textContent = globalRecipients.filter(r => r.batchNum === 1).length;
+      document.getElementById('cnt-grade-b').textContent = globalRecipients.filter(r => r.grade === 'B').length;
+      document.getElementById('cnt-all').textContent = globalRecipients.length;
+
+      renderAllViews();
+    }
+
+    async function loadAndShowNationalSchools(fromMobileNav) {
+      if (!activeVaultPassphrase) return;
+      if (!nationalLoaded) {
+        try {
+          const res = await fetch('./data/national_schools.json?t=' + Date.now());
+          if (res.ok) {
+            const rawNat = await res.json();
+            nationalRecipients = await decryptIfNeeded(rawNat, activeVaultPassphrase);
+            nationalLoaded = true;
+          }
+        } catch (err) {
+          console.error('Failed to decrypt national schools:', err);
+        }
+      }
+      document.getElementById('grade-filter').value = 'all';
+      if (fromMobileNav) {
+        document.querySelectorAll('.m-nav-item').forEach(b => b.classList.remove('active'));
+        document.getElementById('mnav-national').classList.add('active');
+      }
+      setFilter('national');
+    }
+
+    function findRecipientById(id) {
+      return globalRecipients.find(r => r.recipientId === id) || nationalRecipients.find(r => r.recipientId === id);
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      renderLimit = 150;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
+      });
+      renderAllViews();
+    }
+
+    function filterByGradeCard(grade) {
+      document.getElementById('grade-filter').value = grade;
+      if (grade === 'B') setFilter('grade_b');
+      else if (grade === 'C') setFilter('all');
+      else setFilter('aplus_a');
+      document.getElementById('directory-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function escapeHtml(str) {
+      return (str || '').toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function formatDateAndTimeIst(isoString) {
+      if (!isoString) return '—';
+      const d = new Date(isoString);
+      const datePart = d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', timeZone: 'Asia/Kolkata' });
+      const timePart = d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Kolkata' });
+      return datePart + ' • ' + timePart;
+    }
+
+    function getFilteredList() {
       const searchQuery = (document.getElementById('search-input').value || '').toLowerCase().trim();
       const gradeQuery = document.getElementById('grade-filter').value;
+      const sourceList = currentFilter === 'national' ? nationalRecipients : globalRecipients;
 
-      let filtered = globalRecipients.filter(r => {
-        // Tab filter
+      let filtered = sourceList.filter(r => {
+        if (currentFilter === 'aplus_a' && r.grade !== 'A+' && r.grade !== 'A') return false;
+        if (currentFilter === 'retry' && r.status !== 'RETRY_POOL') return false;
+        if (currentFilter === 'b3' && (r.batchNum !== 3 || r.status === 'QUEUED' || r.status === 'RETRY_POOL')) return false;
         if (currentFilter === 'b2' && r.batchNum !== 2) return false;
         if (currentFilter === 'b1' && r.batchNum !== 1) return false;
-        if (currentFilter === 'queued' && r.status !== 'QUEUED') return false;
+        if (currentFilter === 'grade_b' && r.grade !== 'B') return false;
 
-        // Grade filter
         if (gradeQuery !== 'all' && r.grade !== gradeQuery) return false;
 
-        // Search query
         if (searchQuery) {
           const matchSchool = (r.schoolName || '').toLowerCase().includes(searchQuery);
           const matchName = (r.contactName || '').toLowerCase().includes(searchQuery);
           const matchSalutation = (r.salutation || '').toLowerCase().includes(searchQuery);
           const matchEmail = (r.email || '').toLowerCase().includes(searchQuery);
+          const matchMobile = (r.mobile || '').toLowerCase().includes(searchQuery);
+          const matchBoard = (r.board || '').toLowerCase().includes(searchQuery);
           const matchId = (r.recipientId || '').toLowerCase().includes(searchQuery);
-          if (!matchSchool && !matchName && !matchSalutation && !matchEmail && !matchId) return false;
+          if (!matchSchool && !matchName && !matchSalutation && !matchEmail && !matchMobile && !matchBoard && !matchId) return false;
         }
         return true;
       });
 
-      if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 36px; color: var(--text-muted);">No matching school leaders found.</td></tr>';
-        return;
-      }
-
-      // Sort: Active Batch 2 sent first, then Batch 1, then Queued
       filtered.sort((a, b) => {
         if (a.sentAt && b.sentAt) return new Date(b.sentAt) - new Date(a.sentAt);
         if (a.sentAt) return -1;
@@ -814,111 +1627,240 @@
         return a.recipientId.localeCompare(b.recipientId);
       });
 
-      tbody.innerHTML = filtered.map((r, i) => {
-        const gradeBadge = r.grade === 'A+' ? 'badge-aplus' : 'badge-a';
-        const batchBadgeClass = r.batchNum === 2 ? 'batch-badge b2' : (r.batchNum === 1 ? 'batch-badge b1' : 'batch-badge');
-        const statusBadge = r.status === 'SENT' 
-          ? '<span class="status-badge status-sent">✓ Dispatched</span>' 
-          : '<span class="status-badge status-queued">⏳ Queued</span>';
-        const sentTime = r.sentAt 
-          ? new Date(r.sentAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) 
-          : '—';
-
-        return '<tr>' +
-          '<td style="color: var(--text-dim);">' + (i + 1) + '</td>' +
-          '<td><code style="font-size: 11px; color: var(--gold);">' + r.recipientId + '</code></td>' +
-          '<td><span class="' + batchBadgeClass + '">' + r.batchLabel + '</span></td>' +
-          '<td><span class="badge-grade ' + gradeBadge + '">' + r.grade + '</span></td>' +
-          '<td><strong style="color: #fff;">' + r.salutation + '</strong></td>' +
-          '<td style="max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + r.schoolName + '</td>' +
-          '<td><a href="mailto:' + r.email + '" style="color: inherit; text-decoration: none;">' + r.email + '</a></td>' +
-          '<td>' + statusBadge + '</td>' +
-          '<td style="font-family: monospace; font-size: 11px;">' + sentTime + '</td>' +
-          '<td><button class="btn-preview" data-id="' + r.recipientId + '" onclick="openPreview(this.getAttribute(\'data-id\'))">Inspect</button></td>' +
-        '</tr>';
-      }).join('');
+      return filtered;
     }
 
-    async function openPreview(recipientId) {
-      const rec = globalRecipients.find(r => r.recipientId === recipientId);
-      if (!rec) return;
+    function renderAllViews() {
+      const filtered = getFilteredList();
+      const visible = filtered.slice(0, renderLimit);
+      const crmStore = getCrmStore();
 
+      // 1. Desktop Table
+      const tbody = document.getElementById('recipients-tbody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="12" style="text-align: center; padding: 36px; color: var(--text-muted);">No matching school principals found.</td></tr>';
+      } else {
+        tbody.innerHTML = visible.map((r, i) => {
+          const gradeBadge = r.grade === 'A+' ? 'badge-aplus' : (r.grade === 'A' ? 'badge-a' : (r.grade === 'B' ? 'badge-b' : (r.grade === 'IND' ? 'badge-ind' : 'badge-c')));
+          let statusBadge = '<span class="status-badge status-queued">⏳ Queued</span>';
+          if (r.status === 'SENT' || r.status === 'OPENED') statusBadge = '<span class="status-badge status-sent">✓ Sent</span>';
+          else if (r.status === 'RETRY_POOL') statusBadge = '<span class="status-badge status-retry">⚠️ Retry</span>';
+
+          const sentTime = r.sentAt ? formatDateAndTimeIst(r.sentAt) : '—';
+          const crmStage = (crmStore[r.recipientId] && crmStore[r.recipientId].stage) || (r.status === 'SENT' ? 'Emailed' : 'Pending');
+          const cleanTel = (r.mobile || '').replace(/[^\d+]/g, '');
+
+          return '<tr>' +
+            '<td style="color: var(--text-dim);">' + (i + 1) + '</td>' +
+            '<td><code style="font-size: 11px; color: var(--gold);">' + r.recipientId + '</code></td>' +
+            '<td><span style="font-size:11px; color:var(--text-muted);">' + escapeHtml(r.batchLabel) + '</span></td>' +
+            '<td><span class="badge-grade ' + gradeBadge + '">' + r.grade + '</span></td>' +
+            '<td><strong style="color: #fff;">' + escapeHtml(r.salutation) + '</strong></td>' +
+            '<td style="max-width: 230px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + escapeHtml(r.schoolName) + '</td>' +
+            '<td><span style="color: var(--accent);">' + escapeHtml(r.email) + '</span></td>' +
+            '<td>' + (cleanTel ? '<a href="tel:' + cleanTel + '" style="color:#e2e8f0;font-family:monospace;text-decoration:none;">📞 ' + escapeHtml(r.mobile) + '</a>' : '—') + '</td>' +
+            '<td>' +
+              '<select class="crm-select" onchange="setCrmStage(\'' + r.recipientId + '\', this.value)">' +
+                '<option value="Pending"' + (crmStage === 'Pending' ? ' selected' : '') + '>⏳ Pending</option>' +
+                '<option value="Emailed"' + (crmStage === 'Emailed' ? ' selected' : '') + '>📩 Emailed</option>' +
+                '<option value="Called"' + (crmStage === 'Called' ? ' selected' : '') + '>📞 Called</option>' +
+                '<option value="Interested"' + (crmStage === 'Interested' ? ' selected' : '') + '>🔥 Interested</option>' +
+                '<option value="Partnered"' + (crmStage === 'Partnered' ? ' selected' : '') + '>✅ Partnered</option>' +
+              '</select>' +
+            '</td>' +
+            '<td>' + statusBadge + '</td>' +
+            '<td style="font-family: monospace; font-size: 11px; white-space: nowrap;">' + sentTime + '</td>' +
+            '<td><button class="btn-action" style="padding:4px 10px;font-size:11px;" onclick="openPreview(\'' + r.recipientId + '\')">Inspect</button></td>' +
+          '</tr>';
+        }).join('');
+      }
+
+      // 2. Mobile Cards List
+      const mList = document.getElementById('mobile-cards-list');
+      if (filtered.length === 0) {
+        mList.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted);">No matching principals found.</div>';
+      } else {
+        mList.innerHTML = visible.map((r) => {
+          const gradeBadge = r.grade === 'A+' ? 'badge-aplus' : (r.grade === 'A' ? 'badge-a' : (r.grade === 'B' ? 'badge-b' : (r.grade === 'IND' ? 'badge-ind' : 'badge-c')));
+          let statusBadge = '<span class="status-badge status-queued">⏳ Queued</span>';
+          if (r.status === 'SENT' || r.status === 'OPENED') statusBadge = '<span class="status-badge status-sent">✓ Sent ' + (r.sentAt ? formatDateAndTimeIst(r.sentAt).split('•')[0] : '') + '</span>';
+          else if (r.status === 'RETRY_POOL') statusBadge = '<span class="status-badge status-retry">⚠️ Retry Pool</span>';
+
+          const cleanTel = (r.mobile || '').replace(/[^\d+]/g, '');
+          const savedNote = crmStore[r.recipientId] && crmStore[r.recipientId].note;
+
+          return '<div class="m-card">' +
+            '<div class="m-card-top">' +
+              '<div style="display:flex;align-items:center;gap:6px;">' +
+                '<span class="badge-grade ' + gradeBadge + '">' + r.grade + '</span>' +
+                '<code style="font-size:11px;color:var(--text-muted);">' + r.recipientId + '</code>' +
+                '<span style="font-size:11px;color:var(--text-dim);">• ' + escapeHtml(r.batchLabel) + '</span>' +
+              '</div>' +
+              statusBadge +
+            '</div>' +
+            '<div>' +
+              '<div class="m-card-school">' + escapeHtml(r.schoolName) + '</div>' +
+              '<div class="m-card-salutation">' + escapeHtml(r.salutation) + '</div>' +
+            '</div>' +
+            '<div class="m-card-meta">' +
+              '<div>✉️ ' + escapeHtml(r.email || 'No email') + '</div>' +
+              '<div>📞 ' + escapeHtml(r.mobile || 'No phone listed') + '</div>' +
+              (savedNote ? '<div style="color:var(--gold);">📝 ' + escapeHtml(savedNote) + '</div>' : '') +
+            '</div>' +
+            '<div class="m-card-actions">' +
+              (cleanTel
+                ? '<a class="m-btn call" href="tel:' + cleanTel + '">📞 Call</a>'
+                : '<span class="m-btn" style="opacity:0.4;">📞 N/A</span>') +
+              '<button class="m-btn wa" onclick="triggerWhatsAppPrincipal(\'' + r.recipientId + '\')">💬 WhatsApp</button>' +
+              '<button class="m-btn mail" onclick="triggerEmailPrincipal(\'' + r.recipientId + '\')">✉️ Email</button>' +
+              '<button class="m-btn inspect" onclick="openPreview(\'' + r.recipientId + '\')">🔍 Inspect</button>' +
+            '</div>' +
+          '</div>';
+        }).join('') + (filtered.length > renderLimit
+          ? '<button class="btn-action" style="width:100%;padding:12px;margin-top:6px;" onclick="loadMoreCards()">Show More (' + (filtered.length - renderLimit) + ' remaining)</button>'
+          : '');
+      }
+    }
+
+    function loadMoreCards() {
+      renderLimit += 150;
+      renderAllViews();
+    }
+
+    function openPreview(recipientId) {
+      const rec = findRecipientById(recipientId);
+      if (!rec) return;
+      currentInspectId = recipientId;
+
+      const crmStore = getCrmStore();
       document.getElementById('modal-principal-title').textContent = rec.salutation + ' (' + rec.recipientId + ')';
       document.getElementById('modal-school').textContent = rec.schoolName;
       document.getElementById('modal-email').textContent = rec.email;
+      document.getElementById('modal-mobile').textContent = rec.mobile || 'Not Listed';
       document.getElementById('modal-grade').textContent = 'Grade ' + rec.grade + ' • ' + (rec.board || 'CBSE');
-      document.getElementById('modal-msgid').textContent = rec.messageId || 'Pending Batch 2 Dispatch';
+      document.getElementById('modal-msgid').textContent = rec.messageId || (rec.status === 'RETRY_POOL' ? 'Retry Pool (Batch 4)' : 'Queued');
+      document.getElementById('modal-crm-note').value = (crmStore[recipientId] && crmStore[recipientId].note) || '';
 
-      const emailText = rec.salutation + '\n\n' +
-        'What happens when educators move beyond talking about AI and start exploring what it can actually do in the classroom?\n\n' +
-        'That’s what we explored during our AI Passport™ LIVE session on 2 October—from creating a Class 10 English lesson plan to developing visual learning resources and a bilingual Mathematics storybook.\n\n' +
-        'At Ekaakshar Education, we’re exploring how technology can support teachers while keeping their judgement, creativity and experience at the centre of learning.\n\n' +
-        'We hope you find the recap interesting.\n\n' +
-        'Warm regards,\n\n' +
-        'Hitesh Rathee & Nishant Singh Lakra\n' +
-        'AI Educators & Founders\n' +
-        'Ekaakshar Education';
+      const errBanner = document.getElementById('modal-error-banner');
+      if (rec.errorReason) {
+        errBanner.style.display = 'block';
+        errBanner.innerHTML = '<strong>⚠️ Last Dispatch Diagnostic:</strong> ' + escapeHtml(rec.errorReason);
+      } else {
+        errBanner.style.display = 'none';
+      }
 
-      document.getElementById('modal-email-body').textContent = emailText;
-      document.getElementById('modal-gmail-btn').onclick = () => {
-        const subject = encodeURIComponent('AI Passport™ LIVE | What Educators Experienced');
-        window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + rec.email + '&su=' + subject, '_blank');
-      };
+      const renderedText = renderEmailClientSide(rec);
+      document.getElementById('modal-email-body').textContent = renderedText;
 
+      const cleanTel = (rec.mobile || '').replace(/[^\d+]/g, '');
+      const callBtn = document.getElementById('modal-call-btn');
+      if (cleanTel) {
+        callBtn.href = 'tel:' + cleanTel;
+        callBtn.style.display = 'inline-flex';
+      } else {
+        callBtn.style.display = 'none';
+      }
+
+      document.getElementById('modal-wa-btn').onclick = () => triggerWhatsAppPrincipal(recipientId);
+      document.getElementById('modal-gmail-btn').onclick = () => triggerEmailPrincipal(recipientId);
       document.getElementById('preview-modal').style.display = 'flex';
     }
 
-    function closeModal() {
-      document.getElementById('preview-modal').style.display = 'none';
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
     }
 
-    function closeModalOnBackdrop(e) {
-      if (e.target.id === 'preview-modal') closeModal();
+    function closeModalOnBackdrop(e, id) {
+      if (e.target.id === id) closeModal(id);
     }
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
 
     function copyModalText() {
-      const text = document.getElementById('modal-email-body').textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Email copy copied to clipboard!');
-      });
+      const txt = document.getElementById('modal-email-body').textContent;
+      navigator.clipboard.writeText(txt);
+    }
+
+    async function launchBatchFromUi() {
+      const pool = document.getElementById('launch-pool').value;
+      const rate = document.getElementById('launch-rate').value;
+      const limit = document.getElementById('launch-limit').value;
+      const passcode = document.getElementById('launch-passcode').value;
+      const msgEl = document.getElementById('launch-status-msg');
+
+      if (!isAlphaGoMatch(passcode)) {
+        msgEl.style.color = 'var(--red)';
+        msgEl.textContent = '❌ Passcode Required: Enter the exact authorization passcode ALPHA GO.';
+        return;
+      }
+
+      msgEl.style.color = 'var(--amber)';
+      msgEl.textContent = '⏳ Connecting to local dispatch runner...';
+
+      try {
+        const res = await fetch('/api/campaign/launch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pool, rate, limit, passcode })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          msgEl.style.color = 'var(--green)';
+          msgEl.textContent = '✅ ' + data.message;
+          document.getElementById('launch-passcode').value = '';
+          setTimeout(fetchStats, 1200);
+        } else {
+          msgEl.style.color = 'var(--red)';
+          msgEl.textContent = '❌ ' + (data.error || 'Launch failed');
+        }
+      } catch (err) {
+        msgEl.style.color = 'var(--amber)';
+        msgEl.textContent = 'ℹ️ Bulk SMTP Runner requires Localhost (:3001). On Mobile/GitHub Pages, use the 1-to-1 Email / WhatsApp buttons on any card.';
+      }
+    }
+
+    async function stopRunnerFromUi() {
+      const msgEl = document.getElementById('launch-status-msg');
+      try {
+        const res = await fetch('/api/campaign/stop', { method: 'POST' });
+        const data = await res.json();
+        msgEl.style.color = 'var(--amber)';
+        msgEl.textContent = '🛑 ' + (data.message || 'Runner stopped.');
+        setTimeout(fetchStats, 800);
+      } catch (_) {
+        msgEl.style.color = 'var(--amber)';
+        msgEl.textContent = 'ℹ️ Local runner is not connected.';
+      }
     }
 
     function exportCsv() {
-      if (globalRecipients.length === 0) return;
-      const headers = ['Recipient ID', 'Batch', 'Grade', 'Board', 'Salutation', 'Principal Name', 'School Name', 'Email', 'Mobile', 'Status', 'Sent Time (IST)', 'Google Message ID'];
-      const rows = globalRecipients.map(r => [
-        r.recipientId,
-        r.batchLabel,
-        r.grade,
-        r.board,
-        r.salutation,
-        r.contactName,
-        '"' + (r.schoolName || '').replace(/"/g, '""') + '"',
-        r.email,
-        r.mobile,
-        r.status,
-        r.sentAt ? new Date(r.sentAt).toISOString() : '',
-        r.messageId || ''
-      ]);
-
-      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement('a');
-      link.setAttribute('href', encodedUri);
-      link.setAttribute('download', 'ai_passport_delhi_outreach_report_' + new Date().toISOString().slice(0,10) + '.csv');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const list = getFilteredList();
+      const crmStore = getCrmStore();
+      const headers = ['RecipientID', 'Batch_Region', 'Grade', 'Salutation', 'SchoolName', 'Email', 'Mobile', 'CRM_Stage', 'CRM_Note', 'Status', 'SentAt'];
+      const rows = list.map(r => {
+        const crm = crmStore[r.recipientId] || {};
+        return [
+          r.recipientId,
+          '"' + (r.batchLabel || '').replace(/"/g, '""') + '"',
+          r.grade,
+          '"' + (r.salutation || '').replace(/"/g, '""') + '"',
+          '"' + (r.schoolName || '').replace(/"/g, '""') + '"',
+          r.email,
+          r.mobile || '',
+          crm.stage || (r.status === 'SENT' ? 'Emailed' : 'Pending'),
+          '"' + (crm.note || '').replace(/"/g, '""') + '"',
+          r.status,
+          r.sentAt || ''
+        ].join(',');
+      });
+      const blob = new Blob([headers.join(',') + '\n' + rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ai_passport_principals_crm_export.csv';
+      a.click();
     }
 
-    // Init
-    fetchStats();
-    startCountdownTimer();
-    setInterval(fetchStats, 2000);
+    initVaultAuth();
+    setInterval(fetchStats, 8000);
   </script>
 </body>
 </html>
