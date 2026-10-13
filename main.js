@@ -826,6 +826,11 @@ function initRegistrationForm() {
       formObject[key] = value;
     });
     
+    // Explicit tab routing & session coordinates for Google Sheet & confirmation email
+    formObject.tab = '18th Oct';
+    formObject.event_date = '18 October 2026';
+    formObject.event_time = '11:00 AM – 1:00 PM IST';
+    
     const dataName = (fullname && fullname.value) || 'Citizen Builder';
     
     // Send form data to Webhook
@@ -1346,11 +1351,11 @@ function initMobileMenu() {
 
 /* --- 11. Live Countdown Timer Logic (Three-Phase Lifecycle Engine) --- */
 function initCountdowns() {
-  // Target Event: 11 October 2026, 2:00 PM – 3:30 PM IST (Asia/Kolkata, UTC+5:30)
-  // Start: 2026-10-11 14:00:00 IST (08:30 UTC)
-  // End:   2026-10-11 15:30:00 IST (10:00 UTC)
-  const startTime = Date.parse('2026-10-11T14:00:00+05:30');
-  const endTime = Date.parse('2026-10-11T15:30:00+05:30');
+  // Target Event: 18 October 2026, 11:00 AM – 1:00 PM IST (Asia/Kolkata, UTC+5:30)
+  // Start: 2026-10-18 11:00:00 IST (05:30 UTC)
+  // End:   2026-10-18 13:00:00 IST (07:30 UTC)
+  const startTime = Date.parse('2026-10-18T11:00:00+05:30');
+  const endTime = Date.parse('2026-10-18T13:00:00+05:30');
   
   const daysContainers = document.querySelectorAll('.countdown-days');
   const hoursContainers = document.querySelectorAll('.countdown-hours');

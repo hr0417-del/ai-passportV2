@@ -1,12 +1,12 @@
 // ==========================================================================
-// MY AI PASSPORT™ — GOOGLE APPS SCRIPT WEB APP (v6.0 - 11 OCT LIVE WEBINAR)
+// MY AI PASSPORT™ — GOOGLE APPS SCRIPT WEB APP (v6.3 - 18 OCT LIVE WEBINAR & C11 SESSION 2)
 // Active Spreadsheet ID: 1bdChBRpjvxYTVlxPL0DppuJMsO7j7fRkrhqqXVoihVs
-// Tab Target: "11 OCT"
+// Tab Target: "18th Oct"
 // ==========================================================================
 
 var SPREADSHEET_ID = "1bdChBRpjvxYTVlxPL0DppuJMsO7j7fRkrhqqXVoihVs";
-var TAB_NAME = "11 OCT";
-var VERIFIED_TAB_NAME = "11 OCT Verified Sent";
+var TAB_NAME = "18th Oct";
+var VERIFIED_TAB_NAME = "18 OCT Verified Sent";
 var COHORT_TAB_NAME = "C11 Cohort";
 
 function getSpreadsheet() {
@@ -70,16 +70,18 @@ function getCohortSheet(ss) {
   return sheet;
 }
 
-function getTargetSheet(ss) {
+function getTargetSheet(ss, data) {
   if (!ss) ss = getSpreadsheet();
   if (!ss) return null;
-  var sheet = ss.getSheetByName(TAB_NAME) || 
-              ss.getSheetByName("11 Oct") || 
-              ss.getSheetByName("11 oct live");
+  var requestedTab = (data && data.tab) ? data.tab.toString().trim() : TAB_NAME;
+  var sheet = ss.getSheetByName(requestedTab) || 
+              ss.getSheetByName("18th Oct") || 
+              ss.getSheetByName("18 Oct") ||
+              ss.getSheetByName("18 OCT");
               
   if (!sheet) {
     try {
-      sheet = ss.insertSheet(TAB_NAME);
+      sheet = ss.insertSheet(requestedTab || "18th Oct");
       var headers = [
         "Timestamp", "Full Name", "Email Address", "WhatsApp Mobile", "Role", 
         "Primary AI Interest / Use Case", "Organization / Profession", "AI Passport ID", 
@@ -187,7 +189,7 @@ function doGet(e) {
   return ContentService.createTextOutput(JSON.stringify({
     status: "online",
     service: "AI Passport Live API",
-    version: "6.2",
+    version: "6.3",
     spreadsheetId: SPREADSHEET_ID,
     tabName: TAB_NAME,
     cohortTabName: COHORT_TAB_NAME
@@ -418,7 +420,7 @@ function processCohortRegistration(data) {
 function processRegistration(data) {
   try {
     var ss = getSpreadsheet();
-    var sheet = getTargetSheet(ss);
+    var sheet = getTargetSheet(ss, data);
     
     var email = (data.email || "").toString().trim();
     var mobile = (data.mobile || "").toString().trim();
@@ -448,7 +450,7 @@ function processRegistration(data) {
       return ContentService.createTextOutput(JSON.stringify({
         success: false,
         duplicate: true,
-        message: "User already exists in '11 OCT' tab. Registration skipped."
+        message: "User already exists in '" + sheet.getName() + "' tab. Registration skipped."
       })).setMimeType(ContentService.MimeType.JSON);
     }
     
@@ -770,7 +772,7 @@ function sendCohortConfirmationEmail(email, fullname, passportId, role, org, fee
                 A warm welcome to <strong>C11 — Viksit Bharat: AI Educator Cohort</strong>, powered by AI Passport™ and Ekaakshar Education.
               </p>
               <p style="font-size: 15px; line-height: 1.6; color: #334155; margin: 0 0 16px 0;">
-                We’re delighted to have you join this focused cohort of educators beginning <strong>11 October 2026</strong>. Over the course of <strong>5 live sessions | 10 hours</strong>, we will explore how AI can move beyond experimentation and become a practical, responsible, and meaningful part of teaching and learning.
+                We’re delighted to have you join this focused cohort of educators. Session 2 goes live on <strong>18 October 2026 (2:00 PM – 4:00 PM IST)</strong>. Over the course of <strong>5 live sessions | 10 hours</strong>, we will explore how AI can move beyond experimentation and become a practical, responsible, and meaningful part of teaching and learning.
               </p>
             </td>
           </tr>
@@ -804,8 +806,8 @@ function sendCohortConfirmationEmail(email, fullname, passportId, role, org, fee
                   <td align="right" style="padding-bottom: 8px; font-size: 13px; font-weight: 700; color: #0F172A;">${org || 'Educator'}</td>
                 </tr>
                 <tr>
-                  <td style="font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">LAUNCH DATE</td>
-                  <td align="right" style="font-size: 13px; font-weight: 700; color: #0F172A;">11 OCTOBER 2026</td>
+                  <td style="font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">NEXT SESSION</td>
+                  <td align="right" style="font-size: 13px; font-weight: 700; color: #0F172A;">18 OCTOBER 2026 (2:00–4:00 PM IST)</td>
                 </tr>
               </table>
             </td>
@@ -831,7 +833,7 @@ function sendCohortConfirmationEmail(email, fullname, passportId, role, org, fee
           <tr>
             <td align="center" style="padding-bottom: 24px; border-top: 1px solid #E2E8F0; padding-top: 24px;">
               <h3 style="font-size: 14px; font-weight: 800; color: #0F172A; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 16px 0; text-align: left;">
-                ACTIONS REQUIRED BEFORE 11 OCTOBER
+                ACTIONS REQUIRED FOR NEXT SESSION (18 OCTOBER)
               </h3>
               
               <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -844,8 +846,8 @@ function sendCohortConfirmationEmail(email, fullname, passportId, role, org, fee
                 </tr>
                 <tr>
                   <td align="center">
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Cohort+C11+%E2%80%94+Session+1&dates=20261011T103000Z/20261011T123000Z&details=Viksit+Bharat+AI+Educator+Cohort+C11+Launch+Session.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2Fcohort.html&location=Online+Live+Masterclass" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; text-align: center;">
-                      ADD C11 TO GOOGLE CALENDAR &rarr;
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Cohort+C11+%E2%80%94+Session+2&dates=20261018T083000Z/20261018T103000Z&details=Viksit+Bharat+AI+Educator+Cohort+C11+Session+2.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2Fcohort.html&location=Online+Live+Masterclass" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; text-align: center;">
+                      ADD SESSION 2 TO GOOGLE CALENDAR &rarr;
                     </a>
                   </td>
                 </tr>
@@ -951,11 +953,11 @@ function sendConfirmationEmail(email, fullname, passportId, role) {
                 </tr>
                 <tr>
                   <td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">DATE</td>
-                  <td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A;">11 OCTOBER 2026</td>
+                  <td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A;">18 OCTOBER 2026</td>
                 </tr>
                 <tr>
                   <td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">TIME</td>
-                  <td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A;">2:00 PM &ndash; 3:30 PM IST</td>
+                  <td align="right" style="padding-bottom: 10px; font-size: 14px; font-weight: 700; color: #0F172A;">11:00 AM &ndash; 1:00 PM IST</td>
                 </tr>
                 <tr>
                   <td style="padding-bottom: 10px; font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.05em;">ROLE REGISTERED</td>
@@ -975,10 +977,10 @@ function sendConfirmationEmail(email, fullname, passportId, role) {
               <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center">
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education+%E2%80%93+Preparing+the+Teacher+for+Viksit+Bharat&dates=20261011T083000Z/20261011T100000Z&details=Free+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2F&location=Online+Live+Webinar" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; margin-right: 8px; margin-bottom: 12px;">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AI+Passport+Live%3A+AI+in+Education+%E2%80%93+Preparing+the+Teacher+for+Viksit+Bharat&dates=20261018T053000Z/20261018T073000Z&details=Free+live+experience+for+teachers+and+educators.+Official+Portal%3A+https%3A%2F%2Faipassport.ekaakshareducation.com%2F&location=Online+Live+Webinar" target="_blank" style="background-color: #0F172A; color: #FFFFFF; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; margin-right: 8px; margin-bottom: 12px;">
                       ADD TO CALENDAR &rarr;
                     </a>
-                    <a href="https://api.whatsapp.com/send?text=I%27m%20attending%20AI%20Passport%20Live%E2%84%A2%20%E2%80%94%20AI%20in%20Education%3A%20Preparing%20the%20Teacher%20for%20Viksit%20Bharat%20on%2011%20October%202026%2C%20from%202%3A00%20PM%20to%203%3A30%20PM%20IST.%20Learn%20more%3A%20https%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" style="background-color: #F8FAFC; color: #0F172A; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border: 1px solid #CBD5E1; margin-bottom: 12px;">
+                    <a href="https://api.whatsapp.com/send?text=I%27m%20attending%20AI%20Passport%20Live%E2%84%A2%20%E2%80%94%20AI%20in%20Education%3A%20Preparing%20the%20Teacher%20for%20Viksit%20Bharat%20on%2018%20October%202026%2C%20from%2011%3A00%20AM%20to%201%3A00%20PM%20IST.%20Learn%20more%3A%20https%3A%2F%2Faipassport.ekaakshareducation.com%2F" target="_blank" style="background-color: #F8FAFC; color: #0F172A; font-weight: 700; padding: 14px 24px; border-radius: 8px; display: inline-block; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border: 1px solid #CBD5E1; margin-bottom: 12px;">
                       SHARE ON WHATSAPP &rarr;
                     </a>
                   </td>
@@ -1015,7 +1017,7 @@ function sendConfirmationEmail(email, fullname, passportId, role) {
 </html>
   `;
   
-  GmailApp.sendEmail(email, subject, "Your seat for the AI Passport National Webinar is confirmed. Passport ID: " + passportId, {
+  GmailApp.sendEmail(email, subject, "Your seat for the AI Passport National Webinar is confirmed for 18 October 2026 (11:00 AM – 1:00 PM IST). Passport ID: " + passportId, {
     name: "AI Passport™ by Ekaakshar Education",
     bcc: bccEmail,
     htmlBody: htmlBody
